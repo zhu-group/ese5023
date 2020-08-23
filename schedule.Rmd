@@ -8,7 +8,7 @@ Tu. (oddy week only) and Th., 19:00-21:00
 Teaching Building 1, Room 401
 
 ### Schedule for 2020 Fall
-+ **09/01 Tu.** [01 Introduction](https://zhu-group.github.io/ese5023/page_a.html)
++ **09/01 Tu.** [01 Introduction](https://zhu-group.github.io/ese5023/01_Introduction.html)
   
 + **09/03 Th.** 02 Unix (part 1): Basics
 
