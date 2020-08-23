@@ -1,8 +1,55 @@
 ---
 title: "Schedule"
 ---
-**Class Time:** Tuesday (oddy week only) / Thersday 19:00-21:00
+### Class Time
+Tu. (oddy week only) and Th., 19:00-21:00
 
-**Location:** Teaching Building 1, Room 401
+### Location
+Teaching Building 1, Room 401
 
-**TEST:** Teaching Building 1, Room 401
+### Schedule for 2020 Fall
++ **09/01 Tu.** [01 Introduction](https://zhu-group.github.io/ese5023/page_a.html)
+  
++ **09/03 Th.** 02 Unix (part 1): Basics
+
++ **09/10 Th.** 03 Unix (part2): Shell scripts
+
++ **09/15 Tu.** 04 Version control with Git
+
++ **09/17 Th.** 05 FORTRAN (part 1): Basics
+
++ **09/24 Th.** 06 FORTRAN (part 2): Functions and modules
+
++ **09/29 Tu.** 07 FORTRAN (part 3): Working with files
+
++ **10/15 Th.** 08 R Basics  
+
++ **10/20 Tu.** 09 File I/O with R							
+
++ **10/22 Th.** 10 Basic plotting with R
+
++ **10/29 Th.** 11 Simple statistical analysis with R
+
++ **11/03 Tu.** 12 Time series analysis with R
+
++ **11/05 Th.** 13 Spatial data analysis with R				
+
++ **11/12 Th.** 14 Plotting with ggplot
+
++ **11/17 Tu.** 15 Map making with R
+
++ **11/19 Th.** 16
+
++ **11/26 Th.** 17
+
++ **12/01 Tu.** 18
+
++ **12/03 Th.** 19
+
++ **12/10 Th.** 20
+
++ **12/15 Tu.** 21
+
++ **12/17 Th.** 22		Parallel computing with R
+
++ **12/24 Th.** 23		Final presentations 

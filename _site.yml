@@ -1,4 +1,4 @@
-name: "my-website"
+name: "ESE5023"
 output_dir: "docs"  # docs directory of master branch
 navbar:
   title: "Computing and Programming for Environmental Research"
@@ -20,7 +20,7 @@ navbar:
           href: page_c.html
     - text: "Software"
       icon: fa-wrench
-      href: about.html
+      href: software.html
 output:
   html_document:
     theme: spacelab
