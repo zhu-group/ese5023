@@ -6,7 +6,7 @@ navbar:
   left:
     - text: "Syllabus"
       icon: fa-bell-o
-      href: index.html
+      href: Syllabus.html
     - text: "Schedule"
       icon: fa-calendar
       href: schedule.html
