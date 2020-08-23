@@ -23,6 +23,6 @@ navbar:
       href: about.html
 output:
   html_document:
-    theme: yeti
-    highlight: textmate
+    theme: spacelab
+    highlight: haddock
     
