@@ -1,5 +1,4 @@
 name: "my-website"
-output_dir: "."
 navbar:
   title: "Computing and Programming for Environmental Research"
   type: inverse
