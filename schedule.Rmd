@@ -5,3 +5,4 @@ title: "Schedule"
 
 **Location:** Teaching Building 1, Room 401
 
+**TEST:** Teaching Building 1, Room 401

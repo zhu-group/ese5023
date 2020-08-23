@@ -6,3 +6,4 @@ output:
 ---
 
 Hello, My website!
+This is the home page of the ESE5023 class
