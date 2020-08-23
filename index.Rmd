@@ -1,0 +1,8 @@
+---
+title: "Syllabus"
+output:
+  html_document:
+    df_print: paged
+---
+
+Hello, My website!

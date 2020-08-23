@@ -1,0 +1,28 @@
+name: "my-website"
+output_dir: "_site"
+navbar:
+  title: "Computing and Programming for Environmental Research"
+  type: inverse
+  left:
+    - text: "Syllabus"
+      icon: fa-bell-o
+      href: index.html
+    - text: "Schedule"
+      icon: fa-calendar
+      href: schedule.html
+    - text: "Assignments"
+      icon: fa-laptop
+      menu:
+        - text: "Assignment 01"
+          href: page_a.html
+        - text: "---------"
+        - text: "Assignment 02"
+          href: page_c.html
+    - text: "Software"
+      icon: fa-wrench
+      href: about.html
+output:
+  html_document:
+    theme: readable
+    highlight: textmate
+    

@@ -1,0 +1,13 @@
+---
+title: "About this website"
+---
+
+```{bash}
+pwd
+```
+
+```
+my_list <- c(1, b, c)
+```
+
+More Info.
