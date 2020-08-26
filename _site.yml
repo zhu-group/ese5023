@@ -10,14 +10,21 @@ navbar:
     - text: "Schedule"
       icon: fa-calendar
       href: Schedule.html
+    - text: "Sections"
+      icon: fa-laptop
+      menu:
+        - text: "Section 01 Introduction"
+          href: Section_01.html
+        - text: "---------"
+        - text: "Section 02 Unix (part 1): Basics"
+          href: Section_02.html     
+        - text: "Section 03 Unix (part 2): Shell scripts"
+          href: Section_03.html            
     - text: "Assignments"
       icon: fa-laptop
       menu:
         - text: "Assignment 01"
-          href: page_a.html
-        - text: "---------"
-        - text: "Assignment 02"
-          href: page_c.html
+          href: Assignment_01.html
     - text: "Resource"
       icon: fa-wrench
       href: Resource.html
