@@ -1,11 +1,8 @@
 ---
-title: "ESE5023"
+title: ""
 output:
   html_document:
     df_print: paged
 ---
-## Computing and Programming for Environmental Research
 
-
-Hello, My website!
-This is the home page of the ESE5023 class
+![](figs/ese5023.jpg)
