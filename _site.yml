@@ -9,7 +9,7 @@ navbar:
       href: Syllabus.html
     - text: "Schedule"
       icon: fa-calendar
-      href: schedule.html
+      href: Schedule.html
     - text: "Assignments"
       icon: fa-laptop
       menu:
@@ -18,9 +18,9 @@ navbar:
         - text: "---------"
         - text: "Assignment 02"
           href: page_c.html
-    - text: "Software"
+    - text: "Resource"
       icon: fa-wrench
-      href: software.html
+      href: Resource.html
 output:
   html_document:
     theme: spacelab
