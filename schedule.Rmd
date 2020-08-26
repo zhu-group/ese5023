@@ -1,13 +1,12 @@
 ---
 title: "Schedule"
 ---
-### Class Time
-Tu. (oddy week only) and Th., 19:00-21:00
+**Class Time:** Tuesday (odd week only) / Thursday, 19:00-21:00
 
-### Location
-Teaching Building 1, Room 401
+**Location:** 401, Teaching Building 1
 
 ### Schedule for 2020 Fall
+
 + **09/01 Tu.** [01 Introduction](https://zhu-group.github.io/ese5023/01_Introduction.html)
   
 + **09/03 Th.** 02 Unix (part 1): Basics
