@@ -10,6 +10,14 @@ navbar:
     - text: "Schedule"
       icon: fa-calendar
       href: Schedule.html
+    - text: "Sections"
+      icon: fa-laptop
+      menu:
+        - text: "Section 01"
+          href: Section_01.html
+        - text: "---------"
+        - text: "Section 02"
+          href: page_c.html     
     - text: "Assignments"
       icon: fa-laptop
       menu:
