@@ -30,6 +30,6 @@ navbar:
       href: Resource.html
 output:
   html_document:
-    theme: cerulean
+    theme: readable
     highlight: pygments
     
