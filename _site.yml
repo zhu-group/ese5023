@@ -30,6 +30,6 @@ navbar:
       href: Resource.html
 output:
   html_document:
-    theme: spacelab
-    highlight: haddock
+    theme: cerulean
+    highlight: pygments
     
