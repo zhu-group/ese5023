@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
@@ -233,6 +236,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -240,6 +312,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,10 +390,29 @@ $(document).ready(function () {
 </div>
 
 
-<p>More Info. is needed to add here.</p>
+<div id="ssh-client-tools" class="section level1">
+<h1>1 SSH Client Tools</h1>
+<p>You need to connect to Linux server to transfer files from Linux to your operating system (Windows, MacOS, Ubuntu, etc.) and inversely. So you need to have Secure Shell (SSH), which is a network protocol which enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you to connect SSH to your Linux servers.<br />
+<strong>Windows:</strong> <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty">PuTTY</a>, <a href="https://mobaxterm.mobatek.net">MobaXterm</a>, <a href="https://www.netsarang.com/en/xshell">Xshell</a><br />
+<strong>MacOS:</strong> Terminal (pre-installed), <a href="https://www.iterm2.com/">iTerm2</a><br />
+<strong>Ubuntu:</strong> Terminal (pre-installed), <a href="https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window">Terminator</a><br />
+<strong>Others:</strong> <a href="http://www.hostbuf.com">Finalshell</a>, <a href="https://termius.com">Termius</a><br />
+The instructor will use <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty">PuTTY</a> in the class.</p>
+</div>
+<div id="taiyi-cluster-computer" class="section level1">
+<h1>2 TaiYi cluster computer</h1>
+<p>Students will be given an educational account on the TaiYi cluster computer. Check <a href="http://hpc.sustech.edu.cn/index.html">here</a> for instructions on how to use TaiYi.</p>
+</div>
+<div id="git" class="section level1">
+<h1>3 Git</h1>
+<p><strong>Client:</strong> In this class, we will use <a href="https://www.gitkraken.com/git-client">GitKraken</a> as the Git client. There are many other third-party GUI tools, such as <a href="https://desktop.github.com/">GitHub Desktop</a>, <a href="https://www.sourcetreeapp.com/">SourceTree</a>, etc.<br />
+<strong>Platform:</strong> We use <a href="https://github.com">Github</a> as the repository version control platform. Follow <a href="https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration">this page</a> for Github account setup and configuration. Other softwares/platforms, like <a href="https://about.gitlab.com">gitlab</a> or <a href="https://bitbucket.org">bitbucket</a>, will not be covered in the class.</p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -344,6 +445,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
