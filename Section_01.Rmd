@@ -1,7 +1,67 @@
 ---
 title: "Section 01 Introduction"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
 ---
 
-### Computing and programming in Environmental Research
+> Without coding, computers would literally ***do nothing***. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal. [^1]
 
-More Info. is needed to add here.
+[^1]: By Travis Addair, Software Engineer, on Quora
+
+# Background Poll
+
+***1. Are you familiar with following languages?***  
+
+  * FORTRAN  
+  * C  
+  * C++
+  * Java
+  * Other
+  * I know Chinese, English, maybe some Cantonese
+
+***2. Do you use following languages for data analysis?***  
+
+  * MATLAB  
+  * Python  
+  * R
+  * IDL
+  * Other
+  * No, I don't
+
+***3. What do you use for data visualization?***  
+
+  * MATLAB  
+  * Python  
+  * R
+  * IDL
+  * Origin
+  * Other (but not Excel or similar spreadsheet software)
+  * I use Excel, sometimes Powerpoint 
+
+***4. What is your laptop's operating system (OS)?***  
+
+  * Windows  
+  * MacOS  
+  * Ubuntu
+  * Other
+
+***5. Do you know how to use command lines?***
+
+  * Yes, I know DOS  
+  * Yes, I know Linux/Unix  
+  * What's a command line?
+
+***6. Why is coding important?***  
+
+  * Research
+  * Job hunting
+  * Just for fun
+  * Other
+  
+***8. Name one thing you want to achieve at the end of the semester (Open question)***  
+
+  

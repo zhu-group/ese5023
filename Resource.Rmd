@@ -9,23 +9,20 @@ output:
 ---
 
 # 1 SSH Client Tools
-
-You need to connect to Linux server to transfer files from Linux to your operating system (Windows, MacOS, Ubuntu, etc.) and inversely. So you need to have Secure Shell (SSH), which is a network protocol which enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you to connect SSH to your Linux servers.  
+You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you to connect SSH to your Linux servers.  
 **Windows:** 
-[PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty),  [MobaXterm](https://mobaxterm.mobatek.net),  [Xshell](https://www.netsarang.com/en/xshell)  
+[MobaXterm](https://mobaxterm.mobatek.net), [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty),   [Xshell](https://www.netsarang.com/en/xshell)  
 **MacOS:**
 Terminal (pre-installed), [iTerm2](https://www.iterm2.com/)  
 **Ubuntu:**
-Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window)  
+Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window) 
 **Others:**
 [Finalshell](http://www.hostbuf.com),  [Termius](https://termius.com)  
 The instructor will use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty) in the class.
 
-# 2 TaiYi cluster computer
-
-Students will be given an educational account on the TaiYi cluster computer. Check [here](http://hpc.sustech.edu.cn/index.html) for instructions on how to use TaiYi.
+# 2 TaiYi HPC supercomputer
+Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check [here](http://hpc.sustech.edu.cn/index.html) for instructions on how to use TaiYi.
 
 # 3 Git
-
-**Client:** In this class, we will use [GitKraken](https://www.gitkraken.com/git-client) as the Git client. There are many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc.  
+**Client:** We use [GitKraken](https://www.gitkraken.com/git-client) as the Git client. There are also many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc.  
 **Platform:** We use [Github](https://github.com) as the repository version control platform. Follow [this page](https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration) for Github account setup and configuration. Other softwares/platforms, like [gitlab](https://about.gitlab.com) or [bitbucket](https://bitbucket.org), will not be covered in the class.   

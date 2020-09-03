@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
@@ -233,6 +236,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -240,6 +312,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,13 +390,82 @@ $(document).ready(function () {
 </div>
 
 
-<div id="computing-and-programming-in-environmental-research" class="section level3">
-<h3>Computing and programming in Environmental Research</h3>
-<p>More Info. is needed to add here.</p>
+<blockquote>
+<p>Without coding, computers would literally <strong><em>do nothing</em></strong>. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+</blockquote>
+<div id="background-poll" class="section level1">
+<h1>Background Poll</h1>
+<p><strong><em>1. Are you familiar with following languages?</em></strong></p>
+<ul>
+<li>FORTRAN<br />
+</li>
+<li>C<br />
+</li>
+<li>C++</li>
+<li>Java</li>
+<li>Other</li>
+<li>I know Chinese, English, maybe some Cantonese</li>
+</ul>
+<p><strong><em>2. Do you use following languages for data analysis?</em></strong></p>
+<ul>
+<li>MATLAB<br />
+</li>
+<li>Python<br />
+</li>
+<li>R</li>
+<li>IDL</li>
+<li>Other</li>
+<li>No, I don’t</li>
+</ul>
+<p><strong><em>3. What do you use for data visualization?</em></strong></p>
+<ul>
+<li>MATLAB<br />
+</li>
+<li>Python<br />
+</li>
+<li>R</li>
+<li>IDL</li>
+<li>Origin</li>
+<li>Other (but not Excel or similar spreadsheet software)</li>
+<li>I use Excel, sometimes Powerpoint</li>
+</ul>
+<p><strong><em>4. What is your laptop’s operating system (OS)?</em></strong></p>
+<ul>
+<li>Windows<br />
+</li>
+<li>MacOS<br />
+</li>
+<li>Ubuntu</li>
+<li>Other</li>
+</ul>
+<p><strong><em>5. Do you know how to use command lines?</em></strong></p>
+<ul>
+<li>Yes, I know DOS<br />
+</li>
+<li>Yes, I know Linux/Unix<br />
+</li>
+<li>What’s a command line?</li>
+</ul>
+<p><strong><em>6. Why is coding important?</em></strong></p>
+<ul>
+<li>Research</li>
+<li>Job hunting</li>
+<li>Just for fun</li>
+<li>Other</li>
+</ul>
+<p><strong><em>8. Name one thing you want to achieve at the end of the semester (Open question)</em></strong></p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>By Travis Addair, Software Engineer, on Quora<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -347,6 +498,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
