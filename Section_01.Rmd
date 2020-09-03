@@ -10,7 +10,7 @@ output:
 
 > Without coding, computers would literally ***do nothing***. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal. [^1]
 
-[^1]: By Travis Addair, Software Engineer, on Quora
+[^1]: By Travis Addair, Software Engineer, on Quora.
 
 # Background Poll
 
@@ -39,7 +39,7 @@ output:
   * R
   * IDL
   * Origin
-  * Other (but not Excel or similar spreadsheet software)
+  * Other (but not Excel or similar spreadsheet softwares)
   * I use Excel, sometimes Powerpoint 
 
 ***4. What is your laptop's operating system (OS)?***  
@@ -55,13 +55,79 @@ output:
   * Yes, I know Linux/Unix  
   * What's a command line?
 
-***6. Why is coding important?***  
+***6. In your view, why is programming important?***  
 
-  * Research
-  * Job hunting
-  * Just for fun
-  * Other
+***7. In your view, why is programming difficult? *** 
   
-***8. Name one thing you want to achieve at the end of the semester (Open question)***  
+***8. Name one thing you want to achieve at the end of the semester***  
+
+# Course topics
+
+<img src="figs/R.png" alt="drawing" width="200"/>
+<img src="figs/Linux.jpeg" alt="drawing" width="200"/>
+<img src="figs/Git.jpeg" alt="drawing" width="200"/>
+
+* Three languages: R, Shell (BASH), and FORTRAN
+* One operation system: Linux  
+* At the end of the semester, you should be able to:
+  + Handle common file formats with R
+    - plan text, .csv, .nc, .hdf, etc.
+  + Do statistical sleuth with R
+    - comparing distributing, ANOVA, regressions, etc.  
+  + Make time series analysis with R
+    - MA, AR, seasonal decomposition, ARIMA, forecasting,  etc.
+  + Conduct spatial analysis with R
+    - raster and shape files, interpolation, spatial regression, etc. 
+  + Create publication-quality figures with R
+    - ggplot, image, lattice, etc.
+  + Use Git for version control
+    - Github, GitKraken, etc.
+  + Write, compile, and run FORTRAN scripts
+    - gfortran, ifort, basics, functions, modules, etc.
+  + Use Linux environment
+    - basics, BASH scripts, installing software, modules, etc.
+  + Run jobs on TaiYi high-performance computer
+    - SSH, managing jobs, scp, etc.
+  + [Optional] Build personal research website
+    - Rmarkdown (In fact, this website is made with Rmarkdown)
+
+# Course structure
+
+* Thursday class   
+  + New material demonstrated (~ 1 hour)
+  + In-class exercises (~ 1 hour)
+
+* Tuesday class (odd week only)
+  + In-class exercises (~ 1 hour)
+  + Working on assignments
+  + Discussing the final project
+  + One-on-one interactions
+  
+* Office Hours to discuss specific questions  
+
+# Should you take the course?
+
+> This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on R, FORTRAN, Git, and Linux
+
+> By taking the course, you commit yourself to working on ***time-consuming*** assignments and final project
+
+* Good reasons for ***not*** taking the course:
+  + After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
+  + I have strong programming background with other tools (C, C++, Java, MATLAB, Python, IDL, etc.)
+  + I am able to model, analyze, and visualize data sets through programming efforts already
+  + I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)
+  + I want to take a “easy” class to meet the graduation requirement
+  + I don't want to spend much time on the course, instead I want to focus more on my research  
+
+* Bad reasons for ***not*** taking the course:
+  + I don’t have coding/programming experience
+  + Programming is terrifying, perhaps I can never learn it
+  + My project does not require programming efforts
+
+# Course grading   
+
+* Assignments (50%)
+* Final project (40%), 
+* Class participation (10%)
 
   

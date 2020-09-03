@@ -9,17 +9,16 @@ output:
 **Instructor:**  
 Lei Zhu  
 *School of Environmental Science and Engineering  
-Office: 419, Taizhou Hall  
+Office: 429, Taizhou Hall  
 Email: zhul3@sustech.edu.cn  
 Phone: 0755-26601426  
 Office Hours: By appointment*  
 
-**Teaching Assistants:**    
+**Teaching Assistants (TAs):**    
 Ming Yang  
 *School of Environmental Science and Engineering  
 Office: 401-5, Taizhou Hall  
 Email: 12031077@mail.sustech.edu.cn  
-Phone: 0755-26601426  
 Office Hours: TBD*  
 
 **Class Time:**   
@@ -32,19 +31,26 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 The course has a credit of 3.0, with a total class hours of 48
 
 **Overview:**   
-Computing is an indispensable tool for Environmental scientists. Being able to analyze and visualize data sets through programming efforts precisely has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech. This course will introduce students to modern computing softwares, programming tools, and practice that are broadly applicable in their later research. This course will include an introduction to Linux, version control and data backup, programming in two commonly used languages (FORTRAN and R), data analysis and visualization tools, and high-performance computing exercises on cluster computers. This course will boost students’ programming and computing skills, which are in high demand in the era of Big Data. This course is a **hands-on and project-oriented** course that facilitates student learning through lectures, in-class exercises, assignments, final project, and one-on-one interactions. All topics will be taught through example data sets, demos, and research problems from Environmental Science.  
+Computing is an indispensable tool for Environmental scientists. Being able to analyze and visualize data sets through programming efforts precisely has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech.   
+
+This course will introduce students to modern computing softwares, programming tools, and practices that are broadly applicable in their later research. This course will include an introduction to Linux, version control and data backup with Git, programming in two commonly used languages (FORTRAN and R), data analysis and visualization tools, and high-performance computing exercises on cluster computers. This course will boost students’ programming and computing skills, which are in high demand in the era of Big Data. 
+
+This course is a **hands-on and project-oriented** course that facilitates student learning through lectures, in-class exercises, labs, assignments, final project, and one-on-one interactions. Class topics will be taught through example data sets, demos, and research problems from Environmental Science.  
 
 **Structure:**   
-The course will meet on Thursday weekly, and on Tuesday every other week (odd week only). On Thursday, new material will be presented by the instructor followed by in-class exercises. On Tuesday, the class will trun into a lab - class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TA.
+The course will meet on Thursday weekly, and on Tuesday every other week (odd week only). On Thursday, new material will be demonstrated by the instructor followed by in-class exercises. On Tuesday, the class will trun into a lab - class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
+
+**Prerequisites:**  
+C or C++; Applied Mathematics; Or permission of the instructor
 
 **Textbook:**   
 There is no required textbook. Readings will be freely available from online resources made available through the course website.
 
 **Laptop:**   
-Students are **required** to have a laptop available to bring to class to learn the material, participate in-class exercises, and work on the assignments. Students are encouraged to check [resources](https://zhu-group.github.io/ese5023/Resource.html) for softwares/tools used in the course.
+Students are **required** to have laptops available to bring to class to learn the material, participate in-class exercises, and work on the assignments. Students are encouraged to check [resources](https://zhu-group.github.io/ese5023/Resource.html) for softwares/tools used in the course.
 
 **Grading:**   
-Students will be evaluated at the end of the semester based on their assignments (40%), assignment presentation (20%), and final project (40%).
+Students will be evaluated at the end of the semester based on their assignments (50%), final project (40%), and class participation (10%).
 
 **Schedule:**  
 [Schedule for 2020 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
