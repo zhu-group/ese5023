@@ -221,4 +221,10 @@ text(0.25*TotalDraw,3.5,"3.1415926",cex=1,col="red")
 print(paste("Mean Pi from the last 100 steps is: ",mean(Results[TotalDraw-99:TotalDraw])))
 ```  
 
+***
 
+# In-class exercises
+
+* Brainstorm one research question   
+* What is the conceptual model?   
+* What is the math/logic model?   
