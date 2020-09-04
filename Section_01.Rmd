@@ -61,6 +61,8 @@ output:
   
 ***8. Name one thing you want to achieve at the end of the semester***  
 
+***
+
 # Course topics
 
 <img src="figs/R.png" alt="drawing" width="200"/>
@@ -130,4 +132,93 @@ output:
 * Final project (40%), 
 * Class participation (10%)
 
-  
+***
+
+# A closer look at programming process 
+
+<img src="figs/flow_01.jpg" alt="drawing" width="800"/>
+
+Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. The most important step is to have a **well-defined** *conceptual model*. This involves with simplifying and generalizing your raw question, so that you can describe you question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is the just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
+
+<img src="figs/flow_02.jpg" alt="drawing" width="800"/>
+
+# An example: Estimation of $\pi$
+
+Now suppose our research question is:
+
+## Question: How to estimate the number of $\pi$? {.tabset .tabset-fade .tabset-pills}
+
+### Your ideas  
+
+Can you think about a few ways to solve this?  
+
+### Hints
+
+If *r* is the radius of a circle, then the surface of this circle is $\pi*r^{2}$. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate $\pi$. How can we estimate the surface of a circle with a random method. 
+
+A circle (red) in a square (black) is our solution. Indeed, this is very easy to know the surface of a square. It is the square of the length of one of its sides. Do you see where this is leading us? What if we were able to estimate the rate between the surface of the circle and the surface of the square? Then we would know the surface of the circle. 
+
+<img src="figs/flow_03.jpg" alt="drawing" width="400"/>
+
+Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply *Monte Carlo method* here. If we uniformly drop *N* random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. [^2]
+
+[^2]: [Estimation of the number PI – A Monte Carlo simulation](https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/).
+
+## {-}
+
+## The conceptual model
+
+Following above idea, the conceptual model would be: 
+The proportion between the number of points within the circle (*n*) and the square (*N*) is equal to surfaceCircle/surfaceSquare.
+
+## The math model
+
+Simply translating the conceptual model, we have 
+$$n/N = \pi / 4$$ 
+
+## The computer model
+
+Put this in R, the code would be like [^2]
+
+```{r}
+# Define a function to compute pi
+Simulation <- function(N){
+  c = rep(0,N)
+  numberIn = 0
+  for(i in 1:N){
+    x = runif(2,-1,1)
+    if(sqrt(x[1]*x[1] + x[2]*x[2]) <= 1){
+      numberIn = numberIn + 1
+    }
+    prop = numberIn / i
+    piHat = prop *4
+    c[i] = piHat
+  }
+  return(c)
+}
+```
+Let's start with drawing 1000 random points
+```{r}
+# Draw 100 points
+TotalDraw <- 1000
+Results   <- Simulation(TotalDraw)
+# Plot
+plot( seq(1,TotalDraw,by=1), Results, type='l', xlab='Step', ylab='pi',lwd=1.5)
+abline(h=3.141592,col="red",lty=2)
+text(0.25*TotalDraw,3.5,"3.1415926",cex=1,col="red")
+print(paste("Mean Pi from the last 100 steps is: ",mean(Results[TotalDraw-99:TotalDraw])))
+```
+
+Simulation with 100,000 random points yields a better result
+```{r}
+# Draw 1E5 points
+TotalDraw <- 1E5
+Results   <- Simulation(TotalDraw)
+# Plot
+plot( seq(1,TotalDraw,by=1), Results, type='l', xlab='Step', ylab='pi',lwd=1.5)
+abline(h=3.141592,col="red",lty=2)
+text(0.25*TotalDraw,3.5,"3.1415926",cex=1,col="red")
+print(paste("Mean Pi from the last 100 steps is: ",mean(Results[TotalDraw-99:TotalDraw])))
+```  
+
+

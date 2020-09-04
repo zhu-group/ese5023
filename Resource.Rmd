@@ -15,7 +15,7 @@ You need to have the Secure Shell (SSH), which is a network protocol that enable
 **MacOS:**
 Terminal (pre-installed), [iTerm2](https://www.iterm2.com/)  
 **Ubuntu:**
-Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window) 
+Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window)   
 **Others:**
 [Finalshell](http://www.hostbuf.com),  [Termius](https://termius.com)  
 The instructor will use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty) in the class.
