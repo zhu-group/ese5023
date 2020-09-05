@@ -60,14 +60,13 @@ output:
 ***7. In your view, why is programming difficult? *** 
   
 ***8. Name one thing you want to achieve at the end of the semester***  
-
 ***
 
 # Course topics
 
 <img src="figs/R.png" alt="drawing" width="200"/>
-<img src="figs/Linux.jpeg" alt="drawing" width="200"/>
 <img src="figs/Git.jpeg" alt="drawing" width="200"/>
+<img src="figs/Linux.jpeg" alt="drawing" width="200"/>
 
 * Three languages: R, Shell (BASH), and FORTRAN
 * One operation system: Linux  
