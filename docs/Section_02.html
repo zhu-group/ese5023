@@ -597,30 +597,39 @@ div.tocify {
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Print x</span></a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">x</a></code></pre></div>
 <pre><code>## [1] 0.01</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># Or use the function print()</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">print</span>(x)</a></code></pre></div>
+<pre><code>## [1] 0.01</code></pre>
+<p>You can also assign a character to a variable</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># Print x</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">MyName &lt;-<span class="st"> &quot;SUSTech&quot;</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="co"># Or use the function print()</span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="kw">print</span>(MyName)</a></code></pre></div>
+<pre><code>## [1] &quot;SUSTech&quot;</code></pre>
 <p>Look for the <strong>Environment</strong> window in the top right panel of RStudio, and you will see that <code>x</code> and its value have appeared. Our variable <code>x</code> can be used in place of a number in any calculation that expects a number:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># Print x</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">log10</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># Print x</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">log10</span>(x)</a></code></pre></div>
 <pre><code>## [1] -2</code></pre>
 <p>Notice also that variables can be reassigned:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># Assignment</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># Assignment</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">100</span></a></code></pre></div>
 <p><code>x</code> used to contain the value <code>0.01</code> and now it has the value <code>100</code>.</p>
 <p>Assignment values can contain the variable being assigned to:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="co"># Notice how RStudio updates its description of x on the top right tab</span></a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a>
-<a class="sourceLine" id="cb49-3" data-line-number="3">y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># Notice how RStudio updates its description of x on the top right tab</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <p>The right hand side of the assignment can be any valid R expression. The right hand side is <em>fully evaluated</em> before the assignment occurs.</p>
 <p>Variable names can contain letters, numbers, underscores and periods <strong>but no spaces</strong>. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables begining with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.</p>
 </div>
 <div id="vectorization" class="section level2">
 <h2>Vectorization</h2>
-<p>One final thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
+<p>One thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="dv">2</span><span class="op">^</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="dv">2</span><span class="op">^</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>##  [1]    2    4    8   16   32   64  128  256  512 1024</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="dv">2</span><span class="op">^</span>x</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="dv">2</span><span class="op">^</span>x</a></code></pre></div>
 <pre><code>##  [1]    2    4    8   16   32   64  128  256  512 1024</code></pre>
 <p>This is incredibly powerful; we will discuss this further in an upcoming lesson.</p>
 </div>
@@ -628,13 +637,147 @@ div.tocify {
 <h2>Managing your environment</h2>
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;          &quot;y&quot;</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;          &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but we still needed to give the parentheses to tell R to call the function.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;y&quot;</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;y&quot;</code></pre>
+</div>
+<div id="conditional-statements" class="section level2">
+<h2>Conditional statements</h2>
+<p>Often when we’re coding we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
+<p>There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the <code>if</code> and <code>else</code> constructs.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) { <span class="co"># If this condition is TRUE</span></a>
+<a class="sourceLine" id="cb64-4" data-line-number="4">  <span class="co"># Do following</span></a>
+<a class="sourceLine" id="cb64-5" data-line-number="5">  <span class="kw">print</span>(<span class="st">&quot;x is greater than or equal to 10&quot;</span>)</a>
+<a class="sourceLine" id="cb64-6" data-line-number="6">} <span class="co"># End of if statement</span></a>
+<a class="sourceLine" id="cb64-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb64-8" data-line-number="8">x</a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>The print statement does not appear in the console because <code>x</code> is not greater than <code>10</code>. To print a different message for numbers less than <code>10</code>, we can add an else statement.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb66-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;x is greater than or equal to 10&quot;</span>)</a>
+<a class="sourceLine" id="cb66-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb66-6" data-line-number="6">  <span class="kw">print</span>(<span class="st">&quot;x is less than 10&quot;</span>)</a>
+<a class="sourceLine" id="cb66-7" data-line-number="7">}</a></code></pre></div>
+<pre><code>## [1] &quot;x is less than 10&quot;</code></pre>
+<p>You can also test multiple conditions by using <code>else if</code>.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb68-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;x is greater than or equal to 10&quot;</span>)</a>
+<a class="sourceLine" id="cb68-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb68-6" data-line-number="6">  <span class="kw">print</span>(<span class="st">&quot;x is greater than 3, but less than 10&quot;</span>)</a>
+<a class="sourceLine" id="cb68-7" data-line-number="7">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb68-8" data-line-number="8">  <span class="kw">print</span>(<span class="st">&quot;x is less or equal than 3&quot;</span>)</a>
+<a class="sourceLine" id="cb68-9" data-line-number="9">}</a></code></pre></div>
+<pre><code>## [1] &quot;x is greater than 3, but less than 10&quot;</code></pre>
+<p><strong>Important</strong>: when R evaluates the condition inside <code>if()</code> statements, it is looking for a logical element, i.e., <code>TRUE</code> or <code>FALSE</code>. This can cause some headaches for beginners. For example:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">x  &lt;-<span class="st">  </span><span class="dv">4</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="cf">if</span> (x) {</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">  <span class="st">&quot;4 equals 3&quot;</span></a>
+<a class="sourceLine" id="cb70-4" data-line-number="4">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb70-5" data-line-number="5">  <span class="st">&quot;4 does not equal 3&quot;</span>          </a>
+<a class="sourceLine" id="cb70-6" data-line-number="6">}</a></code></pre></div>
+<pre><code>## [1] &quot;4 does not equal 3&quot;</code></pre>
+</div>
+<div id="repeating-operations" class="section level2">
+<h2>Repeating operations</h2>
+<p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a <code>for()</code> loop will do the job. This is the most flexible of looping operations, but therefore also the hardest to use correctly. In general, the advice of many R users would be to learn about <code>for()</code> loops, but to avoid using <code>for()</code> loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) { <span class="co"># If this condition is TRUE</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">  <span class="co"># Do following</span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">} <span class="co"># End of the for loop</span></a></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<p>We can use a for() loop nested within another for() loop to iterate over two things at once.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)) {</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">    <span class="kw">print</span>(<span class="kw">paste</span>(i,j))</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb74-5" data-line-number="5">}</a></code></pre></div>
+<pre><code>## [1] &quot;1 a&quot;
+## [1] &quot;1 b&quot;
+## [1] &quot;1 c&quot;
+## [1] &quot;1 d&quot;
+## [1] &quot;1 e&quot;
+## [1] &quot;2 a&quot;
+## [1] &quot;2 b&quot;
+## [1] &quot;2 c&quot;
+## [1] &quot;2 d&quot;
+## [1] &quot;2 e&quot;
+## [1] &quot;3 a&quot;
+## [1] &quot;3 b&quot;
+## [1] &quot;3 c&quot;
+## [1] &quot;3 d&quot;
+## [1] &quot;3 e&quot;
+## [1] &quot;4 a&quot;
+## [1] &quot;4 b&quot;
+## [1] &quot;4 c&quot;
+## [1] &quot;4 d&quot;
+## [1] &quot;4 e&quot;
+## [1] &quot;5 a&quot;
+## [1] &quot;5 b&quot;
+## [1] &quot;5 c&quot;
+## [1] &quot;5 d&quot;
+## [1] &quot;5 e&quot;</code></pre>
+<p>We notice in the output that when the first index (<code>i</code>) is set to <code>1</code>, the second index (<code>j</code>) iterates through its full set of indices. Once the indices of <code>j</code> have been iterated through, then <code>i</code> is incremented. This process continues until the last index has been used for each <code>for()</code> loop.</p>
+<p>Rather than printing the results, we could write the loop output to a new object.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">output_vector &lt;-<span class="st"> </span><span class="kw">c</span>()</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb76-3" data-line-number="3">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)) {</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4">    temp_output &lt;-<span class="st"> </span><span class="kw">paste</span>(i, j)</a>
+<a class="sourceLine" id="cb76-5" data-line-number="5">    output_vector &lt;-<span class="st"> </span><span class="kw">c</span>(output_vector, temp_output)</a>
+<a class="sourceLine" id="cb76-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb76-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb76-8" data-line-number="8">output_vector</a></code></pre></div>
+<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
+## [25] &quot;5 e&quot;</code></pre>
+<p>This approach can be useful, but ‘growing your results’ (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values. Here <code>c()</code> means “combine”:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3">z &lt;-<span class="st"> </span><span class="kw">c</span>(x, y)</a>
+<a class="sourceLine" id="cb78-4" data-line-number="4">z</a></code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+<p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results</strong> object before hand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix like above, create an empty matrix with 5 row and 5 columns, then at each iteration store the results in the appropriate location.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">output_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">j_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)</a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb80-4" data-line-number="4">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb80-5" data-line-number="5">    temp_j_value &lt;-<span class="st"> </span>j_vector[j]</a>
+<a class="sourceLine" id="cb80-6" data-line-number="6">    temp_output &lt;-<span class="st"> </span><span class="kw">paste</span>(i, temp_j_value)</a>
+<a class="sourceLine" id="cb80-7" data-line-number="7">    output_matrix[i, j] &lt;-<span class="st"> </span>temp_output</a>
+<a class="sourceLine" id="cb80-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb80-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb80-10" data-line-number="10">output_vector2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(output_matrix)</a>
+<a class="sourceLine" id="cb80-11" data-line-number="11">output_vector2</a></code></pre></div>
+<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot; &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot;
+## [25] &quot;5 e&quot;</code></pre>
+<p>Here we use <code>matrix()</code> to create an empty matrix with 5 rows and 5 columns, and use <code>as.vector()</code> to convert the 5x5 matrix into a vector.</p>
+<p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="cf">while</span>(z <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span> ){ <span class="co"># While this condition is TRUE</span></a>
+<a class="sourceLine" id="cb82-3" data-line-number="3">  <span class="co"># Do following</span></a>
+<a class="sourceLine" id="cb82-4" data-line-number="4">  z &lt;-<span class="st"> </span>z <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb82-5" data-line-number="5">  <span class="kw">print</span>(z)</a>
+<a class="sourceLine" id="cb82-6" data-line-number="6">} <span class="co"># End of the while loop</span></a></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6</code></pre>
+<p>OK, can you figure out why the number <code>6</code> is also printed?</p>
+<p><code>while()</code> loops will not always be appropriate. You have to be <strong>particularly careful</strong> that you don’t end up stuck in an infinite loop because your condition is always met and hence the while statement never terminates.</p>
 </div>
 <div id="r-packages" class="section level2">
 <h2>R Packages</h2>
@@ -650,7 +793,11 @@ div.tocify {
 <p><img src="figs/packages.jpg" alt="drawing" width="800"/></p>
 <p>Clicking on this tab will displas all of installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.</p>
 <p>Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.</p>
+<hr />
 </div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
 </div>
 <div class="footnotes">
 <hr />

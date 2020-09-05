@@ -7,7 +7,7 @@ output:
 **Computing and Programming for Environmental Research (ESE5023)**
 
 **Instructor:**  
-Lei Zhu  
+**Lei Zhu**  
 *School of Environmental Science and Engineering  
 Office: 429, Taizhou Hall  
 Email: zhul3@sustech.edu.cn  
@@ -15,13 +15,13 @@ Phone: 0755-26601426
 Office Hours: By appointment*  
 
 **Teaching Assistants (TAs):**    
-Ming Yang  
+**Ming Yang**  
 *School of Environmental Science and Engineering  
 Office: 401-5, Taizhou Hall  
 Email: 12031077@mail.sustech.edu.cn  
 Office Hours: TBD*  
 
-Ao Ding  
+**Ao Ding**  
 *School of Environmental Science and Engineering  
 Office: 506, Wisdom Valley #2  
 Email: 12032748@mail.sustech.edu.cn  
