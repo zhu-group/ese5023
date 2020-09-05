@@ -34,6 +34,6 @@ Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux
 The instructor will use [MobaXterm](https://mobaxterm.mobatek.net) in the class.
 
 # TaiYi HPC supercomputer
-Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check [instructions]((http://hpc.sustech.edu.cn/index.html)) for how to use TaiYi.
+Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check [instructions](http://hpc.sustech.edu.cn/index.html) for how to use TaiYi.
 
   

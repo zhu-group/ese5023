@@ -1,5 +1,5 @@
 ---
-title: "Section 02 Linux: Basics"
+title: "Section 02 R Basics"
 output:
   html_document:
     toc: true
@@ -8,108 +8,29 @@ output:
       smooth_scroll: false
 ---
 
-*The notes below are modified from the excellent [online tutorial](http://swcarpentry.github.io/shell-novice/) freely available on the Software Carpentry website.*
+> R is a dialect of the S language, and has come to be — by far — the dominant dialect. [^1]
 
-<!--------------------------------------------------------->
-# A brief introduction to Linux 
+# Why R?
 
-Linux is an operating system (OS) built by Linus Torvalds at the University of Helsinki in 1991. The name "Linux" comes from the Linux kernel.   
+[^1]: [Why use the R Language?](https://www.burns-stat.com/documents/tutorials/why-use-the-r-language/)
 
-Linux has survived so long because it’s **a power tool that allows people to do complex things with just a few keystrokes**. More importantly, it helps them **combine existing programs in new ways and automate repetitive tasks** so they aren’t typing the same things over and over again. Use of Linux ***shell*** is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers [^1].   
+R is the leading tool for statistics, data analysis, and machine learning.  It is more than a statistical package; it’s a ***programming language***, so you can create your own objects, functions, and packages. [^2]  
 
-As Linux lovers put it:  
+[^2]: [Why Use R?](https://www.r-bloggers.com/why-use-r/)
 
-> One OS to rule them all,  
-One OS to find them.  
-One OS to call them all,  
-And in salvation bind them.  
-In the bright land of Linux,  
-Where the hackers play.   
+Academics and statisticians have developed R over two decades. R has now one of the richest ecosystems to perform data analysis. There are around ***16000 packages*** available in CRAN ([Comprehensive R Archive Network](https://cran.r-project.org/)). It is possible to find a library for ***whatever the analysis*** you want to perform. The rich variety of library makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. [^3]
 
-These lessons will start you on a path towards using Linux and Shell on the TaiYi HPC supercomputer.
+[^3]: [R Vs Python: What’s the Difference?](https://www.guru99.com/r-vs-python.html)
 
-[^1]: http://swcarpentry.github.io/shell-novice
+The following figure [^4] summaries important reasons of learning R:
 
-<!--------------------------------------------------------->
-# SSH to TaiYi
+[^4]: [Source](https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg)
 
+<img src="figs/learn_R.png" alt="drawing" width="600"/>
 
+***
 
-<!--------------------------------------------------------->
-# Get the demo data
-
-You need to download some files to follow this lesson:    
-
-1. Copy `data-shell.tar.xz` to your home folder using `cp`.
-2. Extract the file by `tar -xvf shell-novice-data.tar.xz`.
-
-<!--------------------------------------------------------->
-# Navigating Files and Directories
-
-Several commands are frequently used to create, inspect, rename, and delete files and directories. To start exploring them, let's open a shell window. 
-
-The dollar sign `$` is a **prompt**, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.
-
-Next, let's find out where we are by running a command called `pwd` (which stands for "print working directory"). At any moment, our **current working directory** is our current default directory, i.e., the directory that the computer assumes we want to run commands in unless we explicitly specify something else. Here, the computer's response is `/data/ese5023`, which is my **home directory**:
-
-
-```{bash, eval=FALSE, engine='sh'}
-pwd
-```
-```{bash, eval=TRUE, engine='sh'}
-pwd
-```
-
-
-```{bash}
-cd /work/ZHU
-pwd
-ls
-```
-
-In your case, it should be something like `/work/XXX`, which is your **home directory**.
-
-Now let's learn the command that will let us see the contents of our own filesystem. We can see what's in my home directory by running `ls`, which stands for "listing":
-
-```{bash}
-cd /work/ZHU
-ls
-```
-
-`ls` prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We can make its output more comprehensible by using the **flag** `-F`, which tells `ls` to add a trailing `/` to the names of directories:
-```{bash}
-cd /work/ZHU
-ls -F
-```
-
-`ls` has lots of other options. To find out what they are, we can type: `man ls`.
-
-`man` is the Unix "manual" command: it prints a description of a command and its options, and (if you're lucky) provides a few examples of how to use it. To navigate through the `man` pages, you may use the up and down arrow keys to move line-by-line, or try the "b" and spacebar keys to skip up and down by full page. Quit the `man` pages by typing "q".
-
-Here, we can see that my working directory contains mostly **sub-directories**. Any names in the output that don't have trailing slashes, are plain **files**.
-
-We can also use `ls` to see the contents of a different directory. Let's take a look at the `data-shell` directory by running `ls -F Desktop`, i.e., the command `ls` with the **arguments** `-F` and `Desktop`. The second argument --- the one without a leading dash --- tells ls that we want a listing of something other than our current working directory:  
-
-```{bash}
-cd /work/ZHU
-ls -F data-shell
-```
-
-Your output should be a list of all the files and sub-directories in the `data-shell` directory you downloaded at the start of the lesson.
-
-The command to change locations is `cd` followed by a directory name to change our working directory. `cd` stands for "change directory", which is a bit misleading: the command doesn't change the directory, it changes the shell's idea of what directory we are in.
-
-Let's say we want to move to the `data` directory we saw above. We can use the following series of commands to get there:
-
-```{bash}
-cd /work/ZHU
-cd data-shell
-cd data
-```
-
-These commands will move us from our home directory into the `data-shell` directory, then into the `data` directory. `cd` doesn't print anything, but if we run `pwd` after it, we can see that we are now in `/work/data-shell/data`. If we run `ls` without arguments now, it lists the contents of `/work/data-shell/data`, because that's where we now are:  
+# First look at RStudio
 
 
 
-
-Page Under construction.

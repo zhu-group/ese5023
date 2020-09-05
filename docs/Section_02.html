@@ -11,7 +11,7 @@
 
 
 
-<title>Section 02 Linux: Basics</title>
+<title>Section 02 R Basics</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,97 +27,6 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
 <style type="text/css">
@@ -443,6 +352,13 @@ div.tocify {
     Schedule
   </a>
 </li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-laptop"></span>
@@ -457,13 +373,6 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li>
-  <a href="Resource.html">
-    <span class="fa fa-wrench"></span>
-     
-    Resource
-  </a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -476,95 +385,32 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 02 Linux: Basics</h1>
+<h1 class="title toc-ignore">Section 02 R Basics</h1>
 
 </div>
 
 
-<p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/shell-novice/">online tutorial</a> freely available on the Software Carpentry website.</em></p>
-<!--------------------------------------------------------->
-<div id="a-brief-introduction-to-linux" class="section level1">
-<h1>A brief introduction to Linux</h1>
-<p>Linux is an operating system (OS) built by Linus Torvalds at the University of Helsinki in 1991. The name “Linux” comes from the Linux kernel.</p>
-<p>Linux has survived so long because it’s <strong>a power tool that allows people to do complex things with just a few keystrokes</strong>. More importantly, it helps them <strong>combine existing programs in new ways and automate repetitive tasks</strong> so they aren’t typing the same things over and over again. Use of Linux <strong><em>shell</em></strong> is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p>As Linux lovers put it:</p>
 <blockquote>
-<p>One OS to rule them all,<br />
-One OS to find them.<br />
-One OS to call them all,<br />
-And in salvation bind them.<br />
-In the bright land of Linux,<br />
-Where the hackers play.</p>
+<p>R is a dialect of the S language, and has come to be — by far — the dominant dialect. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </blockquote>
-<p>These lessons will start you on a path towards using Linux and Shell on the TaiYi HPC supercomputer.</p>
-<!--------------------------------------------------------->
+<div id="why-r" class="section level1">
+<h1>Why R?</h1>
+<p>R is the leading tool for statistics, data analysis, and machine learning. It is more than a statistical package; it’s a <strong><em>programming language</em></strong>, so you can create your own objects, functions, and packages. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>Academics and statisticians have developed R over two decades. R has now one of the richest ecosystems to perform data analysis. There are around <strong><em>16000 packages</em></strong> available in CRAN (<a href="https://cran.r-project.org/">Comprehensive R Archive Network</a>). It is possible to find a library for <strong><em>whatever the analysis</em></strong> you want to perform. The rich variety of library makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>The following figure <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> summaries important reasons of learning R:</p>
+<p><img src="figs/learn_R.png" alt="drawing" width="600"/></p>
+<hr />
 </div>
-<div id="ssh-to-taiyi" class="section level1">
-<h1>SSH to TaiYi</h1>
-<!--------------------------------------------------------->
-</div>
-<div id="get-the-demo-data" class="section level1">
-<h1>Get the demo data</h1>
-<p>You need to download some files to follow this lesson:</p>
-<ol style="list-style-type: decimal">
-<li>Copy <code>data-shell.tar.xz</code> to your home folder using <code>cp</code>.</li>
-<li>Extract the file by <code>tar -xvf shell-novice-data.tar.xz</code>.</li>
-</ol>
-<!--------------------------------------------------------->
-</div>
-<div id="navigating-files-and-directories" class="section level1">
-<h1>Navigating Files and Directories</h1>
-<p>Several commands are frequently used to create, inspect, rename, and delete files and directories. To start exploring them, let’s open a shell window.</p>
-<p>The dollar sign <code>$</code> is a <strong>prompt</strong>, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.</p>
-<p>Next, let’s find out where we are by running a command called <code>pwd</code> (which stands for “print working directory”). At any moment, our <strong>current working directory</strong> is our current default directory, i.e., the directory that the computer assumes we want to run commands in unless we explicitly specify something else. Here, the computer’s response is <code>/data/ese5023</code>, which is my <strong>home directory</strong>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">pwd</span></a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">pwd</span></a></code></pre></div>
-<pre><code>## /data/ese5023</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="bu">cd</span> /work/ZHU</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="bu">pwd</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">ls</span></a></code></pre></div>
-<pre><code>## /work/ZHU
-## data-shell
-## data-shell.tar.xz</code></pre>
-<p>In your case, it should be something like <code>/work/XXX</code>, which is your <strong>home directory</strong>.</p>
-<p>Now let’s learn the command that will let us see the contents of our own filesystem. We can see what’s in my home directory by running <code>ls</code>, which stands for “listing”:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">cd</span> /work/ZHU</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="fu">ls</span></a></code></pre></div>
-<pre><code>## data-shell
-## data-shell.tar.xz</code></pre>
-<p><code>ls</code> prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We can make its output more comprehensible by using the <strong>flag</strong> <code>-F</code>, which tells <code>ls</code> to add a trailing <code>/</code> to the names of directories:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="bu">cd</span> /work/ZHU</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="fu">ls</span> -F</a></code></pre></div>
-<pre><code>## data-shell/
-## data-shell.tar.xz*</code></pre>
-<p><code>ls</code> has lots of other options. To find out what they are, we can type: <code>man ls</code>.</p>
-<p><code>man</code> is the Unix “manual” command: it prints a description of a command and its options, and (if you’re lucky) provides a few examples of how to use it. To navigate through the <code>man</code> pages, you may use the up and down arrow keys to move line-by-line, or try the “b” and spacebar keys to skip up and down by full page. Quit the <code>man</code> pages by typing “q”.</p>
-<p>Here, we can see that my working directory contains mostly <strong>sub-directories</strong>. Any names in the output that don’t have trailing slashes, are plain <strong>files</strong>.</p>
-<p>We can also use <code>ls</code> to see the contents of a different directory. Let’s take a look at the <code>data-shell</code> directory by running <code>ls -F Desktop</code>, i.e., the command <code>ls</code> with the <strong>arguments</strong> <code>-F</code> and <code>Desktop</code>. The second argument — the one without a leading dash — tells ls that we want a listing of something other than our current working directory:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="bu">cd</span> /work/ZHU</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="fu">ls</span> -F data-shell</a></code></pre></div>
-<pre><code>## creatures/
-## data/
-## Desktop/
-## molecules/
-## north-pacific-gyre/
-## notes.txt*
-## pizza.cfg*
-## solar.pdf*
-## writing/</code></pre>
-<p>Your output should be a list of all the files and sub-directories in the <code>data-shell</code> directory you downloaded at the start of the lesson.</p>
-<p>The command to change locations is <code>cd</code> followed by a directory name to change our working directory. <code>cd</code> stands for “change directory”, which is a bit misleading: the command doesn’t change the directory, it changes the shell’s idea of what directory we are in.</p>
-<p>Let’s say we want to move to the <code>data</code> directory we saw above. We can use the following series of commands to get there:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="bu">cd</span> /work/ZHU</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="bu">cd</span> data-shell</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="bu">cd</span> data</a></code></pre></div>
-<p>These commands will move us from our home directory into the <code>data-shell</code> directory, then into the <code>data</code> directory. <code>cd</code> doesn’t print anything, but if we run <code>pwd</code> after it, we can see that we are now in <code>/work/data-shell/data</code>. If we run <code>ls</code> without arguments now, it lists the contents of <code>/work/data-shell/data</code>, because that’s where we now are:</p>
-<p>Page Under construction.</p>
+<div id="first-look-at-rstudio" class="section level1">
+<h1>First look at RStudio</h1>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="http://swcarpentry.github.io/shell-novice" class="uri">http://swcarpentry.github.io/shell-novice</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="https://www.burns-stat.com/documents/tutorials/why-use-the-r-language/">Why use the R Language?</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><a href="https://www.r-bloggers.com/why-use-r/">Why Use R?</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p><a href="https://www.guru99.com/r-vs-python.html">R Vs Python: What’s the Difference?</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><a href="https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg">Source</a><a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
