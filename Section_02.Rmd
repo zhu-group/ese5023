@@ -32,5 +32,208 @@ The following figure [^4] summaries important reasons of learning R:
 
 # First look at RStudio
 
+The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your own R code.
+<img src="figs/RStudio.jpg" alt="drawing" width="800"/>
+
+Check this [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf) for more features and shortcuts of the RStudio IDE.
+
+***
+
+*The notes below are modified from the excellent [online R tutorial](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html) freely available on the Software Carpentry website.*
+
+# Introduction to R
+
+## Using R as a calculator
+
+The simplest thing you could do with R is to do arithmetic, let try this in the **Console** window:
+
+```{r}
+1 + 2
+```
+R will print out the answer, with a preceding `## [1]` or `[1]` in your computer. Don’t worry about this for now, we’ll explain that later. For now think of it as indicating output.  
+
+You will find the spaces have no impact on the result
+
+```{r}
+1+2
+```
+
+When using R as a calculator, the order of operations is the same as you would have learned back in school. From highest to lowest precedence:
+
+* Parentheses: `(`, `)`
+* Exponents: `^` or `**`
+* Multiply: `*`
+* Divide: `/`
+* Add: `+`
+* Subtract: `-`
+
+Let's try
+
+```{r}
+1 + 2 * 3
+```
+
+```{r}
+(1 + 2) * 3
+```
+
+```{r}
+(1 + 2) ^ 3
+```
+
+Always think about clarifing your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol `#` is ignored by R when it executes code.
+
+```{r}
+# Get the square root of 100?
+100 ^ 0.5
+```
+
+Really small or large numbers get a scientific notation:
+```{r}
+2 / 10000
+```
+You can write numbers in scientific notation too:
+```{r}
+5e+5 * 1e+5
+```
+
+## Mathematical functions
+
+R has many built in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function’s *arguments*:
+
+```{r}
+# Trigonometry functions
+sin(1)
+sin(0.5*pi)
+```
+
+```{r}
+# Natural logarithm
+log(10)
+# Base-10 logarithm
+log10(10)
+# e^(1/2)
+exp(0.5)
+```
+Don’t worry about trying to remember every function in R. You can look them up online, or if you can remember the start of the function’s name, use the `Tab` completion in RStudio.
+
+This is one advantage that RStudio has over R on its own, it has **auto-completion abilities** that allow you to more easily look up functions, their arguments, and the values that they take.
+
+Typing a `?` before the name of a command will open the help page for that command. When using RStudio, this will open the ‘Help’ pane. The help page will include a detailed description of the command and how it works. Scrolling to the bottom of the help page will usually show a collection of code examples which illustrate command usage. 
 
 
+## Comparing things
+
+We can also do comparisons in R:
+
+```{r}
+# Equality (note two equals signs, read as "is equal to")
+1 == 1
+# Inequality (read as "is not equal to")
+3 != 2  
+# Less than
+100 < 101  
+# Less than or equal to
+1e3 <= 2e3
+# Greater than
+1/3 > 1/5
+# Greater than or equal to
+-100 > -200
+```
+
+A word of warning about comparing numbers: you should never use `==` to compare two numbers unless they are integers (a data type which can specifically represent only whole numbers).
+
+Computers may only represent decimal numbers with a certain degree of precision, so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called Machine numeric tolerance). Further reading: http://floating-point-gui.de/
+
+Instead you should use the `all.equal` function.
+
+```{r}
+# Comparing
+all.equal(1, 1)
+all.equal(1, 1+1e-5)
+```
+
+## Variables and assignment
+
+We can store values in variables using the assignment operator `<-`, like this:
+
+```{r}
+# Assignment
+x <- 1/100
+```
+Notice that assignment does not print a value. Instead, we stored it for later in something called a **variable**. `x` now contains the value `0.01`:
+```{r}
+# Print x
+x
+```
+
+Look for the **Environment** window in the top right panel of RStudio, and you will see that `x` and its value have appeared. Our variable `x` can be used in place of a number in any calculation that expects a number:
+```{r}
+# Print x
+log10(x)
+```
+Notice also that variables can be reassigned:
+```{r}
+# Assignment
+x <- 100
+```
+`x` used to contain the value `0.01` and now it has the value `100`.
+
+Assignment values can contain the variable being assigned to:
+```{r}
+# Notice how RStudio updates its description of x on the top right tab
+x <- x + 1 
+y <- x * 2
+```
+The right hand side of the assignment can be any valid R expression. The right hand side is *fully evaluated* before the assignment occurs.
+
+Variable names can contain letters, numbers, underscores and periods **but no spaces**. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables begining with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.
+
+## Vectorization
+
+One final thing to be aware of is that R is *vectorized*, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example
+
+```{r}
+1:10
+2^(1:10)
+x <- 1:10
+2^x
+```
+This is incredibly powerful; we will discuss this further in an upcoming lesson.
+
+
+## Managing your environment
+
+There are a few useful commands you can use to interact with the R session.
+
+`ls` will list all of the variables and functions stored in the global environment (your working R session):
+
+```{r}
+ls()
+```
+
+Note here that we didn’t give any arguments to `ls`, but we still needed to give the parentheses to tell R to call the function.
+
+You can use `rm` to delete objects you no longer need:
+```{r}
+rm(x)
+ls()
+```
+
+## R Packages
+
+It is possible to add functions to R by writing a **package**, or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio have functionality for managing packages. You can:
+
+* See what packages are installed by typing `installed.packages()`
+* Install packages by typing `install.packages("packagename")`, where `packagename` is the package name, in quotes.
+* Update installed packages by typing `update.packages()`
+* Remove a package with `remove.packages("packagename")`
+* Make a package available for use with `library(packagename)`, no quotes.
+
+Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. 
+
+<img src="figs/packages.jpg" alt="drawing" width="800"/>
+
+Clicking on this tab will displas all of installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.
+
+Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
