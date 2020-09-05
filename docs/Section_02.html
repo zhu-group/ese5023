@@ -494,6 +494,7 @@ div.tocify {
 </div>
 <div id="first-look-at-rstudio" class="section level1">
 <h1>First look at RStudio</h1>
+<p>Follow <a href="https://zhu-group.github.io/ese5023/Resource.html#RStudio_Desktop">instructions</a> to install RStudio.</p>
 <p>The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your own R code. <img src="figs/RStudio.jpg" alt="drawing" width="800"/></p>
 <p>Check this <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf">cheat sheet</a> for more features and shortcuts of the RStudio IDE.</p>
 <hr />
@@ -638,12 +639,14 @@ div.tocify {
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;          &quot;y&quot;</code></pre>
+<pre><code>##  [1] &quot;i&quot;              &quot;j&quot;              &quot;j_vector&quot;       &quot;MyName&quot;         &quot;output_matrix&quot;  &quot;output_vector&quot;  &quot;output_vector2&quot; &quot;Results&quot;       
+##  [9] &quot;Simulation&quot;     &quot;temp_j_value&quot;   &quot;temp_output&quot;    &quot;TotalDraw&quot;      &quot;x&quot;              &quot;y&quot;              &quot;z&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but we still needed to give the parentheses to tell R to call the function.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
 <a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;y&quot;</code></pre>
+<pre><code>##  [1] &quot;i&quot;              &quot;j&quot;              &quot;j_vector&quot;       &quot;MyName&quot;         &quot;output_matrix&quot;  &quot;output_vector&quot;  &quot;output_vector2&quot; &quot;Results&quot;       
+##  [9] &quot;Simulation&quot;     &quot;temp_j_value&quot;   &quot;temp_output&quot;    &quot;TotalDraw&quot;      &quot;y&quot;              &quot;z&quot;</code></pre>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>

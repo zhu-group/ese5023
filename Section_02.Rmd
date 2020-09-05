@@ -32,6 +32,8 @@ The following figure [^4] summaries important reasons of learning R:
 
 # First look at RStudio
 
+Follow [instructions](https://zhu-group.github.io/ese5023/Resource.html#RStudio_Desktop) to install RStudio.
+
 The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your own R code.
 <img src="figs/RStudio.jpg" alt="drawing" width="800"/>
 
