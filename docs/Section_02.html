@@ -637,12 +637,12 @@ div.tocify {
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;          &quot;y&quot;</code></pre>
+<pre><code>## [1] &quot;MyName&quot; &quot;x&quot;      &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but we still needed to give the parentheses to tell R to call the function.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
 <a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;y&quot;</code></pre>
+<pre><code>## [1] &quot;MyName&quot; &quot;y&quot;</code></pre>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
@@ -749,8 +749,9 @@ div.tocify {
 <a class="sourceLine" id="cb78-6" data-line-number="6">  }</a>
 <a class="sourceLine" id="cb78-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb78-8" data-line-number="8">output_vector</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot;
-## [14] &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
+<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot;
+## [13] &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
+## [25] &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values. Here <code>c()</code> means “combine”:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb80-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
@@ -769,8 +770,9 @@ div.tocify {
 <a class="sourceLine" id="cb82-9" data-line-number="9">}</a>
 <a class="sourceLine" id="cb82-10" data-line-number="10">output_vector2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(output_matrix)</a>
 <a class="sourceLine" id="cb82-11" data-line-number="11">output_vector2</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot; &quot;3 c&quot;
-## [14] &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot; &quot;5 e&quot;</code></pre>
+<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot;
+## [13] &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot;
+## [25] &quot;5 e&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with 5 rows and 5 columns, and use <code>as.vector()</code> to convert the 5x5 matrix into a vector.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">0</span></a>
@@ -802,6 +804,26 @@ div.tocify {
 <p><img src="figs/packages.jpg" alt="drawing" width="800"/></p>
 <p>Clicking on this tab will displas all of installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.</p>
 <p>Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.</p>
+</div>
+<div id="working-directory" class="section level2">
+<h2>Working directory</h2>
+<p>If you want to read files from a specific location or write files to a specific location, you need to set <em>working directory</em> in R. This can be accomplished by specifying path with in <code>setwd()</code> function. First, let’s check the working directory using <code>getwd()</code></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># Get current working directory in R</span></a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="kw">getwd</span>()</a></code></pre></div>
+<p>You can change the working directory using <code>setwd()</code>, or using RStudio through GUI (Session -&gt; Set Working Directory -&gt; Choose Directory).</p>
+</div>
+<div id="seeking-help" class="section level2">
+<h2>Seeking Help</h2>
+<p><strong>Reading Help files</strong></p>
+<p>R, and every package, provide help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive R session):</p>
+<p><code>?function_name</code> or <code>help(function_name)</code></p>
+<p>This will load up a help page in RStudio.</p>
+<p><strong>Special Operators</strong></p>
+<p>To seek help on special operators, use quotes: <code>?&quot;&gt;=&quot;</code></p>
+<p><strong>When you have no idea where to begin</strong></p>
+<p>If you don’t know what function or package you need to use <a href="https://cran.r-project.org/web/views/">CRAN Task Views</a> is a specially maintained list of packages grouped into fields. This can be a good starting point.</p>
+<p><strong>When your code doesn’t work: seeking help from your peers</strong></p>
+<p>If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have <strong><em>already been answered</em></strong> on <a href="https://stackoverflow.com/">Stack Overflow</a>. You can search using the [r] tag.</p>
 <hr />
 </div>
 </div>
@@ -809,11 +831,22 @@ div.tocify {
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">X1  &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">X2  &lt;-<span class="st"> </span><span class="dv">120</span></a>
-<a class="sourceLine" id="cb86-3" data-line-number="3">X3  &lt;-<span class="st"> </span>X2 <span class="op">*</span><span class="st"> </span><span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb86-4" data-line-number="4">X4  &lt;-<span class="st"> </span>X1 <span class="op">-</span><span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb86-5" data-line-number="5">X5  &lt;-<span class="st"> </span>X1 <span class="op">&gt;</span><span class="st"> </span>X2</a></code></pre></div>
+<ul>
+<li>Creat a folder named <code>ESE5023</code>
+<ul>
+<li>Windows: In <code>C:\</code> or <code>D:\</code> disk</li>
+<li>MacOS: In <code>/home/</code></li>
+</ul></li>
+<li>Change RStudio <code>Working directory</code> to this folder</li>
+</ul>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">X1  &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">X2  &lt;-<span class="st"> </span><span class="dv">120</span></a>
+<a class="sourceLine" id="cb87-3" data-line-number="3">X3  &lt;-<span class="st"> </span>X2 <span class="op">*</span><span class="st"> </span><span class="fl">2.0</span></a>
+<a class="sourceLine" id="cb87-4" data-line-number="4">X4  &lt;-<span class="st"> </span>X1 <span class="op">-</span><span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb87-5" data-line-number="5">X5  &lt;-<span class="st"> </span>X1 <span class="op">&gt;</span><span class="st"> </span>X2</a></code></pre></div>
 <p>What will be the value of each variable after each statement in the program?</p>
 <ul>
 <li>Now type above codes in <strong>Console</strong>, check your results.<br />
@@ -822,21 +855,21 @@ div.tocify {
 <li>Clean up your working environment by deleting the <code>X1</code>, <code>X2</code>, and <code>X3</code> variables.</li>
 </ul>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise #2</h2>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
 <p>A <a href="https://www.programiz.com/article/flowchart-programming">Flowchart</a> is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very usuful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn flowchart with <code>if</code> and <code>else</code> in R.</p>
 <p>Open a new R script (File -&gt; New File -&gt; R Script), you should see a new panel in your RStudio. Type following lines in the script, and save it.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="co"># Using runif() function to generate a random value between 0 and 1</span></a>
-<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="co"># Then times 100 to make the value between 0 and 100.</span></a>
-<a class="sourceLine" id="cb87-3" data-line-number="3">Score  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb87-4" data-line-number="4"><span class="kw">print</span>(Score)</a>
-<a class="sourceLine" id="cb87-5" data-line-number="5"><span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">90</span>) {</a>
-<a class="sourceLine" id="cb87-6" data-line-number="6">  <span class="kw">print</span>(<span class="st">&quot;Excellent&quot;</span>) </a>
-<a class="sourceLine" id="cb87-7" data-line-number="7">} <span class="cf">else</span> <span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</a>
-<a class="sourceLine" id="cb87-8" data-line-number="8">  <span class="kw">print</span>(<span class="st">&quot;Pass&quot;</span>)</a>
-<a class="sourceLine" id="cb87-9" data-line-number="9">} <span class="cf">else</span>{</a>
-<a class="sourceLine" id="cb87-10" data-line-number="10">  <span class="kw">print</span>(<span class="st">&quot;Fail&quot;</span>)</a>
-<a class="sourceLine" id="cb87-11" data-line-number="11">}  </a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="co"># Using runif() function to generate a random value between 0 and 1</span></a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="co"># Then times 100 to make the value between 0 and 100.</span></a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">Score  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="kw">print</span>(Score)</a>
+<a class="sourceLine" id="cb88-5" data-line-number="5"><span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">90</span>) {</a>
+<a class="sourceLine" id="cb88-6" data-line-number="6">  <span class="kw">print</span>(<span class="st">&quot;Excellent&quot;</span>) </a>
+<a class="sourceLine" id="cb88-7" data-line-number="7">} <span class="cf">else</span> <span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</a>
+<a class="sourceLine" id="cb88-8" data-line-number="8">  <span class="kw">print</span>(<span class="st">&quot;Pass&quot;</span>)</a>
+<a class="sourceLine" id="cb88-9" data-line-number="9">} <span class="cf">else</span>{</a>
+<a class="sourceLine" id="cb88-10" data-line-number="10">  <span class="kw">print</span>(<span class="st">&quot;Fail&quot;</span>)</a>
+<a class="sourceLine" id="cb88-11" data-line-number="11">}  </a></code></pre></div>
 <ul>
 <li>Selecting all the lines, and then run the script using <code>Ctrl</code>+<code>Enter</code>, what is your result in <strong>Console</strong>?</li>
 </ul>
@@ -848,25 +881,25 @@ div.tocify {
 </ul>
 <p><img src="figs/Score.png" alt="drawing" width="600"/></p>
 </div>
-<div id="exercise-3" class="section level2">
-<h2>Exercise #3</h2>
+<div id="exercise-4" class="section level2">
+<h2>Exercise #4</h2>
 <p>Type following lines in your script:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">TotalStudents &lt;-<span class="st"> </span><span class="dv">40</span></a>
-<a class="sourceLine" id="cb88-2" data-line-number="2">Score         &lt;-<span class="st"> </span><span class="kw">runif</span>(TotalStudents,<span class="dv">0</span>,<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb88-3" data-line-number="3">PassStudents  &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="cf">for</span> (Whatever <span class="cf">in</span> Score) {</a>
-<a class="sourceLine" id="cb88-5" data-line-number="5">  <span class="cf">if</span>(Whatever <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</a>
-<a class="sourceLine" id="cb88-6" data-line-number="6">    PassStudents &lt;-<span class="st"> </span>PassStudents <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb88-7" data-line-number="7">  } </a>
-<a class="sourceLine" id="cb88-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb88-9" data-line-number="9"><span class="kw">print</span>(<span class="st">&quot;How many students pass:&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">TotalStudents &lt;-<span class="st"> </span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">Score         &lt;-<span class="st"> </span><span class="kw">runif</span>(TotalStudents,<span class="dv">0</span>,<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">PassStudents  &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="cf">for</span> (Whatever <span class="cf">in</span> Score) {</a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">  <span class="cf">if</span>(Whatever <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</a>
+<a class="sourceLine" id="cb89-6" data-line-number="6">    PassStudents &lt;-<span class="st"> </span>PassStudents <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb89-7" data-line-number="7">  } </a>
+<a class="sourceLine" id="cb89-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb89-9" data-line-number="9"><span class="kw">print</span>(<span class="st">&quot;How many students pass:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;How many students pass:&quot;</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">print</span>(PassStudents)</a></code></pre></div>
-<pre><code>## [1] 17</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">print</span>(<span class="st">&quot;Pass ratio is:&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">print</span>(PassStudents)</a></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">print</span>(<span class="st">&quot;Pass ratio is:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Pass ratio is:&quot;</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">print</span>(PassStudents<span class="op">/</span>TotalStudents)</a></code></pre></div>
-<pre><code>## [1] 0.425</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">print</span>(PassStudents<span class="op">/</span>TotalStudents)</a></code></pre></div>
+<pre><code>## [1] 0.325</code></pre>
 <ul>
 <li>Can you explain what this script does? Use following flowchart <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> for help.</li>
 </ul>
@@ -879,8 +912,8 @@ div.tocify {
 </ul></li>
 </ul>
 </div>
-<div id="exercise-4" class="section level2">
-<h2>Exercise #4</h2>
+<div id="exercise-5" class="section level2">
+<h2>Exercise #5</h2>
 <ul>
 <li>Install the following packages:
 <ul>
@@ -892,7 +925,22 @@ div.tocify {
 <li><p>Load <code>lubridate</code> package by typing <code>library(lubridate)</code></p></li>
 <li><p>Check date of today with <code>today()</code> function in <code>lubridate</code> package.</p></li>
 </ul>
+<hr />
 </div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li><a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">R Reference Card</a></li>
+<li><a href="https://dss.princeton.edu/training/RStudio101.pdf">Introduction to RStudio</a></li>
+<li><a href="http://swcarpentry.github.io/r-novice-gapminder/">R for Reproducible Scientific Analysis</a></li>
+<li><a href="http://swcarpentry.github.io/r-novice-inflammation/">Programming with R</a></li>
+<li><a href="http://www.r-tutor.com/r-introduction">R Introduction</a></li>
+<li><a href="https://www.statmethods.net/r-tutorial/index.html">R Tutorial For Beginners - Quick-R</a></li>
+</ul>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
 </div>
 <div class="footnotes">
 <hr />

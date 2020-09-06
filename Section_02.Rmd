@@ -389,11 +389,53 @@ Clicking on this tab will displas all of installed packages with a checkbox next
 
 Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
 
+## Working directory
+
+If you want to read files from a specific location or write files to a specific location, you need to set *working directory* in R. This can be accomplished by specifying path with in `setwd()` function. First, let's check the working directory using `getwd()`
+
+```{r eval=FALSE}
+# Get current working directory in R
+getwd()
+```
+
+You can change the working directory using `setwd()`, or using RStudio through GUI (Session -> Set Working Directory -> Choose Directory). 
+
+## Seeking Help
+
+**Reading Help files**
+
+R, and every package, provide help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive R session): 
+
+`?function_name` or `help(function_name)`
+
+This will load up a help page in RStudio.
+
+**Special Operators**
+
+To seek help on special operators, use quotes:
+`?">="`
+
+**When you have no idea where to begin**
+
+If you don’t know what function or package you need to use [CRAN Task Views](https://cran.r-project.org/web/views/) is a specially maintained list of packages grouped into fields. This can be a good starting point.
+
+**When your code doesn’t work: seeking help from your peers**
+
+If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have ***already been answered*** on [Stack Overflow](https://stackoverflow.com/). You can search using the [r] tag.
+
 ***
 
 # In-class exercises
 
 ## Exercise #1
+
+* Creat a folder named `ESE5023` 
+  + Windows: In `C:\` or `D:\` disk
+  + MacOS: In `/home/`
+* Change RStudio `Working directory` to this folder
+
+## Exercise #2
+
 ```{r eval=FALSE}
 X1  <- 50
 X2  <- 120
@@ -407,7 +449,7 @@ What will be the value of each variable after each statement in the program?
 * Write a command to compare `X3` to `X4`. Which one is larger?
 * Clean up your working environment by deleting the `X1`, `X2`, and `X3` variables. 
 
-## Exercise #2
+## Exercise #3
 
 A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very usuful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn flowchart with `if` and `else` in R.
 
@@ -441,7 +483,7 @@ You can play with this script a few times to get different output.
 
 [^5]: [Source](https://www.edrawsoft.com/program-flowchart.html?_ga=2.236753857.159447294.1599375959-170019789.1599375959)
 
-## Exercise #3
+## Exercise #4
 
 Type following lines in your script:
 
@@ -471,7 +513,7 @@ print(PassStudents/TotalStudents)
   + how many student have a score higher than 90
   + how many student have a score lower than 30
 
-## Exercise #4
+## Exercise #5
 
 * Install the following packages: 
   + `ggplot2`
@@ -483,4 +525,15 @@ print(PassStudents/TotalStudents)
 
 * Check date of today with `today()` function in `lubridate` package. 
 
-  
+***
+
+# Further reading
+
+* [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
+* [Introduction to RStudio](https://dss.princeton.edu/training/RStudio101.pdf)
+* [R for Reproducible Scientific Analysis](http://swcarpentry.github.io/r-novice-gapminder/)
+* [Programming with R](http://swcarpentry.github.io/r-novice-inflammation/)
+* [R Introduction](http://www.r-tutor.com/r-introduction)
+* [R Tutorial For Beginners - Quick-R](https://www.statmethods.net/r-tutorial/index.html)
+
+# References  
