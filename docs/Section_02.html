@@ -637,12 +637,16 @@ div.tocify {
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot; &quot;x&quot;      &quot;y&quot;</code></pre>
+<pre><code>##  [1] &quot;i&quot;              &quot;j&quot;              &quot;j_vector&quot;       &quot;m&quot;              &quot;MyName&quot;         &quot;n&quot;              &quot;output_matrix&quot;  &quot;output_vector&quot; 
+##  [9] &quot;output_vector2&quot; &quot;PassStudents&quot;   &quot;Results&quot;        &quot;Score&quot;          &quot;Simulation&quot;     &quot;temp_j_value&quot;   &quot;temp_output&quot;    &quot;TotalDraw&quot;     
+## [17] &quot;TotalStudents&quot;  &quot;Whatever&quot;       &quot;x&quot;              &quot;y&quot;              &quot;z&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but we still needed to give the parentheses to tell R to call the function.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
 <a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot; &quot;y&quot;</code></pre>
+<pre><code>##  [1] &quot;i&quot;              &quot;j&quot;              &quot;j_vector&quot;       &quot;m&quot;              &quot;MyName&quot;         &quot;n&quot;              &quot;output_matrix&quot;  &quot;output_vector&quot; 
+##  [9] &quot;output_vector2&quot; &quot;PassStudents&quot;   &quot;Results&quot;        &quot;Score&quot;          &quot;Simulation&quot;     &quot;temp_j_value&quot;   &quot;temp_output&quot;    &quot;TotalDraw&quot;     
+## [17] &quot;TotalStudents&quot;  &quot;Whatever&quot;       &quot;y&quot;              &quot;z&quot;</code></pre>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
@@ -749,8 +753,7 @@ div.tocify {
 <a class="sourceLine" id="cb78-6" data-line-number="6">  }</a>
 <a class="sourceLine" id="cb78-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb78-8" data-line-number="8">output_vector</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot;
-## [13] &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
+<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
 ## [25] &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values. Here <code>c()</code> means “combine”:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
@@ -770,8 +773,7 @@ div.tocify {
 <a class="sourceLine" id="cb82-9" data-line-number="9">}</a>
 <a class="sourceLine" id="cb82-10" data-line-number="10">output_vector2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(output_matrix)</a>
 <a class="sourceLine" id="cb82-11" data-line-number="11">output_vector2</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot;
-## [13] &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot;
+<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot; &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot;
 ## [25] &quot;5 e&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with 5 rows and 5 columns, and use <code>as.vector()</code> to convert the 5x5 matrix into a vector.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
@@ -895,11 +897,11 @@ div.tocify {
 <a class="sourceLine" id="cb89-9" data-line-number="9"><span class="kw">print</span>(<span class="st">&quot;How many students pass:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;How many students pass:&quot;</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">print</span>(PassStudents)</a></code></pre></div>
-<pre><code>## [1] 13</code></pre>
+<pre><code>## [1] 18</code></pre>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">print</span>(<span class="st">&quot;Pass ratio is:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Pass ratio is:&quot;</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">print</span>(PassStudents<span class="op">/</span>TotalStudents)</a></code></pre></div>
-<pre><code>## [1] 0.325</code></pre>
+<pre><code>## [1] 0.45</code></pre>
 <ul>
 <li>Can you explain what this script does? Use following flowchart <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> for help.</li>
 </ul>

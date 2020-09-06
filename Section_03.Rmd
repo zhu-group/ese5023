@@ -18,7 +18,7 @@ output:
 
 We will use [monthly CO~2~ data](https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html) measured from Mauna Loa in this section. 
 
-To begin with, download the `co2_mm_mlo.csv` file from [here](). And save it to your `working directory`.
+To begin with, download the `co2_mm_mlo.csv` file from [here](https://zhu-group.github.io/ese5023/download/co2_mm_mlo.csv). And save it to your `working directory`.
 
 [^1]: [Keeling Curve Lessons](https://scrippsco2.ucsd.edu/history_legacy/keeling_curve_lessons.html)
 
