@@ -60,6 +60,7 @@ output:
 ***7. In your view, why is programming difficult? *** 
   
 ***8. Name one thing you want to achieve at the end of the semester***  
+
 ***
 
 # Course topics

@@ -172,9 +172,7 @@ print(x)
 
 You can also assign a character to a variable
 ```{r}
-# Print x
 MyName <- "SUSTech"
-# Or use the function print()
 print(MyName)
 ```
 
@@ -206,9 +204,9 @@ One thing to be aware of is that R is *vectorized*, meaning that variables and f
 
 ```{r}
 1:10
-2^(1:10)
+2 ^ (1:10)
 x <- 1:10
-2^x
+2 ^ x
 ```
 This is incredibly powerful; we will discuss this further in an upcoming lesson.
 
@@ -281,6 +279,19 @@ if (x) {
   "4 equals 3"
 } else {
   "4 does not equal 3"          
+}
+```
+
+We can use logical AND `&&` and OR `||` operator for more than one conditions.
+
+```{r}
+m  <- 1
+n  <- 100
+if ( m >= 0 && n >=200   ) {
+  "m >= 0 and n >=200 "
+}
+if ( m >= 0 || n >=200   ) {
+  "m >= 0 or n >=200 "
 }
 ```
 
@@ -380,3 +391,95 @@ Packages can be installed and updated from the Package tab with the Install and 
 ***
 
 # In-class exercises
+
+## Exercise #1
+```{r eval=FALSE}
+X1  <- 50
+X2  <- 120
+X3  <- X2 * 2.0
+X4  <- X1 - 20
+X5  <- X1 > X2
+```
+What will be the value of each variable after each statement in the program? 
+
+* Now type above codes in **Console**, check your results.  
+* Write a command to compare `X3` to `X4`. Which one is larger?
+* Clean up your working environment by deleting the `X1`, `X2`, and `X3` variables. 
+
+## Exercise #2
+
+A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very usuful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn flowchart with `if` and `else` in R.
+
+Open a new R script (File -> New File -> R Script), you should see a new panel in your RStudio. Type following lines in the script, and save it.
+
+```{r eval=FALSE}
+# Using runif() function to generate a random value between 0 and 1
+# Then times 100 to make the value between 0 and 100.
+Score  <- runif(1,0,100)
+print(Score)
+if (Score >= 90) {
+  print("Excellent") 
+} else if (Score >= 60){
+  print("Pass")
+} else{
+  print("Fail")
+}  
+```
+
+* Selecting all the lines, and then run the script using `Ctrl`+`Enter`, what is your result in **Console**?  
+
+Here `Score` is randomly generated using `runif()` function. Type `?runif()` for help. `1` means we draw one value from the sample, `0` and `100` mean the sample is uniformly distributed between zero and one hundred.
+
+You can play with this script a few times to get different output.
+
+* Draw a flow chart based on this script.  
+
+* Update your script to reflect following flowchart [^5]
+
+<img src="figs/Score.png" alt="drawing" width="600"/>
+
+[^5]: [Source](https://www.edrawsoft.com/program-flowchart.html?_ga=2.236753857.159447294.1599375959-170019789.1599375959)
+
+## Exercise #3
+
+Type following lines in your script:
+
+```{r}
+TotalStudents <- 40
+Score         <- runif(TotalStudents,0,100)
+PassStudents  <- 0
+for (Whatever in Score) {
+  if(Whatever >= 60){
+    PassStudents <- PassStudents + 1
+  } 
+}
+print("How many students pass:")
+print(PassStudents)
+print("Pass ratio is:")
+print(PassStudents/TotalStudents)
+
+```
+
+* Can you explain what this script does? Use following flowchart [^6] for help.
+
+<img src="figs/for_loop.jpg" alt="drawing" width="200"/>
+
+[^6]: [Source](https://www.datamentor.io/r-programming/for-loop/#:~:text=%20R%20for%20Loop%20%201%20Syntax%20of,In%20the%20above%20example%2C%20the%20loop...%20More%20)
+
+* Update your script to count: 
+  + how many student have a score higher than 90
+  + how many student have a score lower than 30
+
+## Exercise #4
+
+* Install the following packages: 
+  + `ggplot2`
+  + `plyr` 
+  + `gapminder`
+  + `lubridate` 
+  
+* Load `lubridate` package by typing `library(lubridate)`  
+
+* Check date of today with `today()` function in `lubridate` package. 
+
+  
