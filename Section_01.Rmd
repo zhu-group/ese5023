@@ -74,6 +74,8 @@ output:
 * At the end of the semester, you should be able to:
   + Handle common file formats with R
     - plan text, .csv, .nc, .hdf, etc.
+  + Work with data neatly
+    - Dataframe, dplyr, tidyr
   + Do statistical sleuth with R
     - comparing distributing, ANOVA, regressions, etc.  
   + Make time series analysis with R

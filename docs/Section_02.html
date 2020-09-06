@@ -498,7 +498,7 @@ div.tocify {
 <p>The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your own R code. <img src="figs/RStudio.jpg" alt="drawing" width="800"/></p>
 <p>Check this <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf">cheat sheet</a> for more features and shortcuts of the RStudio IDE.</p>
 <hr />
-<p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html">online R tutorial</a> freely available on the Software Carpentry website.</em></p>
+<p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/r-novice-gapminder/">online R tutorial</a> freely available on the Software Carpentry website.</em></p>
 </div>
 <div id="introduction-to-r" class="section level1">
 <h1>Introduction to R</h1>
@@ -749,8 +749,8 @@ div.tocify {
 <a class="sourceLine" id="cb78-6" data-line-number="6">  }</a>
 <a class="sourceLine" id="cb78-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb78-8" data-line-number="8">output_vector</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
-## [25] &quot;5 e&quot;</code></pre>
+<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot;
+## [14] &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values. Here <code>c()</code> means “combine”:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb80-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
@@ -769,8 +769,8 @@ div.tocify {
 <a class="sourceLine" id="cb82-9" data-line-number="9">}</a>
 <a class="sourceLine" id="cb82-10" data-line-number="10">output_vector2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(output_matrix)</a>
 <a class="sourceLine" id="cb82-11" data-line-number="11">output_vector2</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot; &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot;
-## [25] &quot;5 e&quot;</code></pre>
+<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot; &quot;3 c&quot;
+## [14] &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot; &quot;5 e&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with 5 rows and 5 columns, and use <code>as.vector()</code> to convert the 5x5 matrix into a vector.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">0</span></a>
