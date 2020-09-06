@@ -18,11 +18,67 @@ output:
 
 We will use [monthly CO~2~ data](https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html) measured from Mauna Loa in this section. 
 
-To begin with, download the `co2_mm_mlo.csv` file from [here](https://zhu-group.github.io/ese5023/download/co2_mm_mlo.csv). And save it to your `working directory`.
+To begin with, download the `co2_mm_mlo.csv` file from [here](https://zhu-group.github.io/ese5023/download/co2_mm_mlo.csv). And save it to your `working directory`. Take a look at the file, where the column `co2` means monthly average CO~2~ in the unit of ppm (part per million, 10^-6^), `quality` column is the quality flag of the observation, `0` means the data point should be discarded, `1` means the data point is usuable.
 
 [^1]: [Keeling Curve Lessons](https://scrippsco2.ucsd.edu/history_legacy/keeling_curve_lessons.html)
 
 ***
+
+# Loading .csv file
+
+We can load this file via the following:
+```{r}
+Keeling_Data <- read.csv(file = "co2_mm_mlo.csv")
+```
+
+Now the file is loaded into the dataset `Keeling_Data`, check the head (first 6 lines) of the dataset using `head()` function
+```{r}
+head(Keeling_Data)
+```
+Or the end of (last 6 lines) with `tail()`:
+```{r}
+tail(Keeling_Data)
+```
+
+The `read.table()` function is used for reading in **tabular data** stored in a text file where the columns of data are separated by punctuation characters such as `.csv` files (csv = comma-separated values). `Tabs` and `commas` are the most common punctuation characters used to separate or delimit data points in `.csv` files. For convenience R provides 2 other versions of `read.table()`. These are: `read.csv()` for files where the data are separated with `commas` and `read.delim()` for files where the data are separated with `tabs`. Of these three functions, `read.csv()` is the most commonly used. If needed it is possible to override the default delimiting punctuation marks for both `read.csv()` and `read.delim()`.
+
+We can begin exploring our dataset right away, pulling out columns by specifying them using the `$` operator:
+
+```{r}
+Keeling_Data$co2
+```
+
+You can only check a few of the data points:
+```{r}
+Keeling_Data$co2[1:10]
+Keeling_Data$year[200:210]
+```
+
+We can also minic Keeling Curve using `plot()` function
+```{r}
+plot(Keeling_Data$decimal_date, Keeling_Data$co2)
+```
+
+It's ugly as there are  a few data points with the value of `-99.99` (quality=0). We can polish the figure as:
+
+```{r}
+plot(Keeling_Data$decimal_date, Keeling_Data$co2, ylim=c(300,420), type="l")
+```
+
+In fact, we should never use data points with the value of `-99.99` (quality=`0`). One good way to do so is to set those values to `NA` (Not Available’ / Missing Values).
+
+```{r}
+Year     <- Keeling_Data$decimal_date
+CO2_ppm  <- Keeling_Data$co2 
+CO2_ppm[which(CO2_ppm == -99.99)]  <- NA
+plot(Year, CO2_ppm, type="l")
+```
+
+Here we use `which()` function to find which value is equal to `-99.99`. We `type="l"` to plot a line, you can use `type="p"` to plot points, and `type="o"` to plot points + line.
+
+# Data Types
+
+
 
 # Further reading
 
