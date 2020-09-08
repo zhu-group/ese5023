@@ -85,8 +85,8 @@ output:
 
 # Course topics
 
-Research in the ESE field (in fact any field) is all about data:  
-<img src="figs/phd053104s.gif" alt="drawing" width="600"/>  
+Research in the ESE field (In fact, any field) is all about data:  
+<img src="figs/phd053104s.gif" alt="drawing" width="700"/>  
 Hopefully, this course will make your life easier when it comes to interpret and visualize data.
 
 **Course topics:**
@@ -143,7 +143,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 * Final project (40%), 
 * Class participation (10%)
 
-# Should you take the course?
+# Take the course or not?
 
 This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on R, FORTRAN, Git, and Linux.
 
@@ -161,7 +161,7 @@ Good reasons for ***not*** taking the course:
 Bad reasons for ***not*** taking the course:
 
 * I don’t have coding/programming experience
-* Programming is terrifying; perhaps I can never learn it
+* Programming is intimidating; perhaps I can never learn it
 * My project does not require programming efforts
 
 ***
