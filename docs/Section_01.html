@@ -486,7 +486,8 @@ div.tocify {
 </blockquote>
 <div id="background-poll" class="section level1">
 <h1>Background Poll</h1>
-<p><strong><em>1. Are you familiar with following languages?</em></strong></p>
+<p><strong>1. On a scale of 0 (not any) to 10 (sophisticated), how to describe your programming experience?</strong></p>
+<p><strong>2. Are you familiar with the following languages?</strong></p>
 <ul>
 <li>FORTRAN<br />
 </li>
@@ -495,9 +496,9 @@ div.tocify {
 <li>C++</li>
 <li>Java</li>
 <li>Other</li>
-<li>I know Chinese, English, maybe some Cantonese</li>
+<li>I know English, maybe some Cantonese</li>
 </ul>
-<p><strong><em>2. Do you use following languages for data analysis?</em></strong></p>
+<p><strong>3. Do you use the following languages for data analysis?</strong></p>
 <ul>
 <li>MATLAB<br />
 </li>
@@ -508,7 +509,7 @@ div.tocify {
 <li>Other</li>
 <li>No, I don’t</li>
 </ul>
-<p><strong><em>3. What do you use for data visualization?</em></strong></p>
+<p><strong>4. What do you use for data visualization?</strong></p>
 <ul>
 <li>MATLAB<br />
 </li>
@@ -517,34 +518,57 @@ div.tocify {
 <li>R</li>
 <li>IDL</li>
 <li>Origin</li>
-<li>Other (but not Excel or similar spreadsheet softwares)</li>
-<li>I use Excel, sometimes Powerpoint</li>
+<li>Other (but not Excel or similar spreadsheet software)</li>
+<li>I use Excel, sometimes Power-point</li>
 </ul>
-<p><strong><em>4. What is your laptop’s operating system (OS)?</em></strong></p>
+<p><strong>5. Have you heard about Git?</strong></p>
+<ul>
+<li>Yes<br />
+</li>
+<li>No</li>
+</ul>
+<p><strong>6. Do you know how to use command-lines?</strong></p>
+<ul>
+<li>Yes, I know DOS<br />
+</li>
+<li>Yes, I know Linux/Unix terminal<br />
+</li>
+<li>No, what’s a command-line?</li>
+</ul>
+<p><strong>7. What is your laptop’s operating system (OS)?</strong></p>
 <ul>
 <li>Windows<br />
 </li>
-<li>MacOS<br />
+<li>macOS<br />
 </li>
 <li>Ubuntu</li>
 <li>Other</li>
 </ul>
-<p><strong><em>5. Do you know how to use command lines?</em></strong></p>
+<p><strong>8. In your view, why is programming necessary?</strong> (open question)</p>
 <ul>
-<li>Yes, I know DOS<br />
-</li>
-<li>Yes, I know Linux/Unix<br />
-</li>
-<li>What’s a command line?</li>
+<li>Research</li>
+<li>Job hunting</li>
+<li>Just for fun</li>
+<li>Other</li>
 </ul>
-<p><strong><em>6. In your view, why is programming important?</em></strong></p>
-<p><strong><em>7. In your view, why is programming difficult? </em></strong></p>
-<p><strong><em>8. Name one thing you want to achieve at the end of the semester</em></strong></p>
+<p><strong>9. In your view, why is programming hard?</strong> (open question) <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<ul>
+<li>Oh, I’m just really not a math person</li>
+<li>Programmers are elite hackers, like in movies</li>
+<li>I need a computer science degree to write code<br />
+</li>
+<li>Programmers should be immediately good at all things about the computer</li>
+<li>Other</li>
+</ul>
+<p><strong>10. Name one thing you want to achieve at the end of the semester</strong> (open question)</p>
 <hr />
 </div>
 <div id="course-topics" class="section level1">
 <h1>Course topics</h1>
-<p><img src="figs/R.png" alt="drawing" width="200"/> <img src="figs/Git.jpeg" alt="drawing" width="200"/> <img src="figs/Linux.jpeg" alt="drawing" width="200"/></p>
+<p>Research in the ESE field (in fact any field) is all about data:<br />
+<img src="figs/phd053104s.gif" alt="drawing" width="600"/><br />
+Hopefully, this course will make your life easier when it comes to interpret and visualize data.</p>
+<p><strong>Course topics:</strong></p>
 <ul>
 <li>Three languages: R, Shell (BASH), and FORTRAN</li>
 <li>One operation system: Linux<br />
@@ -553,13 +577,13 @@ div.tocify {
 <ul>
 <li>Handle common file formats with R
 <ul>
-<li>plan text, .csv, .nc, .hdf, etc.</li>
+<li>plain text, .csv, .nc, .hdf, .RData, etc.</li>
 </ul></li>
 <li>Work with data neatly
 <ul>
 <li>Dataframe, dplyr, tidyr</li>
 </ul></li>
-<li>Do statistical sleuth with R
+<li>Proceed statistical sleuth with R
 <ul>
 <li>comparing distributing, ANOVA, regressions, etc.<br />
 </li>
@@ -574,7 +598,7 @@ div.tocify {
 </ul></li>
 <li>Create publication-quality figures with R
 <ul>
-<li>ggplot, image, lattice, etc.</li>
+<li>ggplot, image.plot, lattice, etc.</li>
 </ul></li>
 <li>Use Git for version control
 <ul>
@@ -582,22 +606,27 @@ div.tocify {
 </ul></li>
 <li>Write, compile, and run FORTRAN scripts
 <ul>
-<li>gfortran, ifort, basics, functions, modules, etc.</li>
+<li>gfortran, intel-fortran, functions, modules, etc.</li>
 </ul></li>
-<li>Use Linux environment
+<li>Use the Linux environment
 <ul>
-<li>basics, BASH scripts, installing software, modules, etc.</li>
+<li>basics, BASH scripts, installing software, loading modules, etc.</li>
 </ul></li>
 <li>Run jobs on TaiYi high-performance computer
 <ul>
 <li>SSH, managing jobs, scp, etc.</li>
 </ul></li>
-<li>[Optional] Build personal research website
+<li>[Optional] Build and launch a website
 <ul>
-<li>Rmarkdown (In fact, this website is made with Rmarkdown)</li>
+<li>Rmarkdown (In fact, this website is built with Rmarkdown), Parallel computing in R</li>
+</ul></li>
+<li>[Optional] Use other useful tools
+<ul>
+<li>CDO, Panoply, hdfview, MRT, etc.</li>
 </ul></li>
 </ul></li>
 </ul>
+<p><img src="figs/R.png" alt="drawing" width="200"/> <img src="figs/Git.jpeg" alt="drawing" width="200"/> <img src="figs/Linux.jpeg" alt="drawing" width="200"/></p>
 </div>
 <div id="course-structure" class="section level1">
 <h1>Course structure</h1>
@@ -617,32 +646,6 @@ div.tocify {
 <li>Office Hours to discuss specific questions</li>
 </ul>
 </div>
-<div id="should-you-take-the-course" class="section level1">
-<h1>Should you take the course?</h1>
-<blockquote>
-<p>This course is designed for ESE graduate students having <strong><em>no or weak</em></strong> programming background, with emphasis on R, FORTRAN, Git, and Linux</p>
-</blockquote>
-<blockquote>
-<p>By taking the course, you commit yourself to working on <strong><em>time-consuming</em></strong> assignments and final project</p>
-</blockquote>
-<ul>
-<li>Good reasons for <strong><em>not</em></strong> taking the course:
-<ul>
-<li>After browsing the <a href="https://zhu-group.github.io/ese5023/Syllabus.html">syllabus</a> and <a href="https://zhu-group.github.io/ese5023/Schedule.html">schedule</a>, there is nothing new for me</li>
-<li>I have strong programming background with other tools (C, C++, Java, MATLAB, Python, IDL, etc.)</li>
-<li>I am able to model, analyze, and visualize data sets through programming efforts already</li>
-<li>I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)</li>
-<li>I want to take a “easy” class to meet the graduation requirement</li>
-<li>I don’t want to spend much time on the course, instead I want to focus more on my research</li>
-</ul></li>
-<li>Bad reasons for <strong><em>not</em></strong> taking the course:
-<ul>
-<li>I don’t have coding/programming experience</li>
-<li>Programming is terrifying, perhaps I can never learn it</li>
-<li>My project does not require programming efforts</li>
-</ul></li>
-</ul>
-</div>
 <div id="course-grading" class="section level1">
 <h1>Course grading</h1>
 <ul>
@@ -650,12 +653,32 @@ div.tocify {
 <li>Final project (40%),</li>
 <li>Class participation (10%)</li>
 </ul>
+</div>
+<div id="should-you-take-the-course" class="section level1">
+<h1>Should you take the course?</h1>
+<p>This course is designed for ESE graduate students having <strong><em>no or weak</em></strong> programming background, with emphasis on R, FORTRAN, Git, and Linux.</p>
+<p>By taking the course, you commit yourself to work on <strong><em>time-consuming</em></strong> assignments and final project.</p>
+<p>Good reasons for <strong><em>not</em></strong> taking the course:</p>
+<ul>
+<li>After browsing the <a href="https://zhu-group.github.io/ese5023/Syllabus.html">syllabus</a> and <a href="https://zhu-group.github.io/ese5023/Schedule.html">schedule</a>, there is nothing new for me</li>
+<li>I have a strong programming background with other tools (C, C++, Java, MATLAB, Python, IDL, etc.)</li>
+<li>I am able to model, analyze, and visualize data sets through programming efforts already</li>
+<li>I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)</li>
+<li>I want to take an “easy” class to meet the graduation requirement</li>
+<li>I don’t want to spend much time on the course; instead, I want to focus more on my research</li>
+</ul>
+<p>Bad reasons for <strong><em>not</em></strong> taking the course:</p>
+<ul>
+<li>I don’t have coding/programming experience</li>
+<li>Programming is terrifying; perhaps I can never learn it</li>
+<li>My project does not require programming efforts</li>
+</ul>
 <hr />
 </div>
 <div id="a-closer-look-at-programming-process" class="section level1">
 <h1>A closer look at programming process</h1>
 <p><img src="figs/flow_01.jpg" alt="drawing" width="800"/></p>
-<p>Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as <em>conceptual model</em>, <em>math or logic model</em>, and <em>computer model</em>. The most important step is to have a <strong>well-defined</strong> <em>conceptual model</em>. This involves with simplifying and generalizing your raw question, so that you can describe you question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is the just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models <strong>iteratively</strong> before finally solving the question, so the chart would be more like as follow.</p>
+<p>Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as <em>conceptual model</em>, <em>math or logic model</em>, and <em>computer model</em>. The most crucial step is to have a <strong>well-defined</strong> <em>conceptual model</em>. This involves simplifying and generalizing your raw question so that you can describe the question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models <strong>iteratively</strong> before finally solving the question, so the chart would be more like as follow.</p>
 <p><img src="figs/flow_02.jpg" alt="drawing" width="800"/></p>
 </div>
 <div id="an-example-estimation-of-pi" class="section level1">
@@ -669,10 +692,10 @@ div.tocify {
 </div>
 <div id="hints" class="section level3">
 <h3>Hints</h3>
-<p>If <em>r</em> is the radius of a circle, then the surface of this circle is <span class="math inline">\(\pi*r^{2}\)</span>. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate <span class="math inline">\(\pi\)</span>. How can we estimate the surface of a circle with a random method.</p>
+<p>If <em>r</em> is the radius of a circle, then the surface of this circle is <span class="math inline">\(\pi*r^{2}\)</span>. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate <span class="math inline">\(\pi\)</span>. Then how can we estimate the surface of a circle?</p>
 <p>A circle (red) in a square (black) is our solution. Indeed, this is very easy to know the surface of a square. It is the square of the length of one of its sides. Do you see where this is leading us? What if we were able to estimate the rate between the surface of the circle and the surface of the square? Then we would know the surface of the circle.</p>
 <p><img src="figs/flow_03.jpg" alt="drawing" width="400"/></p>
-<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 </div>
 </div>
 <div id="section" class="section level2 unnumbered">
@@ -680,7 +703,7 @@ div.tocify {
 </div>
 <div id="the-conceptual-model" class="section level2">
 <h2>The conceptual model</h2>
-<p>Following above idea, the conceptual model would be: The proportion between the number of points within the circle (<em>n</em>) and the square (<em>N</em>) is equal to surfaceCircle/surfaceSquare.</p>
+<p>Following the above idea, the conceptual model would be: The proportion between the number of points within the circle (<em>n</em>) and the square (<em>N</em>) is equal to surfaceCircle/surfaceSquare.</p>
 </div>
 <div id="the-math-model" class="section level2">
 <h2>The math model</h2>
@@ -688,7 +711,7 @@ div.tocify {
 </div>
 <div id="the-computer-model" class="section level2">
 <h2>The computer model</h2>
-<p>Put this in R, the code would be like <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Put this in R, and the code would be like <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Define a function to compute pi</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">Simulation &lt;-<span class="st"> </span><span class="cf">function</span>(N){</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  c =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,N)</a>
@@ -704,7 +727,7 @@ div.tocify {
 <a class="sourceLine" id="cb1-13" data-line-number="13">  }</a>
 <a class="sourceLine" id="cb1-14" data-line-number="14">  <span class="kw">return</span>(c)</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">}</a></code></pre></div>
-<p>Let’s start with drawing 1000 random points</p>
+<p>Let’s start by drawing 1000 random points</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Draw 100 points</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">TotalDraw &lt;-<span class="st"> </span><span class="dv">1000</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">Results   &lt;-<span class="st"> </span><span class="kw">Simulation</span>(TotalDraw)</a>
@@ -714,7 +737,7 @@ div.tocify {
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</a></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.16774516335638&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.2426458266695&quot;</code></pre>
 <p>Simulation with 100,000 random points yields a better result</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Draw 1E5 points</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">TotalDraw &lt;-<span class="st"> </span><span class="fl">1E5</span></a>
@@ -725,26 +748,25 @@ div.tocify {
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</a></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.15057205583967&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.13756008804763&quot;</code></pre>
 <hr />
 </div>
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>
 <ul>
-<li>Brainstorm one research question<br />
-</li>
-<li>What is the conceptual model?<br />
-</li>
-<li>What is the math/logic model?</li>
+<li><p>Brainstorm one research question</p></li>
+<li><p>What is the conceptual model?</p></li>
+<li><p>What is the math/logic model?</p></li>
 </ul>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>By Travis Addair, Software Engineer, on Quora.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><a href="https://makemeaprogrammer.com/is-programming-hard/">source</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

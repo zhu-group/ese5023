@@ -59,13 +59,13 @@ We can also minic Keeling Curve using `plot()` function
 plot(Keeling_Data$decimal_date, Keeling_Data$co2)
 ```
 
-It's ugly as there are  a few data points with the value of `-99.99` (quality=0). We can polish the figure as:
+It's ugly as there are  a few data points with the value of `-99.99` (quality=`0`). We can polish the figure as:
 
 ```{r}
 plot(Keeling_Data$decimal_date, Keeling_Data$co2, ylim=c(300,420), type="l")
 ```
 
-In fact, we should never use data points with the value of `-99.99` (quality=`0`). One good way to do so is to set those values to `NA` (Not Available’ / Missing Values).
+In fact, we should never use data points with the value of `-99.99` (quality=`0`). One good way to do so is to set those values to `NA` (Not Available) or *Missing Values*.
 
 ```{r}
 Year     <- Keeling_Data$decimal_date
@@ -74,7 +74,7 @@ CO2_ppm[which(CO2_ppm == -99.99)]  <- NA
 plot(Year, CO2_ppm, type="l")
 ```
 
-Here we use `which()` function to find which value is equal to `-99.99`. We `type="l"` to plot a line, you can use `type="p"` to plot points, and `type="o"` to plot points + line.
+Here we use `which()` function to find which value is equal to `-99.99`. We use `type="l"` to plot a line, you can set `type="p"` to plot points, and `type="o"` to plot points + line.
 
 # Data Types
 

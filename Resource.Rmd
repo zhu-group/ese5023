@@ -9,7 +9,7 @@ output:
 ---
 
 # RStudio Desktop
-We will use [RStudio](https://rstudio.com/) to learn [R](https://www.r-project.org/) programming, make sure you install R first before installing RStudio Desktop.
+We will use [RStudio](https://rstudio.com/) to learn [R](https://www.r-project.org/) programming. Make sure you install R first before installing RStudio Desktop.
 
 * Install [R (v4.0.2)](https://mirrors.tongji.edu.cn/CRAN/) 
 * Install [RStudio Desktop (v1.3.1073)](https://rstudio.com/products/rstudio/download/)
@@ -17,14 +17,14 @@ We will use [RStudio](https://rstudio.com/) to learn [R](https://www.r-project.o
 # Git
 * Client: We use [GitKraken](https://www.gitkraken.com/git-client) as the Git client. There are also many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc.  
 
-* Platform: We use [Github](https://github.com) as the repository version control platform. Follow [this page](https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration) for Github account setup and configuration. Other softwares/platforms, like [gitlab](https://about.gitlab.com) or [bitbucket](https://bitbucket.org), will not be covered in the class. 
+* Platform: We use [Github](https://github.com) as the repository version control platform. Follow [this page](https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration) for Github account setup and configuration. Other software/platform, like [gitlab](https://about.gitlab.com) or [bitbucket](https://bitbucket.org), will not be covered in the class. 
 
 # SSH Client Tools
-You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you to connect SSH to your Linux servers. 
+You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you connect to your Linux servers. 
 
 * Windows:
 [MobaXterm](https://mobaxterm.mobatek.net), [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty),   [Xshell](https://www.netsarang.com/en/xshell)  
-* MacOS:
+* macOS:
 Terminal (pre-installed), [iTerm2](https://www.iterm2.com/)  
 * Ubuntu:
 Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window)   
@@ -34,6 +34,6 @@ Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux
 The instructor will use [MobaXterm](https://mobaxterm.mobatek.net) in the class.
 
 # TaiYi HPC supercomputer
-Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check [instructions](http://hpc.sustech.edu.cn/index.html) for how to use TaiYi.
+Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check [instructions](http://hpc.sustech.edu.cn/index.html) on how to use TaiYi.
 
   

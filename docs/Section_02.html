@@ -487,15 +487,15 @@ div.tocify {
 <div id="why-r" class="section level1">
 <h1>Why R?</h1>
 <p>R is the leading tool for statistics, data analysis, and machine learning. It is more than a statistical package; it’s a <strong><em>programming language</em></strong>, so you can create your own objects, functions, and packages. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<p>Academics and statisticians have developed R over two decades. R has now one of the richest ecosystems to perform data analysis. There are around <strong><em>16000 packages</em></strong> available in CRAN (<a href="https://cran.r-project.org/">Comprehensive R Archive Network</a>). It is possible to find a library for <strong><em>whatever the analysis</em></strong> you want to perform. The rich variety of library makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<p>The following figure <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> summaries important reasons of learning R:</p>
+<p>Academics and statisticians have developed R over two decades. R now has one of the richest ecosystems to perform data analysis. There are around <strong><em>16000 packages</em></strong> available in CRAN (<a href="https://cran.r-project.org/">Comprehensive R Archive Network</a>). It is possible to find a library for <strong><em>whatever the analysis</em></strong> you want to perform. The rich variety of libraries makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>The following figure <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> summaries important reasons for learning R:</p>
 <p><img src="figs/learn_R.png" alt="drawing" width="600"/></p>
 <hr />
 </div>
 <div id="first-look-at-rstudio" class="section level1">
 <h1>First look at RStudio</h1>
 <p>Follow <a href="https://zhu-group.github.io/ese5023/Resource.html#RStudio_Desktop">instructions</a> to install RStudio.</p>
-<p>The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your own R code. <img src="figs/RStudio.jpg" alt="drawing" width="800"/></p>
+<p>The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your R code. <img src="figs/RStudio.jpg" alt="drawing" width="800"/></p>
 <p>Check this <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf">cheat sheet</a> for more features and shortcuts of the RStudio IDE.</p>
 <hr />
 <p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/r-novice-gapminder/">online R tutorial</a> freely available on the Software Carpentry website.</em></p>
@@ -504,11 +504,11 @@ div.tocify {
 <h1>Introduction to R</h1>
 <div id="using-r-as-a-calculator" class="section level2">
 <h2>Using R as a calculator</h2>
-<p>The simplest thing you could do with R is to do arithmetic, let try this in the <strong>Console</strong> window:</p>
+<p>The simplest thing you could do with R is to do arithmetic. Let try this in the <strong>Console</strong> window:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>R will print out the answer, with a preceding <code>## [1]</code> or <code>[1]</code> in your computer. Don’t worry about this for now, we’ll explain that later. For now think of it as indicating output.</p>
-<p>You will find the spaces have no impact on the result</p>
+<p>R will print out the answer with a preceding <code>## [1]</code> (my PC) or <code>[1]</code> (your laptop). Don’t worry about this for now, we’ll explain that later. For now, think of it as indicating output.</p>
+<p>You will find the spaces have no impact on the result.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dv">1</span><span class="op">+</span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>When using R as a calculator, the order of operations is the same as you would have learned back in school. From highest to lowest precedence:</p>
@@ -527,7 +527,7 @@ div.tocify {
 <pre><code>## [1] 9</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
 <pre><code>## [1] 27</code></pre>
-<p>Always think about clarifing your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by R when it executes code.</p>
+<p>Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by R when it executes code.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Get the square root of 100?</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="dv">100</span> <span class="op">^</span><span class="st"> </span><span class="fl">0.5</span></a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
@@ -540,7 +540,7 @@ div.tocify {
 </div>
 <div id="mathematical-functions" class="section level2">
 <h2>Mathematical functions</h2>
-<p>R has many built in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
+<p>R has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Trigonometry functions</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">sin</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 0.841471</code></pre>
@@ -556,8 +556,8 @@ div.tocify {
 <a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">exp</span>(<span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 1.648721</code></pre>
 <p>Don’t worry about trying to remember every function in R. You can look them up online, or if you can remember the start of the function’s name, use the <code>Tab</code> completion in RStudio.</p>
-<p>This is one advantage that RStudio has over R on its own, it has <strong>auto-completion abilities</strong> that allow you to more easily look up functions, their arguments, and the values that they take.</p>
-<p>Typing a <code>?</code> before the name of a command will open the help page for that command. When using RStudio, this will open the ‘Help’ pane. The help page will include a detailed description of the command and how it works. Scrolling to the bottom of the help page will usually show a collection of code examples which illustrate command usage.</p>
+<p>This is one advantage that RStudio has over R on its own; it has <strong>auto-completion abilities</strong> that allow you to more easily look up functions, their arguments, and the values that they take.</p>
+<p>Typing a <code>?</code> before the name of a command will open the help page for that command. When using RStudio, this will open the ‘Help’ pane. The help page will include a detailed description of the command and how it works. Scrolling to the bottom of the help page will usually show a collection of code examples that illustrate command usage.</p>
 </div>
 <div id="comparing-things" class="section level2">
 <h2>Comparing things</h2>
@@ -582,7 +582,7 @@ div.tocify {
 <pre><code>## [1] TRUE</code></pre>
 <p>A word of warning about comparing numbers: you should never use <code>==</code> to compare two numbers unless they are integers (a data type which can specifically represent only whole numbers).</p>
 <p>Computers may only represent decimal numbers with a certain degree of precision, so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called Machine numeric tolerance). Further reading: <a href="http://floating-point-gui.de/" class="uri">http://floating-point-gui.de/</a></p>
-<p>Instead you should use the <code>all.equal</code> function.</p>
+<p>Instead, you should use the <code>all.equal</code> function.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># Comparing</span></a>
 <a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">all.equal</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -594,7 +594,7 @@ div.tocify {
 <p>We can store values in variables using the assignment operator <code>&lt;-</code>, like this:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># Assignment</span></a>
 <a class="sourceLine" id="cb43-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">100</span></a></code></pre></div>
-<p>Notice that assignment does not print a value. Instead, we stored it for later in something called a <strong>variable</strong>. <code>x</code> now contains the value <code>0.01</code>:</p>
+<p>Notice that the assignment does not print a value. Instead, we stored it for later in something called a <strong>variable</strong>. <code>x</code> now contains the value <code>0.01</code>:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Print x</span></a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">x</a></code></pre></div>
 <pre><code>## [1] 0.01</code></pre>
@@ -612,17 +612,17 @@ div.tocify {
 <p>Notice also that variables can be reassigned:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># Assignment</span></a>
 <a class="sourceLine" id="cb52-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">100</span></a></code></pre></div>
-<p><code>x</code> used to contain the value <code>0.01</code> and now it has the value <code>100</code>.</p>
+<p><code>x</code> used to contain the value <code>0.01</code>, and now it has the value <code>100</code>.</p>
 <p>Assignment values can contain the variable being assigned to:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># Notice how RStudio updates its description of x on the top right tab</span></a>
 <a class="sourceLine" id="cb53-2" data-line-number="2">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a>
 <a class="sourceLine" id="cb53-3" data-line-number="3">y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
-<p>The right hand side of the assignment can be any valid R expression. The right hand side is <em>fully evaluated</em> before the assignment occurs.</p>
-<p>Variable names can contain letters, numbers, underscores and periods <strong>but no spaces</strong>. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables begining with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.</p>
+<p>The right-hand side of the assignment can be any valid R expression. The right-hand side is <em>fully evaluated</em> before the assignment occurs.</p>
+<p>Variable names can contain letters, numbers, underscores, periods, <strong>but no spaces</strong>. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables beginning with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.</p>
 </div>
 <div id="vectorization" class="section level2">
 <h2>Vectorization</h2>
-<p>One thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example</p>
+<p>One thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example:</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
@@ -637,8 +637,7 @@ div.tocify {
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;         
-## [6] &quot;y&quot;</code></pre>
+<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;          &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but we still needed to give the parentheses to tell R to call the function.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
@@ -647,7 +646,7 @@ div.tocify {
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
-<p>Often when we’re coding we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
+<p>Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
 <p>There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the <code>if</code> and <code>else</code> constructs.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">5</span></a>
 <a class="sourceLine" id="cb64-2" data-line-number="2"></a>
@@ -658,7 +657,7 @@ div.tocify {
 <a class="sourceLine" id="cb64-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb64-8" data-line-number="8">x</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<p>The print statement does not appear in the console because <code>x</code> is not greater than <code>10</code>. To print a different message for numbers less than <code>10</code>, we can add an else statement.</p>
+<p>The print statement does not appear in the <strong>console</strong> because <code>x</code> is not greater than <code>10</code>. To print a different message for numbers less than <code>10</code>, we can add an else statement.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">5</span></a>
 <a class="sourceLine" id="cb66-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb66-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
@@ -686,7 +685,7 @@ div.tocify {
 <a class="sourceLine" id="cb70-5" data-line-number="5">  <span class="st">&quot;4 does not equal 3&quot;</span>          </a>
 <a class="sourceLine" id="cb70-6" data-line-number="6">}</a></code></pre></div>
 <pre><code>## [1] &quot;4 does not equal 3&quot;</code></pre>
-<p>We can use logical AND <code>&amp;&amp;</code> and OR <code>||</code> operator for more than one conditions.</p>
+<p>We can use logical AND <code>&amp;&amp;</code> and OR <code>||</code> operator for more than one condition.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">m  &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb72-2" data-line-number="2">n  &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb72-3" data-line-number="3"><span class="cf">if</span> ( m <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;=</span><span class="dv">200</span>   ) {</a>
@@ -699,7 +698,7 @@ div.tocify {
 </div>
 <div id="repeating-operations" class="section level2">
 <h2>Repeating operations</h2>
-<p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a <code>for()</code> loop will do the job. This is the most flexible of looping operations, but therefore also the hardest to use correctly. In general, the advice of many R users would be to learn about <code>for()</code> loops, but to avoid using <code>for()</code> loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.</p>
+<p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a <code>for()</code> loop will do the job. This is the most flexible of looping operations, but therefore also the hardest to use correctly. In general, the advice of many R users would be to learn about <code>for()</code> loops but to avoid using <code>for()</code> loops unless the order of iteration is important: i.e., the calculation at each iteration depends on the results of previous iterations.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) { <span class="co"># If this condition is TRUE</span></a>
 <a class="sourceLine" id="cb74-2" data-line-number="2">  <span class="co"># Do following</span></a>
 <a class="sourceLine" id="cb74-3" data-line-number="3">  <span class="kw">print</span>(i)</a>
@@ -709,7 +708,7 @@ div.tocify {
 ## [1] 3
 ## [1] 4
 ## [1] 5</code></pre>
-<p>We can use a for() loop nested within another for() loop to iterate over two things at once.</p>
+<p>We can use a <code>for()</code> loop nested within another for() loop to iterate over two things at once.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
 <a class="sourceLine" id="cb76-2" data-line-number="2">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)) {</a>
 <a class="sourceLine" id="cb76-3" data-line-number="3">    <span class="kw">print</span>(<span class="kw">paste</span>(i,j))</a>
@@ -750,16 +749,14 @@ div.tocify {
 <a class="sourceLine" id="cb78-6" data-line-number="6">  }</a>
 <a class="sourceLine" id="cb78-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb78-8" data-line-number="8">output_vector</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot;
-## [12] &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot;
-## [23] &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
+<pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values. Here <code>c()</code> means “combine”:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb80-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb80-3" data-line-number="3">z &lt;-<span class="st"> </span><span class="kw">c</span>(x, y)</a>
 <a class="sourceLine" id="cb80-4" data-line-number="4">z</a></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
-<p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results</strong> object before hand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix like above, create an empty matrix with 5 row and 5 columns, then at each iteration store the results in the appropriate location.</p>
+<p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results</strong> object beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with 5 row and 5 columns, then at each iteration stores the results in the appropriate location.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">output_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb82-2" data-line-number="2">j_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)</a>
 <a class="sourceLine" id="cb82-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
@@ -771,9 +768,7 @@ div.tocify {
 <a class="sourceLine" id="cb82-9" data-line-number="9">}</a>
 <a class="sourceLine" id="cb82-10" data-line-number="10">output_vector2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(output_matrix)</a>
 <a class="sourceLine" id="cb82-11" data-line-number="11">output_vector2</a></code></pre></div>
-<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot;
-## [12] &quot;2 c&quot; &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot;
-## [23] &quot;3 e&quot; &quot;4 e&quot; &quot;5 e&quot;</code></pre>
+<pre><code>##  [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot; &quot;2 c&quot; &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot; &quot;3 e&quot; &quot;4 e&quot; &quot;5 e&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with 5 rows and 5 columns, and use <code>as.vector()</code> to convert the 5x5 matrix into a vector.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">0</span></a>
@@ -789,11 +784,11 @@ div.tocify {
 ## [1] 5
 ## [1] 6</code></pre>
 <p>OK, can you figure out why the number <code>6</code> is also printed?</p>
-<p><code>while()</code> loops will not always be appropriate. You have to be <strong>particularly careful</strong> that you don’t end up stuck in an infinite loop because your condition is always met and hence the while statement never terminates.</p>
+<p><code>while()</code> loops will not always be appropriate. You have to be <strong>particularly careful</strong> that you don’t end up stuck in an infinite loop because your condition is always met, and hence the while statement never terminates.</p>
 </div>
 <div id="r-packages" class="section level2">
 <h2>R Packages</h2>
-<p>It is possible to add functions to R by writing a <strong>package</strong>, or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio have functionality for managing packages. You can:</p>
+<p>It is possible to add functions to R by writing a <strong>package</strong> or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:</p>
 <ul>
 <li>See what packages are installed by typing <code>installed.packages()</code></li>
 <li>Install packages by typing <code>install.packages(&quot;packagename&quot;)</code>, where <code>packagename</code> is the package name, in quotes.</li>
@@ -803,12 +798,12 @@ div.tocify {
 </ul>
 <p>Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio.</p>
 <p><img src="figs/packages.jpg" alt="drawing" width="800"/></p>
-<p>Clicking on this tab will displas all of installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.</p>
+<p>Clicking on this tab will display all of the installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded, and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.</p>
 <p>Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.</p>
 </div>
 <div id="working-directory" class="section level2">
 <h2>Working directory</h2>
-<p>If you want to read files from a specific location or write files to a specific location, you need to set <em>working directory</em> in R. This can be accomplished by specifying path with in <code>setwd()</code> function. First, let’s check the working directory using <code>getwd()</code></p>
+<p>If you want to read files from a specific location or write files to a specific location, you need to set <em>working directory</em> in R. This can be accomplished by specifying path with <code>setwd()</code> function. First, let’s check the working directory using <code>getwd()</code>.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># Get current working directory in R</span></a>
 <a class="sourceLine" id="cb86-2" data-line-number="2"><span class="kw">getwd</span>()</a></code></pre></div>
 <p>You can change the working directory using <code>setwd()</code>, or using RStudio through GUI (Session -&gt; Set Working Directory -&gt; Choose Directory).</p>
@@ -836,7 +831,7 @@ div.tocify {
 <li>Creat a folder named <code>ESE5023</code>
 <ul>
 <li>Windows: In <code>C:\</code> or <code>D:\</code> disk</li>
-<li>MacOS: In <code>/home/</code></li>
+<li>macOS: In <code>/home/</code></li>
 </ul></li>
 <li>Change RStudio <code>Working directory</code> to this folder</li>
 </ul>
@@ -850,7 +845,7 @@ div.tocify {
 <a class="sourceLine" id="cb87-5" data-line-number="5">X5  &lt;-<span class="st"> </span>X1 <span class="op">&gt;</span><span class="st"> </span>X2</a></code></pre></div>
 <p>What will be the value of each variable after each statement in the program?</p>
 <ul>
-<li>Now type above codes in <strong>Console</strong>, check your results.<br />
+<li>Now type the above codes in <strong>Console</strong>, check your results.<br />
 </li>
 <li>Write a command to compare <code>X3</code> to <code>X4</code>. Which one is larger?</li>
 <li>Clean up your working environment by deleting the <code>X1</code>, <code>X2</code>, and <code>X3</code> variables.</li>
@@ -858,8 +853,8 @@ div.tocify {
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise #3</h2>
-<p>A <a href="https://www.programiz.com/article/flowchart-programming">Flowchart</a> is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very usuful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn flowchart with <code>if</code> and <code>else</code> in R.</p>
-<p>Open a new R script (File -&gt; New File -&gt; R Script), you should see a new panel in your RStudio. Type following lines in the script, and save it.</p>
+<p>A <a href="https://www.programiz.com/article/flowchart-programming">Flowchart</a> is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn the flowchart with <code>if</code> and <code>else</code> in R.</p>
+<p>Open a new R script (File -&gt; New File -&gt; R Script), and you should see a new panel in your RStudio. Type the following lines in the script, and save it.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="co"># Using runif() function to generate a random value between 0 and 1</span></a>
 <a class="sourceLine" id="cb88-2" data-line-number="2"><span class="co"># Then times 100 to make the value between 0 and 100.</span></a>
 <a class="sourceLine" id="cb88-3" data-line-number="3">Score  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">100</span>)</a>
@@ -875,16 +870,16 @@ div.tocify {
 <li>Selecting all the lines, and then run the script using <code>Ctrl</code>+<code>Enter</code>, what is your result in <strong>Console</strong>?</li>
 </ul>
 <p>Here <code>Score</code> is randomly generated using <code>runif()</code> function. Type <code>?runif()</code> for help. <code>1</code> means we draw one value from the sample, <code>0</code> and <code>100</code> mean the sample is uniformly distributed between zero and one hundred.</p>
-<p>You can play with this script a few times to get different output.</p>
+<p>You can play with this script a few times to get different outputs.</p>
 <ul>
 <li><p>Draw a flow chart based on this script.</p></li>
-<li><p>Update your script to reflect following flowchart <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p></li>
+<li><p>Update your script to reflect the following flowchart <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p></li>
 </ul>
 <p><img src="figs/Score.png" alt="drawing" width="600"/></p>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
-<p>Type following lines in your script:</p>
+<p>Type the following lines in your script:</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">TotalStudents &lt;-<span class="st"> </span><span class="dv">40</span></a>
 <a class="sourceLine" id="cb89-2" data-line-number="2">Score         &lt;-<span class="st"> </span><span class="kw">runif</span>(TotalStudents,<span class="dv">0</span>,<span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb89-3" data-line-number="3">PassStudents  &lt;-<span class="st"> </span><span class="dv">0</span></a>
@@ -896,13 +891,13 @@ div.tocify {
 <a class="sourceLine" id="cb89-9" data-line-number="9"><span class="kw">print</span>(<span class="st">&quot;How many students pass:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;How many students pass:&quot;</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">print</span>(PassStudents)</a></code></pre></div>
-<pre><code>## [1] 15</code></pre>
+<pre><code>## [1] 14</code></pre>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">print</span>(<span class="st">&quot;Pass ratio is:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Pass ratio is:&quot;</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">print</span>(PassStudents<span class="op">/</span>TotalStudents)</a></code></pre></div>
-<pre><code>## [1] 0.375</code></pre>
+<pre><code>## [1] 0.35</code></pre>
 <ul>
-<li>Can you explain what this script does? Use following flowchart <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> for help.</li>
+<li>Can you explain what this script does? Use the following flowchart <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> for help.</li>
 </ul>
 <p><img src="figs/for_loop.jpg" alt="drawing" width="200"/></p>
 <ul>

@@ -18,11 +18,11 @@ R is the leading tool for statistics, data analysis, and machine learning.  It i
 
 [^2]: [Why Use R?](https://www.r-bloggers.com/why-use-r/)
 
-Academics and statisticians have developed R over two decades. R has now one of the richest ecosystems to perform data analysis. There are around ***16000 packages*** available in CRAN ([Comprehensive R Archive Network](https://cran.r-project.org/)). It is possible to find a library for ***whatever the analysis*** you want to perform. The rich variety of library makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. [^3]
+Academics and statisticians have developed R over two decades. R now has one of the richest ecosystems to perform data analysis. There are around ***16000 packages*** available in CRAN ([Comprehensive R Archive Network](https://cran.r-project.org/)). It is possible to find a library for ***whatever the analysis*** you want to perform. The rich variety of libraries makes R the first choice for statistical and data analysis. R also makes communicating the findings with a presentation, document, or website very easy. [^3]
 
 [^3]: [R Vs Python: What’s the Difference?](https://www.guru99.com/r-vs-python.html)
 
-The following figure [^4] summaries important reasons of learning R:
+The following figure [^4] summaries important reasons for learning R:
 
 [^4]: [Source](https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg)
 
@@ -34,7 +34,7 @@ The following figure [^4] summaries important reasons of learning R:
 
 Follow [instructions](https://zhu-group.github.io/ese5023/Resource.html#RStudio_Desktop) to install RStudio.
 
-The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your own R code.
+The RStudio IDE (Integrated Development Environment) is the most popular integrated development environment for R. It allows you to write, run, and debug your R code.
 <img src="figs/RStudio.jpg" alt="drawing" width="800"/>
 
 Check this [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf) for more features and shortcuts of the RStudio IDE.
@@ -47,14 +47,14 @@ Check this [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rstud
 
 ## Using R as a calculator
 
-The simplest thing you could do with R is to do arithmetic, let try this in the **Console** window:
+The simplest thing you could do with R is to do arithmetic. Let try this in the **Console** window:
 
 ```{r}
 1 + 2
 ```
-R will print out the answer, with a preceding `## [1]` or `[1]` in your computer. Don’t worry about this for now, we’ll explain that later. For now think of it as indicating output.  
+R will print out the answer with a preceding `## [1]` (my PC) or `[1]` (your laptop). Don’t worry about this for now, we’ll explain that later. For now, think of it as indicating output.  
 
-You will find the spaces have no impact on the result
+You will find the spaces have no impact on the result.
 
 ```{r}
 1+2
@@ -83,7 +83,7 @@ Let's try
 (1 + 2) ^ 3
 ```
 
-Always think about clarifing your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol `#` is ignored by R when it executes code.
+Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol `#` is ignored by R when it executes code.
 
 ```{r}
 # Get the square root of 100?
@@ -101,7 +101,7 @@ You can write numbers in scientific notation too:
 
 ## Mathematical functions
 
-R has many built in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function’s *arguments*:
+R has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function’s *arguments*:
 
 ```{r}
 # Trigonometry functions
@@ -119,9 +119,9 @@ exp(0.5)
 ```
 Don’t worry about trying to remember every function in R. You can look them up online, or if you can remember the start of the function’s name, use the `Tab` completion in RStudio.
 
-This is one advantage that RStudio has over R on its own, it has **auto-completion abilities** that allow you to more easily look up functions, their arguments, and the values that they take.
+This is one advantage that RStudio has over R on its own; it has **auto-completion abilities** that allow you to more easily look up functions, their arguments, and the values that they take.
 
-Typing a `?` before the name of a command will open the help page for that command. When using RStudio, this will open the ‘Help’ pane. The help page will include a detailed description of the command and how it works. Scrolling to the bottom of the help page will usually show a collection of code examples which illustrate command usage. 
+Typing a `?` before the name of a command will open the help page for that command. When using RStudio, this will open the ‘Help’ pane. The help page will include a detailed description of the command and how it works. Scrolling to the bottom of the help page will usually show a collection of code examples that illustrate command usage. 
 
 ## Comparing things
 
@@ -146,7 +146,7 @@ A word of warning about comparing numbers: you should never use `==` to compare 
 
 Computers may only represent decimal numbers with a certain degree of precision, so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called Machine numeric tolerance). Further reading: http://floating-point-gui.de/
 
-Instead you should use the `all.equal` function.
+Instead, you should use the `all.equal` function.
 
 ```{r}
 # Comparing
@@ -162,7 +162,7 @@ We can store values in variables using the assignment operator `<-`, like this:
 # Assignment
 x <- 1/100
 ```
-Notice that assignment does not print a value. Instead, we stored it for later in something called a **variable**. `x` now contains the value `0.01`:
+Notice that the assignment does not print a value. Instead, we stored it for later in something called a **variable**. `x` now contains the value `0.01`:
 ```{r}
 # Print x
 x
@@ -186,7 +186,7 @@ Notice also that variables can be reassigned:
 # Assignment
 x <- 100
 ```
-`x` used to contain the value `0.01` and now it has the value `100`.
+`x` used to contain the value `0.01`, and now it has the value `100`.
 
 Assignment values can contain the variable being assigned to:
 ```{r}
@@ -194,13 +194,13 @@ Assignment values can contain the variable being assigned to:
 x <- x + 1 
 y <- x * 2
 ```
-The right hand side of the assignment can be any valid R expression. The right hand side is *fully evaluated* before the assignment occurs.
+The right-hand side of the assignment can be any valid R expression. The right-hand side is *fully evaluated* before the assignment occurs.
 
-Variable names can contain letters, numbers, underscores and periods **but no spaces**. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables begining with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.
+Variable names can contain letters, numbers, underscores, periods, **but no spaces**. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables beginning with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.
 
 ## Vectorization
 
-One thing to be aware of is that R is *vectorized*, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example
+One thing to be aware of is that R is *vectorized*, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values in a certain order of the same data type. For example:
 
 ```{r}
 1:10
@@ -231,7 +231,7 @@ ls()
 
 ## Conditional statements 
 
-Often when we’re coding we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
+Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
 
 There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the `if` and `else` constructs.
 
@@ -246,7 +246,7 @@ if (x >= 10) { # If this condition is TRUE
 x
 ```
 
-The print statement does not appear in the console because `x` is not greater than `10`. To print a different message for numbers less than `10`, we can add an else statement.
+The print statement does not appear in the **console** because `x` is not greater than `10`. To print a different message for numbers less than `10`, we can add an else statement.
 
 ```{r}
 x <- 5
@@ -283,7 +283,7 @@ if (x) {
 }
 ```
 
-We can use logical AND `&&` and OR `||` operator for more than one conditions.
+We can use logical AND `&&` and OR `||` operator for more than one condition.
 
 ```{r}
 m  <- 1
@@ -298,7 +298,7 @@ if ( m >= 0 || n >=200   ) {
 
 ## Repeating operations
 
-If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a `for()` loop will do the job. This is the most flexible of looping operations, but therefore also the hardest to use correctly. In general, the advice of many R users would be to learn about `for()` loops, but to avoid using `for()` loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations. 
+If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a `for()` loop will do the job. This is the most flexible of looping operations, but therefore also the hardest to use correctly. In general, the advice of many R users would be to learn about `for()` loops but to avoid using `for()` loops unless the order of iteration is important: i.e., the calculation at each iteration depends on the results of previous iterations. 
 ```{r}
 for (i in 1:5) { # If this condition is TRUE
   # Do following
@@ -306,7 +306,7 @@ for (i in 1:5) { # If this condition is TRUE
 } # End of the for loop
 ```
 
-We can use a for() loop nested within another for() loop to iterate over two things at once.
+We can use a `for()` loop nested within another for() loop to iterate over two things at once.
 
 ```{r}
 for (i in 1:5) {
@@ -339,7 +339,7 @@ z <- c(x, y)
 z
 ```
 
-**Important**: One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an **empty results** object before hand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix like above, create an empty matrix with 5 row and 5 columns, then at each iteration store the results in the appropriate location.
+**Important**: One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an **empty results** object beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with 5 row and 5 columns, then at each iteration stores the results in the appropriate location.
 
 ```{r}
 output_matrix <- matrix(nrow=5, ncol=5)
@@ -369,11 +369,11 @@ while(z <= 5 ){ # While this condition is TRUE
 
 OK, can you figure out why the number `6` is also printed?
 
-`while()` loops will not always be appropriate. You have to be **particularly careful** that you don’t end up stuck in an infinite loop because your condition is always met and hence the while statement never terminates.
+`while()` loops will not always be appropriate. You have to be **particularly careful** that you don’t end up stuck in an infinite loop because your condition is always met, and hence the while statement never terminates.
 
 ## R Packages
 
-It is possible to add functions to R by writing a **package**, or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio have functionality for managing packages. You can:
+It is possible to add functions to R by writing a **package** or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:
 
 * See what packages are installed by typing `installed.packages()`
 * Install packages by typing `install.packages("packagename")`, where `packagename` is the package name, in quotes.
@@ -385,13 +385,13 @@ Packages can also be viewed, loaded, and detached in the Packages tab of the low
 
 <img src="figs/packages.jpg" alt="drawing" width="800"/>
 
-Clicking on this tab will displas all of installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.
+Clicking on this tab will display all of the installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded, and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.
 
 Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
 
 ## Working directory
 
-If you want to read files from a specific location or write files to a specific location, you need to set *working directory* in R. This can be accomplished by specifying path with in `setwd()` function. First, let's check the working directory using `getwd()`
+If you want to read files from a specific location or write files to a specific location, you need to set *working directory* in R. This can be accomplished by specifying path with `setwd()` function. First, let's check the working directory using `getwd()`.
 
 ```{r eval=FALSE}
 # Get current working directory in R
@@ -431,7 +431,7 @@ If you’re having trouble using a function, 9 times out of 10, the answers you 
 
 * Creat a folder named `ESE5023` 
   + Windows: In `C:\` or `D:\` disk
-  + MacOS: In `/home/`
+  + macOS: In `/home/`
 * Change RStudio `Working directory` to this folder
 
 ## Exercise #2
@@ -445,15 +445,15 @@ X5  <- X1 > X2
 ```
 What will be the value of each variable after each statement in the program? 
 
-* Now type above codes in **Console**, check your results.  
+* Now type the above codes in **Console**, check your results.  
 * Write a command to compare `X3` to `X4`. Which one is larger?
 * Clean up your working environment by deleting the `X1`, `X2`, and `X3` variables. 
 
 ## Exercise #3
 
-A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very usuful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn flowchart with `if` and `else` in R.
+A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn the flowchart with `if` and `else` in R.
 
-Open a new R script (File -> New File -> R Script), you should see a new panel in your RStudio. Type following lines in the script, and save it.
+Open a new R script (File -> New File -> R Script), and you should see a new panel in your RStudio. Type the following lines in the script, and save it.
 
 ```{r eval=FALSE}
 # Using runif() function to generate a random value between 0 and 1
@@ -473,11 +473,11 @@ if (Score >= 90) {
 
 Here `Score` is randomly generated using `runif()` function. Type `?runif()` for help. `1` means we draw one value from the sample, `0` and `100` mean the sample is uniformly distributed between zero and one hundred.
 
-You can play with this script a few times to get different output.
+You can play with this script a few times to get different outputs.
 
 * Draw a flow chart based on this script.  
 
-* Update your script to reflect following flowchart [^5]
+* Update your script to reflect the following flowchart [^5]
 
 <img src="figs/Score.png" alt="drawing" width="600"/>
 
@@ -485,7 +485,7 @@ You can play with this script a few times to get different output.
 
 ## Exercise #4
 
-Type following lines in your script:
+Type the following lines in your script:
 
 ```{r}
 TotalStudents <- 40
@@ -503,7 +503,7 @@ print(PassStudents/TotalStudents)
 
 ```
 
-* Can you explain what this script does? Use following flowchart [^6] for help.
+* Can you explain what this script does? Use the following flowchart [^6] for help.
 
 <img src="figs/for_loop.jpg" alt="drawing" width="200"/>
 

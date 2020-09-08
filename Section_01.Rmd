@@ -14,16 +14,18 @@ output:
 
 # Background Poll
 
-***1. Are you familiar with following languages?***  
+**1. On a scale of 0 (not any) to 10 (sophisticated), how to describe your programming experience?**
+
+**2. Are you familiar with the following languages?**  
 
   * FORTRAN  
   * C  
   * C++
   * Java
   * Other
-  * I know Chinese, English, maybe some Cantonese
+  * I know English, maybe some Cantonese
 
-***2. Do you use following languages for data analysis?***  
+**3. Do you use the following languages for data analysis?**  
 
   * MATLAB  
   * Python  
@@ -32,68 +34,94 @@ output:
   * Other
   * No, I don't
 
-***3. What do you use for data visualization?***  
+**4. What do you use for data visualization?**  
 
   * MATLAB  
   * Python  
   * R
   * IDL
   * Origin
-  * Other (but not Excel or similar spreadsheet softwares)
-  * I use Excel, sometimes Powerpoint 
+  * Other (but not Excel or similar spreadsheet software)
+  * I use Excel, sometimes Power-point  
 
-***4. What is your laptop's operating system (OS)?***  
+**5. Have you heard about Git?**  
+
+  * Yes  
+  * No
+
+**6. Do you know how to use command-lines?**
+
+  * Yes, I know DOS  
+  * Yes, I know Linux/Unix terminal  
+  * No, what's a command-line?
+
+**7. What is your laptop's operating system (OS)?**  
 
   * Windows  
-  * MacOS  
+  * macOS  
   * Ubuntu
   * Other
 
-***5. Do you know how to use command lines?***
+**8. In your view, why is programming necessary?** (open question) 
 
-  * Yes, I know DOS  
-  * Yes, I know Linux/Unix  
-  * What's a command line?
+  * Research
+  * Job hunting
+  * Just for fun
+  * Other
 
-***6. In your view, why is programming important?***  
-
-***7. In your view, why is programming difficult? *** 
+**9. In your view, why is programming hard?** (open question) [^2]
   
-***8. Name one thing you want to achieve at the end of the semester***  
+  * Oh, I’m just really not a math person
+  * Programmers are elite hackers, like in movies
+  * I need a computer science degree to write code  
+  * Programmers should be immediately good at all things about the computer
+  * Other
+
+[^2]: [source](https://makemeaprogrammer.com/is-programming-hard/)
+  
+**10. Name one thing you want to achieve at the end of the semester** (open question)  
 
 ***
 
 # Course topics
 
-<img src="figs/R.png" alt="drawing" width="200"/>
-<img src="figs/Git.jpeg" alt="drawing" width="200"/>
-<img src="figs/Linux.jpeg" alt="drawing" width="200"/>
+Research in the ESE field (in fact any field) is all about data:  
+<img src="figs/phd053104s.gif" alt="drawing" width="600"/>  
+Hopefully, this course will make your life easier when it comes to interpret and visualize data.
+
+**Course topics:**
 
 * Three languages: R, Shell (BASH), and FORTRAN
 * One operation system: Linux  
 * At the end of the semester, you should be able to:
   + Handle common file formats with R
-    - plan text, .csv, .nc, .hdf, etc.
+    - plain text, .csv, .nc, .hdf, .RData, etc.
   + Work with data neatly
     - Dataframe, dplyr, tidyr
-  + Do statistical sleuth with R
+  + Proceed statistical sleuth with R
     - comparing distributing, ANOVA, regressions, etc.  
   + Make time series analysis with R
     - MA, AR, seasonal decomposition, ARIMA, forecasting,  etc.
   + Conduct spatial analysis with R
     - raster and shape files, interpolation, spatial regression, etc. 
   + Create publication-quality figures with R
-    - ggplot, image, lattice, etc.
+    - ggplot, image.plot, lattice, etc.
   + Use Git for version control
     - Github, GitKraken, etc.
   + Write, compile, and run FORTRAN scripts
-    - gfortran, ifort, basics, functions, modules, etc.
-  + Use Linux environment
-    - basics, BASH scripts, installing software, modules, etc.
+    - gfortran, intel-fortran, functions, modules, etc.
+  + Use the Linux environment
+    - basics, BASH scripts, installing software, loading modules, etc.
   + Run jobs on TaiYi high-performance computer
     - SSH, managing jobs, scp, etc.
-  + [Optional] Build personal research website
-    - Rmarkdown (In fact, this website is made with Rmarkdown)
+  + [Optional] Build and launch a website
+    - Rmarkdown (In fact, this website is built with Rmarkdown), Parallel computing in R
+  + [Optional] Use other useful tools
+    - CDO, Panoply, hdfview, MRT, etc.
+
+<img src="figs/R.png" alt="drawing" width="200"/>
+<img src="figs/Git.jpeg" alt="drawing" width="200"/>
+<img src="figs/Linux.jpeg" alt="drawing" width="200"/>
 
 # Course structure
 
@@ -109,30 +137,32 @@ output:
   
 * Office Hours to discuss specific questions  
 
-# Should you take the course?
-
-> This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on R, FORTRAN, Git, and Linux
-
-> By taking the course, you commit yourself to working on ***time-consuming*** assignments and final project
-
-* Good reasons for ***not*** taking the course:
-  + After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
-  + I have strong programming background with other tools (C, C++, Java, MATLAB, Python, IDL, etc.)
-  + I am able to model, analyze, and visualize data sets through programming efforts already
-  + I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)
-  + I want to take a “easy” class to meet the graduation requirement
-  + I don't want to spend much time on the course, instead I want to focus more on my research  
-
-* Bad reasons for ***not*** taking the course:
-  + I don’t have coding/programming experience
-  + Programming is terrifying, perhaps I can never learn it
-  + My project does not require programming efforts
-
 # Course grading   
 
 * Assignments (50%)
 * Final project (40%), 
 * Class participation (10%)
+
+# Should you take the course?
+
+This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on R, FORTRAN, Git, and Linux.
+
+By taking the course, you commit yourself to work on ***time-consuming*** assignments and final project.
+
+Good reasons for ***not*** taking the course:
+
+* After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
+* I have a strong programming background with other tools (C, C++, Java, MATLAB, Python, IDL, etc.)
+* I am able to model, analyze, and visualize data sets through programming efforts already
+* I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)
+* I want to take an “easy” class to meet the graduation requirement
+* I don't want to spend much time on the course; instead, I want to focus more on my research  
+
+Bad reasons for ***not*** taking the course:
+
+* I don’t have coding/programming experience
+* Programming is terrifying; perhaps I can never learn it
+* My project does not require programming efforts
 
 ***
 
@@ -140,7 +170,7 @@ output:
 
 <img src="figs/flow_01.jpg" alt="drawing" width="800"/>
 
-Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. The most important step is to have a **well-defined** *conceptual model*. This involves with simplifying and generalizing your raw question, so that you can describe you question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is the just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
+Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. The most crucial step is to have a **well-defined** *conceptual model*. This involves simplifying and generalizing your raw question so that you can describe the question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
 
 <img src="figs/flow_02.jpg" alt="drawing" width="800"/>
 
@@ -156,21 +186,21 @@ Can you think about a few ways to solve this?
 
 ### Hints
 
-If *r* is the radius of a circle, then the surface of this circle is $\pi*r^{2}$. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate $\pi$. How can we estimate the surface of a circle with a random method. 
+If *r* is the radius of a circle, then the surface of this circle is $\pi*r^{2}$. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate $\pi$. Then how can we estimate the surface of a circle?   
 
 A circle (red) in a square (black) is our solution. Indeed, this is very easy to know the surface of a square. It is the square of the length of one of its sides. Do you see where this is leading us? What if we were able to estimate the rate between the surface of the circle and the surface of the square? Then we would know the surface of the circle. 
 
 <img src="figs/flow_03.jpg" alt="drawing" width="400"/>
 
-Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply *Monte Carlo method* here. If we uniformly drop *N* random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. [^2]
+Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the *Monte Carlo method* here. If we uniformly drop *N* random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. [^3]
 
-[^2]: [Estimation of the number PI – A Monte Carlo simulation](https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/).
+[^3]: [Estimation of the number PI – A Monte Carlo simulation](https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/).
 
 ## {-}
 
 ## The conceptual model
 
-Following above idea, the conceptual model would be: 
+Following the above idea, the conceptual model would be: 
 The proportion between the number of points within the circle (*n*) and the square (*N*) is equal to surfaceCircle/surfaceSquare.
 
 ## The math model
@@ -180,7 +210,7 @@ $$n/N = \pi / 4$$
 
 ## The computer model
 
-Put this in R, the code would be like [^2]
+Put this in R, and the code would be like [^3]
 
 ```{r}
 # Define a function to compute pi
@@ -199,7 +229,7 @@ Simulation <- function(N){
   return(c)
 }
 ```
-Let's start with drawing 1000 random points
+Let's start by drawing 1000 random points
 ```{r}
 # Draw 100 points
 TotalDraw <- 1000
@@ -228,5 +258,7 @@ print(paste("Mean Pi from the last 100 steps is: ",mean(Results[TotalDraw-99:Tot
 # In-class exercises
 
 * Brainstorm one research question   
+
 * What is the conceptual model?   
+
 * What is the math/logic model?   
