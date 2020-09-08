@@ -657,7 +657,6 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <div id="take-the-course-or-not" class="section level1">
 <h1>Take the course or not?</h1>
 <p>This course is designed for ESE graduate students having <strong><em>no or weak</em></strong> programming background, with emphasis on R, FORTRAN, Git, and Linux.</p>
-<p>By taking the course, you commit yourself to work on <strong><em>time-consuming</em></strong> assignments and final project.</p>
 <p>Good reasons for <strong><em>not</em></strong> taking the course:</p>
 <ul>
 <li>After browsing the <a href="https://zhu-group.github.io/ese5023/Syllabus.html">syllabus</a> and <a href="https://zhu-group.github.io/ese5023/Schedule.html">schedule</a>, there is nothing new for me</li>
@@ -673,12 +672,13 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <li>Programming is intimidating; perhaps I can never learn it</li>
 <li>My project does not require programming efforts</li>
 </ul>
+<p><strong>By taking the course, you commit yourself to work on time-consuming assignments and final project.</strong></p>
 <hr />
 </div>
 <div id="a-closer-look-at-programming-process" class="section level1">
 <h1>A closer look at programming process</h1>
 <p><img src="figs/flow_01.jpg" alt="drawing" width="800"/></p>
-<p>Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as <em>conceptual model</em>, <em>math or logic model</em>, and <em>computer model</em>. The most crucial step is to have a <strong>well-defined</strong> <em>conceptual model</em>. This involves simplifying and generalizing your raw question so that you can describe the question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models <strong>iteratively</strong> before finally solving the question, so the chart would be more like as follow.</p>
+<p>Very often, we find programming difficult because we fail to break down the initial research question into small parts, which I refer as <em>conceptual model</em>, <em>math or logic model</em>, and <em>computer model</em>. The most crucial step is to have a <strong>well-defined</strong> <em>conceptual model</em>. This involves simplifying and generalizing your initial question so that you can describe the gist in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models <strong>iteratively</strong> before finally solving the question, so the chart would be more like as follow.</p>
 <p><img src="figs/flow_02.jpg" alt="drawing" width="800"/></p>
 </div>
 <div id="an-example-estimation-of-pi" class="section level1">
@@ -737,7 +737,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</a></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.1532370032557&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.06952322355072&quot;</code></pre>
 <p>Simulation with 100,000 random points yields a better result</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Draw 1E5 points</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">TotalDraw &lt;-<span class="st"> </span><span class="fl">1E5</span></a>
@@ -748,7 +748,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</a></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.1518685575957&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.13146147657249&quot;</code></pre>
 <hr />
 </div>
 </div>

@@ -147,8 +147,6 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on R, FORTRAN, Git, and Linux.
 
-By taking the course, you commit yourself to work on ***time-consuming*** assignments and final project.
-
 Good reasons for ***not*** taking the course:
 
 * After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
@@ -164,13 +162,15 @@ Bad reasons for ***not*** taking the course:
 * Programming is intimidating; perhaps I can never learn it
 * My project does not require programming efforts
 
+**By taking the course, you commit yourself to work on time-consuming assignments and final project.**
+
 ***
 
 # A closer look at programming process 
 
 <img src="figs/flow_01.jpg" alt="drawing" width="800"/>
 
-Very often, we find programming difficult because we are not breaking down the research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. The most crucial step is to have a **well-defined** *conceptual model*. This involves simplifying and generalizing your raw question so that you can describe the question in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become very straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
+Very often, we find programming difficult because we fail to break down the initial research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. The most crucial step is to have a **well-defined** *conceptual model*. This involves simplifying and generalizing your initial question so that you can describe the gist in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
 
 <img src="figs/flow_02.jpg" alt="drawing" width="800"/>
 
