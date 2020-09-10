@@ -557,8 +557,7 @@ A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diag
 Open a new R script (File -> New File -> R Script). Type the following lines in the script, and save it.
 
 ```{r eval=FALSE}
-# Using runif() function to generate a random value between 0 and 1
-# Then times 100 to make the value between 0 and 100.
+# Using runif() function to generate one random value between 0 and 100
 Score  <- runif(1,0,100)
 print(Score)
 if (Score >= 90) {
