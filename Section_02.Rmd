@@ -43,6 +43,8 @@ Check this [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rstud
 
 *The notes below are modified from the excellent [online R tutorial](http://swcarpentry.github.io/r-novice-gapminder/) freely available on the Software Carpentry website.*
 
+***
+
 # Introduction to R
 
 ## Using R as a calculator
@@ -290,7 +292,7 @@ if (AQI <= 50) {
 
 Change `AQI` to `40`, `80`, and `120`, check the ouput.
 
-**Important**: when R evaluates the condition inside `if()` statements, it is looking for a logical element, i.e., `TRUE` or `FALSE`. This can cause some headaches for beginners. For example:
+**Important**: when R evaluates the condition inside `if()` statements, it is looking for a logical element, *i.e.*, `TRUE` or `FALSE`. This can cause some headaches for beginners. For example:
 
 ```{r}
 x  <-  4 == 3
@@ -301,14 +303,11 @@ if (x) {
 }
 ```
 
-We can use logical AND `&&` and OR `||` operator for more than one condition.
-
+We can use logical AND `&&` and OR `||` operator for more than one condition:
 ```{r}
-
 if (AQI > 50 && AQI <= 100) {
   print("Air Quality is Good")
 }
-
 ```
 
 Change `AQI` to `40`, `80`, and `120`, check the ouput.
@@ -469,7 +468,7 @@ OK, can you figure out why the number `6` is also printed?
 
 ## R Packages
 
-It is possible to add functions to R by writing a **package** or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:
+It is possible to add functions to R by writing a *package* or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:
 
 * See what packages are installed by typing `installed.packages()`
 * Install packages by typing `install.packages("packagename")`, where `packagename` is the package name, in quotes.
@@ -523,7 +522,7 @@ If you don’t know what function or package you need to use [CRAN Task Views](h
 
 **When your code doesn’t work: seeking help from your peers**
 
-If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have ***already been answered*** on [Stack Overflow](https://stackoverflow.com/). You can search using the [r] tag.
+If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have ***already been answered*** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[r]` tag.
 
 ***
 
@@ -628,7 +627,9 @@ $$C = (F - 32) * 5/9$$
 
 * Install the following packages: 
   + `ggplot2`
-  + `plyr` 
+  + `plyr`
+  + `dplyr`
+  + `tidyr`
   + `gapminder`
   + `lubridate` 
   

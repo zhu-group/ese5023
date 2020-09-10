@@ -13,7 +13,7 @@ https://zhu-group.github.io/ese5023
 Office: 429, Taizhou Hall  
 Email: zhul3@sustech.edu.cn  
 Phone: 0755-26601426  
-Office Hours: By appointment*  
+Office Hours: M., 11-12*  
 
 **Teaching Assistants (TAs):**    
 **Ming Yang**  
@@ -61,3 +61,9 @@ Students will be evaluated at the end of the semester based on their assignments
 
 **Schedule:**  
 [Schedule for 2020 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
+
+***
+
+*This course is inspired by the excellent course [Research computing in earth sciences](https://rabernat.github.io/research_computing/) freely available on the Github.*
+
+***
