@@ -628,8 +628,6 @@ $$C = (F - 32) * 5/9$$
 * Install the following packages: 
   + `ggplot2`
   + `plyr`
-  + `dplyr`
-  + `tidyr`
   + `gapminder`
   + `lubridate` 
   
