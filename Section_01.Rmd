@@ -215,16 +215,16 @@ Put this in R, and the code would be like [^3]
 ```{r}
 # Define a function to compute pi
 Simulation <- function(N){
-  c = rep(0,N)
-  numberIn = 0
+  c <- rep(0,N)
+  numberIn <-  0
   for(i in 1:N){
-    x = runif(2,-1,1)
+    x <- runif(2,-1,1)
     if(sqrt(x[1]*x[1] + x[2]*x[2]) <= 1){
-      numberIn = numberIn + 1
+      numberIn <- numberIn + 1
     }
-    prop = numberIn / i
-    piHat = prop *4
-    c[i] = piHat
+    prop  <- numberIn / i
+    piHat <- prop *4
+    c[i]  <- piHat
   }
   return(c)
 }
