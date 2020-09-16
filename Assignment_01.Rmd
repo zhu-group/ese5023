@@ -18,7 +18,7 @@ For problem set *i*, create a script named `PS1_i.R`. Submit your scripts and re
 **Collaboration:**  
 Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
 
-* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspried by reading XXX”) that helped you.
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
 * Write your scripts and report **independently** - the scripts and report must come from you only.
 
 **Late Submission:**   
@@ -31,46 +31,56 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 
 # 1 Flowchart 
 
-**[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart [^1]. Here the purple parallelpgram operator is to print values in order. Show you output with some random `a`, `b`, and `c` values.  
+**[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart [^1]. Here the purple parallelogram operator is to print values in order. Report your output with some random `a`, `b`, and `c` values.  
 <img src="figs/flowchart_a1.png" alt="drawing" width="450"/>
 
 [^1]: [Source](https://www.tenouk.com/clabworksheet/labworksheet8_files/cifelseswitchcase031.png)
 
+***
+
 # 2 Matrix multiplication
 
-**2.1 [5 points]** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ), both are filled with random integers from `0` and `50`.
+**2.1 [5 points]** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ); both are filled with random integers from `0` and `50`.
 
 **2.2 [5 points]** Write a function `Matrix_multip` to do matrix multiplication, *i.e.*, `M1 * M2`. Here you are only allowed to use `for` loop, `*` operator, and `+` operator. Check your result with the `%*%` operator.
 
+***
+
 # 3 Pascal triangle
 
-**[15 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an arguement `N` to print the first *N* lines of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
+**[15 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `N` to print the first *N* lines of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
 
-# 5. Add or double
+***
 
-**[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *N* RMB? Here *N* is randomly seleted from `100` to `200`. Write a function `Smallest_number` to print your results. For example, `Smallest_number(2)` should print `2`, and `Smallest_number(5)` should print `3`.
+# 4. Add or double
 
-# 4 Dynamic programming
+**[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *N* RMB? Here *N* is randomly selected from `100` to `200`. Write a function `Smallest_number` to print your results. For example, `Smallest_number(2)` should print `2`, and `Smallest_number(5)` should print `3`.
 
-Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to a integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. For example:
+***
+
+# 5 Dynamic programming
+
+Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. For example:
 $$ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 $$
 $$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$
-**1.1 [20 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `0` to `200`. 
+**5.1 [20 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `0` to `200`. 
 
-**1.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `0` to `200`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions` as the y-axis and the sequence from `0` to `200` as the x-axis. 
+**5.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `0` to `200`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions` as the y-axis and the sequence from `0` to `200` as the x-axis. 
 
 (Hint: You may find `seq()`, `choose()`, and `permutations()` useful)
 
-# 5 Visibility in Shenzhen during the past 10 years
+***
 
-In this problem set, we will examine how visibility behaviros in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Hourly visibility data are stored under the `VIS` column. Read page `10` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for detailed format of the data.
+# 6 Visibility in Shenzhen during the past 10 years
 
-You want to only use data points meet the following criteria:
+In this problem set, we will examine how visibility behaviors in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Hourly visibility data are stored under the `VIS` column. Read page `10` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the data.
+
+You want to only use data points satisfying the following criteria:
 
 * Visibility data (in meters) within the range of `0` and `160000`
 * Pass all quality control checks: `VISIBILITY-OBSERVATION distance quality code` is `1`, `VISIBILITY-OBSERVATION variability code` is `N`, and `VISIBILITY-OBSERVATION quality variability code` is `1`.
 
-**5.1 [15 points]** Plot hourly visibility data as a function of the observation time, simalir to the timeseries plot you made in [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3). Based on your naked eyes, is there a trend in visibility in the past 10 years? 
+**6.1 [15 points]** Plot hourly visibility data as a function of the observation time, similar to the time series plot you made in [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3). Based on your naked eyes, is there a trend in visibility during the past 10 years? 
 
-**5.2 [10 points]** For each year, report the number of days with visibility shorter than `5km` and longer than `25km`. Is the visibility getting better or worse?
+**6.2 [10 points]** For each year, report the number of days with visibility shorter than `5km` and longer than `25km`. Is the visibility getting better or worse?
 
