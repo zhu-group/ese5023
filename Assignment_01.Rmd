@@ -9,7 +9,23 @@ output:
 ---
 
 Out: 09/17 19:00  
-For problem set *i*, creat a script named `PS1_i.R`. Submit your scripts and report via GitHub by **10/10 19:00**  
+For problem set *i*, create a script named `PS1_i.R`. Submit your scripts and report via GitHub by **10/10 19:00**  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspried by reading XXX”) that helped you.
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Late Submission:**   
+Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
+
+**Submitting your assignment:**  
+Submit your scripts and report via GitHub. The submission time is determined based on your Github records.  
 
 ***
 
@@ -30,7 +46,7 @@ For problem set *i*, creat a script named `PS1_i.R`. Submit your scripts and rep
 
 **[15 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an arguement `N` to print the first *N* lines of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
 
-# 5. Add or double the money
+# 5. Add or double
 
 **[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *N* RMB? Here *N* is randomly seleted from `100` to `200`. Write a function `Smallest_number` to print your results. For example, `Smallest_number(2)` should print `2`, and `Smallest_number(5)` should print `3`.
 
