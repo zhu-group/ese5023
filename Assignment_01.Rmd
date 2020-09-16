@@ -54,7 +54,7 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 
 # 4. Add or double
 
-**[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *N* RMB? Here *N* is randomly selected from `100` to `200`. Write a function `Smallest_number` to print your results. For example, `Smallest_number(2)` should print `2`, and `Smallest_number(5)` should print `3`.
+**[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is randomly selected from `100` to `200`. Write a function `Smallest_number` to print your results. For example, `Smallest_number(2)` should print `2`, and `Smallest_number(5)` should print `3`.
 
 ***
 
@@ -73,7 +73,7 @@ $$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$
 
 # 6 Visibility in Shenzhen during the past 10 years
 
-In this problem set, we will examine how visibility behaviors in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Hourly visibility data are stored under the `VIS` column. Read page `10` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the data.
+In this problem set, we will examine how visibility changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Hourly visibility data are stored under the `VIS` column. Read page `10` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the data.
 
 You want to only use data points satisfying the following criteria:
 
