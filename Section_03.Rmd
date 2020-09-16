@@ -14,7 +14,7 @@ output:
   
 <img src="figs/mlo_record.png" alt="drawing" width="600"/>
 
-[Charles David Keeling](https://scrippsco2.ucsd.edu/history_legacy/charles_david_keeling_biography.html) directed a program to measure the concentrations of CO~2~ in the atmosphere that continued without interruption from the late 1950's through the present. This program, operated out of [Scripps Institution of Oceanography](https://scripps.ucsd.edu), is responsible for the Mauna Loa record, which is almost certainly the ***best-known icon*** illustrating the impact of humanity on the planet as a whole. [^1] 
+[Charles David Keeling](https://scrippsco2.ucsd.edu/history_legacy/charles_david_keeling_biography.html) directed a program to measure the concentrations of CO~2~ in the atmosphere that continued without interruption from the late 1950s through the present. This program, operated out of [Scripps Institution of Oceanography](https://scripps.ucsd.edu), is responsible for the Mauna Loa record, which is almost certainly the ***best-known icon*** illustrating the impact of humanity on the planet as a whole. [^1] 
 
 We will use [monthly CO~2~ data](https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html) measured from Mauna Loa in this section. 
 
@@ -24,13 +24,13 @@ We will use [monthly CO~2~ data](https://www.esrl.noaa.gov/gmd/ccgg/trends/data.
 
 # Loading .csv file
 
-To begin with, download the `co2_mm_mlo.csv` file from [here](https://zhu-group.github.io/ese5023/download/co2_mm_mlo.csv). And save it to your `working directory`. Take a look at the file, where the column `co2` means monthly average CO~2~ in the unit of ppm (part per million, 10^-6^), `quality` column is the quality flag of the observation, `0` means the data point should be discarded, `1` means the data point is usuable.
+To begin with, download the `co2_mm_mlo.csv` file from [here](https://zhu-group.github.io/ese5023/download/co2_mm_mlo.csv). Save the file to your `working directory`. Take a look at the file, where the column `co2` means monthly average CO~2~ in the unit of ppm (part per million, 10^-6^), `quality` column is the quality flag of the observation, `0` means the data point does not meet the quality control so that should be discarded, `1` means the data point is usable.
 
 We can load this file via the following:
 ```{r}
 Keeling_Data <- read.csv(file = "co2_mm_mlo.csv", header = T)
 ```
-Now the file is loaded into the dataset `Keeling_Data`. Here we use the *option* `header = T` so that the first line of `co2_mm_mlo.csv` is loaded as names of the variables. You can try to trun this off by setting `header = F`, and check what happens.
+Now the file is loaded into the dataset `Keeling_Data`. Here we use the *option* `header = T` so that the first line of `co2_mm_mlo.csv` is loaded as names of the variables. You can try to turn this off by setting `header = F`, and check what happens.
 
 Check the names of columns:
 ```{r}
@@ -67,25 +67,41 @@ We can begin exploring our dataset right away, pulling out columns by specifying
 Keeling_Data$co2
 ```
 
-You can use `[]` to extract elements of a vector by specifying their coressponding *index*.  
+Let's do a few simple statistical checks with `Keeling_Data$co2`:
+```{r}
+# Min
+min(Keeling_Data$co2)
+# Max
+max(Keeling_Data$co2)
+# Mean
+mean(Keeling_Data$co2)
+# Plot the histogram
+hist(Keeling_Data$co2)
+# Show quantiles
+summary(Keeling_Data$co2)
+```
+You will find there are some `-99.99` values, thoese are actually *missing values*. We will get back to this later.
+
+You can use `[]` to extract elements of a vector by specifying their corresponding *index*.  
+
 **Important:** Index in R starts from `1`, not `0`. For example:
 ```{r}
 Keeling_Data$co2[1:10]
 Keeling_Data$year[200:210]
 Keeling_Data$co2[0]
 ```
-We can minic Keeling Curve using `plot()` function
+We can mimic the Keeling Curve using `plot()` function
 ```{r}
 plot(Keeling_Data$decimal_date, Keeling_Data$co2)
 ```
 
-It's ugly as there are  a few data points with the value of `-99.99` (quality=`0`). We can polish the figure as:
+It's ugly as there are a few data points with a value of `-99.99` (quality=`0`). We can polish the figure as:
 
 ```{r}
 plot(Keeling_Data$decimal_date, Keeling_Data$co2, ylim=c(300,420), type="l")
 ```
 
-In fact, we should never use data points with the value of `-99.99` (quality=`0`). One good way to do so is to set those values to `NA` (Not Available) or *Missing Values*.
+In fact, we should never use data points with a value of `-99.99` (quality=`0`). One good way to do so is to set those values to `NA` (Not Available) or *Missing Values*.
 
 ```{r}
 Year     <- Keeling_Data$decimal_date
@@ -95,6 +111,19 @@ plot(Year, CO2_ppm, type="l")
 ```
 
 Here we use `which()` function to find  values equal to `-99.99`. We use `type="l"` to plot a line, you can set `type="p"` to plot points, and `type="o"` to plot points + line.
+
+**Important:** Always use the `na.rm=T` opintion to handle vectors containing `NA` values.
+
+```{r}
+mean(CO2_ppm)
+mean(CO2_ppm, na.rm=T)
+```
+
+***
+
+*The notes below are modified from the excellent [online R tutorial](http://swcarpentry.github.io/r-novice-gapminder/) freely available on the Software Carpentry website.*
+
+***
 
 # Data Types
 
@@ -107,7 +136,7 @@ By doing so, we convert CO~2~ in a unit of ppb (part per billion, 10^-9^).  Then
 ```{r, eval=FALSE}
 Keeling_Data$month[1:10] + Keeling_Data$co2[1:10]
 ```
-The above line of script won't work as `Keeling_Data$month` and `Keeling_Data$co2` have different *data types*.
+The above line won't work as `Keeling_Data$month` and `Keeling_Data$co2` has different *data types*.
 
 In R, there are 5 main types: `double`, `integer`, `complex`, `logical`, and `character`. We can ask what type of data something is using the `typeof()` function:
 ```{r}
@@ -125,7 +154,7 @@ typeof(1)
 typeof(1L)
 ```
 
-We don't use `complex` very often, it can be defined as `a + bi`, where `a` and `b` are numbers:
+We don't use `complex` very often; it can be defined as `a + bi`, where `a` and `b` are numbers:
 ```{r}
 typeof(1+1i)
 ```
@@ -134,18 +163,18 @@ No matter how complicated our analyses become, all data in R is interpreted as o
 
 # Data structure 
 
-When R reads the `co2_mm_mlo.csv` file, it actually loads the table  into something called a `data.frame`, and named it as `Keeling_Data`. A `data.frame` is a structure which R knows how to build out of the basic data types.
+When R reads the `co2_mm_mlo.csv` file, it loads the table  into something called a `data.frame`, and named it as `Keeling_Data`. A `data.frame` is a structure that R knows how to build out of the basic data types.
 
 We can check that it is a `data.frame` by calling the `class()` function on it:
 ```{r}
 class(Keeling_Data)
 ```
 
-In order to use our data in R, we need to understand what the basic data structures are, and how they behave.
+In order to use our data in R, we need to understand what the basic data structures are and how they behave.
 
-## Vector and Type Coercion
+## Vector and type coercion
 
-To better understand data structures behavior, let’s meet the first data structure: the `vector`.
+To better understand data structure, let’s meet the first data structure: the `vector`.
 ```{r}
 vector_1 <- vector(length = 3)
 vector_1
@@ -162,7 +191,7 @@ You can check if something is a vector using the `str()` function:
 str(vector_2)
 ```
 
-The output from this command indicates the basic data type found in this vector - in this case `chr`, or character; an indication of the number of things in the vector - actually, the indexes of the vector, in this case `[1:3]`; and a few examples of what’s actually in the vector - in this case empty character strings. If we similarly do
+The output from this command indicates the basic data type found in this vector - in this case `chr`, or character; an indication of the number of things in the vector - actually, the indexes of the vector, in this case `[1:3]`; and a few examples of what’s actually in the vector - in this case empty character strings. If we similarly do:
 ```{r}
 str(Keeling_Data$co2)
 ```
@@ -191,7 +220,7 @@ vector_6
 
 The coercion rules go:  
 `logical` -> `integer` -> `numeric` -> `complex` -> `character`   
-where -> can be read as are *transformed into*. You can try to force coercion against this flow using the `as.` functions:
+where -> can be read as being *transformed into*. You can try to force coercion against this flow using the `as.` functions:
 
 ```{r}
 vector_7 <- c('0','2','4')
@@ -227,11 +256,11 @@ x <- x * 2
 names(x) <- LETTERS
 x
 ```
-Here `LETTERS` is a  a built in vector from `A` to `Z`.
+Here `LETTERS` is a built in vector from `A` to `Z`.
 
 ## Factor
 
-Another important data structure is called a *factor*. Factors usually look like character data, but are typically used to represent categorical information. 
+Another important data structure is called a *factor*. Factors usually look like character data but are typically used to represent categorical information. 
 
 Let’s turn `Keeling_Data$month` vector into a factor like so:
 ```{r}
@@ -241,14 +270,14 @@ class(Keeling_Data$month)
 str(Keeling_Data$month)
 ```
 
-Now R has noticed that there are `12` possible categories in our data - but it also did something surprising; instead of printing out the strings we gave it, we got a bunch of numbers instead. R has replaced our human-readable categories with numbered indices under the hood, this is necessary as many statistical calculations utilise such numerical representations for categorical data:
+Now R has noticed that there are `12` possible categories in our data - but it also did something surprising; instead of printing out the strings we gave it, we got a bunch of numbers instead. R has replaced our human-readable categories with numbered indices under the hood. This is necessary as many statistical calculations utilize such numerical representations for categorical data:
 ```{r}
 typeof(Keeling_Data$month)
 ```
 
 ## List
 
-Another data structure you’ll use is the `list`. A list is simpler in some ways than the other types, because you can put anything you want in it:
+Another data structure you’ll use is the `list`. A list is simpler in some ways than the other types because you can put anything you want in it:
 ```{r}
 list_1 <- list(1, "a", TRUE, 1+4i)
 list_1
@@ -263,7 +292,7 @@ typeof(Keeling_Data)
 
 We see that `data.frames` look like `lists` - this is because a `data.frame` is really a list of vectors and factors, as they have to be - in order to hold those columns that are a mix of vectors and factors, the `data.frame` needs something a bit more flexible than a vector to put all the columns together into a familiar table. In other words, a `data.frame` is a special `list` in which all the vectors **must have the same length**.
 
-In our `Keeling_Data` example, we have an integer, a double and a logical variable. As we have seen already, each column of `data.frame` is a vector. 
+In our `Keeling_Data` example, we have an integer, a double, and a logical variable. As we have seen already, each column of `data.frame` is a vector. 
 ```{r}
 Keeling_Data[,1]
 typeof(Keeling_Data[,1])
@@ -281,7 +310,7 @@ str(Keeling_Data[1,])
 
 ## Matrix and array
 
-A `matrix` is a **two-dimensional** `array` and they are used commonly as part of the mathematical machinery of statistics. We can declare a matrix full of zeros using the `matrix()` function:
+A `matrix` is a **two-dimensional** `array` and they are commonly used as part of the mathematical machinery of statistics. We can declare a matrix full of zeros using the `matrix()` function:
 ```{r}
 matrix_1 <- matrix(0, ncol=6, nrow=3)
 matrix_1
@@ -297,7 +326,7 @@ nrow(matrix_1)
 ncol(matrix_1)
 ```
 
-Here `dim()` returns the diminations of the matrix, `nrow()` returns the number of rows of the matrix, and `ncols()` returns the number of columns of the matrix.
+Here `dim()` returns the dimension of the matrix, `nrow()` returns the number of rows of the matrix, and `ncols()` returns the number of columns of the matrix.
 
 An `array` is a `vector` with one or more dimensions. So, an array with one dimension is (almost) the same as a vector. An array with two dimensions is (almost) the same as a matrix. An array with three or more dimensions is an n-dimensional array. 
 
@@ -327,6 +356,8 @@ str(array_3)
 dim(array_3)
 ```
 
+***
+
 # In-class exercises
 
 ## Exercise #1
@@ -346,39 +377,38 @@ Keeling_Data[2, ]
 
 ## Exercise #2
 
-* Make a matrix contains the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behaviour? See if you can figure out how to change this. (Hint: read the documentation using `?matrix`)
+* Make a matrix contains the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior? See if you can figure out how to change this. (Hint: read the documentation using `?matrix`)
 
 ## Exercise #3
 
-In this exercise, we will take a look at the hourly weather data measured at the Baoan International Airport in the past 10 years. The data set is download from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Suppose you are asked to study how temperature envolves in the past 10 years at this site.
+In this exercise, we will take a look at the hourly weather data measured at the Baoan International Airport in the past 10 years. The data set is download from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Suppose you are asked to study how temperature varies in the past 10 years at this site.
 
-* Download the file [2281305.zip](https://zhu-group.github.io/ese5023/download/2281305.zip), where the namber `2281305` is the site ID.  
+* Download the file [2281305.zip](https://zhu-group.github.io/ese5023/download/2281305.zip), where the number `2281305` is the site ID.  
 
-* Extract the zip file, you should see a file named `2281305.csv`,  save the `.csv` file to your `working directory`. 
+* Extract the zip file, you should see a file named `2281305.csv`. Save the `.csv` file to your `working directory`. 
 
-* Load `2281305.csv` file in R, check the variable names with the `names()` function. What do you observe? You can read the comperhensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for variable names and format of the file, only if you want to. 
+* Load `2281305.csv` file in R, check the variable names with the `names()` function. What do you observe? You can read the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for variable names and format of the file.
 
 * Now assign the temperature data (named as `TMP` in the file) to a new vector named `BaoAn_T`, print the head and tail of `BaoAn_T`. What do you see? What is the data type of `BaoAn_T`, double or character? 
 
 * Assign the time information (named as `DATE` in the file) to a new vector named `Obs_Time`, print the head and tail of `Obs_Time`. What do you see? What is the data type of `Obs_Time`, double or character? 
 
-* You may find the temperature data is in a strange format (like `+0160,1`): the first digit is `+` (positive) or `-` (negative), the following four digits stand for temperature of the air degrees Celsius with a scaling factor of `10`, the value after `,` is the quality code where `1` means the data point passed all quality control checks. Be careful with temperature date points as `+9999`, which means the data point is actually missing.
+* You may find the temperature data is in a strange format (like `+0160,1`): the first digit is `+` (positive) or `-` (negative), the following four digits stand for temperature of the air in degrees Celsius with a scaling factor of `10`, the value after `,` is the quality code where `1` means the data point passed all quality control checks. Be careful with temperature data with a value of `+9999`, which means the data point is missing.
 
 * You can use the function `substr()` to split a `character`. For example `substr("abcde",1,3)` returns `abc` which is a sub-string from element `1` to element `3` of `abcde`, while `substr("abcde",5,5)` returns `e`. Now use `substr()` to creat two character vectors: `BaoAn_T_value` for temperature values and `BaoAn_T_flag` for temperature quality flags.
 
 * Convert the character vector `BaoAn_T_value` to a numeric vector `BaoAn_T_value2` using `as.numeric()`, and character vector `BaoAn_T_flag` to a logical vector `BaoAn_T_flag2`.
 
-* Now handel the missing values. Use `which()` function to check figure out which elements in `BaoAn_T_value2` have a value of `9999`, and replace those with `NA`.
+* Now handle the missing values. Use `which()` function to figure out which elements in `BaoAn_T_value2` have a value of `9999`, and replace those with `NA`.
 
 * Now consider the scaling factor of `10`, let `BaoAn_T_value3 = BaoAn_T_value2 * 0.1`.
 
 * Convert the character vector `Obs_Time` into a new vector named `Obs_Time2` using the `as.Date()` function. By doing so, `Obs_Time2` is now a class *Date* representing calendar dates. Use `?as.Date()` to see more info.
 
 * Now plot `BaoAn_T_value3` as a function of `Obs_Time2`, you should see something like:
+<img src="figs/BaoAn_T.png" alt="drawing" width="700"/>
 
-<img src="figs/BaoAn_T.png" alt="drawing" width="600"/>
-
-* Try `min()` and `max()` to get minimun and maxium temperature. If you get results showing `NA`, try to add `na.rm=T` option. Finally, try `which.min()` and `which.max()` to get the dates that with minimun and maxium temperature.
+* Try `min()` and `max()` to get minimum and maximum temperature. If you get results showing `NA`, try to add `na.rm=T` option. Finally, try `which.min()` and `which.max()` to get the date with minimum and maximum temperature.
 
 ```{r eval=FALSE, include=FALSE}
 # Read the hourly data 
@@ -420,5 +450,16 @@ max(BaoAn_T_value3, na.rm=T)
 Obs_Time2[which.min(BaoAn_T_value3)]
 Obs_Time2[which.max(BaoAn_T_value3)]
 ```
+
+***
+
+# Further reading
+
+* [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
+* [R for Reproducible Scientific Analysis](http://swcarpentry.github.io/r-novice-gapminder/)
+* [Programming with R](http://swcarpentry.github.io/r-novice-inflammation/)
+* [R Introduction](http://www.r-tutor.com/r-introduction)
+* [R Tutorial For Beginners - Quick-R](https://www.statmethods.net/r-tutorial/index.html)
+
 
 # References  

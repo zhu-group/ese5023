@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
@@ -233,6 +236,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -240,6 +312,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,10 +390,55 @@ $(document).ready(function () {
 </div>
 
 
-<p>Page Under construction.</p>
+<p>Out: 09/17 19:00<br />
+For problem set <em>i</em>, creat a script named <code>PS1_i.R</code>. Submit your scripts and report via GitHub by <strong>10/10 19:00</strong></p>
+<hr />
+<div id="flowchart" class="section level1">
+<h1>1 Flowchart</h1>
+<p><strong>[5 points]</strong> Write a function <code>Print_values</code> with arguments <code>a</code>, <code>b</code>, and <code>c</code> to reflect the following flowchart <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Here the purple parallelpgram operator is to print values in order. Show you output with some random <code>a</code>, <code>b</code>, and <code>c</code> values.<br />
+<img src="figs/flowchart_a1.png" alt="drawing" width="450"/></p>
+</div>
+<div id="matrix-multiplication" class="section level1">
+<h1>2 Matrix multiplication</h1>
+<p><strong>2.1 [5 points]</strong> Make two matrices <code>M1</code> (<code>5</code> rows and <code>10</code> columns ) and <code>M2</code> (<code>10</code> rows and <code>5</code> columns ), both are filled with random integers from <code>0</code> and <code>50</code>.</p>
+<p><strong>2.2 [5 points]</strong> Write a function <code>Matrix_multip</code> to do matrix multiplication, <em>i.e.</em>, <code>M1 * M2</code>. Here you are only allowed to use <code>for</code> loop, <code>*</code> operator, and <code>+</code> operator. Check your result with the <code>%*%</code> operator.</p>
+</div>
+<div id="pascal-triangle" class="section level1">
+<h1>3 Pascal triangle</h1>
+<p><strong>[15 points]</strong> One of the most interesting number patterns is <a href="https://www.mathsisfun.com/pascals-triangle.html">Pascal’s triangle</a> (named after Blaise Pascal). Write a function <code>Pascal_triangle</code> with an arguement <code>N</code> to print the first <em>N</em> lines of the Pascal triangle. Report <code>Pascal_triangle(100)</code> and <code>Pascal_triangle(200)</code>.</p>
+</div>
+<div id="add-or-double-the-money" class="section level1">
+<h1>5. Add or double the money</h1>
+<p><strong>[20 points]</strong> If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly <em>N</em> RMB? Here <em>N</em> is randomly seleted from <code>100</code> to <code>200</code>. Write a function <code>Smallest_number</code> to print your results. For example, <code>Smallest_number(2)</code> should print <code>2</code>, and <code>Smallest_number(5)</code> should print <code>3</code>.</p>
+</div>
+<div id="dynamic-programming" class="section level1">
+<h1>4 Dynamic programming</h1>
+<p>Insert <code>+</code> or <code>-</code> operation anywhere between the digits <code>123456789</code> in a way that the expression evaluates to a integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. For example: <span class="math display">\[ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 \]</span> <span class="math display">\[ 1 + 2 + 34 - 56 + 78 - 9 = 50 \]</span> <strong>1.1 [20 points]</strong> Write a function <code>Find_expression</code>, which should be able to print every possible solution that makes the expression evaluate to a random integer from <code>0</code> to <code>200</code>.</p>
+<p><strong>1.2 [5 points]</strong> Count the total number of suitable solutions for any integer <em>i</em> from <code>0</code> to <code>200</code>, assign the count to <code>Total_solutions[i]</code>. Plot the vector <code>Total_solutions</code> as the y-axis and the sequence from <code>0</code> to <code>200</code> as the x-axis.</p>
+<p>(Hint: You may find <code>seq()</code>, <code>choose()</code>, and <code>permutations()</code> useful)</p>
+</div>
+<div id="visibility-in-shenzhen-during-the-past-10-years" class="section level1">
+<h1>5 Visibility in Shenzhen during the past 10 years</h1>
+<p>In this problem set, we will examine how visibility behaviros in Shenzhen during the past 10 years. Recall the <code>2281305.csv</code> you used for <a href="https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3">Exercise #3</a> in Section 03. Hourly visibility data are stored under the <code>VIS</code> column. Read page <code>10</code> of the comprehensive <a href="https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf">user guide</a> for detailed format of the data.</p>
+<p>You want to only use data points meet the following criteria:</p>
+<ul>
+<li>Visibility data (in meters) within the range of <code>0</code> and <code>160000</code></li>
+<li>Pass all quality control checks: <code>VISIBILITY-OBSERVATION distance quality code</code> is <code>1</code>, <code>VISIBILITY-OBSERVATION variability code</code> is <code>N</code>, and <code>VISIBILITY-OBSERVATION quality variability code</code> is <code>1</code>.</li>
+</ul>
+<p><strong>5.1 [15 points]</strong> Plot hourly visibility data as a function of the observation time, simalir to the timeseries plot you made in <a href="https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3">Exercise #3</a>. Based on your naked eyes, is there a trend in visibility in the past 10 years?</p>
+<p><strong>5.2 [10 points]</strong> For each year, report the number of days with visibility shorter than <code>5km</code> and longer than <code>25km</code>. Is the visibility getting better or worse?</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://www.tenouk.com/clabworksheet/labworksheet8_files/cifelseswitchcase031.png">Source</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -344,6 +471,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
