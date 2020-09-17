@@ -13,7 +13,7 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |:--:|:---:|:--:|:-------------------------------------------------------------------------------------|:------------:|:------------:|
 |1   |09/08|Tu. |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)        |              |              |
 |1   |09/10|Th. |[Section 02 R Basics](https://zhu-group.github.io/ese5023/Section_02.html)            |              |              |
-|2   |09/17|Th. |[Section 03 Data Structures](https://zhu-group.github.io/ese5023/Section_03.html)     |  [1](https://zhu-group.github.io/ese5023/Assignment_01.html)           |              |
+|2   |09/17|Th. |[Section 03 Data Structures](https://zhu-group.github.io/ese5023/Section_03.html)     | [Assignment 1](https://zhu-group.github.io/ese5023/Assignment_01.html)           |              |
 |3   |09/22|Tu. |Lab 01                                                                                |              |              |
 |3   |09/24|Th. |Section 04 Version control with Git                                                   |              |              |
 |4   |10/10|Sat.|Section 05 Dataframe                                                                  |  2           |  1           |
