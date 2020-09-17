@@ -1,5 +1,5 @@
 ---
-title: "Section 03 Data Structures"
+title: "Section 03 Data structures"
 output:
   html_document:
     toc: true
@@ -8,7 +8,7 @@ output:
       smooth_scroll: false
 ---
 
-> "I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. ***Bad programmers worry about the code. Good programmers worry about data structures and their relationships." - Linus Torvalds
+> "I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. Bad programmers worry about the code. Good programmers worry about data structures and their relationships." - Linus Torvalds
 
 # Keeling Curve
   
@@ -414,7 +414,9 @@ Suppose you are asked to study how temperature varies during the past 10 years a
 
 * Try `min()` and `max()` to get minimum and maximum temperature. If you get results showing `NA`, try to add `na.rm=T` option. Finally, try `which.min()` and `which.max()` to get the date with minimum and maximum temperature.
 
-```{r eval=FALSE, include=FALSE}
+Here are the scripts, make sure you understand.
+
+```{r eval=FALSE}
 # Read the hourly data 
 Met_Data       <- read.csv(file = "2281305.csv", header = T)
 # Get variable names

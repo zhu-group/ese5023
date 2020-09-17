@@ -11,7 +11,7 @@
 
 
 
-<title>Section 03 Data Structures</title>
+<title>Section 03 Data structures</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -476,13 +476,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 03 Data Structures</h1>
+<h1 class="title toc-ignore">Section 03 Data structures</h1>
 
 </div>
 
 
 <blockquote>
-<p>&quot;I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. ***Bad programmers worry about the code. Good programmers worry about data structures and their relationships.&quot; - Linus Torvalds</p>
+<p>“I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. Bad programmers worry about the code. Good programmers worry about data structures and their relationships.” - Linus Torvalds</p>
 </blockquote>
 <div id="keeling-curve" class="section level1">
 <h1>Keeling Curve</h1>
@@ -997,6 +997,47 @@ where <code>-&gt;</code> can be read as being <em>transformed into</em>. You can
 <li><p>Now plot <code>BaoAn_T_value3</code> as a function of <code>Obs_Time2</code>. Change <code>type</code>, <code>lwd</code>, and <code>col</code> option of <code>plot()</code> function to produce a figure like: <img src="figs/BaoAn_T.png" alt="drawing" width="700"/></p></li>
 <li><p>Try <code>min()</code> and <code>max()</code> to get minimum and maximum temperature. If you get results showing <code>NA</code>, try to add <code>na.rm=T</code> option. Finally, try <code>which.min()</code> and <code>which.max()</code> to get the date with minimum and maximum temperature.</p></li>
 </ul>
+<p>Here are the scripts, make sure you understand.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="co"># Read the hourly data </span></a>
+<a class="sourceLine" id="cb154-2" data-line-number="2">Met_Data       &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;2281305.csv&quot;</span>, <span class="dt">header =</span> T)</a>
+<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="co"># Get variable names</span></a>
+<a class="sourceLine" id="cb154-4" data-line-number="4"><span class="kw">names</span>(Met_Data)</a>
+<a class="sourceLine" id="cb154-5" data-line-number="5"><span class="co"># Temperature</span></a>
+<a class="sourceLine" id="cb154-6" data-line-number="6">BaoAn_T        &lt;-<span class="st"> </span>Met_Data<span class="op">$</span>TMP</a>
+<a class="sourceLine" id="cb154-7" data-line-number="7"><span class="co"># Time</span></a>
+<a class="sourceLine" id="cb154-8" data-line-number="8">Obs_Time       &lt;-<span class="st"> </span>Met_Data<span class="op">$</span>DATE</a>
+<a class="sourceLine" id="cb154-9" data-line-number="9"><span class="co"># Check the head of Met_Data$TMP</span></a>
+<a class="sourceLine" id="cb154-10" data-line-number="10"><span class="kw">head</span>(BaoAn_T)</a>
+<a class="sourceLine" id="cb154-11" data-line-number="11"><span class="co"># Check the tail of Met_Data$TMP</span></a>
+<a class="sourceLine" id="cb154-12" data-line-number="12"><span class="kw">tail</span>(BaoAn_T)</a>
+<a class="sourceLine" id="cb154-13" data-line-number="13"><span class="co"># Check the head of Met_Data$DATE</span></a>
+<a class="sourceLine" id="cb154-14" data-line-number="14"><span class="kw">head</span>(Obs_Time)</a>
+<a class="sourceLine" id="cb154-15" data-line-number="15"><span class="co"># Check the tail of Met_Data$DATE</span></a>
+<a class="sourceLine" id="cb154-16" data-line-number="16"><span class="kw">tail</span>(Obs_Time)</a>
+<a class="sourceLine" id="cb154-17" data-line-number="17"><span class="co"># Split the Temperature string</span></a>
+<a class="sourceLine" id="cb154-18" data-line-number="18">BaoAn_T_value  &lt;-<span class="st"> </span><span class="kw">substr</span>(BaoAn_T,<span class="dv">1</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb154-19" data-line-number="19"><span class="co"># Split the quality flag string</span></a>
+<a class="sourceLine" id="cb154-20" data-line-number="20">BaoAn_T_flag   &lt;-<span class="st"> </span><span class="kw">substr</span>(BaoAn_T,<span class="dv">7</span>,<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb154-21" data-line-number="21"><span class="co"># Convert character to double</span></a>
+<a class="sourceLine" id="cb154-22" data-line-number="22">BaoAn_T_value2 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(BaoAn_T_value)</a>
+<a class="sourceLine" id="cb154-23" data-line-number="23"><span class="co"># Convert character to double then to logical</span></a>
+<a class="sourceLine" id="cb154-24" data-line-number="24">BaoAn_T_flag2  &lt;-<span class="st"> </span><span class="kw">as.logical</span>( <span class="kw">as.numeric</span>(BaoAn_T_flag) )</a>
+<a class="sourceLine" id="cb154-25" data-line-number="25"><span class="co"># Check which values are equal to 9999, set those to NA</span></a>
+<a class="sourceLine" id="cb154-26" data-line-number="26">BaoAn_T_value2[<span class="kw">which</span>(BaoAn_T_value2<span class="op">==</span><span class="dv">9999</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb154-27" data-line-number="27"><span class="co"># Check which values have bad quality, set those to NA</span></a>
+<a class="sourceLine" id="cb154-28" data-line-number="28">BaoAn_T_value2[<span class="op">!</span><span class="kw">which</span>(BaoAn_T_flag2)]       &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb154-29" data-line-number="29"><span class="co"># Apply scaling factor 0.1</span></a>
+<a class="sourceLine" id="cb154-30" data-line-number="30">BaoAn_T_value3 &lt;-<span class="st"> </span>BaoAn_T_value2 <span class="op">*</span><span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb154-31" data-line-number="31"><span class="co"># Convert the character vector to date vector</span></a>
+<a class="sourceLine" id="cb154-32" data-line-number="32">Obs_Time2      &lt;-<span class="st"> </span><span class="kw">as.Date</span>(Obs_Time)</a>
+<a class="sourceLine" id="cb154-33" data-line-number="33"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb154-34" data-line-number="34"><span class="kw">plot</span>(Obs_Time2, BaoAn_T_value3, <span class="dt">lwd=</span><span class="fl">0.5</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb154-35" data-line-number="35"><span class="co"># Min and max of BaoAn_T_value3</span></a>
+<a class="sourceLine" id="cb154-36" data-line-number="36"><span class="kw">min</span>(BaoAn_T_value3, <span class="dt">na.rm=</span>T)</a>
+<a class="sourceLine" id="cb154-37" data-line-number="37"><span class="kw">max</span>(BaoAn_T_value3, <span class="dt">na.rm=</span>T)</a>
+<a class="sourceLine" id="cb154-38" data-line-number="38"><span class="co"># Date of the max and min</span></a>
+<a class="sourceLine" id="cb154-39" data-line-number="39">Obs_Time2[<span class="kw">which.min</span>(BaoAn_T_value3)]</a>
+<a class="sourceLine" id="cb154-40" data-line-number="40">Obs_Time2[<span class="kw">which.max</span>(BaoAn_T_value3)]</a></code></pre></div>
 <hr />
 </div>
 </div>

@@ -25,13 +25,13 @@ Collaboration on solving the assignment is allowed, after you have thought about
 Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
 
 **Submitting your assignment:**  
-Submit your scripts and report via GitHub. The submission time is determined based on your Github records.  
+Submit your scripts and report via GitHub. The submission time will be determined based on your Github records.  
 
 ***
 
 # 1. Flowchart 
 
-**[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart [^1]. Here the purple parallelogram operator is to print values in order. Report your output with some random `a`, `b`, and `c` values.  
+**[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart [^1]. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random `a`, `b`, and `c` values.  
 <img src="figs/flowchart_a1.png" alt="drawing" width="450"/>
 
 [^1]: [Source](https://www.tenouk.com/clabworksheet/labworksheet8_files/cifelseswitchcase031.png)
@@ -54,7 +54,7 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 
 # 4. Add or double
 
-**[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `100` to `200`. Write a function `Least_move` to print your results. For example, `Least_move(2)` should print `2`, and `Least_move(5)` should print `3`.
+**[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `100` to `200`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `2`, and `Least_moves(5)` should print `3`.
 
 ***
 
@@ -88,7 +88,7 @@ You want to only use data points satisfying the following criteria:
 
 # 7. Explore a data set
 
-Browse the [CASEarth website](http://data.casearth.cn/). Search and download a data set you are interested in. Your data should be in `csv` or `XLSX` format, and have temporal information. In R, do the following:  
+Browse the [CASEarth website](http://data.casearth.cn/). Search and download a data set you are interested in. Your data set should be in `csv` or `XLSX` format, and have temporal information. In R, do the following:  
 **7.1 [5 points]** Load the `csv` or `XLSX` file, and clean possible data points with missing values or bad quality.  
 **7.2 [5 points]** Plot the time series of a certain variable.  
 **7.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
