@@ -234,6 +234,8 @@ You can use `rm()` to delete objects you no longer need:
 ```{r}
 rm(x)
 ls()
+rm(MyName, y)
+ls()
 ```
 
 ## Conditional statements 

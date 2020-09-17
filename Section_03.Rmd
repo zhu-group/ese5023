@@ -67,14 +67,18 @@ We can begin exploring our dataset right away, pulling out columns by specifying
 Keeling_Data$co2
 ```
 
-Let's do a few simple statistical checks with `Keeling_Data$co2`:
+Let's do some simple statistical checks with `Keeling_Data$co2`:
 ```{r}
 # Min
 min(Keeling_Data$co2)
 # Max
 max(Keeling_Data$co2)
+# Range
+range(Keeling_Data$co2)
 # Mean
 mean(Keeling_Data$co2)
+# Median
+median(Keeling_Data$co2)
 # Plot the histogram
 hist(Keeling_Data$co2)
 # Show quantiles

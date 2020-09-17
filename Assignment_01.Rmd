@@ -29,7 +29,7 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 
 ***
 
-# 1 Flowchart 
+# 1. Flowchart 
 
 **[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart [^1]. Here the purple parallelogram operator is to print values in order. Report your output with some random `a`, `b`, and `c` values.  
 <img src="figs/flowchart_a1.png" alt="drawing" width="450"/>
@@ -38,7 +38,7 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 
 ***
 
-# 2 Matrix multiplication
+# 2. Matrix multiplication
 
 **2.1 [5 points]** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ); both are filled with random integers from `0` and `50`.
 
@@ -46,32 +46,32 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 
 ***
 
-# 3 Pascal triangle
+# 3. Pascal triangle
 
-**[15 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `N` to print the first *N* lines of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
+**[15 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `N` to print the *N*th line of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
 
 ***
 
 # 4. Add or double
 
-**[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is randomly selected from `100` to `200`. Write a function `Smallest_number` to print your results. For example, `Smallest_number(2)` should print `2`, and `Smallest_number(5)` should print `3`.
+**[20 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `100` to `200`. Write a function `Least_move` to print your results. For example, `Least_move(2)` should print `2`, and `Least_move(5)` should print `3`.
 
 ***
 
-# 5 Dynamic programming
+# 5. Dynamic programming
 
 Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. For example:
 $$ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 $$
 $$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$
 **5.1 [20 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `0` to `200`. 
 
-**5.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `0` to `200`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions` as the y-axis and the sequence from `0` to `200` as the x-axis. 
+**5.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `0` to `200`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions`, so which number(s) yields the maximum and minimum of `Total_solutions`? 
 
 (Hint: You may find `seq()`, `choose()`, and `permutations()` useful)
 
 ***
 
-# 6 Visibility in Shenzhen during the past 10 years
+# 6. Visibility in Shenzhen during the past 10 years
 
 In this problem set, we will examine how visibility changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Hourly visibility data are stored under the `VIS` column. Read page `10` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the data.
 

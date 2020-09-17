@@ -408,36 +408,36 @@ Submit your scripts and report via GitHub. The submission time is determined bas
 <hr />
 </div>
 <div id="flowchart" class="section level1">
-<h1>1 Flowchart</h1>
+<h1>1. Flowchart</h1>
 <p><strong>[5 points]</strong> Write a function <code>Print_values</code> with arguments <code>a</code>, <code>b</code>, and <code>c</code> to reflect the following flowchart <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Here the purple parallelogram operator is to print values in order. Report your output with some random <code>a</code>, <code>b</code>, and <code>c</code> values.<br />
 <img src="figs/flowchart_a1.png" alt="drawing" width="450"/></p>
 <hr />
 </div>
 <div id="matrix-multiplication" class="section level1">
-<h1>2 Matrix multiplication</h1>
+<h1>2. Matrix multiplication</h1>
 <p><strong>2.1 [5 points]</strong> Make two matrices <code>M1</code> (<code>5</code> rows and <code>10</code> columns ) and <code>M2</code> (<code>10</code> rows and <code>5</code> columns ); both are filled with random integers from <code>0</code> and <code>50</code>.</p>
 <p><strong>2.2 [5 points]</strong> Write a function <code>Matrix_multip</code> to do matrix multiplication, <em>i.e.</em>, <code>M1 * M2</code>. Here you are only allowed to use <code>for</code> loop, <code>*</code> operator, and <code>+</code> operator. Check your result with the <code>%*%</code> operator.</p>
 <hr />
 </div>
 <div id="pascal-triangle" class="section level1">
-<h1>3 Pascal triangle</h1>
-<p><strong>[15 points]</strong> One of the most interesting number patterns is <a href="https://www.mathsisfun.com/pascals-triangle.html">Pascal’s triangle</a> (named after Blaise Pascal). Write a function <code>Pascal_triangle</code> with an argument <code>N</code> to print the first <em>N</em> lines of the Pascal triangle. Report <code>Pascal_triangle(100)</code> and <code>Pascal_triangle(200)</code>.</p>
+<h1>3. Pascal triangle</h1>
+<p><strong>[15 points]</strong> One of the most interesting number patterns is <a href="https://www.mathsisfun.com/pascals-triangle.html">Pascal’s triangle</a> (named after Blaise Pascal). Write a function <code>Pascal_triangle</code> with an argument <code>N</code> to print the <em>N</em>th line of the Pascal triangle. Report <code>Pascal_triangle(100)</code> and <code>Pascal_triangle(200)</code>.</p>
 <hr />
 </div>
 <div id="add-or-double" class="section level1">
 <h1>4. Add or double</h1>
-<p><strong>[20 points]</strong> If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly <em>x</em> RMB? Here <em>x</em> is randomly selected from <code>100</code> to <code>200</code>. Write a function <code>Smallest_number</code> to print your results. For example, <code>Smallest_number(2)</code> should print <code>2</code>, and <code>Smallest_number(5)</code> should print <code>3</code>.</p>
+<p><strong>[20 points]</strong> If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly <em>x</em> RMB? Here <em>x</em> is an integer randomly selected from <code>100</code> to <code>200</code>. Write a function <code>Least_move</code> to print your results. For example, <code>Least_move(2)</code> should print <code>2</code>, and <code>Least_move(5)</code> should print <code>3</code>.</p>
 <hr />
 </div>
 <div id="dynamic-programming" class="section level1">
-<h1>5 Dynamic programming</h1>
+<h1>5. Dynamic programming</h1>
 <p>Insert <code>+</code> or <code>-</code> operation anywhere between the digits <code>123456789</code> in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. For example: <span class="math display">\[ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 \]</span> <span class="math display">\[ 1 + 2 + 34 - 56 + 78 - 9 = 50 \]</span> <strong>5.1 [20 points]</strong> Write a function <code>Find_expression</code>, which should be able to print every possible solution that makes the expression evaluate to a random integer from <code>0</code> to <code>200</code>.</p>
-<p><strong>5.2 [5 points]</strong> Count the total number of suitable solutions for any integer <em>i</em> from <code>0</code> to <code>200</code>, assign the count to <code>Total_solutions[i]</code>. Plot the vector <code>Total_solutions</code> as the y-axis and the sequence from <code>0</code> to <code>200</code> as the x-axis.</p>
+<p><strong>5.2 [5 points]</strong> Count the total number of suitable solutions for any integer <em>i</em> from <code>0</code> to <code>200</code>, assign the count to <code>Total_solutions[i]</code>. Plot the vector <code>Total_solutions</code>, so which number(s) yields the maximum and minimum of <code>Total_solutions</code>?</p>
 <p>(Hint: You may find <code>seq()</code>, <code>choose()</code>, and <code>permutations()</code> useful)</p>
 <hr />
 </div>
 <div id="visibility-in-shenzhen-during-the-past-10-years" class="section level1">
-<h1>6 Visibility in Shenzhen during the past 10 years</h1>
+<h1>6. Visibility in Shenzhen during the past 10 years</h1>
 <p>In this problem set, we will examine how visibility changes in Shenzhen during the past 10 years. Recall the <code>2281305.csv</code> you used for <a href="https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3">Exercise #3</a> in Section 03. Hourly visibility data are stored under the <code>VIS</code> column. Read page <code>10</code> of the comprehensive <a href="https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf">user guide</a> for the detailed format of the data.</p>
 <p>You want to only use data points satisfying the following criteria:</p>
 <ul>
