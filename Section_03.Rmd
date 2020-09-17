@@ -8,7 +8,7 @@ output:
       smooth_scroll: false
 ---
 
-> "I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. Bad programmers worry about the code. Bad programmers worry about the code. Good programmers worry about data structures and their relationships." - Linus Torvalds
+> "I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. ***Bad programmers worry about the code. Good programmers worry about data structures and their relationships." - Linus Torvalds
 
 # Keeling Curve
   
@@ -56,11 +56,6 @@ tail(Keeling_Data,4)
 
 The `read.table()` function is used for reading in **tabular data** stored in a text file where the columns of data are separated by punctuation characters such as `.csv` files (csv = comma-separated values). `Tabs` and `commas` are the most common punctuation characters used to separate or delimit data points in `.csv` files. For convenience R provides 2 other versions of `read.table()`. These are: `read.csv()` for files where the data are separated with `commas` and `read.delim()` for files where the data are separated with `tabs`. Of these three functions, `read.csv()` is the most commonly used. If needed it is possible to override the default delimiting punctuation marks for both `read.csv()` and `read.delim()`.
 
-```{r}
-head(Keeling_Data,3)
-tail(Keeling_Data,4)
-```
-
 We can begin exploring our dataset right away, pulling out columns by specifying them using the `$` operator:
 
 ```{r}
@@ -99,7 +94,7 @@ We can mimic the Keeling Curve using `plot()` function
 plot(Keeling_Data$decimal_date, Keeling_Data$co2)
 ```
 
-It's ugly as there are a few data points with a value of `-99.99` (quality=`0`). We can polish the figure as:
+It's ugly as there are a few data points with a value of `-99.99` (quality=`0`). We can polish the figure by adding two more opinions `ylim` and `type`:
 
 ```{r}
 plot(Keeling_Data$decimal_date, Keeling_Data$co2, ylim=c(300,420), type="l")
@@ -114,7 +109,7 @@ CO2_ppm[which(CO2_ppm == -99.99)]  <- NA
 plot(Year, CO2_ppm, type="l")
 ```
 
-Here we use `which()` function to find  values equal to `-99.99`. We use `type="l"` to plot a line, you can set `type="p"` to plot points, and `type="o"` to plot points + line.
+Here we use `which()` function to return the indexes of elements equal to `-99.99`. Use `type="l"` to plot a line, `type="p"` for points, and `type="o"` for points + line.
 
 **Important:** Always use the `na.rm=T` opintion to handle vectors containing `NA` values.
 
@@ -211,7 +206,7 @@ Given what we’ve learned so far, what do you think the following will produce?
 vector_4 <- c(1,2,3,"4")
 vector_4
 ```
-This is something called *type coercion*, and it is the source of many surprises and the reason why we need to be aware of the basic data types and how R will interpret them. When R encounters a mix of types (here `double` and `character`) to be combined into a single vector, it will **force them all to be the same type**. Consider:
+This is something called *type coercion*, and it is the source of many surprises and the reason why we need to be aware of the basic data types and how R will interpret them. When R encounters a mix of types (here `double` and `character` in `vector_4`) to be combined into a single vector, it will **force them all to be the same type**. Consider:
 ```{r}
 vector_5 <- c("a", TRUE)
 vector_5
@@ -224,22 +219,25 @@ vector_6
 
 The coercion rules go:  
 `logical` -> `integer` -> `numeric` -> `complex` -> `character`   
-where -> can be read as being *transformed into*. You can try to force coercion against this flow using the `as.` functions:
+where `->` can be read as being *transformed into*. You can try to force coercion against this flow by calling functions with names starting with `as.`:
 
 ```{r}
 vector_7 <- c('0','2','4')
 vector_7
+str(vector_7)
 vector_8 <- as.numeric(vector_7)
 vector_8
+str(vector_8)
 vector_9 <- as.logical(vector_8)
 vector_9
+str(vector_9)
 ```
 
 As you can see, some surprising things can happen when R forces one basic data type into another!
 
 **Rememebr:** If your data doesn’t look like what you thought it was going to look like, type coercion may well be to blame; make sure everything is the **same type** in your vectors and your columns of `data.frames`, or you will get nasty surprises!
 
-Coercion can also be very useful. For example, in our `Keeling_Data` data `quality` is `numeric`, but we know that the 1s and 0s actually represent `TRUE` and `FALSE` (a common way of representing them). We should use the `logical` datatype here, which has two states: TRUE or FALSE, which is exactly what our data represents. We can ‘coerce’ this column to be `logical` by using the `as.logical()` function:
+Coercion can also be very useful. For example, in our `Keeling_Data` data `quality` is `numeric`, but we know that the `1`s and `0`s actually represent `TRUE` and `FALSE` (a common way of representing them). We should use the `logical` datatype here, which has two states: `TRUE` or `FALSE`, which is exactly what our data represents. We can coerce this column to be `logical` by calling the `as.logical()` function on it:
 
 ```{r}
 # Old data
@@ -260,13 +258,13 @@ x <- x * 2
 names(x) <- LETTERS
 x
 ```
-Here `LETTERS` is a built in vector from `A` to `Z`.
+Notice `LETTERS` is a built-in vector from `A` to `Z`.
 
 ## Factor
 
-Another important data structure is called a *factor*. Factors usually look like character data but are typically used to represent categorical information. 
+Another important data structure is *factor*. Factors usually look like character data but are typically used to represent **categorical information**. 
 
-Let’s turn `Keeling_Data$month` vector into a factor like so:
+Let’s turn `Keeling_Data$month` vector into a factor using the `factor()` function:
 ```{r}
 str(Keeling_Data$month)
 Keeling_Data$month <- factor(Keeling_Data$month)
@@ -274,14 +272,14 @@ class(Keeling_Data$month)
 str(Keeling_Data$month)
 ```
 
-Now R has noticed that there are `12` possible categories in our data - but it also did something surprising; instead of printing out the strings we gave it, we got a bunch of numbers instead. R has replaced our human-readable categories with numbered indices under the hood. This is necessary as many statistical calculations utilize such numerical representations for categorical data:
+Now R has noticed that there are `12` possible categories in `Keeling_Data$month` - but it also did something surprising; instead of printing out the strings we gave it, we got a bunch of numbers instead. R has replaced our human-readable categories with numbered indices under the hood. This is necessary as many statistical calculations utilize such numerical representations for categorical data.
 ```{r}
 typeof(Keeling_Data$month)
 ```
 
 ## List
 
-Another data structure you’ll use is the `list`. A list is simpler in some ways than the other types because you can put anything you want in it:
+Another data structure you’ll use is `list`. A list is simpler in some ways than the other types because you can put anything you want in it:
 ```{r}
 list_1 <- list(1, "a", TRUE, 1+4i)
 list_1
@@ -294,9 +292,9 @@ We can now understand something a bit surprising in our `data.frame`; what happe
 typeof(Keeling_Data)
 ```
 
-We see that `data.frames` look like `lists` - this is because a `data.frame` is really a list of vectors and factors, as they have to be - in order to hold those columns that are a mix of vectors and factors, the `data.frame` needs something a bit more flexible than a vector to put all the columns together into a familiar table. In other words, a `data.frame` is a special `list` in which all the vectors **must have the same length**.
+We see that a `data.frame` looks like `list` - this is because a `data.frame` is really a list of vectors and factors, as they have to be - in order to hold those columns that are a mix of vectors and factors, the `data.frame` needs something a bit more flexible than a vector to put all the columns together into a familiar table. In other words, a `data.frame` is a special `list` in which all the vectors **must have the same length**.
 
-In our `Keeling_Data` example, we have an integer, a double, and a logical variable. As we have seen already, each column of `data.frame` is a vector. 
+In the `Keeling_Data` example, we have an `integer`, a `double`, and a `logical` variable. As we have seen already, each column of `data.frame` is a vector. 
 ```{r}
 Keeling_Data[,1]
 typeof(Keeling_Data[,1])
@@ -314,7 +312,7 @@ str(Keeling_Data[1,])
 
 ## Matrix and array
 
-A `matrix` is a **two-dimensional** `array` and they are commonly used as part of the mathematical machinery of statistics. We can declare a matrix full of zeros using the `matrix()` function:
+A matrix is a **two-dimensional** array and they are commonly used as part of the mathematical machinery of statistics. We can declare a matrix full of zeros using the `matrix()` function:
 ```{r}
 matrix_1 <- matrix(0, ncol=6, nrow=3)
 matrix_1
@@ -332,7 +330,7 @@ ncol(matrix_1)
 
 Here `dim()` returns the dimension of the matrix, `nrow()` returns the number of rows of the matrix, and `ncols()` returns the number of columns of the matrix.
 
-An `array` is a `vector` with one or more dimensions. So, an array with one dimension is (almost) the same as a vector. An array with two dimensions is (almost) the same as a matrix. An array with three or more dimensions is an n-dimensional array. 
+An array is a vector with one or more dimensions. So, an array with one dimension is (almost) the same as a vector. An array with two dimensions is (almost) the same as a matrix. An array with three or more dimensions is an n-dimensional array. 
 
 Let's create an array (3-elements vector) with `NA`:
 ```{r}
@@ -366,7 +364,7 @@ dim(array_3)
 
 ## Exercise #1
 
-Using the `Keeling_Data`, try the following ways to call variables and elements:
+Using `Keeling_Data`, try the following ways to call variables or elements:
 
 ```{r, eval=F}
 Keeling_Data[2]
@@ -377,15 +375,17 @@ Keeling_Data[2, 2]
 Keeling_Data[, 2]
 Keeling_Data[2, ]
 ```
-* Can you explain what/why is returned by each one?
+* Can you explain what is returned by each one and why?
 
 ## Exercise #2
 
-* Make a matrix contains the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior? See if you can figure out how to change this. (Hint: read the documentation using `?matrix`)
+* Make a matrix contains the numbers `1:50`, with `5` columns and `10` rows. Did the `matrix()` function fill your matrix by column, or by row, as its default behavior? See if you can figure out how to change this. (Hint: read the documentation using `?matrix`)
 
 ## Exercise #3
 
-In this exercise, we will take a look at the hourly weather data measured at the Baoan International Airport in the past 10 years. The data set is download from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Suppose you are asked to study how temperature varies in the past 10 years at this site.
+In this exercise, we will take a look at the hourly weather data measured at the BaoAn International Airport during the past 10 years. The data set is download from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). 
+
+Suppose you are asked to study how temperature varies during the past 10 years at this site.  
 
 * Download the file [2281305.zip](https://zhu-group.github.io/ese5023/download/2281305.zip), where the number `2281305` is the site ID.  
 
@@ -407,29 +407,29 @@ In this exercise, we will take a look at the hourly weather data measured at the
 
 * Now consider the scaling factor of `10`, let `BaoAn_T_value3 = BaoAn_T_value2 * 0.1`.
 
-* Convert the character vector `Obs_Time` into a new vector named `Obs_Time2` using the `as.Date()` function. By doing so, `Obs_Time2` is now a class *Date* representing calendar dates. Use `?as.Date()` to see more info.
+* Convert the character vector `Obs_Time` into a new vector named `Obs_Time2` using the `as.Date()` function. By doing so, `Obs_Time2` is now a class *date* representing calendar dates. Use `?as.Date()` to learn more. 
 
-* Now plot `BaoAn_T_value3` as a function of `Obs_Time2`, you should see something like:
+* Now plot `BaoAn_T_value3` as a function of `Obs_Time2`. Change `type`, `lwd`, and `col` option of `plot()` function to produce a figure like:
 <img src="figs/BaoAn_T.png" alt="drawing" width="700"/>
 
 * Try `min()` and `max()` to get minimum and maximum temperature. If you get results showing `NA`, try to add `na.rm=T` option. Finally, try `which.min()` and `which.max()` to get the date with minimum and maximum temperature.
 
 ```{r eval=FALSE, include=FALSE}
 # Read the hourly data 
-Met_Data <- read.csv(file = "2281305.csv", header = T)
+Met_Data       <- read.csv(file = "2281305.csv", header = T)
 # Get variable names
 names(Met_Data)
 # Temperature
-BaoAn_T  <- Met_Data$TMP
+BaoAn_T        <- Met_Data$TMP
 # Time
-Obs_Time <- Met_Data$DATE
-# Check head of Met_Data$TMP
+Obs_Time       <- Met_Data$DATE
+# Check the head of Met_Data$TMP
 head(BaoAn_T)
-# Check tail of Met_Data$TMP
+# Check the tail of Met_Data$TMP
 tail(BaoAn_T)
-# Check head of Met_Data$DATE
+# Check the head of Met_Data$DATE
 head(Obs_Time)
-# Check tail of Met_Data$DATE
+# Check the tail of Met_Data$DATE
 tail(Obs_Time)
 # Split the Temperature string
 BaoAn_T_value  <- substr(BaoAn_T,1,5)
@@ -441,12 +441,14 @@ BaoAn_T_value2 <- as.numeric(BaoAn_T_value)
 BaoAn_T_flag2  <- as.logical( as.numeric(BaoAn_T_flag) )
 # Check which values are equal to 9999, set those to NA
 BaoAn_T_value2[which(BaoAn_T_value2==9999)] <- NA
+# Check which values have bad quality, set those to NA
+BaoAn_T_value2[!which(BaoAn_T_flag2)]       <- NA
 # Apply scaling factor 0.1
 BaoAn_T_value3 <- BaoAn_T_value2 * 0.1
 # Convert the character vector to date vector
 Obs_Time2      <- as.Date(Obs_Time)
 # Plot
-plot(Obs_Time2, BaoAn_T_value3, lwd=0.5, type="l")
+plot(Obs_Time2, BaoAn_T_value3, lwd=0.5, type="l", col="blue")
 # Min and max of BaoAn_T_value3
 min(BaoAn_T_value3, na.rm=T)
 max(BaoAn_T_value3, na.rm=T)

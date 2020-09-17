@@ -88,8 +88,8 @@ You want to only use data points satisfying the following criteria:
 
 # 7. Explore a data set
 
-Browse the [CASEarth website](http://data.casearth.cn/). Search and download a data set you are interested in. Your data should be in `csv` or `XLSX` format. In R, do the following:  
-**7.1 [5 points]** Load the `csv` or `XLSX` file.  
+Browse the [CASEarth website](http://data.casearth.cn/). Search and download a data set you are interested in. Your data should be in `csv` or `XLSX` format, and have temporal information. In R, do the following:  
+**7.1 [5 points]** Load the `csv` or `XLSX` file, and clean possible data points with missing values or bad quality.  
 **7.2 [5 points]** Plot the time series of a certain variable.  
 **7.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
 
