@@ -55,16 +55,20 @@ Submit your scripts and report via GitHub. The submission time will be determine
 # 4. Add or double
 
 **[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `2`, and `Least_moves(5)` should print `3`.
+
 (Hint: You may find `choose()` or `permutations()` useful)
 
 ***
 
 # 5. Dynamic programming
 
-Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. For example:
+Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. 
+
+**5.1 [15 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `1` to `100`. For example, `Find_expression(50)` should print lines include:
 $$ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 $$
+and
 $$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$
-**5.1 [15 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `1` to `100`. 
+
 
 **5.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `1` to `100`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions`, so which number(s) yields the maximum and minimum of `Total_solutions`? 
 
