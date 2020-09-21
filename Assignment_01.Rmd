@@ -54,7 +54,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 # 4. Add or double
 
-**[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `2`, and `Least_moves(5)` should print `3`.
+**[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `1`, and `Least_moves(5)` should print `3`.
 
 (Hint: You may find `choose()` or `permutations()` useful)
 
