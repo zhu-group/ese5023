@@ -1,5 +1,5 @@
 ---
-title: "Assignment 01"
+title: "Lab 01"
 output:
   html_document:
     toc: true
@@ -7,25 +7,6 @@ output:
       collapsed: false
       smooth_scroll: false
 ---
-
-Out: 09/17 19:00  
-For problem set *i*, create a script named `PS1_i.R`. Submit your scripts and report via GitHub by **10/10 19:00**  
-
-***
-
-# Instructions  
-
-**Collaboration:**  
-Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
-
-* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
-* Write your scripts and report **independently** - the scripts and report must come from you only.
-
-**Late Submission:**   
-Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
-
-**Submitting your assignment:**  
-Submit your scripts and report via GitHub. The submission time will be determined based on your Github records.  
 
 ***
 
