@@ -60,7 +60,7 @@ FindTop(10)
 Many a times, we will require our functions to do some processing and **return back the result**. This is accomplished with the `return()` function in R. 
 
 Change the above function to:
-```{r}
+```{r, eval=FALSE}
 # Define the function FindTop_new()
 FindTop_new    <- function(N){
     MoviePage  <- readLines('https://movie.douban.com/top250', encoding='UTF-8')
