@@ -73,7 +73,7 @@ FindTop_new    <- function(N){
 }
 FindTop_new(10)
 ```
-* Now you should be able to pass the output of `FindTop_new()` to a vector, say `MoiveList`. Try this. 
+* Now you should be able to pass the output of `FindTop_new()` to a vector, say `MovieList`. Try this. 
 
 # 4. Git platform and client
 
