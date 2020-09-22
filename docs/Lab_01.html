@@ -27,6 +27,97 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -391,60 +482,70 @@ div.tocify {
 
 
 <hr />
-<div id="flowchart" class="section level1">
-<h1>1. Flowchart</h1>
-<p><strong>[5 points]</strong> Write a function <code>Print_values</code> with arguments <code>a</code>, <code>b</code>, and <code>c</code> to reflect the following flowchart <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random <code>a</code>, <code>b</code>, and <code>c</code> values.<br />
-<img src="figs/flowchart_a1.png" alt="drawing" width="450"/></p>
-<hr />
-</div>
-<div id="matrix-multiplication" class="section level1">
-<h1>2. Matrix multiplication</h1>
-<p><strong>2.1 [5 points]</strong> Make two matrices <code>M1</code> (<code>5</code> rows and <code>10</code> columns ) and <code>M2</code> (<code>10</code> rows and <code>5</code> columns ); both are filled with random integers from <code>0</code> and <code>50</code>.</p>
-<p><strong>2.2 [5 points]</strong> Write a function <code>Matrix_multip</code> to do matrix multiplication, <em>i.e.</em>, <code>M1 * M2</code>. Here you are only allowed to use <code>for</code> loop, <code>*</code> operator, and <code>+</code> operator. Verify your result with the built-in <code>%*%</code> operator.</p>
-<hr />
-</div>
-<div id="pascal-triangle" class="section level1">
-<h1>3. Pascal triangle</h1>
-<p><strong>[10 points]</strong> One of the most interesting number patterns is <a href="https://www.mathsisfun.com/pascals-triangle.html">Pascal’s triangle</a> (named after Blaise Pascal). Write a function <code>Pascal_triangle</code> with an argument <code>k</code> to print the <em>k</em><sup>th</sup> line of the Pascal triangle. Report <code>Pascal_triangle(100)</code> and <code>Pascal_triangle(200)</code>.</p>
-<hr />
-</div>
-<div id="add-or-double" class="section level1">
-<h1>4. Add or double</h1>
-<p><strong>[15 points]</strong> If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly <em>x</em> RMB? Here <em>x</em> is an integer randomly selected from <code>1</code> to <code>100</code>. Write a function <code>Least_moves</code> to print your results. For example, <code>Least_moves(2)</code> should print <code>1</code>, and <code>Least_moves(5)</code> should print <code>3</code>.</p>
-<p>(Hint: You may find <code>choose()</code> or <code>permutations()</code> useful)</p>
-<hr />
-</div>
-<div id="dynamic-programming" class="section level1">
-<h1>5. Dynamic programming</h1>
-<p>Insert <code>+</code> or <code>-</code> operation anywhere between the digits <code>123456789</code> in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order.</p>
-<p><strong>5.1 [15 points]</strong> Write a function <code>Find_expression</code>, which should be able to print every possible solution that makes the expression evaluate to a random integer from <code>1</code> to <code>100</code>. For example, <code>Find_expression(50)</code> should print lines include: <span class="math display">\[ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 \]</span> and <span class="math display">\[ 1 + 2 + 34 - 56 + 78 - 9 = 50 \]</span></p>
-<p><strong>5.2 [5 points]</strong> Count the total number of suitable solutions for any integer <em>i</em> from <code>1</code> to <code>100</code>, assign the count to <code>Total_solutions[i]</code>. Plot the vector <code>Total_solutions</code>, so which number(s) yields the maximum and minimum of <code>Total_solutions</code>?</p>
-<p>(Hint: You may find <code>seq()</code>, <code>choose()</code>, and <code>permutations()</code> useful)</p>
-<hr />
-</div>
-<div id="visibility-in-shenzhen-during-the-past-10-years" class="section level1">
-<h1>6. Visibility in Shenzhen during the past 10 years</h1>
-<p>In this problem set, we will examine how visibility changes in Shenzhen during the past 10 years. Recall the <code>2281305.csv</code> you used for <a href="https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3">Exercise #3</a> in Section 03. Hourly visibility data are stored under the <code>VIS</code> column. Read page <code>10</code> of the comprehensive <a href="https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf">user guide</a> for the detailed format of the data.</p>
-<p>You want to only use data points satisfying the following criteria:</p>
+<div id="permutations-and-combinations" class="section level1">
+<h1>1. Permutations and Combinations</h1>
 <ul>
-<li>Visibility data (in meters) within the range of <code>0</code> and <code>160000</code></li>
-<li>Pass all quality control checks: <code>VISIBILITY-OBSERVATION distance quality code</code> is <code>1</code>, <code>VISIBILITY-OBSERVATION variability code</code> is <code>N</code>, and <code>VISIBILITY-OBSERVATION quality variability code</code> is <code>1</code>.</li>
+<li><p>Install the <code>gtools</code> package</p></li>
+<li><p>Use <code>?</code> to learn how to use <code>combinations()</code> and <code>permutations()</code></p></li>
+<li><p>Use <code>permutations()</code> to show all possible permutations of picking two balls with replacement/repetition from a bag with a <code>red</code>, <code>blue</code>, <code>green</code>, and <code>black</code> ball</p></li>
+<li><p>Use <code>combinations()</code> to show all possible combinations of picking two balls with replacement/repetition from a bag with a <code>red</code>, <code>blue</code>, <code>green</code>, and <code>black</code> ball</p></li>
 </ul>
-<p><strong>6.1 [15 points]</strong> Plot hourly visibility data as a function of the observation time, similar to the time series plot you made in <a href="https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3">Exercise #3</a>. Based on your naked eyes, is there a trend in visibility during the past 10 years?</p>
-<p><strong>6.2 [10 points]</strong> For each year, report the number of days with visibility within the following intervals: <code>[0,5)</code>,<code>[5,10)</code>,<code>[10,15)</code>,<code>[15,20)</code>,<code>[20,25)</code>,<code>[25,30)</code>, and <code>&gt;=30</code>. Is the visibility getting better or worse?</p>
 <hr />
 </div>
-<div id="explore-a-data-set" class="section level1">
-<h1>7. Explore a data set</h1>
-<p>Browse the <a href="http://data.casearth.cn/">CASEarth website</a>. Search and download a data set you are interested in. Your data set should be in <code>csv</code> or <code>XLSX</code> format, and have temporal information. In R, do the following:<br />
-<strong>7.1 [5 points]</strong> Load the <code>csv</code> or <code>XLSX</code> file, and clean possible data points with missing values or bad quality.<br />
-<strong>7.2 [5 points]</strong> Plot the time series of a certain variable.<br />
-<strong>7.3 [5 points]</strong> Conduct at least <code>5</code> simple statistical checks with the variable, and report your findings.</p>
+<div id="more-about-mauna-loa-co2" class="section level1">
+<h1>2.More about Mauna Loa CO<sub>2</sub></h1>
+<ul>
+<li><p>Use <code>Keeling_Data</code> in <a href="https://zhu-group.github.io/ese5023/Section_03.html#Loading_csv_file">Section 03</a>, compute the annual mean of CO<sub>2</sub> since 1959, plot your results.</p></li>
+<li><p>The annual mean rate of growth of CO<sub>2</sub> in a given year is defined as the difference in concentration between the end of December and the start of January of that year. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Compute the annual mean rate of growth of CO<sub>2</sub> since 1959. Plot the annual mean rate of growth. What do you observe? Does the increasing trend accelerate or decelerate?</p></li>
+</ul>
+<hr />
+</div>
+<div id="return-a-value-from-a-function" class="section level1">
+<h1>3. Return a value from a function</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Define the function FindTop()</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">FindTop        &lt;-<span class="st"> </span><span class="cf">function</span>(N){</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    MoviePage  &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;https://movie.douban.com/top250&#39;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    Pattarn    &lt;-<span class="st"> &#39;&lt;span class=</span><span class="ch">\&quot;</span><span class="st">title</span><span class="ch">\&quot;</span><span class="st">&gt;&amp;nbsp;/&amp;nbsp;([^&lt;]*)&lt;/span&gt;&#39;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    Lines      &lt;-<span class="st"> </span><span class="kw">grep</span>(Pattarn, MoviePage, <span class="dt">value=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    Lines2     &lt;-<span class="st"> </span><span class="kw">sub</span>(Pattarn,  <span class="st">&#39;</span><span class="ch">\\</span><span class="st">1&#39;</span>, Lines )</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;^ *&#39;</span>, <span class="st">&#39;&#39;</span>, Lines2)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="kw">print</span>(Names[<span class="dv">1</span><span class="op">:</span>N])</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co"># Call the function with arguement 5 and 10</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">FindTop</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">FindTop</span>(<span class="dv">10</span>)</a></code></pre></div>
+<ul>
+<li><p>Run the above lines.</p></li>
+<li><p>Go to <a href="https://movie.douban.com/top250">this website</a>, figure out what the above function does.</p></li>
+<li><p>For now, don’t worry about the weird syntax in getting <code>Pattarn</code>, <code>Lines2</code>, and <code>Names</code>. Make sure you understand how to use <code>readLines()</code>, <code>grep()</code>, and <code>sub()</code> by reading their help documents.</p></li>
+<li><p>What’s the difference between <code>read.csv()</code> and <code>readLines()</code>?</p></li>
+</ul>
+<p>Many a times, we will require our functions to do some processing and <strong>return back the result</strong>. This is accomplished with the <code>return()</code> function in R.</p>
+<p>Change the above function to:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Define the function FindTop_new()</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">FindTop_new    &lt;-<span class="st"> </span><span class="cf">function</span>(N){</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    MoviePage  &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;https://movie.douban.com/top250&#39;</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    Pattarn    &lt;-<span class="st"> &#39;&lt;span class=</span><span class="ch">\&quot;</span><span class="st">title</span><span class="ch">\&quot;</span><span class="st">&gt;&amp;nbsp;/&amp;nbsp;([^&lt;]*)&lt;/span&gt;&#39;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    Lines      &lt;-<span class="st"> </span><span class="kw">grep</span>(Pattarn, MoviePage, <span class="dt">value=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    Lines2     &lt;-<span class="st"> </span><span class="kw">sub</span>(Pattarn,  <span class="st">&#39;</span><span class="ch">\\</span><span class="st">1&#39;</span>, Lines )</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;^ *&#39;</span>, <span class="st">&#39;&#39;</span>, Lines2)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw">return</span>(Names[<span class="dv">1</span><span class="op">:</span>N])</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">}</a></code></pre></div>
+<ul>
+<li>Now you should be able to pass the output of <code>FindTop_new()</code> to a vector, say <code>MoiveList</code>. Try this.</li>
+</ul>
+</div>
+<div id="git-platform-and-client" class="section level1">
+<h1>4. Git platform and client</h1>
+<ul>
+<li><p>Sign up for <a href="https://github.com">GitHub</a>: choose a user name that isn’t already taken, provide an email address and a password, and click the big green “Sign up for GitHub” button.</p></li>
+<li><p>Install <a href="https://www.gitkraken.com/git-client">GitKraken</a></p></li>
+</ul>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://www.tenouk.com/clabworksheet/labworksheet8_files/cifelseswitchcase031.png">Source</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/gr.html">Trends in Atmospheric Carbon Dioxide</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

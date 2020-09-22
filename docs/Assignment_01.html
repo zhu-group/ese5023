@@ -427,7 +427,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 <div id="add-or-double" class="section level1">
 <h1>4. Add or double</h1>
 <p><strong>[15 points]</strong> If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly <em>x</em> RMB? Here <em>x</em> is an integer randomly selected from <code>1</code> to <code>100</code>. Write a function <code>Least_moves</code> to print your results. For example, <code>Least_moves(2)</code> should print <code>1</code>, and <code>Least_moves(5)</code> should print <code>3</code>.</p>
-<p>(Hint: You may find <code>choose()</code> or <code>permutations()</code> useful)</p>
+<p>(Hint: You may find <code>combinations()</code> or <code>permutations()</code> in the <code>gtools</code> package useful)</p>
 <hr />
 </div>
 <div id="dynamic-programming" class="section level1">
@@ -435,7 +435,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 <p>Insert <code>+</code> or <code>-</code> operation anywhere between the digits <code>123456789</code> in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order.</p>
 <p><strong>5.1 [15 points]</strong> Write a function <code>Find_expression</code>, which should be able to print every possible solution that makes the expression evaluate to a random integer from <code>1</code> to <code>100</code>. For example, <code>Find_expression(50)</code> should print lines include: <span class="math display">\[ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 \]</span> and <span class="math display">\[ 1 + 2 + 34 - 56 + 78 - 9 = 50 \]</span></p>
 <p><strong>5.2 [5 points]</strong> Count the total number of suitable solutions for any integer <em>i</em> from <code>1</code> to <code>100</code>, assign the count to <code>Total_solutions[i]</code>. Plot the vector <code>Total_solutions</code>, so which number(s) yields the maximum and minimum of <code>Total_solutions</code>?</p>
-<p>(Hint: You may find <code>seq()</code>, <code>choose()</code>, and <code>permutations()</code> useful)</p>
+<p>(Hint: You may find <code>seq()</code>, <code>combinations()</code>, and <code>permutations()</code> useful)</p>
 <hr />
 </div>
 <div id="visibility-in-shenzhen-during-the-past-10-years" class="section level1">

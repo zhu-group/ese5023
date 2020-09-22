@@ -10,72 +10,70 @@ output:
 
 ***
 
-# 1. Flowchart 
+# 1. Permutations and Combinations 
 
-**[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart [^1]. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random `a`, `b`, and `c` values.  
-<img src="figs/flowchart_a1.png" alt="drawing" width="450"/>
+* Install the `gtools` package
 
-[^1]: [Source](https://www.tenouk.com/clabworksheet/labworksheet8_files/cifelseswitchcase031.png)
+* Use `?` to learn how to use `combinations()` and `permutations()`
 
-***
+* Use `permutations()` to show all possible permutations of picking two balls with replacement/repetition from a bag with a `red`, `blue`, `green`, and `black` ball
 
-# 2. Matrix multiplication
-
-**2.1 [5 points]** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ); both are filled with random integers from `0` and `50`.
-
-**2.2 [5 points]** Write a function `Matrix_multip` to do matrix multiplication, *i.e.*, `M1 * M2`. Here you are only allowed to use `for` loop, `*` operator, and `+` operator. Verify your result with the built-in `%*%` operator.
+* Use `combinations()` to show all possible combinations of picking two balls with replacement/repetition from a bag with a `red`, `blue`, `green`, and `black` ball
 
 ***
 
-# 3. Pascal triangle
+# 2.More about Mauna Loa CO~2~
 
-**[10 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `k` to print the *k*^th^ line of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
+* Use `Keeling_Data` in [Section 03](https://zhu-group.github.io/ese5023/Section_03.html#Loading_csv_file), compute the annual mean of CO~2~ since 1959, plot your results.
 
-***
+* The annual mean rate of growth of CO~2~ in a given year is defined as the difference in concentration between the end of December and the start of January of that year. [^1] Compute the annual mean rate of growth  of CO~2~ since 1959. Plot the annual mean rate of growth. What do you observe? Does the increasing trend accelerate or decelerate?
 
-# 4. Add or double
-
-**[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `1`, and `Least_moves(5)` should print `3`.
-
-(Hint: You may find `choose()` or `permutations()` useful)
+[^1]: [Trends in Atmospheric Carbon Dioxide](https://www.esrl.noaa.gov/gmd/ccgg/trends/gr.html)
 
 ***
 
-# 5. Dynamic programming
+# 3. Return a value from a function
 
-Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. 
+```{r, eval=FALSE}
+# Define the function FindTop()
+FindTop        <- function(N){
+    MoviePage  <- readLines('https://movie.douban.com/top250')
+    Pattarn    <- '<span class=\"title\">&nbsp;/&nbsp;([^<]*)</span>'
+    Lines      <- grep(Pattarn, MoviePage, value=TRUE)
+    Lines2     <- sub(Pattarn,  '\\1', Lines )
+    Names      <- sub('^ *', '', Lines2)
+    print(Names[1:N])
+}
+# Call the function with arguement 5 and 10
+FindTop(5)
+FindTop(10)
+```
+* Run the above lines. 
 
-**5.1 [15 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `1` to `100`. For example, `Find_expression(50)` should print lines include:
-$$ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 $$
-and
-$$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$
+* Go to [this website](https://movie.douban.com/top250), figure out what the above function does. 
 
+* For now, don't worry about the weird syntax in getting `Pattarn`, `Lines2`, and `Names`. Make sure you understand how to use `readLines()`, `grep()`, and `sub()` by reading their help documents. 
 
-**5.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `1` to `100`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions`, so which number(s) yields the maximum and minimum of `Total_solutions`? 
+* What's the difference between `read.csv()` and `readLines()`?
 
-(Hint: You may find `seq()`, `choose()`, and `permutations()` useful)
+Many a times, we will require our functions to do some processing and **return back the result**. This is accomplished with the `return()` function in R. 
 
-***
+Change the above function to:
+```{r}
+# Define the function FindTop_new()
+FindTop_new    <- function(N){
+    MoviePage  <- readLines('https://movie.douban.com/top250')
+    Pattarn    <- '<span class=\"title\">&nbsp;/&nbsp;([^<]*)</span>'
+    Lines      <- grep(Pattarn, MoviePage, value=TRUE)
+    Lines2     <- sub(Pattarn,  '\\1', Lines )
+    Names      <- sub('^ *', '', Lines2)
+    return(Names[1:N])
+}
+```
+* Now you should be able to pass the output of `FindTop_new()` to a vector, say `MoiveList`. Try this. 
 
-# 6. Visibility in Shenzhen during the past 10 years
+# 4. Git platform and client
 
-In this problem set, we will examine how visibility changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Hourly visibility data are stored under the `VIS` column. Read page `10` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the data.
+* Sign up for [GitHub](https://github.com): choose a user name that isn’t already taken, provide an email address and a password, and click the big green “Sign up for GitHub” button.
 
-You want to only use data points satisfying the following criteria:
-
-* Visibility data (in meters) within the range of `0` and `160000`
-* Pass all quality control checks: `VISIBILITY-OBSERVATION distance quality code` is `1`, `VISIBILITY-OBSERVATION variability code` is `N`, and `VISIBILITY-OBSERVATION quality variability code` is `1`.
-
-**6.1 [15 points]** Plot hourly visibility data as a function of the observation time, similar to the time series plot you made in [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3). Based on your naked eyes, is there a trend in visibility during the past 10 years? 
-
-**6.2 [10 points]** For each year, report the number of days with visibility within the following intervals: `[0,5)`,`[5,10)`,`[10,15)`,`[15,20)`,`[20,25)`,`[25,30)`, and `>=30`. Is the visibility getting better or worse?
-
-***
-
-# 7. Explore a data set
-
-Browse the [CASEarth website](http://data.casearth.cn/). Search and download a data set you are interested in. Your data set should be in `csv` or `XLSX` format, and have temporal information. In R, do the following:  
-**7.1 [5 points]** Load the `csv` or `XLSX` file, and clean possible data points with missing values or bad quality.  
-**7.2 [5 points]** Plot the time series of a certain variable.  
-**7.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
-
+* Install [GitKraken](https://www.gitkraken.com/git-client)

@@ -56,7 +56,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 **[15 points]** If you start with 1 RMB and, with each move, you can either double your money or add another 1 RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `1`, and `Least_moves(5)` should print `3`.
 
-(Hint: You may find `choose()` or `permutations()` useful)
+(Hint: You may find `combinations()` or `permutations()` in the `gtools` package useful)
 
 ***
 
@@ -72,7 +72,7 @@ $$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$
 
 **5.2 [5 points]** Count the total number of suitable solutions for any integer *i* from `1` to `100`, assign the count to `Total_solutions[i]`. Plot the vector `Total_solutions`, so which number(s) yields the maximum and minimum of `Total_solutions`? 
 
-(Hint: You may find `seq()`, `choose()`, and `permutations()` useful)
+(Hint: You may find `seq()`, `combinations()`, and `permutations()` useful)
 
 ***
 
