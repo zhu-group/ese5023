@@ -37,11 +37,12 @@ output:
 ```{r, eval=FALSE}
 # Define the function FindTop()
 FindTop        <- function(N){
-    MoviePage  <- readLines('https://movie.douban.com/top250')
+    MoviePage  <- readLines('https://movie.douban.com/top250', encoding='UTF-8')
     Pattarn    <- '<span class=\"title\">&nbsp;/&nbsp;([^<]*)</span>'
     Lines      <- grep(Pattarn, MoviePage, value=TRUE)
-    Lines2     <- sub(Pattarn,  '\\1', Lines )
-    Names      <- sub('^ *', '', Lines2)
+    Lines      <- sub(Pattarn,  '\\1', Lines )
+    Names      <- sub('^ *', '', Lines)
+    Names      <- sub('&#39;', "'", Names)
     print(Names[1:N])
 }
 # Call the function with arguement 5 and 10
@@ -52,7 +53,7 @@ FindTop(10)
 
 * Go to [this website](https://movie.douban.com/top250), figure out what the above function does. 
 
-* For now, don't worry about the weird syntax in getting `Pattarn`, `Lines2`, and `Names`. Make sure you understand how to use `readLines()`, `grep()`, and `sub()` by reading their help documents. 
+* For now, don't worry about the weird syntax in getting `Pattarn`, `Lines`, and `Names`. Make sure you understand how to use `readLines()`, `grep()`, and `sub()` by reading their help documents. 
 
 * What's the difference between `read.csv()` and `readLines()`?
 
@@ -62,13 +63,15 @@ Change the above function to:
 ```{r}
 # Define the function FindTop_new()
 FindTop_new    <- function(N){
-    MoviePage  <- readLines('https://movie.douban.com/top250')
+    MoviePage  <- readLines('https://movie.douban.com/top250', encoding='UTF-8')
     Pattarn    <- '<span class=\"title\">&nbsp;/&nbsp;([^<]*)</span>'
     Lines      <- grep(Pattarn, MoviePage, value=TRUE)
-    Lines2     <- sub(Pattarn,  '\\1', Lines )
-    Names      <- sub('^ *', '', Lines2)
+    Lines      <- sub(Pattarn,  '\\1', Lines )
+    Names      <- sub('^ *', '', Lines)
+    Names      <- sub('&#39;', "'", Names)
     return(Names[1:N])
 }
+FindTop_new(10)
 ```
 * Now you should be able to pass the output of `FindTop_new()` to a vector, say `MoiveList`. Try this. 
 
