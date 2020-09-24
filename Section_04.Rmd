@@ -251,11 +251,11 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 ## Exercise #3
 
-* Create a local repository `ESE5023_Assignment`
+* Create a local repository `ESE5023_Assignments`
 
 * Push it to GitHub as a `remote` repository. This is the place you are going to turn in your assignments, *e.g*., `PS1_1.R`, `PS1_2.R`, `PS3_3.R`,...
 
-* Go to GitHub, click `ESE5023_Assignment` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `MingYang-Hydrate` and `topleo` as collaboratos. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignment` repository, and they will grade your assignments and provide necessary feedback. 
+* Go to GitHub, click `ESE5023_Assignments` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `MingYang-Hydrate` and `topleo` as collaboratos. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignments` repository, and they will grade your assignments and provide necessary feedback. 
 
 ***
 
