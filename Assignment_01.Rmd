@@ -9,7 +9,8 @@ output:
 ---
 
 Out: 09/17 19:00  
-For problem set *i*, create a script named `PS1_i.R`. Submit your scripts and report via GitHub by **10/10 19:00**  
+For problem set *i*, create a script named `PS1_i.R`.  
+Submit your R scripts and report to `ESE5023_Assignment` on GitHub by **10/10 19:00**  
 
 ***
 
@@ -25,7 +26,7 @@ Collaboration on solving the assignment is allowed, after you have thought about
 Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
 
 **Submitting your assignment:**  
-Submit your scripts and report via GitHub. The submission time will be determined based on your Github records.  
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.  
 
 ***
 
