@@ -144,6 +144,9 @@ Follow the instructor to do the following:
 
 Navigate yourself with the Interface.
 
+<img src="figs/GitKraken.png" alt="drawing" width="800"/>
+
+
 ## Initialize a new repository
 
 `New Tab` -> `Start a local repo` -> `Init` -> `Local Only`
@@ -176,7 +179,7 @@ Now add a new file into the repository. Stage this change, and commit it.
 
 Pop open the hood of your project and check out the `Activity Logs` located in the footer toolbar of GitKraken. `Activity Logs` provide real-time feedback of application and repository-level interactions that occurred in GitKraken. `Activity Logs` files are plain text in a standard log file format. Each line displays the time of action, action feedback, and performance data measured in milliseconds.
 
-## Integration with GitHub and Push
+## Integration with GitHub
 
 Now your repository is merely local. We need to integrate it with GitHub to make a `remote` repository.
 
@@ -206,9 +209,9 @@ Provide the URL of the `remote`, then click `Clone the repo`. By doing so, your 
 
 ## Other important usages
 
-For now, we only cover the basic usage of Git. In fact, there are much more important usages of Git, like `branch`, `merge`, `conflict`, and `pull request`. Go to [GitKraken Guide](https://support.gitkraken.com/start-here/guide/) for more.
+For now, we only cover the basic usage of Git. In fact, there are other important usages of Git, like `branch`, `merge`, `conflict`, and `pull request`. Go to [GitKraken Guide](https://support.gitkraken.com/start-here/guide/) for more.
 
-Git is a powerful command-line tool. Check [Version Control with Git](http://swcarpentry.github.io/git-novice/) for more.
+Git is a also powerful command-line tool. Check [Version Control with Git](http://swcarpentry.github.io/git-novice/) for more.
 
 ***
 
@@ -250,7 +253,7 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 * Create a local repository `ESE5023_Assignment`
 
-* Push it to GitHub as a `remote` repository. This is the place you turn in your assignments.
+* Push it to GitHub as a `remote` repository. This is the place you are going to turn in your assignments, *e.g*., `PS1_1.R`, `PS1_2.R`, `PS3_3.R`,...
 
 * Go to GitHub, click `ESE5023_Assignment` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `MingYang-Hydrate` and `topleo` as collaboratos. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignment` repository, and they will grade your assignments and provide necessary feedback. 
 
@@ -258,6 +261,7 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 # Further reading
 
+* [Version Control with Git](http://swcarpentry.github.io/git-novice/)
 * [Git Basics](https://git-scm.com/about)
 * [Learn Git with GitKraken, with videos](https://www.gitkraken.com/resources/learn-git)
 * [GitKraken Guide](https://support.gitkraken.com/start-here/guide/)
