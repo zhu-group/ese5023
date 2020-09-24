@@ -20,7 +20,7 @@ output:
 
 <img src="figs/phd101212s.png" alt="drawing" width="600"/>  
 
-**Version control** systems start with a base version of the document and then record changes you make each step of the way. You can think of it as a recording of your progress: you can rewind to start at the base document and play back each change you made, eventually arriving at your more recent version.
+**Version control** systems start with a base version of the document and then record changes you make each step of the way. You can think of it as a recording of your progress: you can rewind to start at the base document and playback each change you made, eventually arriving at your more recent version.
 
 <img src="figs/play-changes.svg" alt="drawing" width="500"/>  
 
@@ -52,7 +52,7 @@ Git thinks of its data more like a series of snapshots of a filesystem. With Git
 
 Git tracks the changes you make to files, so you have a record of what has been done, and you can revert to specific versions should you ever need to. Git also makes collaboration easier, allowing changes by multiple people to all be merged into one source. So regardless of whether you write code that only you will see, or work as part of a team, Git will be useful for you. [^2]
 
-Git is software that runs **locally**. Your files and their history are stored on your computer. You can also use online hosts/platforms (such as [GitHub](https://github.com), [Gitlab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org)) to store a copy of the files and their revision history. Having a centrally located place where you can upload your changes and download changes from others, enable you to collaborate more easily with other developers. Git can automatically merge the changes, so two people can even work on different parts of the same file and later merge those changes without loosing each other’s work.
+Git is a software that runs **locally**. Your files and their history are stored on your computer. You can also use online hosts/platforms (such as [GitHub](https://github.com), [Gitlab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org)) to store a copy of the files and their revision history. Having a centrally located place where you can upload your changes, and download changes from others, enable you to collaborate more easily with other developers. Git can automatically merge the changes, so two people can even work on different parts of the same file and later merge those changes without losing each other’s work.
 
 [^2]: [What Is Git & Why Should You Use It?](https://www.nobledesktop.com/blog/what-is-git-and-why-should-you-use-it#:~:text=Git%20is%20the%20most%20commonly%20used%20version%20control,people%20to%20all%20be%20merged%20into%20one%20source.)
 
@@ -109,7 +109,7 @@ The default development branch. Whenever you create a Git repository, a branch n
 (a repository): To reconcile two sets of changes to a repository.
 
 **Origin**:  
-The default upstream repository. Most projects have at least one upstream project which they track. By default origin is used for that purpose.
+The default upstream repository. Most projects have at least one upstream project which they track. By default, origin is used for that purpose.
 
 **Pull**:  
 Pulling a branch means to fetch it and merge it. 
@@ -160,9 +160,9 @@ Unstage files by selecting a staged file and hitting the button that appears.
 
 ## Commit a change
 
-After Staging the change, write a short summary about the change. [Good commit messages](https://chris.beams.io/posts/git-commit/) start with a brief (<50 characters) statement about the changes made in the commit. Generally, the message should complete the sentence “If applied, this commit will” . If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.
+After Staging the change, write a short summary of the change. [Good commit messages](https://chris.beams.io/posts/git-commit/) start with a brief (<50 characters) statement about the changes made in the commit. Generally, the message should complete the sentence “If applied, this commit will”. If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.
 
-Then click `Commit changes to 1 file`. Inmidiatly, you will see a summary of the commit.
+Then click `Commit changes to 1 file`. Immediately, you will see a summary of the commit.
 
 The above steps can be viewed as:
 
@@ -174,14 +174,14 @@ Now add a new file into the repository. Stage this change, and commit it.
 
 ## Check the Activity Logs
 
-Pop open the hood of your project and check out the `Activity Logs` located in the footer toolbar of GitKraken. `Activity Logs` provide real time feedback of application and repository-level interactions that occured in GitKraken. `Activity Logs` files are plain text in a standard log file format. Each line displays time of action, action feedback, and performance data measured in milliseconds.
+Pop open the hood of your project and check out the `Activity Logs` located in the footer toolbar of GitKraken. `Activity Logs` provide real-time feedback of application and repository-level interactions that occurred in GitKraken. `Activity Logs` files are plain text in a standard log file format. Each line displays the time of action, action feedback, and performance data measured in milliseconds.
 
 ## Integration with GitHub and Push
 
-Now your repository is local, we need to integrate it with GitHub to make a `remote` repository.
+Now your repository is merely local. We need to integrate it with GitHub to make a `remote` repository.
 
 * Click `Push`, you will get a message `There is no remote to push to, would you like to add one?`. Select `Yes`.
-* Provide your GitHub information and integrate.
+* Provide your GitHub information and integrate it.
 * Finally, click `Create remote and push local refs`
 
 ## Browse GitHub
@@ -204,11 +204,11 @@ Now close GitKraken, and delete the local repository. What happens to the `remot
 `New Tab` -> `Clone a repo` -> `Clone`. 
 Provide the URL of the `remote`, then click `Clone the repo`. By doing so, your repository will go back soon.
 
-## Other important usage
+## Other important usages
 
-For now, we only conver the basic usage of Git. In fact, there are many more important usage of Git, like `branch`, `merge`, `conflict`, and `pull request`. Go to [GitKraken Guide](https://support.gitkraken.com/start-here/guide/) for more.
+For now, we only cover the basic usage of Git. In fact, there are much more important usages of Git, like `branch`, `merge`, `conflict`, and `pull request`. Go to [GitKraken Guide](https://support.gitkraken.com/start-here/guide/) for more.
 
-Git is a powerful command-line tool, check [Version Control with Git](http://swcarpentry.github.io/git-novice/) for more.
+Git is a powerful command-line tool. Check [Version Control with Git](http://swcarpentry.github.io/git-novice/) for more.
 
 ***
 
@@ -236,7 +236,7 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 * Upload a file via GitHub, commit the change.
 
-* Edit your R script online by clicking the file then `Edit this file`, commit the change.
+* Edit your R script online by clicking the file, then `Edit this file`, commit the change.
 
 * Now `pull` the `remote` repository to update your local repository.
 
@@ -250,9 +250,9 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 * Create a local repository `ESE5023_Assignment`
 
-* Push it to GitHub. This is the place you turn in your assignments.
+* Push it to GitHub as a `remote` repository. This is the place you turn in your assignments.
 
-* Go to GitHub, click `ESE5023_Assignment` repository, then `Settings`. Under the `Manage access`, click `Invite a collaborator`, add `MingYang-Hydrate` and `topleo`. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignment` repository, they will grade your assignments and provide necessary feedback. 
+* Go to GitHub, click `ESE5023_Assignment` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `MingYang-Hydrate` and `topleo` as collaboratos. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignment` repository, and they will grade your assignments and provide necessary feedback. 
 
 ***
 

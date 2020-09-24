@@ -399,7 +399,7 @@ div.tocify {
 <div id="version-control" class="section level1">
 <h1>Version Control</h1>
 <p><img src="figs/phd101212s.png" alt="drawing" width="600"/></p>
-<p><strong>Version control</strong> systems start with a base version of the document and then record changes you make each step of the way. You can think of it as a recording of your progress: you can rewind to start at the base document and play back each change you made, eventually arriving at your more recent version.</p>
+<p><strong>Version control</strong> systems start with a base version of the document and then record changes you make each step of the way. You can think of it as a recording of your progress: you can rewind to start at the base document and playback each change you made, eventually arriving at your more recent version.</p>
 <p><img src="figs/play-changes.svg" alt="drawing" width="500"/></p>
 <p>Once you think of changes as separate from the document itself, you can then think about “playing back” different sets of changes on the base document, ultimately resulting in <strong>different versions</strong> of that document. For example, two users can make independent sets of changes on the same document:</p>
 <p><img src="figs/versions.svg" alt="drawing" width="300"/></p>
@@ -417,7 +417,7 @@ div.tocify {
 <p>Git thinks of its data more like a series of snapshots of a filesystem. With Git, every time you <em>commit</em>, or save the <em>state</em> of your project, Git basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot. To be efficient, if files have not changed, Git doesn’t store the file again, just a link to the previous identical file it has already stored. <strong>Git thinks about its data more like a stream of snapshots.</strong> This makes Git more like a mini <strong>filesystem</strong> with some incredibly powerful tools built on top of it. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p><img src="figs/snapshots.png" alt="drawing" width="600"/></p>
 <p>Git tracks the changes you make to files, so you have a record of what has been done, and you can revert to specific versions should you ever need to. Git also makes collaboration easier, allowing changes by multiple people to all be merged into one source. So regardless of whether you write code that only you will see, or work as part of a team, Git will be useful for you. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<p>Git is software that runs <strong>locally</strong>. Your files and their history are stored on your computer. You can also use online hosts/platforms (such as <a href="https://github.com">GitHub</a>, <a href="https://about.gitlab.com">Gitlab</a>, or <a href="https://bitbucket.org">Bitbucket</a>) to store a copy of the files and their revision history. Having a centrally located place where you can upload your changes and download changes from others, enable you to collaborate more easily with other developers. Git can automatically merge the changes, so two people can even work on different parts of the same file and later merge those changes without loosing each other’s work.</p>
+<p>Git is a software that runs <strong>locally</strong>. Your files and their history are stored on your computer. You can also use online hosts/platforms (such as <a href="https://github.com">GitHub</a>, <a href="https://about.gitlab.com">Gitlab</a>, or <a href="https://bitbucket.org">Bitbucket</a>) to store a copy of the files and their revision history. Having a centrally located place where you can upload your changes, and download changes from others, enable you to collaborate more easily with other developers. Git can automatically merge the changes, so two people can even work on different parts of the same file and later merge those changes without losing each other’s work.</p>
 </div>
 <div id="why-is-git-useful" class="section level2">
 <h2>Why is Git Useful?</h2>
@@ -462,7 +462,7 @@ The default development branch. Whenever you create a Git repository, a branch n
 <p><strong>Merge</strong>:<br />
 (a repository): To reconcile two sets of changes to a repository.</p>
 <p><strong>Origin</strong>:<br />
-The default upstream repository. Most projects have at least one upstream project which they track. By default origin is used for that purpose.</p>
+The default upstream repository. Most projects have at least one upstream project which they track. By default, origin is used for that purpose.</p>
 <p><strong>Pull</strong>:<br />
 Pulling a branch means to fetch it and merge it.</p>
 <p><strong>Push</strong>:<br />
@@ -507,8 +507,8 @@ A tool for managing changes to a set of files. Each set of changes creates a new
 </div>
 <div id="commit-a-change" class="section level2">
 <h2>Commit a change</h2>
-<p>After Staging the change, write a short summary about the change. <a href="https://chris.beams.io/posts/git-commit/">Good commit messages</a> start with a brief (&lt;50 characters) statement about the changes made in the commit. Generally, the message should complete the sentence “If applied, this commit will” . If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.</p>
-<p>Then click <code>Commit changes to 1 file</code>. Inmidiatly, you will see a summary of the commit.</p>
+<p>After Staging the change, write a short summary of the change. <a href="https://chris.beams.io/posts/git-commit/">Good commit messages</a> start with a brief (&lt;50 characters) statement about the changes made in the commit. Generally, the message should complete the sentence “If applied, this commit will”. If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.</p>
+<p>Then click <code>Commit changes to 1 file</code>. Immediately, you will see a summary of the commit.</p>
 <p>The above steps can be viewed as:</p>
 <p><img src="figs/git-staging-area.svg" alt="drawing" width="600"/></p>
 </div>
@@ -518,14 +518,14 @@ A tool for managing changes to a set of files. Each set of changes creates a new
 </div>
 <div id="check-the-activity-logs" class="section level2">
 <h2>Check the Activity Logs</h2>
-<p>Pop open the hood of your project and check out the <code>Activity Logs</code> located in the footer toolbar of GitKraken. <code>Activity Logs</code> provide real time feedback of application and repository-level interactions that occured in GitKraken. <code>Activity Logs</code> files are plain text in a standard log file format. Each line displays time of action, action feedback, and performance data measured in milliseconds.</p>
+<p>Pop open the hood of your project and check out the <code>Activity Logs</code> located in the footer toolbar of GitKraken. <code>Activity Logs</code> provide real-time feedback of application and repository-level interactions that occurred in GitKraken. <code>Activity Logs</code> files are plain text in a standard log file format. Each line displays the time of action, action feedback, and performance data measured in milliseconds.</p>
 </div>
 <div id="integration-with-github-and-push" class="section level2">
 <h2>Integration with GitHub and Push</h2>
-<p>Now your repository is local, we need to integrate it with GitHub to make a <code>remote</code> repository.</p>
+<p>Now your repository is merely local. We need to integrate it with GitHub to make a <code>remote</code> repository.</p>
 <ul>
 <li>Click <code>Push</code>, you will get a message <code>There is no remote to push to, would you like to add one?</code>. Select <code>Yes</code>.</li>
-<li>Provide your GitHub information and integrate.</li>
+<li>Provide your GitHub information and integrate it.</li>
 <li>Finally, click <code>Create remote and push local refs</code></li>
 </ul>
 </div>
@@ -549,10 +549,10 @@ A tool for managing changes to a set of files. Each set of changes creates a new
 <h2>Clone a remote repository</h2>
 <p><code>New Tab</code> -&gt; <code>Clone a repo</code> -&gt; <code>Clone</code>. Provide the URL of the <code>remote</code>, then click <code>Clone the repo</code>. By doing so, your repository will go back soon.</p>
 </div>
-<div id="other-important-usage" class="section level2">
-<h2>Other important usage</h2>
-<p>For now, we only conver the basic usage of Git. In fact, there are many more important usage of Git, like <code>branch</code>, <code>merge</code>, <code>conflict</code>, and <code>pull request</code>. Go to <a href="https://support.gitkraken.com/start-here/guide/">GitKraken Guide</a> for more.</p>
-<p>Git is a powerful command-line tool, check <a href="http://swcarpentry.github.io/git-novice/">Version Control with Git</a> for more.</p>
+<div id="other-important-usages" class="section level2">
+<h2>Other important usages</h2>
+<p>For now, we only cover the basic usage of Git. In fact, there are much more important usages of Git, like <code>branch</code>, <code>merge</code>, <code>conflict</code>, and <code>pull request</code>. Go to <a href="https://support.gitkraken.com/start-here/guide/">GitKraken Guide</a> for more.</p>
+<p>Git is a powerful command-line tool. Check <a href="http://swcarpentry.github.io/git-novice/">Version Control with Git</a> for more.</p>
 <hr />
 </div>
 </div>
@@ -573,7 +573,7 @@ A tool for managing changes to a set of files. Each set of changes creates a new
 <li><p>Add <em>two</em> files at the same time to the folder, stage and then commit your changes.</p></li>
 <li><p>Now <code>push</code> the local repository to GitHub. Check your <em>filesystem</em> on GitHub.</p></li>
 <li><p>Upload a file via GitHub, commit the change.</p></li>
-<li><p>Edit your R script online by clicking the file then <code>Edit this file</code>, commit the change.</p></li>
+<li><p>Edit your R script online by clicking the file, then <code>Edit this file</code>, commit the change.</p></li>
 <li><p>Now <code>pull</code> the <code>remote</code> repository to update your local repository.</p></li>
 <li><p>Take a look at the Activity Logs. Do the logs record your commands?</p></li>
 <li><p>Now close GitKraken, and delete your local folder.</p></li>
@@ -584,8 +584,8 @@ A tool for managing changes to a set of files. Each set of changes creates a new
 <h2>Exercise #3</h2>
 <ul>
 <li><p>Create a local repository <code>ESE5023_Assignment</code></p></li>
-<li><p>Push it to GitHub. This is the place you turn in your assignments.</p></li>
-<li><p>Go to GitHub, click <code>ESE5023_Assignment</code> repository, then <code>Settings</code>. Under the <code>Manage access</code>, click <code>Invite a collaborator</code>, add <code>xxx</code> and <code>xxx</code>. By doing so, your TAs will be able to get access to your GitHub <code>ESE5023_Assignment</code> repository, they will grade your assignments and provide necessary feedback.</p></li>
+<li><p>Push it to GitHub as a <code>remote</code> repository. This is the place you turn in your assignments.</p></li>
+<li><p>Go to GitHub, click <code>ESE5023_Assignment</code> repository, then <code>Settings</code>. Under the <code>Manage access</code> sub-page, click <code>Invite a collaborator</code>, add invite <code>MingYang-Hydrate</code> and <code>topleo</code> as collaboratos. By doing so, your TAs will be able to get access to your GitHub <code>ESE5023_Assignment</code> repository, and they will grade your assignments and provide necessary feedback.</p></li>
 </ul>
 <hr />
 </div>
