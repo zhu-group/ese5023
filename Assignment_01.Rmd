@@ -89,7 +89,7 @@ You want to only use data points satisfying the following criteria:
 
 **6.1 [15 points]** Plot hourly visibility data as a function of the observation time, similar to the time series plot you made in [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3). Based on your naked eyes, is there a trend in visibility during the past 10 years? 
 
-**6.2 [10 points]** For each year, report the number of days with visibility within the following intervals: `[0,5)`,`[5,10)`,`[10,15)`,`[15,20)`,`[20,25)`,`[25,30)`, and `>=30`. Is the visibility getting better or worse?
+**6.2 [10 points]** For each year, report the number of days with visibility within the respective interval: `[0,5km)`,`[5km,10km)`,`[10km,15km)`,`[15km,20km)`,`[20km,25km)`,`[25km,30km)`, and `>=30km`. Is the visibility getting better or worse?
 
 ***
 
