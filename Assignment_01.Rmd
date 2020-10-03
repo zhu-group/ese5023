@@ -95,8 +95,8 @@ You want to only use data points satisfying the following criteria:
 
 # 7. Explore a data set
 
-Browse the [CASEarth website](http://data.casearth.cn/), [NOAA Land-Based Datasets and Products ](https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets), or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/). Search and download a data set you are interested in. Your data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information. In R, do the following:  
-**7.1 [5 points]** Load the `csv` or `XLSX` file, and clean possible data points with missing values or bad quality.  
+Browse the [CASEarth](http://data.casearth.cn/), [NOAA Land-Based Datasets and Products ](https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets), or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. Your data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information. In R, do the following:  
+**7.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.  
 **7.2 [5 points]** Plot the time series of a certain variable.  
 **7.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
 
