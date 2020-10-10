@@ -110,12 +110,6 @@ Keeling_Data_tbl %>%
   filter(year == 2000)
 ```
 
-The condition can be more complicated, for example:
-```{r}
-Keeling_Data_tbl %>% 
-  filter(year == 2000 || year == 1990)
-```
-
 If we now want to move forward with the above tibble, but only with `quality == 1` , we can combine `select()` and `filter()` functions:
 ```{r}
 Keeling_Data_tbl %>% 
