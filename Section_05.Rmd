@@ -33,11 +33,11 @@ library(ggplot2)
 
 # Tidy data
 
-In this section, we will learn a consistent way to organise the data in R, called **tidy data**. Getting the data into this format requires some upfront work, but that work pays off in the long term. Once you have tidy data and the tools provided by the `tidyr`, `dplyr` and `ggplot2` packages, you will spend much less time munging/wrangling data from one representation to another, allowing you to spend more time on the analytic questions at hand.
+In this section, we will learn a consistent way to organize the data in R, called **tidy data**. Getting the data into this format requires some upfront work, but that work pays off in the long term. Once you have tidy data and the tools provided by the `tidyr`, `dplyr` and `ggplot2` packages, you will spend much less time munging/wrangling data from one representation to another, allowing you to spend more time on the analytic questions at hand.
 
 ## Tibble
 
-For now, we will use `tibble` instead of R’s traditional `data.frame`. Tibble is data frame, but they tweak some older behaviours to make life a little easier. 
+For now, we will use `tibble` instead of R’s traditional `data.frame`. Tibble is a data frame, but they tweak some older behaviors to make life a little easier. 
 
 Let's use `Keeling_Data` as an example:
 
@@ -70,15 +70,15 @@ These three rules are interrelated because it’s impossible to only satisfy two
 
 Why ensure that your data is tidy? There are two main advantages:
 
-* There’s a general advantage to picking one consistent way of storing data. If you have **a consistent data structure**, it’s easier to learn the tools that work with it because they have an underlying uniformity. If you ensure that your data is tidy, you’ll spend less time fighting with the tools and more time working on your analysis.
+* There’s a general advantage to picking one consistent way of storing data. If you have **a consistent data structure**, it’s easier to learn the tools that work with it because they have an **underlying uniformity**. If you ensure that your data is tidy, you’ll spend less time fighting with the tools and more time working on your analysis.
 
-* There’s a specific advantage to placing variables in columns because it allows R’s vectorised nature to shine. That makes transforming tidy data feel particularly natural. `tidyr`, `dplyr`, and `ggplot2` are designed to work with tidy data.
+* There’s a specific advantage to placing variables in columns because it allows R’s **vectorized nature** to shine. That makes transforming tidy data feel particularly natural. `tidyr`, `dplyr`, and `ggplot2` are designed to work with tidy data.
 
 # The `dplyr` package
 
 The `dplyr` package provides a number of very useful functions for manipulating dataframes in a way that will reduce the self-repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the dplyr grammar easier to read.
 
-Here we’re going to cover 5 of the most commonly used functions as well as using pipes `%>%` to combine them.
+Here we’re going to cover commonly used functions as well as using pipes `%>%` to combine them.
 
 ## Using `select()`
 
@@ -91,25 +91,32 @@ select(Keeling_Data_tbl,co2)
 
 ## The pipe symbol `%>%`
 
-Above we used ‘normal’ grammar, but the strengths of `dplyr` and `tidyr` lie in combining several functions using **pipes**. Since the pipes grammar is unlike anything we’ve seen in R before, let’s repeat what we’ve done above using pipes.
+Above we used ‘normal’ grammar, but the strengths of `dplyr` and `tidyr` lie in combining several functions using **pipes**. Since the pipes grammar is unlike anything we’ve seen in R before, let’s repeat what we’ve done above using pipes. 
+
+`x %>% f(y)` is the same as `f(x, y)`
 
 ```{r}
 Keeling_Data_tbl %>% 
   select(year,co2,quality)
 ```
 
-The above lines mean we first call the `Keeling_Data_tbl` tibble and pass it on, using the **pipe symbol** `%>%`, to the next step, which is the `select()` function. In this case, we don’t specify which **data object** we use in the `select()` function since in gets that from the previous pipe. The `select()` function then takes what it gets from the pipe, in this case the `Keeling_Data_tbl` tibble, as its *1st argument*. You will see the power of `pipe` as script lines increase.
+The above lines mean we first call the `Keeling_Data_tbl` tibble and pass it on, using the **pipe symbol** `%>%`, to the next step, which is the `select()` function. In this case, we don’t specify which **data object** we use in the `select()` function since in gets that from the previous pipe. The `select()` function then takes what it gets from the pipe, in this case the `Keeling_Data_tbl` tibble, as its **first argument**. By using pipe, we can take output of the previous step as input for the next one, so that we can avoid defining and calling unnecessary temporary variables. You will start to see the power of `pipe` later.
 
 ## Using `filter()`
 
-Use `filter()` to get values (cells):
+Use `filter()` to get values (rows):
 ```{r}
 Keeling_Data_tbl %>% 
   filter(year == 2000)
 ```
 
-If we now want to move forward with the above tibble, but only with `quality == 1` , we can combine `select()` and `filter()` functions:
+The condition can be more complicated, for example:
+```{r}
+Keeling_Data_tbl %>% 
+  filter(year == 2000 || year == 1990)
+```
 
+If we now want to move forward with the above tibble, but only with `quality == 1` , we can combine `select()` and `filter()` functions:
 ```{r}
 Keeling_Data_tbl %>% 
   select(year,co2,quality) %>% 
@@ -129,16 +136,16 @@ Keeling_Data_tbl %>%
   group_by(month)
 ```
 
-The `group_by()` function is much more exciting in conjunction with the  `summarize()` function. This will allow us to create new variable(s) by using functions that repeat for each of the continent-specific data frames. That is to say, using the `group_by()` function, we **split our original dataframe into multiple pieces**, then we can run functions (e.g. `mean()` or `sd()`) within `summarize()`.
+The `group_by()` function is much more exciting in conjunction with the  `summarize()` function. This will allow us to create new variable(s) by using functions that repeat for each of the continent-specific data frames. That is to say, using the `group_by()` function, we **split our original dataframe into multiple pieces**, then we can run functions (*e.g.*, `mean()` or `sd()`) within `summarize()`.
 
 ```{r}
 Keeling_Data_tbl %>% 
   select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
-  summarize(month_mean = mean(co2))
+  summarize(monthly_mean = mean(co2))
 ```
-Here we create a new variable (column) `month_mean`, and append it to the groups (month in this case). Now, we get a so-called *climatology*.
+Here we create a new variable (column) `monthly_mean`, and append it to the groups (`month` in this case). Now, we get a so-called *monthly climatology*.
 
 You can also use `arrange()` and `desc()` to sort the data: 
 ```{r}
@@ -146,8 +153,8 @@ Keeling_Data_tbl %>%
   select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
-  summarize(month_mean = mean(co2)) %>% 
-  arrange(month_mean)
+  summarize(monthly_mean = mean(co2)) %>% 
+  arrange(monthly_mean)
 ```
 
 ```{r}
@@ -155,43 +162,45 @@ Keeling_Data_tbl %>%
   select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
-  summarize(month_mean = mean(co2)) %>% 
-  arrange(desc(month_mean))
+  summarize(monthly_mean = mean(co2)) %>% 
+  arrange(desc(monthly_mean))
 ```
 
-Let's add more statistics:
+Let's add more statistics to the monthly climatology:
 ```{r}
 Keeling_Data_tbl %>% 
   select(year,month,co2,quality) %>% 
   filter(quality == 1) %>% 
   group_by(month) %>% 
-  summarize(month_mean = mean(co2), moth_sd = sd(co2),
-            month_min = min(co2), month_max = max(co2),
-            month_se = sd(co2)/sqrt(n()))
+  summarize(monthly_mean = mean(co2), monthly_sd = sd(co2),
+            monthly_min = min(co2), monthly_max = max(co2),
+            monthly_se = sd(co2)/sqrt(n()))
 ```
 Here we call the `n()` to get the size of a vector.
 
-## Using mutate()
+## Using `mutate()`
 
-We can also create new variables (columns) using the `mutate()` function:
+We can also create new variables (columns) using the `mutate()` function. Here we create a new column `co2_ppb` by simply scaling `co2` by a factor of `1000`.
 
 ```{r}
 Keeling_Data_tbl %>% 
-  mutate(co2_ppt = co2 * 1e3)
+  mutate(co2_ppb = co2 * 1e3)
 ```
 
-When creating new variables, we can hook this with a logical condition. A simple combination of `mutate()` and `ifelse()` facilitates filtering right where it is needed: in the moment of creating something new. This easy-to-read statement is a fast and powerful way of discarding certain data or for updating values depending on this given condition.
+When creating new variables, we can hook this with a logical condition. A simple combination of `mutate()` and `ifelse()` facilitates filtering right where it is needed: in the moment of creating something new. This easy-to-read statement is a fast and powerful way of discarding certain data or for updating values depending on this given condition. 
+
+Let's create a new variable `co2_new`, it is equal to `co2` when `quality==1`, otherwise it's `NA`: 
 
 ```{r}
 Keeling_Data_tbl %>% 
-  mutate(co2_ppt = co2 * 1e3, co2_new = ifelse(quality==1, co2, NA))
+  mutate(co2_ppb = co2 * 1e3, co2_new = ifelse(quality==1, co2, NA))
 ```
 
 ## Combining `dplyr` and `ggplot2`
 
-Just as we used `%>%` to pipe data along a chain of `dplyr` functions we can use it to pass data to `ggplot()`. Because `%>%` replaces the first argument in a function we don’t need to specify the `data = argument` in the `ggplot()` function. 
+Just as we used `%>%` to pipe data along a chain of `dplyr` functions we can use it to pass data to `ggplot()`. Because `%>%` replaces **the first argument** in a function we don’t need to specify the `data = argument` in the `ggplot()` function. 
 
-By combining `dplyr` and `ggplot2` functions we can make figures without creating any new variables or modifying the data.
+By combining `dplyr` and `ggplot2` functions, we can make figures without creating any new variables or modifying the data.
 
 ```{r}
 Keeling_Data_tbl %>% 
@@ -200,9 +209,10 @@ Keeling_Data_tbl %>%
   ggplot(aes(x=decimal_date, y=co2_new)) + 
   geom_line()
 ```
-As you will see, this is much easier than what we have done in [Section 3](https://zhu-group.github.io/ese5023/Section_03.html) This is the power of a tidy dataset and its related functions!
 
-Now let's plot monthly CO~2~ with the `color` option:
+As you will see, this is much easier than what we have done in [Section 3](https://zhu-group.github.io/ese5023/Section_03.html#Loading_csv_file). This is the power of a tidy dataset and its related functions!
+
+Let's plot CO~2~ of the same month as a function of `decimal_date`, with the `color` option:
 ```{r}
 Keeling_Data_tbl %>% 
   mutate(co2_new = ifelse(quality==1, co2, NA)) %>% 
@@ -211,7 +221,7 @@ Keeling_Data_tbl %>%
   geom_line()
 ```
 
-Or plot the data in panels with the `facet_wrap` function:
+Or plot the same data but in panels (facets), with the `facet_wrap` function:
 ```{r}
 Keeling_Data_tbl %>% 
   mutate(co2_new = ifelse(quality==1, co2, NA)) %>% 
@@ -230,13 +240,13 @@ The ‘long’ layout or format is where:
 * each column is a variable
 * each row is an observation
 
-For the ‘wide’ format each row is often a site/subject/patient and you have multiple observation variables containing the same type of data. These can be either repeated observations over time, or observation of multiple variables (or a mix of both). 
+For the ‘wide’ format, each row is often a site/subject/patient and you have multiple observation variables containing the same type of data. These can be either repeated observations over time, or observation of multiple variables (or a mix of both). 
 
-You may find data input may be simpler or some other applications may prefer the ‘wide’ format. However, many of R’s functions have been designed assuming you have ‘longer’ formatted data. 
+You may find data input may be simpler, or some other applications may prefer the ‘wide’ format. However, many of R’s functions have been designed assuming you have ‘longer’ formatted data. 
 
-Here we use `tidyr` package to efficiently transform the data shape regardless of original format.
+Here we use `tidyr` package to efficiently transform the data shape regardless of the original format.
 
-'Long' and 'wide' layouts mainly affect readability. For humans, the 'wide' format is often more intuitive since we can often see more of the data on the screen due to its shape. However, the 'long' format is more machine readable and is closer to the formatting of databases.
+'Long' and 'wide' layouts mainly affect readability. For humans, the 'wide' format is often more intuitive since we can often see more of the data on the screen due to its shape. However, the 'long' format is more machine-readable and is closer to the formatting of databases.
 
 ## Long to wide format with `spread()`
 
@@ -268,7 +278,7 @@ Please go over the notes once again, make sure you understand the scripts.
 
 ## Exercise #2
 
-Using the tools/functions covered in this section to solve [More about Mauna Loa CO2](https://zhu-group.github.io/ese5023/Lab_01.html#2More_about_Mauna_Loa_CO2) in [Lab 01](https://zhu-group.github.io/ese5023/Lab_01.html).
+Using the tools/functions covered in this section, to solve [More about Mauna Loa CO2](https://zhu-group.github.io/ese5023/Lab_01.html#2More_about_Mauna_Loa_CO2) in [Lab 01](https://zhu-group.github.io/ese5023/Lab_01.html).
 
 # Further reading
 
@@ -276,6 +286,4 @@ Using the tools/functions covered in this section to solve [More about Mauna Loa
 * [Dataframe Manipulation with dplyr](http://swcarpentry.github.io/r-novice-gapminder/13-dplyr/index.html)
 * [Dataframe Manipulation with tidyr](http://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html)
 * [R for Data Science](https://r4ds.had.co.nz/), see chapter 10 and 12.
-* [Data wrangling with R](https://rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/), with video
-
-# References  
+* [Data wrangling with R](https://rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/), with a video
