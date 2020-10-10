@@ -14,9 +14,9 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |1   |09/08|Tu. |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)        |              |              |
 |1   |09/10|Th. |[Section 02 R Basics](https://zhu-group.github.io/ese5023/Section_02.html)            |              |              |
 |2   |09/17|Th. |[Section 03 Data structures](https://zhu-group.github.io/ese5023/Section_03.html)     | [Assignment 1](https://zhu-group.github.io/ese5023/Assignment_01.html)           |              |
-|3   |09/22|Tu. |[Lab 01](https://zhu-group.github.io/ese5023/Lab_01.html)                         |              |              |
+|3   |09/22|Tu. |[Lab 01](https://zhu-group.github.io/ese5023/Lab_01.html)                             |              |              |
 |3   |09/24|Th. |[Section 04 Version control with Git](https://zhu-group.github.io/ese5023/Section_04.html)                                                   |              |              |
-|4   |10/10|Sat.|Section 05 Dataframe                                                                  |  2           |  1           |
+|4   |10/10|Sat.|[Section 05 Data wrangling](https://zhu-group.github.io/ese5023/Section_05.html)      |  2           |  1           |
 |5   |10/13|Tu. |Lab 02                                                                                |              |              |
 |5   |10/15|Th. |Section 06 Statistical sleuth: Basics                                                 |              |              |
 |6   |10/22|Th. |Section 07 Statistical sleuth: Intermediate                                           |  3           |  2           |
