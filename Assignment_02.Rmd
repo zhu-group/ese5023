@@ -1,0 +1,60 @@
+---
+title: "Assignment 02"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 10/11 19:00 **  
+**Due: 10/23 19:00 **  
+
+For problem set *i*, create a script named `PS2_i.R`. Upload your **R scripts** and **a report** to the `ESE5023_Assignments` repository.
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Late Submission:**   
+Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
+
+**Submitting your assignment:**  
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.  
+
+***
+
+# 1. Significant earthquakes since 2150 B.C.
+
+The [Significant Earthquake Database](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) contains information on destructive earthquakes from 2150 B.C. to the present. Download the entire significant earthquake data file ([signif.txt](https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt)) in tab-delimited format. Check [definitions of the variables](https://www.ngdc.noaa.gov/nndc/struts/results?&t=101650&s=225&d=225). 
+
+**1.1 [5 points]** Read in the `.txt` (or `.tsv`) file in R and convert it as a `tibble` object named `Sig_EQs`.
+
+**1.2 [5 points]** Compute the total number of deaths caused by earthquakes in each country since 2150 B.C. and then print the top ten countries along with the total number of deaths.
+
+**1.3 [10 points]** Compute the global total number of earthquakes with magnitude larger than `6.0` (`EQ_PRIMARY > 6.0`) each year and then plot the timeseries. Do you observe any trend? Explain why or why not? 
+
+**1.4 [10 points]** Write a function `CountEq_LargestEq` that returns BOTH the total number of earthquakes since 2150 B.C. in a given country AND the date of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to each country, report your results in a decsdening order.
+
+***
+
+# 2. Wind speed in Shenzhen during the past 10 years
+
+In this problem set, we will examine how wind speed changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Use the functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+
+**[15 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed during the past 10 years? 
+
+***
+
+# 3. Revisit a data set
+
+Revisit the data set you used in [Problem 7](https://zhu-group.github.io/ese5023/Assignment_01.html#7_Explore_a_data_set) of the Assignment 01. Now use the functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+
+**[5 points]** Reproduce the same time series you made in Assignment 01.  
