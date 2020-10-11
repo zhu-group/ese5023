@@ -35,7 +35,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 The [Significant Earthquake Database](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) contains information on destructive earthquakes from 2150 B.C. to the present. Download the entire significant earthquake data file ([signif.txt](https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt)) in tab-delimited format. Check [definitions of the variables](https://www.ngdc.noaa.gov/nndc/struts/results?&t=101650&s=225&d=225). 
 
-**1.1 [5 points]** Read in the `.txt` (or `.tsv`) file in R and convert it as a `tibble` object named `Sig_EQs`.
+**1.1 [5 points]** Read the `.txt` (or `.tsv`) file (`signif.txt`) with R and convert it to a `tibble` object named `Sig_EQs`.
 
 **1.2 [5 points]** Compute the total number of deaths caused by earthquakes in each country since 2150 B.C. and then print the top ten countries along with the total number of deaths.
 
