@@ -47,7 +47,7 @@ The [Significant Earthquake Database](https://www.ngdc.noaa.gov/nndc/struts/form
 
 # 2. Wind speed in Shenzhen during the past 10 years
 
-In this problem set, we will examine how wind speed changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Use the functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+In this problem set, we will examine how wind speed changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Read page `8`-`9` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the wind data. Explain how you filter the data in your report. Use the functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
 
 **[15 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed within the past 10 years? 
 
