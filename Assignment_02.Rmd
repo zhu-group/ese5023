@@ -37,11 +37,11 @@ The [Significant Earthquake Database](https://www.ngdc.noaa.gov/nndc/struts/form
 
 **1.1 [5 points]** Read the `.txt` (or `.tsv`) file (`signif.txt`) with R and convert it to a `tibble` object named `Sig_EQs`.
 
-**1.2 [5 points]** Compute the total number of deaths caused by earthquakes in each country since 2150 B.C. and then print the top ten countries along with the total number of deaths.
+**1.2 [5 points]** Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top ten countries along with the total number of deaths.
 
-**1.3 [10 points]** Compute the global total number of earthquakes with magnitude larger than `6.0` (`EQ_PRIMARY > 6.0`) each year and then plot the timeseries. Do you observe any trend? Explain why or why not? 
+**1.3 [10 points]** Compute the total number of earthquakes with magnitude larger than `6.0` (`EQ_PRIMARY > 6.0`) worldwide each year, and then plot the timeseries. Do you observe any trend? Explain why or why not? 
 
-**1.4 [10 points]** Write a function `CountEq_LargestEq` that returns BOTH the total number of earthquakes since 2150 B.C. in a given country AND the date of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to each country, report your results in a decsdening order.
+**1.4 [10 points]** Write a function `CountEq_LargestEq` that returns both (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) the date of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to each country, report your results in a decsdening order.
 
 ***
 
@@ -49,7 +49,7 @@ The [Significant Earthquake Database](https://www.ngdc.noaa.gov/nndc/struts/form
 
 In this problem set, we will examine how wind speed changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Use the functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
 
-**[15 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed during the past 10 years? 
+**[15 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed within the past 10 years? 
 
 ***
 
@@ -57,4 +57,4 @@ In this problem set, we will examine how wind speed changes in Shenzhen during t
 
 Revisit the data set you used in [Problem 7](https://zhu-group.github.io/ese5023/Assignment_01.html#7_Explore_a_data_set) of the Assignment 01. Now use the functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
 
-**[5 points]** Reproduce the same time series you made in Assignment 01.  
+**[5 points]** Reproduce the same time series you made previously in Assignment 01.  
