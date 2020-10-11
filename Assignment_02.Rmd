@@ -11,7 +11,7 @@ output:
 **Out: 10/11 19:00 **  
 **Due: 10/23 19:00 **  
 
-For problem set *i*, create a script named `PS2_i.R`. Upload your **R scripts** and **a report** to the `ESE5023_Assignments` repository.
+For problem set *i*, create a script named `PS2_i.R`. Write your results briefly in a report (`Report_PS2.pdf`). Upload your **R scripts** and **report** to the `ESE5023_Assignments` repository before the deadline.
 
 ***
 
