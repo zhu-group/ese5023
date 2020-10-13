@@ -487,32 +487,32 @@ div.tocify {
 <hr />
 <div id="the-gapminder-data" class="section level1">
 <h1>1. The gapminder data</h1>
-<p>In this excerise, we look at some of the data on wealth and life expectancy of countries over time used by Hans Rosling in his famous <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen">TED talk</a>.</p>
-<p>The data has been conviently packaged in the R package <code>gapminder</code>, a subset of the original data set available at <a href="https://www.gapminder.org/">Gapminder</a>. For each of 142 countries, the package provides values for life expectancy, GDP per capita, and population, every five years, from 1952 to 2007. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p><strong>1.1</strong> Install the <code>gapminder</code> package if you havn’t. Then load the data by:</p>
+<p>In this exercise, we look at some of the data on wealth and life expectancy of countries overtime used by Hans Rosling in his famous <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen">TED talk</a>.</p>
+<p>The data has been conveniently packaged in the R package <code>gapminder</code>, a subset of the original data set available at <a href="https://www.gapminder.org/">Gapminder</a>. For each of 142 countries, the package provides values for life expectancy, GDP per capita, and population, every five years, from 1952 to 2007. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><strong>1.1</strong> Install the <code>gapminder</code> package if you haven’t. Then load the data by:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Load the gapminder library</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(gapminder)</a></code></pre></div>
-<p>Using <code>class()</code> function to verify <code>gapminder</code> is a <code>tibble</code>.</p>
+<p>Using the <code>class()</code> function to verify <code>gapminder</code> is a <code>tibble</code>.</p>
 <p>You are required to use functions from <code>tidyr</code>, <code>dplyr</code>, and <code>ggplot2</code> to finish the following questions:</p>
 <p><strong>1.2</strong> Plot life expectancy of China from 1952 to 2007.</p>
-<p><strong>1.3</strong> Plot population of countries in Africa from 1952 to 2007, show each country in a seperate panel (facet). Based on your observations, which country has experienced the fastest growth in population?</p>
+<p><strong>1.3</strong> Plot population of countries in Africa from 1952 to 2007, show each country in a separate panel (facet). Based on your observations, which country has experienced the fastest growth in population?</p>
 <p><strong>1.4</strong> Calculate the average GDP per capita from 1952 to 2007 for each country. Which country has the highest average GDP per capita? And which one has the lowest?</p>
-<p><strong>1.5</strong> Calculate the standard error of the life expectency for each continent.</p>
-<p><strong>1.6</strong> Plot the difference in total GDP (defined as <code>population * GDP per capita</code>) between USA and China from 1952 to 2007.</p>
+<p><strong>1.5</strong> Calculate the standard error of the life expectancy for each continent.</p>
+<p><strong>1.6</strong> Plot the difference in total GDP (defined as <code>population * GDP per capita</code>) between the USA and China from 1952 to 2007.</p>
 <p><strong>1.7</strong> Create a <code>tibble</code> contains only <code>country</code>, <code>year</code>, and <code>pop</code>, named it as <code>Country_Pop</code>. Create another <code>tibble</code> named <code>Country_LifeExp</code> that contains <code>country</code>, <code>year</code>, and <code>lifeExp</code>. Run:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Save objects to a RData file</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">save</span>(Country_Pop, Country_LifeExp, <span class="dt">file=</span><span class="st">&quot;My.RData&quot;</span>)</a></code></pre></div>
-<p>Check your <code>working direction</code>, where should now has a new file <code>My.RData</code>.</p>
-<p>Here we have used the <code>save()</code> function to save two R objects to a specified file (<code>My.RData</code> in this case). Using <code>?</code> to learn more about how to use <code>save()</code> function.</p>
+<p>Check your <code>working direction</code>, where should now have a new file <code>My.RData</code>.</p>
+<p>Here we have used the <code>save()</code> function to save two R objects to a specified file (<code>My.RData</code> in this case). Using <code>?</code> to learn more about how to use the <code>save()</code> function.</p>
 <p><strong>1.8</strong> Close RStudio. Re-open it, and run:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Load a RData file</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">load</span>(<span class="st">&quot;My.RData&quot;</span>)</a></code></pre></div>
-<p>Here we call the function <code>load()</code> to read the two R objects (<code>Country_Pop</code> and <code>Country_LifeExp</code>) back from the file. Use <code>ls()</code> to check. Consider saving your temporary data as <code>.RData</code> files to save time.</p>
+<p>Here we call the <code>load()</code> function to read the two R objects (<code>Country_Pop</code> and <code>Country_LifeExp</code>) back from the file. Use the <code>ls()</code> function to check. Consider saving your temporary data as <code>.RData</code> files to save time.</p>
 <p><strong>1.9</strong> Run:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Save objects to a .csv file</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">write.csv</span>(Country_LifeExp, <span class="dt">file=</span><span class="st">&quot;Country_LifeExp.csv&quot;</span>)</a></code></pre></div>
-<p>Check your <code>working direction</code>, you should find a new file <code>Country_LifeExp.csv</code>. Check this file. Using <code>?</code> to learn more about how to use <code>write.csv()</code> function.</p>
-<p><strong>1.10</strong> Now save your results from 1.4 to a <code>.csv</code> file using <code>write.csv()</code> function.</p>
+<p>Check your <code>working direction</code>, you should now find a new file <code>Country_LifeExp.csv</code>. Check this file. Using <code>?</code> to learn more about how to use the <code>write.csv()</code> function.</p>
+<p><strong>1.10</strong> Now save your results from 1.4 to a <code>.csv</code> file using the <code>write.csv()</code> function.</p>
 <hr />
 </div>
 <div id="references" class="section level1">
