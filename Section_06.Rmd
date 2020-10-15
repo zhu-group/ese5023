@@ -283,9 +283,9 @@ Please go over the notes once again, make sure you understand the scripts.
 
 ## Exercise #2
 
-2.1 Use the two-sample t-test to determine how does the mean CO~2~ changes from 1958-1990 to 1991-2020. Report the mean change and 95% confident intervals.
+2.1 Use the two-sample t-test to determine how does the mean CO~2~ of 1958-1990 compare with that of 1991-2020. Report the mean change and 95% confident intervals.
 
-2.2 Use the simple linear regression to compute the annual increase rate of CO~2~. Report the mean rate and 95% confident intervals.
+2.2 Use the simple linear regression to compute the annual increase rate of CO~2~. Report the mean rate and 95% confident intervals. Ignore the seasonality for now.
 
 ## Exercise #3
 
