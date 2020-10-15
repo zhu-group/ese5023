@@ -490,8 +490,9 @@ div.tocify {
 <hr />
 <p><em>The notes below are modified from the freely available online book <a href="https://daviddalpiaz.github.io/appliedstats/applied_statistics.pdf">Applied Statistics with R</a>.</em></p>
 <hr />
-<div id="summary-statistics" class="section level1">
-<h1>Summary Statistics</h1>
+<p><strong>Question:</strong> What will you do when get a new dataset before analyzing it?</p>
+<div id="quick-summaries" class="section level1">
+<h1>Quick summaries</h1>
 <p>R has built-in functions for a large number of summary statistics. For numeric variables, we can summarize data with the center and spread. We have covered many of the summary functions, make sure you understand what the following functions return: <code>mean()</code>, <code>median()</code>, <code>range()</code>, <code>max()</code>, <code>min()</code>, <code>sd()</code>, <code>var()</code>, <code>IQR()</code>, <code>summary()</code>. Pay attention to data sets containing <code>NA</code> values.</p>
 <p>Recall the <code>Keeling_Data</code>, call the above functions:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
@@ -540,7 +541,8 @@ div.tocify {
 <a class="sourceLine" id="cb16-5" data-line-number="5">     <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>,</a>
 <a class="sourceLine" id="cb16-6" data-line-number="6">     <span class="dt">border =</span> <span class="st">&quot;red&quot;</span>)</a>
 <a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</a></code></pre></div>
-<p><img src="Section_06_files/figure-html/unnamed-chunk-3-1.png" width="672" /> By default R will attempt to intelligently guess a good number of <code>breaks</code>, but as we can see here, it is sometimes useful to modify this yourself.</p>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>By default R will attempt to intelligently guess a good number of <code>breaks</code>, but as we can see here, it is sometimes useful to modify this yourself.</p>
 </div>
 <div id="barplots" class="section level2">
 <h2>Barplots</h2>
@@ -565,6 +567,7 @@ div.tocify {
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl)</a></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Here we used the <code>boxplot()</code> command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The R syntax <code>co2_new ~ month, data = Keeling_Data_tbl</code> reads “Plot the <code>co2_new</code> variable against the <code>month</code> variable using the <code>Keeling_Data_tbl</code> dataset.” We see the use of a <code>~</code> (which specifies a formula) and also a <code>data = argument</code>. This will be a syntax that is common to many functions we will use later.</p>
+<p>Again, <code>boxplot()</code> has a number of additional arguments which have the ability to make our plot more visually appealing.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl,</a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</a>
 <a class="sourceLine" id="cb21-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</a>
@@ -573,11 +576,10 @@ div.tocify {
 <a class="sourceLine" id="cb21-6" data-line-number="6"><span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>,</a>
 <a class="sourceLine" id="cb21-7" data-line-number="7"><span class="dt">border =</span> <span class="st">&quot;darkgreen&quot;</span>)</a></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Again, <code>boxplot()</code> has a number of additional arguments which have the ability to make our plot more visually appealing.</p>
 </div>
 <div id="scatterplots" class="section level2">
 <h2>Scatterplots</h2>
-<p>Lastly, to visualize the relationship between two numeric variables, we will use a scatterplot. This can be done with the <code>plot()</code> function and the <code>~</code> syntax we just used with a boxplot. (The function plot() can also be used more generally; see the documentation for details.)</p>
+<p>Lastly, to visualize the relationship between two numeric variables, we will use a scatterplot. This can be done with the <code>plot()</code> function and the <code>~</code> syntax we just used with a boxplot. (The function <code>plot()</code> can also be used more generally; see the documentation for details.)</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl)</a></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl,</a>
@@ -601,7 +603,13 @@ div.tocify {
 <li>A random draw of values from a particular distribution.</li>
 </ul>
 <p>R has functions for obtaining density, distribution, quantile and random values.</p>
-<p>The general naming structure of the relevant R functions is: * <code>dname</code> calculates density (pdf) at input x. * <code>pname</code> calculates distribution (cdf) at input x. * <code>qname</code> calculates the quantile at an input probability. * <code>rname</code> generates a random draw from a particular distribution.</p>
+<p>The general naming structure of the relevant R functions is:</p>
+<ul>
+<li><code>dname</code> calculates density (pdf) at input x.</li>
+<li><code>pname</code> calculates distribution (cdf) at input x.</li>
+<li><code>qname</code> calculates the quantile at an input probability.</li>
+<li><code>rname</code> generates a random draw from a particular distribution.</li>
+</ul>
 <p>Note that <code>name</code> represents the <code>name</code> of the given distribution. For example, consider a random variable <code>X</code> which is <span class="math inline">\(N(\mu=2, \sigma^{2}=25)\)</span>. To calculate the value of the pdf at <code>x = 3</code>, that is, the height of the curve at <code>x = 3</code>, use:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 0.07820854</code></pre>
@@ -613,7 +621,7 @@ div.tocify {
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n = 5</code>, use:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
-<pre><code>## [1] -0.8521365  0.4761735  7.5690041 -0.3044518 -2.4492583</code></pre>
+<pre><code>## [1]  9.005348  3.865758  7.795497  5.770912 11.459773</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <ul>
 <li><code>binom</code> for <code>Binomial</code> distribution</li>
@@ -636,25 +644,25 @@ div.tocify {
 <a class="sourceLine" id="cb32-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co"># perform the Pearson test by default</span></a>
 <a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">cor</span>(Sample1, Sample2)</a></code></pre></div>
-<pre><code>## [1] -0.1152129</code></pre>
+<pre><code>## [1] 0.07897806</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1152129</code></pre>
+<pre><code>## [1] 0.07897806</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.167443</code></pre>
+<pre><code>## [1] 0.08196879</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1118367</code></pre>
+<pre><code>## [1] 0.04979592</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">cor.test</span>(Sample1, Sample2)</a></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  Sample1 and Sample2
-## t = -0.80357, df = 48, p-value = 0.4256
+## t = 0.54889, df = 48, p-value = 0.5856
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3813316  0.1685397
+##  -0.2038510  0.3496395
 ## sample estimates:
 ##        cor 
-## -0.1152129</code></pre>
+## 0.07897806</code></pre>
 </div>
 <div id="t-test" class="section level2">
 <h2>t-test</h2>
@@ -665,13 +673,13 @@ div.tocify {
 ##  One Sample t-test
 ## 
 ## data:  Sample
-## t = -1.1129, df = 49, p-value = 0.2712
+## t = -1.7029, df = 49, p-value = 0.09493
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -2.3712655  0.6809198
+##  -2.6352358  0.2177051
 ## sample estimates:
-##  mean of x 
-## -0.8451728</code></pre>
+## mean of x 
+## -1.208765</code></pre>
 <p>Two-sample t-test is almost the same as one-sample t-Test, but now the <em>null hypothesis</em> changes. Let’s generate two random samples, both with a size of <code>n = 50</code> from the <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span> distribution, and use t-test to check whether the means are sigificantly different.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
@@ -681,19 +689,19 @@ div.tocify {
 ##  Welch Two Sample t-test
 ## 
 ## data:  Sample1 and Sample2
-## t = -0.57992, df = 94.814, p-value = 0.5633
+## t = 2.2239, df = 93.882, p-value = 0.02855
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -2.446070  1.340106
+##  0.2152126 3.8012487
 ## sample estimates:
 ##  mean of x  mean of y 
-## -0.9101922 -0.3572104</code></pre>
+##  1.6153929 -0.3928378</code></pre>
 <p>You can use <code>t.test()</code> to test independent or paired samples, use <code>?</code> to see more.</p>
 </div>
 </div>
 <div id="simple-linear-regression" class="section level1">
 <h1>Simple linear regression</h1>
-<p>This is most used model in all fields - simple but powerful. We first fit the model using <code>lm()</code> then use <code>summary()</code> to view the results in greater detail.</p>
+<p>This is the most used statistical model in all fields - simple but powerful. We first fit the model using <code>lm()</code> then use <code>summary()</code> to view the results in greater detail.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb46-2" data-line-number="2">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb46-3" data-line-number="3">b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
@@ -708,26 +716,26 @@ div.tocify {
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -8.5142 -3.3885  0.1437  2.5465 12.6029 
+## -14.663  -4.046  -0.635   4.545  16.971 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   0.9666     0.6963   1.388    0.172    
-## x             0.9510     0.1488   6.393 6.27e-08 ***
+## (Intercept)   1.0897     1.0220   1.066    0.292    
+## x             1.1242     0.1938   5.802 5.03e-07 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 4.918 on 48 degrees of freedom
-## Multiple R-squared:  0.4599, Adjusted R-squared:  0.4486 
-## F-statistic: 40.87 on 1 and 48 DF,  p-value: 6.275e-08</code></pre>
+## Residual standard error: 6.955 on 48 degrees of freedom
+## Multiple R-squared:  0.4122, Adjusted R-squared:    0.4 
+## F-statistic: 33.66 on 1 and 48 DF,  p-value: 5.028e-07</code></pre>
 <p>You can extract the regression information directly with the <code>names()</code> function:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(fit))</a></code></pre></div>
 <pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot;  &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;     &quot;adj.r.squared&quot;
 ## [10] &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">summary</span>(fit)<span class="op">$</span>coefficients</a></code></pre></div>
-<pre><code>##              Estimate Std. Error  t value     Pr(&gt;|t|)
-## (Intercept) 0.9665895  0.6963395 1.388101 1.715158e-01
-## x           0.9510254  0.1487592 6.393052 6.274540e-08</code></pre>
+<pre><code>##             Estimate Std. Error  t value     Pr(&gt;|t|)
+## (Intercept) 1.089745  1.0219934 1.066293 2.916252e-01
+## x           1.124233  0.1937741 5.801775 5.027541e-07</code></pre>
 <p>As you can see, the <code>names()</code> function tells us what information is available, and then we use the <code>$</code> operator and coefficients to extract the information we are interested in.</p>
 <p>We can plot the regression line by:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</a>
@@ -767,6 +775,7 @@ div.tocify {
 <li><p><a href="https://daviddalpiaz.github.io/appliedstats/applied_statistics.pdf">Applied Statistics with R</a></p></li>
 <li><p><a href="https://bookdown.org/mikemahoney218/LectureBook/basic-statistics-using-r.html">Introduction to Data Exploration and Analysis with R</a></p></li>
 <li><p><a href="https://r-statistics.co/">r-statistics</a></p></li>
+<li><p><a href="https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf">simpleR – Using R for Introductory Statistics</a></p></li>
 </ul>
 </div>
 

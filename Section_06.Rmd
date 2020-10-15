@@ -16,7 +16,9 @@ output:
 
 ***
 
-# Summary Statistics
+**Question:** What will you do when get a new dataset before  analyzing it?
+
+# Quick summaries
 
 R has built-in functions for a large number of summary statistics. For numeric variables, we can summarize data with the center and spread. We have covered many of the summary functions, make sure you understand what the following functions return: `mean()`, `median()`, `range()`, `max()`, `min()`, `sd()`, `var()`, `IQR()`, `summary()`. Pay attention to data sets containing `NA` values.
 
@@ -69,6 +71,7 @@ hist(Month_CO2,
      border = "red")
 box(lwd=2,col="green")
 ```
+
 By default R will attempt to intelligently guess a good number of `breaks`, but as we can see here,
 it is sometimes useful to modify this yourself.
 
@@ -107,6 +110,8 @@ boxplot(co2_new ~ month, data=Keeling_Data_tbl)
 
 Here we used the `boxplot()` command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The R syntax `co2_new ~ month, data = Keeling_Data_tbl` reads “Plot the `co2_new` variable against the `month` variable using the `Keeling_Data_tbl` dataset.” We see the use of a `~` (which specifies a formula) and also a `data = argument`. This will be a syntax that is common to many functions we will use later.
 
+Again, `boxplot()` has a number of additional arguments which have the ability to make our plot more visually appealing.
+
 ```{r}
 boxplot(co2_new ~ month, data=Keeling_Data_tbl,
 xlab = "Month",
@@ -117,11 +122,9 @@ col = "orange",
 border = "darkgreen")
 ```
 
-Again, `boxplot()` has a number of additional arguments which have the ability to make our plot more visually appealing.
-
 ## Scatterplots
 
-Lastly, to visualize the relationship between two numeric variables, we will use a scatterplot. This can be done with the `plot()` function and the `~` syntax we just used with a boxplot. (The function plot() can also be used more generally; see the documentation for details.)
+Lastly, to visualize the relationship between two numeric variables, we will use a scatterplot. This can be done with the `plot()` function and the `~` syntax we just used with a boxplot. (The function `plot()` can also be used more generally; see the documentation for details.)
 
 ```{r}
 plot(co2_new ~ year, data=Keeling_Data_tbl)
@@ -150,7 +153,8 @@ We typically want to know one of four things:
 
 R has functions for obtaining density, distribution, quantile and random values.
 
-The general naming structure of the relevant R functions is:
+The general naming structure of the relevant R functions is: 
+
 * `dname` calculates density (pdf) at input x.
 * `pname` calculates distribution (cdf) at input x.
 * `qname` calculates the quantile at an input probability.
@@ -233,7 +237,7 @@ You can use `t.test()` to test independent or paired samples, use `?` to see mor
 
 # Simple linear regression
 
-This is most used model in all fields - simple but powerful. We first fit the model using `lm()` then use `summary()` to view the results in greater detail.
+This is the most used statistical model in all fields - simple but powerful. We first fit the model using `lm()` then use `summary()` to view the results in greater detail.
 
 ```{r}
 x <- rnorm(n = 50, mean = 0, sd = 5)
@@ -300,3 +304,5 @@ Can you demonstrate the two statements using R?
 * [Introduction to Data Exploration and Analysis with R](https://bookdown.org/mikemahoney218/LectureBook/basic-statistics-using-r.html)
 
 * [r-statistics](https://r-statistics.co/)
+
+* [simpleR – Using R for Introductory Statistics](https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf)
