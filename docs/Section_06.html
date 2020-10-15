@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 06 Statistical sleuth: Basics</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Computing and Programming for Environmental Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="Assignment_02.html">Assignment 02</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Section 06 Statistical sleuth: Basics</h1>
+
+</div>
+
+
+<blockquote>
+<p>“Statistics is the grammar of science.” - Karl Pearson</p>
+</blockquote>
+<hr />
+<p><em>The notes below are modified from the freely available online book <a href="https://daviddalpiaz.github.io/appliedstats/applied_statistics.pdf">Applied Statistics with R</a>.</em></p>
+<hr />
+<div id="summary-statistics" class="section level1">
+<h1>Summary Statistics</h1>
+<p>R has built in functions for a large number of summary statistics. For numeric variables, we can summarize data with the center and spread. We have covered many of the summary functions, make sure you understand what the following functions return: <code>mean()</code>, <code>median()</code>, <code>range()</code>, <code>max()</code>, <code>min()</code>, <code>sd()</code>, <code>var()</code>, <code>IQR()</code>, <code>summary()</code>. Pay attention to data sets containing <code>NA</code> values.</p>
+<p>Recall the <code>Keeling_Data</code>, call the above functions:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">Keeling_Data     &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">Keeling_Data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(Keeling_Data)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># Add a new column to the original tibble</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">Keeling_Data_tbl &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># Notice we use pull() to get a vector from a tibble</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">Month_CO2 &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="st">  </span><span class="kw">pull</span>(co2_new)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co"># Summary and descriptive statistics</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw">mean</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>## [1] 355.6515</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">median</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>## [1] 352.98</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">range</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>## [1] 313.20 417.07</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">sd</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>## [1] 28.74672</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">var</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>## [1] 826.3739</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">IQR</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>## [1] 49.4675</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">summary</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   313.2   329.4   353.0   355.7   378.8   417.1       7</code></pre>
+<hr />
+</div>
+<div id="quick-plots" class="section level1">
+<h1>Quick plots</h1>
+<p>Now we have some data to work with, and we have learned about the data at the most basic level, our next tasks is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis. We will look at four methods of visualizing data.</p>
+<div id="histograms" class="section level2">
+<h2>Histograms</h2>
+<p>When visualizing a single numerical variable, a histogram will be our go-to tool, which can be created in R using the <code>hist()</code> function.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">hist</span>(Month_CO2)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The histogram function has a number of parameters which can be changed to make our plot look much nicer. Use the <code>?</code> operator to read the documentation for the <code>hist()</code> to see a full list of these parameters.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">hist</span>(Month_CO2,</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">     <span class="dt">xlab =</span> <span class="st">&quot;Monthly CO2 mixing ratios (ppm)&quot;</span>,</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">     <span class="dt">main =</span> <span class="st">&quot;Histogram of Monthly CO2&quot;</span>,</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">     <span class="dt">breaks =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">     <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>,</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">     <span class="dt">border =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-3-1.png" width="672" /> By default R will attempt to intelligently guess a good number of <code>breaks</code>, but as we can see here, it is sometimes useful to modify this yourself.</p>
+</div>
+<div id="barplots" class="section level2">
+<h2>Barplots</h2>
+<p>Somewhat similar to a histogram, a barplot can provide a visual summary of a <strong>categorical variable</strong>, or a numeric variable with a finite number of values, like a ranking from 1 to 10.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">barplot</span>(<span class="kw">table</span>(Keeling_Data_tbl<span class="op">$</span>month),</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;Frequency&quot;</span>,</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;Number of observations&quot;</span>,</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>,</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="dt">border =</span> <span class="st">&quot;darkorange&quot;</span>)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="boxplots" class="section level2">
+<h2>Boxplots</h2>
+<p>To visualize the relationship between a numerical and categorical variable, we will use a boxplot. In the <code>Keeling_Data_tbl</code> dataset, the <code>month</code> is a categorical variable. First note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in R, we use the <code>boxplot()</code> function.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">boxplot</span>(Month_CO2)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Or try plot the raw data:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">boxplot</span>(Keeling_Data<span class="op">$</span>co2)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>However, more often we will use boxplots to compare a numerical variable for different values of a categorical variable.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Here we used the <code>boxplot()</code> command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The R syntax <code>co2_new ~ month, data = Keeling_Data_tbl</code> reads “Plot the <code>co2_new</code> variable against the <code>month</code> variable using the <code>Keeling_Data_tbl</code> dataset.” We see the use of a <code>~</code> (which specifies a formula) and also a <code>data = argument</code>. This will be a syntax that is common to many functions we will use later.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl,</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;Monthly CO2&quot;</span>,</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="dt">cex =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>,</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="dt">border =</span> <span class="st">&quot;darkgreen&quot;</span>)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Again, <code>boxplot()</code> has a number of additional arguments which have the ability to make our plot more visually appealing.</p>
+</div>
+<div id="scatterplots" class="section level2">
+<h2>Scatterplots</h2>
+<p>Lastly, to visualize the relationship between two numeric variables we will use a scatterplot. This can be done with the <code>plot()</code> function and the <code>~</code> syntax we just used with a boxplot. (The function plot() can also be used more generally; see the documentation for details.)</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl,</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>,</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;CO2 vs Year&quot;</span>,</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>,</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="dt">cex =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="dt">col =</span> <span class="st">&quot;navy&quot;</span>)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+</div>
+<div id="distributions-in-r" class="section level1">
+<h1>Distributions in R</h1>
+<p>When working with different statistical distributions, we often want to make probabilistic statements based on the distribution.</p>
+<p>We typically want to know one of four things:</p>
+<ul>
+<li>The density (pdf) at a particular value.</li>
+<li>The distribution (cdf) at a particular value.</li>
+<li>The quantile value corresponding to a particular probability.</li>
+<li>A random draw of values from a particular distribution.</li>
+</ul>
+<p>R has functions for obtaining density, distribution, quantile and random values.</p>
+<p>The general naming structure of the relevant R functions is: * <code>dname</code> calculates density (pdf) at input x. * <code>pname</code> calculates distribution (cdf) at input x. * <code>qname</code> calculates the quantile at an input probability. * <code>rname</code> generates a random draw from a particular distribution.</p>
+<p>Note that <code>name</code> represents the <code>name</code> of the given distribution. For example, consider a random variable <code>X</code> which is <span class="math inline">\(N(\mu=2, \sigma^{2}=25)\)</span>. To calculate the value of the pdf at <code>x = 3</code>, that is, the height of the curve at <code>x = 3</code>, use:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 0.07820854</code></pre>
+<p>To calculate the value of the cdf at <code>x = 3</code>, that is, <span class="math inline">\(P(X&lt;=3)\)</span>, the probability that <code>X</code> is less than or equal to 3, use:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 0.5792597</code></pre>
+<p>Or, to calculate the quantile for probability 0.975, use:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 11.79982</code></pre>
+<p>Lastly, to generate a random sample of size <code>n = 5</code>, use:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1]  6.7772778 -2.1433214 -0.2700056  3.5402565  7.8637813</code></pre>
+<p>These functions exist for many other distributions, including but not limited to:</p>
+<ul>
+<li><code>binom</code> for <code>Binomial</code> distribution</li>
+<li><code>t</code> for <code>t</code> distribution</li>
+<li><code>pois</code> for <code>Poisson</code> distribution</li>
+<li><code>f</code> for <code>F</code> distribution</li>
+<li><code>chisq</code> for <code>Chi-Squared</code> distribution</li>
+</ul>
+<p>Notice each distribution will have its own set of parameters which need to be passed to the functions as arguments.</p>
+</div>
+<div id="models-and-tests" class="section level1">
+<h1>Models and tests</h1>
+<div id="correlation" class="section level2">
+<h2>Correlation</h2>
+<p>Correlation describes how closely related two variables are. <em>Pearson’s test</em> assumes your data is normally distributed and measures linear correlation. <em>Spearman’s test</em> does not assume normality and measures non-linear correlation. And <em>Kendall’s test</em> also does not assume normality and measures non-linear correlation, and is a more robust test - but it is harder to compute by hand, and as such is less commonly seen.</p>
+<p>In R, <code>cor(Vector1, Vector2)</code> provides correlation coefficients, while <code>cor.test(Vector1, Vector2)</code> performs the statistical test, giving test statistics, p values, and other outputs. Both perform the Pearson test by default, but can be changed by providing the argument <code>method = &quot;spearman&quot;</code> or <code>method = &quot;kendall&quot;</code>.</p>
+<p>Let’s generate two random samples, both with a size of <code>n = 50</code> from the <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span> distribution, and use different tests:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co"># perform the Pearson test by default</span></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">cor</span>(Sample1, Sample2)</a></code></pre></div>
+<pre><code>## [1] 0.1119955</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0.1119955</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0.02348139</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0.02693878</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">cor.test</span>(Sample1, Sample2)</a></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  Sample1 and Sample2
+## t = 0.78084, df = 48, p-value = 0.4387
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.1717049  0.3785427
+## sample estimates:
+##       cor 
+## 0.1119955</code></pre>
+</div>
+<div id="t-test" class="section level2">
+<h2>t-test</h2>
+<p>T-test is a method of comparing the mean(s). For one sample t-test, the <em>null hypothesis</em> is the sample mean equals to a fixed value. For example, let’s generate a random sample of size <code>n = 50</code> from <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span>, and use t-test to check whether the mean is significantlly different from zero.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">Sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">t.test</span>(Sample, <span class="dt">mu=</span><span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  Sample
+## t = 0.0055656, df = 49, p-value = 0.9956
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -1.432642  1.440600
+## sample estimates:
+##   mean of x 
+## 0.003978757</code></pre>
+<p>Two sample t-test is almost the same as one sample t-Test, but now the <em>null hypothesis</em> changes. Let’s generate two random samples, both with a size of <code>n = 50</code> from the <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span> distribution, and use t-test to check whether the means are significantlly different.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="kw">t.test</span>(Sample1, Sample2)</a></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Sample1 and Sample2
+## t = 0.021621, df = 97.667, p-value = 0.9828
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.023854  2.068439
+## sample estimates:
+##  mean of x  mean of y 
+## -0.9571416 -0.9794341</code></pre>
+<p>You can use <code>t.test()</code> to test independent or paired samples, use <code>?</code> to see more.</p>
+</div>
+</div>
+<div id="simple-linear-regression" class="section level1">
+<h1>Simple linear regression</h1>
+<p>This is most used model in all fields - simple but powerful. We first fit the model using <code>lm()</code> then use <code>summary()</code> to view the results in greater detail.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="kw">plot</span>(x,y)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">summary</span>(fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -16.719  -4.398   1.461   4.175  16.046 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.9226     0.9374   0.984     0.33    
+## x             1.1245     0.1833   6.135 1.56e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.597 on 48 degrees of freedom
+## Multiple R-squared:  0.4395, Adjusted R-squared:  0.4279 
+## F-statistic: 37.64 on 1 and 48 DF,  p-value: 1.557e-07</code></pre>
+<p>You can extract the regression information directly with the <code>names()</code> function:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(fit))</a></code></pre></div>
+<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot;  &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;     &quot;adj.r.squared&quot;
+## [10] &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">summary</span>(fit)<span class="op">$</span>coefficients</a></code></pre></div>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) 0.9225507  0.9374348 0.9841226 3.299900e-01
+## x           1.1244778  0.1832799 6.1353026 1.557432e-07</code></pre>
+<p>As you can see, the <code>names()</code> function tells us what information is available, and then we use the <code>$</code> operator and coefficients to extract the information we are interested in.</p>
+<p>We can plot the regression line by:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;y vs x&quot;</span>,</a>
+<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="dt">pch =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb53-6" data-line-number="6"><span class="dt">cex =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb53-7" data-line-number="7"><span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
+<a class="sourceLine" id="cb53-8" data-line-number="8"><span class="kw">abline</span>(fit, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb53-9" data-line-number="9"><span class="kw">points</span>(<span class="kw">mean</span>(x), <span class="kw">mean</span>(y), <span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>, <span class="dt">cex =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="Section_06_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Please go over the notes once again, make sure you understand the scripts.</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>2.1 Use the two sample t-test to determine how does the mean CO<sub>2</sub> changes from 1958-1990 to 1991-2020. Report the mean change and 95% confident intervals.</p>
+<p>2.2 Use the simple linear regression to compute the annual increase rate of CO<sub>2</sub>. Report the mean rate and 95% confident intervals.</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
+<p>One of the most important theorems in all of statistics is called the <em>Central Limit Theorem</em> or the <em>Law of Large Numbers</em>.</p>
+<p>It states that given a sufficiently large sample size from a population with a finite level of variance, the mean of all samples from the same population will be approximately equal to the mean of the original population.</p>
+<p>Furthermore, as you increase the number of samples and the sample size the distribution of all of the sample means will approximate a normal distribution even if the original variables themselves are not normally distributed.</p>
+<p>Can you demonstrate the two statements using R?</p>
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li><p><a href="https://daviddalpiaz.github.io/appliedstats/applied_statistics.pdf">Applied Statistics with R</a></p></li>
+<li><p><a href="https://bookdown.org/mikemahoney218/LectureBook/basic-statistics-using-r.html">Introduction to Data Exploration and Analysis with R</a></p></li>
+<li><p><a href="https://r-statistics.co/">r-statistics</a></p></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
