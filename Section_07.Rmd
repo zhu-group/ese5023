@@ -12,7 +12,7 @@ output:
 
 # ANOVA
 
-Analysis of Variance (ANOVA) is a statistical technique, commonly used to studying differences between two or more group means. ANOVA test is centred on the different sources of variation in a typical variable. ANOVA in R primarily provides evidence of the existence of the mean equality between the groups. This statistical method is an extension of the t-test. It is used in a situation where the factor variable has more than one group. [^1]
+Analysis of Variance (ANOVA) is a statistical technique, commonly used to study differences between two or more group means. ANOVA test is centred on the different sources of variation in a typical variable. ANOVA in R primarily provides evidence of the existence of the mean equality between the groups. This statistical method is an extension of the t-test. It is used in a situation where the factor variable has more than one group. [^1]
 
 [^1]: [R ANOVA Tutorial: One way & Two way](https://www.guru99.com/r-anova-tutorial.html)
 
@@ -25,9 +25,9 @@ To clarify if the data comes from the same population, you can perform a **one-w
 Hypothesis in one-way ANOVA test:
 
 * Null hypothesis (H0): **The means between groups are identical**
-* Altantive hypothesis: **At least, the mean of one group is different**
+* Alternative hypothesis: **At least, the mean of one group is different**
 
-In other words, the H0 hypothesis implies that there is **not enough evidence** to prove the mean of the group (factor) are different from another. This test is similar to the *t-test*, although ANOVA test is recommended in situation with more than 2 groups. 
+In other words, the H0 hypothesis implies that there is **not enough evidence** to prove the mean of the group (factor) are different from another. This test is similar to the *t-test*, although ANOVA test is recommended in a situation with more than 2 groups. 
 
 Let's use the [crop dataset](https://zhu-group.github.io/ese5023/download/crop.data.csv) to implement the one-way ANOVA test. The dataset contains 96 rows and 4 variables: 
 
@@ -58,8 +58,8 @@ glimpse(crop_data_tbl)
 
 Our objective is to test the following assumption:
 
-* Null: There is no difference in crop yeild average between fertilizer group
-* Altantive: The crop yeild average is different for at least one fertilizer group.
+* Null: There is no difference in crop yield average between fertilizer group
+* Alternative: The crop yield average is different for at least one fertilizer group.
 
 In other words, we want to know if there is a statistical difference between the mean of the crop yeild according to the type of fertilizer. 
 
@@ -110,7 +110,7 @@ TukeyHSD(anova_one_way)
 A two-way ANOVA test adds another group variable to the formula. It is identical to the one-way ANOVA test. Hypothesis in two-way ANOVA test:
 
 * Null: The means are equal for both variables (i.e., factor variable)
-* Altantive: The means are different for both variables
+* Alternative: The means are different for both variables
 
 Let's add `block` variable to the model. This variable indicates the blocking method used in the land. Now we are interested to see if there is a statistical dependence between the fertilizer type (`fertilizer`) and blocking method (`block`).
 
@@ -147,7 +147,7 @@ linear model:
 
 $$y_{i}  = \beta_{0} + \beta_{1}x_{i1} + \beta_{2}x_{i2} + \beta_{3}x_{i3} + \epsilon_{i},  i = 1,2,3,...,n$$
 
-where $\epsilon_{i} ~ N(0, \sigma^{2})$.  In this notation we will define:
+where $\epsilon_{i} ~ N(0, \sigma^{2})$.  In this notation, we will define:
 
 * $x_{i1}$ as the solar radiation (`Solar.R`) of the *i*th day.
 * $x_{i2}$ as the wind speed (`Wind`) of the *i*th day.
@@ -155,7 +155,7 @@ where $\epsilon_{i} ~ N(0, \sigma^{2})$.  In this notation we will define:
 
 The data points ($x_{i1}, x_{i2}, x_{i3}, y_{i}$) now exist in 4-dimensional space, so instead of fitting a line as we did in the simple linear regression model to the data, we will fit a 4-dimensional space. 
 
-Before the linear regression model can be applied, one must verify multiple factors and make sure assumptions are met. Most of all one must make sure *linearity* exists between the variables in the dataset. One of the fastest ways to check the linearity is by using scatter plots.
+Before the linear regression model can be applied, one must verify multiple factors and make sure assumptions are met. Most of all, one must make sure *linearity* exists between the variables in the dataset. One of the fastest ways to check the linearity is by using scatter plots.
 
 ```{r}
 # plotting the data to determine the linearity
@@ -172,14 +172,14 @@ coef(model)
 ```
 
 $$y_{i}  = -64.34 + -3.33x_{i1} + 1.65x_{i2} + 0.060x_{i3}$$
-Here we have fitted our model using `lm()`, however we have introduced a new syntactical element. The formula `Ozone ~ Wind + Temp + Solar.R` reads: “model the response variable `Ozone` as a linear function of `Wind`, `Temp`, and `Solar.R`”. That is, it will estimate an intercept, as well as slope coefficients for `Wind`, `Temp`, and `Solar.R`. We then extract these as we have done before using `coef()`.
+Here we have fitted our model using `lm()`, however, we have introduced a new syntactical element. The formula `Ozone ~ Wind + Temp + Solar.R` reads: “model the response variable `Ozone` as a linear function of `Wind`, `Temp`, and `Solar.R`”. That is, it will estimate an intercept, as well as slope coefficients for `Wind`, `Temp`, and `Solar.R`. We then extract these as we have done before using `coef()`.
 
-The model can be futher explored with the `summary()` function:
+The model can be further explored with the `summary()` function:
 ```{r}
 summary(model)
 ```
 
-In the above model, we assume that all the predictor variables are **independent** from each other. However, such assumption is falwed as we can see from the Matrix Scatterplot that `Temp` corrlates with `Wind`.
+In the above model, we assume that all the predictor variables are **independent** of each other. However, such assumption is falwed as we can see from the Matrix Scatterplot that `Temp` corrlates with `Wind`.
 
 ```{r}
 cor(airquality$Wind, airquality$Temp)
@@ -232,8 +232,9 @@ summary(fit)
 
 ```
 
-You can see the high $R^{2}$ doesn't make any senses, as the linear model has no any valid observations.  
+You can see the high $R^{2}$ doesn't make any senses, as the linear model has no  valid observations.  
 
+***
 
 # Variable Selection 
 
@@ -249,7 +250,7 @@ str(Boston)
 
 The original data are 506 observations on 14 variables, `medv` being the response variable *y*.
 
-We usually splitting our data to training and testing samples. In this case, we sample 90% of the original data and use it as the *training set*. The remaining 10% is used as *test set*. The regression model will be built on the training set and future performance of your model will be evaluated with the test set.
+We usually split our data to training and testing samples. In this case, we sample 90% of the original data and use it as the *training set*. The remaining 10% is used as *test set*. The regression model will be built on the training set, and future performance of your model will be evaluated with the test set.
 
 ```{r}
 sample_index <- sample(nrow(Boston),nrow(Boston)*0.90)
@@ -257,7 +258,7 @@ Boston_train <- Boston[sample_index,]
 Boston_test  <- Boston[-sample_index,]
 ```
 
-What we want to do next is to build a **best** model with training data. Let's begin with including all *x* varables in the model:
+What we want to do next is to build a **best** model with training data. Let's begin with including all *x* variables in the model:
 
 ```{r, eval=F}
 model_1 <- lm(medv~crim+zn+chas+nox+rm+dis+rad+tax+ptratio+black+lstat, data=Boston_train)
@@ -281,11 +282,11 @@ subset_result <- regsubsets(medv ~ ., data=Boston_train, nbest=2, nvmax = 14)
 plot(subset_result, scale="bic")
 ```
 
-Here `nbest` is number of subsets of each size to record, we use `2` so that each time R compares `2` varibales. `nvmax` is the maximum size of subsets to examine, this is set to `14` to conisder all the varibales in the `Boston_train` dataset.
+Here `nbest` is the number of subsets of each size to record, and we use `2` so that each time R compares `2` variables. `nvmax` is the maximum size of subsets to examine; this is set to `14` to consider all the variables in the `Boston_train` dataset.
 
 Each row represents a model. Black indicates that a variable is included in the model, while white indicates that it is not. The argument `scale = ""` can be `Cp`, `adjr2`, `r2`, or `bic`.
 
-* AIC stands for (Akaike’s Information Criteria), a metric developped by the Japanese Statistician, Hirotugu Akaike, 1970. The basic idea of AIC is to penalize the inclusion of additional variables to a model. It adds a penalty that increases the error when including additional terms. **The lower the AIC, the better the model**. 
+* AIC stands for (Akaike’s Information Criteria), a metric developed by the Japanese Statistician, Hirotugu Akaike, 1970. The basic idea of AIC is to penalize the inclusion of additional variables to a model. It adds a penalty that increases the error when including additional terms. **The lower the AIC, the better the model**. 
 
 * AICc is a version of AIC corrected for small sample sizes.
 
@@ -293,7 +294,7 @@ Each row represents a model. Black indicates that a variable is included in the 
 
 * Mallows Cp: A variant of AIC developed by Colin Mallows.
 
-What is the problem with best subset regression? If there are *n* independent variables, the number of possible nonempty subsets is $2^{n}-1$. If you try a best subset regression with more than 50 variables, you might need to wait for your entire life to get the result.
+What is the problem with the best subset regression? If there are *n* independent variables, the number of possible nonempty subsets is $2^{n}-1$. If you try a best subset regression with more than 50 variables, you might need to wait for your entire life to get the result.
 
 ## Variable Selection Using AIC
 
@@ -303,7 +304,8 @@ To perform the forward/backward/stepwise regression in R, we need to define the 
 nullmodel=lm(medv ~ 1, data=Boston_train)
 fullmodel=lm(medv ~ ., data=Boston_train)
 ```
-nullmodel is the model with **no** varaible in it, while fullmodel is the model with **every** variable in it.
+
+The nullmodel is the model with **no** variable in it, while the fullmodel is the model with **every** variable in it.
 
 ```{r}
 # Backward Elimination
@@ -314,6 +316,8 @@ model_step_f <- step(nullmodel, scope=list(lower=nullmodel, upper=fullmodel), di
 model_step_s <- step(nullmodel, scope=list(lower=nullmodel, upper=fullmodel), direction='both')
 ```
 
+***
+
 # In-class exercises
 
 ## Exercise #1
@@ -322,7 +326,7 @@ Please go over the notes once again, make sure you understand the scripts.
 
 ## Exercise #2
 
-2.1 Using the crop yeild data, graphically check crop yeilds in different soil density (`density`) groups; and conduct a one-way ANOVA test to show whether there is difference in crop yeild average between soil density type (`density`) group.
+2.1 Using the crop yeild data, graphically check crop yeilds in different soil density (`density`) groups; and conduct a one-way ANOVA test to show whether there is a difference in crop yeild average between soil density type (`density`) group.
 
 2.2 Conduct a two-way ANOVA test to show whether changing the soil density type **or** the blocking method impact the crop yeilds. 
 
@@ -336,7 +340,9 @@ data(cpus)
 
 3.1 Fit a best subset regression between predictor variable `perf` and response variables `syct`, `mmin`, `mmax`, `cach`, `chmin`, `chmax`. Try `bic` and `adjr2` in as the `scale` argument.
 
-3.2 Using Forward, Backward, and Stepwise Regression method for variable selection.
+3.2 Try forward, backward, and stepwise regression method for variable selection. Compare your best models obtained by the three methods.
+
+***
 
 # Further reading
 
