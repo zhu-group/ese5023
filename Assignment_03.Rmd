@@ -1,0 +1,59 @@
+---
+title: "Assignment 03"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 10/23 19:00 **  
+**Due: 11/05 19:00 **  
+
+For problem set *i*, create a script named `PS3_i.R`. Write your results briefly in a report (`Report_PS3.pdf`). Upload your **R scripts** and **report** to the `ESE5023_Assignments` repository before the deadline.
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Late Submission:**   
+Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
+
+**Submitting your assignment:**  
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.  
+
+***
+
+# 1. Atmospheric lapse rate 
+
+The *lapse rate* is the rate at which temperature drops as you increase elevation. Some hardy students were interested in checking empirically if the lapse rate of 9.8 degrees C km^-1^ was accurate for their hiking. To investigate, they grabbed their thermometers and their Huawei wrist altimeters and found the following data on their hike.
+
+||1|2|3|4|5|6|7|8|
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+|Elevation (m)|180|305|381|488|549|640|762|883|
+|Temperature (degrees C)|13.3|12.2|13.3|10.0|8.3|9.4|8.3|7.2|
+
+**[10 points]** Draw a scatter plot with regression line, and investigate if the lapse rate is 9.8 degrees C km^-1^.
+
+***
+
+# 2. Wind speed in Shenzhen during the past 10 years
+
+In this problem set, we will examine how wind speed changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Read page `8`-`9` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the wind data. Explain how you filter the data in your report. Use functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+
+**[10 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed within the past 10 years? 
+
+***
+
+# 3. Revisit a data set
+
+Revisit the data set you used in [Problem 7](https://zhu-group.github.io/ese5023/Assignment_01.html#7_Explore_a_data_set) of the Assignment 01. Now use functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+
+**[10 points]** Reproduce the same time series you made previously in Assignment 01.  
