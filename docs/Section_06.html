@@ -621,7 +621,7 @@ div.tocify {
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n = 5</code>, use:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
-<pre><code>## [1]  3.570127 12.599286  2.114467  2.221722  9.586167</code></pre>
+<pre><code>## [1] -1.0987860  4.4250829 -0.9395398 13.2871041 -3.0946293</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <ul>
 <li><code>binom</code> for <code>Binomial</code> distribution</li>
@@ -644,25 +644,25 @@ div.tocify {
 <a class="sourceLine" id="cb32-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co"># perform the Pearson test by default</span></a>
 <a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">cor</span>(Sample1, Sample2)</a></code></pre></div>
-<pre><code>## [1] 0.008844222</code></pre>
+<pre><code>## [1] -0.1181969</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] 0.008844222</code></pre>
+<pre><code>## [1] -0.1181969</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.03942377</code></pre>
+<pre><code>## [1] -0.1140456</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.0155102</code></pre>
+<pre><code>## [1] -0.07428571</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">cor.test</span>(Sample1, Sample2)</a></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  Sample1 and Sample2
-## t = 0.061277, df = 48, p-value = 0.9514
+## t = -0.82467, df = 48, p-value = 0.4136
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.2701686  0.2864867
+##  -0.3839139  0.1655990
 ## sample estimates:
-##         cor 
-## 0.008844222</code></pre>
+##        cor 
+## -0.1181969</code></pre>
 </div>
 <div id="t-test" class="section level2">
 <h2>t-test</h2>
@@ -673,13 +673,13 @@ div.tocify {
 ##  One Sample t-test
 ## 
 ## data:  Sample
-## t = -1.78, df = 49, p-value = 0.08128
+## t = 0.023793, df = 49, p-value = 0.9811
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -2.5642018  0.1553399
+##  -1.245335  1.275178
 ## sample estimates:
 ## mean of x 
-## -1.204431</code></pre>
+## 0.0149215</code></pre>
 <p>Two-sample t-test is almost the same as one-sample t-Test, but now the <em>null hypothesis</em> changes. Let’s generate two random samples, both with a size of <code>n = 50</code> from the <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span> distribution, and use t-test to check whether the means are sigificantly different.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
@@ -689,13 +689,13 @@ div.tocify {
 ##  Welch Two Sample t-test
 ## 
 ## data:  Sample1 and Sample2
-## t = 0.07969, df = 95.453, p-value = 0.9367
+## t = -0.38017, df = 97.354, p-value = 0.7046
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -2.366221  2.564142
+##  -2.214112  1.502216
 ## sample estimates:
-##   mean of x   mean of y 
-## -0.05390733 -0.15286816</code></pre>
+##  mean of x  mean of y 
+## -0.4647220 -0.1087738</code></pre>
 <p>You can use <code>t.test()</code> to test independent or paired samples, use <code>?</code> to see more.</p>
 </div>
 </div>
@@ -715,27 +715,27 @@ div.tocify {
 ## lm(formula = y ~ x)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -8.3350 -2.8645 -0.0816  2.5487 13.0309 
+##      Min       1Q   Median       3Q      Max 
+## -11.2160  -3.4882  -0.8258   3.1498  12.0383 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -0.2677     0.6931  -0.386    0.701    
-## x             0.9496     0.1277   7.435 1.59e-09 ***
+## (Intercept)  -0.1199     0.7332  -0.164    0.871    
+## x             0.8779     0.1753   5.010  7.8e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 4.72 on 48 degrees of freedom
-## Multiple R-squared:  0.5353, Adjusted R-squared:  0.5256 
-## F-statistic: 55.29 on 1 and 48 DF,  p-value: 1.586e-09</code></pre>
+## Residual standard error: 5.163 on 48 degrees of freedom
+## Multiple R-squared:  0.3433, Adjusted R-squared:  0.3296 
+## F-statistic:  25.1 on 1 and 48 DF,  p-value: 7.804e-06</code></pre>
 <p>You can extract the regression information directly with the <code>names()</code> function:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(fit))</a></code></pre></div>
 <pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot;  &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;           
 ##  [8] &quot;r.squared&quot;     &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">summary</span>(fit)<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>##               Estimate Std. Error    t value     Pr(&gt;|t|)
-## (Intercept) -0.2677420  0.6930600 -0.3863187 7.009678e-01
-## x            0.9496188  0.1277154  7.4354269 1.586201e-09</code></pre>
+## (Intercept) -0.1198806  0.7332114 -0.1635007 8.708107e-01
+## x            0.8779249  0.1752501  5.0095532 7.803509e-06</code></pre>
 <p>As you can see, the <code>names()</code> function tells us what information is available, and then we use the <code>$</code> operator and coefficients to extract the information we are interested in.</p>
 <p>We can plot the regression line by:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</a>
