@@ -31,10 +31,10 @@ In other words, the H0 hypothesis implies that there is **not enough evidence** 
 
 Let's use the [crop dataset](https://zhu-group.github.io/ese5023/download/crop.data.csv) to implement the one-way ANOVA test. The dataset contains 96 rows and 4 variables: 
 
-* yield: Crop Yield 
-* density: Type of density used: factor level: 1 and 2
-* block: Type of block used: factor level: 1, 2, 3, and 4
-* fertilizer: Type of fertilizer used: factor level: 1, 2, and 3
+* `yield`: crop yield 
+* `density`: type of soil density: factor level: 1 and 2
+* `block`: blocking method used: factor level: 1, 2, 3, and 4
+* `fertilizer`: type of fertilizer used: factor level: 1, 2, and 3
 
 In R import the data:
 
@@ -58,8 +58,8 @@ glimpse(crop_data_tbl)
 
 Our objective is to test the following assumption:
 
-* Null: There is no difference in crop yield average between fertilizer group
-* Alternative: The crop yield average is different for at least one fertilizer group.
+* Null: There is **no difference** in crop yield average among fertilizer groups
+* Alternative: The crop yield average is different for **at least** one fertilizer group.
 
 In other words, we want to know if there is a statistical difference between the mean of the crop yeild according to the type of fertilizer. 
 
@@ -147,7 +147,7 @@ linear model:
 
 $$y_{i}  = \beta_{0} + \beta_{1}x_{i1} + \beta_{2}x_{i2} + \beta_{3}x_{i3} + \epsilon_{i},  i = 1,2,3,...,n$$
 
-where $\epsilon_{i} ~ N(0, \sigma^{2})$.  In this notation, we will define:
+where $\epsilon_{i}$ ~ $N(0, \sigma^{2})$.  In this notation, we will define:
 
 * $x_{i1}$ as the solar radiation (`Solar.R`) of the *i*th day.
 * $x_{i2}$ as the wind speed (`Wind`) of the *i*th day.

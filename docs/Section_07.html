@@ -502,10 +502,10 @@ div.tocify {
 <p>In other words, the H0 hypothesis implies that there is <strong>not enough evidence</strong> to prove the mean of the group (factor) are different from another. This test is similar to the <em>t-test</em>, although ANOVA test is recommended in a situation with more than 2 groups.</p>
 <p>Let’s use the <a href="https://zhu-group.github.io/ese5023/download/crop.data.csv">crop dataset</a> to implement the one-way ANOVA test. The dataset contains 96 rows and 4 variables:</p>
 <ul>
-<li>yield: Crop Yield</li>
-<li>density: Type of density used: factor level: 1 and 2</li>
-<li>block: Type of block used: factor level: 1, 2, 3, and 4</li>
-<li>fertilizer: Type of fertilizer used: factor level: 1, 2, and 3</li>
+<li><code>yield</code>: crop yield</li>
+<li><code>density</code>: type of soil density: factor level: 1 and 2</li>
+<li><code>block</code>: blocking method used: factor level: 1, 2, 3, and 4</li>
+<li><code>fertilizer</code>: type of fertilizer used: factor level: 1, 2, and 3</li>
 </ul>
 <p>In R import the data:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
@@ -531,8 +531,8 @@ div.tocify {
 ## $ yield      &lt;dbl&gt; 177.2287, 177.5500, 176.4085, 177.7036, 177.1255, 176.7783, 176.7463, 177.0612, 176.2749, 177.9672, 176.6013, 177…</code></pre>
 <p>Our objective is to test the following assumption:</p>
 <ul>
-<li>Null: There is no difference in crop yield average between fertilizer group</li>
-<li>Alternative: The crop yield average is different for at least one fertilizer group.</li>
+<li>Null: There is <strong>no difference</strong> in crop yield average among fertilizer groups</li>
+<li>Alternative: The crop yield average is different for <strong>at least</strong> one fertilizer group.</li>
 </ul>
 <p>In other words, we want to know if there is a statistical difference between the mean of the crop yeild according to the type of fertilizer.</p>
 <p>First, we can check the level of the fertilizer with the following code:</p>
@@ -620,7 +620,7 @@ div.tocify {
 ##  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
 <p>Now we will focus on using three variables, <code>Solar.R</code>, <code>Wind</code>, and <code>Temp</code>, as predictor variables. That is, we would like to model the ozone contraction as a function of solar radiation, wind speed, and temperature. To do so, we will define the following linear model:</p>
 <p><span class="math display">\[y_{i}  = \beta_{0} + \beta_{1}x_{i1} + \beta_{2}x_{i2} + \beta_{3}x_{i3} + \epsilon_{i},  i = 1,2,3,...,n\]</span></p>
-<p>where <span class="math inline">\(\epsilon_{i} ~ N(0, \sigma^{2})\)</span>. In this notation, we will define:</p>
+<p>where <span class="math inline">\(\epsilon_{i}\)</span> ~ <span class="math inline">\(N(0, \sigma^{2})\)</span>. In this notation, we will define:</p>
 <ul>
 <li><span class="math inline">\(x_{i1}\)</span> as the solar radiation (<code>Solar.R</code>) of the <em>i</em>th day.</li>
 <li><span class="math inline">\(x_{i2}\)</span> as the wind speed (<code>Wind</code>) of the <em>i</em>th day.</li>
@@ -725,28 +725,26 @@ div.tocify {
 ## 
 ## Residuals:
 ##        1        2        3        4        6        7        8        9       11       12       13       14       15 
-##   8.0991   8.3335  -0.1681  -3.9441   2.3413  -1.2933 -12.4524  -3.2114  -1.8256  -1.6299   4.7932  -2.8865   3.8444 
+##   2.6798   6.2709  -0.5001   5.0636   2.4127  -3.4735  -0.8717   0.1626 -12.7715  -1.0615  -7.0466   1.2494   7.8860 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)  
-## (Intercept)  21.4470     6.3687   3.368    0.078 .
-## Fake1         3.7073    11.3416   0.327    0.775  
-## Fake2        -8.4122     7.3434  -1.146    0.371  
-## Fake3         1.0957     8.2940   0.132    0.907  
-## Fake4         2.4239     6.7742   0.358    0.755  
-## Fake5        -0.1749     9.2528  -0.019    0.987  
-## Fake6       -12.7323    13.1754  -0.966    0.436  
-## Fake7        22.1929    17.4413   1.272    0.331  
-## Fake8        -1.1252     7.0479  -0.160    0.888  
-## Fake9         8.0511     6.6747   1.206    0.351  
-## Fake10       -2.9856     5.8629  -0.509    0.661  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  28.78137   12.41102   2.319    0.146
+## Fake1       -16.46382   17.49065  -0.941    0.446
+## Fake2        -9.20611    9.92985  -0.927    0.452
+## Fake3        -4.87838   11.72844  -0.416    0.718
+## Fake4         3.04715   22.67982   0.134    0.905
+## Fake5         0.24600    9.40277   0.026    0.982
+## Fake6        -9.24685   11.24387  -0.822    0.497
+## Fake7        11.13206   12.86777   0.865    0.478
+## Fake8        -0.08783   16.41710  -0.005    0.996
+## Fake9         8.64033   11.35091   0.761    0.526
+## Fake10       -2.46053    7.16961  -0.343    0.764
 ## 
-## Residual standard error: 13.7 on 2 degrees of freedom
+## Residual standard error: 13.58 on 2 degrees of freedom
 ##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.7075, Adjusted R-squared:  -0.7551 
-## F-statistic: 0.4837 on 10 and 2 DF,  p-value: 0.8228</code></pre>
+## Multiple R-squared:  0.7126, Adjusted R-squared:  -0.7246 
+## F-statistic: 0.4958 on 10 and 2 DF,  p-value: 0.8163</code></pre>
 <p>You can see the high <span class="math inline">\(R^{2}\)</span> doesn’t make any senses, as the linear model has no valid observations.</p>
 <hr />
 </div>
@@ -792,30 +790,30 @@ div.tocify {
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -10.6246  -2.8358  -0.6039   1.8810  26.1851 
+## -16.4825  -2.6670  -0.5672   1.6570  25.8316 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  34.495195   5.407817   6.379 4.52e-10 ***
-## crim         -0.106918   0.032980  -3.242 0.001277 ** 
-## zn            0.047927   0.014345   3.341 0.000906 ***
-## indus         0.017617   0.066484   0.265 0.791142    
-## chas          2.919706   0.904459   3.228 0.001339 ** 
-## nox         -17.254874   4.006517  -4.307 2.04e-05 ***
-## rm            3.974875   0.442827   8.976  &lt; 2e-16 ***
-## age           0.007448   0.013935   0.535 0.593260    
-## dis          -1.398150   0.209926  -6.660 8.16e-11 ***
-## rad           0.282187   0.069054   4.086 5.20e-05 ***
-## tax          -0.010619   0.003994  -2.659 0.008128 ** 
-## ptratio      -0.974217   0.136349  -7.145 3.75e-12 ***
-## black         0.009317   0.002825   3.298 0.001051 ** 
-## lstat        -0.535022   0.053624  -9.977  &lt; 2e-16 ***
+## (Intercept)  31.556924   5.348009   5.901 7.22e-09 ***
+## crim         -0.106777   0.033309  -3.206  0.00145 ** 
+## zn            0.041058   0.014225   2.886  0.00409 ** 
+## indus         0.058484   0.065765   0.889  0.37434    
+## chas          2.724246   0.865563   3.147  0.00176 ** 
+## nox         -16.031072   3.905465  -4.105 4.82e-05 ***
+## rm            4.326376   0.440961   9.811  &lt; 2e-16 ***
+## age          -0.008316   0.013489  -0.616  0.53791    
+## dis          -1.339314   0.208946  -6.410 3.75e-10 ***
+## rad           0.291017   0.068496   4.249 2.62e-05 ***
+## tax          -0.012981   0.003947  -3.289  0.00109 ** 
+## ptratio      -0.917305   0.135476  -6.771 4.10e-11 ***
+## black         0.008496   0.002775   3.061  0.00234 ** 
+## lstat        -0.499643   0.052748  -9.472  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 4.695 on 441 degrees of freedom
-## Multiple R-squared:  0.7523, Adjusted R-squared:  0.745 
-## F-statistic:   103 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 4.657 on 441 degrees of freedom
+## Multiple R-squared:  0.7498, Adjusted R-squared:  0.7424 
+## F-statistic: 101.7 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div id="best-subset-regression" class="section level2">
 <h2>Best subset regression</h2>
 <p>You can use the <code>leaps</code> package to get the best subset regression.</p>
@@ -842,460 +840,460 @@ div.tocify {
 <p>The nullmodel is the model with <strong>no</strong> variable in it, while the fullmodel is the model with <strong>every</strong> variable in it.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># Backward Elimination</span></a>
 <a class="sourceLine" id="cb40-2" data-line-number="2">model_step_b &lt;-<span class="st"> </span><span class="kw">step</span>(fullmodel,<span class="dt">direction=</span><span class="st">&#39;backward&#39;</span>)</a></code></pre></div>
-<pre><code>## Start:  AIC=1421.03
+<pre><code>## Start:  AIC=1413.64
 ## medv ~ crim + zn + indus + chas + nox + rm + age + dis + rad + 
 ##     tax + ptratio + black + lstat
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## - indus    1      1.55  9721.1 1419.1
-## - age      1      6.30  9725.8 1419.3
-## &lt;none&gt;                  9719.5 1421.0
-## - tax      1    155.80  9875.3 1426.3
-## - chas     1    229.67  9949.2 1429.7
-## - crim     1    231.64  9951.2 1429.7
-## - black    1    239.78  9959.3 1430.1
-## - zn       1    246.02  9965.6 1430.4
-## - rad      1    368.04 10087.6 1435.9
-## - nox      1    408.79 10128.3 1437.8
-## - dis      1    977.65 10697.2 1462.6
-## - ptratio  1   1125.17 10844.7 1468.9
-## - rm       1   1775.77 11495.3 1495.4
-## - lstat    1   2193.97 11913.5 1511.6
+## - age      1      8.24  9571.4 1412.0
+## - indus    1     17.15  9580.3 1412.5
+## &lt;none&gt;                  9563.1 1413.6
+## - zn       1    180.66  9743.8 1420.2
+## - black    1    203.22  9766.3 1421.2
+## - chas     1    214.81  9777.9 1421.8
+## - crim     1    222.84  9786.0 1422.1
+## - tax      1    234.57  9797.7 1422.7
+## - nox      1    365.38  9928.5 1428.7
+## - rad      1    391.45  9954.6 1429.9
+## - dis      1    890.96 10454.1 1452.2
+## - ptratio  1    994.17 10557.3 1456.7
+## - lstat    1   1945.64 11508.8 1495.9
+## - rm       1   2087.42 11650.5 1501.5
 ## 
-## Step:  AIC=1419.1
-## medv ~ crim + zn + chas + nox + rm + age + dis + rad + tax + 
+## Step:  AIC=1412.04
+## medv ~ crim + zn + indus + chas + nox + rm + dis + rad + tax + 
 ##     ptratio + black + lstat
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## - age      1      6.43  9727.5 1417.4
-## &lt;none&gt;                  9721.1 1419.1
-## - tax      1    185.78  9906.9 1425.7
-## - crim     1    232.95  9954.0 1427.9
-## - chas     1    236.40  9957.5 1428.0
-## - black    1    238.62  9959.7 1428.1
-## - zn       1    245.52  9966.6 1428.5
-## - rad      1    395.40 10116.5 1435.2
-## - nox      1    421.28 10142.4 1436.4
-## - dis      1   1033.54 10754.6 1463.1
-## - ptratio  1   1131.04 10852.1 1467.2
-## - rm       1   1777.97 11499.1 1493.5
-## - lstat    1   2197.89 11919.0 1509.8
+## - indus    1     16.77  9588.1 1410.8
+## &lt;none&gt;                  9571.4 1412.0
+## - zn       1    190.02  9761.4 1419.0
+## - black    1    199.02  9770.4 1419.4
+## - chas     1    211.76  9783.1 1420.0
+## - crim     1    224.05  9795.4 1420.6
+## - tax      1    236.46  9807.8 1421.1
+## - rad      1    401.76  9973.1 1428.8
+## - nox      1    423.08  9994.4 1429.7
+## - dis      1    920.48 10491.8 1451.8
+## - ptratio  1   1011.78 10583.1 1455.8
+## - rm       1   2125.53 11696.9 1501.3
+## - lstat    1   2299.54 11870.9 1508.0
 ## 
-## Step:  AIC=1417.4
+## Step:  AIC=1410.83
 ## medv ~ crim + zn + chas + nox + rm + dis + rad + tax + ptratio + 
 ##     black + lstat
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## &lt;none&gt;                  9727.5 1417.4
-## - tax      1    184.96  9912.5 1424.0
-## - crim     1    234.32  9961.8 1426.2
-## - zn       1    239.64  9967.2 1426.5
-## - chas     1    241.15  9968.7 1426.5
-## - black    1    242.40  9969.9 1426.6
-## - rad      1    390.86 10118.4 1433.3
-## - nox      1    423.47 10151.0 1434.8
-## - ptratio  1   1124.69 10852.2 1465.2
-## - dis      1   1200.76 10928.3 1468.4
-## - rm       1   1885.71 11613.2 1496.0
-## - lstat    1   2406.71 12134.2 1516.0</code></pre>
+## &lt;none&gt;                  9588.1 1410.8
+## - zn       1    178.46  9766.6 1417.2
+## - black    1    196.57  9784.7 1418.1
+## - crim     1    227.35  9815.5 1419.5
+## - chas     1    228.37  9816.5 1419.5
+## - tax      1    233.49  9821.6 1419.8
+## - rad      1    389.26  9977.4 1426.9
+## - nox      1    409.73  9997.9 1427.9
+## - ptratio  1    995.13 10583.3 1453.8
+## - dis      1   1007.64 10595.8 1454.3
+## - rm       1   2108.77 11696.9 1499.3
+## - lstat    1   2283.41 11871.5 1506.0</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># Forward Selection</span></a>
 <a class="sourceLine" id="cb42-2" data-line-number="2">model_step_f &lt;-<span class="st"> </span><span class="kw">step</span>(nullmodel, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>nullmodel, <span class="dt">upper=</span>fullmodel), <span class="dt">direction=</span><span class="st">&#39;forward&#39;</span>)</a></code></pre></div>
-<pre><code>## Start:  AIC=2029.95
+<pre><code>## Start:  AIC=2018.02
 ## medv ~ 1
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + lstat    1   21640.9 17595 1667.0
-## + rm       1   19769.7 19466 1713.0
-## + ptratio  1   10705.3 28530 1887.0
-## + indus    1    9874.1 29361 1900.0
-## + tax      1    9148.3 30087 1911.2
-## + nox      1    7945.1 31290 1929.0
-## + rad      1    6198.3 33037 1953.7
-## + age      1    6149.3 33086 1954.4
-## + crim     1    5995.8 33240 1956.5
-## + zn       1    5683.9 33552 1960.8
-## + black    1    4175.7 35060 1980.8
-## + dis      1    2906.9 36328 1996.9
-## + chas     1    1011.2 38224 2020.1
-## &lt;none&gt;                 39235 2030.0
+## + lstat    1   20974.8 17245 1657.9
+## + rm       1   19380.4 18840 1698.2
+## + ptratio  1    9814.9 28405 1885.0
+## + indus    1    8716.4 29504 1902.2
+## + tax      1    8259.3 29961 1909.2
+## + nox      1    6825.5 31395 1930.5
+## + age      1    5503.4 32717 1949.3
+## + crim     1    5417.5 32803 1950.5
+## + rad      1    5372.3 32848 1951.1
+## + zn       1    4996.3 33224 1956.3
+## + black    1    4508.4 33712 1962.9
+## + dis      1    2522.5 35698 1989.0
+## + chas     1    1377.7 36842 2003.3
+## &lt;none&gt;                 38220 2018.0
 ## 
-## Step:  AIC=1667.05
+## Step:  AIC=1657.93
 ## medv ~ lstat
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + rm       1    3955.0 13640 1553.2
-## + ptratio  1    2687.7 14907 1593.6
-## + chas     1     717.8 16877 1650.1
-## + dis      1     711.7 16883 1650.3
-## + age      1     341.6 17253 1660.1
-## + tax      1     220.7 17374 1663.3
-## + zn       1     209.3 17385 1663.6
-## + black    1     150.3 17444 1665.1
-## + crim     1     134.2 17460 1665.6
-## + indus    1      91.6 17503 1666.7
-## &lt;none&gt;                 17594 1667.0
-## + rad      1      21.1 17573 1668.5
-## + nox      1      10.5 17584 1668.8
+## + rm       1    4153.0 13092 1534.6
+## + ptratio  1    2468.0 14777 1589.7
+## + chas     1     774.8 16471 1639.0
+## + dis      1     538.1 16707 1645.5
+## + tax      1     238.9 17006 1653.6
+## + age      1     209.6 17036 1654.4
+## + zn       1     177.7 17068 1655.2
+## + crim     1     155.4 17090 1655.8
+## + black    1     141.2 17104 1656.2
+## + indus    1      85.2 17160 1657.7
+## &lt;none&gt;                 17245 1657.9
+## + rad      1      28.1 17217 1659.2
+## + nox      1       4.6 17241 1659.8
 ## 
-## Step:  AIC=1553.2
+## Step:  AIC=1534.57
 ## medv ~ lstat + rm
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + ptratio  1   1694.04 11946 1494.8
-## + chas     1    579.55 13060 1535.4
-## + black    1    438.10 13201 1540.3
-## + tax      1    352.35 13287 1543.3
-## + crim     1    310.29 13329 1544.7
-## + dis      1    305.14 13334 1544.9
-## + rad      1    171.28 13468 1549.5
-## + zn       1     67.17 13572 1553.0
-## &lt;none&gt;                 13640 1553.2
-## + indus    1     52.78 13587 1553.4
-## + age      1     44.77 13595 1553.7
-## + nox      1      3.22 13636 1555.1
+## + ptratio  1   1500.09 11592 1481.2
+## + chas     1    513.90 12578 1518.3
+## + tax      1    427.06 12665 1521.5
+## + black    1    421.62 12671 1521.7
+## + crim     1    360.87 12732 1523.8
+## + rad      1    227.69 12865 1528.6
+## + dis      1    187.42 12905 1530.0
+## &lt;none&gt;                 13092 1534.6
+## + zn       1     55.37 13037 1534.6
+## + indus    1     54.22 13038 1534.7
+## + nox      1     17.88 13074 1536.0
+## + age      1      0.72 13092 1536.5
 ## 
-## Step:  AIC=1494.85
+## Step:  AIC=1481.2
 ## medv ~ lstat + rm + ptratio
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + dis    1    424.63 11521 1480.4
-## + chas   1    359.61 11586 1483.0
-## + black  1    342.51 11603 1483.6
-## + crim   1    127.75 11818 1492.0
-## + age    1    105.60 11840 1492.8
-## &lt;none&gt;               11946 1494.8
-## + tax    1     24.17 11921 1495.9
-## + nox    1     10.45 11935 1496.5
-## + zn     1      9.78 11936 1496.5
-## + rad    1      5.89 11940 1496.6
-## + indus  1      1.64 11944 1496.8
+## + chas   1    358.59 11234 1468.9
+## + dis    1    300.50 11292 1471.2
+## + black  1    297.68 11295 1471.4
+## + crim   1    156.35 11436 1477.0
+## + tax    1     51.48 11541 1481.2
+## &lt;none&gt;               11592 1481.2
+## + nox    1     25.49 11567 1482.2
+## + age    1     15.89 11576 1482.6
+## + zn     1     12.37 11580 1482.7
+## + indus  1      1.04 11591 1483.2
+## + rad    1      0.21 11592 1483.2
 ## 
-## Step:  AIC=1480.39
-## medv ~ lstat + rm + ptratio + dis
-## 
-##         Df Sum of Sq   RSS    AIC
-## + nox    1    545.96 10975 1460.3
-## + black  1    443.97 11077 1464.5
-## + chas   1    268.51 11252 1471.7
-## + crim   1    222.21 11299 1473.5
-## + indus  1    190.88 11330 1474.8
-## + tax    1    169.40 11351 1475.7
-## + zn     1    135.86 11385 1477.0
-## &lt;none&gt;               11521 1480.4
-## + rad    1     15.91 11505 1481.8
-## + age    1     13.46 11507 1481.8
-## 
-## Step:  AIC=1460.3
-## medv ~ lstat + rm + ptratio + dis + nox
+## Step:  AIC=1468.9
+## medv ~ lstat + rm + ptratio + chas
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + chas   1    321.40 10654 1448.8
-## + black  1    290.37 10684 1450.1
-## + crim   1    150.22 10825 1456.0
-## + zn     1    144.90 10830 1456.2
-## &lt;none&gt;               10975 1460.3
-## + rad    1     39.54 10935 1460.7
-## + indus  1     21.65 10953 1461.4
-## + tax    1      7.33 10968 1462.0
-## + age    1      5.16 10970 1462.1
+## + black  1   277.393 10956 1459.5
+## + dis    1   208.950 11025 1462.4
+## + crim   1   146.651 11087 1464.9
+## + nox    1    69.116 11165 1468.1
+## + tax    1    61.222 11172 1468.4
+## &lt;none&gt;               11234 1468.9
+## + indus  1     4.343 11229 1470.7
+## + zn     1     1.793 11232 1470.8
+## + age    1     1.230 11232 1470.8
+## + rad    1     0.592 11233 1470.9
 ## 
-## Step:  AIC=1448.77
-## medv ~ lstat + rm + ptratio + dis + nox + chas
-## 
-##         Df Sum of Sq   RSS    AIC
-## + black  1   255.771 10398 1439.7
-## + zn     1   156.707 10497 1444.0
-## + crim   1   123.771 10530 1445.5
-## + rad    1    49.285 10604 1448.7
-## &lt;none&gt;               10654 1448.8
-## + indus  1    30.189 10623 1449.5
-## + age    1     1.389 10652 1450.7
-## + tax    1     1.334 10652 1450.7
-## 
-## Step:  AIC=1439.71
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black
+## Step:  AIC=1459.52
+## medv ~ lstat + rm + ptratio + chas + black
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + zn     1   178.965 10219 1433.8
-## + rad    1   125.898 10272 1436.2
-## + crim   1    60.457 10337 1439.1
-## &lt;none&gt;               10398 1439.7
-## + indus  1    18.085 10380 1440.9
-## + tax    1     6.095 10392 1441.5
-## + age    1     0.000 10398 1441.7
+## + dis    1   277.638 10679 1449.8
+## + crim   1    62.121 10894 1458.9
+## &lt;none&gt;               10956 1459.5
+## + nox    1    25.016 10931 1460.5
+## + rad    1    23.567 10933 1460.5
+## + tax    1     8.677 10948 1461.2
+## + age    1     3.468 10953 1461.4
+## + zn     1     2.657 10954 1461.4
+## + indus  1     0.808 10956 1461.5
 ## 
-## Step:  AIC=1433.82
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn
+## Step:  AIC=1449.85
+## medv ~ lstat + rm + ptratio + chas + black + dis
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + crim   1    96.073 10123 1431.5
-## + rad    1    83.225 10136 1432.1
-## &lt;none&gt;               10219 1433.8
-## + indus  1    16.731 10202 1435.1
-## + age    1     3.202 10216 1435.7
-## + tax    1     1.119 10218 1435.8
+## + nox    1    476.12 10202 1431.1
+## + indus  1    122.33 10556 1446.6
+## + age    1    121.53 10557 1446.6
+## + crim   1    114.09 10565 1447.0
+## + zn     1    113.38 10565 1447.0
+## + tax    1     89.98 10589 1448.0
+## &lt;none&gt;               10679 1449.8
+## + rad    1      0.02 10679 1451.8
 ## 
-## Step:  AIC=1431.52
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn + 
-##     crim
+## Step:  AIC=1431.09
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox
+## 
+##         Df Sum of Sq   RSS    AIC
+## + zn     1   115.406 10087 1427.9
+## + rad    1    81.582 10121 1429.4
+## + crim   1    77.629 10125 1429.6
+## &lt;none&gt;               10202 1431.1
+## + age    1    27.916 10175 1431.8
+## + indus  1     4.737 10198 1432.9
+## + tax    1     0.182 10202 1433.1
+## 
+## Step:  AIC=1427.92
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn
 ## 
 ##         Df Sum of Sq     RSS    AIC
-## + rad    1   210.198  9912.5 1424.0
-## &lt;none&gt;               10122.7 1431.5
-## + indus  1    16.496 10106.2 1432.8
-## + tax    1     4.301 10118.4 1433.3
-## + age    1     1.612 10121.1 1433.4
+## + crim   1   109.713  9977.4 1424.9
+## + rad    1    53.588 10033.5 1427.5
+## &lt;none&gt;               10087.1 1427.9
+## + age    1    16.927 10070.2 1429.2
+## + tax    1    10.459 10076.7 1429.4
+## + indus  1     4.556 10082.6 1429.7
 ## 
-## Step:  AIC=1423.97
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn + 
+## Step:  AIC=1424.94
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn + 
+##     crim
+## 
+##         Df Sum of Sq    RSS    AIC
+## + rad    1   155.804 9821.6 1419.8
+## &lt;none&gt;               9977.4 1424.9
+## + age    1    19.133 9958.3 1426.1
+## + indus  1     3.813 9973.6 1426.8
+## + tax    1     0.027 9977.4 1426.9
+## 
+## Step:  AIC=1419.78
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn + 
 ##     crim + rad
 ## 
 ##         Df Sum of Sq    RSS    AIC
-## + tax    1   184.963 9727.5 1417.4
-## &lt;none&gt;               9912.5 1424.0
-## + indus  1    30.871 9881.6 1424.5
-## + age    1     5.616 9906.9 1425.7
+## + tax    1   233.485 9588.1 1410.8
+## &lt;none&gt;               9821.6 1419.8
+## + indus  1    13.794 9807.8 1421.1
+## + age    1    10.837 9810.8 1421.3
 ## 
-## Step:  AIC=1417.4
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn + 
+## Step:  AIC=1410.83
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn + 
 ##     crim + rad + tax
 ## 
 ##         Df Sum of Sq    RSS    AIC
-## &lt;none&gt;               9727.5 1417.4
-## + age    1    6.4299 9721.1 1419.1
-## + indus  1    1.6807 9725.8 1419.3</code></pre>
+## &lt;none&gt;               9588.1 1410.8
+## + indus  1   16.7654 9571.4 1412.0
+## + age    1    7.8574 9580.3 1412.5</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Stepwise Selection </span></a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">model_step_s &lt;-<span class="st"> </span><span class="kw">step</span>(nullmodel, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>nullmodel, <span class="dt">upper=</span>fullmodel), <span class="dt">direction=</span><span class="st">&#39;both&#39;</span>)</a></code></pre></div>
-<pre><code>## Start:  AIC=2029.95
+<pre><code>## Start:  AIC=2018.02
 ## medv ~ 1
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + lstat    1   21640.9 17595 1667.0
-## + rm       1   19769.7 19466 1713.0
-## + ptratio  1   10705.3 28530 1887.0
-## + indus    1    9874.1 29361 1900.0
-## + tax      1    9148.3 30087 1911.2
-## + nox      1    7945.1 31290 1929.0
-## + rad      1    6198.3 33037 1953.7
-## + age      1    6149.3 33086 1954.4
-## + crim     1    5995.8 33240 1956.5
-## + zn       1    5683.9 33552 1960.8
-## + black    1    4175.7 35060 1980.8
-## + dis      1    2906.9 36328 1996.9
-## + chas     1    1011.2 38224 2020.1
-## &lt;none&gt;                 39235 2030.0
+## + lstat    1   20974.8 17245 1657.9
+## + rm       1   19380.4 18840 1698.2
+## + ptratio  1    9814.9 28405 1885.0
+## + indus    1    8716.4 29504 1902.2
+## + tax      1    8259.3 29961 1909.2
+## + nox      1    6825.5 31395 1930.5
+## + age      1    5503.4 32717 1949.3
+## + crim     1    5417.5 32803 1950.5
+## + rad      1    5372.3 32848 1951.1
+## + zn       1    4996.3 33224 1956.3
+## + black    1    4508.4 33712 1962.9
+## + dis      1    2522.5 35698 1989.0
+## + chas     1    1377.7 36842 2003.3
+## &lt;none&gt;                 38220 2018.0
 ## 
-## Step:  AIC=1667.05
+## Step:  AIC=1657.93
 ## medv ~ lstat
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + rm       1    3955.0 13640 1553.2
-## + ptratio  1    2687.7 14907 1593.6
-## + chas     1     717.8 16877 1650.1
-## + dis      1     711.7 16883 1650.3
-## + age      1     341.6 17253 1660.1
-## + tax      1     220.7 17374 1663.3
-## + zn       1     209.3 17385 1663.6
-## + black    1     150.3 17444 1665.1
-## + crim     1     134.2 17460 1665.6
-## + indus    1      91.6 17503 1666.7
-## &lt;none&gt;                 17595 1667.0
-## + rad      1      21.1 17573 1668.5
-## + nox      1      10.5 17584 1668.8
-## - lstat    1   21640.9 39235 2030.0
+## + rm       1    4153.0 13092 1534.6
+## + ptratio  1    2468.0 14777 1589.7
+## + chas     1     774.8 16471 1639.0
+## + dis      1     538.1 16707 1645.5
+## + tax      1     238.9 17007 1653.6
+## + age      1     209.6 17036 1654.4
+## + zn       1     177.7 17068 1655.2
+## + crim     1     155.4 17090 1655.8
+## + black    1     141.2 17104 1656.2
+## + indus    1      85.2 17160 1657.7
+## &lt;none&gt;                 17245 1657.9
+## + rad      1      28.1 17217 1659.2
+## + nox      1       4.6 17241 1659.8
+## - lstat    1   20974.8 38220 2018.0
 ## 
-## Step:  AIC=1553.2
+## Step:  AIC=1534.57
 ## medv ~ lstat + rm
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + ptratio  1    1694.0 11946 1494.8
-## + chas     1     579.5 13060 1535.4
-## + black    1     438.1 13201 1540.3
-## + tax      1     352.4 13287 1543.3
-## + crim     1     310.3 13329 1544.7
-## + dis      1     305.1 13334 1544.9
-## + rad      1     171.3 13468 1549.5
-## + zn       1      67.2 13572 1553.0
-## &lt;none&gt;                 13640 1553.2
-## + indus    1      52.8 13587 1553.4
-## + age      1      44.8 13595 1553.7
-## + nox      1       3.2 13636 1555.1
-## - rm       1    3955.0 17594 1667.0
-## - lstat    1    5826.2 19466 1713.0
+## + ptratio  1    1500.1 11592 1481.2
+## + chas     1     513.9 12578 1518.3
+## + tax      1     427.1 12665 1521.5
+## + black    1     421.6 12671 1521.7
+## + crim     1     360.9 12732 1523.8
+## + rad      1     227.7 12865 1528.6
+## + dis      1     187.4 12905 1530.0
+## &lt;none&gt;                 13092 1534.6
+## + zn       1      55.4 13037 1534.6
+## + indus    1      54.2 13038 1534.7
+## + nox      1      17.9 13074 1536.0
+## + age      1       0.7 13092 1536.5
+## - rm       1    4153.0 17245 1657.9
+## - lstat    1    5747.4 18840 1698.2
 ## 
-## Step:  AIC=1494.85
+## Step:  AIC=1481.2
 ## medv ~ lstat + rm + ptratio
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + dis      1     424.6 11521 1480.4
-## + chas     1     359.6 11586 1483.0
-## + black    1     342.5 11603 1483.6
-## + crim     1     127.7 11818 1492.0
-## + age      1     105.6 11840 1492.8
-## &lt;none&gt;                 11946 1494.8
-## + tax      1      24.2 11921 1495.9
-## + nox      1      10.5 11935 1496.5
-## + zn       1       9.8 11936 1496.5
-## + rad      1       5.9 11940 1496.6
-## + indus    1       1.6 11944 1496.8
-## - ptratio  1    1694.0 13640 1553.2
-## - rm       1    2961.4 14907 1593.6
-## - lstat    1    4384.7 16330 1635.1
+## + chas     1     358.6 11234 1468.9
+## + dis      1     300.5 11292 1471.2
+## + black    1     297.7 11295 1471.4
+## + crim     1     156.4 11436 1477.0
+## + tax      1      51.5 11541 1481.2
+## &lt;none&gt;                 11592 1481.2
+## + nox      1      25.5 11567 1482.2
+## + age      1      15.9 11576 1482.6
+## + zn       1      12.4 11580 1482.7
+## + indus    1       1.0 11591 1483.2
+## + rad      1       0.2 11592 1483.2
+## - ptratio  1    1500.1 13092 1534.6
+## - rm       1    3185.1 14777 1589.7
+## - lstat    1    4420.5 16013 1626.2
 ## 
-## Step:  AIC=1480.39
-## medv ~ lstat + rm + ptratio + dis
-## 
-##           Df Sum of Sq   RSS    AIC
-## + nox      1     546.0 10975 1460.3
-## + black    1     444.0 11077 1464.5
-## + chas     1     268.5 11252 1471.7
-## + crim     1     222.2 11299 1473.5
-## + indus    1     190.9 11330 1474.8
-## + tax      1     169.4 11351 1475.7
-## + zn       1     135.9 11385 1477.0
-## &lt;none&gt;                 11521 1480.4
-## + rad      1      15.9 11505 1481.8
-## + age      1      13.5 11507 1481.8
-## - dis      1     424.6 11946 1494.8
-## - ptratio  1    1813.5 13334 1544.9
-## - rm       1    2540.3 14061 1569.0
-## - lstat    1    4614.4 16135 1631.7
-## 
-## Step:  AIC=1460.3
-## medv ~ lstat + rm + ptratio + dis + nox
+## Step:  AIC=1468.9
+## medv ~ lstat + rm + ptratio + chas
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + chas     1     321.4 10654 1448.8
-## + black    1     290.4 10684 1450.1
-## + crim     1     150.2 10825 1456.0
-## + zn       1     144.9 10830 1456.2
-## &lt;none&gt;                 10975 1460.3
-## + rad      1      39.5 10935 1460.7
-## + indus    1      21.7 10953 1461.4
-## + tax      1       7.3 10968 1462.0
-## + age      1       5.2 10970 1462.1
-## - nox      1     546.0 11521 1480.4
-## - dis      1     960.1 11935 1496.5
-## - ptratio  1    2024.8 13000 1535.3
-## - rm       1    2417.1 13392 1548.9
-## - lstat    1    3171.2 14146 1573.8
+## + black    1     277.4 10956 1459.5
+## + dis      1     208.9 11025 1462.4
+## + crim     1     146.7 11087 1464.9
+## + nox      1      69.1 11165 1468.1
+## + tax      1      61.2 11172 1468.4
+## &lt;none&gt;                 11234 1468.9
+## + indus    1       4.3 11229 1470.7
+## + zn       1       1.8 11232 1470.8
+## + age      1       1.2 11232 1470.8
+## + rad      1       0.6 11233 1470.9
+## - chas     1     358.6 11592 1481.2
+## - ptratio  1    1344.8 12578 1518.3
+## - rm       1    3040.2 14274 1575.9
+## - lstat    1    4464.7 15698 1619.2
 ## 
-## Step:  AIC=1448.77
-## medv ~ lstat + rm + ptratio + dis + nox + chas
-## 
-##           Df Sum of Sq   RSS    AIC
-## + black    1    255.77 10398 1439.7
-## + zn       1    156.71 10497 1444.0
-## + crim     1    123.77 10530 1445.5
-## + rad      1     49.29 10604 1448.7
-## &lt;none&gt;                 10654 1448.8
-## + indus    1     30.19 10623 1449.5
-## + age      1      1.39 10652 1450.7
-## + tax      1      1.33 10652 1450.7
-## - chas     1    321.40 10975 1460.3
-## - nox      1    598.85 11252 1471.7
-## - dis      1    897.88 11551 1483.6
-## - ptratio  1   1787.02 12440 1517.3
-## - rm       1   2414.11 13068 1539.7
-## - lstat    1   3040.57 13694 1561.0
-## 
-## Step:  AIC=1439.71
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black
+## Step:  AIC=1459.52
+## medv ~ lstat + rm + ptratio + chas + black
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + zn       1    178.96 10219 1433.8
-## + rad      1    125.90 10272 1436.2
-## + crim     1     60.46 10337 1439.1
-## &lt;none&gt;                 10398 1439.7
-## + indus    1     18.09 10380 1440.9
-## + tax      1      6.10 10392 1441.5
-## + age      1      0.00 10398 1441.7
-## - black    1    255.77 10654 1448.8
-## - chas     1    286.80 10684 1450.1
-## - nox      1    441.57 10839 1456.6
-## - dis      1    862.74 11260 1474.0
-## - ptratio  1   1692.82 12090 1506.3
-## - rm       1   2585.54 12983 1538.8
-## - lstat    1   2611.81 13010 1539.7
+## + dis      1     277.6 10679 1449.8
+## + crim     1      62.1 10894 1458.9
+## &lt;none&gt;                 10956 1459.5
+## + nox      1      25.0 10931 1460.5
+## + rad      1      23.6 10933 1460.5
+## + tax      1       8.7 10948 1461.2
+## + age      1       3.5 10953 1461.4
+## + zn       1       2.7 10954 1461.4
+## + indus    1       0.8 10956 1461.5
+## - black    1     277.4 11234 1468.9
+## - chas     1     338.3 11295 1471.4
+## - ptratio  1    1236.6 12193 1506.2
+## - lstat    1    3142.4 14099 1572.3
+## - rm       1    3247.3 14204 1575.6
 ## 
-## Step:  AIC=1433.82
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn
+## Step:  AIC=1449.85
+## medv ~ lstat + rm + ptratio + chas + black + dis
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + crim     1     96.07 10123 1431.5
-## + rad      1     83.22 10136 1432.1
-## &lt;none&gt;                 10219 1433.8
-## + indus    1     16.73 10202 1435.1
-## + age      1      3.20 10216 1435.7
-## + tax      1      1.12 10218 1435.8
-## - zn       1    178.96 10398 1439.7
-## - black    1    278.03 10497 1444.0
-## - chas     1    297.35 10516 1444.9
-## - nox      1    445.89 10665 1451.2
-## - dis      1   1034.04 11253 1475.7
-## - ptratio  1   1268.85 11488 1485.1
-## - rm       1   2277.04 12496 1523.3
-## - lstat    1   2689.78 12908 1538.1
+## + nox      1     476.1 10202 1431.1
+## + indus    1     122.3 10556 1446.6
+## + age      1     121.5 10557 1446.6
+## + crim     1     114.1 10565 1447.0
+## + zn       1     113.4 10565 1447.0
+## + tax      1      90.0 10589 1448.0
+## &lt;none&gt;                 10679 1449.8
+## + rad      1       0.0 10679 1451.8
+## - chas     1     235.6 10914 1457.8
+## - dis      1     277.6 10956 1459.5
+## - black    1     346.1 11025 1462.4
+## - ptratio  1    1342.8 12022 1501.7
+## - rm       1    2931.7 13610 1558.2
+## - lstat    1    3367.9 14046 1572.6
 ## 
-## Step:  AIC=1431.52
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn + 
+## Step:  AIC=1431.09
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox
+## 
+##           Df Sum of Sq   RSS    AIC
+## + zn       1    115.41 10087 1427.9
+## + rad      1     81.58 10121 1429.4
+## + crim     1     77.63 10125 1429.6
+## &lt;none&gt;                 10202 1431.1
+## + age      1     27.92 10175 1431.8
+## + indus    1      4.74 10198 1432.9
+## + tax      1      0.18 10202 1433.1
+## - black    1    217.17 10420 1438.7
+## - chas     1    294.93 10498 1442.1
+## - nox      1    476.12 10679 1449.8
+## - dis      1    728.74 10931 1460.5
+## - ptratio  1   1519.01 11722 1492.2
+## - lstat    1   2497.25 12700 1528.7
+## - rm       1   2802.19 13005 1539.5
+## 
+## Step:  AIC=1427.92
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn
+## 
+##           Df Sum of Sq     RSS    AIC
+## + crim     1    109.71  9977.4 1424.9
+## + rad      1     53.59 10033.5 1427.5
+## &lt;none&gt;                 10087.1 1427.9
+## + age      1     16.93 10070.2 1429.2
+## + tax      1     10.46 10076.7 1429.4
+## + indus    1      4.56 10082.6 1429.7
+## - zn       1    115.41 10202.5 1431.1
+## - black    1    239.19 10326.3 1436.6
+## - chas     1    301.39 10388.5 1439.3
+## - nox      1    478.14 10565.3 1447.0
+## - dis      1    828.21 10915.3 1461.8
+## - ptratio  1   1175.76 11262.9 1476.1
+## - rm       1   2539.82 12627.0 1528.1
+## - lstat    1   2544.45 12631.6 1528.3
+## 
+## Step:  AIC=1424.94
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn + 
 ##     crim
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## + rad      1    210.20  9912.5 1424.0
-## &lt;none&gt;                 10122.7 1431.5
-## + indus    1     16.50 10106.2 1432.8
-## + tax      1      4.30 10118.4 1433.3
-## + age      1      1.61 10121.1 1433.4
-## - crim     1     96.07 10218.7 1433.8
-## - black    1    200.46 10323.1 1438.4
-## - zn       1    214.58 10337.3 1439.1
-## - chas     1    280.15 10402.8 1441.9
-## - nox      1    410.90 10533.6 1447.6
-## - dis      1   1095.88 11218.6 1476.3
-## - ptratio  1   1112.44 11235.1 1477.0
-## - rm       1   2317.10 12439.8 1523.3
-## - lstat    1   2412.50 12535.2 1526.8
+## + rad      1    155.80  9821.6 1419.8
+## &lt;none&gt;                  9977.4 1424.9
+## + age      1     19.13  9958.3 1426.1
+## + indus    1      3.81  9973.6 1426.8
+## + tax      1      0.03  9977.4 1426.9
+## - crim     1    109.71 10087.1 1427.9
+## - zn       1    147.49 10124.9 1429.6
+## - black    1    159.28 10136.7 1430.2
+## - chas     1    284.57 10262.0 1435.7
+## - nox      1    435.37 10412.8 1442.4
+## - dis      1    891.92 10869.3 1461.9
+## - ptratio  1   1009.91 10987.3 1466.8
+## - lstat    1   2308.80 12286.2 1517.7
+## - rm       1   2588.92 12566.3 1527.9
 ## 
-## Step:  AIC=1423.97
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn + 
+## Step:  AIC=1419.78
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn + 
 ##     crim + rad
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## + tax      1    184.96  9727.5 1417.4
-## &lt;none&gt;                  9912.5 1424.0
-## + indus    1     30.87  9881.6 1424.5
-## + age      1      5.62  9906.9 1425.7
-## - zn       1    165.16 10077.6 1429.5
-## - rad      1    210.20 10122.7 1431.5
-## - crim     1    223.05 10135.5 1432.1
-## - black    1    265.75 10178.2 1434.0
-## - chas     1    281.55 10194.0 1434.7
-## - nox      1    592.01 10504.5 1448.4
-## - dis      1   1101.96 11014.4 1469.9
-## - ptratio  1   1321.47 11233.9 1478.9
-## - rm       1   2074.60 11987.1 1508.4
-## - lstat    1   2452.13 12364.6 1522.5
+## + tax      1    233.49  9588.1 1410.8
+## &lt;none&gt;                  9821.6 1419.8
+## + indus    1     13.79  9807.8 1421.1
+## + age      1     10.84  9810.8 1421.3
+## - zn       1    110.98  9932.6 1422.9
+## - rad      1    155.80  9977.4 1424.9
+## - crim     1    211.93 10033.5 1427.5
+## - black    1    212.63 10034.3 1427.5
+## - chas     1    275.18 10096.8 1430.3
+## - nox      1    578.00 10399.6 1443.8
+## - dis      1    889.64 10711.3 1457.2
+## - ptratio  1   1156.86 10978.5 1468.4
+## - rm       1   2329.64 12151.3 1514.6
+## - lstat    1   2345.54 12167.2 1515.2
 ## 
-## Step:  AIC=1417.4
-## medv ~ lstat + rm + ptratio + dis + nox + chas + black + zn + 
+## Step:  AIC=1410.83
+## medv ~ lstat + rm + ptratio + chas + black + dis + nox + zn + 
 ##     crim + rad + tax
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## &lt;none&gt;                  9727.5 1417.4
-## + age      1      6.43  9721.1 1419.1
-## + indus    1      1.68  9725.8 1419.3
-## - tax      1    184.96  9912.5 1424.0
-## - crim     1    234.32  9961.8 1426.2
-## - zn       1    239.64  9967.2 1426.5
-## - chas     1    241.15  9968.7 1426.5
-## - black    1    242.40  9969.9 1426.6
-## - rad      1    390.86 10118.4 1433.3
-## - nox      1    423.47 10151.0 1434.8
-## - ptratio  1   1124.69 10852.2 1465.2
-## - dis      1   1200.76 10928.3 1468.4
-## - rm       1   1885.71 11613.2 1496.0
-## - lstat    1   2406.71 12134.2 1516.0</code></pre>
+## &lt;none&gt;                  9588.1 1410.8
+## + indus    1     16.77  9571.4 1412.0
+## + age      1      7.86  9580.3 1412.5
+## - zn       1    178.46  9766.6 1417.2
+## - black    1    196.57  9784.7 1418.1
+## - crim     1    227.35  9815.5 1419.5
+## - chas     1    228.37  9816.5 1419.5
+## - tax      1    233.49  9821.6 1419.8
+## - rad      1    389.26  9977.4 1426.9
+## - nox      1    409.73  9997.9 1427.9
+## - ptratio  1    995.13 10583.3 1453.8
+## - dis      1   1007.64 10595.8 1454.3
+## - rm       1   2108.77 11696.9 1499.3
+## - lstat    1   2283.41 11871.5 1506.0</code></pre>
 <hr />
 </div>
 </div>
