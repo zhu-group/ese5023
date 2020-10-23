@@ -161,11 +161,11 @@ The *recession velocity* is in `km per second`, which was determined with consid
 
 **5.2 [5 points]** Add a simple linear regression line to the above scatter plot. 
 
-**5.3 [10 points]** If Hubble's *Big Bang Theory* is correct, then for the regression line you made in 5.2:
+**5.3 [10 points]** If Hubble's *Big Bang Theory* is correct, explain why the following two assumptions about the regression line you made in 5.2 need to be true:
 
-* The intercept should be zero - as the universe starts with one single point!
+* The intercept should be zero
 
-* And the slope is the age of the universe.
+* And the slope is the age of the universe
 
 Address the first assumptions with with regression results; and estimate the age of the universe.
 
