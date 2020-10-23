@@ -33,19 +33,25 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 # 1. Cloud Seeding
 
-Massive injection of silver iodide into cumulus clouds may lead to increased rainfall. To test this hypothesis, a flight experiment is conducted in southern Florida. On each of 52 days that were deemed suitable for cloud seeding, a random mechanism was used to decide whether to seed the target cloud on that day or leave it unseeded as a control. An airplane flew through the cloud in both cases, since the experimenters and the pilot were themselves unaware of whether on any particular day the seeding mechanism in the plane was loaded or not (that is, they were *blind* to the treatment). Precipitation was measured as the total rain volume falling from the cloud base following the airplane seeding run, as measured by radar. [^1]
+Massive injection of silver iodide into cumulus clouds may lead to increased rainfall. To test this hypothesis, a flight experiment is conducted. On each of 52 days that were deemed suitable for cloud seeding, a random mechanism was used to decide whether to seed the target cloud on that day or leave it unseeded as a control. 
+
+An airplane flew through the cloud in both cases, since the experimenters and the pilot were themselves unaware of whether on any particular day the seeding mechanism in the plane was loaded or not (that is, they were *blind* to the treatment). Precipitation was measured as the total rain volume falling from the cloud base following the airplane seeding run, as measured by radar. [^1]
 
 [^1]: Simpson and Eden, A Bayesian Analysis of a Multiplicative Treatment Effect in Weather Modification, Technometrics, 17(1975), 161-166.
 
-Rainfall (acre-feet) for days with and without cloud seeding were collected as follows.
+Rainfall (acre-feet) for days with and without cloud seeding were collected as follows:
 
-Rainfall from Unseeded Days (n=26): 1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3, 41.1, 36.6, 29.0, 28.6, 26.3, 
+**Rainfall from Unseeded Days (n=26):** 
+
+1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3, 41.1, 36.6, 29.0, 28.6, 26.3, 
 26.0, 24.4, 21.4, 17.3, 11.5, 4.9, 4.9, 1.0
 
-Rainfall from Seeded Days (n=26): 2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0, 242.5, 200.7, 198.6, 129.6, 119.0, 118.3,
+**Rainfall from Seeded Days (n=26):** 
+
+2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0, 242.5, 200.7, 198.6, 129.6, 119.0, 118.3,
 115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1
 
-**1.1 [5 points]** Plot two box plots side-by-side of the data. Discribe the distributions.
+**1.1 [5 points]** Plot two box plots side-by-side of data from the two groups. Discribe the distributions.
 
 **1.2 [5 points]** Did cloud seeding have an effect on rainfall in this experiment? If so, how much?
 
@@ -53,7 +59,9 @@ Rainfall from Seeded Days (n=26): 2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 4
 
 # 2. Was Tyrannosaurus Rex Warm-Blooded?
 
-It is known that the oxygen isotopic composition of vertebrate bone phosphare is related to the body temperature at which the bone forms. Difference in means at different bone sites would indicate nonconstant temperatures throughout the body. Minor temperature differences would be expected in warm-blooded anaimals The following data show several measurements of the oxygen isotopic composition of bone phosphare in each of 12 bone specimens from a single Tyrannosaurus rex skeleton. [^2]
+It is known that the oxygen isotopic composition of vertebrate bone phosphate is related to the body temperature at which the bone forms. Difference in means at different bone sites would indicate nonconstant temperatures throughout the body. Minor temperature differences would be expected in warm-blooded anaimals. 
+
+The following data show several measurements of the oxygen isotopic composition of bone phosphate in each of 12 bone specimens from a single Tyrannosaurus rex skeleton. [^2]
 
 [^2]: Thermophysiology of Tyrannosaurus rex; Evidence from Oxygen Isotopes, Science, 265 (1994): 222-224.
 
@@ -78,7 +86,7 @@ It is known that the oxygen isotopic composition of vertebrate bone phosphare is
 
 # 3. Vegetarians and Zinc
 
-Previous studies suggest that vegetarians may not receive enough zinc in their diets. As the zinc requirement is particularly important during pregnancy, researchers conducted a study to determine whether vegatarian pregnant women are at greater risk from zinc level than are nonvegetarian pregnant women. 
+Previous studies suggest that vegetarians may not receive enough zinc in their diets. As the zinc requirement is particularly important during the pregnancy, researchers conducted a study to determine whether vegatarian pregnant women are at greater risk from zinc level than are nonvegetarian pregnant women. 
 
 23 women were monitored: 12 vegetarians who were pregnant, 6 nonvegetarian who were pregnant, and 5 vegetarians who were not pregnant. None of these women was smokers, and none of the nonpregnant women was taking oral contraceptives. The zinc status in each woman was measured by zinc content in the blood, urine, and hair. The following table presents zinc levels in the hair. [^3]
 
@@ -103,7 +111,7 @@ Previous studies suggest that vegetarians may not receive enough zinc in their d
 
 ***
 
-# 4. Atmospheric lapse rate 
+# 4. Atmospheric Lapse Rate 
 
 The *lapse rate* is the rate at which temperature drops as you increase elevation. Some hardy students were interested in checking empirically if the lapse rate of 9.8 degrees C km^-1^ was accurate for their hiking. To investigate, they grabbed their thermometers and their Huawei wrist altimeters and found the following data on their hike.
 
@@ -118,7 +126,7 @@ The *lapse rate* is the rate at which temperature drops as you increase elevatio
 
 # 5. The Big Bang Theory
 
-Edwin Hubble used the power of the Mount Wilson Observatory telescopes to measure features of the nebulae outside the Milky Way. He was surprised to find a relationship between a nebula's distance from Earth and the velocity with which is was going away from the Earth. Hubble's initial data on 24 nebulae are listed below. [^4]
+[Edwin Hubble](https://www.britannica.com/biography/Edwin-Hubble) used the power of the Mount Wilson Observatory telescopes to measure features of the *nebulae* outside *the Milky Way*. He was surprised to find a relationship between a nebula's distance from the Earth and the velocity with which is was going away from the Earth. Hubble's initial data on 24 nebulae are listed below. [^4]
 
 ||Nebula|Velocity|Distance|
 |:---|:---|:---|:---|
@@ -147,31 +155,33 @@ Edwin Hubble used the power of the Mount Wilson Observatory telescopes to measur
 |23|NGC 4486|800|2.000|
 |24|NGC 4649|1090|2.000|
 
-The recession velocity is in km per second, which was determined with considerable accuracy by the red shift in the spectrum of light from a nebula. The distance measures the distance from the Earth, in megaparsecs (about 30.9 trillion km). The distance was measured by comparing mean luminosities of the nebulae to those of certain str types, a method that is not particularly accurate.
+The *recession velocity* is in `km per second`, which was determined with considerable accuracy by the *red shift* in the spectrum of light from a nebula. The distance measures the distance from the Earth, in `megaparsecs` (1 megaparsecs is 1 million parsecs, and 1 parsec is about 30.9 trillion km). The distance was measured by comparing mean luminosities of the nebulae to those of certain star types, a method that is NOT particularly accurate.
 
 **5.1 [5 points]**  Make a scatter plot with distance as the Y-axis and recession velocity as the x-axis. Describe what you see.
 
-**5.2 [5 points]** Add a simple linear regression to the above scatter plot. 
+**5.2 [5 points]** Add a simple linear regression line to the above scatter plot. 
 
-**5.3 [10 points]** If Hubble's Big Bang theory is correct, then for the regression line:
+**5.3 [10 points]** If Hubble's *Big Bang Theory* is correct, then for the regression line you made in 5.2:
 
-* The intercept is zero - as the universe starts with one single point!
+* The intercept should be zero - as the universe starts with one single point!
 
 * And the slope is the age of the universe.
 
-Address the above two assumptions with the dataset and the regression results.
+Address the first assumptions with with regression results; and estimate the age of the universe.
+
+**5.4 [5 points]** Explain why improved measurement of distance would lead to more precise estimates of the regression coefficients. 
 
 [^4]: Hubble, A Relation Between Distance and Radial Velocity Among Extra-galactic Nebulae, Proceedings of the National Academy of Science, 15(1929), 168-173.
 
-# 6. CPU performance
+# 6. CPU Performance
 
-Let's reuse the CPU performance data from Exercise #3. Now split the dataset randomly into two subsets: (1) the train set (80% data points), and (2) the test set (20% data points).
+Let's reuse the CPU performance data from [Exercise #3](https://zhu-group.github.io/ese5023/Section_07.html#Exercise_3) in Section 07. Now split the dataset randomly into two subsets: (1) the train set (contains 80% of the data points), and (2) the test set (contains 20% of the data points).
 
-**6.1 [5 points]** For your train set, fit a best subset regression between predictor variable `perf` and response variables `syct`, `mmin`, `mmax`, `cach`, `chmin`, `chmax`.
+**6.1 [5 points]** For the train set, fit the best subset regression between predictor variable `perf` and response variables including `syct`, `mmin`, `mmax`, `cach`, `chmin`, and `chmax`.
 
-**6.2 [10 points]** Apply the best regression model to the test set, and compare your predicted `perf` with the actual values provided. Quantify the bias between predicted `perf` values and provided `perf` values. 
+**6.2 [5 points]** Apply the best regression model to the test set, and compare your predicted `perf` values with the actual values that provided in the test set. Quantify the bias between predicted `perf` values and provided `perf` values. 
 
-# 7. Analysis of a data set
+# 7. Analysis of Data Sets from Your Group
 
 Find some data sets from your research group, conduct the following statistical tests:
 
