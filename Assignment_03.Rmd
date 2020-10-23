@@ -37,7 +37,7 @@ Massive injection of silver iodide into cumulus clouds may lead to increased rai
 
 An airplane flew through the cloud in both cases, since the experimenters and the pilot were themselves unaware of whether on any particular day the seeding mechanism in the plane was loaded or not (that is, they were *blind* to the treatment). Precipitation was measured as the total rain volume falling from the cloud base following the airplane seeding run, as measured by radar. [^1]
 
-[^1]: Simpson and Eden, A Bayesian Analysis of a Multiplicative Treatment Effect in Weather Modification, Technometrics, 17(1975), 161-166.
+[^1]: Simpson and Eden, A Bayesian Analysis of a Multiplicative Treatment Effect in Weather Modification, *Technometrics*, 17(1975), 161-166.
 
 Rainfall (acre-feet) for days with and without cloud seeding were collected as follows:
 
@@ -63,7 +63,7 @@ It is known that the oxygen isotopic composition of vertebrate bone phosphate is
 
 The following data show several measurements of the oxygen isotopic composition of bone phosphate in each of 12 bone specimens from a single Tyrannosaurus rex skeleton. [^2]
 
-[^2]: Thermophysiology of Tyrannosaurus rex; Evidence from Oxygen Isotopes, Science, 265 (1994): 222-224.
+[^2]: Barrick and Showers, Thermophysiology of Tyrannosaurus rex; Evidence from Oxygen Isotopes, *Science*, 265(1994): 222-224.
 
 |Bone|Oxygen isotopic composition|
 |:---|---:|---:|---:|---:|---:|---:|
@@ -90,7 +90,7 @@ Previous studies suggest that vegetarians may not receive enough zinc in their d
 
 23 women were monitored: 12 vegetarians who were pregnant, 6 nonvegetarian who were pregnant, and 5 vegetarians who were not pregnant. None of these women was smokers, and none of the nonpregnant women was taking oral contraceptives. The zinc status in each woman was measured by zinc content in the blood, urine, and hair. The following table presents zinc levels in the hair. [^3]
 
-[^3]: King et al., Effect of vegetarianism on the Zinc Status of Pregnant Women, American Journal of Clinical Nutrition, 34(108), 1049-1055.
+[^3]: King et al., Effect of vegetarianism on the Zinc Status of Pregnant Women, *American Journal of Clinical Nutrition*, 34(108), 1049-1055.
 
 |Pregnant nonvegetarians|Pregnant vegetarians|Nonpregnant vegetarians|
 |:---|:---|:---|
@@ -127,6 +127,8 @@ The *lapse rate* is the rate at which temperature drops as you increase elevatio
 # 5. The Big Bang Theory
 
 [Edwin Hubble](https://www.britannica.com/biography/Edwin-Hubble) used the power of the Mount Wilson Observatory telescopes to measure features of the *nebulae* outside *the Milky Way*. He was surprised to find a relationship between a nebula's distance from the Earth and the velocity with which is was going away from the Earth. Hubble's initial data on 24 nebulae are listed below. [^4]
+
+[^4]: Hubble, A Relation Between Distance and Radial Velocity Among Extra-galactic Nebulae, *Proceedings of the National Academy of Science*, 15(1929), 168-173.
 
 ||Nebula|Velocity|Distance|
 |:---|:---|:---|:---|
@@ -170,8 +172,6 @@ The *recession velocity* is in `km per second`, which was determined with consid
 Address the first assumption with your regression results; and estimate the age of the universe.
 
 **5.4 [5 points]** Explain why improved measurement of distance would lead to more precise estimates of the regression coefficients. 
-
-[^4]: Hubble, A Relation Between Distance and Radial Velocity Among Extra-galactic Nebulae, Proceedings of the National Academy of Science, 15(1929), 168-173.
 
 # 6. CPU Performance
 
