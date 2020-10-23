@@ -173,6 +173,8 @@ Address the first assumption with your regression results; and estimate the age 
 
 **5.4 [5 points]** Explain why improved measurement of distance would lead to more precise estimates of the regression coefficients. 
 
+***
+
 # 6. CPU Performance
 
 Let's reuse the CPU performance data from [Exercise #3](https://zhu-group.github.io/ese5023/Section_07.html#Exercise_3) in Section 07. Now split the dataset randomly into two subsets: (1) the train set (contains 80% of the data points), and (2) the test set (contains 20% of the data points).
@@ -180,6 +182,8 @@ Let's reuse the CPU performance data from [Exercise #3](https://zhu-group.github
 **6.1 [5 points]** For the train set, fit the best subset regression between predictor variable `perf` and response variables including `syct`, `mmin`, `mmax`, `cach`, `chmin`, and `chmax`.
 
 **6.2 [5 points]** Apply the best regression model to the test set, and compare your predicted `perf` values with the actual values that provided in the test set. Quantify the mean bias between predicted `perf` values and provided `perf` values. 
+
+***
 
 # 7. Analysis of Data Sets from Your Group
 
