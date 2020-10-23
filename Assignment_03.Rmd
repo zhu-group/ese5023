@@ -20,7 +20,7 @@ For problem set *i*, create a script named `PS3_i.R`. Write your results briefly
 **Collaboration:**  
 Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
 
-* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in the problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
 * Write your scripts and report **independently** - the scripts and report must come from you only.
 
 **Late Submission:**   
@@ -33,9 +33,9 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 # 1. Cloud Seeding
 
-To test a hypothesis that massive injection of silver iodide into cumulus clouds can lead to increased rainfall, an flight expermient is conducted in southern Florida. On each of 52 days that were deemed suitable for cloud seeding, a random mechanism was used to decide whether to seed the target cloud on that day or leave it unseeded as a control. An airplane flew through the cloud in both cases, since the experimenters and the pilot were themselves unaware of whether on any particular day the seeding mechanism in the plane was loaded or not (that is, thery were *blind* to the treatment). Precipitation was measured as the total rain volumn falling from the cloud base following the airplane seeding run, as measured by radar. [^1]
+Massive injection of silver iodide into cumulus clouds may lead to increased rainfall. To test this hypothesis, a flight experiment is conducted in southern Florida. On each of 52 days that were deemed suitable for cloud seeding, a random mechanism was used to decide whether to seed the target cloud on that day or leave it unseeded as a control. An airplane flew through the cloud in both cases, since the experimenters and the pilot were themselves unaware of whether on any particular day the seeding mechanism in the plane was loaded or not (that is, they were *blind* to the treatment). Precipitation was measured as the total rain volume falling from the cloud base following the airplane seeding run, as measured by radar. [^1]
 
-[^1]: Simpson and Eden, A Bauesian Analysis of a Multiplicative Tretment Effect in Weather Modification, Technometric, 17(1975), 161-166.
+[^1]: Simpson and Eden, A Bayesian Analysis of a Multiplicative Treatment Effect in Weather Modification, Technometrics, 17(1975), 161-166.
 
 Rainfall (acre-feet) for days with and without cloud seeding were collected as follows.
 
@@ -53,9 +53,9 @@ Rainfall from Seeded Days (n=26): 2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 4
 
 # 2. Was Tyrannosaurus Rex Warm-Blooded?
 
-It is known that the oxygen isotopic composition of vertebrate bone phosphare is related to the body temperature at which the bone forms. Difference in means at different bone sites would indicate nonconstant temperatures throughout the body. Minor temperature differences would be expected in warm-blooded anaimals. The following data show several measurements of the oxygen isotopic composition of bone phosphare in each of 12 bone specimens from a single Tyrannosurus rex skeleton. [^2]
+It is known that the oxygen isotopic composition of vertebrate bone phosphare is related to the body temperature at which the bone forms. Difference in means at different bone sites would indicate nonconstant temperatures throughout the body. Minor temperature differences would be expected in warm-blooded anaimals The following data show several measurements of the oxygen isotopic composition of bone phosphare in each of 12 bone specimens from a single Tyrannosaurus rex skeleton. [^2]
 
-[^2]: Thermophysiology of Tyrannosaurus rex; Evdience from Oxygen Isotopes, Science, 265 (1994): 222-224.
+[^2]: Thermophysiology of Tyrannosaurus rex; Evidence from Oxygen Isotopes, Science, 265 (1994): 222-224.
 
 |Bone|Oxygen isotopic composition|
 |:---|---:|---:|---:|---:|---:|---:|
@@ -78,9 +78,9 @@ It is known that the oxygen isotopic composition of vertebrate bone phosphare is
 
 # 3. Vegetarians and Zinc
 
-Previuos studies suggest that vegetarians may not recieve enough zinc in their diets. As the zinc requirement is particularly important during pregnance, researchers conducted a study to determine whether vehetarian pregnant women are at greater risk from zinc level than are nonvegetarian prenant women. 
+Previous studies suggest that vegetarians may not receive enough zinc in their diets. As the zinc requirement is particularly important during pregnancy, researchers conducted a study to determine whether vegatarian pregnant women are at greater risk from zinc level than are nonvegetarian pregnant women. 
 
-23 women were monitored: 12 vegetarians who were pregnant, 6 nonvegetarian who were pregnant, and 5 vegetarians who were not pregnant. None of these women were smokers, and none of the nonpregnant women were taking oral contraceptives. The zinc status in each women was measured by zinc content in the blood, urine, and hair. The following table presents zinc levels in the hair. [^3]
+23 women were monitored: 12 vegetarians who were pregnant, 6 nonvegetarian who were pregnant, and 5 vegetarians who were not pregnant. None of these women was smokers, and none of the nonpregnant women was taking oral contraceptives. The zinc status in each woman was measured by zinc content in the blood, urine, and hair. The following table presents zinc levels in the hair. [^3]
 
 [^3]: King et al., Effect of vegetarianism on the Zinc Status of Pregnant Women, American Journal of Clinical Nutrition, 34(108), 1049-1055.
 
@@ -99,7 +99,7 @@ Previuos studies suggest that vegetarians may not recieve enough zinc in their d
 ||184||
 ||186||
 
-**[10 points]** What evdience is there that pregnat vegetarians tend to have lower zinc levels than pregnant nonvegetarians?
+**[10 points]** What evidence is there that pregnant vegetarians tend to have lower zinc levels than pregnant nonvegetarians?
 
 ***
 
@@ -118,7 +118,7 @@ The *lapse rate* is the rate at which temperature drops as you increase elevatio
 
 # 5. The Big Bang Theory
 
-Edwin Hubble used the power of the Mount Wilson Observatory telescopes to measure features of the nebulae outside the Milky Way. He was surprised to find a relationship between a nebula's distance from Earth and the velocity with which is was going away from the Earth. Hubble's initial data on 24 nebulae are lised below. [^4]
+Edwin Hubble used the power of the Mount Wilson Observatory telescopes to measure features of the nebulae outside the Milky Way. He was surprised to find a relationship between a nebula's distance from Earth and the velocity with which is was going away from the Earth. Hubble's initial data on 24 nebulae are listed below. [^4]
 
 ||Nebula|Velocity|Distance|
 |:---|:---|:---|:---|
@@ -147,9 +147,9 @@ Edwin Hubble used the power of the Mount Wilson Observatory telescopes to measur
 |23|NGC 4486|800|2.000|
 |24|NGC 4649|1090|2.000|
 
-The recession velocity is in km per second, which was determined with considerable accuracy by the red shift in the spectrum of light from a nebula. The distance measures distance from the Earth, in megaparsecs (about 30.9 trillion km). Distance were measured by comparing mean luminosities of the nebulae to those of certain str types, a method that is not particularly accurate.
+The recession velocity is in km per second, which was determined with considerable accuracy by the red shift in the spectrum of light from a nebula. The distance measures the distance from the Earth, in megaparsecs (about 30.9 trillion km). The distance was measured by comparing mean luminosities of the nebulae to those of certain str types, a method that is not particularly accurate.
 
-**5.1 [5 points]**  Make a scatter plot with distance as the Y-axis and recession velocity as the x-axis. Discribe what you see.
+**5.1 [5 points]**  Make a scatter plot with distance as the Y-axis and recession velocity as the x-axis. Describe what you see.
 
 **5.2 [5 points]** Add a simple linear regression to the above scatter plot. 
 
@@ -169,17 +169,17 @@ Let's reuse the CPU performance data from Exercise #3. Now split the dataset ran
 
 **6.1 [5 points]** For your train set, fit a best subset regression between predictor variable `perf` and response variables `syct`, `mmin`, `mmax`, `cach`, `chmin`, `chmax`.
 
-**6.2 [10 points]** Apply the best regression model to the test set, and compare your perdicted `perf` with the actual values provided. Quantify the bias between perdicted `perf` and provided `perf`. 
+**6.2 [10 points]** Apply the best regression model to the test set, and compare your predicted `perf` with the actual values provided. Quantify the bias between predicted `perf` values and provided `perf` values. 
 
-# 7. Analysis a data set
+# 7. Analysis of a data set
 
-Find some data sets from your research group, conduct the following statistical test:
+Find some data sets from your research group, conduct the following statistical tests:
 
-**7.1 [5 points]** Compare the means from two groups using the t-test. Distribe your findings.
+**7.1 [5 points]** Define a simple research question that can be tested with the t-test. Test your question with R, and describe your findings.
 
-**7.2 [5 points]** Compare the means from more groups using the ANOVA. Distribe your findings.
+**7.2 [5 points]** Define a simple research question that can be tested with the ANOVA. Test your question with R, and describe your findings.
 
-**7.2 [5 points]** Define a simple research question that can be tested with a simple linear regression model. Test your question with R, and distribe your findings.
+**7.2 [5 points]** Define a simple research question that can be tested with a simple linear regression model. Test your question with R, and describe your findings.
 
 
 # Source  
