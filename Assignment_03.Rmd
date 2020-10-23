@@ -31,7 +31,79 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 ***
 
-# 1. Atmospheric lapse rate 
+# 1. Cloud Seeding
+
+To test a hypothesis that massive injection of silver iodide into cumulus clouds can lead to increased rainfall, an flight expermient is conducted in southern Florida. On each of 52 days that were deemed suitable for cloud seeding, a random mechanism was used to decide whether to seed the target cloud on that day or leave it unseeded as a control. An airplane flew through the cloud in both cases, since the experimenters and the pilot were themselves unaware of whether on any particular day the seeding mechanism in the plane was loaded or not (that is, thery were *blind* to the treatment). Precipitation was measured as the total rain volumn falling from the cloud base following the airplane seeding run, as measured by radar. [^1]
+
+[^1]: Simpson and Eden, A Bauesian Analysis of a Multiplicative Tretment Effect in Weather Modification, Technometric, 17(1975), 161-166.
+
+Rainfall (acre-feet) for days with and without cloud seeding were collected as follows.
+
+Rainfall from Unseeded Days (n=26): 1202.6, 830.1, 372.4, 345.5, 321.2, 244.3, 163.0, 147.8, 95.0, 87.0, 81.2, 68.5, 47.3, 41.1, 36.6, 29.0, 28.6, 26.3, 
+26.0, 24.4, 21.4, 17.3, 11.5, 4.9, 4.9, 1.0
+
+Rainfall from Seeded Days (n=26): 2745.6, 1697.1, 1656.4, 978.0, 703.4, 489.1, 430.0, 334.1, 302.8, 274.7, 274.7, 255.0, 242.5, 200.7, 198.6, 129.6, 119.0, 118.3,
+115.3, 92.4, 40.6, 32.7, 31.4, 17.5, 7.7, 4.1
+
+**1.1 [5 points]** Plot two box plots side-by-side of the data. Discribe the distributions.
+
+**1.2 [5 points]** Did cloud seeding have an effect on rainfall in this experiment? If so, how much?
+
+***
+
+# 2. Was Tyrannosaurus Rex Warm-Blooded?
+
+It is known that the oxygen isotopic composition of vertebrate bone phosphare is related to the body temperature at which the bone forms. Difference in means at different bone sites would indicate nonconstant temperatures throughout the body. Minor temperature differences would be expected in warm-blooded anaimals. The following data show several measurements of the oxygen isotopic composition of bone phosphare in each of 12 bone specimens from a single Tyrannosurus rex skeleton. [^2]
+
+[^2]: Thermophysiology of Tyrannosaurus rex; Evdience from Oxygen Isotopes, Science, 265 (1994): 222-224.
+
+|Bone|Oxygen isotopic composition|
+|:---|---:|---:|---:|---:|---:|---:|
+|Rib 16|11.10|11.22|11.29|11.49|
+|Gastralia|11.32|11.40|11.71|
+|Gastralia|11.60|11.78|12.05|
+|Dorsal vertebra|10.61|10.88|11.12|11.24|11.43|
+|Dorsal vertebra|10.92|11.20|11.30|11.62|11.70|
+|Femur|11.70|11.79|11.91|12.15|
+|Tibia|11.33|11.41|11.62|12.15|12.30|
+|Metatarsal|11.32|11.65|11.96|12.15|
+|Phalange|11.54|11.89|12.04|
+|Proximal caudal|10.93|11.01|11.08|11.12|11.28|11.37|
+|Mid-caudal|11.35|11.43|11.50|11.57|11.92|
+|Distal caudal|11.95|12.01|12.25|12.30|12.39|
+
+**[10 points]** Is there evidence that the means are different for the different bones?
+
+***
+
+# 3. Vegetarians and Zinc
+
+Previuos studies suggest that vegetarians may not recieve enough zinc in their diets. As the zinc requirement is particularly important during pregnance, researchers conducted a study to determine whether vehetarian pregnant women are at greater risk from zinc level than are nonvegetarian prenant women. 
+
+23 women were monitored: 12 vegetarians who were pregnant, 6 nonvegetarian who were pregnant, and 5 vegetarians who were not pregnant. None of these women were smokers, and none of the nonpregnant women were taking oral contraceptives. The zinc status in each women was measured by zinc content in the blood, urine, and hair. The following table presents zinc levels in the hair. [^3]
+
+[^3]: King et al., Effect of vegetarianism on the Zinc Status of Pregnant Women, American Journal of Clinical Nutrition, 34(108), 1049-1055.
+
+|Pregnant nonvegetarians|Pregnant vegetarians|Nonpregnant vegetarians|
+|:---|:---|:---|
+|185|171|210|
+|189|174|139|
+|187|202|172|
+|181|171|198|
+|150|207|177|
+|176|125||
+||189||
+||179||
+||163||
+||174||
+||184||
+||186||
+
+**[10 points]** What evdience is there that pregnat vegetarians tend to have lower zinc levels than pregnant nonvegetarians?
+
+***
+
+# 4. Atmospheric lapse rate 
 
 The *lapse rate* is the rate at which temperature drops as you increase elevation. Some hardy students were interested in checking empirically if the lapse rate of 9.8 degrees C km^-1^ was accurate for their hiking. To investigate, they grabbed their thermometers and their Huawei wrist altimeters and found the following data on their hike.
 
@@ -44,16 +116,71 @@ The *lapse rate* is the rate at which temperature drops as you increase elevatio
 
 ***
 
-# 2. Wind speed in Shenzhen during the past 10 years
+# 5. The Big Bang Theory
 
-In this problem set, we will examine how wind speed changes in Shenzhen during the past 10 years. Recall the `2281305.csv` you used for [Exercise #3](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) in Section 03. Read page `8`-`9` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the wind data. Explain how you filter the data in your report. Use functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+Edwin Hubble used the power of the Mount Wilson Observatory telescopes to measure features of the nebulae outside the Milky Way. He was surprised to find a relationship between a nebula's distance from Earth and the velocity with which is was going away from the Earth. Hubble's initial data on 24 nebulae are lised below. [^4]
 
-**[10 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed within the past 10 years? 
+||Nebula|Velocity|Distance|
+|:---|:---|:---|:---|
+|1|S. Mag.|170|0.032|
+|2|L. Mag.|290|0.034|
+|3|NGC 6822|-130|0.214|
+|4|NGC 598|-70|0.263|
+|5|NGC 221|-185|0.275|
+|6|NGC 224|-220|0.275|
+|7|NGC 5457|200|0.450|
+|8|NGC 4736|290|0.500|
+|9|NGC 5194|270|0.500|
+|10|NGC 4449|200|0.630|
+|11|NGC 4214|300|0.800|
+|12|NGC 3031|-30|0.900|
+|13|NGC 3627|650|0.900|
+|14|NGC 4626|150|0.900|
+|15|NGC 5236|500|0.900|
+|16|NGC 1068|920|1.000|
+|17|NGC 5055|450|1.100|
+|18|NGC 7331|500|1.100|
+|19|NGC 4258|500|1.400|
+|20|NGC 4151|960|1.700|
+|21|NGC 4382|500|2.000|
+|22|NGC 4472|850|2.000|
+|23|NGC 4486|800|2.000|
+|24|NGC 4649|1090|2.000|
 
-***
+The recession velocity is in km per second, which was determined with considerable accuracy by the red shift in the spectrum of light from a nebula. The distance measures distance from the Earth, in megaparsecs (about 30.9 trillion km). Distance were measured by comparing mean luminosities of the nebulae to those of certain str types, a method that is not particularly accurate.
 
-# 3. Revisit a data set
+**5.1 [5 points]**  Make a scatter plot with distance as the Y-axis and recession velocity as the x-axis. Discribe what you see.
 
-Revisit the data set you used in [Problem 7](https://zhu-group.github.io/ese5023/Assignment_01.html#7_Explore_a_data_set) of the Assignment 01. Now use functions from `tidyr`, `dplyr`, and `ggplot2` packages to: 
+**5.2 [5 points]** Add a simple linear regression to the above scatter plot. 
 
-**[10 points]** Reproduce the same time series you made previously in Assignment 01.  
+**5.3 [10 points]** If Hubble's Big Bang theory is correct, then for the regression line:
+
+* The intercept is zero - as the universe starts with one single point!
+
+* And the slope is the age of the universe.
+
+Address the above two assumptions with the dataset and the regression results.
+
+[^4]: Hubble, A Relation Between Distance and Radial Velocity Among Extra-galactic Nebulae, Proceedings of the National Academy of Science, 15(1929), 168-173.
+
+# 6. CPU performance
+
+Let's reuse the CPU performance data from Exercise #3. Now split the dataset randomly into two subsets: (1) the train set (80% data points), and (2) the test set (20% data points).
+
+**6.1 [5 points]** For your train set, fit a best subset regression between predictor variable `perf` and response variables `syct`, `mmin`, `mmax`, `cach`, `chmin`, `chmax`.
+
+**6.2 [10 points]** Apply the best regression model to the test set, and compare your perdicted `perf` with the actual values provided. Quantify the bias between perdicted `perf` and provided `perf`. 
+
+# 7. Analysis a data set
+
+Find some data sets from your research group, conduct the following statistical test:
+
+**7.1 [5 points]** Compare the means from two groups using the t-test. Distribe your findings.
+
+**7.2 [5 points]** Compare the means from more groups using the ANOVA. Distribe your findings.
+
+**7.2 [5 points]** Define a simple research question that can be tested with a simple linear regression model. Test your question with R, and distribe your findings.
+
+
+# Source  
+

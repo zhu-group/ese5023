@@ -95,7 +95,7 @@ anova_one_way <- aov(yield ~ fertilizer, data = crop_data_tbl)
 summary(anova_one_way)
 ```
 
-The p-value is lower than the usual threshold of 0.05. You are confident to say there is a statistical difference between the groups, indicated by the "*". 
+The p-value is lower than the usual threshold of 0.05. You are confident to say there is a statistical difference between the groups, indicated by the "***". 
 
 ## Pairwise comparison
 
@@ -153,7 +153,7 @@ where $\epsilon_{i}$ ~ $N(0, \sigma^{2})$.  In this notation, we will define:
 * $x_{i2}$ as the wind speed (`Wind`) of the *i*th day.
 * $x_{i3}$ as the temperature (`Temp`) of the *i*th day.
 
-The data points ($x_{i1}, x_{i2}, x_{i3}, y_{i}$) now exist in 4-dimensional space, so instead of fitting a line as we did in the simple linear regression model to the data, we will fit a 4-dimensional space. 
+The data points ($x_{i1}, x_{i2}, x_{i3}, y_{i}$) now exist in 4-dimensional space, so instead of fitting a line as we did in the simple linear regression model to the data, we will fit a 3-dimensional space. 
 
 Before the linear regression model can be applied, one must verify multiple factors and make sure assumptions are met. Most of all, one must make sure *linearity* exists between the variables in the dataset. One of the fastest ways to check the linearity is by using scatter plots.
 
@@ -232,7 +232,7 @@ summary(fit)
 
 ```
 
-You can see the high $R^{2}$ doesn't make any senses, as the linear model has no  valid observations.  
+You can see the high $R^{2}$ doesn't make any sense, as the linear model has no  valid observations.  
 
 ***
 
@@ -326,7 +326,7 @@ Please go over the notes once again, make sure you understand the scripts.
 
 ## Exercise #2
 
-2.1 Using the crop yeild data, graphically check crop yeilds in different soil density (`density`) groups; and conduct a one-way ANOVA test to show whether there is a difference in crop yeild average between soil density type (`density`) group.
+2.1 Using the crop yeild data, graphically check crop yeilds in different soil density (`density`) groups; and conduct a one-way ANOVA test to show whether there is a difference in crop yeild average between soil density (`density`) group.
 
 2.2 Conduct a two-way ANOVA test to show whether changing the soil density type **or** the blocking method impact the crop yeilds. 
 
@@ -338,7 +338,7 @@ library(MASS)
 data(cpus)
 ```
 
-3.1 Fit a best subset regression between predictor variable `perf` and response variables `syct`, `mmin`, `mmax`, `cach`, `chmin`, `chmax`. Try `bic` and `adjr2` in as the `scale` argument.
+3.1 Fit a best subset regression between predictor variable `perf` and response variables `syct`, `mmin`, `mmax`, `cach`, `chmin`, `chmax`. Try `bic` and `adjr2`  as the `scale` argument.
 
 3.2 Try forward, backward, and stepwise regression method for variable selection. Compare your best models obtained by the three methods.
 

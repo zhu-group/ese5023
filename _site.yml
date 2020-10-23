@@ -19,7 +19,9 @@ navbar:
         - text: "Assignment 01"
           href: Assignment_01.html
         - text: "Assignment 02"
-          href: Assignment_02.html  
+          href: Assignment_02.html
+        - text: "Assignment 03"
+          href: Assignment_03.html          
 output:
   html_document:
     theme: readable
