@@ -63,7 +63,7 @@ It is known that the oxygen isotopic composition of vertebrate bone phosphate is
 
 The following data show several measurements of the oxygen isotopic composition of bone phosphate in each of 12 bone specimens from a single Tyrannosaurus rex skeleton. [^2]
 
-[^2]: Barrick and Showers, Thermophysiology of Tyrannosaurus rex; Evidence from Oxygen Isotopes, *Science*, 265(1994): 222-224.
+[^2]: Barrick and Showers, Thermophysiology of Tyrannosaurus rex; Evidence from Oxygen Isotopes, *Science*, 265(1994), 222-224.
 
 |Bone|Oxygen isotopic composition|
 |:---|---:|---:|---:|---:|---:|---:|
@@ -120,7 +120,7 @@ The *lapse rate* is the rate at which temperature drops as you increase elevatio
 |Elevation (m)|180|305|381|488|549|640|762|883|
 |Temperature (degrees C)|13.3|12.2|13.3|10.0|8.3|9.4|8.3|7.2|
 
-**[10 points]** Draw a scatter plot with regression line, and investigate if the lapse rate is 9.8 degrees C km^-1^.
+**[15 points]** Draw a scatter plot with regression line, and investigate if the lapse rate is 9.8 degrees C km^-1^.
 
 ***
 
@@ -163,7 +163,7 @@ The *recession velocity* is in `km per second`, which was determined with consid
 
 **5.2 [5 points]** Add a simple linear regression line to the above scatter plot. 
 
-**5.3 [10 points]** If Hubble's *Big Bang Theory* is correct, explain why the following two assumptions about the regression line you made in 5.2 need to be true:
+**5.3 [15 points]** If Hubble's *Big Bang Theory* is correct, explain why the following two assumptions about the regression line you made in 5.2 need to be true:
 
 * The intercept should be zero
 
