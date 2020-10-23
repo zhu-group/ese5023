@@ -80,7 +80,7 @@ The following data show several measurements of the oxygen isotopic composition 
 |Mid-caudal|11.35|11.43|11.50|11.57|11.92|
 |Distal caudal|11.95|12.01|12.25|12.30|12.39|
 
-**[10 points]** Is there evidence that the means are different for the different bones?
+**[10 points]** Is there evidence that the means are different for the different bones? Does the dataset support Tyrannosaurus Rex is warm-blooded or not?
 
 ***
 
