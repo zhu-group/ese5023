@@ -32,12 +32,16 @@ library(gapminder)
 
 **1.7** Fitting a simple linear regression model requires linearity between the two variables. Apparently, such an assumption is not met by examining the scatter plot from **1.6**. This is because `mean_gdpPercap` does not follow a normal distribution. Instead it follows a *log-normal distribution*. The log-normal distribution is characterized with a long tail towards high values. In statistics, this is called *positively skewed* or *right-skewed*. Use the `hist()` function to verify `mean_gdpPercap` indeed has a long tail. Please notice that environmental data often follow log-normal distributions.
 
-**1.8** We can transfer a log-normal distribution to a normal distribution using logarithmic calculations. Now take `log` on `mean_gdpPercap`, and assign the results to a new vector `mean_gdpPercap_log`. Check the distribution of `mean_gdpPercap_log`.
+**1.8** We can transfer a log-normal distribution to a normal distribution using logarithmic calculations. Now take `log` on `mean_gdpPercap`, and add the results to `gapminder_new` as a new variable `mean_gdpPercap_log` using the `mutate()` function. Check the distribution of `mean_gdpPercap_log`.
 
 **1.9** Plot a scatter plot with `mean_lifeExp` as the Y-axis and `mean_gdpPercap_log` as the X-axis. Compare it with that from **1.5**, describe the differnece between the two.
 
-**1.10** As both `mean_gdpPercap_log` and `mean_lifeExp` are roughly following normal distributions now, we can finally build a linear model between `mean_lifeExp` and `mean_gdpPercap_log`. Fit a simple linear regression model between `mean_lifeExp` and `mean_gdpPercap_log`, and add the regression line to the scatter plot from **1.9**. Estimate the improvement in life expectancy when GDP per capita increases by 1 unit.
+**1.10** As both `mean_gdpPercap_log` and `mean_lifeExp` are roughly following normal distributions now, we can finally build a linear model between `mean_lifeExp` and `mean_gdpPercap_log`. Fit a simple linear regression model between `mean_lifeExp` and `mean_gdpPercap_log`, and add the regression line to the scatter plot from **1.9**. Estimate the improvement in life expectancy when GDP per capita doubles.
 
 **1.11**  Split `gapminder_new` into two subsets - `gapminder_new_train` (with 85% of the total data points) and `gapminder_new_test` (with 15% of the total data points). Following **1.10**, build a linear model (named `model_log`) between `mean_gdpPercap_log` and `mean_lifeExp` using data from `gapminder_new_train` subset. 
 
 **1.12** Apply the fitted linear model `model_log` to `gapminder_new_test` subset, get predicted life expectancies using the `predict()` function. Compare predicted life expectancies with actual values in `gapminder_new_test` in terms of correlation coefficients and relative mean bias. 
+
+# 2. Transforming data to normal distribution
+
+Parametric methods, such as t-test, ANOVA tests, and linear regression, assume that the dependent (outcome) variable is approximately normally distributed for every groups to be compared. Read [Transform Data to Normal Distribution in R](https://www.datanovia.com/en/lessons/transform-data-to-normal-distribution-in-r/) and [Summary and Analysis of Extension Program Evaluation in R](http://rcompanion.org/handbook/I_12.html) for how to do this in R.
