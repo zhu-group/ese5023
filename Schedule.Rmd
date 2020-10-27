@@ -19,8 +19,8 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |4   |10/10|Sat.|[Section 05 Data wrangling](https://zhu-group.github.io/ese5023/Section_05.html)      | [Assignment 2](https://zhu-group.github.io/ese5023/Assignment_02.html) |  1           |
 |5   |10/13|Tu. |[Lab 02](https://zhu-group.github.io/ese5023/Lab_02.html)                             |              |              |
 |5   |10/15|Th. |[Section 06 Statistical sleuth: Basics](https://zhu-group.github.io/ese5023/Section_06.html)         |              |              |
-|6   |10/22|Th. |[Section 07 Statistical sleuth: Intermediate](https://zhu-group.github.io/ese5023/Section_07.html)   | [Assignment 3](https://zhu-group.github.io/ese5023/Assignment_03.html)           |  2           |
-|7   |10/27|Tu. |Lab 03                                                                                |              |              |
+|6   |10/22|Th. |[Section 07 Statistical sleuth: Intermediate](https://zhu-group.github.io/ese5023/Section_07.html)   | [Assignment 3](https://zhu-group.github.io/ese5023/Assignment_03.html) |  2   |
+|7   |10/27|Tu. |[Lab 03](https://zhu-group.github.io/ese5023/Lab_02.html)                             |              |              |
 |7   |10/29|Th. |Section 08 Plotting with R                                                            |              |              |
 |8   |11/05|Th. |Section 09 Time series analysis                                                       |  4           |  3           |
 |9   |11/10|Tu. |Lab 04                                                                                |              |              |

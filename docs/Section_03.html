@@ -540,53 +540,51 @@ div.tocify {
 <p>The <code>read.table()</code> function is used for reading in <strong>tabular data</strong> stored in a text file where the columns of data are separated by punctuation characters such as <code>.csv</code> files (csv = comma-separated values). <code>Tabs</code> and <code>commas</code> are the most common punctuation characters used to separate or delimit data points in <code>.csv</code> files. For convenience R provides 2 other versions of <code>read.table()</code>. These are: <code>read.csv()</code> for files where the data are separated with <code>commas</code> and <code>read.delim()</code> for files where the data are separated with <code>tabs</code>. Of these three functions, <code>read.csv()</code> is the most commonly used. If needed it is possible to override the default delimiting punctuation marks for both <code>read.csv()</code> and <code>read.delim()</code>.</p>
 <p>We can begin exploring our dataset right away, pulling out columns by specifying them using the <code>$</code> operator:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">Keeling_Data<span class="op">$</span>co2</a></code></pre></div>
-<pre><code>##   [1] 315.71 317.45 317.50 -99.99 315.86 314.93 313.20 -99.99 313.33 314.67 315.62 316.38 316.71 317.72 318.29 318.15
-##  [17] 316.54 314.80 313.84 313.26 314.80 315.58 316.43 316.97 317.58 319.02 320.03 319.59 318.18 315.91 314.16 313.83
-##  [33] 315.00 316.19 316.93 317.70 318.54 319.48 320.58 319.77 318.57 316.79 314.80 315.38 316.10 317.01 317.94 318.56
-##  [49] 319.68 320.63 321.01 320.55 319.58 317.40 316.26 315.42 316.69 317.69 318.74 319.08 319.86 321.39 322.25 321.47
-##  [65] 319.74 317.77 316.21 315.99 317.12 318.31 319.57 -99.99 -99.99 -99.99 322.25 321.89 320.44 318.70 316.70 316.79
-##  [81] 317.79 318.71 319.44 320.44 320.89 322.13 322.16 321.87 321.39 318.81 317.81 317.30 318.87 319.42 320.62 321.59
-##  [97] 322.39 323.87 324.01 323.75 322.39 320.37 318.64 318.10 319.79 321.08 322.07 322.50 323.04 324.42 325.00 324.09
-## [113] 322.55 320.92 319.31 319.31 320.72 321.96 322.57 323.15 323.89 325.02 325.57 325.36 324.14 322.03 320.41 320.25
-## [129] 321.31 322.84 324.00 324.42 325.64 326.66 327.34 326.76 325.88 323.67 322.38 321.78 322.85 324.11 325.03 325.99
-## [145] 326.87 328.13 328.07 327.66 326.35 324.69 323.10 323.16 323.98 325.13 326.17 326.68 327.18 327.78 328.92 328.57
-## [161] 327.34 325.46 323.36 323.57 324.80 326.01 326.77 327.63 327.75 329.72 330.07 329.09 328.05 326.32 324.93 325.06
-## [177] 326.50 327.55 328.54 329.56 330.30 331.50 332.48 332.07 330.87 329.31 327.51 327.18 328.16 328.64 329.35 330.71
-## [193] 331.48 332.65 333.19 332.16 331.07 329.12 327.32 327.28 328.30 329.58 330.73 331.46 331.90 333.17 333.94 333.45
-## [209] 331.97 329.95 328.50 328.34 329.37 -99.99 331.59 332.75 333.52 334.64 334.77 334.00 333.06 330.68 328.95 328.75
-## [225] 330.15 331.62 332.66 333.13 334.95 336.13 336.93 336.17 334.88 332.56 331.29 331.27 332.41 333.60 334.95 335.25
-## [241] 336.66 337.69 338.03 338.01 336.41 334.41 332.37 332.41 333.75 334.90 336.14 336.69 338.27 338.95 339.21 339.26
-## [257] 337.54 335.75 333.98 334.19 335.31 336.81 337.90 338.34 340.01 340.93 341.48 341.33 339.40 337.70 336.19 336.15
-## [273] 337.27 338.32 339.29 340.55 341.61 342.53 343.03 342.54 340.78 338.44 336.95 337.08 338.58 339.88 340.96 341.73
-## [289] 342.81 343.97 344.63 343.79 342.32 340.09 338.28 338.29 339.60 340.90 341.68 342.90 343.33 345.25 346.03 345.63
-## [305] 344.19 342.27 340.35 340.38 341.59 343.05 344.10 344.79 345.52 -99.99 347.63 346.98 345.53 343.55 341.40 341.67
-## [321] 343.10 344.70 345.21 346.16 347.74 348.34 349.06 348.38 346.71 345.02 343.27 343.13 344.49 345.88 346.56 347.28
-## [337] 348.01 349.77 350.38 349.93 348.16 346.08 345.22 344.51 345.93 347.22 348.52 348.73 349.73 351.31 352.09 351.53
-## [353] 350.11 348.08 346.52 346.59 347.96 349.16 350.39 351.64 352.40 353.69 354.21 353.72 352.69 350.40 348.92 349.13
-## [369] 350.20 351.41 352.91 353.27 353.96 355.64 355.86 355.37 353.99 351.81 350.05 350.25 351.49 352.85 353.80 355.04
-## [385] 355.73 356.32 357.32 356.34 354.84 353.01 351.31 351.62 353.07 354.33 354.84 355.73 357.23 358.66 359.13 358.13
-## [401] 356.19 353.85 352.25 352.35 353.81 355.12 356.25 357.11 357.86 359.09 359.59 359.33 357.01 354.94 352.95 353.32
-## [417] 354.32 355.57 357.00 357.31 358.47 359.27 360.19 359.52 357.33 355.64 354.03 354.12 355.41 356.91 358.24 358.92
-## [433] 359.99 361.23 361.65 360.81 359.38 357.46 355.73 356.08 357.53 358.98 359.92 360.86 361.83 363.30 363.69 363.19
-## [449] 361.64 359.12 358.17 357.99 359.45 360.68 362.07 363.24 364.17 364.57 365.13 364.92 363.55 361.38 359.54 359.58
-## [465] 360.89 362.24 363.09 364.03 364.51 366.35 366.64 365.59 364.31 362.25 360.29 360.82 362.49 364.38 365.27 365.98
-## [481] 367.24 368.66 369.42 368.99 367.82 365.95 364.02 364.40 365.52 367.13 368.18 369.07 369.68 370.99 370.96 370.30
-## [497] 369.45 366.90 364.81 365.37 366.72 368.10 369.29 369.55 370.60 371.82 371.58 371.70 369.86 368.13 367.00 367.03
-## [513] 368.37 369.67 370.59 371.51 372.43 373.37 373.85 373.22 371.50 369.61 368.18 368.45 369.76 371.24 372.53 373.20
-## [529] 374.12 375.02 375.76 375.52 374.01 371.85 370.75 370.55 372.25 373.79 374.88 375.64 376.45 377.73 378.60 378.28
-## [545] 376.70 374.38 373.17 373.15 374.66 375.99 377.00 377.87 378.88 380.35 380.62 379.69 377.47 376.01 374.25 374.46
-## [561] 376.16 377.51 378.46 379.73 380.77 382.29 382.45 382.21 380.74 378.74 376.70 377.00 378.35 380.11 381.38 382.20
-## [577] 382.67 384.61 385.03 384.05 382.46 380.41 378.85 379.13 380.15 381.82 382.89 383.90 384.58 386.50 386.56 386.10
-## [593] 384.50 381.99 380.96 381.12 382.45 383.94 385.52 385.82 386.03 387.21 388.54 387.76 386.37 384.09 383.18 382.99
-## [609] 384.19 385.56 386.94 387.48 388.82 389.55 390.14 389.48 388.03 386.11 384.74 384.43 386.02 387.42 388.71 390.20
-## [625] 391.17 392.46 393.00 392.15 390.20 388.35 386.85 387.24 388.67 389.79 391.33 391.86 392.60 393.25 394.19 393.74
-## [641] 392.51 390.13 389.08 389.00 390.28 391.86 393.12 393.86 394.40 396.18 396.74 395.71 394.36 392.39 391.11 391.05
-## [657] 392.98 394.34 395.55 396.80 397.43 398.41 399.78 398.60 397.32 395.20 393.45 393.70 395.16 396.84 397.85 398.01
-## [673] 399.77 401.38 401.78 401.25 399.10 397.03 395.38 396.03 397.28 398.91 399.98 400.28 401.54 403.28 403.96 402.80
-## [689] 401.31 398.93 397.63 398.29 400.16 401.85 402.56 404.12 404.87 407.45 407.72 406.83 404.41 402.27 401.05 401.59
-## [705] 403.55 404.45 406.17 406.46 407.22 409.04 409.69 408.88 407.12 405.13 403.37 403.63 405.12 406.81 407.96 408.32
-## [721] 409.41 410.24 411.24 410.79 408.71 406.99 405.51 406.00 408.02 409.07 410.83 411.75 411.97 413.33 414.64 413.93
-## [737] 411.74 409.95 408.54 408.52 410.25 411.76 413.39 414.11 414.51 416.21 417.07 416.38 414.38</code></pre>
+<pre><code>##   [1] 315.71 317.45 317.50 -99.99 315.86 314.93 313.20 -99.99 313.33 314.67 315.62 316.38 316.71 317.72 318.29 318.15 316.54
+##  [18] 314.80 313.84 313.26 314.80 315.58 316.43 316.97 317.58 319.02 320.03 319.59 318.18 315.91 314.16 313.83 315.00 316.19
+##  [35] 316.93 317.70 318.54 319.48 320.58 319.77 318.57 316.79 314.80 315.38 316.10 317.01 317.94 318.56 319.68 320.63 321.01
+##  [52] 320.55 319.58 317.40 316.26 315.42 316.69 317.69 318.74 319.08 319.86 321.39 322.25 321.47 319.74 317.77 316.21 315.99
+##  [69] 317.12 318.31 319.57 -99.99 -99.99 -99.99 322.25 321.89 320.44 318.70 316.70 316.79 317.79 318.71 319.44 320.44 320.89
+##  [86] 322.13 322.16 321.87 321.39 318.81 317.81 317.30 318.87 319.42 320.62 321.59 322.39 323.87 324.01 323.75 322.39 320.37
+## [103] 318.64 318.10 319.79 321.08 322.07 322.50 323.04 324.42 325.00 324.09 322.55 320.92 319.31 319.31 320.72 321.96 322.57
+## [120] 323.15 323.89 325.02 325.57 325.36 324.14 322.03 320.41 320.25 321.31 322.84 324.00 324.42 325.64 326.66 327.34 326.76
+## [137] 325.88 323.67 322.38 321.78 322.85 324.11 325.03 325.99 326.87 328.13 328.07 327.66 326.35 324.69 323.10 323.16 323.98
+## [154] 325.13 326.17 326.68 327.18 327.78 328.92 328.57 327.34 325.46 323.36 323.57 324.80 326.01 326.77 327.63 327.75 329.72
+## [171] 330.07 329.09 328.05 326.32 324.93 325.06 326.50 327.55 328.54 329.56 330.30 331.50 332.48 332.07 330.87 329.31 327.51
+## [188] 327.18 328.16 328.64 329.35 330.71 331.48 332.65 333.19 332.16 331.07 329.12 327.32 327.28 328.30 329.58 330.73 331.46
+## [205] 331.90 333.17 333.94 333.45 331.97 329.95 328.50 328.34 329.37 -99.99 331.59 332.75 333.52 334.64 334.77 334.00 333.06
+## [222] 330.68 328.95 328.75 330.15 331.62 332.66 333.13 334.95 336.13 336.93 336.17 334.88 332.56 331.29 331.27 332.41 333.60
+## [239] 334.95 335.25 336.66 337.69 338.03 338.01 336.41 334.41 332.37 332.41 333.75 334.90 336.14 336.69 338.27 338.95 339.21
+## [256] 339.26 337.54 335.75 333.98 334.19 335.31 336.81 337.90 338.34 340.01 340.93 341.48 341.33 339.40 337.70 336.19 336.15
+## [273] 337.27 338.32 339.29 340.55 341.61 342.53 343.03 342.54 340.78 338.44 336.95 337.08 338.58 339.88 340.96 341.73 342.81
+## [290] 343.97 344.63 343.79 342.32 340.09 338.28 338.29 339.60 340.90 341.68 342.90 343.33 345.25 346.03 345.63 344.19 342.27
+## [307] 340.35 340.38 341.59 343.05 344.10 344.79 345.52 -99.99 347.63 346.98 345.53 343.55 341.40 341.67 343.10 344.70 345.21
+## [324] 346.16 347.74 348.34 349.06 348.38 346.71 345.02 343.27 343.13 344.49 345.88 346.56 347.28 348.01 349.77 350.38 349.93
+## [341] 348.16 346.08 345.22 344.51 345.93 347.22 348.52 348.73 349.73 351.31 352.09 351.53 350.11 348.08 346.52 346.59 347.96
+## [358] 349.16 350.39 351.64 352.40 353.69 354.21 353.72 352.69 350.40 348.92 349.13 350.20 351.41 352.91 353.27 353.96 355.64
+## [375] 355.86 355.37 353.99 351.81 350.05 350.25 351.49 352.85 353.80 355.04 355.73 356.32 357.32 356.34 354.84 353.01 351.31
+## [392] 351.62 353.07 354.33 354.84 355.73 357.23 358.66 359.13 358.13 356.19 353.85 352.25 352.35 353.81 355.12 356.25 357.11
+## [409] 357.86 359.09 359.59 359.33 357.01 354.94 352.95 353.32 354.32 355.57 357.00 357.31 358.47 359.27 360.19 359.52 357.33
+## [426] 355.64 354.03 354.12 355.41 356.91 358.24 358.92 359.99 361.23 361.65 360.81 359.38 357.46 355.73 356.08 357.53 358.98
+## [443] 359.92 360.86 361.83 363.30 363.69 363.19 361.64 359.12 358.17 357.99 359.45 360.68 362.07 363.24 364.17 364.57 365.13
+## [460] 364.92 363.55 361.38 359.54 359.58 360.89 362.24 363.09 364.03 364.51 366.35 366.64 365.59 364.31 362.25 360.29 360.82
+## [477] 362.49 364.38 365.27 365.98 367.24 368.66 369.42 368.99 367.82 365.95 364.02 364.40 365.52 367.13 368.18 369.07 369.68
+## [494] 370.99 370.96 370.30 369.45 366.90 364.81 365.37 366.72 368.10 369.29 369.55 370.60 371.82 371.58 371.70 369.86 368.13
+## [511] 367.00 367.03 368.37 369.67 370.59 371.51 372.43 373.37 373.85 373.22 371.50 369.61 368.18 368.45 369.76 371.24 372.53
+## [528] 373.20 374.12 375.02 375.76 375.52 374.01 371.85 370.75 370.55 372.25 373.79 374.88 375.64 376.45 377.73 378.60 378.28
+## [545] 376.70 374.38 373.17 373.15 374.66 375.99 377.00 377.87 378.88 380.35 380.62 379.69 377.47 376.01 374.25 374.46 376.16
+## [562] 377.51 378.46 379.73 380.77 382.29 382.45 382.21 380.74 378.74 376.70 377.00 378.35 380.11 381.38 382.20 382.67 384.61
+## [579] 385.03 384.05 382.46 380.41 378.85 379.13 380.15 381.82 382.89 383.90 384.58 386.50 386.56 386.10 384.50 381.99 380.96
+## [596] 381.12 382.45 383.94 385.52 385.82 386.03 387.21 388.54 387.76 386.37 384.09 383.18 382.99 384.19 385.56 386.94 387.48
+## [613] 388.82 389.55 390.14 389.48 388.03 386.11 384.74 384.43 386.02 387.42 388.71 390.20 391.17 392.46 393.00 392.15 390.20
+## [630] 388.35 386.85 387.24 388.67 389.79 391.33 391.86 392.60 393.25 394.19 393.74 392.51 390.13 389.08 389.00 390.28 391.86
+## [647] 393.12 393.86 394.40 396.18 396.74 395.71 394.36 392.39 391.11 391.05 392.98 394.34 395.55 396.80 397.43 398.41 399.78
+## [664] 398.60 397.32 395.20 393.45 393.70 395.16 396.84 397.85 398.01 399.77 401.38 401.78 401.25 399.10 397.03 395.38 396.03
+## [681] 397.28 398.91 399.98 400.28 401.54 403.28 403.96 402.80 401.31 398.93 397.63 398.29 400.16 401.85 402.56 404.12 404.87
+## [698] 407.45 407.72 406.83 404.41 402.27 401.05 401.59 403.55 404.45 406.17 406.46 407.22 409.04 409.69 408.88 407.12 405.13
+## [715] 403.37 403.63 405.12 406.81 407.96 408.32 409.41 410.24 411.24 410.79 408.71 406.99 405.51 406.00 408.02 409.07 410.83
+## [732] 411.75 411.97 413.33 414.64 413.93 411.74 409.95 408.54 408.52 410.25 411.76 413.39 414.11 414.51 416.21 417.07 416.38
+## [749] 414.38</code></pre>
 <p>Let’s do some simple statistical checks with <code>Keeling_Data$co2</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># Min</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">min</span>(Keeling_Data<span class="op">$</span>co2)</a></code></pre></div>
@@ -753,7 +751,7 @@ where <code>-&gt;</code> can be read as being <em>transformed into</em>. You can
 <p>Another important data structure is <em>factor</em>. Factors usually look like character data but are typically used to represent <strong>categorical information</strong>.</p>
 <p>Let’s turn <code>Keeling_Data$month</code> vector into a factor using the <code>factor()</code> function:</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">str</span>(Keeling_Data<span class="op">$</span>month)</a></code></pre></div>
-<pre><code>##  chr [1:749] &quot;March&quot; &quot;April&quot; &quot;May&quot; &quot;June&quot; &quot;July&quot; &quot;August&quot; &quot;September&quot; &quot;October&quot; &quot;November&quot; &quot;December&quot; &quot;January&quot; ...</code></pre>
+<pre><code>##  chr [1:749] &quot;March&quot; &quot;April&quot; &quot;May&quot; &quot;June&quot; &quot;July&quot; &quot;August&quot; &quot;September&quot; &quot;October&quot; &quot;November&quot; &quot;December&quot; &quot;January&quot; &quot;February&quot; ...</code></pre>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">Keeling_Data<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">factor</span>(Keeling_Data<span class="op">$</span>month)</a>
 <a class="sourceLine" id="cb97-2" data-line-number="2"><span class="kw">class</span>(Keeling_Data<span class="op">$</span>month)</a></code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
@@ -795,111 +793,102 @@ where <code>-&gt;</code> can be read as being <em>transformed into</em>. You can
 <p>We see that a <code>data.frame</code> looks like <code>list</code> - this is because a <code>data.frame</code> is really a list of vectors and factors, as they have to be - in order to hold those columns that are a mix of vectors and factors, the <code>data.frame</code> needs something a bit more flexible than a vector to put all the columns together into a familiar table. In other words, a <code>data.frame</code> is a special <code>list</code> in which all the vectors <strong>must have the same length</strong>.</p>
 <p>In the <code>Keeling_Data</code> example, we have an <code>integer</code>, a <code>double</code>, and a <code>logical</code> variable. As we have seen already, each column of <code>data.frame</code> is a vector.</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">Keeling_Data[,<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>##   [1] 1958 1958 1958 1958 1958 1958 1958 1958 1958 1958 1959 1959 1959 1959 1959 1959 1959 1959 1959 1959 1959 1959 1960
-##  [24] 1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 1961 1961 1961 1961 1961 1961 1961 1961 1961 1961 1961 1961
-##  [47] 1962 1962 1962 1962 1962 1962 1962 1962 1962 1962 1962 1962 1963 1963 1963 1963 1963 1963 1963 1963 1963 1963 1963
-##  [70] 1963 1964 1964 1964 1964 1964 1964 1964 1964 1964 1964 1964 1964 1965 1965 1965 1965 1965 1965 1965 1965 1965 1965
-##  [93] 1965 1965 1966 1966 1966 1966 1966 1966 1966 1966 1966 1966 1966 1966 1967 1967 1967 1967 1967 1967 1967 1967 1967
-## [116] 1967 1967 1967 1968 1968 1968 1968 1968 1968 1968 1968 1968 1968 1968 1968 1969 1969 1969 1969 1969 1969 1969 1969
-## [139] 1969 1969 1969 1969 1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 1971 1971 1971 1971 1971 1971 1971
-## [162] 1971 1971 1971 1971 1971 1972 1972 1972 1972 1972 1972 1972 1972 1972 1972 1972 1972 1973 1973 1973 1973 1973 1973
-## [185] 1973 1973 1973 1973 1973 1973 1974 1974 1974 1974 1974 1974 1974 1974 1974 1974 1974 1974 1975 1975 1975 1975 1975
-## [208] 1975 1975 1975 1975 1975 1975 1975 1976 1976 1976 1976 1976 1976 1976 1976 1976 1976 1976 1976 1977 1977 1977 1977
-## [231] 1977 1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 1978 1978 1978 1978 1978 1978 1978 1978 1978 1979 1979 1979
-## [254] 1979 1979 1979 1979 1979 1979 1979 1979 1979 1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 1981 1981
-## [277] 1981 1981 1981 1981 1981 1981 1981 1981 1981 1981 1982 1982 1982 1982 1982 1982 1982 1982 1982 1982 1982 1982 1983
-## [300] 1983 1983 1983 1983 1983 1983 1983 1983 1983 1983 1983 1984 1984 1984 1984 1984 1984 1984 1984 1984 1984 1984 1984
-## [323] 1985 1985 1985 1985 1985 1985 1985 1985 1985 1985 1985 1985 1986 1986 1986 1986 1986 1986 1986 1986 1986 1986 1986
-## [346] 1986 1987 1987 1987 1987 1987 1987 1987 1987 1987 1987 1987 1987 1988 1988 1988 1988 1988 1988 1988 1988 1988 1988
-## [369] 1988 1988 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1990 1990 1990 1990 1990 1990 1990 1990 1990
-## [392] 1990 1990 1990 1991 1991 1991 1991 1991 1991 1991 1991 1991 1991 1991 1991 1992 1992 1992 1992 1992 1992 1992 1992
-## [415] 1992 1992 1992 1992 1993 1993 1993 1993 1993 1993 1993 1993 1993 1993 1993 1993 1994 1994 1994 1994 1994 1994 1994
-## [438] 1994 1994 1994 1994 1994 1995 1995 1995 1995 1995 1995 1995 1995 1995 1995 1995 1995 1996 1996 1996 1996 1996 1996
-## [461] 1996 1996 1996 1996 1996 1996 1997 1997 1997 1997 1997 1997 1997 1997 1997 1997 1997 1997 1998 1998 1998 1998 1998
-## [484] 1998 1998 1998 1998 1998 1998 1998 1999 1999 1999 1999 1999 1999 1999 1999 1999 1999 1999 1999 2000 2000 2000 2000
-## [507] 2000 2000 2000 2000 2000 2000 2000 2000 2001 2001 2001 2001 2001 2001 2001 2001 2001 2001 2001 2001 2002 2002 2002
-## [530] 2002 2002 2002 2002 2002 2002 2002 2002 2002 2003 2003 2003 2003 2003 2003 2003 2003 2003 2003 2003 2003 2004 2004
-## [553] 2004 2004 2004 2004 2004 2004 2004 2004 2004 2004 2005 2005 2005 2005 2005 2005 2005 2005 2005 2005 2005 2005 2006
-## [576] 2006 2006 2006 2006 2006 2006 2006 2006 2006 2006 2006 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007
-## [599] 2008 2008 2008 2008 2008 2008 2008 2008 2008 2008 2008 2008 2009 2009 2009 2009 2009 2009 2009 2009 2009 2009 2009
-## [622] 2009 2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 2011 2011 2011 2011 2011 2011 2011 2011 2011 2011
-## [645] 2011 2011 2012 2012 2012 2012 2012 2012 2012 2012 2012 2012 2012 2012 2013 2013 2013 2013 2013 2013 2013 2013 2013
-## [668] 2013 2013 2013 2014 2014 2014 2014 2014 2014 2014 2014 2014 2014 2014 2014 2015 2015 2015 2015 2015 2015 2015 2015
-## [691] 2015 2015 2015 2015 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2017 2017 2017 2017 2017 2017 2017
-## [714] 2017 2017 2017 2017 2017 2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 2019 2019 2019 2019 2019 2019
-## [737] 2019 2019 2019 2019 2019 2019 2020 2020 2020 2020 2020 2020 2020</code></pre>
+<pre><code>##   [1] 1958 1958 1958 1958 1958 1958 1958 1958 1958 1958 1959 1959 1959 1959 1959 1959 1959 1959 1959 1959 1959 1959 1960 1960 1960
+##  [26] 1960 1960 1960 1960 1960 1960 1960 1960 1960 1961 1961 1961 1961 1961 1961 1961 1961 1961 1961 1961 1961 1962 1962 1962 1962
+##  [51] 1962 1962 1962 1962 1962 1962 1962 1962 1963 1963 1963 1963 1963 1963 1963 1963 1963 1963 1963 1963 1964 1964 1964 1964 1964
+##  [76] 1964 1964 1964 1964 1964 1964 1964 1965 1965 1965 1965 1965 1965 1965 1965 1965 1965 1965 1965 1966 1966 1966 1966 1966 1966
+## [101] 1966 1966 1966 1966 1966 1966 1967 1967 1967 1967 1967 1967 1967 1967 1967 1967 1967 1967 1968 1968 1968 1968 1968 1968 1968
+## [126] 1968 1968 1968 1968 1968 1969 1969 1969 1969 1969 1969 1969 1969 1969 1969 1969 1969 1970 1970 1970 1970 1970 1970 1970 1970
+## [151] 1970 1970 1970 1970 1971 1971 1971 1971 1971 1971 1971 1971 1971 1971 1971 1971 1972 1972 1972 1972 1972 1972 1972 1972 1972
+## [176] 1972 1972 1972 1973 1973 1973 1973 1973 1973 1973 1973 1973 1973 1973 1973 1974 1974 1974 1974 1974 1974 1974 1974 1974 1974
+## [201] 1974 1974 1975 1975 1975 1975 1975 1975 1975 1975 1975 1975 1975 1975 1976 1976 1976 1976 1976 1976 1976 1976 1976 1976 1976
+## [226] 1976 1977 1977 1977 1977 1977 1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 1978 1978 1978 1978 1978 1978 1978 1978 1978
+## [251] 1979 1979 1979 1979 1979 1979 1979 1979 1979 1979 1979 1979 1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 1981
+## [276] 1981 1981 1981 1981 1981 1981 1981 1981 1981 1981 1981 1982 1982 1982 1982 1982 1982 1982 1982 1982 1982 1982 1982 1983 1983
+## [301] 1983 1983 1983 1983 1983 1983 1983 1983 1983 1983 1984 1984 1984 1984 1984 1984 1984 1984 1984 1984 1984 1984 1985 1985 1985
+## [326] 1985 1985 1985 1985 1985 1985 1985 1985 1985 1986 1986 1986 1986 1986 1986 1986 1986 1986 1986 1986 1986 1987 1987 1987 1987
+## [351] 1987 1987 1987 1987 1987 1987 1987 1987 1988 1988 1988 1988 1988 1988 1988 1988 1988 1988 1988 1988 1989 1989 1989 1989 1989
+## [376] 1989 1989 1989 1989 1989 1989 1989 1990 1990 1990 1990 1990 1990 1990 1990 1990 1990 1990 1990 1991 1991 1991 1991 1991 1991
+## [401] 1991 1991 1991 1991 1991 1991 1992 1992 1992 1992 1992 1992 1992 1992 1992 1992 1992 1992 1993 1993 1993 1993 1993 1993 1993
+## [426] 1993 1993 1993 1993 1993 1994 1994 1994 1994 1994 1994 1994 1994 1994 1994 1994 1994 1995 1995 1995 1995 1995 1995 1995 1995
+## [451] 1995 1995 1995 1995 1996 1996 1996 1996 1996 1996 1996 1996 1996 1996 1996 1996 1997 1997 1997 1997 1997 1997 1997 1997 1997
+## [476] 1997 1997 1997 1998 1998 1998 1998 1998 1998 1998 1998 1998 1998 1998 1998 1999 1999 1999 1999 1999 1999 1999 1999 1999 1999
+## [501] 1999 1999 2000 2000 2000 2000 2000 2000 2000 2000 2000 2000 2000 2000 2001 2001 2001 2001 2001 2001 2001 2001 2001 2001 2001
+## [526] 2001 2002 2002 2002 2002 2002 2002 2002 2002 2002 2002 2002 2002 2003 2003 2003 2003 2003 2003 2003 2003 2003 2003 2003 2003
+## [551] 2004 2004 2004 2004 2004 2004 2004 2004 2004 2004 2004 2004 2005 2005 2005 2005 2005 2005 2005 2005 2005 2005 2005 2005 2006
+## [576] 2006 2006 2006 2006 2006 2006 2006 2006 2006 2006 2006 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 2008 2008
+## [601] 2008 2008 2008 2008 2008 2008 2008 2008 2008 2008 2009 2009 2009 2009 2009 2009 2009 2009 2009 2009 2009 2009 2010 2010 2010
+## [626] 2010 2010 2010 2010 2010 2010 2010 2010 2010 2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 2012 2012 2012 2012
+## [651] 2012 2012 2012 2012 2012 2012 2012 2012 2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 2014 2014 2014 2014 2014
+## [676] 2014 2014 2014 2014 2014 2014 2014 2015 2015 2015 2015 2015 2015 2015 2015 2015 2015 2015 2015 2016 2016 2016 2016 2016 2016
+## [701] 2016 2016 2016 2016 2016 2016 2017 2017 2017 2017 2017 2017 2017 2017 2017 2017 2017 2017 2018 2018 2018 2018 2018 2018 2018
+## [726] 2018 2018 2018 2018 2018 2019 2019 2019 2019 2019 2019 2019 2019 2019 2019 2019 2019 2020 2020 2020 2020 2020 2020 2020</code></pre>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">typeof</span>(Keeling_Data[,<span class="dv">1</span>])</a></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">Keeling_Data[,<span class="dv">2</span>]</a></code></pre></div>
-<pre><code>##   [1] March     April     May       June      July      August    September October   November  December  January  
-##  [12] February  March     April     May       June      July      August    September October   November  December 
-##  [23] January   February  March     April     May       June      July      August    September October   November 
-##  [34] December  January   February  March     April     May       June      July      August    September October  
-##  [45] November  December  January   February  March     April     May       June      July      August    September
-##  [56] October   November  December  January   February  March     April     May       June      July      August   
-##  [67] September October   November  December  January   February  March     April     May       June      July     
-##  [78] August    September October   November  December  January   February  March     April     May       June     
-##  [89] July      August    September October   November  December  January   February  March     April     May      
-## [100] June      July      August    September October   November  December  January   February  March     April    
-## [111] May       June      July      August    September October   November  December  January   February  March    
-## [122] April     May       June      July      August    September October   November  December  January   February 
-## [133] March     April     May       June      July      August    September October   November  December  January  
-## [144] February  March     April     May       June      July      August    September October   November  December 
-## [155] January   February  March     April     May       June      July      August    September October   November 
-## [166] December  January   February  March     April     May       June      July      August    September October  
-## [177] November  December  January   February  March     April     May       June      July      August    September
-## [188] October   November  December  January   February  March     April     May       June      July      August   
-## [199] September October   November  December  January   February  March     April     May       June      July     
-## [210] August    September October   November  December  January   February  March     April     May       June     
-## [221] July      August    September October   November  December  January   February  March     April     May      
-## [232] June      July      August    September October   November  December  January   February  March     April    
-## [243] May       June      July      August    September October   November  December  January   February  March    
-## [254] April     May       June      July      August    September October   November  December  January   February 
-## [265] March     April     May       June      July      August    September October   November  December  January  
-## [276] February  March     April     May       June      July      August    September October   November  December 
-## [287] January   February  March     April     May       June      July      August    September October   November 
-## [298] December  January   February  March     April     May       June      July      August    September October  
-## [309] November  December  January   February  March     April     May       June      July      August    September
-## [320] October   November  December  January   February  March     April     May       June      July      August   
-## [331] September October   November  December  January   February  March     April     May       June      July     
-## [342] August    September October   November  December  January   February  March     April     May       June     
-## [353] July      August    September October   November  December  January   February  March     April     May      
-## [364] June      July      August    September October   November  December  January   February  March     April    
-## [375] May       June      July      August    September October   November  December  January   February  March    
-## [386] April     May       June      July      August    September October   November  December  January   February 
-## [397] March     April     May       June      July      August    September October   November  December  January  
-## [408] February  March     April     May       June      July      August    September October   November  December 
-## [419] January   February  March     April     May       June      July      August    September October   November 
-## [430] December  January   February  March     April     May       June      July      August    September October  
-## [441] November  December  January   February  March     April     May       June      July      August    September
-## [452] October   November  December  January   February  March     April     May       June      July      August   
-## [463] September October   November  December  January   February  March     April     May       June      July     
-## [474] August    September October   November  December  January   February  March     April     May       June     
-## [485] July      August    September October   November  December  January   February  March     April     May      
-## [496] June      July      August    September October   November  December  January   February  March     April    
-## [507] May       June      July      August    September October   November  December  January   February  March    
-## [518] April     May       June      July      August    September October   November  December  January   February 
-## [529] March     April     May       June      July      August    September October   November  December  January  
-## [540] February  March     April     May       June      July      August    September October   November  December 
-## [551] January   February  March     April     May       June      July      August    September October   November 
-## [562] December  January   February  March     April     May       June      July      August    September October  
-## [573] November  December  January   February  March     April     May       June      July      August    September
-## [584] October   November  December  January   February  March     April     May       June      July      August   
-## [595] September October   November  December  January   February  March     April     May       June      July     
-## [606] August    September October   November  December  January   February  March     April     May       June     
-## [617] July      August    September October   November  December  January   February  March     April     May      
-## [628] June      July      August    September October   November  December  January   February  March     April    
-## [639] May       June      July      August    September October   November  December  January   February  March    
-## [650] April     May       June      July      August    September October   November  December  January   February 
-## [661] March     April     May       June      July      August    September October   November  December  January  
-## [672] February  March     April     May       June      July      August    September October   November  December 
-## [683] January   February  March     April     May       June      July      August    September October   November 
-## [694] December  January   February  March     April     May       June      July      August    September October  
-## [705] November  December  January   February  March     April     May       June      July      August    September
-## [716] October   November  December  January   February  March     April     May       June      July      August   
-## [727] September October   November  December  January   February  March     April     May       June      July     
-## [738] August    September October   November  December  January   February  March     April     May       June     
-## [749] July     
+<pre><code>##   [1] March     April     May       June      July      August    September October   November  December  January   February 
+##  [13] March     April     May       June      July      August    September October   November  December  January   February 
+##  [25] March     April     May       June      July      August    September October   November  December  January   February 
+##  [37] March     April     May       June      July      August    September October   November  December  January   February 
+##  [49] March     April     May       June      July      August    September October   November  December  January   February 
+##  [61] March     April     May       June      July      August    September October   November  December  January   February 
+##  [73] March     April     May       June      July      August    September October   November  December  January   February 
+##  [85] March     April     May       June      July      August    September October   November  December  January   February 
+##  [97] March     April     May       June      July      August    September October   November  December  January   February 
+## [109] March     April     May       June      July      August    September October   November  December  January   February 
+## [121] March     April     May       June      July      August    September October   November  December  January   February 
+## [133] March     April     May       June      July      August    September October   November  December  January   February 
+## [145] March     April     May       June      July      August    September October   November  December  January   February 
+## [157] March     April     May       June      July      August    September October   November  December  January   February 
+## [169] March     April     May       June      July      August    September October   November  December  January   February 
+## [181] March     April     May       June      July      August    September October   November  December  January   February 
+## [193] March     April     May       June      July      August    September October   November  December  January   February 
+## [205] March     April     May       June      July      August    September October   November  December  January   February 
+## [217] March     April     May       June      July      August    September October   November  December  January   February 
+## [229] March     April     May       June      July      August    September October   November  December  January   February 
+## [241] March     April     May       June      July      August    September October   November  December  January   February 
+## [253] March     April     May       June      July      August    September October   November  December  January   February 
+## [265] March     April     May       June      July      August    September October   November  December  January   February 
+## [277] March     April     May       June      July      August    September October   November  December  January   February 
+## [289] March     April     May       June      July      August    September October   November  December  January   February 
+## [301] March     April     May       June      July      August    September October   November  December  January   February 
+## [313] March     April     May       June      July      August    September October   November  December  January   February 
+## [325] March     April     May       June      July      August    September October   November  December  January   February 
+## [337] March     April     May       June      July      August    September October   November  December  January   February 
+## [349] March     April     May       June      July      August    September October   November  December  January   February 
+## [361] March     April     May       June      July      August    September October   November  December  January   February 
+## [373] March     April     May       June      July      August    September October   November  December  January   February 
+## [385] March     April     May       June      July      August    September October   November  December  January   February 
+## [397] March     April     May       June      July      August    September October   November  December  January   February 
+## [409] March     April     May       June      July      August    September October   November  December  January   February 
+## [421] March     April     May       June      July      August    September October   November  December  January   February 
+## [433] March     April     May       June      July      August    September October   November  December  January   February 
+## [445] March     April     May       June      July      August    September October   November  December  January   February 
+## [457] March     April     May       June      July      August    September October   November  December  January   February 
+## [469] March     April     May       June      July      August    September October   November  December  January   February 
+## [481] March     April     May       June      July      August    September October   November  December  January   February 
+## [493] March     April     May       June      July      August    September October   November  December  January   February 
+## [505] March     April     May       June      July      August    September October   November  December  January   February 
+## [517] March     April     May       June      July      August    September October   November  December  January   February 
+## [529] March     April     May       June      July      August    September October   November  December  January   February 
+## [541] March     April     May       June      July      August    September October   November  December  January   February 
+## [553] March     April     May       June      July      August    September October   November  December  January   February 
+## [565] March     April     May       June      July      August    September October   November  December  January   February 
+## [577] March     April     May       June      July      August    September October   November  December  January   February 
+## [589] March     April     May       June      July      August    September October   November  December  January   February 
+## [601] March     April     May       June      July      August    September October   November  December  January   February 
+## [613] March     April     May       June      July      August    September October   November  December  January   February 
+## [625] March     April     May       June      July      August    September October   November  December  January   February 
+## [637] March     April     May       June      July      August    September October   November  December  January   February 
+## [649] March     April     May       June      July      August    September October   November  December  January   February 
+## [661] March     April     May       June      July      August    September October   November  December  January   February 
+## [673] March     April     May       June      July      August    September October   November  December  January   February 
+## [685] March     April     May       June      July      August    September October   November  December  January   February 
+## [697] March     April     May       June      July      August    September October   November  December  January   February 
+## [709] March     April     May       June      July      August    September October   November  December  January   February 
+## [721] March     April     May       June      July      August    September October   November  December  January   February 
+## [733] March     April     May       June      July      August    September October   November  December  January   February 
+## [745] March     April     May       June      July     
 ## Levels: April August December February January July June March May November October September</code></pre>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">typeof</span>(Keeling_Data[,<span class="dv">2</span>])</a></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
