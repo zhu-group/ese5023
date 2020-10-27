@@ -23,15 +23,16 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -41,14 +42,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -57,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -511,27 +514,27 @@ div.tocify {
 <li><code>fertilizer</code>: type of fertilizer used: factor level: 1, 2, and 3</li>
 </ul>
 <p>In R import the data:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># Read csv</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">crop_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;crop.data.csv&quot;</span>, <span class="dt">header=</span>T)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># Change to factor type</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">crop_data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(crop_data) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fertilizer =</span> <span class="kw">factor</span>(fertilizer, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">block =</span> <span class="kw">factor</span>(block, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">density =</span> <span class="kw">factor</span>(density, <span class="dt">ordered =</span> <span class="ot">TRUE</span>))   </a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co"># Quick check</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="kw">glimpse</span>(crop_data_tbl)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Read csv</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>crop_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;crop.data.csv&quot;</span>, <span class="dt">header=</span>T)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Change to factor type</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>crop_data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(crop_data) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fertilizer =</span> <span class="kw">factor</span>(fertilizer, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">block =</span> <span class="kw">factor</span>(block, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">density =</span> <span class="kw">factor</span>(density, <span class="dt">ordered =</span> <span class="ot">TRUE</span>))   </span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co"># Quick check</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">glimpse</span>(crop_data_tbl)</span></code></pre></div>
 <pre><code>## Rows: 96
 ## Columns: 4
-## $ density    &lt;ord&gt; 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, …
-## $ block      &lt;ord&gt; 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, …
-## $ fertilizer &lt;ord&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, …
-## $ yield      &lt;dbl&gt; 177.2287, 177.5500, 176.4085, 177.7036, 177.1255, 176.7783, 176.7463, 177.0612, 176.2749, 177.9672, 176.6013…</code></pre>
+## $ density    &lt;ord&gt; 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1...
+## $ block      &lt;ord&gt; 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1...
+## $ fertilizer &lt;ord&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+## $ yield      &lt;dbl&gt; 177.2287, 177.5500, 176.4085, 177.703...</code></pre>
 <p>Our objective is to test the following assumption:</p>
 <ul>
 <li>Null: There is <strong>no difference</strong> in crop yield average among fertilizer groups</li>
@@ -539,16 +542,16 @@ div.tocify {
 </ul>
 <p>In other words, we want to know if there is a statistical difference between the mean of the crop yeild according to the type of fertilizer.</p>
 <p>First, we can check the level of the fertilizer with the following code:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">levels</span>(crop_data_tbl<span class="op">$</span>fertilizer)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">levels</span>(crop_data_tbl<span class="op">$</span>fertilizer)</span></code></pre></div>
 <pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
 <p>We can compute the mean and standard deviation:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">crop_data_tbl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(fertilizer) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="dt">count =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="dt">mean_yield =</span> <span class="kw">mean</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="dt">sd_yield =</span> <span class="kw">sd</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  )</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>crop_data_tbl <span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">group_by</span>(fertilizer) <span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="dt">count =</span> <span class="kw">n</span>(),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="dt">mean_yield =</span> <span class="kw">mean</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="dt">sd_yield =</span> <span class="kw">sd</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  )</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 3 x 4
 ##   fertilizer count mean_yield sd_yield
@@ -557,24 +560,25 @@ div.tocify {
 ## 2 2             32       177.    0.574
 ## 3 3             32       177.    0.599</code></pre>
 <p>We can also graphically check if there is a difference between the distribution:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ggplot</span>(crop_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> fertilizer, <span class="dt">y =</span> yield, <span class="dt">fill =</span> fertilizer)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_classic</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">ggplot</span>(crop_data_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> fertilizer, <span class="dt">y =</span> yield, <span class="dt">fill =</span> fertilizer)) <span class="op">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <p><img src="Section_07_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Finally, we run the one-way ANOVA test with the command <code>aov</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">anova_one_way &lt;-<span class="st"> </span><span class="kw">aov</span>(yield <span class="op">~</span><span class="st"> </span>fertilizer, <span class="dt">data =</span> crop_data_tbl)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">summary</span>(anova_one_way)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>anova_one_way &lt;-<span class="st"> </span><span class="kw">aov</span>(yield <span class="op">~</span><span class="st"> </span>fertilizer, <span class="dt">data =</span> crop_data_tbl)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">summary</span>(anova_one_way)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
 ## fertilizer   2   6.07  3.0340   7.863  7e-04 ***
 ## Residuals   93  35.89  0.3859                   
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>The p-value is lower than the usual threshold of 0.05. You are confident to say there is a statistical difference between the groups, indicated by the &quot;***&quot;.</p>
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The p-value is lower than the usual threshold of 0.05. You are confident to say there is a statistical difference between the groups, indicated by the "***".</p>
 </div>
 <div id="pairwise-comparison" class="section level2">
 <h2>Pairwise comparison</h2>
 <p>The one-way ANOVA test does not inform which group has a different mean. Instead, you can perform a <em>Tukey test</em> with the function <code>TukeyHSD()</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">TukeyHSD</span>(anova_one_way)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">TukeyHSD</span>(anova_one_way)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -594,14 +598,15 @@ div.tocify {
 <li>Alternative: The means are different for both variables</li>
 </ul>
 <p>Let’s add <code>block</code> variable to the model. This variable indicates the blocking method used in the land. Now we are interested to see if there is a statistical dependence between the fertilizer type (<code>fertilizer</code>) and blocking method (<code>block</code>).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">anova_two_way &lt;-<span class="st"> </span><span class="kw">aov</span>(yield <span class="op">~</span><span class="st"> </span>fertilizer <span class="op">+</span><span class="st"> </span>block, <span class="dt">data =</span> crop_data_tbl)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">summary</span>(anova_two_way)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>anova_two_way &lt;-<span class="st"> </span><span class="kw">aov</span>(yield <span class="op">~</span><span class="st"> </span>fertilizer <span class="op">+</span><span class="st"> </span>block, <span class="dt">data =</span> crop_data_tbl)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">summary</span>(anova_two_way)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## fertilizer   2  6.068  3.0340   9.018 0.000269 ***
 ## block        3  5.608  1.8693   5.556 0.001522 ** 
 ## Residuals   90 30.278  0.3364                     
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>We can conclude that both fertilizer type (<code>fertilizer</code>) and blocking method (<code>block</code>) are statistically different from 0. We can reject the Null hypothesis and confirm that changing the fertilizer type <strong>or</strong> the blocking method impact the crop yeilds.</p>
 </div>
 </div>
@@ -609,11 +614,11 @@ div.tocify {
 <h1>Multiple Linear Regression</h1>
 <p>We have used the simple linear regression model in the last section, where we assume a linear relationship between a <em>response variable</em> and a single <em>predictor variable</em>. However, it is rarely the case that a dataset will have a single predictor variable. It is also rarely the case that a response variable will only depend on a single variable. So in this chapter, we will extend our current linear model to allow a response to depend on <strong>multiple</strong> predictors.</p>
 <p>Let’s use the <code>airquality</code> dataset from the <code>datasets</code> package that comes with R. The dataset contains daily ozone concentration, solar radiation, wind speed, and temperature in New York City from May to September. Load the <code>airquality</code> by:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(datasets)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">library</span>(stats)</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">data</span>(airquality)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">library</span>(datasets)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">library</span>(stats)</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">data</span>(airquality)</span></code></pre></div>
 <p>Check the data by</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">str</span>(airquality)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">str</span>(airquality)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    153 obs. of  6 variables:
 ##  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
 ##  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
@@ -631,18 +636,18 @@ div.tocify {
 </ul>
 <p>The data points (<span class="math inline">\(x_{i1}, x_{i2}, x_{i3}, y_{i}\)</span>) now exist in 4-dimensional space, so instead of fitting a line as we did in the simple linear regression model to the data, we will fit a 3-dimensional space.</p>
 <p>Before the linear regression model can be applied, one must verify multiple factors and make sure assumptions are met. Most of all, one must make sure <em>linearity</em> exists between the variables in the dataset. One of the fastest ways to check the linearity is by using scatter plots.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># plotting the data to determine the linearity</span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">plot</span>(airquality, <span class="dt">main=</span><span class="st">&quot;Matrix Scatterplot&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># plotting the data to determine the linearity</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">plot</span>(airquality, <span class="dt">main=</span><span class="st">&quot;Matrix Scatterplot&quot;</span>)</span></code></pre></div>
 <p><img src="Section_07_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>From the above scatter plot we can determine the variables <code>Ozone</code>, <code>Solar.R</code>, <code>Wind</code>, and <code>Temp</code> in the database <code>airquality</code> are in linearity.</p>
 <p>In R, the multiple linear regression is done as:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Wind <span class="op">+</span><span class="st"> </span>Temp <span class="op">+</span><span class="st"> </span>Solar.R, <span class="dt">data =</span> airquality)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">coef</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>model &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Wind <span class="op">+</span><span class="st"> </span>Temp <span class="op">+</span><span class="st"> </span>Solar.R, <span class="dt">data =</span> airquality)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">coef</span>(model)</span></code></pre></div>
 <pre><code>##  (Intercept)         Wind         Temp      Solar.R 
 ## -64.34207893  -3.33359131   1.65209291   0.05982059</code></pre>
 <p><span class="math display">\[y_{i}  = -64.34 + -3.33x_{i1} + 1.65x_{i2} + 0.060x_{i3}\]</span> Here we have fitted our model using <code>lm()</code>, however, we have introduced a new syntactical element. The formula <code>Ozone ~ Wind + Temp + Solar.R</code> reads: “model the response variable <code>Ozone</code> as a linear function of <code>Wind</code>, <code>Temp</code>, and <code>Solar.R</code>”. That is, it will estimate an intercept, as well as slope coefficients for <code>Wind</code>, <code>Temp</code>, and <code>Solar.R</code>. We then extract these as we have done before using <code>coef()</code>.</p>
 <p>The model can be further explored with the <code>summary()</code> function:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Ozone ~ Wind + Temp + Solar.R, data = airquality)
@@ -658,18 +663,19 @@ div.tocify {
 ## Temp          1.65209    0.25353   6.516 2.42e-09 ***
 ## Solar.R       0.05982    0.02319   2.580  0.01124 *  
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 21.18 on 107 degrees of freedom
 ##   (42 observations deleted due to missingness)
 ## Multiple R-squared:  0.6059, Adjusted R-squared:  0.5948 
 ## F-statistic: 54.83 on 3 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>In the above model, we assume that all the predictor variables are <strong>independent</strong> of each other. However, such assumption is falwed as we can see from the Matrix Scatterplot that <code>Temp</code> corrlates with <code>Wind</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">cor</span>(airquality<span class="op">$</span>Wind, airquality<span class="op">$</span>Temp)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">cor</span>(airquality<span class="op">$</span>Wind, airquality<span class="op">$</span>Temp)</span></code></pre></div>
 <pre><code>## [1] -0.4579879</code></pre>
 <p>Such <strong>interaction variables</strong> introduce an additional level of regression analysis by allowing researchers to explore the synergistic effects of combined predictors. In R, you can interact two variables by using a colon <code>:</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Wind <span class="op">+</span><span class="st"> </span>Temp <span class="op">+</span><span class="st"> </span>Solar.R <span class="op">+</span><span class="st"> </span>Wind<span class="op">:</span>Temp, <span class="dt">data =</span> airquality)</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">summary</span>(model2)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Wind <span class="op">+</span><span class="st"> </span>Temp <span class="op">+</span><span class="st"> </span>Solar.R <span class="op">+</span><span class="st"> </span>Wind<span class="op">:</span>Temp, <span class="dt">data =</span> airquality)</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Ozone ~ Wind + Temp + Solar.R + Wind:Temp, data = airquality)
@@ -686,7 +692,8 @@ div.tocify {
 ## Solar.R        0.06599    0.02152   3.067 0.002745 ** 
 ## Wind:Temp     -0.22795    0.05259  -4.334 3.34e-05 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 19.61 on 106 degrees of freedom
 ##   (42 observations deleted due to missingness)
@@ -701,67 +708,72 @@ div.tocify {
 <p>Larger sample sizes allow you to specify more complex models. For trustworthy results, your sample size must be <strong>large enough</strong> to support the level of complexity that is required by your research question. If your sample size isn’t large enough, you won’t be able to fit a model that adequately approximates the true model for your response variable. You won’t be able to trust the results.</p>
 <p>You must have a sufficient number of observations for each term in a regression model. Simulation studies show that a good rule of thumb is to have <strong>10-15 observations per term</strong> in multiple linear regression. For example, if your model contains two predictors and the interaction term, you’ll need 30-45 observations. However, if the effect size is small or there is high multicollinearity, you may need more observations per term. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>Let’s demonstrate the idea by adding more fake variables to the linear model.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">N              &lt;-<span class="st"> </span><span class="kw">dim</span>(airquality)[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">Fake           &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim=</span><span class="kw">c</span>(N,<span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">airquality_new &lt;-<span class="st"> </span>airquality</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="co"># Generate some fake observations</span></a>
-<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
-<a class="sourceLine" id="cb27-7" data-line-number="7">  Fake[,i]     &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb27-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb27-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb27-10" data-line-number="10"><span class="co"># Attach to the original data</span></a>
-<a class="sourceLine" id="cb27-11" data-line-number="11">airquality_new &lt;-<span class="st"> </span><span class="kw">cbind</span>(airquality,Fake)</a>
-<a class="sourceLine" id="cb27-12" data-line-number="12">airquality_new &lt;-<span class="st"> </span>airquality_new[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,]</a>
-<a class="sourceLine" id="cb27-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb27-14" data-line-number="14"><span class="co"># Change column names</span></a>
-<a class="sourceLine" id="cb27-15" data-line-number="15"><span class="kw">colnames</span>(airquality_new)[<span class="dv">7</span><span class="op">:</span><span class="dv">16</span>] =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Fake&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb27-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb27-17" data-line-number="17"><span class="co"># Fit linear model</span></a>
-<a class="sourceLine" id="cb27-18" data-line-number="18">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Fake1 <span class="op">+</span><span class="st"> </span>Fake2 <span class="op">+</span><span class="st"> </span>Fake3 <span class="op">+</span><span class="st"> </span>Fake4 <span class="op">+</span><span class="st"> </span>Fake5 <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-19" data-line-number="19"><span class="st">            </span>Fake6 <span class="op">+</span><span class="st"> </span>Fake7 <span class="op">+</span><span class="st"> </span>Fake8 <span class="op">+</span><span class="st"> </span>Fake9 <span class="op">+</span><span class="st"> </span>Fake10, <span class="dt">data =</span> airquality_new)</a>
-<a class="sourceLine" id="cb27-20" data-line-number="20"><span class="kw">summary</span>(fit)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>N              &lt;-<span class="st"> </span><span class="kw">dim</span>(airquality)[<span class="dv">1</span>]</span>
+<span id="cb27-2"><a href="#cb27-2"></a>Fake           &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim=</span><span class="kw">c</span>(N,<span class="dv">10</span>))</span>
+<span id="cb27-3"><a href="#cb27-3"></a>airquality_new &lt;-<span class="st"> </span>airquality</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="co"># Generate some fake observations</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</span>
+<span id="cb27-7"><a href="#cb27-7"></a>  Fake[,i]     &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb27-8"><a href="#cb27-8"></a>}</span>
+<span id="cb27-9"><a href="#cb27-9"></a></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="co"># Attach to the original data</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a>airquality_new &lt;-<span class="st"> </span><span class="kw">cbind</span>(airquality,Fake)</span>
+<span id="cb27-12"><a href="#cb27-12"></a>airquality_new &lt;-<span class="st"> </span>airquality_new[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,]</span>
+<span id="cb27-13"><a href="#cb27-13"></a></span>
+<span id="cb27-14"><a href="#cb27-14"></a><span class="co"># Change column names</span></span>
+<span id="cb27-15"><a href="#cb27-15"></a><span class="kw">colnames</span>(airquality_new)[<span class="dv">7</span><span class="op">:</span><span class="dv">16</span>] =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Fake&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb27-16"><a href="#cb27-16"></a></span>
+<span id="cb27-17"><a href="#cb27-17"></a><span class="co"># Fit linear model</span></span>
+<span id="cb27-18"><a href="#cb27-18"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Fake1 <span class="op">+</span><span class="st"> </span>Fake2 <span class="op">+</span><span class="st"> </span>Fake3 <span class="op">+</span><span class="st"> </span>Fake4 <span class="op">+</span><span class="st"> </span>Fake5 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-19"><a href="#cb27-19"></a><span class="st">            </span>Fake6 <span class="op">+</span><span class="st"> </span>Fake7 <span class="op">+</span><span class="st"> </span>Fake8 <span class="op">+</span><span class="st"> </span>Fake9 <span class="op">+</span><span class="st"> </span>Fake10, <span class="dt">data =</span> airquality_new)</span>
+<span id="cb27-20"><a href="#cb27-20"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Ozone ~ Fake1 + Fake2 + Fake3 + Fake4 + Fake5 + 
 ##     Fake6 + Fake7 + Fake8 + Fake9 + Fake10, data = airquality_new)
 ## 
 ## Residuals:
-##       1       2       3       4       6       7       8       9      11      12      13      14      15 
-##  9.9922  4.8355 -3.4321 -5.3850  6.7799 -2.9986 -0.7697 -1.7067 -7.6902 11.8843  0.1888 -6.5773 -5.1212 
+##       1       2       3       4       6       7       8 
+## 14.2382  5.6720 -3.9799 -3.4908  0.5198  6.5421 -3.5108 
+##       9      11      12      13      14      15 
+## -2.3404  3.4473  5.4639 -8.7321 -5.1053 -8.7240 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)   19.958     11.768   1.696    0.232
-## Fake1         -1.361      8.320  -0.164    0.885
-## Fake2         -6.001     14.362  -0.418    0.717
-## Fake3         -2.038      5.433  -0.375    0.744
-## Fake4          5.883      9.986   0.589    0.615
-## Fake5          0.751      9.992   0.075    0.947
-## Fake6         -9.036     12.231  -0.739    0.537
-## Fake7          8.609     11.524   0.747    0.533
-## Fake8          5.594     16.218   0.345    0.763
-## Fake9         -2.370      6.958  -0.341    0.766
-## Fake10         3.401     11.953   0.285    0.803
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)  21.7417     6.9066   3.148   0.0878 .
+## Fake1        -4.5755    16.2164  -0.282   0.8043  
+## Fake2        -2.8752    10.3019  -0.279   0.8064  
+## Fake3        -4.9069     8.1584  -0.601   0.6086  
+## Fake4        -0.3372     6.3690  -0.053   0.9626  
+## Fake5        -4.1494     5.9653  -0.696   0.5586  
+## Fake6        -9.3545     9.3034  -1.005   0.4205  
+## Fake7        -0.1721     7.2111  -0.024   0.9831  
+## Fake8         2.0132    10.5227   0.191   0.8659  
+## Fake9        -3.3003    12.0978  -0.273   0.8106  
+## Fake10       -4.6102     9.9606  -0.463   0.6890  
+## ---
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 15.69 on 2 degrees of freedom
+## Residual standard error: 16.49 on 2 degrees of freedom
 ##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.6162, Adjusted R-squared:  -1.303 
-## F-statistic: 0.3211 on 10 and 2 DF,  p-value: 0.9112</code></pre>
+## Multiple R-squared:  0.576,  Adjusted R-squared:  -1.544 
+## F-statistic: 0.2716 on 10 and 2 DF,  p-value: 0.9366</code></pre>
 <p>You can see the high <span class="math inline">\(R^{2}\)</span> doesn’t make any sense, as the linear model has no valid observations.</p>
 <hr />
 </div>
 <div id="variable-selection" class="section level1">
 <h1>Variable Selection</h1>
 <p>We use Boston Housing Data as an illustrative example. Boston housing data is a built-in dataset in <code>MASS</code> package, so you do not need to download externally. Package <code>MASS</code> comes with R when you installed R, so <strong>no need</strong> to use <code>install.packages(MASS)</code> to download and install, but you do need to load this package. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">library</span>(MASS)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">library</span>(MASS)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;MASS&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     select</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">data</span>(Boston); <span class="co">#this data is in MASS package</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">str</span>(Boston)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">data</span>(Boston); <span class="co">#this data is in MASS package</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="kw">str</span>(Boston)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    506 obs. of  14 variables:
 ##  $ crim   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...
 ##  $ zn     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...
@@ -779,54 +791,56 @@ div.tocify {
 ##  $ medv   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 27.1 16.5 18.9 ...</code></pre>
 <p>The original data are 506 observations on 14 variables, <code>medv</code> being the response variable <em>y</em>.</p>
 <p>We usually split our data to training and testing samples. In this case, we sample 90% of the original data and use it as the <em>training set</em>. The remaining 10% is used as <em>test set</em>. The regression model will be built on the training set, and future performance of your model will be evaluated with the test set.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">sample_index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Boston),<span class="kw">nrow</span>(Boston)<span class="op">*</span><span class="fl">0.90</span>)</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">Boston_train &lt;-<span class="st"> </span>Boston[sample_index,]</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">Boston_test  &lt;-<span class="st"> </span>Boston[<span class="op">-</span>sample_index,]</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>sample_index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Boston),<span class="kw">nrow</span>(Boston)<span class="op">*</span><span class="fl">0.90</span>)</span>
+<span id="cb34-2"><a href="#cb34-2"></a>Boston_train &lt;-<span class="st"> </span>Boston[sample_index,]</span>
+<span id="cb34-3"><a href="#cb34-3"></a>Boston_test  &lt;-<span class="st"> </span>Boston[<span class="op">-</span>sample_index,]</span></code></pre></div>
 <p>What we want to do next is to build a <strong>best</strong> model with training data. Let’s begin with including all <em>x</em> variables in the model:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">model_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(medv<span class="op">~</span>crim<span class="op">+</span>zn<span class="op">+</span>chas<span class="op">+</span>nox<span class="op">+</span>rm<span class="op">+</span>dis<span class="op">+</span>rad<span class="op">+</span>tax<span class="op">+</span>ptratio<span class="op">+</span>black<span class="op">+</span>lstat, <span class="dt">data=</span>Boston_train)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>model_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(medv<span class="op">~</span>crim<span class="op">+</span>zn<span class="op">+</span>chas<span class="op">+</span>nox<span class="op">+</span>rm<span class="op">+</span>dis<span class="op">+</span>rad<span class="op">+</span>tax<span class="op">+</span>ptratio<span class="op">+</span>black<span class="op">+</span>lstat, <span class="dt">data=</span>Boston_train)</span></code></pre></div>
 <p>To include all variables in the model, you can write the statement this simpler way.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">model_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>Boston_train)</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">summary</span>(model_<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>model_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>Boston_train)</span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">summary</span>(model_<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ ., data = Boston_train)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -14.6802  -2.7862  -0.5588   1.7544  26.5944 
+## -16.6305  -2.7492  -0.5089   1.8453  26.4603 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  3.747e+01  5.300e+00   7.071 6.06e-12 ***
-## crim        -1.063e-01  3.297e-02  -3.223 0.001361 ** 
-## zn           5.019e-02  1.452e-02   3.457 0.000599 ***
-## indus        2.994e-02  6.485e-02   0.462 0.644503    
-## chas         1.938e+00  9.083e-01   2.133 0.033448 *  
-## nox         -1.836e+01  3.940e+00  -4.659 4.22e-06 ***
-## rm           3.870e+00  4.308e-01   8.983  &lt; 2e-16 ***
-## age         -9.913e-04  1.404e-02  -0.071 0.943752    
-## dis         -1.508e+00  2.127e-01  -7.092 5.28e-12 ***
-## rad          3.165e-01  7.386e-02   4.285 2.25e-05 ***
-## tax         -1.343e-02  4.216e-03  -3.186 0.001543 ** 
-## ptratio     -9.950e-01  1.361e-01  -7.313 1.24e-12 ***
-## black        9.220e-03  2.807e-03   3.284 0.001103 ** 
-## lstat       -5.040e-01  5.171e-02  -9.746  &lt; 2e-16 ***
+## (Intercept)  32.982609   5.479267   6.020 3.68e-09 ***
+## crim         -0.102436   0.046795  -2.189 0.029119 *  
+## zn            0.042392   0.014179   2.990 0.002949 ** 
+## indus         0.027322   0.064895   0.421 0.673950    
+## chas          2.756955   0.890286   3.097 0.002082 ** 
+## nox         -15.822651   3.981851  -3.974 8.27e-05 ***
+## rm            4.081732   0.449734   9.076  &lt; 2e-16 ***
+## age          -0.001506   0.013946  -0.108 0.914079    
+## dis          -1.377179   0.209754  -6.566 1.46e-10 ***
+## rad           0.308446   0.071052   4.341 1.76e-05 ***
+## tax          -0.012452   0.003923  -3.174 0.001609 ** 
+## ptratio      -0.949281   0.137804  -6.889 1.95e-11 ***
+## black         0.010852   0.002927   3.708 0.000235 ***
+## lstat        -0.540390   0.054122  -9.985  &lt; 2e-16 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 4.719 on 441 degrees of freedom
-## Multiple R-squared:  0.7487, Adjusted R-squared:  0.7413 
-## F-statistic: 101.1 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 4.75 on 441 degrees of freedom
+## Multiple R-squared:  0.7445, Adjusted R-squared:  0.7369 
+## F-statistic: 98.83 on 13 and 441 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div id="best-subset-regression" class="section level2">
 <h2>Best subset regression</h2>
 <p>You can use the <code>leaps</code> package to get the best subset regression.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co">#install.packages(&#39;leaps&#39;)</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">library</span>(leaps)</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">subset_result &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>Boston_train, <span class="dt">nbest=</span><span class="dv">2</span>, <span class="dt">nvmax =</span> <span class="dv">14</span>)</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="kw">plot</span>(subset_result, <span class="dt">scale=</span><span class="st">&quot;bic&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co">#install.packages(&#39;leaps&#39;)</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="kw">library</span>(leaps)</span></code></pre></div>
+<pre><code>## Warning: package &#39;leaps&#39; was built under R version 4.0.3</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>subset_result &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>Boston_train, <span class="dt">nbest=</span><span class="dv">2</span>, <span class="dt">nvmax =</span> <span class="dv">14</span>)</span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="kw">plot</span>(subset_result, <span class="dt">scale=</span><span class="st">&quot;bic&quot;</span>)</span></code></pre></div>
 <p><img src="Section_07_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Here <code>nbest</code> is the number of subsets of each size to record, and we use <code>2</code> so that each time R compares <code>2</code> variables. <code>nvmax</code> is the maximum size of subsets to examine; this is set to <code>14</code> to consider all the variables in the <code>Boston_train</code> dataset.</p>
-<p>Each row represents a model. Black indicates that a variable is included in the model, while white indicates that it is not. The argument <code>scale = &quot;&quot;</code> can be <code>Cp</code>, <code>adjr2</code>, <code>r2</code>, or <code>bic</code>.</p>
+<p>Each row represents a model. Black indicates that a variable is included in the model, while white indicates that it is not. The argument <code>scale = ""</code> can be <code>Cp</code>, <code>adjr2</code>, <code>r2</code>, or <code>bic</code>.</p>
 <ul>
 <li><p>AIC stands for (Akaike’s Information Criteria), a metric developed by the Japanese Statistician, Hirotugu Akaike, 1970. The basic idea of AIC is to penalize the inclusion of additional variables to a model. It adds a penalty that increases the error when including additional terms. <strong>The lower the AIC, the better the model</strong>.</p></li>
 <li><p>AICc is a version of AIC corrected for small sample sizes.</p></li>
@@ -838,465 +852,465 @@ div.tocify {
 <div id="variable-selection-using-aic" class="section level2">
 <h2>Variable Selection Using AIC</h2>
 <p>To perform the forward/backward/stepwise regression in R, we need to define the starting points:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">nullmodel=<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data=</span>Boston_train)</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">fullmodel=<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>Boston_train)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>nullmodel=<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data=</span>Boston_train)</span>
+<span id="cb41-2"><a href="#cb41-2"></a>fullmodel=<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>Boston_train)</span></code></pre></div>
 <p>The nullmodel is the model with <strong>no</strong> variable in it, while the fullmodel is the model with <strong>every</strong> variable in it.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># Backward Elimination</span></a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">model_step_b &lt;-<span class="st"> </span><span class="kw">step</span>(fullmodel,<span class="dt">direction=</span><span class="st">&#39;backward&#39;</span>)</a></code></pre></div>
-<pre><code>## Start:  AIC=1425.73
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Backward Elimination</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>model_step_b &lt;-<span class="st"> </span><span class="kw">step</span>(fullmodel,<span class="dt">direction=</span><span class="st">&#39;backward&#39;</span>)</span></code></pre></div>
+<pre><code>## Start:  AIC=1431.67
 ## medv ~ crim + zn + indus + chas + nox + rm + age + dis + rad + 
 ##     tax + ptratio + black + lstat
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## - age      1      0.11  9820.6 1423.7
-## - indus    1      4.75  9825.3 1424.0
-## &lt;none&gt;                  9820.5 1425.7
-## - chas     1    101.35  9921.9 1428.4
-## - tax      1    226.08 10046.6 1434.1
-## - crim     1    231.38 10051.9 1434.3
-## - black    1    240.22 10060.8 1434.7
-## - zn       1    266.11 10086.6 1435.9
-## - rad      1    408.84 10229.4 1442.3
-## - nox      1    483.33 10303.9 1445.6
-## - dis      1   1120.13 10940.7 1472.9
-## - ptratio  1   1191.03 11011.6 1475.8
-## - rm       1   1797.10 11617.6 1500.2
-## - lstat    1   2115.23 11935.8 1512.5
+## - age      1      0.26  9949.9 1429.7
+## - indus    1      4.00  9953.7 1429.9
+## &lt;none&gt;                  9949.7 1431.7
+## - crim     1    108.11 10057.8 1434.6
+## - zn       1    201.66 10151.3 1438.8
+## - chas     1    216.36 10166.0 1439.5
+## - tax      1    227.29 10177.0 1440.0
+## - black    1    310.22 10259.9 1443.6
+## - nox      1    356.25 10305.9 1445.7
+## - rad      1    425.19 10374.9 1448.7
+## - dis      1    972.59 10922.3 1472.1
+## - ptratio  1   1070.62 11020.3 1476.2
+## - rm       1   1858.43 11808.1 1507.6
+## - lstat    1   2249.25 12198.9 1522.4
 ## 
-## Step:  AIC=1423.73
+## Step:  AIC=1429.69
 ## medv ~ crim + zn + indus + chas + nox + rm + dis + rad + tax + 
 ##     ptratio + black + lstat
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## - indus    1      4.71  9825.3 1422.0
-## &lt;none&gt;                  9820.6 1423.7
-## - chas     1    101.31  9921.9 1426.4
-## - tax      1    226.57 10047.2 1432.1
-## - crim     1    231.61 10052.3 1432.3
-## - black    1    240.40 10061.0 1432.7
-## - zn       1    272.37 10093.0 1434.2
-## - rad      1    412.21 10232.8 1440.4
-## - nox      1    519.43 10340.1 1445.2
-## - ptratio  1   1200.64 11021.3 1474.2
-## - dis      1   1220.05 11040.7 1475.0
-## - rm       1   1871.34 11692.0 1501.1
-## - lstat    1   2349.82 12170.5 1519.3
+## - indus    1      4.00  9953.9 1427.9
+## &lt;none&gt;                  9949.9 1429.7
+## - crim     1    108.24 10058.2 1432.6
+## - zn       1    207.09 10157.0 1437.1
+## - chas     1    216.31 10166.2 1437.5
+## - tax      1    227.89 10177.8 1438.0
+## - black    1    310.14 10260.1 1441.7
+## - nox      1    393.06 10343.0 1445.3
+## - rad      1    430.06 10380.0 1446.9
+## - dis      1   1046.72 10996.7 1473.2
+## - ptratio  1   1080.55 11030.5 1474.6
+## - rm       1   1948.87 11898.8 1509.1
+## - lstat    1   2600.24 12550.2 1533.3
 ## 
-## Step:  AIC=1421.95
+## Step:  AIC=1427.87
 ## medv ~ crim + zn + chas + nox + rm + dis + rad + tax + ptratio + 
 ##     black + lstat
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## &lt;none&gt;                  9825.3 1422.0
-## - chas     1    107.02  9932.4 1424.9
-## - crim     1    234.82 10060.2 1430.7
-## - black    1    238.23 10063.6 1430.8
-## - tax      1    238.45 10063.8 1430.9
-## - zn       1    268.22 10093.6 1432.2
-## - rad      1    415.32 10240.7 1438.8
-## - nox      1    533.67 10359.0 1444.0
-## - ptratio  1   1201.80 11027.1 1472.5
-## - dis      1   1330.23 11155.6 1477.7
-## - rm       1   1870.39 11695.7 1499.2
-## - lstat    1   2348.68 12174.0 1517.5</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># Forward Selection</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">model_step_f &lt;-<span class="st"> </span><span class="kw">step</span>(nullmodel, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>nullmodel, <span class="dt">upper=</span>fullmodel), <span class="dt">direction=</span><span class="st">&#39;forward&#39;</span>)</a></code></pre></div>
-<pre><code>## Start:  AIC=2028.19
+## &lt;none&gt;                  9953.9 1427.9
+## - crim     1    110.94 10064.9 1430.9
+## - zn       1    203.66 10157.6 1435.1
+## - chas     1    224.94 10178.9 1436.0
+## - tax      1    252.79 10206.7 1437.3
+## - black    1    307.32 10261.3 1439.7
+## - nox      1    399.98 10353.9 1443.8
+## - rad      1    442.95 10396.9 1445.7
+## - ptratio  1   1085.54 11039.5 1473.0
+## - dis      1   1151.63 11105.6 1475.7
+## - rm       1   1952.65 11906.6 1507.4
+## - lstat    1   2606.17 12560.1 1531.7</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Forward Selection</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>model_step_f &lt;-<span class="st"> </span><span class="kw">step</span>(nullmodel, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>nullmodel, <span class="dt">upper=</span>fullmodel), <span class="dt">direction=</span><span class="st">&#39;forward&#39;</span>)</span></code></pre></div>
+<pre><code>## Start:  AIC=2026.46
 ## medv ~ 1
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + lstat    1   21219.8 17864 1674.0
-## + rm       1   19226.7 19857 1722.1
-## + ptratio  1   10619.5 28465 1885.9
-## + indus    1    9331.8 29752 1906.1
-## + tax      1    8738.0 30346 1915.1
-## + nox      1    7294.6 31790 1936.2
-## + rad      1    6048.8 33035 1953.7
-## + crim     1    6029.6 33055 1954.0
-## + age      1    5497.6 33587 1961.2
-## + zn       1    5492.6 33592 1961.3
-## + black    1    4363.4 34721 1976.3
-## + dis      1    2596.7 36487 1998.9
-## + chas     1     945.7 38138 2019.0
-## &lt;none&gt;                 39084 2028.2
+## + lstat    1   20975.4 17960 1676.4
+## + rm       1   19368.2 19567 1715.4
+## + ptratio  1    9501.4 29434 1901.2
+## + indus    1    9207.5 29728 1905.7
+## + tax      1    8086.6 30849 1922.5
+## + nox      1    6642.9 32293 1943.3
+## + crim     1    6087.2 32848 1951.1
+## + age      1    5269.6 33666 1962.3
+## + zn       1    5207.4 33728 1963.1
+## + rad      1    5091.1 33844 1964.7
+## + black    1    4051.5 34884 1978.5
+## + dis      1    2202.5 36733 2002.0
+## + chas     1    1210.1 37725 2014.1
+## &lt;none&gt;                 38935 2026.5
 ## 
-## Step:  AIC=1673.97
+## Step:  AIC=1676.4
 ## medv ~ lstat
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + rm       1    3916.4 13948 1563.4
-## + ptratio  1    2792.0 15072 1598.7
-## + dis      1     639.0 17225 1659.4
-## + chas     1     547.3 17317 1661.8
-## + tax      1     316.8 17548 1667.8
-## + zn       1     223.9 17640 1670.2
-## + age      1     200.9 17664 1670.8
-## + black    1     175.0 17689 1671.5
-## + crim     1     170.1 17694 1671.6
-## + indus    1     108.6 17756 1673.2
-## &lt;none&gt;                 17864 1674.0
-## + rad      1      56.3 17808 1674.5
-## + nox      1       0.1 17864 1676.0
+## + rm       1    4081.5 13879 1561.1
+## + ptratio  1    2522.4 15438 1609.5
+## + chas     1     774.8 17185 1658.3
+## + dis      1     737.2 17223 1659.3
+## + age      1     324.4 17636 1670.1
+## + tax      1     246.8 17713 1672.1
+## + black    1     242.1 17718 1672.2
+## + zn       1     156.9 17803 1674.4
+## + indus    1     107.9 17852 1675.7
+## + crim     1      86.9 17873 1676.2
+## &lt;none&gt;                 17960 1676.4
+## + nox      1      13.4 17947 1678.1
+## + rad      1       8.5 17952 1678.2
 ## 
-## Step:  AIC=1563.37
+## Step:  AIC=1561.1
 ## medv ~ lstat + rm
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + ptratio  1   1771.71 12176 1503.6
-## + black    1    483.98 13464 1549.3
-## + tax      1    473.30 13475 1549.7
-## + chas     1    344.60 13603 1554.0
-## + crim     1    332.93 13615 1554.4
-## + dis      1    280.75 13667 1556.1
-## + rad      1    236.35 13712 1557.6
-## + zn       1     82.69 13865 1562.7
-## + indus    1     70.74 13877 1563.1
-## &lt;none&gt;                 13948 1563.4
-## + nox      1     29.85 13918 1564.4
-## + age      1      4.44 13944 1565.2
+## + ptratio  1   1573.31 12305 1508.4
+## + black    1    610.14 13268 1542.6
+## + chas     1    579.29 13299 1543.7
+## + tax      1    388.81 13490 1550.2
+## + dis      1    324.41 13554 1552.3
+## + crim     1    225.72 13653 1555.6
+## + rad      1    148.09 13730 1558.2
+## &lt;none&gt;                 13879 1561.1
+## + indus    1     48.97 13830 1561.5
+## + zn       1     46.33 13832 1561.6
+## + age      1     19.80 13859 1562.5
+## + nox      1      2.98 13876 1563.0
 ## 
-## Step:  AIC=1503.56
+## Step:  AIC=1508.36
 ## medv ~ lstat + rm + ptratio
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + black  1    378.04 11798 1491.2
-## + dis    1    374.34 11802 1491.3
-## + chas   1    191.85 11984 1498.3
-## + crim   1    133.47 12043 1500.5
-## + nox    1     61.41 12115 1503.3
-## + tax    1     59.97 12116 1503.3
-## &lt;none&gt;               12176 1503.6
-## + age    1     30.47 12146 1504.4
-## + zn     1      5.15 12171 1505.4
-## + rad    1      0.67 12176 1505.5
-## + indus  1      0.08 12176 1505.6
+## + dis    1    466.15 11839 1492.8
+## + black  1    446.74 11858 1493.5
+## + chas   1    420.57 11885 1494.5
+## + age    1     60.20 12245 1508.1
+## &lt;none&gt;               12305 1508.4
+## + crim   1     52.19 12253 1508.4
+## + tax    1     31.71 12274 1509.2
+## + zn     1     19.83 12285 1509.6
+## + rad    1     16.28 12289 1509.8
+## + nox    1      8.35 12297 1510.0
+## + indus  1      4.21 12301 1510.2
 ## 
-## Step:  AIC=1491.21
-## medv ~ lstat + rm + ptratio + black
-## 
-##         Df Sum of Sq   RSS    AIC
-## + dis    1    466.78 11332 1474.8
-## + chas   1    174.35 11624 1486.4
-## &lt;none&gt;               11798 1491.2
-## + crim   1     49.56 11749 1491.3
-## + rad    1     48.23 11750 1491.3
-## + age    1     41.78 11756 1491.6
-## + nox    1     15.44 11783 1492.6
-## + indus  1     11.71 11787 1492.8
-## + zn     1      6.95 11791 1492.9
-## + tax    1      4.05 11794 1493.1
-## 
-## Step:  AIC=1474.84
-## medv ~ lstat + rm + ptratio + black + dis
+## Step:  AIC=1492.78
+## medv ~ lstat + rm + ptratio + dis
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + nox    1    636.27 10695 1450.5
-## + zn     1    188.23 11143 1469.2
-## + indus  1    141.45 11190 1471.1
-## + crim   1    110.03 11221 1472.4
-## + chas   1    107.56 11224 1472.5
-## + age    1    100.32 11231 1472.8
-## + tax    1     92.65 11239 1473.1
-## &lt;none&gt;               11332 1474.8
-## + rad    1      0.23 11331 1476.8
+## + nox    1    582.55 11257 1471.8
+## + black  1    564.45 11275 1472.6
+## + chas   1    305.69 11533 1482.9
+## + tax    1    193.60 11646 1487.3
+## + indus  1    189.10 11650 1487.5
+## + crim   1    139.50 11700 1489.4
+## + zn     1    111.94 11727 1490.5
+## + age    1     60.08 11779 1492.5
+## &lt;none&gt;               11839 1492.8
+## + rad    1      8.06 11831 1494.5
 ## 
-## Step:  AIC=1450.55
-## medv ~ lstat + rm + ptratio + black + dis + nox
-## 
-##         Df Sum of Sq   RSS    AIC
-## + zn     1   193.414 10502 1444.2
-## + chas   1   138.571 10557 1446.6
-## + rad    1   108.266 10587 1447.9
-## + crim   1    73.527 10622 1449.4
-## &lt;none&gt;               10695 1450.5
-## + age    1    10.122 10685 1452.1
-## + tax    1     2.076 10693 1452.5
-## + indus  1     1.253 10694 1452.5
-## 
-## Step:  AIC=1444.25
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn
+## Step:  AIC=1471.83
+## medv ~ lstat + rm + ptratio + dis + nox
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + chas   1   149.044 10353 1439.7
-## + crim   1   120.715 10381 1441.0
-## + rad    1    61.903 10440 1443.6
-## &lt;none&gt;               10502 1444.2
-## + tax    1     5.127 10497 1446.0
-## + indus  1     1.775 10500 1446.2
-## + age    1     1.261 10500 1446.2
+## + black  1    394.80 10862 1457.6
+## + chas   1    344.50 10912 1459.7
+## + zn     1    126.14 11130 1468.7
+## + crim   1     64.35 11192 1471.2
+## + rad    1     58.63 11198 1471.5
+## &lt;none&gt;               11257 1471.8
+## + indus  1     16.63 11240 1473.2
+## + tax    1     10.36 11246 1473.4
+## + age    1      1.36 11255 1473.8
 ## 
-## Step:  AIC=1439.74
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas
-## 
-##         Df Sum of Sq   RSS    AIC
-## + crim   1   108.505 10244 1437.0
-## + rad    1    63.654 10289 1438.9
-## &lt;none&gt;               10353 1439.7
-## + indus  1     4.600 10348 1441.5
-## + age    1     3.442 10349 1441.6
-## + tax    1     2.799 10350 1441.6
-## 
-## Step:  AIC=1436.95
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas + 
-##     crim
+## Step:  AIC=1457.58
+## medv ~ lstat + rm + ptratio + dis + nox + black
 ## 
 ##         Df Sum of Sq   RSS    AIC
-## + rad    1   180.450 10064 1430.9
-## &lt;none&gt;               10244 1437.0
-## + age    1     4.331 10240 1438.8
-## + indus  1     3.804 10240 1438.8
-## + tax    1     3.585 10241 1438.8
+## + chas   1   285.327 10576 1447.5
+## + rad    1   166.255 10696 1452.6
+## + zn     1   153.747 10708 1453.1
+## &lt;none&gt;               10862 1457.6
+## + age    1     8.967 10853 1459.2
+## + indus  1     6.031 10856 1459.3
+## + crim   1     5.065 10857 1459.4
+## + tax    1     2.154 10860 1459.5
 ## 
-## Step:  AIC=1430.86
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas + 
-##     crim + rad
+## Step:  AIC=1447.47
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas
+## 
+##         Df Sum of Sq   RSS    AIC
+## + zn     1   164.164 10412 1442.3
+## + rad    1   154.819 10422 1442.8
+## &lt;none&gt;               10576 1447.5
+## + age    1    16.546 10560 1448.8
+## + indus  1    12.756 10564 1448.9
+## + tax    1     3.594 10573 1449.3
+## + crim   1     2.512 10574 1449.4
+## 
+## Step:  AIC=1442.35
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn
+## 
+##         Df Sum of Sq   RSS    AIC
+## + rad    1   106.386 10306 1439.7
+## &lt;none&gt;               10412 1442.3
+## + crim   1    15.351 10397 1443.7
+## + indus  1    13.621 10399 1443.8
+## + age    1     4.843 10407 1444.1
+## + tax    1     1.536 10411 1444.3
+## 
+## Step:  AIC=1439.68
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn + 
+##     rad
+## 
+##         Df Sum of Sq   RSS    AIC
+## + tax    1   241.003 10065 1430.9
+## + crim   1    99.156 10207 1437.3
+## &lt;none&gt;               10306 1439.7
+## + indus  1    22.103 10284 1440.7
+## + age    1     1.199 10305 1441.6
+## 
+## Step:  AIC=1430.91
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn + 
+##     rad + tax
 ## 
 ##         Df Sum of Sq     RSS    AIC
-## + tax    1   238.453  9825.3 1422.0
-## &lt;none&gt;               10063.8 1430.9
-## + indus  1    16.587 10047.2 1432.1
-## + age    1     0.928 10062.9 1432.8
+## + crim   1   110.938  9953.9 1427.9
+## &lt;none&gt;               10064.9 1430.9
+## + indus  1     6.699 10058.2 1432.6
+## + age    1     0.404 10064.5 1432.9
 ## 
-## Step:  AIC=1421.95
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas + 
-##     crim + rad + tax
+## Step:  AIC=1427.87
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn + 
+##     rad + tax + crim
 ## 
 ##         Df Sum of Sq    RSS    AIC
-## &lt;none&gt;               9825.3 1422.0
-## + indus  1    4.7069 9820.6 1423.7
-## + age    1    0.0703 9825.3 1424.0</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Stepwise Selection </span></a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">model_step_s &lt;-<span class="st"> </span><span class="kw">step</span>(nullmodel, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>nullmodel, <span class="dt">upper=</span>fullmodel), <span class="dt">direction=</span><span class="st">&#39;both&#39;</span>)</a></code></pre></div>
-<pre><code>## Start:  AIC=2028.19
+## &lt;none&gt;               9953.9 1427.9
+## + indus  1    4.0035 9949.9 1429.7
+## + age    1    0.2674 9953.7 1429.9</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># Stepwise Selection </span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>model_step_s &lt;-<span class="st"> </span><span class="kw">step</span>(nullmodel, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>nullmodel, <span class="dt">upper=</span>fullmodel), <span class="dt">direction=</span><span class="st">&#39;both&#39;</span>)</span></code></pre></div>
+<pre><code>## Start:  AIC=2026.46
 ## medv ~ 1
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + lstat    1   21219.8 17864 1674.0
-## + rm       1   19226.7 19857 1722.1
-## + ptratio  1   10619.5 28465 1885.9
-## + indus    1    9331.8 29752 1906.1
-## + tax      1    8738.0 30346 1915.1
-## + nox      1    7294.6 31790 1936.2
-## + rad      1    6048.8 33035 1953.7
-## + crim     1    6029.6 33055 1954.0
-## + age      1    5497.6 33587 1961.2
-## + zn       1    5492.6 33592 1961.3
-## + black    1    4363.4 34721 1976.3
-## + dis      1    2596.7 36487 1998.9
-## + chas     1     945.7 38138 2019.0
-## &lt;none&gt;                 39084 2028.2
+## + lstat    1   20975.4 17960 1676.4
+## + rm       1   19368.2 19567 1715.4
+## + ptratio  1    9501.4 29434 1901.2
+## + indus    1    9207.5 29728 1905.7
+## + tax      1    8086.6 30849 1922.5
+## + nox      1    6642.9 32293 1943.3
+## + crim     1    6087.2 32848 1951.1
+## + age      1    5269.6 33666 1962.3
+## + zn       1    5207.4 33728 1963.1
+## + rad      1    5091.1 33844 1964.7
+## + black    1    4051.5 34884 1978.5
+## + dis      1    2202.5 36733 2002.0
+## + chas     1    1210.1 37725 2014.1
+## &lt;none&gt;                 38935 2026.5
 ## 
-## Step:  AIC=1673.97
+## Step:  AIC=1676.4
 ## medv ~ lstat
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + rm       1    3916.4 13948 1563.4
-## + ptratio  1    2792.0 15072 1598.7
-## + dis      1     639.0 17225 1659.4
-## + chas     1     547.3 17317 1661.8
-## + tax      1     316.8 17548 1667.8
-## + zn       1     223.9 17641 1670.2
-## + age      1     200.9 17664 1670.8
-## + black    1     175.0 17689 1671.5
-## + crim     1     170.1 17694 1671.6
-## + indus    1     108.6 17756 1673.2
-## &lt;none&gt;                 17864 1674.0
-## + rad      1      56.3 17808 1674.5
-## + nox      1       0.1 17864 1676.0
-## - lstat    1   21219.8 39084 2028.2
+## + rm       1    4081.5 13879 1561.1
+## + ptratio  1    2522.4 15438 1609.5
+## + chas     1     774.8 17185 1658.3
+## + dis      1     737.2 17223 1659.3
+## + age      1     324.4 17636 1670.1
+## + tax      1     246.8 17713 1672.1
+## + black    1     242.1 17718 1672.2
+## + zn       1     156.9 17803 1674.4
+## + indus    1     107.9 17852 1675.7
+## + crim     1      86.9 17873 1676.2
+## &lt;none&gt;                 17960 1676.4
+## + nox      1      13.4 17947 1678.1
+## + rad      1       8.5 17952 1678.2
+## - lstat    1   20975.4 38935 2026.5
 ## 
-## Step:  AIC=1563.37
+## Step:  AIC=1561.1
 ## medv ~ lstat + rm
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + ptratio  1    1771.7 12176 1503.6
-## + black    1     484.0 13464 1549.3
-## + tax      1     473.3 13475 1549.7
-## + chas     1     344.6 13603 1554.0
-## + crim     1     332.9 13615 1554.4
-## + dis      1     280.7 13667 1556.1
-## + rad      1     236.3 13712 1557.6
-## + zn       1      82.7 13865 1562.7
-## + indus    1      70.7 13877 1563.1
-## &lt;none&gt;                 13948 1563.4
-## + nox      1      29.9 13918 1564.4
-## + age      1       4.4 13944 1565.2
-## - rm       1    3916.4 17864 1674.0
-## - lstat    1    5909.5 19858 1722.1
+## + ptratio  1    1573.3 12305 1508.4
+## + black    1     610.1 13268 1542.6
+## + chas     1     579.3 13299 1543.7
+## + tax      1     388.8 13490 1550.2
+## + dis      1     324.4 13554 1552.3
+## + crim     1     225.7 13653 1555.6
+## + rad      1     148.1 13730 1558.2
+## &lt;none&gt;                 13879 1561.1
+## + indus    1      49.0 13830 1561.5
+## + zn       1      46.3 13832 1561.6
+## + age      1      19.8 13859 1562.5
+## + nox      1       3.0 13876 1563.0
+## - rm       1    4081.5 17960 1676.4
+## - lstat    1    5688.7 19567 1715.4
 ## 
-## Step:  AIC=1503.56
+## Step:  AIC=1508.36
 ## medv ~ lstat + rm + ptratio
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + black    1     378.0 11798 1491.2
-## + dis      1     374.3 11802 1491.3
-## + chas     1     191.8 11984 1498.3
-## + crim     1     133.5 12043 1500.5
-## + nox      1      61.4 12115 1503.3
-## + tax      1      60.0 12116 1503.3
-## &lt;none&gt;                 12176 1503.6
-## + age      1      30.5 12146 1504.4
-## + zn       1       5.2 12171 1505.4
-## + rad      1       0.7 12176 1505.5
-## + indus    1       0.1 12176 1505.6
-## - ptratio  1    1771.7 13948 1563.4
-## - rm       1    2896.1 15072 1598.7
-## - lstat    1    4456.2 16632 1643.5
+## + dis      1     466.1 11839 1492.8
+## + black    1     446.7 11858 1493.5
+## + chas     1     420.6 11885 1494.5
+## + age      1      60.2 12245 1508.1
+## &lt;none&gt;                 12305 1508.4
+## + crim     1      52.2 12253 1508.4
+## + tax      1      31.7 12274 1509.2
+## + zn       1      19.8 12285 1509.6
+## + rad      1      16.3 12289 1509.8
+## + nox      1       8.3 12297 1510.0
+## + indus    1       4.2 12301 1510.2
+## - ptratio  1    1573.3 13879 1561.1
+## - rm       1    3132.4 15438 1609.5
+## - lstat    1    4452.4 16758 1646.9
 ## 
-## Step:  AIC=1491.21
-## medv ~ lstat + rm + ptratio + black
-## 
-##           Df Sum of Sq   RSS    AIC
-## + dis      1    466.78 11332 1474.8
-## + chas     1    174.35 11624 1486.4
-## &lt;none&gt;                 11798 1491.2
-## + crim     1     49.56 11749 1491.3
-## + rad      1     48.23 11750 1491.3
-## + age      1     41.78 11756 1491.6
-## + nox      1     15.44 11783 1492.6
-## + indus    1     11.71 11787 1492.8
-## + zn       1      6.95 11791 1492.9
-## + tax      1      4.05 11794 1493.1
-## - black    1    378.04 12176 1503.6
-## - ptratio  1   1665.78 13464 1549.3
-## - lstat    1   3073.75 14872 1594.6
-## - rm       1   3144.41 14943 1596.7
-## 
-## Step:  AIC=1474.84
-## medv ~ lstat + rm + ptratio + black + dis
+## Step:  AIC=1492.78
+## medv ~ lstat + rm + ptratio + dis
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + nox      1     636.3 10695 1450.5
-## + zn       1     188.2 11143 1469.2
-## + indus    1     141.4 11190 1471.1
-## + crim     1     110.0 11221 1472.4
-## + chas     1     107.6 11224 1472.5
-## + age      1     100.3 11231 1472.8
-## + tax      1      92.7 11239 1473.1
-## &lt;none&gt;                 11332 1474.8
-## + rad      1       0.2 11331 1476.8
-## - dis      1     466.8 11798 1491.2
-## - black    1     470.5 11802 1491.3
-## - ptratio  1    1757.8 13089 1538.5
-## - rm       1    2782.9 14114 1572.8
-## - lstat    1    3530.1 14862 1596.2
+## + nox      1     582.5 11257 1471.8
+## + black    1     564.5 11275 1472.6
+## + chas     1     305.7 11533 1482.9
+## + tax      1     193.6 11646 1487.3
+## + indus    1     189.1 11650 1487.5
+## + crim     1     139.5 11700 1489.4
+## + zn       1     111.9 11727 1490.5
+## + age      1      60.1 11779 1492.5
+## &lt;none&gt;                 11839 1492.8
+## + rad      1       8.1 11831 1494.5
+## - dis      1     466.1 12305 1508.4
+## - ptratio  1    1715.1 13554 1552.3
+## - rm       1    2684.4 14524 1583.8
+## - lstat    1    4791.9 16631 1645.4
 ## 
-## Step:  AIC=1450.55
-## medv ~ lstat + rm + ptratio + black + dis + nox
-## 
-##           Df Sum of Sq   RSS    AIC
-## + zn       1    193.41 10502 1444.2
-## + chas     1    138.57 10557 1446.6
-## + rad      1    108.27 10587 1447.9
-## + crim     1     73.53 10622 1449.4
-## &lt;none&gt;                 10695 1450.5
-## + age      1     10.12 10685 1452.1
-## + tax      1      2.08 10693 1452.5
-## + indus    1      1.25 10694 1452.5
-## - black    1    282.46 10978 1460.4
-## - nox      1    636.27 11332 1474.8
-## - dis      1   1087.61 11783 1492.6
-## - ptratio  1   2035.35 12731 1527.8
-## - lstat    1   2603.57 13299 1547.7
-## - rm       1   2605.05 13300 1547.7
-## 
-## Step:  AIC=1444.25
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn
+## Step:  AIC=1471.83
+## medv ~ lstat + rm + ptratio + dis + nox
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + chas     1    149.04 10353 1439.7
-## + crim     1    120.71 10381 1441.0
-## + rad      1     61.90 10440 1443.6
-## &lt;none&gt;                 10502 1444.2
-## + tax      1      5.13 10497 1446.0
-## + indus    1      1.78 10500 1446.2
-## + age      1      1.26 10500 1446.2
-## - zn       1    193.41 10695 1450.5
-## - black    1    310.21 10812 1455.5
-## - nox      1    641.45 11143 1469.2
-## - dis      1   1258.98 11761 1493.8
-## - ptratio  1   1528.71 12030 1504.1
-## - rm       1   2313.58 12815 1532.8
-## - lstat    1   2674.99 13177 1545.5
+## + black    1     394.8 10862 1457.6
+## + chas     1     344.5 10912 1459.7
+## + zn       1     126.1 11130 1468.7
+## + crim     1      64.4 11192 1471.2
+## + rad      1      58.6 11198 1471.5
+## &lt;none&gt;                 11257 1471.8
+## + indus    1      16.6 11240 1473.2
+## + tax      1      10.4 11246 1473.4
+## + age      1       1.4 11255 1473.8
+## - nox      1     582.5 11839 1492.8
+## - dis      1    1040.3 12297 1510.0
+## - ptratio  1    1939.2 13196 1542.2
+## - rm       1    2572.0 13829 1563.5
+## - lstat    1    3412.5 14669 1590.3
 ## 
-## Step:  AIC=1439.74
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas
-## 
-##           Df Sum of Sq   RSS    AIC
-## + crim     1    108.51 10244 1437.0
-## + rad      1     63.65 10289 1438.9
-## &lt;none&gt;                 10353 1439.7
-## + indus    1      4.60 10348 1441.5
-## + age      1      3.44 10349 1441.6
-## + tax      1      2.80 10350 1441.6
-## - chas     1    149.04 10502 1444.2
-## - zn       1    203.89 10557 1446.6
-## - black    1    285.72 10638 1450.1
-## - nox      1    673.97 11027 1466.4
-## - dis      1   1223.34 11576 1488.6
-## - ptratio  1   1400.89 11754 1495.5
-## - rm       1   2248.49 12601 1527.2
-## - lstat    1   2633.98 12987 1540.9
-## 
-## Step:  AIC=1436.95
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas + 
-##     crim
+## Step:  AIC=1457.58
+## medv ~ lstat + rm + ptratio + dis + nox + black
 ## 
 ##           Df Sum of Sq   RSS    AIC
-## + rad      1    180.45 10064 1430.9
-## &lt;none&gt;                 10244 1437.0
-## + age      1      4.33 10240 1438.8
-## + indus    1      3.80 10240 1438.8
-## + tax      1      3.59 10241 1438.8
-## - crim     1    108.51 10353 1439.7
-## - chas     1    136.83 10381 1441.0
-## - black    1    208.23 10452 1444.1
-## - zn       1    248.83 10493 1445.9
-## - nox      1    627.64 10872 1462.0
-## - ptratio  1   1208.10 11452 1485.7
-## - dis      1   1302.07 11546 1489.4
-## - rm       1   2283.25 12528 1526.5
-## - lstat    1   2351.52 12596 1529.0
+## + chas     1    285.33 10576 1447.5
+## + rad      1    166.26 10696 1452.6
+## + zn       1    153.75 10708 1453.1
+## &lt;none&gt;                 10862 1457.6
+## + age      1      8.97 10853 1459.2
+## + indus    1      6.03 10856 1459.3
+## + crim     1      5.06 10857 1459.4
+## + tax      1      2.15 10860 1459.5
+## - black    1    394.80 11257 1471.8
+## - nox      1    412.89 11275 1472.6
+## - dis      1    994.65 11856 1495.5
+## - ptratio  1   1741.24 12603 1523.2
+## - rm       1   2814.22 13676 1560.4
+## - lstat    1   2853.99 13716 1561.7
 ## 
-## Step:  AIC=1430.86
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas + 
-##     crim + rad
+## Step:  AIC=1447.47
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas
+## 
+##           Df Sum of Sq   RSS    AIC
+## + zn       1    164.16 10412 1442.3
+## + rad      1    154.82 10422 1442.8
+## &lt;none&gt;                 10576 1447.5
+## + age      1     16.55 10560 1448.8
+## + indus    1     12.76 10564 1448.9
+## + tax      1      3.59 10573 1449.3
+## + crim     1      2.51 10574 1449.4
+## - chas     1    285.33 10862 1457.6
+## - black    1    335.62 10912 1459.7
+## - nox      1    452.55 11029 1464.5
+## - dis      1    908.37 11485 1483.0
+## - ptratio  1   1602.03 12178 1509.6
+## - rm       1   2751.95 13328 1550.7
+## - lstat    1   2762.28 13339 1551.0
+## 
+## Step:  AIC=1442.35
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn
+## 
+##           Df Sum of Sq   RSS    AIC
+## + rad      1    106.39 10306 1439.7
+## &lt;none&gt;                 10412 1442.3
+## + crim     1     15.35 10397 1443.7
+## + indus    1     13.62 10399 1443.8
+## + age      1      4.84 10407 1444.1
+## + tax      1      1.54 10411 1444.3
+## - zn       1    164.16 10576 1447.5
+## - chas     1    295.74 10708 1453.1
+## - black    1    361.09 10773 1455.9
+## - nox      1    462.16 10874 1460.1
+## - dis      1   1059.99 11472 1484.5
+## - ptratio  1   1206.03 11618 1490.2
+## - rm       1   2472.47 12885 1537.3
+## - lstat    1   2792.17 13204 1548.4
+## 
+## Step:  AIC=1439.68
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn + 
+##     rad
+## 
+##           Df Sum of Sq   RSS    AIC
+## + tax      1    241.00 10065 1430.9
+## + crim     1     99.16 10207 1437.3
+## &lt;none&gt;                 10306 1439.7
+## + indus    1     22.10 10284 1440.7
+## + age      1      1.20 10305 1441.6
+## - rad      1    106.39 10412 1442.3
+## - zn       1    115.73 10422 1442.8
+## - chas     1    284.27 10590 1450.1
+## - black    1    437.63 10744 1456.6
+## - nox      1    566.65 10872 1462.0
+## - dis      1   1019.09 11325 1480.6
+## - ptratio  1   1254.60 11560 1490.0
+## - rm       1   2246.58 12552 1527.4
+## - lstat    1   2884.01 13190 1549.9
+## 
+## Step:  AIC=1430.91
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn + 
+##     rad + tax
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## + tax      1    238.45  9825.3 1422.0
-## &lt;none&gt;                 10063.8 1430.9
-## + indus    1     16.59 10047.2 1432.1
-## + age      1      0.93 10062.9 1432.8
-## - chas     1    133.21 10197.0 1434.8
-## - rad      1    180.45 10244.2 1437.0
-## - zn       1    189.38 10253.2 1437.3
-## - crim     1    225.30 10289.1 1438.9
-## - black    1    266.18 10330.0 1440.7
-## - nox      1    797.99 10861.8 1463.6
-## - dis      1   1271.94 11335.7 1483.0
-## - ptratio  1   1377.07 11440.9 1487.2
-## - rm       1   2073.02 12136.8 1514.1
-## - lstat    1   2384.02 12447.8 1525.6
+## + crim     1    110.94  9953.9 1427.9
+## &lt;none&gt;                 10064.9 1430.9
+## + indus    1      6.70 10058.2 1432.6
+## + age      1      0.40 10064.5 1432.9
+## - zn       1    174.23 10239.1 1436.7
+## - tax      1    241.00 10305.9 1439.7
+## - chas     1    245.19 10310.1 1439.9
+## - rad      1    345.85 10410.7 1444.3
+## - nox      1    372.78 10437.7 1445.5
+## - black    1    401.29 10466.2 1446.7
+## - ptratio  1   1070.64 11135.5 1474.9
+## - dis      1   1080.10 11145.0 1475.3
+## - rm       1   2009.18 12074.1 1511.7
+## - lstat    1   2853.93 12918.8 1542.5
 ## 
-## Step:  AIC=1421.95
-## medv ~ lstat + rm + ptratio + black + dis + nox + zn + chas + 
-##     crim + rad + tax
+## Step:  AIC=1427.87
+## medv ~ lstat + rm + ptratio + dis + nox + black + chas + zn + 
+##     rad + tax + crim
 ## 
 ##           Df Sum of Sq     RSS    AIC
-## &lt;none&gt;                  9825.3 1422.0
-## + indus    1      4.71  9820.6 1423.7
-## + age      1      0.07  9825.3 1424.0
-## - chas     1    107.02  9932.4 1424.9
-## - crim     1    234.82 10060.2 1430.7
-## - black    1    238.23 10063.6 1430.8
-## - tax      1    238.45 10063.8 1430.9
-## - zn       1    268.22 10093.6 1432.2
-## - rad      1    415.32 10240.7 1438.8
-## - nox      1    533.67 10359.0 1444.0
-## - ptratio  1   1201.80 11027.1 1472.5
-## - dis      1   1330.23 11155.6 1477.7
-## - rm       1   1870.39 11695.7 1499.2
-## - lstat    1   2348.68 12174.0 1517.5</code></pre>
+## &lt;none&gt;                  9953.9 1427.9
+## + indus    1      4.00  9949.9 1429.7
+## + age      1      0.27  9953.7 1429.9
+## - crim     1    110.94 10064.9 1430.9
+## - zn       1    203.66 10157.6 1435.1
+## - chas     1    224.94 10178.9 1436.0
+## - tax      1    252.79 10206.7 1437.3
+## - black    1    307.32 10261.3 1439.7
+## - nox      1    399.98 10353.9 1443.8
+## - rad      1    442.95 10396.9 1445.7
+## - ptratio  1   1085.54 11039.5 1473.0
+## - dis      1   1151.63 11105.6 1475.7
+## - rm       1   1952.65 11906.6 1507.4
+## - lstat    1   2606.17 12560.1 1531.7</code></pre>
 <hr />
 </div>
 </div>
@@ -1314,8 +1328,8 @@ div.tocify {
 <div id="exercise-3" class="section level2">
 <h2>Exercise #3</h2>
 <p>In this exercise, we consider CPU performance from different types. Load the data <code>cpus</code> in the <code>MASS</code> package by:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">data</span>(cpus)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="kw">data</span>(cpus)</span></code></pre></div>
 <p>3.1 Fit a best subset regression between predictor variable <code>perf</code> and response variables <code>syct</code>, <code>mmin</code>, <code>mmax</code>, <code>cach</code>, <code>chmin</code>, <code>chmax</code>. Try <code>bic</code> and <code>adjr2</code> as the <code>scale</code> argument.</p>
 <p>3.2 Try forward, backward, and stepwise regression method for variable selection. Compare your best models obtained by the three methods.</p>
 <hr />
@@ -1332,9 +1346,9 @@ div.tocify {
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://blog.minitab.com/blog/adventures-in-statistics-2/the-danger-of-overfitting-regression-models">The Danger of Overfitting Regression Models</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="https://blog.minitab.com/blog/adventures-in-statistics-2/the-danger-of-overfitting-regression-models">The Danger of Overfitting Regression Models</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p><a href="https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html#compare-model-fit-manually">Regression and Variable Selection</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="https://blog.minitab.com/blog/adventures-in-statistics-2/the-danger-of-overfitting-regression-models">The Danger of Overfitting Regression Models</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://blog.minitab.com/blog/adventures-in-statistics-2/the-danger-of-overfitting-regression-models">The Danger of Overfitting Regression Models</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html#compare-model-fit-manually">Regression and Variable Selection</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

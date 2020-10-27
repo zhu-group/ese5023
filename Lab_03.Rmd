@@ -26,7 +26,7 @@ library(gapminder)
 
 **1.4** You probably figured out that the improvement in mean life expectancy is the biggest in Asia from 1957 to 2007. Can you estimate such improvement?
 
-**1.5** Generate a `tibble` object named `gapminder_new`, which contains mean life expectancy (`mean_lifeExp`) and mean GDP per capita (`mean_gdpPercap`) in each country; both are averaged from 1957 to 2007. Plot a scatter plot with `mean_lifeExp` as the Y-axis and `mean_lifeExp` as the X-axis. 
+**1.5** Generate a `tibble` object named `gapminder_new`, which contains mean life expectancy (`mean_lifeExp`) and mean GDP per capita (`mean_gdpPercap`) in each country; both are averaged from 1957 to 2007. Plot a scatter plot with `mean_lifeExp` as the Y-axis and `mean_gdpPercap` as the X-axis. 
 
 **1.6** Based on the scatter plot from **1.5**, can we fit a simple linear regression model to the two variables? Why or why not?
 
