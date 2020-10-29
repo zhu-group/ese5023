@@ -399,7 +399,7 @@ image.plot(Lon, Lat, Air_T_Jan,
            horizontal=T, useRaster=T,
            legend.shrink=0.75, axis.args=list(cex.axis = 1.25), 
            legend.width=1, legend.mar=2,
-           legend.args=list(text="Surface Temperature [k]",cex=1.25),           
+           legend.args=list(text="Surface Temperature [degC]",cex=1.25),           
            xlab='',ylab='',midpoint=T, axes=F, ann=F
 )
 title(xlab="",cex.lab=1.25,font.lab=2)
