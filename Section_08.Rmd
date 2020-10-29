@@ -258,7 +258,7 @@ ggsave("D://class/myplot2.png", plot=plot1, width=20,
 
 ## ggplot2's grammar of graphics and beyond
 
-We have covered some basics but critical steps of making plots with `ggplot2`. There are many more features that we don't have time to go through in just one section. You can explore the full functionality of `ggplot2()` by studying the resources listed at the end. 
+We have covered some basics but critical steps of making plots with `ggplot2`. There are many more features that we don't have time to go through in just one section. You can explore the full functionality of `ggplot2()` by studying the [further reading](https://zhu-group.github.io/ese5023/Section_08.html#Further_reading) listed at the end. 
 
 To summarize, ggplot2's grammar of graphics goes like:
 
@@ -296,7 +296,7 @@ Find the plots you want to mimic, edit and customize the scripts.
 
 # Image plot
 
-In our field, we plot 2-D maps with values very often. Again, you can learn how to do so with `ggplot2`. But for now, let's learn how to do this using the `image.plot()` function.
+In our field, we plot 2-D maps with values very often. Again, you can learn how to do so with `ggplot2`, see [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/maps.html) for more. But for now, let's learn how to do this using the `image.plot()` function.
 
 Install `fields`, `maps`, and `RNetCDF` packages if you haven't:
 
@@ -306,7 +306,7 @@ install.packages("maps")
 install.packages("RNetCDF")
 ```
 
-Here we will use [Jones (CRU) Air Temperature Anomalies Version 4: CRUTEM4](https://psl.noaa.gov/data/gridded/data.crutem4.html), which contains global gridded (5°x5°) monthly anomalies of observed air temperature and combined observed air and marine temperature (HADCRU4) from the mid-1800s to near present. The current version is V4.2.0, which was put out on 5/9/2013. Download the [monthly long term mean surface data](https://zhu-group.github.io/ese5023/download/air.mon.ltm.nc), and move it to your `working directory`.
+Here we will use [Jones (CRU) Air Temperature Anomalies Version 4: CRUTEM4](https://psl.noaa.gov/data/gridded/data.crutem4.html), which contains global gridded (5°x5°) monthly anomalies of observed air temperature and combined observed air and marine temperature (HADCRU4) from the 1800s to near present. The current version is V4.2.0, which was put out on 5/9/2013. Download the [monthly long term mean surface data](https://zhu-group.github.io/ese5023/download/air.mon.ltm.nc), and move it to your `working directory`.
 
 The data set is in the [Network Common Data Form (NetCDF)](https://www.unidata.ucar.edu/software/netcdf/) format. NetCDF file is self-describing. A netCDF file includes information about the data it contains. It is widely used in Earth Science, Remote Sensing, and Environmental Science.
 
@@ -373,7 +373,7 @@ title(xlab="",cex.lab=1.25,font.lab=2)
 axis(1,at=pretty(Lon),tck=-0.015,lwd=2,cex.axis=1.25,font=1)
 title(ylab="",cex.lab=1.25,font.lab=2)
 axis(2,at=pretty(Lat),tck=-0.015,lwd=2,cex.axis=1.25,font=1,las=1)
-title(main=paste("Long term (1850-2020) mean surface temperature in Jan."),
+title(main=paste("Long term (1800-2020) mean surface temperature in Jan."),
       cex.main=1,font.main=2)
 
 # Add map
@@ -406,7 +406,7 @@ title(xlab="",cex.lab=1.25,font.lab=2)
 axis(1,at=pretty(Lon),tck=-0.015,lwd=2,cex.axis=1.25,font=1)
 title(ylab="",cex.lab=1.25,font.lab=2)
 axis(2,at=pretty(Lat),tck=-0.015,lwd=2,cex.axis=1.25,font=1,las=1)
-title(main=paste("Long term (1850-2020) mean surface temperature in Jan."),
+title(main=paste("Long term (1800-2020) mean surface temperature in Jan."),
       cex.main=1,font.main=2)
 
 # Add map
@@ -429,9 +429,9 @@ Can you reproduce the following figure (`myfirstplot.png`, width 25 cm, height 2
 
 <img src="figs/myfirstplot.png" alt="drawing" width="700"/>
 
-## Exercise #3
+## Exercise #2
 
-Download the monthly anomaly file (`air.mon.anom.nc`, ~ 21 MB) from [Jones (CRU) Air Temperature Anomalies Version 4: CRUTEM4](https://psl.noaa.gov/data/gridded/data.crutem4.html). Plot an image plot to show the surface air temperature monthly anomaly for the most recent month, change the plot title accordingly, and save you file as `Air_monthly_anomaly_recent.png`.
+Download the monthly anomaly file (`air.mon.anom.nc`, ~ 21 MB) from [Jones (CRU) Air Temperature Anomalies Version 4: CRUTEM4](ftp://ftp.cdc.noaa.gov/Datasets/cru/crutem4/std/air.mon.anom.nc). Plot an image plot to show the surface air temperature monthly anomaly in the most recent month, change the plot title accordingly, and save you file as `Air_monthly_anomaly_recent.png`.
 
 ***
 
@@ -439,13 +439,16 @@ Download the monthly anomaly file (`air.mon.anom.nc`, ~ 21 MB) from [Jones (CRU)
 
 * [A Layered Grammar of Graphics ](http://vita.had.co.nz/papers/layered-grammar.pdf)
 
+* [ggplot2: elegant graphics for data analysis](https://ggplot2-book.org/)
+
 * [Data Visualization with ggplot2 Cheat Sheet](https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
 
 * [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1)
-
-* [ggplot2: elegant graphics for data analysis](https://ggplot2-book.org/)
 
 * [ggplot2 Short Tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
 
 * [ggplot2 Quickref](http://r-statistics.co/ggplot2-cheatsheet.html)
 
+***
+
+# References  
