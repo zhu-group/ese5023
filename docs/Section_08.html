@@ -651,7 +651,7 @@ div.tocify {
 </div>
 <div id="step-7.-saving-the-plot" class="section level2">
 <h2>Step 7. Saving the plot</h2>
-<p>Finally, you can save the above plot uisng the <code>ggsave()</code> function. The default is to save the last plot that you displayed, using the size of the current graphics device. It’s smart enough to guesses the type of graphics device from the extension. Let’s save the above figure to a local path <code>D://class</code> with a name <code>myplot.png</code>:</p>
+<p>Finally, you can save the above plot uisng the <code>ggsave()</code> function. The default is to save the last plot that you displayed, using the size of the current graphics device. It’s smart enough to guess the type of graphics device from the extension. Let’s save the above figure to a local path <code>D://class</code> with a name <code>myplot.png</code>:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>( continent<span class="op">==</span><span class="st">&quot;Asia&quot;</span> <span class="op">|</span><span class="st"> </span>continent<span class="op">==</span><span class="st">&quot;Europe&quot;</span> ) <span class="op">%&gt;%</span><span class="st">   </span></a>
 <a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>( <span class="kw">substr</span>(country,<span class="dv">1</span>,<span class="dv">1</span>)<span class="op">==</span><span class="st">&quot;C&quot;</span> ) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -709,7 +709,7 @@ div.tocify {
 <a class="sourceLine" id="cb27-8" data-line-number="8"><span class="st">  </span><span class="er">&lt;</span>FACET_FUNCTION<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb27-9" data-line-number="9"><span class="st">  </span></a>
 <a class="sourceLine" id="cb27-10" data-line-number="10"><span class="kw">ggsave</span>()  </a></code></pre></div>
-<p>The template takes <em>seven parameters</em>, the bracketed words that appear in the template. We have no time to cover <code>STAT</code>, <code>POSITION</code>, and <code>COORDINATE_FUNCTION</code>, which you can learn by yourself following the resources listed at the end. In practice, you rarely need to supply all seven parameters to make a plot because <code>ggplot2</code> will provide useful defaults for everything except the data, the mappings, and the geom function.</p>
+<p>The template takes <em>seven parameters</em>, the bracketed words that appear in the template. We have no time to cover <code>STAT</code>, <code>POSITION</code>, and <code>COORDINATE_FUNCTION</code>, which you can learn by yourself following the <a href="https://zhu-group.github.io/ese5023/Section_08.html#Further_reading">further reading</a>. In practice, you rarely need to supply all seven parameters to make a plot because <code>ggplot2</code> will provide useful defaults for everything except the data, the mappings, and the geom function.</p>
 <p>The seven parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe any plot as a combination of a data set, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, and a faceting scheme.</p>
 <p>With this, you can make any type of plot with <code>ggplot2()</code>!</p>
 </div>
@@ -722,7 +722,7 @@ div.tocify {
 <li><a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extensions</a></li>
 <li><a href="https://plotly.com/r/">Plotly R Open Source Graphing Library</a></li>
 </ul>
-<p>Find the plots you want to mimic, edit and customize the scripts.</p>
+<p>Find the plots you want to mimic, edit and customize the scripts based on your need.</p>
 <hr />
 </div>
 </div>

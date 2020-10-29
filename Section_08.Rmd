@@ -209,7 +209,7 @@ gapminder %>%
 
 ## Step 7. Saving the plot
 
-Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guesses the type of graphics device from the extension. Let's save the above figure to a local path `D://class` with a name `myplot.png`:
+Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guess the type of graphics device from the extension. Let's save the above figure to a local path `D://class` with a name `myplot.png`:
 
 ```{r}
 gapminder %>%
@@ -275,7 +275,7 @@ ggplot(data = <DATA>) +
 ggsave()  
 ```
 
-The template takes *seven parameters*, the bracketed words that appear in the template. We have no time to cover `STAT`, `POSITION`, and `COORDINATE_FUNCTION`, which you can learn by yourself following the resources listed at the end. In practice, you rarely need to supply all seven parameters to make a plot because `ggplot2` will provide useful defaults for everything except the data, the mappings, and the geom function.
+The template takes *seven parameters*, the bracketed words that appear in the template. We have no time to cover `STAT`, `POSITION`, and `COORDINATE_FUNCTION`, which you can learn by yourself following  the [further reading](https://zhu-group.github.io/ese5023/Section_08.html#Further_reading). In practice, you rarely need to supply all seven parameters to make a plot because `ggplot2` will provide useful defaults for everything except the data, the mappings, and the geom function.
 
 The seven parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe any plot as a combination of a data set, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, and a faceting scheme. 
 
@@ -290,7 +290,7 @@ A good way to learn `ggplot2` is to browse plots (and scripts!) in the R Graph G
 * [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/gallery/)
 * [Plotly R Open Source Graphing Library](https://plotly.com/r/)
 
-Find the plots you want to mimic, edit and customize the scripts.
+Find the plots you want to mimic, edit and customize the scripts based on your need.
 
 ***
 
