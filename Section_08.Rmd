@@ -1,0 +1,451 @@
+---
+title: "Section 08 Plotting in R"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> "The simple graph has brought more information to the data analyst's mind than any other device." - John Tukey
+
+# Plotting with ggplot2
+
+*This section is modified from the excellent [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1) and [How to make any plot in ggplot2?](http://r-statistics.co/ggplot2-Tutorial-With-R.html), both are freely available online*
+
+`ggplot2` is the most elegant and aesthetically pleasing graphics framework available in R. It implements the **grammar of graphics**, a coherent system for describing and building graphs. It can significantly improve your plots' quality and make you much more efficient in creating them. With that being said, the learning curve is steep because the way you make plots with `ggplot2` is very different from base graphics making in R and in other languages. The distinctive feature of the `ggplot2` framework is the way you make plots through **adding layers**. Here we will learn the steps of making a plot with `ggplot2`. [^1]
+
+[^1]: [How to make any plot in ggplot2?](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
+
+## Step 1. Passing the data set
+
+First of all, you need to tell R what data set to use in plotting. This is done by passing a *data.frame* object to the `ggplot()` function. Here the data frame object should contain **all** features needed to make the plot you want. Unlike base graphics in R and other languages, `ggplot()` does not take vectors as arguments.
+
+In previous sections, you learn how to use the pipe operator (`%>%`) to pass a data set (`tibble` object) produced through [data wrangling](https://zhu-group.github.io/ese5023/Section_05.html) to the `ggplot()` function. This is exactly what you need to do in this step. 
+
+Let's use the `gapminder` data set again. Now suppose we want to look at how GCP per capita (`gdpPercap`) changes from 1957 to 2007 for countries with names starting with the letter "C" in Asia or Europe. (I make up this subjective example, but hopefully, you can see the power of the `dplyr` package!) We can then pass the subset of `gapminder` data to `ggplot` to make a scatter plot between `gdpPercap` and `year`. 
+
+```{r}
+
+# Load libraries
+library(dplyr)
+library(ggplot2)
+library(gapminder)
+
+# Make a simple scatter plot
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap) ) + 
+  geom_point()
+
+```
+
+## Step 2. Mapping the aesthetics
+
+The plot above, however, can not distinguish countries as all points are plotted in the same manner. In fact, we would like to add `country` as the **third** variable to the two dimensional scatter plot. By doing so, we are mapping the scatter plot to an ***aesthetic***. An aesthetic is a visual property of the objects in your plot. Aesthetics include things like the `size`,  `shape`, `color`, or even transparency (`alpha`) of the points. You can display a point (like the one below) in different ways by changing the values of its aesthetic properties. 
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point()
+
+```
+
+To map an aesthetic to a variable, associate the name of the aesthetic to the name of the variable inside `aes()`. `ggplot2` will automatically assign a unique level of the aesthetic (here a unique color) to each unique value of the variable, a process known as *scaling*. `ggplot2` will also add a *legend* that explains which levels correspond to which values.
+
+In the above example, we mapped `country` to the `color` aesthetic, but we could have mapped `country` to the `size` aesthetic in the same way. In this case, the exact size of each point would reveal its class affiliation. 
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, size=country) ) + 
+  geom_point()
+
+```
+
+We get a warning here, because mapping an unordered variable (`country`) to an ordered aesthetic (`size`) is not a good idea. We can ignore the warning for now.
+
+Similarly, we could map `country` to the `shape` or `alpha` aesthetic:
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, shape=country) ) + 
+  geom_point()
+
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, alpha=country) ) + 
+  geom_point()
+
+```
+
+You can even combine more than one aesthetic:
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country, shape=country) ) + 
+  geom_point()
+
+```
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country, shape=continent, size=country) ) + 
+  geom_point()
+
+```
+
+Once you map an aesthetic, `ggplot2` takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values.
+
+## Step 3. Adding more geometric objects
+
+In the previous steps, we make a scatter plot between `gdpPercap` and `year`. The plot uses a visual object to represent the data. In ggplot2 syntax, we say the plot uses a geometrical object or **geom**. 
+
+People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. `ggplot2` provides over 40 geoms, and extension packages provide even more (see [here](https://exts.ggplot2.tidyverse.org/gallery/) for a sampling). The best way to get a comprehensive overview is [ggplot2 cheatsheet](https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf). To learn more about any single geom, use `?`, for example `?geom_smooth`.
+
+In `ggplot2`, you can use "+" to add another geom to the plot. In the plot below, we add a smoothed line to the scatter plots from the individual country.
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+## Step 4. Changing the labels
+
+Now that you have drawn the main parts of the plot. You might want to add the plot’s main title and perhaps change the X and Y axis titles. This can be accomplished using the `labs` layer, meant for specifying the labels. However, manipulating the size, the color of the labels is the job of the ‘Theme’.
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia")
+```
+
+## Step 5. Adjusting the theme
+
+Very often, we want to customize our plot to make it looks better. For example we may need to increase the size of the labels and/or change the legend title. Adjusting the size of labels can be done using the `theme()` function by setting the`plot.title`, `axis.text.x`, and `axis.text.y` option. They need to be specified inside the `element_text()`. If you want to remove any of them, set it to `element_blank()`, and it will vanish entirely. 
+
+Adjusting the legend title is a bit tricky. If your legend is that of a `color` attribute and it varies based on a factor, you need to set the `name` using the `scale_color_discrete()` function, where the color part belongs to the color attribute and the **discrete** because the legend is based on a factor variable.
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name")
+```
+
+## Step 6. Using the facets
+
+For categorical variables, it is particularly useful to split your plot into **facets**, subplots that each display one subset of the data. To facet your plot by a single variable, use `facet_wrap()`. The first argument of `facet_wrap()` should be a formula, which you create with `~` followed by a variable name. The variable that you pass to `facet_wrap()` should be discrete.
+
+Let's split our plot into two facets based on `continent`:
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent)
+```
+
+One way to change the layout the facets is specifying `ncol` and `nrow` options in the `facet_wrap()` function:
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent, nrow=2)
+```
+
+## Step 7. Saving the plot
+
+Finally, you can save the above plot uisng the `ggsave()` function. The default is to save the last plot that you displayed, using the size of the current graphics device. It's smart enough to guesses the type of graphics device from the extension. Let's save the above figure to a local path `D://class` with a name `myplot.png`:
+
+```{r}
+gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent, nrow=2)
+  ggsave("D://class/myplot.png")  # save a stored ggplot
+
+```
+
+You can also change the plot size (`width` and `height`) and resolution (`dpi`) by setting corresponding options. Use `?ggsave()` for more.
+
+```{r}
+# Save a ggplot object
+plot1 <- gapminder %>%
+  dplyr::filter( continent=="Asia" | continent=="Europe" ) %>%   
+  dplyr::filter( substr(country,1,1)=="C" ) %>% 
+  ggplot( aes(x=year, y=gdpPercap, color=country) ) + 
+  geom_point() + 
+  geom_smooth() +
+  labs(title="GDP per captia from 1957 to 2007", x="Year", y="GDP per captia") +
+  theme_bw() +
+  theme(plot.title=element_text(size=20, face="bold"), 
+        axis.text.x=element_text(size=10), 
+        axis.text.y=element_text(size=10),
+        axis.title.x=element_text(size=20),
+        axis.title.y=element_text(size=20)) + 
+  scale_color_discrete(name="Country Name") +
+  facet_wrap( ~ continent, nrow=2)
+
+# And later save it to a stored figure
+ggsave("D://class/myplot2.png", plot=plot1, width=20,
+       height=10, units="cm", dpi=400)
+```
+
+## ggplot2's grammar of graphics and beyond
+
+We have covered some basics but critical steps of making plots with `ggplot2`. There are many more features that we don't have time to go through in just one section. You can explore the full functionality of `ggplot2()` by studying the resources listed at the end. 
+
+To summarize, ggplot2's grammar of graphics goes like:
+
+```{r, eval=F}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+  
+ggsave()  
+```
+
+The template takes *seven parameters*, the bracketed words that appear in the template. We have no time to cover `STAT`, `POSITION`, and `COORDINATE_FUNCTION`, which you can learn by yourself following the resources listed at the end. In practice, you rarely need to supply all seven parameters to make a plot because `ggplot2` will provide useful defaults for everything except the data, the mappings, and the geom function.
+
+The seven parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe any plot as a combination of a data set, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, and a faceting scheme. 
+
+With this, you can make any type of plot with `ggplot2()`!
+
+##  R Graph Gallery
+
+A good way to learn `ggplot2` is to browse plots (and scripts!) in the R Graph Gallery, such as:
+
+* [The R Graph Gallery](https://www.r-graph-gallery.com/index.html)
+* [Top 50 ggplot2 Visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+* [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/gallery/)
+* [Plotly R Open Source Graphing Library](https://plotly.com/r/)
+
+Find the plots you want to mimic, edit and customize the scripts.
+
+***
+
+# Image plot
+
+In our field, we plot 2-D maps with values very often. Again, you can learn how to do so with `ggplot2`. But for now, let's learn how to do this using the `image.plot()` function.
+
+Install `fields`, `maps`, and `RNetCDF` packages if you haven't:
+
+```{r, eval=F}
+install.packages("fields")
+install.packages("maps")
+install.packages("RNetCDF")
+```
+
+Here we will use [Jones (CRU) Air Temperature Anomalies Version 4: CRUTEM4](https://psl.noaa.gov/data/gridded/data.crutem4.html), which contains global gridded (5°x5°) monthly anomalies of observed air temperature and combined observed air and marine temperature (HADCRU4) from the mid-1800s to near present. The current version is V4.2.0, which was put out on 5/9/2013. Download the [monthly long term mean surface data](https://zhu-group.github.io/ese5023/download/air.mon.ltm.nc), and move it to your `working directory`.
+
+The data set is in the [Network Common Data Form (NetCDF)](https://www.unidata.ucar.edu/software/netcdf/) format. NetCDF file is self-describing. A netCDF file includes information about the data it contains. It is widely used in Earth Science, Remote Sensing, and Environmental Science.
+
+## Reading a NetCDF file
+
+Before plotting, we need to read the NetCDF file using functions in the `RNetCDF` package.
+
+```{r}
+library(fields); library(maps); library(RNetCDF)
+
+# Open the NetCDF file
+ex.nc     <- open.nc("air.mon.ltm.nc")
+
+# Print the variables and attributes
+print.nc(ex.nc)
+
+# Read the variables
+# Lat
+Lat       <- var.get.nc(ex.nc, "lat")
+# Lon
+Lon       <- var.get.nc(ex.nc, "lon")
+# Monthly long term mean, surface temperature [K]
+Air_T     <- var.get.nc(ex.nc, "air") 
+
+# Close the NetCDF file
+close.nc(ex.nc)
+```
+
+## Making an image plot
+
+Let's plot the mean surface temperature in Jan. (`Air_T_Jan`). Since `image.plot()` requires an **increasing** order of both X and Y axes, we have to do some data transformation before plotting them.
+
+```{r}
+# Original Lat is in decreasing order, we need to reverse it
+Lat <- rev(Lat)
+
+# Data transformation of Air_T_Jan
+Air_T_Jan <- Air_T[,,1]
+for(row in 1:length(Lat)){
+  Air_T_Jan[,row] <- Air_T_Jan[, (length(Lat)+1-row) ]
+}
+
+```
+
+Plot the matrix with `image.plot()`:
+```{r}
+image.plot(Lon, Lat, Air_T_Jan)
+```
+
+We can make the plot look better by setting more options:
+```{r}
+# Set margins on bottom, left, top, right
+par(mar=c(4.5,3,2,1))
+
+# Plot
+image.plot(Lon, Lat, Air_T_Jan,
+           horizontal=T, useRaster=T,
+           legend.shrink=0.75, axis.args=list(cex.axis = 1.25), 
+           legend.width=1, legend.mar=2,
+           legend.args=list(text="Surface Temperature [k]",cex=1.25),           
+           xlab='',ylab='',midpoint=T, axes=F, ann=F
+)
+title(xlab="",cex.lab=1.25,font.lab=2)
+axis(1,at=pretty(Lon),tck=-0.015,lwd=2,cex.axis=1.25,font=1)
+title(ylab="",cex.lab=1.25,font.lab=2)
+axis(2,at=pretty(Lat),tck=-0.015,lwd=2,cex.axis=1.25,font=1,las=1)
+title(main=paste("Long term (1850-2020) mean surface temperature in Jan."),
+      cex.main=1,font.main=2)
+
+# Add map
+map('world',add=T,lwd=0.75,col="black")
+
+# Add a box
+box(lwd=2)
+```
+
+Use `?image.plot()` to learn more about the options.
+
+Finally, we can save the above plot as:
+```{r}
+
+# Set the png format
+png("D://class/Surface_T.png", width=8.5, height=6, units="in", res=400) 
+
+# Set margins on bottom, left, top, right
+par(mar=c(4.5,3,2,1))
+
+# Plot
+image.plot(Lon, Lat, Air_T_Jan,
+           horizontal=T, useRaster=T,
+           legend.shrink=0.75, axis.args=list(cex.axis = 1.25), 
+           legend.width=1, legend.mar=2,
+           legend.args=list(text="Surface Temperature [k]",cex=1.25),           
+           xlab='',ylab='',midpoint=T, axes=F, ann=F
+)
+title(xlab="",cex.lab=1.25,font.lab=2)
+axis(1,at=pretty(Lon),tck=-0.015,lwd=2,cex.axis=1.25,font=1)
+title(ylab="",cex.lab=1.25,font.lab=2)
+axis(2,at=pretty(Lat),tck=-0.015,lwd=2,cex.axis=1.25,font=1,las=1)
+title(main=paste("Long term (1850-2020) mean surface temperature in Jan."),
+      cex.main=1,font.main=2)
+
+# Add map
+map('world',add=T,lwd=0.75,col="black")
+
+# Add a box
+box(lwd=2)
+
+# Close the png file to save the file
+dev.off()
+```
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Can you reproduce the following figure (`myfirstplot.png`, width 25 cm, height 20 cm, and dpi 400) with `ggplot2`?
+
+<img src="figs/myfirstplot.png" alt="drawing" width="700"/>
+
+## Exercise #3
+
+Download the monthly anomaly file (`air.mon.anom.nc`, ~ 21 MB) from [Jones (CRU) Air Temperature Anomalies Version 4: CRUTEM4](https://psl.noaa.gov/data/gridded/data.crutem4.html). Plot an image plot to show the surface air temperature monthly anomaly for the most recent month, change the plot title accordingly, and save you file as `Air_monthly_anomaly_recent.png`.
+
+***
+
+# Further reading
+
+* [A Layered Grammar of Graphics ](http://vita.had.co.nz/papers/layered-grammar.pdf)
+
+* [Data Visualization with ggplot2 Cheat Sheet](https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
+
+* [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1)
+
+* [ggplot2: elegant graphics for data analysis](https://ggplot2-book.org/)
+
+* [ggplot2 Short Tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
+
+* [ggplot2 Quickref](http://r-statistics.co/ggplot2-cheatsheet.html)
+
