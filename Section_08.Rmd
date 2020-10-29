@@ -344,9 +344,9 @@ Let's plot the mean surface temperature in Jan. (`Air_T_Jan`). Since `image.plot
 Lat <- rev(Lat)
 
 # Data transformation of Air_T_Jan
-Air_T_Jan <- Air_T[,,1]
+Air_T_Jan <- array(NA,dim=c(length(Lon), length(Lat)))
 for(row in 1:length(Lat)){
-  Air_T_Jan[,row] <- Air_T_Jan[, (length(Lat)+1-row) ]
+  Air_T_Jan[,row] <- Air_T[, (length(Lat)+1-row),1 ]
 }
 
 ```

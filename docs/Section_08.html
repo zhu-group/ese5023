@@ -845,9 +845,9 @@ div.tocify {
 <span id="cb45-2"><a href="#cb45-2"></a>Lat &lt;-<span class="st"> </span><span class="kw">rev</span>(Lat)</span>
 <span id="cb45-3"><a href="#cb45-3"></a></span>
 <span id="cb45-4"><a href="#cb45-4"></a><span class="co"># Data transformation of Air_T_Jan</span></span>
-<span id="cb45-5"><a href="#cb45-5"></a>Air_T_Jan &lt;-<span class="st"> </span>Air_T[,,<span class="dv">1</span>]</span>
+<span id="cb45-5"><a href="#cb45-5"></a>Air_T_Jan &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(Lon), <span class="kw">length</span>(Lat)))</span>
 <span id="cb45-6"><a href="#cb45-6"></a><span class="cf">for</span>(row <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Lat)){</span>
-<span id="cb45-7"><a href="#cb45-7"></a>  Air_T_Jan[,row] &lt;-<span class="st"> </span>Air_T_Jan[, (<span class="kw">length</span>(Lat)<span class="op">+</span><span class="dv">1</span><span class="op">-</span>row) ]</span>
+<span id="cb45-7"><a href="#cb45-7"></a>  Air_T_Jan[,row] &lt;-<span class="st"> </span>Air_T[, (<span class="kw">length</span>(Lat)<span class="op">+</span><span class="dv">1</span><span class="op">-</span>row),<span class="dv">1</span> ]</span>
 <span id="cb45-8"><a href="#cb45-8"></a>}</span></code></pre></div>
 <p>Plot the matrix with <code>image.plot()</code>:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan)</span></code></pre></div>
