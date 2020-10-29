@@ -23,16 +23,15 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -42,16 +41,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -60,9 +57,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -511,19 +508,19 @@ div.tocify {
 </div>
 <div id="return-a-value-from-a-function" class="section level1">
 <h1>3. Return a value from a function</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Define the function FindTop()</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>FindTop        &lt;-<span class="st"> </span><span class="cf">function</span>(N){</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    MoviePage  &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;https://movie.douban.com/top250&#39;</span>, <span class="dt">encoding=</span><span class="st">&#39;UTF-8&#39;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>    Pattarn    &lt;-<span class="st"> &#39;&lt;span class=</span><span class="ch">\&quot;</span><span class="st">title</span><span class="ch">\&quot;</span><span class="st">&gt;&amp;nbsp;/&amp;nbsp;([^&lt;]*)&lt;/span&gt;&#39;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>    Lines      &lt;-<span class="st"> </span><span class="kw">grep</span>(Pattarn, MoviePage, <span class="dt">value=</span><span class="ot">TRUE</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>    Lines      &lt;-<span class="st"> </span><span class="kw">sub</span>(Pattarn,  <span class="st">&#39;</span><span class="ch">\\</span><span class="st">1&#39;</span>, Lines )</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;^ *&#39;</span>, <span class="st">&#39;&#39;</span>, Lines)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;&amp;#39;&#39;</span>, <span class="st">&quot;&#39;&quot;</span>, Names)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    <span class="kw">print</span>(Names[<span class="dv">1</span><span class="op">:</span>N])</span>
-<span id="cb1-10"><a href="#cb1-10"></a>}</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Call the function with arguement 5 and 10</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">FindTop</span>(<span class="dv">5</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">FindTop</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Define the function FindTop()</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">FindTop        &lt;-<span class="st"> </span><span class="cf">function</span>(N){</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    MoviePage  &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;https://movie.douban.com/top250&#39;</span>, <span class="dt">encoding=</span><span class="st">&#39;UTF-8&#39;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    Pattarn    &lt;-<span class="st"> &#39;&lt;span class=</span><span class="ch">\&quot;</span><span class="st">title</span><span class="ch">\&quot;</span><span class="st">&gt;&amp;nbsp;/&amp;nbsp;([^&lt;]*)&lt;/span&gt;&#39;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    Lines      &lt;-<span class="st"> </span><span class="kw">grep</span>(Pattarn, MoviePage, <span class="dt">value=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    Lines      &lt;-<span class="st"> </span><span class="kw">sub</span>(Pattarn,  <span class="st">&#39;</span><span class="ch">\\</span><span class="st">1&#39;</span>, Lines )</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;^ *&#39;</span>, <span class="st">&#39;&#39;</span>, Lines)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;&amp;#39;&#39;</span>, <span class="st">&quot;&#39;&quot;</span>, Names)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw">print</span>(Names[<span class="dv">1</span><span class="op">:</span>N])</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co"># Call the function with arguement 5 and 10</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">FindTop</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="kw">FindTop</span>(<span class="dv">10</span>)</a></code></pre></div>
 <ul>
 <li><p>Run the above lines.</p></li>
 <li><p>Go to <a href="https://movie.douban.com/top250">this website</a>, figure out what the above function does.</p></li>
@@ -532,17 +529,17 @@ div.tocify {
 </ul>
 <p>Many a times, we will require our functions to do some processing and <strong>return back the result</strong>. This is accomplished with the <code>return()</code> function in R.</p>
 <p>Change the above function to:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Define the function FindTop_new()</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>FindTop_new    &lt;-<span class="st"> </span><span class="cf">function</span>(N){</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    MoviePage  &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;https://movie.douban.com/top250&#39;</span>, <span class="dt">encoding=</span><span class="st">&#39;UTF-8&#39;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    Pattarn    &lt;-<span class="st"> &#39;&lt;span class=</span><span class="ch">\&quot;</span><span class="st">title</span><span class="ch">\&quot;</span><span class="st">&gt;&amp;nbsp;/&amp;nbsp;([^&lt;]*)&lt;/span&gt;&#39;</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>    Lines      &lt;-<span class="st"> </span><span class="kw">grep</span>(Pattarn, MoviePage, <span class="dt">value=</span><span class="ot">TRUE</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    Lines      &lt;-<span class="st"> </span><span class="kw">sub</span>(Pattarn,  <span class="st">&#39;</span><span class="ch">\\</span><span class="st">1&#39;</span>, Lines )</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;^ *&#39;</span>, <span class="st">&#39;&#39;</span>, Lines)</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;&amp;#39;&#39;</span>, <span class="st">&quot;&#39;&quot;</span>, Names)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    <span class="kw">return</span>(Names[<span class="dv">1</span><span class="op">:</span>N])</span>
-<span id="cb2-10"><a href="#cb2-10"></a>}</span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">FindTop_new</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Define the function FindTop_new()</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">FindTop_new    &lt;-<span class="st"> </span><span class="cf">function</span>(N){</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    MoviePage  &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;https://movie.douban.com/top250&#39;</span>, <span class="dt">encoding=</span><span class="st">&#39;UTF-8&#39;</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    Pattarn    &lt;-<span class="st"> &#39;&lt;span class=</span><span class="ch">\&quot;</span><span class="st">title</span><span class="ch">\&quot;</span><span class="st">&gt;&amp;nbsp;/&amp;nbsp;([^&lt;]*)&lt;/span&gt;&#39;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    Lines      &lt;-<span class="st"> </span><span class="kw">grep</span>(Pattarn, MoviePage, <span class="dt">value=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    Lines      &lt;-<span class="st"> </span><span class="kw">sub</span>(Pattarn,  <span class="st">&#39;</span><span class="ch">\\</span><span class="st">1&#39;</span>, Lines )</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;^ *&#39;</span>, <span class="st">&#39;&#39;</span>, Lines)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    Names      &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;&amp;#39;&#39;</span>, <span class="st">&quot;&#39;&quot;</span>, Names)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    <span class="kw">return</span>(Names[<span class="dv">1</span><span class="op">:</span>N])</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw">FindTop_new</span>(<span class="dv">10</span>)</a></code></pre></div>
 <ul>
 <li>Now you should be able to pass the output of <code>FindTop_new()</code> to a vector, say <code>MovieList</code>. Try this.</li>
 </ul>
@@ -557,7 +554,7 @@ div.tocify {
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/gr.html">Trends in Atmospheric Carbon Dioxide</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/gr.html">Trends in Atmospheric Carbon Dioxide</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

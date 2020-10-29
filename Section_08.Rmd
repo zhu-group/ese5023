@@ -12,7 +12,7 @@ output:
 
 # Plotting with ggplot2
 
-*This section is modified from the excellent [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1) and [How to make any plot in ggplot2?](http://r-statistics.co/ggplot2-Tutorial-With-R.html), both are freely available online*
+*This section is modified from the excellent [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html#introduction-1) and [How to make any plot in ggplot2?](http://r-statistics.co/ggplot2-Tutorial-With-R.html), both are freely available online.*
 
 `ggplot2` is the most elegant and aesthetically pleasing graphics framework available in R. It implements the **grammar of graphics**, a coherent system for describing and building graphs. It can significantly improve your plots' quality and make you much more efficient in creating them. With that being said, the learning curve is steep because the way you make plots with `ggplot2` is very different from base graphics making in R and in other languages. The distinctive feature of the `ggplot2` framework is the way you make plots through **adding layers**. Here we will learn the steps of making a plot with `ggplot2`. [^1]
 
@@ -227,7 +227,7 @@ gapminder %>%
         axis.title.y=element_text(size=20)) + 
   scale_color_discrete(name="Country Name") +
   facet_wrap( ~ continent, nrow=2)
-  ggsave("D://class/myplot.png")  # save a stored ggplot
+  ggsave("myplot.png")  # save a stored ggplot
 
 ```
 
@@ -252,7 +252,7 @@ plot1 <- gapminder %>%
   facet_wrap( ~ continent, nrow=2)
 
 # And later save it to a stored figure
-ggsave("D://class/myplot2.png", plot=plot1, width=20,
+ggsave("myplot2.png", plot=plot1, width=20,
        height=10, units="cm", dpi=400)
 ```
 
@@ -328,7 +328,7 @@ print.nc(ex.nc)
 Lat       <- var.get.nc(ex.nc, "lat")
 # Lon
 Lon       <- var.get.nc(ex.nc, "lon")
-# Monthly long term mean, surface temperature [K]
+# Monthly long term mean, surface temperature [degC]
 Air_T     <- var.get.nc(ex.nc, "air") 
 
 # Close the NetCDF file
@@ -389,7 +389,7 @@ Finally, we can save the above plot as:
 ```{r}
 
 # Set the png format
-png("D://class/Surface_T.png", width=8.5, height=6, units="in", res=400) 
+png("Surface_T.png", width=8.5, height=6, units="in", res=400) 
 
 # Set margins on bottom, left, top, right
 par(mar=c(4.5,3,2,1))
