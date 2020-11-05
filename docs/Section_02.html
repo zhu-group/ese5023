@@ -23,15 +23,16 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -41,14 +42,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -57,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -512,11 +515,11 @@ div.tocify {
 <div id="using-r-as-a-calculator" class="section level2">
 <h2>Using R as a calculator</h2>
 <p>The simplest thing you could do with R is to do arithmetic. Let try this in the <strong>Console</strong> window:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>R will print out the answer with a preceding <code>## [1]</code> (my PC) or <code>[1]</code> (your laptop). Don’t worry about this for now, we’ll explain that later. For now, think of it as indicating output.</p>
 <p>You will find the spaces have no impact on the result.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dv">1</span><span class="op">+</span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>When using R as a calculator, the order of operations is the same as you would have learned back in school. From highest to lowest precedence:</p>
 <ul>
@@ -528,41 +531,41 @@ div.tocify {
 <li>Subtract: <code>-</code></li>
 </ul>
 <p>Let’s try</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 27</code></pre>
 <p>Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by R when it executes code.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Get the square root of 100</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="dv">100</span> <span class="op">^</span><span class="st"> </span><span class="fl">0.5</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get the square root of 100</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="dv">100</span> <span class="op">^</span><span class="st"> </span><span class="fl">0.5</span></span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>Really small or large numbers get a <em>scientific notation</em>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">10000</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">10000</span></span></code></pre></div>
 <pre><code>## [1] 2e-04</code></pre>
 <p>You can write numbers in scientific notation too:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="fl">5e+5</span> <span class="op">*</span><span class="st"> </span><span class="fl">1e+5</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fl">5e+5</span> <span class="op">*</span><span class="st"> </span><span class="fl">1e+5</span></span></code></pre></div>
 <pre><code>## [1] 5e+10</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="fl">5.2E+5</span> <span class="op">+</span><span class="st"> </span><span class="fl">4.8E+6</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fl">5.2E+5</span> <span class="op">+</span><span class="st"> </span><span class="fl">4.8E+6</span></span></code></pre></div>
 <pre><code>## [1] 5320000</code></pre>
 </div>
 <div id="mathematical-functions" class="section level2">
 <h2>Mathematical functions</h2>
 <p>R has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses <code>()</code>. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Trigonometry functions</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">sin</span>(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Trigonometry functions</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">sin</span>(<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.841471</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">sin</span>(<span class="fl">0.5</span><span class="op">*</span>pi)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">sin</span>(<span class="fl">0.5</span><span class="op">*</span>pi)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># Natural logarithm</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">log</span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Natural logarithm</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">log</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 2.302585</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># Base-10 logarithm</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">log10</span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Base-10 logarithm</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">log10</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># e^(1/2)</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">exp</span>(<span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># e^(1/2)</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">exp</span>(<span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 1.648721</code></pre>
 <p>Don’t worry about trying to remember every function in R. You can look them up online, or if you can remember the start of the function’s name, use the <code>Tab</code> completion in RStudio.</p>
 <p>This is one advantage that RStudio has over R on its own; it has <em>auto-completion abilities</em> that allow you to more easily look up functions, their arguments, and the values that they take. In fact, the auto-completion abilities do not limit to functions, but also to variables.</p>
@@ -571,75 +574,75 @@ div.tocify {
 <div id="comparing-things" class="section level2">
 <h2>Comparing things</h2>
 <p>We can also do comparisons in R:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># Equality (note two equals signs, read as &quot;is equal to&quot;)</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Equality (note two equals signs, read as &quot;is equal to&quot;)</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># Inequality (read as &quot;is not equal to&quot;)</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="dv">3</span> <span class="op">!=</span><span class="st"> </span><span class="dv">2</span>  </a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Inequality (read as &quot;is not equal to&quot;)</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="dv">3</span> <span class="op">!=</span><span class="st"> </span><span class="dv">2</span>  </span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># Less than</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="dv">100</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">101</span>  </a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Less than</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="dv">100</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">101</span>  </span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># Less than or equal to</span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="fl">1e3</span> <span class="op">&lt;=</span><span class="st"> </span><span class="fl">2e3</span></a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Less than or equal to</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fl">1e3</span> <span class="op">&lt;=</span><span class="st"> </span><span class="fl">2e3</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># Greater than</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># Greater than</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># Greater than or equal to</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="dv">-100</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">-200</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Greater than or equal to</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="dv">-100</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">-200</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>A word of warning about comparing numbers: you should never use <code>==</code> to compare two numbers unless they are integers (a data type which can specifically represent only whole numbers).</p>
 <p>Computers may only represent decimal numbers with a certain degree of precision, so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called Machine numeric tolerance). <a href="http://floating-point-gui.de">Further reading</a></p>
 <p>Instead, you should use the <code>all.equal()</code> function.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># Comparing</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">all.equal</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># Comparing</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="kw">all.equal</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="fl">+1e-5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">all.equal</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="fl">+1e-5</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Mean relative difference: 1e-05&quot;</code></pre>
 </div>
 <div id="variables-and-assignment" class="section level2">
 <h2>Variables and assignment</h2>
 <p>We can store values in variables using the assignment operator <code>&lt;-</code>, like this:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># Assignment</span></a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Assignment</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">100</span></span></code></pre></div>
 <p>Notice that the assignment does not print a value. Instead, we stored it for later in something called a <em>variable</em>. <code>x</code> now contains the value <code>0.01</code>:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># Print x</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">x</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># Print x</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>x</span></code></pre></div>
 <pre><code>## [1] 0.01</code></pre>
 <p>Remember, you can always print a variable (in fact, anything) using the function <code>print()</code>:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">print</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">print</span>(x)</span></code></pre></div>
 <pre><code>## [1] 0.01</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">print</span>(<span class="st">&quot;Hello World&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Hello World&quot;</code></pre>
 <p>You can also assign a character to a variable</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">MyName &lt;-<span class="st"> &quot;SUSTech&quot;</span></a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">print</span>(MyName)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>MyName &lt;-<span class="st"> &quot;SUSTech&quot;</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="kw">print</span>(MyName)</span></code></pre></div>
 <pre><code>## [1] &quot;SUSTech&quot;</code></pre>
 <p>Look for the <strong>Environment</strong> window from the top right panel of RStudio, and you will see that <code>x</code> and its value have appeared. Our variable <code>x</code> can be used in place of a number in any calculation that expects a number:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co"># Print x</span></a>
-<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">log10</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># Print x</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="kw">log10</span>(x)</span></code></pre></div>
 <pre><code>## [1] -2</code></pre>
 <p>Notice also that variables can be reassigned:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co"># Assignment</span></a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># Assignment</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>x &lt;-<span class="st"> </span><span class="dv">100</span></span></code></pre></div>
 <p><code>x</code> used to contain the value <code>0.01</code>, and now it has the value <code>100</code>.</p>
 <p>Assignment values can contain the variable being assigned to:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="co"># Notice how RStudio updates its description of x on the top right tab</span></a>
-<a class="sourceLine" id="cb57-2" data-line-number="2">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a>
-<a class="sourceLine" id="cb57-3" data-line-number="3">y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># Notice how RStudio updates its description of x on the top right tab</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </span>
+<span id="cb57-3"><a href="#cb57-3"></a>y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
 <p>The right-hand side of the assignment can be any valid R expression. The right-hand side is <strong>fully evaluated</strong> before the assignment occurs.</p>
 <p>Variable names can contain letters, numbers, underscores, periods, <strong>but no spaces</strong>. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore). Variables beginning with a period are hidden variables. Different people use different conventions for long variable names. Whatever you use is up to you, but be consistent.</p>
 </div>
 <div id="vectorization" class="section level2">
 <h2>Vectorization</h2>
 <p>One thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. In contrast to physics and mathematics, a vector in R describes a set of values <strong>in a certain order</strong> of the same data type. For example:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1]    2    4    8   16   32   64  128  256  512 1024</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>x</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>x</span></code></pre></div>
 <pre><code>##  [1]    2    4    8   16   32   64  128  256  512 1024</code></pre>
 <p>This is incredibly powerful; we will discuss this further in an upcoming section.</p>
 </div>
@@ -647,74 +650,81 @@ div.tocify {
 <h2>Managing your environment</h2>
 <p>There are a few useful commands you can use to interact with the R session.</p>
 <p><code>ls()</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;x&quot;          &quot;y&quot;</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;ACF&quot;              &quot;co2&quot;              &quot;co2_components&quot;   &quot;i&quot;                &quot;Keeling_Data&quot;    
+##  [6] &quot;Keeling_Data_tbl&quot; &quot;m&quot;                &quot;MyName&quot;           &quot;PACF&quot;             &quot;Results&quot;         
+## [11] &quot;Simulation&quot;       &quot;t&quot;                &quot;TotalDraw&quot;        &quot;trModel&quot;          &quot;x&quot;               
+## [16] &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls()</code>, but we still needed to give the parentheses <code>()</code> to tell R to call the function.</p>
 <p>You can use <code>rm()</code> to delete objects you no longer need:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">rm</span>(x)</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;MyName&quot;     &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;  &quot;y&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">rm</span>(MyName, y)</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="kw">ls</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;Results&quot;    &quot;Simulation&quot; &quot;TotalDraw&quot;</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">rm</span>(x)</span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="kw">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;ACF&quot;              &quot;co2&quot;              &quot;co2_components&quot;   &quot;i&quot;                &quot;Keeling_Data&quot;    
+##  [6] &quot;Keeling_Data_tbl&quot; &quot;m&quot;                &quot;MyName&quot;           &quot;PACF&quot;             &quot;Results&quot;         
+## [11] &quot;Simulation&quot;       &quot;t&quot;                &quot;TotalDraw&quot;        &quot;trModel&quot;          &quot;y&quot;</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">rm</span>(MyName, y)</span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="kw">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;ACF&quot;              &quot;co2&quot;              &quot;co2_components&quot;   &quot;i&quot;                &quot;Keeling_Data&quot;    
+##  [6] &quot;Keeling_Data_tbl&quot; &quot;m&quot;                &quot;PACF&quot;             &quot;Results&quot;          &quot;Simulation&quot;      
+## [11] &quot;t&quot;                &quot;TotalDraw&quot;        &quot;trModel&quot;</code></pre>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
 <p>Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
 <p>There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the <code>if</code> and <code>else</code> constructs.</p>
 <p>Given today’s AQI (Air Quality Index) value, suppose we want to write a piece of code to check whether the Air Quality is excellent (AQI &lt;= <code>50</code>) or not.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">AQI &lt;-<span class="st"> </span><span class="dv">69</span></a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>AQI &lt;-<span class="st"> </span><span class="dv">69</span></span></code></pre></div>
 <p>Open a new R script (<code>File -&gt; New File -&gt; R Script</code>), and you should see a new panel in your RStudio. Type the following lines in the script, and save it. Select the lines you want to run, there are two ways to do so:</p>
 <ul>
 <li>Type <code>Ctrl</code>+<code>Enter</code></li>
 <li>Click <code>Run</code> then <code>Run Select Line(s)</code> from the top-right of the <strong>Script</strong> window.</li>
 </ul>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">AQI &lt;-<span class="st"> </span><span class="dv">69</span></a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="co"># If this condition is TRUE</span></a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) { </a>
-<a class="sourceLine" id="cb71-4" data-line-number="4">  <span class="co"># Do the following</span></a>
-<a class="sourceLine" id="cb71-5" data-line-number="5">  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</a>
-<a class="sourceLine" id="cb71-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>AQI &lt;-<span class="st"> </span><span class="dv">69</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="co"># If this condition is TRUE</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) { </span>
+<span id="cb71-4"><a href="#cb71-4"></a>  <span class="co"># Do the following</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
+<span id="cb71-6"><a href="#cb71-6"></a>}</span></code></pre></div>
 <p>The print statement does not appear in the <strong>console</strong> because <code>AQI</code> is larger than <code>50</code>. To print a different message for numbers larger than <code>50</code>, we can add an else statement.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co"># If this condition is TRUE</span></a>
-<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) {</a>
-<a class="sourceLine" id="cb72-3" data-line-number="3">  <span class="co"># Do the following</span></a>
-<a class="sourceLine" id="cb72-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</a>
-<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="co"># If this condition is FALSE  </span></a>
-<a class="sourceLine" id="cb72-6" data-line-number="6">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb72-7" data-line-number="7">  <span class="kw">print</span>(<span class="st">&quot;Air Quality is NOT Excellent&quot;</span>)</a>
-<a class="sourceLine" id="cb72-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="co"># If this condition is TRUE</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) {</span>
+<span id="cb72-3"><a href="#cb72-3"></a>  <span class="co"># Do the following</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
+<span id="cb72-5"><a href="#cb72-5"></a><span class="co"># If this condition is FALSE  </span></span>
+<span id="cb72-6"><a href="#cb72-6"></a>} <span class="cf">else</span> {</span>
+<span id="cb72-7"><a href="#cb72-7"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Quality is NOT Excellent&quot;</span>)</span>
+<span id="cb72-8"><a href="#cb72-8"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Air Quality is NOT Excellent&quot;</code></pre>
 <p>You can also test multiple conditions by using <code>else if</code>.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) {</a>
-<a class="sourceLine" id="cb74-2" data-line-number="2">  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">} <span class="cf">else</span> <span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</a>
-<a class="sourceLine" id="cb74-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;Air Quality is GOOD&quot;</span>)</a>
-<a class="sourceLine" id="cb74-5" data-line-number="5">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb74-6" data-line-number="6">  <span class="kw">print</span>(<span class="st">&quot;Air Pollution!&quot;</span>)</a>
-<a class="sourceLine" id="cb74-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) {</span>
+<span id="cb74-2"><a href="#cb74-2"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
+<span id="cb74-3"><a href="#cb74-3"></a>} <span class="cf">else</span> <span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</span>
+<span id="cb74-4"><a href="#cb74-4"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Quality is GOOD&quot;</span>)</span>
+<span id="cb74-5"><a href="#cb74-5"></a>} <span class="cf">else</span> {</span>
+<span id="cb74-6"><a href="#cb74-6"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Pollution!&quot;</span>)</span>
+<span id="cb74-7"><a href="#cb74-7"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Air Quality is GOOD&quot;</code></pre>
 <p>Change <code>AQI</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the ouput.</p>
 <p><strong>Important</strong>: when R evaluates the condition inside <code>if()</code> statements, it is looking for a logical element, <em>i.e.</em>, <code>TRUE</code> or <code>FALSE</code>. This can cause some headaches for beginners. For example:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">x  &lt;-<span class="st">  </span><span class="dv">4</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="cf">if</span> (x) {</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3">  <span class="st">&quot;4 equals 3&quot;</span></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb76-5" data-line-number="5">  <span class="st">&quot;4 does not equal 3&quot;</span>          </a>
-<a class="sourceLine" id="cb76-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>x  &lt;-<span class="st">  </span><span class="dv">4</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a><span class="cf">if</span> (x) {</span>
+<span id="cb76-3"><a href="#cb76-3"></a>  <span class="st">&quot;4 equals 3&quot;</span></span>
+<span id="cb76-4"><a href="#cb76-4"></a>} <span class="cf">else</span> {</span>
+<span id="cb76-5"><a href="#cb76-5"></a>  <span class="st">&quot;4 does not equal 3&quot;</span>          </span>
+<span id="cb76-6"><a href="#cb76-6"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;4 does not equal 3&quot;</code></pre>
 <p>We can use logical AND <code>&amp;&amp;</code> and OR <code>||</code> operator for more than one condition:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Good&quot;</span>)</a>
-<a class="sourceLine" id="cb78-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</span>
+<span id="cb78-2"><a href="#cb78-2"></a>  <span class="kw">print</span>(<span class="st">&quot;Air Quality is Good&quot;</span>)</span>
+<span id="cb78-3"><a href="#cb78-3"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Air Quality is Good&quot;</code></pre>
 <p>Change <code>AQI</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the ouput.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">AQI1 &lt;-<span class="st"> </span><span class="dv">69</span></a>
-<a class="sourceLine" id="cb80-2" data-line-number="2">AQI2 &lt;-<span class="st"> </span><span class="dv">140</span></a>
-<a class="sourceLine" id="cb80-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="cf">if</span> (AQI1 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span> <span class="op">||</span><span class="st"> </span>AQI2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</a>
-<a class="sourceLine" id="cb80-5" data-line-number="5">  <span class="kw">print</span>(<span class="st">&quot;There is at least 1 site with a GOOD air quality&quot;</span>)</a>
-<a class="sourceLine" id="cb80-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>AQI1 &lt;-<span class="st"> </span><span class="dv">69</span></span>
+<span id="cb80-2"><a href="#cb80-2"></a>AQI2 &lt;-<span class="st"> </span><span class="dv">140</span></span>
+<span id="cb80-3"><a href="#cb80-3"></a></span>
+<span id="cb80-4"><a href="#cb80-4"></a><span class="cf">if</span> (AQI1 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span> <span class="op">||</span><span class="st"> </span>AQI2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</span>
+<span id="cb80-5"><a href="#cb80-5"></a>  <span class="kw">print</span>(<span class="st">&quot;There is at least 1 site with a GOOD air quality&quot;</span>)</span>
+<span id="cb80-6"><a href="#cb80-6"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;There is at least 1 site with a GOOD air quality&quot;</code></pre>
 <p>Change <code>AQI1</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the ouput.</p>
 </div>
@@ -723,48 +733,48 @@ div.tocify {
 <p>You probably have realized it’s really tedious to change the AQI variables. It would be really helpful to define a <em>function</em> that handles different inputs automatically.</p>
 <p>A function is a set of statements organized together to perform a specific task. R has a large number of in-built functions and the user can create their own functions. In R, a function is an object so the R interpreter is able to pass control to the function, along with arguments that may be necessary for the function to accomplish the actions. The function in turn performs its task and returns control to the interpreter as well as any result which may be stored in other objects.</p>
 <p>An R function is created by using the keyword <strong>function</strong>. The basic syntax of an R function definition is as follows:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">function_name &lt;-<span class="st"> </span><span class="cf">function</span>(argument_<span class="dv">1</span>, argument_<span class="dv">2</span>, ...) {</a>
-<a class="sourceLine" id="cb82-2" data-line-number="2">   Function body </a>
-<a class="sourceLine" id="cb82-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>function_name &lt;-<span class="st"> </span><span class="cf">function</span>(argument_<span class="dv">1</span>, argument_<span class="dv">2</span>, ...) {</span>
+<span id="cb82-2"><a href="#cb82-2"></a>   Function body </span>
+<span id="cb82-3"><a href="#cb82-3"></a>}</span></code></pre></div>
 <p>In the above AQI example, we can define a function named <code>Check_Air_Quality</code> as:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">Check_Air_Quality&lt;-<span class="st"> </span><span class="cf">function</span>(AQI) {</a>
-<a class="sourceLine" id="cb83-2" data-line-number="2">  <span class="co">#  Excellent </span></a>
-<a class="sourceLine" id="cb83-3" data-line-number="3">  <span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) {</a>
-<a class="sourceLine" id="cb83-4" data-line-number="4">    <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</a>
-<a class="sourceLine" id="cb83-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb83-6" data-line-number="6">  <span class="co"># Good</span></a>
-<a class="sourceLine" id="cb83-7" data-line-number="7">  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</a>
-<a class="sourceLine" id="cb83-8" data-line-number="8">    <span class="kw">print</span>(<span class="st">&quot;Air Quality is Good&quot;</span>)</a>
-<a class="sourceLine" id="cb83-9" data-line-number="9">  }</a>
-<a class="sourceLine" id="cb83-10" data-line-number="10">  <span class="co"># Polluted, Level I</span></a>
-<a class="sourceLine" id="cb83-11" data-line-number="11">  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">150</span>) {</a>
-<a class="sourceLine" id="cb83-12" data-line-number="12">    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level I&quot;</span>)</a>
-<a class="sourceLine" id="cb83-13" data-line-number="13">  }  </a>
-<a class="sourceLine" id="cb83-14" data-line-number="14">  <span class="co"># Polluted, Level II</span></a>
-<a class="sourceLine" id="cb83-15" data-line-number="15">  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">200</span>) {</a>
-<a class="sourceLine" id="cb83-16" data-line-number="16">    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level II&quot;</span>)</a>
-<a class="sourceLine" id="cb83-17" data-line-number="17">  }  </a>
-<a class="sourceLine" id="cb83-18" data-line-number="18">  <span class="co"># Polluted, Level III</span></a>
-<a class="sourceLine" id="cb83-19" data-line-number="19">  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">300</span>) {</a>
-<a class="sourceLine" id="cb83-20" data-line-number="20">    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level III&quot;</span>)</a>
-<a class="sourceLine" id="cb83-21" data-line-number="21">  }  </a>
-<a class="sourceLine" id="cb83-22" data-line-number="22">  <span class="co"># Polluted, Level IV</span></a>
-<a class="sourceLine" id="cb83-23" data-line-number="23">  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">300</span>) {</a>
-<a class="sourceLine" id="cb83-24" data-line-number="24">    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level IV&quot;</span>)</a>
-<a class="sourceLine" id="cb83-25" data-line-number="25">  }  </a>
-<a class="sourceLine" id="cb83-26" data-line-number="26">}</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>Check_Air_Quality&lt;-<span class="st"> </span><span class="cf">function</span>(AQI) {</span>
+<span id="cb83-2"><a href="#cb83-2"></a>  <span class="co">#  Excellent </span></span>
+<span id="cb83-3"><a href="#cb83-3"></a>  <span class="cf">if</span> (AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) {</span>
+<span id="cb83-4"><a href="#cb83-4"></a>    <span class="kw">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
+<span id="cb83-5"><a href="#cb83-5"></a>  }</span>
+<span id="cb83-6"><a href="#cb83-6"></a>  <span class="co"># Good</span></span>
+<span id="cb83-7"><a href="#cb83-7"></a>  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>) {</span>
+<span id="cb83-8"><a href="#cb83-8"></a>    <span class="kw">print</span>(<span class="st">&quot;Air Quality is Good&quot;</span>)</span>
+<span id="cb83-9"><a href="#cb83-9"></a>  }</span>
+<span id="cb83-10"><a href="#cb83-10"></a>  <span class="co"># Polluted, Level I</span></span>
+<span id="cb83-11"><a href="#cb83-11"></a>  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">150</span>) {</span>
+<span id="cb83-12"><a href="#cb83-12"></a>    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level I&quot;</span>)</span>
+<span id="cb83-13"><a href="#cb83-13"></a>  }  </span>
+<span id="cb83-14"><a href="#cb83-14"></a>  <span class="co"># Polluted, Level II</span></span>
+<span id="cb83-15"><a href="#cb83-15"></a>  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">150</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">200</span>) {</span>
+<span id="cb83-16"><a href="#cb83-16"></a>    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level II&quot;</span>)</span>
+<span id="cb83-17"><a href="#cb83-17"></a>  }  </span>
+<span id="cb83-18"><a href="#cb83-18"></a>  <span class="co"># Polluted, Level III</span></span>
+<span id="cb83-19"><a href="#cb83-19"></a>  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;&amp;</span><span class="st"> </span>AQI <span class="op">&lt;=</span><span class="st"> </span><span class="dv">300</span>) {</span>
+<span id="cb83-20"><a href="#cb83-20"></a>    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level III&quot;</span>)</span>
+<span id="cb83-21"><a href="#cb83-21"></a>  }  </span>
+<span id="cb83-22"><a href="#cb83-22"></a>  <span class="co"># Polluted, Level IV</span></span>
+<span id="cb83-23"><a href="#cb83-23"></a>  <span class="cf">if</span> (AQI <span class="op">&gt;</span><span class="st"> </span><span class="dv">300</span>) {</span>
+<span id="cb83-24"><a href="#cb83-24"></a>    <span class="kw">print</span>(<span class="st">&quot;Air pollution, level IV&quot;</span>)</span>
+<span id="cb83-25"><a href="#cb83-25"></a>  }  </span>
+<span id="cb83-26"><a href="#cb83-26"></a>}</span></code></pre></div>
 <p>Call <code>Check_Air_Quality</code> with various <code>AQI</code> values: <code>40</code>, <code>80</code>, <code>120</code>, <code>160</code>, <code>240</code>, and <code>340</code>:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">Check_Air_Quality</span>(<span class="dv">40</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="kw">Check_Air_Quality</span>(<span class="dv">40</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Air Quality is Excellent&quot;</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">Check_Air_Quality</span>(<span class="dv">80</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="kw">Check_Air_Quality</span>(<span class="dv">80</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Air Quality is Good&quot;</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">Check_Air_Quality</span>(<span class="dv">120</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="kw">Check_Air_Quality</span>(<span class="dv">120</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Air pollution, level I&quot;</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">Check_Air_Quality</span>(<span class="dv">160</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="kw">Check_Air_Quality</span>(<span class="dv">160</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Air pollution, level II&quot;</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">Check_Air_Quality</span>(<span class="dv">240</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="kw">Check_Air_Quality</span>(<span class="dv">240</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Air pollution, level III&quot;</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">Check_Air_Quality</span>(<span class="dv">500</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a><span class="kw">Check_Air_Quality</span>(<span class="dv">500</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Air pollution, level IV&quot;</code></pre>
 </div>
 <div id="repeating-operations" class="section level2">
@@ -772,241 +782,241 @@ div.tocify {
 <p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a <code>for()</code> loop will do the job. This is the <strong>most flexible</strong> of looping operations, but therefore also the <strong>hardest</strong> to use correctly.</p>
 <p>In general, the advice of many R users would be to learn about <code>for()</code> loops but to avoid using <code>for()</code> loops unless the order of iteration is important: <em>i.e.</em>, the calculation at each iteration depends on the results of previous iterations.</p>
 <p>Let’s define a list <code>Forecast_List</code>, which contains daily mean temperature forecasts in 5 days in Shenzhen:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">Forecast_List &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">26</span>, <span class="dv">27</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>Forecast_List &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">26</span>, <span class="dv">27</span>)</span></code></pre></div>
 <p>Here <code>c()</code> means “combine”:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">print</span>(Forecast_List)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a><span class="kw">print</span>(Forecast_List)</span></code></pre></div>
 <pre><code>## [1] 28 27 28 26 27</code></pre>
 <p>Now loop each element in <code>Forecast_List</code>:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="cf">for</span> (Daily_T <span class="cf">in</span> Forecast_List) { <span class="co"># If this condition is TRUE</span></a>
-<a class="sourceLine" id="cb99-2" data-line-number="2">  <span class="co"># Do following</span></a>
-<a class="sourceLine" id="cb99-3" data-line-number="3">  <span class="kw">print</span>(Daily_T)</a>
-<a class="sourceLine" id="cb99-4" data-line-number="4">} <span class="co"># End of the for loop</span></a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="cf">for</span> (Daily_T <span class="cf">in</span> Forecast_List) { <span class="co"># If this condition is TRUE</span></span>
+<span id="cb99-2"><a href="#cb99-2"></a>  <span class="co"># Do following</span></span>
+<span id="cb99-3"><a href="#cb99-3"></a>  <span class="kw">print</span>(Daily_T)</span>
+<span id="cb99-4"><a href="#cb99-4"></a>} <span class="co"># End of the for loop</span></span></code></pre></div>
 <pre><code>## [1] 28
 ## [1] 27
 ## [1] 28
 ## [1] 26
 ## [1] 27</code></pre>
 <p>We can use a <code>for()</code> loop nested within another <code>for()</code> loop to iterate over two things at once.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="cf">for</span> (Daily_T <span class="cf">in</span> Forecast_List) {</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2">  <span class="cf">for</span> (Hour <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">24</span>) {</a>
-<a class="sourceLine" id="cb101-3" data-line-number="3">    Hourly_T &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,Daily_T,<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb101-4" data-line-number="4">    <span class="kw">print</span>(<span class="kw">paste</span>(Daily_T,Hourly_T))</a>
-<a class="sourceLine" id="cb101-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb101-6" data-line-number="6">}</a></code></pre></div>
-<pre><code>## [1] &quot;28 19.9299018629304&quot;
-## [1] &quot;28 28.5457924992594&quot;
-## [1] &quot;28 30.5846549492461&quot;
-## [1] &quot;28 30.0582854156915&quot;
-## [1] &quot;28 17.7759212647734&quot;
-## [1] &quot;28 28.5406109603135&quot;
-## [1] &quot;28 31.7883183502171&quot;
-## [1] &quot;28 23.8644959464867&quot;
-## [1] &quot;28 29.8408329083428&quot;
-## [1] &quot;28 32.2272531217278&quot;
-## [1] &quot;28 29.8818023841178&quot;
-## [1] &quot;28 39.9355235795122&quot;
-## [1] &quot;28 33.5139114630034&quot;
-## [1] &quot;28 31.8230224010173&quot;
-## [1] &quot;28 29.6106120795402&quot;
-## [1] &quot;28 24.9188428429581&quot;
-## [1] &quot;28 32.9953260044668&quot;
-## [1] &quot;28 35.8781143168171&quot;
-## [1] &quot;28 27.4073224101883&quot;
-## [1] &quot;28 23.7943493226461&quot;
-## [1] &quot;28 30.5924644508503&quot;
-## [1] &quot;28 25.2000321828306&quot;
-## [1] &quot;28 31.0195166651237&quot;
-## [1] &quot;28 34.5482310890917&quot;
-## [1] &quot;27 17.8968030785179&quot;
-## [1] &quot;27 29.6885281803463&quot;
-## [1] &quot;27 22.0345881735439&quot;
-## [1] &quot;27 28.0914904560331&quot;
-## [1] &quot;27 31.9557049543791&quot;
-## [1] &quot;27 24.2130134433335&quot;
-## [1] &quot;27 21.8354992807535&quot;
-## [1] &quot;27 21.4815459493615&quot;
-## [1] &quot;27 24.5992342235518&quot;
-## [1] &quot;27 35.1121728062319&quot;
-## [1] &quot;27 27.6856227739073&quot;
-## [1] &quot;27 26.4111966364118&quot;
-## [1] &quot;27 26.8990747200138&quot;
-## [1] &quot;27 34.6160232022701&quot;
-## [1] &quot;27 37.7303292353448&quot;
-## [1] &quot;27 23.3499116623999&quot;
-## [1] &quot;27 28.8661275278176&quot;
-## [1] &quot;27 25.7762831822773&quot;
-## [1] &quot;27 32.7798428841616&quot;
-## [1] &quot;27 20.4547217852261&quot;
-## [1] &quot;27 28.0398908072247&quot;
-## [1] &quot;27 24.8534876881506&quot;
-## [1] &quot;27 37.1496360270639&quot;
-## [1] &quot;27 30.196269969275&quot;
-## [1] &quot;28 30.8981783945677&quot;
-## [1] &quot;28 25.1214364479833&quot;
-## [1] &quot;28 25.7482756801129&quot;
-## [1] &quot;28 32.4517223767706&quot;
-## [1] &quot;28 25.7509320193145&quot;
-## [1] &quot;28 26.3031749677388&quot;
-## [1] &quot;28 25.8013190371707&quot;
-## [1] &quot;28 25.0592907681109&quot;
-## [1] &quot;28 28.7614884983952&quot;
-## [1] &quot;28 23.08144902993&quot;
-## [1] &quot;28 20.0797123387974&quot;
-## [1] &quot;28 23.6571136110518&quot;
-## [1] &quot;28 26.2941874913821&quot;
-## [1] &quot;28 22.2853148718298&quot;
-## [1] &quot;28 25.3483259206908&quot;
-## [1] &quot;28 26.2236883792477&quot;
-## [1] &quot;28 27.703458411001&quot;
-## [1] &quot;28 17.7487439061306&quot;
-## [1] &quot;28 21.3912263226204&quot;
-## [1] &quot;28 29.8161446796371&quot;
-## [1] &quot;28 29.9165527084373&quot;
-## [1] &quot;28 26.6903632970832&quot;
-## [1] &quot;28 32.7001162339341&quot;
-## [1] &quot;28 21.9490962252629&quot;
-## [1] &quot;26 29.7202526379534&quot;
-## [1] &quot;26 31.9097967744616&quot;
-## [1] &quot;26 29.6151955023331&quot;
-## [1] &quot;26 26.6277592923218&quot;
-## [1] &quot;26 30.7167664025443&quot;
-## [1] &quot;26 27.3643551614995&quot;
-## [1] &quot;26 23.5566597176519&quot;
-## [1] &quot;26 20.2522990709052&quot;
-## [1] &quot;26 31.2796288031738&quot;
-## [1] &quot;26 22.5600073608354&quot;
-## [1] &quot;26 20.5988272752059&quot;
-## [1] &quot;26 14.347512880091&quot;
-## [1] &quot;26 20.1508843011252&quot;
-## [1] &quot;26 21.7014669465172&quot;
-## [1] &quot;26 27.1385108962308&quot;
-## [1] &quot;26 29.4634344460842&quot;
-## [1] &quot;26 27.2616410369488&quot;
-## [1] &quot;26 21.4015769933055&quot;
-## [1] &quot;26 22.9793752382067&quot;
-## [1] &quot;26 20.8546294529626&quot;
-## [1] &quot;26 34.0324948568173&quot;
-## [1] &quot;26 22.2621686164973&quot;
-## [1] &quot;26 20.4277875999642&quot;
-## [1] &quot;26 24.2098077785644&quot;
-## [1] &quot;27 27.3529099154542&quot;
-## [1] &quot;27 22.8056722722174&quot;
-## [1] &quot;27 20.4851478327322&quot;
-## [1] &quot;27 28.8358232151788&quot;
-## [1] &quot;27 37.9622907979793&quot;
-## [1] &quot;27 26.9278836863078&quot;
-## [1] &quot;27 23.7293444493742&quot;
-## [1] &quot;27 29.9127076176601&quot;
-## [1] &quot;27 34.6577658048321&quot;
-## [1] &quot;27 31.2178307240209&quot;
-## [1] &quot;27 23.2162304027737&quot;
-## [1] &quot;27 32.0724233835734&quot;
-## [1] &quot;27 32.444227152753&quot;
-## [1] &quot;27 20.8357172176409&quot;
-## [1] &quot;27 27.6303930232841&quot;
-## [1] &quot;27 26.9969589464645&quot;
-## [1] &quot;27 25.4562656742126&quot;
-## [1] &quot;27 19.7475146351802&quot;
-## [1] &quot;27 21.8342490849131&quot;
-## [1] &quot;27 17.550480375532&quot;
-## [1] &quot;27 30.224797324775&quot;
-## [1] &quot;27 23.7742946418846&quot;
-## [1] &quot;27 25.1000764878416&quot;
-## [1] &quot;27 18.9602638114463&quot;</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="cf">for</span> (Daily_T <span class="cf">in</span> Forecast_List) {</span>
+<span id="cb101-2"><a href="#cb101-2"></a>  <span class="cf">for</span> (Hour <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">24</span>) {</span>
+<span id="cb101-3"><a href="#cb101-3"></a>    Hourly_T &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,Daily_T,<span class="dv">5</span>)</span>
+<span id="cb101-4"><a href="#cb101-4"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(Daily_T,Hourly_T))</span>
+<span id="cb101-5"><a href="#cb101-5"></a>  }</span>
+<span id="cb101-6"><a href="#cb101-6"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;28 32.6313529179818&quot;
+## [1] &quot;28 23.1631108279772&quot;
+## [1] &quot;28 35.8708023406192&quot;
+## [1] &quot;28 24.0064089296287&quot;
+## [1] &quot;28 22.1907195860899&quot;
+## [1] &quot;28 31.9094270302808&quot;
+## [1] &quot;28 29.4103197958801&quot;
+## [1] &quot;28 24.4204128139366&quot;
+## [1] &quot;28 13.863643247816&quot;
+## [1] &quot;28 34.3585442568404&quot;
+## [1] &quot;28 18.3231309545576&quot;
+## [1] &quot;28 23.6109390482263&quot;
+## [1] &quot;28 25.1702882725464&quot;
+## [1] &quot;28 31.6446203694631&quot;
+## [1] &quot;28 33.7569099899319&quot;
+## [1] &quot;28 37.5259144896366&quot;
+## [1] &quot;28 25.6785889405998&quot;
+## [1] &quot;28 33.6623973739619&quot;
+## [1] &quot;28 30.7702878041473&quot;
+## [1] &quot;28 27.401369410822&quot;
+## [1] &quot;28 17.2554828630095&quot;
+## [1] &quot;28 30.4447623207891&quot;
+## [1] &quot;28 32.7228394322815&quot;
+## [1] &quot;28 18.5205551053463&quot;
+## [1] &quot;27 38.6073293800154&quot;
+## [1] &quot;27 26.7130459936101&quot;
+## [1] &quot;27 28.8720824429156&quot;
+## [1] &quot;27 21.5527704867364&quot;
+## [1] &quot;27 25.8980236636777&quot;
+## [1] &quot;27 33.2897298162032&quot;
+## [1] &quot;27 20.8130180814268&quot;
+## [1] &quot;27 24.8182753728922&quot;
+## [1] &quot;27 25.1896509369281&quot;
+## [1] &quot;27 39.2022727271488&quot;
+## [1] &quot;27 28.3654063285671&quot;
+## [1] &quot;27 25.468191439892&quot;
+## [1] &quot;27 30.37112502063&quot;
+## [1] &quot;27 29.0958966841755&quot;
+## [1] &quot;27 31.2571688999115&quot;
+## [1] &quot;27 31.5280559780707&quot;
+## [1] &quot;27 28.2018167726881&quot;
+## [1] &quot;27 25.9559829368516&quot;
+## [1] &quot;27 28.110073791394&quot;
+## [1] &quot;27 12.2103815501788&quot;
+## [1] &quot;27 32.7839913362645&quot;
+## [1] &quot;27 35.1216970205196&quot;
+## [1] &quot;27 25.2426837705461&quot;
+## [1] &quot;27 33.9846625137716&quot;
+## [1] &quot;28 23.6370365143634&quot;
+## [1] &quot;28 24.779013847585&quot;
+## [1] &quot;28 24.8552483014722&quot;
+## [1] &quot;28 33.2984738066764&quot;
+## [1] &quot;28 28.8773241822714&quot;
+## [1] &quot;28 29.8870576877709&quot;
+## [1] &quot;28 32.4047485189266&quot;
+## [1] &quot;28 19.2487605590438&quot;
+## [1] &quot;28 24.7622947743172&quot;
+## [1] &quot;28 27.2853129193459&quot;
+## [1] &quot;28 23.928285657413&quot;
+## [1] &quot;28 28.8262543807495&quot;
+## [1] &quot;28 23.3935817391438&quot;
+## [1] &quot;28 25.3154856213681&quot;
+## [1] &quot;28 23.8420606504975&quot;
+## [1] &quot;28 29.8179285035821&quot;
+## [1] &quot;28 26.8380556647303&quot;
+## [1] &quot;28 43.8521803440461&quot;
+## [1] &quot;28 31.3752360647985&quot;
+## [1] &quot;28 14.7634199541641&quot;
+## [1] &quot;28 29.2128026111165&quot;
+## [1] &quot;28 35.3368394648736&quot;
+## [1] &quot;28 28.7561814527941&quot;
+## [1] &quot;28 33.6133036694565&quot;
+## [1] &quot;26 33.4700004997887&quot;
+## [1] &quot;26 24.9878391664707&quot;
+## [1] &quot;26 26.8840415738185&quot;
+## [1] &quot;26 25.7610771382574&quot;
+## [1] &quot;26 19.5281558958371&quot;
+## [1] &quot;26 26.6004459451046&quot;
+## [1] &quot;26 32.0812183615968&quot;
+## [1] &quot;26 30.468722752488&quot;
+## [1] &quot;26 25.8369226349216&quot;
+## [1] &quot;26 25.9393137861576&quot;
+## [1] &quot;26 29.3497544958574&quot;
+## [1] &quot;26 25.8100813025021&quot;
+## [1] &quot;26 29.475030656416&quot;
+## [1] &quot;26 32.0354359656902&quot;
+## [1] &quot;26 32.2709178711041&quot;
+## [1] &quot;26 17.6446721097332&quot;
+## [1] &quot;26 22.3954321017407&quot;
+## [1] &quot;26 27.6481361150395&quot;
+## [1] &quot;26 28.3167227629539&quot;
+## [1] &quot;26 32.1799744772507&quot;
+## [1] &quot;26 19.9095516175459&quot;
+## [1] &quot;26 19.706043458697&quot;
+## [1] &quot;26 19.878007606995&quot;
+## [1] &quot;26 30.1676729647542&quot;
+## [1] &quot;27 17.6463908899136&quot;
+## [1] &quot;27 32.1830527197972&quot;
+## [1] &quot;27 33.3068736654546&quot;
+## [1] &quot;27 25.8693845599558&quot;
+## [1] &quot;27 29.3550721440752&quot;
+## [1] &quot;27 24.3715970943647&quot;
+## [1] &quot;27 25.4615846292167&quot;
+## [1] &quot;27 16.2942868420812&quot;
+## [1] &quot;27 19.8626438453745&quot;
+## [1] &quot;27 30.1889456569929&quot;
+## [1] &quot;27 18.5491532577246&quot;
+## [1] &quot;27 32.6768403970641&quot;
+## [1] &quot;27 19.8986423283018&quot;
+## [1] &quot;27 31.3121065229234&quot;
+## [1] &quot;27 35.7696087506424&quot;
+## [1] &quot;27 28.5633088251837&quot;
+## [1] &quot;27 30.5429779630245&quot;
+## [1] &quot;27 26.0019560975986&quot;
+## [1] &quot;27 26.8046928586299&quot;
+## [1] &quot;27 31.9047085794014&quot;
+## [1] &quot;27 28.9846993886208&quot;
+## [1] &quot;27 25.3875069308273&quot;
+## [1] &quot;27 24.0240541351326&quot;
+## [1] &quot;27 17.3346528956779&quot;</code></pre>
 <p>Here at each <code>Hour</code> we use the <code>rnorm()</code> function to generate <code>1</code> random Gaussian sample with a mean of <code>Daily_T</code> and a standard deviation of <code>5</code>.</p>
 <p>We notice in the output that when the first index (<code>Daily_T</code>) is set to <code>28</code>, the second index (<code>Hour</code>) iterates through its full set of indices. Once the indices of <code>Hour</code> have been iterated through, then <code>Daily_T</code> moves to the next one (<em>i.e.</em>, <code>27</code>). This process continues until the last index has been used for each <code>for()</code> loop.</p>
 <p>Rather than printing the results, we could write the loop output to a new <em>object</em>:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">Output_List &lt;-<span class="st"> </span><span class="kw">c</span>()</a>
-<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="cf">for</span> (Daily_T <span class="cf">in</span> Forecast_List) {</a>
-<a class="sourceLine" id="cb103-3" data-line-number="3">  <span class="cf">for</span> (Hour <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">24</span>) {</a>
-<a class="sourceLine" id="cb103-4" data-line-number="4">    Hourly_T    &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,Daily_T,<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb103-5" data-line-number="5">    Temp_Value  &lt;-<span class="st"> </span><span class="kw">paste</span>(Daily_T,Hourly_T)</a>
-<a class="sourceLine" id="cb103-6" data-line-number="6">    Output_List &lt;-<span class="st"> </span><span class="kw">c</span>(Output_List, Temp_Value)</a>
-<a class="sourceLine" id="cb103-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb103-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb103-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb103-10" data-line-number="10"><span class="kw">print</span>(Output_List)</a></code></pre></div>
-<pre><code>##   [1] &quot;28 31.642937726869&quot;  &quot;28 32.9606419785033&quot; &quot;28 29.623376869042&quot;  &quot;28 23.4276062066808&quot;
-##   [5] &quot;28 28.1641695588367&quot; &quot;28 37.4135954621924&quot; &quot;28 13.519752225392&quot;  &quot;28 28.1990022026837&quot;
-##   [9] &quot;28 27.8466649948657&quot; &quot;28 30.872772667181&quot;  &quot;28 25.7102478435&quot;    &quot;28 31.089172050255&quot; 
-##  [13] &quot;28 29.3220372352439&quot; &quot;28 23.876246812612&quot;  &quot;28 35.292117418741&quot;  &quot;28 27.4799227860438&quot;
-##  [17] &quot;28 23.9842887153498&quot; &quot;28 34.136590309634&quot;  &quot;28 16.1859502608804&quot; &quot;28 21.9823487921622&quot;
-##  [21] &quot;28 23.7654753021497&quot; &quot;28 25.5975863526171&quot; &quot;28 21.6381900002899&quot; &quot;28 17.9992978271381&quot;
-##  [25] &quot;27 29.356083351877&quot;  &quot;27 29.1952811160284&quot; &quot;27 30.8872184004693&quot; &quot;27 24.7897036535128&quot;
-##  [29] &quot;27 34.7327035383623&quot; &quot;27 31.7606255844622&quot; &quot;27 33.0948433782751&quot; &quot;27 40.2635307622903&quot;
-##  [33] &quot;27 25.1844180130741&quot; &quot;27 32.8654102461766&quot; &quot;27 21.9520152248762&quot; &quot;27 19.049212485804&quot; 
-##  [37] &quot;27 16.4621746769471&quot; &quot;27 20.1591075720682&quot; &quot;27 21.8426041518273&quot; &quot;27 20.7826591099204&quot;
-##  [41] &quot;27 29.2282358282692&quot; &quot;27 30.4126666349357&quot; &quot;27 29.0953208379432&quot; &quot;27 31.8873843980469&quot;
-##  [45] &quot;27 25.232151334799&quot;  &quot;27 26.8975755983723&quot; &quot;27 23.3884622525257&quot; &quot;27 26.1045695617597&quot;
-##  [49] &quot;28 27.1307785885816&quot; &quot;28 27.2651165526273&quot; &quot;28 20.3552647033383&quot; &quot;28 29.7211873185528&quot;
-##  [53] &quot;28 31.1050659798506&quot; &quot;28 29.5029673487107&quot; &quot;28 28.3736055123778&quot; &quot;28 24.671760941237&quot; 
-##  [57] &quot;28 25.7346322261249&quot; &quot;28 30.3081202630523&quot; &quot;28 24.7998062499619&quot; &quot;28 35.0708993107787&quot;
-##  [61] &quot;28 26.3491569452369&quot; &quot;28 28.6884446837811&quot; &quot;28 32.5870024266652&quot; &quot;28 26.9551652958996&quot;
-##  [65] &quot;28 23.2256013203976&quot; &quot;28 23.4131987996135&quot; &quot;28 26.1745099058941&quot; &quot;28 25.5511583779699&quot;
-##  [69] &quot;28 31.675197634297&quot;  &quot;28 28.6088093212967&quot; &quot;28 26.6359630941529&quot; &quot;28 19.0265916769462&quot;
-##  [73] &quot;26 24.0804433187886&quot; &quot;26 31.6460734652224&quot; &quot;26 23.743362339704&quot;  &quot;26 27.9691951498982&quot;
-##  [77] &quot;26 33.3541979347824&quot; &quot;26 29.7983619944939&quot; &quot;26 24.037008346743&quot;  &quot;26 35.3501098153625&quot;
-##  [81] &quot;26 29.6104175449483&quot; &quot;26 22.6471057676425&quot; &quot;26 20.4725083691863&quot; &quot;26 26.4046468567779&quot;
-##  [85] &quot;26 29.1455739608064&quot; &quot;26 21.2689903318896&quot; &quot;26 21.7407288197184&quot; &quot;26 19.9124200079585&quot;
-##  [89] &quot;26 27.3444661957837&quot; &quot;26 24.473856169881&quot;  &quot;26 26.1442322950748&quot; &quot;26 18.4531777560902&quot;
-##  [93] &quot;26 31.7954550679063&quot; &quot;26 23.635618654785&quot;  &quot;26 23.9724326036581&quot; &quot;26 24.6004892675918&quot;
-##  [97] &quot;27 22.419723146302&quot;  &quot;27 24.7866443571148&quot; &quot;27 31.976113628958&quot;  &quot;27 30.0262343290954&quot;
-## [101] &quot;27 29.343502687121&quot;  &quot;27 25.9598153332165&quot; &quot;27 23.6859017792253&quot; &quot;27 12.0483302550559&quot;
-## [105] &quot;27 32.6222419183523&quot; &quot;27 28.2785006694856&quot; &quot;27 21.1683199476884&quot; &quot;27 34.9491427997087&quot;
-## [109] &quot;27 34.1032697246252&quot; &quot;27 16.5818222200833&quot; &quot;27 15.2978177128133&quot; &quot;27 31.5558838416429&quot;
-## [113] &quot;27 24.4266504031846&quot; &quot;27 29.1044375562881&quot; &quot;27 33.7219189495993&quot; &quot;27 24.2024563263987&quot;
-## [117] &quot;27 25.8633676852296&quot; &quot;27 14.9035566690842&quot; &quot;27 24.6140949715822&quot; &quot;27 29.1899449028307&quot;</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>Output_List &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
+<span id="cb103-2"><a href="#cb103-2"></a><span class="cf">for</span> (Daily_T <span class="cf">in</span> Forecast_List) {</span>
+<span id="cb103-3"><a href="#cb103-3"></a>  <span class="cf">for</span> (Hour <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">24</span>) {</span>
+<span id="cb103-4"><a href="#cb103-4"></a>    Hourly_T    &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,Daily_T,<span class="dv">5</span>)</span>
+<span id="cb103-5"><a href="#cb103-5"></a>    Temp_Value  &lt;-<span class="st"> </span><span class="kw">paste</span>(Daily_T,Hourly_T)</span>
+<span id="cb103-6"><a href="#cb103-6"></a>    Output_List &lt;-<span class="st"> </span><span class="kw">c</span>(Output_List, Temp_Value)</span>
+<span id="cb103-7"><a href="#cb103-7"></a>  }</span>
+<span id="cb103-8"><a href="#cb103-8"></a>}</span>
+<span id="cb103-9"><a href="#cb103-9"></a></span>
+<span id="cb103-10"><a href="#cb103-10"></a><span class="kw">print</span>(Output_List)</span></code></pre></div>
+<pre><code>##   [1] &quot;28 24.987656984048&quot;  &quot;28 26.7169796958786&quot; &quot;28 26.0489781582387&quot; &quot;28 29.8605611947696&quot;
+##   [5] &quot;28 29.0792559195209&quot; &quot;28 22.5585208942714&quot; &quot;28 27.2849301083426&quot; &quot;28 31.047937117839&quot; 
+##   [9] &quot;28 25.321387288116&quot;  &quot;28 26.1588566755462&quot; &quot;28 15.5885999405105&quot; &quot;28 21.4523701542697&quot;
+##  [13] &quot;28 34.1449305361841&quot; &quot;28 28.4480326449028&quot; &quot;28 25.1342856441094&quot; &quot;28 20.5201559441276&quot;
+##  [17] &quot;28 31.4990796801025&quot; &quot;28 24.9421426401798&quot; &quot;28 20.2752781034876&quot; &quot;28 37.6201690006604&quot;
+##  [21] &quot;28 18.6389159928888&quot; &quot;28 35.3292816298286&quot; &quot;28 30.8977626751289&quot; &quot;28 21.7755462663523&quot;
+##  [25] &quot;27 28.0167660445347&quot; &quot;27 26.4161284981699&quot; &quot;27 31.0408824562223&quot; &quot;27 25.3285831065559&quot;
+##  [29] &quot;27 28.3287776479815&quot; &quot;27 16.4159200039881&quot; &quot;27 33.1853729354882&quot; &quot;27 24.4562883457437&quot;
+##  [33] &quot;27 29.9831881265273&quot; &quot;27 34.6782403436021&quot; &quot;27 24.8024784371104&quot; &quot;27 23.9225031005046&quot;
+##  [37] &quot;27 25.7042998817709&quot; &quot;27 24.4826066602324&quot; &quot;27 27.468624577272&quot;  &quot;27 26.6223749340791&quot;
+##  [41] &quot;27 33.9696753888668&quot; &quot;27 21.6742891518514&quot; &quot;27 32.6021804984594&quot; &quot;27 22.924090963078&quot; 
+##  [45] &quot;27 31.4265695089588&quot; &quot;27 23.536803770794&quot;  &quot;27 27.7227686903177&quot; &quot;27 46.3663900666915&quot;
+##  [49] &quot;28 28.4260071395542&quot; &quot;28 28.431984790403&quot;  &quot;28 31.7868197871764&quot; &quot;28 33.7413546885973&quot;
+##  [53] &quot;28 25.4155731663972&quot; &quot;28 32.5874716787023&quot; &quot;28 31.8851583273671&quot; &quot;28 32.4927261594065&quot;
+##  [57] &quot;28 20.498279536757&quot;  &quot;28 32.2114220680967&quot; &quot;28 26.9886010999433&quot; &quot;28 28.8733519609528&quot;
+##  [61] &quot;28 23.7187751461094&quot; &quot;28 32.1063199715382&quot; &quot;28 25.5264389794145&quot; &quot;28 33.9090509143808&quot;
+##  [65] &quot;28 20.7894784977745&quot; &quot;28 20.6449317745035&quot; &quot;28 25.4375816804451&quot; &quot;28 33.4365659122506&quot;
+##  [69] &quot;28 30.2847807702843&quot; &quot;28 19.7722679498011&quot; &quot;28 22.1699740452129&quot; &quot;28 22.5763816874043&quot;
+##  [73] &quot;26 30.5514558420988&quot; &quot;26 26.5541062465754&quot; &quot;26 25.6951791913465&quot; &quot;26 21.2336070747117&quot;
+##  [77] &quot;26 33.6477220973297&quot; &quot;26 33.4322993687906&quot; &quot;26 21.9976596361562&quot; &quot;26 26.1749358739875&quot;
+##  [81] &quot;26 21.1565021213531&quot; &quot;26 24.7084498124373&quot; &quot;26 22.617522625552&quot;  &quot;26 26.3815018058769&quot;
+##  [85] &quot;26 22.7671325276574&quot; &quot;26 13.0771433627965&quot; &quot;26 26.9464209349285&quot; &quot;26 19.5160717444306&quot;
+##  [89] &quot;26 31.4393009719813&quot; &quot;26 29.3517716768853&quot; &quot;26 27.8605641253641&quot; &quot;26 30.5184855357781&quot;
+##  [93] &quot;26 24.7430300576308&quot; &quot;26 34.9547027918211&quot; &quot;26 21.4790901129374&quot; &quot;26 11.8804041629377&quot;
+##  [97] &quot;27 20.6500373334429&quot; &quot;27 25.5746716809129&quot; &quot;27 35.977293025781&quot;  &quot;27 27.8859328591102&quot;
+## [101] &quot;27 31.6881099408843&quot; &quot;27 33.8962113975554&quot; &quot;27 28.2595272154721&quot; &quot;27 25.6931534744672&quot;
+## [105] &quot;27 30.9847562736838&quot; &quot;27 29.4272136236088&quot; &quot;27 25.2729778946564&quot; &quot;27 42.8914732804226&quot;
+## [109] &quot;27 33.3818784437984&quot; &quot;27 29.7018551168185&quot; &quot;27 35.7817890573165&quot; &quot;27 25.4158318962333&quot;
+## [113] &quot;27 28.1899831119053&quot; &quot;27 21.5513969361103&quot; &quot;27 27.2220448927515&quot; &quot;27 31.663819406937&quot; 
+## [117] &quot;27 20.298782385675&quot;  &quot;27 19.2931069350802&quot; &quot;27 29.3493338906468&quot; &quot;27 28.6777214683987&quot;</code></pre>
 <p>This approach can be useful, but “growing your results” (building the result object incrementally) is <strong>computationally inefficient</strong>, so avoid it when you are iterating through a lot of values.</p>
 <p><strong>Important</strong>: One of the biggest things that trips up novices and experienced R users alike, is building a results object (<em>vector</em>, <em>list</em>, <em>matrix</em>, <em>data frame</em>) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an <strong>empty results object</strong> beforehand of appropriate dimensions, rather than initializing an empty object without dimensions. So if you know the end result will be stored in a matrix-like above, create an empty matrix with <code>5</code> row and <code>24</code> columns, then at each iteration stores the results in the appropriate location.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">Output_Matrix    &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">24</span>)</a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="cf">for</span> (Day <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb105-3" data-line-number="3">  Daily_T        &lt;-<span class="st"> </span>Forecast_List[Day]</a>
-<a class="sourceLine" id="cb105-4" data-line-number="4">  <span class="cf">for</span> (Hour <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">24</span>) {</a>
-<a class="sourceLine" id="cb105-5" data-line-number="5">    Hourly_T     &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,Daily_T,<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb105-6" data-line-number="6">    Temp_Value   &lt;-<span class="st"> </span><span class="kw">paste</span>(Daily_T,Hourly_T)</a>
-<a class="sourceLine" id="cb105-7" data-line-number="7">    Output_Matrix[Day, Hour] &lt;-<span class="st"> </span>Temp_Value</a>
-<a class="sourceLine" id="cb105-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb105-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb105-10" data-line-number="10">Output_Matrix2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(Output_Matrix)</a>
-<a class="sourceLine" id="cb105-11" data-line-number="11">Output_Matrix2</a></code></pre></div>
-<pre><code>##   [1] &quot;28 24.2995401371331&quot; &quot;27 27.2287154469267&quot; &quot;28 26.267730598278&quot;  &quot;26 24.4962470189714&quot;
-##   [5] &quot;27 26.7627663109846&quot; &quot;28 24.5416425415949&quot; &quot;27 30.6250317128407&quot; &quot;28 24.2800411492574&quot;
-##   [9] &quot;26 22.5223565834767&quot; &quot;27 23.2525455719503&quot; &quot;28 29.8514752213755&quot; &quot;27 26.2465263297918&quot;
-##  [13] &quot;28 38.3073812939666&quot; &quot;26 19.2417134130742&quot; &quot;27 25.9617518084972&quot; &quot;28 26.103227521749&quot; 
-##  [17] &quot;27 35.337876757409&quot;  &quot;28 24.1515991652932&quot; &quot;26 23.9174694652012&quot; &quot;27 30.1453576860733&quot;
-##  [21] &quot;28 20.5554306129209&quot; &quot;27 24.2973804302885&quot; &quot;28 27.5255768265537&quot; &quot;26 19.1064133896395&quot;
-##  [25] &quot;27 22.4014763935701&quot; &quot;28 26.5449743176975&quot; &quot;27 24.7991281427312&quot; &quot;28 23.9065994343989&quot;
-##  [29] &quot;26 15.9000215099334&quot; &quot;27 19.3442416249318&quot; &quot;28 35.5308933170554&quot; &quot;27 19.8663183899867&quot;
-##  [33] &quot;28 25.2863613134986&quot; &quot;26 25.8789864618458&quot; &quot;27 19.9806379724184&quot; &quot;28 20.6050064093529&quot;
-##  [37] &quot;27 23.396582865483&quot;  &quot;28 22.9255705818169&quot; &quot;26 29.3276050910966&quot; &quot;27 27.1707373036397&quot;
-##  [41] &quot;28 20.9887845802031&quot; &quot;27 34.6907920967146&quot; &quot;28 28.897497041732&quot;  &quot;26 21.7267074562401&quot;
-##  [45] &quot;27 22.0720931415075&quot; &quot;28 26.23753729902&quot;   &quot;27 21.4423784022846&quot; &quot;28 31.3318874300902&quot;
-##  [49] &quot;26 31.2273611038785&quot; &quot;27 29.3408590417888&quot; &quot;28 25.4303976668368&quot; &quot;27 25.1947819943003&quot;
-##  [53] &quot;28 36.4350982049517&quot; &quot;26 39.245823531566&quot;  &quot;27 18.7078381599657&quot; &quot;28 34.8548141124591&quot;
-##  [57] &quot;27 24.6402232360149&quot; &quot;28 25.7810782912758&quot; &quot;26 22.8750298466827&quot; &quot;27 36.3925257840475&quot;
-##  [61] &quot;28 29.0947031764894&quot; &quot;27 30.2932818908818&quot; &quot;28 25.0113579170006&quot; &quot;26 29.7857583093417&quot;
-##  [65] &quot;27 18.6774333327461&quot; &quot;28 19.3725277744643&quot; &quot;27 31.920210255664&quot;  &quot;28 31.9513447120437&quot;
-##  [69] &quot;26 37.7434971147313&quot; &quot;27 27.447239729039&quot;  &quot;28 21.9286739185526&quot; &quot;27 33.8050681551304&quot;
-##  [73] &quot;28 40.679351761376&quot;  &quot;26 34.5863900229047&quot; &quot;27 27.4225116539649&quot; &quot;28 33.4761279768252&quot;
-##  [77] &quot;27 34.9546546244979&quot; &quot;28 31.952129363025&quot;  &quot;26 20.0878171471473&quot; &quot;27 31.5191675580733&quot;
-##  [81] &quot;28 40.8904690042491&quot; &quot;27 36.8293002787211&quot; &quot;28 23.8131771543091&quot; &quot;26 22.9235139202588&quot;
-##  [85] &quot;27 29.6572658108804&quot; &quot;28 21.5002218941178&quot; &quot;27 21.210527624374&quot;  &quot;28 25.8567229083426&quot;
-##  [89] &quot;26 21.2596379284777&quot; &quot;27 33.2284626303431&quot; &quot;28 24.5511469398401&quot; &quot;27 14.5625200233254&quot;
-##  [93] &quot;28 22.800883248161&quot;  &quot;26 31.9614199338869&quot; &quot;27 24.7786173555034&quot; &quot;28 27.5334542504082&quot;
-##  [97] &quot;27 17.5881828295405&quot; &quot;28 25.6266354406248&quot; &quot;26 43.7560390985271&quot; &quot;27 31.4478130431007&quot;
-## [101] &quot;28 27.5404607074&quot;    &quot;27 29.6703097578586&quot; &quot;28 22.7014542751963&quot; &quot;26 25.7796398408051&quot;
-## [105] &quot;27 31.0399029010807&quot; &quot;28 34.9929816126811&quot; &quot;27 20.7340868760043&quot; &quot;28 20.973395125194&quot; 
-## [109] &quot;26 21.5102908703424&quot; &quot;27 19.2467593338803&quot; &quot;28 17.4571938184288&quot; &quot;27 26.1777216927826&quot;
-## [113] &quot;28 39.8715077603989&quot; &quot;26 22.6123188223493&quot; &quot;27 18.7104159187873&quot; &quot;28 26.5959678400609&quot;
-## [117] &quot;27 29.0501955684775&quot; &quot;28 27.5198460870085&quot; &quot;26 28.843455539214&quot;  &quot;27 23.3044160839622&quot;</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a>Output_Matrix    &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">24</span>)</span>
+<span id="cb105-2"><a href="#cb105-2"></a><span class="cf">for</span> (Day <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</span>
+<span id="cb105-3"><a href="#cb105-3"></a>  Daily_T        &lt;-<span class="st"> </span>Forecast_List[Day]</span>
+<span id="cb105-4"><a href="#cb105-4"></a>  <span class="cf">for</span> (Hour <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">24</span>) {</span>
+<span id="cb105-5"><a href="#cb105-5"></a>    Hourly_T     &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,Daily_T,<span class="dv">5</span>)</span>
+<span id="cb105-6"><a href="#cb105-6"></a>    Temp_Value   &lt;-<span class="st"> </span><span class="kw">paste</span>(Daily_T,Hourly_T)</span>
+<span id="cb105-7"><a href="#cb105-7"></a>    Output_Matrix[Day, Hour] &lt;-<span class="st"> </span>Temp_Value</span>
+<span id="cb105-8"><a href="#cb105-8"></a>  }</span>
+<span id="cb105-9"><a href="#cb105-9"></a>}</span>
+<span id="cb105-10"><a href="#cb105-10"></a>Output_Matrix2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(Output_Matrix)</span>
+<span id="cb105-11"><a href="#cb105-11"></a>Output_Matrix2</span></code></pre></div>
+<pre><code>##   [1] &quot;28 34.1687947162419&quot; &quot;27 25.6891013009721&quot; &quot;28 36.4726918882899&quot; &quot;26 24.692417325165&quot; 
+##   [5] &quot;27 22.4237301426124&quot; &quot;28 33.7846171573432&quot; &quot;27 27.0877146194919&quot; &quot;28 25.2798905658499&quot;
+##   [9] &quot;26 36.3054953171291&quot; &quot;27 37.3973630077799&quot; &quot;28 33.2399966153003&quot; &quot;27 27.2781463562324&quot;
+##  [13] &quot;28 26.7269330661259&quot; &quot;26 23.0113049959194&quot; &quot;27 18.5803153082382&quot; &quot;28 21.2480064266004&quot;
+##  [17] &quot;27 26.1713843106769&quot; &quot;28 20.5330302011858&quot; &quot;26 16.5377645785334&quot; &quot;27 30.3806330985112&quot;
+##  [21] &quot;28 24.6876369218341&quot; &quot;27 28.1289815012364&quot; &quot;28 30.4057304583453&quot; &quot;26 21.5647981033692&quot;
+##  [25] &quot;27 24.0203716756016&quot; &quot;28 29.5404307719587&quot; &quot;27 27.7149941059302&quot; &quot;28 32.9240456144115&quot;
+##  [29] &quot;26 29.0416629360497&quot; &quot;27 29.0026124440814&quot; &quot;28 27.4592650213814&quot; &quot;27 39.7621837952837&quot;
+##  [33] &quot;28 25.9929686547411&quot; &quot;26 20.6177320358998&quot; &quot;27 27.0937265470296&quot; &quot;28 23.2984707371795&quot;
+##  [37] &quot;27 21.3117473521248&quot; &quot;28 34.4259835448441&quot; &quot;26 25.5243335066964&quot; &quot;27 21.130839620966&quot; 
+##  [41] &quot;28 26.726932779966&quot;  &quot;27 13.6228158015761&quot; &quot;28 37.0863778866967&quot; &quot;26 27.3012228405251&quot;
+##  [45] &quot;27 23.8680302810909&quot; &quot;28 24.5503570158921&quot; &quot;27 31.163297367284&quot;  &quot;28 24.1699020025247&quot;
+##  [49] &quot;26 24.6543201906952&quot; &quot;27 26.5080705870002&quot; &quot;28 34.9761284831717&quot; &quot;27 25.3119664031818&quot;
+##  [53] &quot;28 25.4965447822013&quot; &quot;26 34.3387216257763&quot; &quot;27 29.1215433382801&quot; &quot;28 26.47453874795&quot;  
+##  [57] &quot;27 29.6139920136252&quot; &quot;28 33.5813312210054&quot; &quot;26 28.6546233195862&quot; &quot;27 35.0703143632077&quot;
+##  [61] &quot;28 38.6460244717249&quot; &quot;27 26.4647003855303&quot; &quot;28 25.7386938288422&quot; &quot;26 29.704168094636&quot; 
+##  [65] &quot;27 23.8021550837329&quot; &quot;28 20.8759108653758&quot; &quot;27 15.2974084854995&quot; &quot;28 32.047378007844&quot; 
+##  [69] &quot;26 25.3866784499343&quot; &quot;27 23.9232195727364&quot; &quot;28 40.2046215895861&quot; &quot;27 28.3695912437316&quot;
+##  [73] &quot;28 26.6392899904978&quot; &quot;26 21.8043247114368&quot; &quot;27 25.8128192510427&quot; &quot;28 26.083081623733&quot; 
+##  [77] &quot;27 15.86749148282&quot;   &quot;28 32.0163404883376&quot; &quot;26 22.5591238326088&quot; &quot;27 31.1379877444581&quot;
+##  [81] &quot;28 26.4385487058915&quot; &quot;27 29.7523740247405&quot; &quot;28 34.416900295185&quot;  &quot;26 24.8890504462616&quot;
+##  [85] &quot;27 29.2208709123909&quot; &quot;28 26.0499822254161&quot; &quot;27 30.8243291302178&quot; &quot;28 25.0720073721768&quot;
+##  [89] &quot;26 32.5212113930937&quot; &quot;27 24.2074410554304&quot; &quot;28 27.622482639059&quot;  &quot;27 20.4294988159825&quot;
+##  [93] &quot;28 28.3303278197555&quot; &quot;26 30.2587230371955&quot; &quot;27 27.5622326882681&quot; &quot;28 29.7887601149121&quot;
+##  [97] &quot;27 21.1349810420865&quot; &quot;28 29.1341804799215&quot; &quot;26 22.5381943746255&quot; &quot;27 23.8543585659132&quot;
+## [101] &quot;28 36.1410488849501&quot; &quot;27 24.2809765877228&quot; &quot;28 23.3464417700417&quot; &quot;26 29.9786490893158&quot;
+## [105] &quot;27 36.2831698530011&quot; &quot;28 25.8715619083875&quot; &quot;27 37.645486837534&quot;  &quot;28 34.7055253566085&quot;
+## [109] &quot;26 28.854081456214&quot;  &quot;27 19.136907629061&quot;  &quot;28 33.466993224089&quot;  &quot;27 25.8892987069634&quot;
+## [113] &quot;28 36.1956502688098&quot; &quot;26 18.8895145223407&quot; &quot;27 23.0791532651559&quot; &quot;28 26.7365323186075&quot;
+## [117] &quot;27 27.2560842596252&quot; &quot;28 30.6961516647921&quot; &quot;26 25.8554914212918&quot; &quot;27 27.2716092197912&quot;</code></pre>
 <p>Here we use <code>matrix()</code> to create an empty matrix with <code>5</code> rows and <code>24</code> columns, and use <code>as.vector()</code> to convert the <code>5x24</code> matrix into a vector with a length of <code>120</code>.</p>
 <p>Sometimes you will find yourself needing to repeat an operation as long as a certain condition is met. You can do this with a <code>while()</code> loop.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="cf">while</span>(z <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>){ <span class="co"># While this condition is TRUE</span></a>
-<a class="sourceLine" id="cb107-3" data-line-number="3">  <span class="co"># Do following</span></a>
-<a class="sourceLine" id="cb107-4" data-line-number="4">  z &lt;-<span class="st"> </span>z <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb107-5" data-line-number="5">  <span class="kw">print</span>(z)</a>
-<a class="sourceLine" id="cb107-6" data-line-number="6">} <span class="co"># End of the while loop</span></a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a>z &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb107-2"><a href="#cb107-2"></a><span class="cf">while</span>(z <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>){ <span class="co"># While this condition is TRUE</span></span>
+<span id="cb107-3"><a href="#cb107-3"></a>  <span class="co"># Do following</span></span>
+<span id="cb107-4"><a href="#cb107-4"></a>  z &lt;-<span class="st"> </span>z <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb107-5"><a href="#cb107-5"></a>  <span class="kw">print</span>(z)</span>
+<span id="cb107-6"><a href="#cb107-6"></a>} <span class="co"># End of the while loop</span></span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3
@@ -1021,9 +1031,9 @@ div.tocify {
 <p>It is possible to add functions to R by writing a <em>package</em> or by obtaining a package written by someone else. As of this writing, there are over 16,000 packages available on CRAN (the comprehensive R archive network). RStudio has functionality for managing packages. You can:</p>
 <ul>
 <li>See what packages are installed by typing <code>installed.packages()</code></li>
-<li>Install packages by typing <code>install.packages(&quot;packagename&quot;)</code>, where <code>packagename</code> is the package name, in quotes.</li>
+<li>Install packages by typing <code>install.packages("packagename")</code>, where <code>packagename</code> is the package name, in quotes.</li>
 <li>Update installed packages by typing <code>update.packages()</code></li>
-<li>Remove a package with <code>remove.packages(&quot;packagename&quot;)</code></li>
+<li>Remove a package with <code>remove.packages("packagename")</code></li>
 <li>Make a package available for use with <code>library(packagename)</code>, no quotes.</li>
 </ul>
 <p>Packages can also be viewed, loaded, and detached in the Packages tab of the lower-right panel in RStudio.</p>
@@ -1034,11 +1044,11 @@ div.tocify {
 <div id="working-directory" class="section level2">
 <h2>Working directory</h2>
 <p>If you want to read files from a specific location or write files to a specific location, you need to set <em>working directory</em> in R. This can be accomplished by specifying path with <code>setwd()</code> function. First, let’s check the working directory using <code>getwd()</code>.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="co"># Get current working directory in R</span></a>
-<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="kw">getwd</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="co"># Get current working directory in R</span></span>
+<span id="cb109-2"><a href="#cb109-2"></a><span class="kw">getwd</span>()</span></code></pre></div>
 <p>You can change the working directory using <code>setwd()</code>:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co"># Set working directory</span></a>
-<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="kw">setwd</span>(<span class="st">&quot;/data/ese5023&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb110-2"><a href="#cb110-2"></a><span class="kw">setwd</span>(<span class="st">&quot;/data/ese5023&quot;</span>)</span></code></pre></div>
 <p>Or you may use RStudio through GUI - click <code>Session</code> then <code>Set Working Directory</code>, followed by <code>Choose Directory</code>.</p>
 </div>
 <div id="seeking-help" class="section level2">
@@ -1048,7 +1058,7 @@ div.tocify {
 <p><code>?function_name</code> or <code>help(function_name)</code></p>
 <p>This will load up a help page in RStudio.</p>
 <p><strong>Special Operators</strong></p>
-<p>To seek help on special operators, use quotes: <code>?&quot;&gt;=&quot;</code></p>
+<p>To seek help on special operators, use quotes: <code>?"&gt;="</code></p>
 <p><strong>When you have no idea where to begin</strong></p>
 <p>If you don’t know what function or package you need to use <a href="https://cran.r-project.org/web/views/">CRAN Task Views</a> is a specially maintained list of packages grouped into fields. This can be a good starting point.</p>
 <p><strong>When your code doesn’t work: seeking help from your peers</strong></p>
@@ -1071,11 +1081,11 @@ div.tocify {
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">X1  &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb111-2" data-line-number="2">X2  &lt;-<span class="st"> </span><span class="dv">120</span></a>
-<a class="sourceLine" id="cb111-3" data-line-number="3">X3  &lt;-<span class="st"> </span>X2 <span class="op">*</span><span class="st"> </span><span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb111-4" data-line-number="4">X4  &lt;-<span class="st"> </span>X1 <span class="op">-</span><span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb111-5" data-line-number="5">X5  &lt;-<span class="st"> </span>X1 <span class="op">&gt;</span><span class="st"> </span>X2</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1"></a>X1  &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb111-2"><a href="#cb111-2"></a>X2  &lt;-<span class="st"> </span><span class="dv">120</span></span>
+<span id="cb111-3"><a href="#cb111-3"></a>X3  &lt;-<span class="st"> </span>X2 <span class="op">*</span><span class="st"> </span><span class="fl">2.0</span></span>
+<span id="cb111-4"><a href="#cb111-4"></a>X4  &lt;-<span class="st"> </span>X1 <span class="op">-</span><span class="st"> </span><span class="dv">20</span></span>
+<span id="cb111-5"><a href="#cb111-5"></a>X5  &lt;-<span class="st"> </span>X1 <span class="op">&gt;</span><span class="st"> </span>X2</span></code></pre></div>
 <p>What will be the value of each variable after each statement in the program?</p>
 <ul>
 <li>Now type the above codes in <strong>Console</strong>, check your results.<br />
@@ -1088,16 +1098,16 @@ div.tocify {
 <h2>Exercise #3</h2>
 <p>A <a href="https://www.programiz.com/article/flowchart-programming">Flowchart</a> is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn the flowchart with <code>if</code> and <code>else</code> in R.</p>
 <p>Open a new R script (File -&gt; New File -&gt; R Script). Type the following lines in the script, and save it.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="co"># Using runif() function to generate one random value between 0 and 100</span></a>
-<a class="sourceLine" id="cb112-2" data-line-number="2">Score  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="kw">print</span>(Score)</a>
-<a class="sourceLine" id="cb112-4" data-line-number="4"><span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">90</span>) {</a>
-<a class="sourceLine" id="cb112-5" data-line-number="5">  <span class="kw">print</span>(<span class="st">&quot;Excellent&quot;</span>) </a>
-<a class="sourceLine" id="cb112-6" data-line-number="6">} <span class="cf">else</span> <span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</a>
-<a class="sourceLine" id="cb112-7" data-line-number="7">  <span class="kw">print</span>(<span class="st">&quot;Pass&quot;</span>)</a>
-<a class="sourceLine" id="cb112-8" data-line-number="8">} <span class="cf">else</span>{</a>
-<a class="sourceLine" id="cb112-9" data-line-number="9">  <span class="kw">print</span>(<span class="st">&quot;Fail&quot;</span>)</a>
-<a class="sourceLine" id="cb112-10" data-line-number="10">}  </a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="co"># Using runif() function to generate one random value between 0 and 100</span></span>
+<span id="cb112-2"><a href="#cb112-2"></a>Score  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb112-3"><a href="#cb112-3"></a><span class="kw">print</span>(Score)</span>
+<span id="cb112-4"><a href="#cb112-4"></a><span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">90</span>) {</span>
+<span id="cb112-5"><a href="#cb112-5"></a>  <span class="kw">print</span>(<span class="st">&quot;Excellent&quot;</span>) </span>
+<span id="cb112-6"><a href="#cb112-6"></a>} <span class="cf">else</span> <span class="cf">if</span> (Score <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</span>
+<span id="cb112-7"><a href="#cb112-7"></a>  <span class="kw">print</span>(<span class="st">&quot;Pass&quot;</span>)</span>
+<span id="cb112-8"><a href="#cb112-8"></a>} <span class="cf">else</span>{</span>
+<span id="cb112-9"><a href="#cb112-9"></a>  <span class="kw">print</span>(<span class="st">&quot;Fail&quot;</span>)</span>
+<span id="cb112-10"><a href="#cb112-10"></a>}  </span></code></pre></div>
 <ul>
 <li>Selecting all the lines, and then run the script using <code>Ctrl</code>+<code>Enter</code>, what is your result in <strong>Console</strong>?</li>
 </ul>
@@ -1112,22 +1122,22 @@ div.tocify {
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
 <p>Type the following lines in your script:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">TotalStudents &lt;-<span class="st"> </span><span class="dv">40</span></a>
-<a class="sourceLine" id="cb113-2" data-line-number="2">Score         &lt;-<span class="st"> </span><span class="kw">runif</span>(TotalStudents,<span class="dv">0</span>,<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb113-3" data-line-number="3">PassStudents  &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb113-4" data-line-number="4"><span class="cf">for</span> (Whatever <span class="cf">in</span> Score) {</a>
-<a class="sourceLine" id="cb113-5" data-line-number="5">  <span class="cf">if</span>(Whatever <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</a>
-<a class="sourceLine" id="cb113-6" data-line-number="6">    PassStudents &lt;-<span class="st"> </span>PassStudents <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb113-7" data-line-number="7">  } </a>
-<a class="sourceLine" id="cb113-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb113-9" data-line-number="9"><span class="kw">print</span>(<span class="st">&quot;How many students pass:&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a>TotalStudents &lt;-<span class="st"> </span><span class="dv">40</span></span>
+<span id="cb113-2"><a href="#cb113-2"></a>Score         &lt;-<span class="st"> </span><span class="kw">runif</span>(TotalStudents,<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb113-3"><a href="#cb113-3"></a>PassStudents  &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb113-4"><a href="#cb113-4"></a><span class="cf">for</span> (Whatever <span class="cf">in</span> Score) {</span>
+<span id="cb113-5"><a href="#cb113-5"></a>  <span class="cf">if</span>(Whatever <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>){</span>
+<span id="cb113-6"><a href="#cb113-6"></a>    PassStudents &lt;-<span class="st"> </span>PassStudents <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb113-7"><a href="#cb113-7"></a>  } </span>
+<span id="cb113-8"><a href="#cb113-8"></a>}</span>
+<span id="cb113-9"><a href="#cb113-9"></a><span class="kw">print</span>(<span class="st">&quot;How many students pass:&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;How many students pass:&quot;</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">print</span>(PassStudents)</a></code></pre></div>
-<pre><code>## [1] 14</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">print</span>(<span class="st">&quot;Pass ratio is:&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="kw">print</span>(PassStudents)</span></code></pre></div>
+<pre><code>## [1] 17</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="kw">print</span>(<span class="st">&quot;Pass ratio is:&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Pass ratio is:&quot;</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="kw">print</span>(PassStudents<span class="op">/</span>TotalStudents)</a></code></pre></div>
-<pre><code>## [1] 0.35</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="kw">print</span>(PassStudents<span class="op">/</span>TotalStudents)</span></code></pre></div>
+<pre><code>## [1] 0.425</code></pre>
 <ul>
 <li>Can you explain what this script does? Use the following flowchart <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> for help.</li>
 </ul>
@@ -1151,7 +1161,7 @@ div.tocify {
 <div id="exercise-6" class="section level2">
 <h2>Exercise #6</h2>
 <ul>
-<li>Install the following packages:
+<li><p>Install the following packages:</p>
 <ul>
 <li><code>ggplot2</code></li>
 <li><code>plyr</code></li>
@@ -1181,12 +1191,12 @@ div.tocify {
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://www.burns-stat.com/documents/tutorials/why-use-the-r-language/">Why use the R Language?</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="https://www.r-bloggers.com/why-use-r/">Why Use R?</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p><a href="https://www.guru99.com/r-vs-python.html">R Vs Python: What’s the Difference?</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p><a href="https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg">Source</a><a href="#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p><a href="https://www.edrawsoft.com/program-flowchart.html?_ga=2.236753857.159447294.1599375959-170019789.1599375959">Source</a><a href="#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p><a href="https://www.datamentor.io/r-programming/for-loop/#:~:text=%20R%20for%20Loop%20%201%20Syntax%20of,In%20the%20above%20example%2C%20the%20loop...%20More%20">Source</a><a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="https://www.burns-stat.com/documents/tutorials/why-use-the-r-language/">Why use the R Language?</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://www.r-bloggers.com/why-use-r/">Why Use R?</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://www.guru99.com/r-vs-python.html">R Vs Python: What’s the Difference?</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://www.gapintelligence.com/system/pictures/568/content_why-learn-r1.jpg">Source</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://www.edrawsoft.com/program-flowchart.html?_ga=2.236753857.159447294.1599375959-170019789.1599375959">Source</a><a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://www.datamentor.io/r-programming/for-loop/#:~:text=%20R%20for%20Loop%20%201%20Syntax%20of,In%20the%20above%20example%2C%20the%20loop...%20More%20">Source</a><a href="#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

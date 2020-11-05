@@ -1,0 +1,211 @@
+---
+title: "Section 09 Time series analysis"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+# The nature of time series data
+
+Time series data are data points collected over a period of time as a **sequence of time gap**. Time series data analysis means analyzing the available data to find out the pattern or trend in the data to predict some future values which will, in turn, help more effective and optimize decisions. Time series analysis example are Financial, Stock prices, Weather data, Utility Studies and many more. [^1]
+
+[^1]: [Time Series Analysis Using ARIMA Model In R](https://datascienceplus.com/time-series-analysis-using-arima-model-in-r/)
+
+Let's use the 'Keeling_Data' CO~2~ data again as an example to take a closer look at a time series.
+
+```{r}
+
+# Read data
+Keeling_Data     <- read.csv(file = "co2_mm_mlo.csv", header = T)
+
+# Handel missing values
+Keeling_Data$co2[which(Keeling_Data$co2<0)] <- NA
+
+for(i in 1:length(Keeling_Data$co2)){
+  if( is.na(Keeling_Data$co2[i])){
+    Keeling_Data$co2[i] <- mean(Keeling_Data$co2[(i-2):(i+2)],na.rm=T )
+  }
+}
+```
+
+Notice that here we use 5-month average to replace the missing values.
+
+Use `ts()` to convert a vector into a time series. Use `?` to learn more.
+
+```{r}
+# Apply the ts() function
+co2 <- ts(Keeling_Data$co2, start=c(1958,3), frequency=12)
+
+# Quick plot
+plot(co2, type="l")
+
+# Check the data type
+str(co2)
+```
+
+***
+
+# Components of a time series
+
+Generally, an environmental time series, $Y(t)$, has three components: trend $T(t)$, seasonality (12-month cycle) $S(t)$, and error $e(t)$. 
+
+$$ Y(t) = T(t) + S(t) + e(t)$$
+Here the error $e(t)$ part is called **white noise**. A white noise ($w_t$) is a collection of **uncorrelated random variables** with mean `0` and finite variance, denoted as:
+$$w_t ∼ wn(0,\sigma^2)$$
+
+In R, you can use `decompose()` to quickly decompose a time series into the three components, particularly for environmental data set. Here is how it works:
+
+* The function first determines the trend component using a *moving average* (if filter is `NULL`, a symmetric window with equal weights is used), and removes it from the time series. 
+
+* Then, the seasonal figure is computed by averaging, for each time unit, over all periods. The seasonal figure is then centered. 
+
+* Finally, the error component is determined by removing trend and seasonal figure (recycled as needed) from the original time series.
+
+```{r}
+co2_components <- decompose(co2)
+plot(co2_components)
+```
+
+In the above example, `co2_components` contains the information/values of the three components. Check the distribution of the error component (`random`) to verify it's a white noise.
+
+```{r}
+# Plot hist
+hist(co2_components$random, prob=TRUE)
+# Add pdf
+curve(dnorm(x, mean=mean(co2_components$random,na.rm=T),
+            sd=sd(co2_components$random,na.rm=T)),
+      add=TRUE, col="red")
+```
+
+As you can see the distribution is a Gaussian white noise, which is a particularly useful white noise series.
+
+***
+
+# ARIMA modeling
+
+ARIMA is the abbreviation for *AutoRegressive Integrated Moving Average*. *Auto Regressive* (AR) terms refer to the lags of the differenced series, *Moving Average* (MA) terms refer to the lags of errors and `I` is the number of difference used to make the time series *stationary*.
+
+Here stationary actually refers *weakly stationary* time series, which is a finite variance process such that:
+
+* The mean value of time-series is constant over time
+
+* The variance does not increase over time
+
+* Seasonality effect is minimal
+
+## AR model
+
+Autoregressive models are based on the idea that the current value of the series, $x_t$, can be explained as a function of `p` past values, $x_t−1$, $x_t−2$, ..., $x_t−p$, where `p` determines the number of steps into the past needed to forecast the current value. 
+
+An *autoregressive* (AR) model of order *p*, abbreviated `AR(p)`, is of the form
+
+$$x_t = \phi_1x_{t-1} + \phi_2x_{t-2} + ... + \phi_px_{t-p} + w_t$$
+
+where $x_t$ is stationary, $w_t ∼ wn(0, \sigma^2_w)$, and $\phi_1$, $\phi_2$, ...,  $\phi_p$ are constants. The mean of $x_t$ is zero.
+
+The following R code can be used to obtain two AR(1) models:
+
+```{r}
+par(mfrow=c(2,1))
+plot(arima.sim(list(order=c(1,0,0), ar=.9), n=100), ylab="x",
+main=(expression(AR(1)~~~phi==+.9)))
+plot(arima.sim(list(order=c(1,0,0), ar=-.9), n=100), ylab="x",
+main=(expression(AR(1)~~~phi==-.9)))
+```
+
+## MA model
+
+As an alternative to the autoregressive representation in which the $x_t$ on the left-hand side of the equation are assumed to be combined linearly, the *moving average* (MA) model of order `q`, abbreviated as `MA(q)`, assumes the white noise $w_t$ on the right-hand side of the defining equation are combined linearly to form the observed data.
+
+The moving average model of order `q`, or `MA(q)` model, is defined to be
+
+$$x_t = w_t + \theta_1w_{t-1} + \theta_2w_{t-2} + ... + \theta_qw_{t-q} $$
+
+where $w_t ∼ wn(0, \sigma^2_w)$, and $\theta_1$, $\theta_2$, ..., $\theta_q$ are parameters.
+
+The following R code can be used to obtain two MA(1) models:
+
+```{r}
+par(mfrow=c(2,1))
+plot(arima.sim(list(order=c(0,0,1), ma=.9), n=100), ylab="x",
+main=(expression(MA(1)~~~theta==+.9)))
+plot(arima.sim(list(order=c(0,0,1), ma=-.9), n=100), ylab="x",
+main=(expression(MA(1)~~~theta==-.9)))
+```
+
+## ACF and PACF
+
+The autocorrelation function (ACF) measures the linear predictability of the series at time `t`, say $x_t$, using only the value $x_s$. 
+
+The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by `k` time units ($x_t$ and $x_{t-k}$). 
+
+To show ACF and the PACF of a AR model, AR(2), in R we can use the following lines: 
+
+```{r}
+ACF = ARMAacf(ar=c(1.5,-.75), ma=0, 24)[-1]
+PACF = ARMAacf(ar=c(1.5,-.75), ma=0, 24, pacf=TRUE)
+par(mfrow=c(1,2))
+plot(ACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
+plot(PACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
+```
+
+To show ACF and the PACF of a MA model, MA(2), in R we can use the following lines: 
+
+```{r}
+ACF = ARMAacf(ar=0, ma=c(0.5,0.6), 24)[-1]
+PACF = ARMAacf(ar=0, ma=c(0.5,0.6), 24, pacf=TRUE)
+par(mfrow=c(1,2))
+plot(ACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
+plot(PACF, type="h", xlab="lag", ylim=c(-.8,1)); abline(h=0)
+```
+
+Behavior of the ACF and PACF for ARMA Models can be summarized as:
+
+* AR(p): ACF Tails off; PACF Cuts off after lag `p`
+
+* MA(q): ACF Cuts off after lag `q`; PACF Tails off
+
+* ARMA(p, q): ACF Tails off;PACF Tails off
+
+## An example
+
+Consider the global temperature series record (`globtemp`) in the `astsa` package. The data are the global mean land–ocean temperature index from 1880 to 2015, with the base period 1951-1980. We want to git an ARIMA model to this time series.
+
+```{r}
+library(astsa)
+plot(globtemp, type="o", ylab="Global Temperature Deviations")
+```
+
+There is a clear trend, so the first step is to de-trend the data.
+
+```{r}
+trModel <- lm(globtemp ~ c(1:length(globtemp)))
+plot(resid(trModel), type="l")
+acf(resid(trModel))
+pacf(resid(trModel))
+```
+
+Based on the acf and pacf, we estimate it may be an ARIMA(1,0,0) model.
+
+# In-class exercises
+
+## Exercise #1
+
+Use the data of the Southern Oscillation Index (SOI; `soi`) data from the `astsa` package to:
+
+* practice the `decompose()` function
+
+* build an ARIMA model [Hint: you may want to de-seasonalize the data before fitting the model]
+
+***
+
+# Further reading
+
+* Robert H. Shumway and David S. Stoffer, Time Series Analysis and Its Applications With R Examples, Fourth Edition.
+
+***
+
+# References  
