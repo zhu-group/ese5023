@@ -86,6 +86,8 @@ As you can see the distribution is a Gaussian white noise, which is a particular
 
 ***
 
+*This section is based on the chapters of Time Series Analysis and Its Applications With R Example by Robert H. Shumway and David S. Stoffer.*
+
 # ARIMA modeling
 
 ARIMA is the abbreviation for *AutoRegressive Integrated Moving Average*. *Auto Regressive* (AR) terms refer to the lags of the differenced series, *Moving Average* (MA) terms refer to the lags of errors and `I` is the number of difference used to make the time series *stationary*.
