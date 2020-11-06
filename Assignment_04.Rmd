@@ -33,7 +33,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 # 1. Plotting with `ggplot2`
 
-**[25 points]** Use research data from your group, make `5` types of plot with the `ggplot2` package:
+**[25 points]** Using research data from your group, make `5` types of plots with the `ggplot2` package:
 
 * Boxplot
 
@@ -57,13 +57,13 @@ For example, the following plots will get a credit of `1` point and `3` points, 
 
 # 2. Analysis of the time series of monthly temperature
 
-In this exercise, we will take another look at the [hourly weather data](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_2) measured at the BaoAn International Airport during the past 10 years. 
+In this exercise, we will take another look at the [hourly weather data](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_3) measured at the BaoAn International Airport during the past 10 years. 
 
 **2.1 [5 points]** Construct a time series of monthly-averaged temperature from 2010 Jan. to 2020 Aug.
 
-**2.2 [5 points]** Decompose the time series into trend, seasonality, and error parts. Verify the error part follows a white noise distribution.
+**2.2 [5 points]** Decompose the time series into trend, seasonality, and error parts. Check whether the error part follows a white noise distribution.
 
-**2.3 [10 points]** Fit an ARIMA model to the time series. Provide a detailed fitting process in your report.
+**2.3 [10 points]** Fit an ARIMA(`p`,`d`,`q`) model to the time series. Describe the fitting process in details in your report.
 
-**2.4 [5 points]** Make predictions of monthly temperatures in 2020 Sep. and Oct. using the ARIMA model from 2.3. The predictions will be evaluated against real observations in those two months.
+**2.4 [5 points]** Predict monthly-averaged temperatures in 2020 Sep. and Oct. with the ARIMA model from **2.3**. The predictions will be evaluated against actual observations in those two months.
 
