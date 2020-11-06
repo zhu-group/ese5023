@@ -47,11 +47,13 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 For each one, your plot will be graded from `0` to `5` points based on the number of elements (*e.g.*, aesthetics, legend, panel, axis, title, theme, style, text, annotation, map, ... ) included and the level of sophistication.
 
-For example, the following plots will get a credit of `1` point and `3` points, respectively.
+For example, the following plots [^1] will get a credit of `1` point and `3` points, respectively.
 
 <img src="figs/ggplot_masterlist_35.png" alt="drawing" width="500"/>
 
 <img src="figs/ggplot_masterlist_40.png" alt="drawing" width="500"/>
+
+[^1]:[Source](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Correlogram)
 
 ***
 
