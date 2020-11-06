@@ -553,7 +553,7 @@ div.tocify {
 </ul>
 <div id="ar-model" class="section level2">
 <h2>AR model</h2>
-<p>Autoregressive models are based on the idea that the current value of the series, <span class="math inline">\(x_t\)</span>, can be explained as a function of <code>p</code> past values, <span class="math inline">\(x_t−1\)</span>, <span class="math inline">\(x_t−2\)</span>, …, <span class="math inline">\(x_t−p\)</span>, where <code>p</code> determines the number of steps into the past needed to forecast the current value.</p>
+<p>Autoregressive models are based on the idea that the current value of the series, <span class="math inline">\(x_t\)</span>, can be explained as a function of <code>p</code> past values, <span class="math inline">\(x_{t−1}\)</span>, <span class="math inline">\(x_{t−2}\)</span>, …, <span class="math inline">\(x_{t−p}\)</span>, where <code>p</code> determines the number of steps into the past needed to forecast the current value.</p>
 <p>An <em>autoregressive</em> (AR) model of order <em>p</em>, abbreviated <code>AR(p)</code>, is of the form</p>
 <p><span class="math display">\[x_t = \phi_1x_{t-1} + \phi_2x_{t-2} + ... + \phi_px_{t-p} + w_t\]</span></p>
 <p>where <span class="math inline">\(x_t\)</span> is stationary, <span class="math inline">\(w_t ∼ wn(0, \sigma^2_w)\)</span>, and <span class="math inline">\(\phi_1\)</span>, <span class="math inline">\(\phi_2\)</span>, …, <span class="math inline">\(\phi_p\)</span> are constants.</p>

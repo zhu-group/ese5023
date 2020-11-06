@@ -98,7 +98,7 @@ Here stationary actually refers *weakly stationary* time series, which is a fini
 
 ## AR model
 
-Autoregressive models are based on the idea that the current value of the series, $x_t$, can be explained as a function of `p` past values, $x_t−1$, $x_t−2$, ..., $x_t−p$, where `p` determines the number of steps into the past needed to forecast the current value. 
+Autoregressive models are based on the idea that the current value of the series, $x_t$, can be explained as a function of `p` past values, $x_{t−1}$, $x_{t−2}$, ..., $x_{t−p}$, where `p` determines the number of steps into the past needed to forecast the current value. 
 
 An *autoregressive* (AR) model of order *p*, abbreviated `AR(p)`, is of the form
 
