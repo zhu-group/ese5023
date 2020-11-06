@@ -494,7 +494,7 @@ div.tocify {
 
 
 <blockquote>
-<p>Without coding, computers would literally <strong><em>do nothing</em></strong>. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>“Without coding, computers would literally do nothing. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal.” - Travis Addair, Software Engineer, on Quora.</p>
 </blockquote>
 <div id="background-poll" class="section level1">
 <h1>Background Poll</h1>
@@ -563,7 +563,7 @@ div.tocify {
 <li>Just for fun</li>
 <li>Other</li>
 </ul>
-<p><strong>9. In your view, why is programming hard?</strong> (open question) <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p><strong>9. In your view, why is programming hard?</strong> (open question) <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <ul>
 <li>Oh, I’m just really not a math person</li>
 <li>Programmers are elite hackers, like in movies</li>
@@ -707,7 +707,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <p>If <em>r</em> is the radius of a circle, then the surface of this circle is <span class="math inline">\(\pi*r^{2}\)</span>. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate <span class="math inline">\(\pi\)</span>. Then how can we estimate the surface of a circle?</p>
 <p>A circle (red) in a square (black) is our solution. Indeed, this is very easy to know the surface of a square. It is the square of the length of one of its sides. Do you see where this is leading us? What if we were able to estimate the rate between the surface of the circle and the surface of the square? Then we would know the surface of the circle.</p>
 <p><img src="figs/flow_03.jpg" alt="drawing" width="400"/></p>
-<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 </div>
 </div>
 <div id="section" class="section level2 unnumbered">
@@ -723,7 +723,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 </div>
 <div id="the-computer-model" class="section level2">
 <h2>The computer model</h2>
-<p>Put this in R, and the code would be like <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>Put this in R, and the code would be like <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Define a function to compute pi</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>Simulation &lt;-<span class="st"> </span><span class="cf">function</span>(N){</span>
 <span id="cb1-3"><a href="#cb1-3"></a>  c &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,N)</span>
@@ -749,7 +749,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <span id="cb2-7"><a href="#cb2-7"></a><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</span></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.16386995602655&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.19503440345888&quot;</code></pre>
 <p>Simulation with 100,000 random points yields a better result</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Draw 1E5 points</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>TotalDraw &lt;-<span class="st"> </span><span class="fl">1E5</span></span>
@@ -760,7 +760,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <span id="cb5-7"><a href="#cb5-7"></a><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</span></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.14038057215257&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.14255208532665&quot;</code></pre>
 <hr />
 </div>
 </div>
@@ -775,10 +775,9 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>By Travis Addair, Software Engineer, on Quora.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://makemeaprogrammer.com/is-programming-hard/">source</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><a href="https://makemeaprogrammer.com/is-programming-hard/">source</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

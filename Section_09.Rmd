@@ -8,6 +8,8 @@ output:
       smooth_scroll: false
 ---
 
+> "Smart don’t come out of books. Smart is making the right decision at the right time." - Stick, Daredevil, S1. Ep7.
+
 # The nature of time series data
 
 Time series data are data points collected over a period of time as a **sequence of time gap**. Time series data analysis means analyzing the available data to find out the pattern or trend in the data to predict some future values which will, in turn, help more effective and optimize decisions. Time series analysis examples are Financial, Stock prices, Weather data, Utility Studies and many more. [^1]

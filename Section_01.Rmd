@@ -8,9 +8,7 @@ output:
       smooth_scroll: false
 ---
 
-> Without coding, computers would literally ***do nothing***. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal. [^1]
-
-[^1]: By Travis Addair, Software Engineer, on Quora.
+> "Without coding, computers would literally do nothing. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal." - Travis Addair, Software Engineer, on Quora.
 
 # Background Poll
 

@@ -8,7 +8,7 @@ output:
       smooth_scroll: false
 ---
 
-> Finding the most important predictor variables (of features) that explains major part of variance of the response variable is key to identify and build high performing models.
+> "Models should be as simple as possible, but not more so." - Albert Einstein
 
 # ANOVA
 
