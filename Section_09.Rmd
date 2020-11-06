@@ -10,7 +10,7 @@ output:
 
 # The nature of time series data
 
-Time series data are data points collected over a period of time as a **sequence of time gap**. Time series data analysis means analyzing the available data to find out the pattern or trend in the data to predict some future values which will, in turn, help more effective and optimize decisions. Time series analysis example are Financial, Stock prices, Weather data, Utility Studies and many more. [^1]
+Time series data are data points collected over a period of time as a **sequence of time gap**. Time series data analysis means analyzing the available data to find out the pattern or trend in the data to predict some future values which will, in turn, help more effective and optimize decisions. Time series analysis examples are Financial, Stock prices, Weather data, Utility Studies and many more. [^1]
 
 [^1]: [Time Series Analysis Using ARIMA Model In R](https://datascienceplus.com/time-series-analysis-using-arima-model-in-r/)
 
@@ -104,7 +104,7 @@ An *autoregressive* (AR) model of order *p*, abbreviated `AR(p)`, is of the form
 
 $$x_t = \phi_1x_{t-1} + \phi_2x_{t-2} + ... + \phi_px_{t-p} + w_t$$
 
-where $x_t$ is stationary, $w_t ∼ wn(0, \sigma^2_w)$, and $\phi_1$, $\phi_2$, ...,  $\phi_p$ are constants. The mean of $x_t$ is zero.
+where $x_t$ is stationary, $w_t ∼ wn(0, \sigma^2_w)$, and $\phi_1$, $\phi_2$, ...,  $\phi_p$ are constants.
 
 The following R code can be used to obtain two AR(1) models:
 

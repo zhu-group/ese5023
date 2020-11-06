@@ -761,17 +761,12 @@ div.tocify {
 <pre><code>## See https://github.com/NCAR/Fields for
 ##  an extensive vignette, other supplements and source code</code></pre>
 <pre><code>## Warning: package &#39;maps&#39; was built under R version 4.0.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;maps&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:astsa&#39;:
-## 
-##     unemp</code></pre>
 <pre><code>## Warning: package &#39;RNetCDF&#39; was built under R version 4.0.3</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Open the NetCDF file</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>ex.nc     &lt;-<span class="st"> </span><span class="kw">open.nc</span>(<span class="st">&quot;air.mon.ltm.nc&quot;</span>)</span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># Print the variables and attributes</span></span>
-<span id="cb44-5"><a href="#cb44-5"></a><span class="kw">print.nc</span>(ex.nc)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Open the NetCDF file</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>ex.nc     &lt;-<span class="st"> </span><span class="kw">open.nc</span>(<span class="st">&quot;air.mon.ltm.nc&quot;</span>)</span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="co"># Print the variables and attributes</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="kw">print.nc</span>(ex.nc)</span></code></pre></div>
 <pre><code>## netcdf classic {
 ## dimensions:
 ##  time = UNLIMITED ; // (12 currently)
@@ -832,89 +827,89 @@ div.tocify {
 ##      NC_CHAR :Source = &quot;http://www.cru.uea.ac.uk/cru/data/temperature/&quot; ;
 ##      NC_CHAR :dataset_title = &quot;HadCRU2&quot; ;
 ## }</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># Read the variables</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="co"># Lat</span></span>
-<span id="cb46-3"><a href="#cb46-3"></a>Lat       &lt;-<span class="st"> </span><span class="kw">var.get.nc</span>(ex.nc, <span class="st">&quot;lat&quot;</span>)</span>
-<span id="cb46-4"><a href="#cb46-4"></a><span class="co"># Lon</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a>Lon       &lt;-<span class="st"> </span><span class="kw">var.get.nc</span>(ex.nc, <span class="st">&quot;lon&quot;</span>)</span>
-<span id="cb46-6"><a href="#cb46-6"></a><span class="co"># Monthly long term mean, surface temperature [degC]</span></span>
-<span id="cb46-7"><a href="#cb46-7"></a>Air_T     &lt;-<span class="st"> </span><span class="kw">var.get.nc</span>(ex.nc, <span class="st">&quot;air&quot;</span>) </span>
-<span id="cb46-8"><a href="#cb46-8"></a></span>
-<span id="cb46-9"><a href="#cb46-9"></a><span class="co"># Close the NetCDF file</span></span>
-<span id="cb46-10"><a href="#cb46-10"></a><span class="kw">close.nc</span>(ex.nc)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Read the variables</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="co"># Lat</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>Lat       &lt;-<span class="st"> </span><span class="kw">var.get.nc</span>(ex.nc, <span class="st">&quot;lat&quot;</span>)</span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># Lon</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>Lon       &lt;-<span class="st"> </span><span class="kw">var.get.nc</span>(ex.nc, <span class="st">&quot;lon&quot;</span>)</span>
+<span id="cb44-6"><a href="#cb44-6"></a><span class="co"># Monthly long term mean, surface temperature [degC]</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a>Air_T     &lt;-<span class="st"> </span><span class="kw">var.get.nc</span>(ex.nc, <span class="st">&quot;air&quot;</span>) </span>
+<span id="cb44-8"><a href="#cb44-8"></a></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="co"># Close the NetCDF file</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a><span class="kw">close.nc</span>(ex.nc)</span></code></pre></div>
 </div>
 <div id="making-an-image-plot" class="section level2">
 <h2>Making an image plot</h2>
 <p>Let’s plot the mean surface temperature in Jan. (<code>Air_T_Jan</code>). Since <code>image.plot()</code> requires an <strong>increasing</strong> order of both X and Y axes, we have to do some data transformation before plotting them.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Original Lat is in decreasing order, we need to reverse it</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>Lat &lt;-<span class="st"> </span><span class="kw">rev</span>(Lat)</span>
-<span id="cb47-3"><a href="#cb47-3"></a></span>
-<span id="cb47-4"><a href="#cb47-4"></a><span class="co"># Data transformation of Air_T_Jan</span></span>
-<span id="cb47-5"><a href="#cb47-5"></a>Air_T_Jan &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(Lon), <span class="kw">length</span>(Lat)))</span>
-<span id="cb47-6"><a href="#cb47-6"></a><span class="cf">for</span>(row <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Lat)){</span>
-<span id="cb47-7"><a href="#cb47-7"></a>  Air_T_Jan[,row] &lt;-<span class="st"> </span>Air_T[, (<span class="kw">length</span>(Lat)<span class="op">+</span><span class="dv">1</span><span class="op">-</span>row),<span class="dv">1</span> ]</span>
-<span id="cb47-8"><a href="#cb47-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Original Lat is in decreasing order, we need to reverse it</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>Lat &lt;-<span class="st"> </span><span class="kw">rev</span>(Lat)</span>
+<span id="cb45-3"><a href="#cb45-3"></a></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="co"># Data transformation of Air_T_Jan</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a>Air_T_Jan &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,<span class="dt">dim=</span><span class="kw">c</span>(<span class="kw">length</span>(Lon), <span class="kw">length</span>(Lat)))</span>
+<span id="cb45-6"><a href="#cb45-6"></a><span class="cf">for</span>(row <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Lat)){</span>
+<span id="cb45-7"><a href="#cb45-7"></a>  Air_T_Jan[,row] &lt;-<span class="st"> </span>Air_T[, (<span class="kw">length</span>(Lat)<span class="op">+</span><span class="dv">1</span><span class="op">-</span>row),<span class="dv">1</span> ]</span>
+<span id="cb45-8"><a href="#cb45-8"></a>}</span></code></pre></div>
 <p>Plot the matrix with <code>image.plot()</code>:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan)</span></code></pre></div>
 <p><img src="Section_08_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>We can make the plot look better by setting more options:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># Set margins on bottom, left, top, right</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb49-3"><a href="#cb49-3"></a></span>
-<span id="cb49-4"><a href="#cb49-4"></a><span class="co"># Plot</span></span>
-<span id="cb49-5"><a href="#cb49-5"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan,</span>
-<span id="cb49-6"><a href="#cb49-6"></a>           <span class="dt">horizontal=</span>T, <span class="dt">useRaster=</span>T,</span>
-<span id="cb49-7"><a href="#cb49-7"></a>           <span class="dt">legend.shrink=</span><span class="fl">0.75</span>, <span class="dt">axis.args=</span><span class="kw">list</span>(<span class="dt">cex.axis =</span> <span class="fl">1.25</span>), </span>
-<span id="cb49-8"><a href="#cb49-8"></a>           <span class="dt">legend.width=</span><span class="dv">1</span>, <span class="dt">legend.mar=</span><span class="dv">2</span>,</span>
-<span id="cb49-9"><a href="#cb49-9"></a>           <span class="dt">legend.args=</span><span class="kw">list</span>(<span class="dt">text=</span><span class="st">&quot;Surface Temperature [degC]&quot;</span>,<span class="dt">cex=</span><span class="fl">1.25</span>),           </span>
-<span id="cb49-10"><a href="#cb49-10"></a>           <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>,<span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,<span class="dt">midpoint=</span>T, <span class="dt">axes=</span>F, <span class="dt">ann=</span>F</span>
-<span id="cb49-11"><a href="#cb49-11"></a>)</span>
-<span id="cb49-12"><a href="#cb49-12"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
-<span id="cb49-13"><a href="#cb49-13"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lon),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>)</span>
-<span id="cb49-14"><a href="#cb49-14"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
-<span id="cb49-15"><a href="#cb49-15"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lat),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>,<span class="dt">las=</span><span class="dv">1</span>)</span>
-<span id="cb49-16"><a href="#cb49-16"></a><span class="kw">title</span>(<span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Long term (1800-2020) mean surface temperature in Jan.&quot;</span>),</span>
-<span id="cb49-17"><a href="#cb49-17"></a>      <span class="dt">cex.main=</span><span class="dv">1</span>,<span class="dt">font.main=</span><span class="dv">2</span>)</span>
-<span id="cb49-18"><a href="#cb49-18"></a></span>
-<span id="cb49-19"><a href="#cb49-19"></a><span class="co"># Add map</span></span>
-<span id="cb49-20"><a href="#cb49-20"></a><span class="kw">map</span>(<span class="st">&#39;world&#39;</span>,<span class="dt">add=</span>T,<span class="dt">lwd=</span><span class="fl">0.75</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
-<span id="cb49-21"><a href="#cb49-21"></a></span>
-<span id="cb49-22"><a href="#cb49-22"></a><span class="co"># Add a box</span></span>
-<span id="cb49-23"><a href="#cb49-23"></a><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Set margins on bottom, left, top, right</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb47-3"><a href="#cb47-3"></a></span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="co"># Plot</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan,</span>
+<span id="cb47-6"><a href="#cb47-6"></a>           <span class="dt">horizontal=</span>T, <span class="dt">useRaster=</span>T,</span>
+<span id="cb47-7"><a href="#cb47-7"></a>           <span class="dt">legend.shrink=</span><span class="fl">0.75</span>, <span class="dt">axis.args=</span><span class="kw">list</span>(<span class="dt">cex.axis =</span> <span class="fl">1.25</span>), </span>
+<span id="cb47-8"><a href="#cb47-8"></a>           <span class="dt">legend.width=</span><span class="dv">1</span>, <span class="dt">legend.mar=</span><span class="dv">2</span>,</span>
+<span id="cb47-9"><a href="#cb47-9"></a>           <span class="dt">legend.args=</span><span class="kw">list</span>(<span class="dt">text=</span><span class="st">&quot;Surface Temperature [degC]&quot;</span>,<span class="dt">cex=</span><span class="fl">1.25</span>),           </span>
+<span id="cb47-10"><a href="#cb47-10"></a>           <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>,<span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,<span class="dt">midpoint=</span>T, <span class="dt">axes=</span>F, <span class="dt">ann=</span>F</span>
+<span id="cb47-11"><a href="#cb47-11"></a>)</span>
+<span id="cb47-12"><a href="#cb47-12"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
+<span id="cb47-13"><a href="#cb47-13"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lon),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>)</span>
+<span id="cb47-14"><a href="#cb47-14"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
+<span id="cb47-15"><a href="#cb47-15"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lat),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>,<span class="dt">las=</span><span class="dv">1</span>)</span>
+<span id="cb47-16"><a href="#cb47-16"></a><span class="kw">title</span>(<span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Long term (1800-2020) mean surface temperature in Jan.&quot;</span>),</span>
+<span id="cb47-17"><a href="#cb47-17"></a>      <span class="dt">cex.main=</span><span class="dv">1</span>,<span class="dt">font.main=</span><span class="dv">2</span>)</span>
+<span id="cb47-18"><a href="#cb47-18"></a></span>
+<span id="cb47-19"><a href="#cb47-19"></a><span class="co"># Add map</span></span>
+<span id="cb47-20"><a href="#cb47-20"></a><span class="kw">map</span>(<span class="st">&#39;world&#39;</span>,<span class="dt">add=</span>T,<span class="dt">lwd=</span><span class="fl">0.75</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb47-21"><a href="#cb47-21"></a></span>
+<span id="cb47-22"><a href="#cb47-22"></a><span class="co"># Add a box</span></span>
+<span id="cb47-23"><a href="#cb47-23"></a><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Section_08_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Use <code>?image.plot()</code> to learn more about the options.</p>
 <p>Finally, we can save the above plot as:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># Set the png format</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="kw">png</span>(<span class="st">&quot;Surface_T.png&quot;</span>, <span class="dt">width=</span><span class="fl">8.5</span>, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">units=</span><span class="st">&quot;in&quot;</span>, <span class="dt">res=</span><span class="dv">400</span>) </span>
-<span id="cb50-3"><a href="#cb50-3"></a></span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="co"># Set margins on bottom, left, top, right</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb50-6"><a href="#cb50-6"></a></span>
-<span id="cb50-7"><a href="#cb50-7"></a><span class="co"># Plot</span></span>
-<span id="cb50-8"><a href="#cb50-8"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan,</span>
-<span id="cb50-9"><a href="#cb50-9"></a>           <span class="dt">horizontal=</span>T, <span class="dt">useRaster=</span>T,</span>
-<span id="cb50-10"><a href="#cb50-10"></a>           <span class="dt">legend.shrink=</span><span class="fl">0.75</span>, <span class="dt">axis.args=</span><span class="kw">list</span>(<span class="dt">cex.axis =</span> <span class="fl">1.25</span>), </span>
-<span id="cb50-11"><a href="#cb50-11"></a>           <span class="dt">legend.width=</span><span class="dv">1</span>, <span class="dt">legend.mar=</span><span class="dv">2</span>,</span>
-<span id="cb50-12"><a href="#cb50-12"></a>           <span class="dt">legend.args=</span><span class="kw">list</span>(<span class="dt">text=</span><span class="st">&quot;Surface Temperature [degC]&quot;</span>,<span class="dt">cex=</span><span class="fl">1.25</span>),           </span>
-<span id="cb50-13"><a href="#cb50-13"></a>           <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>,<span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,<span class="dt">midpoint=</span>T, <span class="dt">axes=</span>F, <span class="dt">ann=</span>F</span>
-<span id="cb50-14"><a href="#cb50-14"></a>)</span>
-<span id="cb50-15"><a href="#cb50-15"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
-<span id="cb50-16"><a href="#cb50-16"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lon),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>)</span>
-<span id="cb50-17"><a href="#cb50-17"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
-<span id="cb50-18"><a href="#cb50-18"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lat),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>,<span class="dt">las=</span><span class="dv">1</span>)</span>
-<span id="cb50-19"><a href="#cb50-19"></a><span class="kw">title</span>(<span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Long term (1800-2020) mean surface temperature in Jan.&quot;</span>),</span>
-<span id="cb50-20"><a href="#cb50-20"></a>      <span class="dt">cex.main=</span><span class="dv">1</span>,<span class="dt">font.main=</span><span class="dv">2</span>)</span>
-<span id="cb50-21"><a href="#cb50-21"></a></span>
-<span id="cb50-22"><a href="#cb50-22"></a><span class="co"># Add map</span></span>
-<span id="cb50-23"><a href="#cb50-23"></a><span class="kw">map</span>(<span class="st">&#39;world&#39;</span>,<span class="dt">add=</span>T,<span class="dt">lwd=</span><span class="fl">0.75</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
-<span id="cb50-24"><a href="#cb50-24"></a></span>
-<span id="cb50-25"><a href="#cb50-25"></a><span class="co"># Add a box</span></span>
-<span id="cb50-26"><a href="#cb50-26"></a><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb50-27"><a href="#cb50-27"></a></span>
-<span id="cb50-28"><a href="#cb50-28"></a><span class="co"># Close the png file to save the file</span></span>
-<span id="cb50-29"><a href="#cb50-29"></a><span class="kw">dev.off</span>()</span></code></pre></div>
-<pre><code>## RStudioGD 
-##         2</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># Set the png format</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="kw">png</span>(<span class="st">&quot;Surface_T.png&quot;</span>, <span class="dt">width=</span><span class="fl">8.5</span>, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">units=</span><span class="st">&quot;in&quot;</span>, <span class="dt">res=</span><span class="dv">400</span>) </span>
+<span id="cb48-3"><a href="#cb48-3"></a></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="co"># Set margins on bottom, left, top, right</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb48-6"><a href="#cb48-6"></a></span>
+<span id="cb48-7"><a href="#cb48-7"></a><span class="co"># Plot</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a><span class="kw">image.plot</span>(Lon, Lat, Air_T_Jan,</span>
+<span id="cb48-9"><a href="#cb48-9"></a>           <span class="dt">horizontal=</span>T, <span class="dt">useRaster=</span>T,</span>
+<span id="cb48-10"><a href="#cb48-10"></a>           <span class="dt">legend.shrink=</span><span class="fl">0.75</span>, <span class="dt">axis.args=</span><span class="kw">list</span>(<span class="dt">cex.axis =</span> <span class="fl">1.25</span>), </span>
+<span id="cb48-11"><a href="#cb48-11"></a>           <span class="dt">legend.width=</span><span class="dv">1</span>, <span class="dt">legend.mar=</span><span class="dv">2</span>,</span>
+<span id="cb48-12"><a href="#cb48-12"></a>           <span class="dt">legend.args=</span><span class="kw">list</span>(<span class="dt">text=</span><span class="st">&quot;Surface Temperature [degC]&quot;</span>,<span class="dt">cex=</span><span class="fl">1.25</span>),           </span>
+<span id="cb48-13"><a href="#cb48-13"></a>           <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>,<span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,<span class="dt">midpoint=</span>T, <span class="dt">axes=</span>F, <span class="dt">ann=</span>F</span>
+<span id="cb48-14"><a href="#cb48-14"></a>)</span>
+<span id="cb48-15"><a href="#cb48-15"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
+<span id="cb48-16"><a href="#cb48-16"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lon),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>)</span>
+<span id="cb48-17"><a href="#cb48-17"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">cex.lab=</span><span class="fl">1.25</span>,<span class="dt">font.lab=</span><span class="dv">2</span>)</span>
+<span id="cb48-18"><a href="#cb48-18"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">at=</span><span class="kw">pretty</span>(Lat),<span class="dt">tck=</span><span class="op">-</span><span class="fl">0.015</span>,<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">cex.axis=</span><span class="fl">1.25</span>,<span class="dt">font=</span><span class="dv">1</span>,<span class="dt">las=</span><span class="dv">1</span>)</span>
+<span id="cb48-19"><a href="#cb48-19"></a><span class="kw">title</span>(<span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Long term (1800-2020) mean surface temperature in Jan.&quot;</span>),</span>
+<span id="cb48-20"><a href="#cb48-20"></a>      <span class="dt">cex.main=</span><span class="dv">1</span>,<span class="dt">font.main=</span><span class="dv">2</span>)</span>
+<span id="cb48-21"><a href="#cb48-21"></a></span>
+<span id="cb48-22"><a href="#cb48-22"></a><span class="co"># Add map</span></span>
+<span id="cb48-23"><a href="#cb48-23"></a><span class="kw">map</span>(<span class="st">&#39;world&#39;</span>,<span class="dt">add=</span>T,<span class="dt">lwd=</span><span class="fl">0.75</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb48-24"><a href="#cb48-24"></a></span>
+<span id="cb48-25"><a href="#cb48-25"></a><span class="co"># Add a box</span></span>
+<span id="cb48-26"><a href="#cb48-26"></a><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb48-27"><a href="#cb48-27"></a></span>
+<span id="cb48-28"><a href="#cb48-28"></a><span class="co"># Close the png file to save the file</span></span>
+<span id="cb48-29"><a href="#cb48-29"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
 <hr />
 </div>
 </div>
