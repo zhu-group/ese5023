@@ -1,0 +1,69 @@
+---
+title: "Assignment 04"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 11/06 19:00 **  
+**Due: 11/19 19:00 **  
+
+For problem set *i*, create a script named `PS4_i.R`. Write your results briefly in a report (`Report_PS4.pdf`). Upload your **R scripts** and **report** to the `ESE5023_Assignments` repository before the deadline.
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in the problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Late Submission:**   
+Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
+
+**Submitting your assignment:**  
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.  
+
+***
+
+# 1. Plotting with `ggplot2`
+
+**[25 points]** Use research data from your group, make `5` types of plot with the `ggplot2` package:
+
+* Boxplot
+
+* Time series
+
+* Histogram
+
+* Scatter plot
+
+* Image plot (you can use data set of interest for this one)
+
+For each one, your plot will be graded from `0` to `5` points based on the number of elements (*e.g.*, aesthetics, legend, panel, axis, title, theme, style, text, annotation, map, ... ) included and the level of sophistication.
+
+For example, the following plots will get a credit of `1` point and `3` points, respectively.
+
+<img src="figs/ggplot_masterlist_35.png" alt="drawing" width="500"/>
+
+<img src="figs/ggplot_masterlist_40.png" alt="drawing" width="500"/>
+
+***
+
+# 2. Analysis of the time series of monthly temperature
+
+In this exercise, we will take another look at the [hourly weather data](https://zhu-group.github.io/ese5023/Section_03.html#Exercise_2) measured at the BaoAn International Airport during the past 10 years. 
+
+**2.1 [5 points]** Construct a time series of monthly-averaged temperature from 2010 Jan. to 2020 Aug.
+
+**2.2 [5 points]** Decompose the time series into trend, seasonality, and error parts. Verify the error part follows a white noise distribution.
+
+**2.3 [10 points]** Fit an ARIMA model to the time series. Provide a detailed fitting process in your report.
+
+**2.4 [5 points]** Make predictions of monthly temperatures in 2020 Sep. and Oct. using the ARIMA model from 2.3. The predictions will be evaluated against real observations in those two months.
+
