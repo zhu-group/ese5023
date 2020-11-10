@@ -26,6 +26,8 @@ Through this demo, you will learn the necessary steps to fitting ARIMA models to
 
 * making predictions
 
+***
+
 **1.1 Load the libraries** 
 
 Load `dplyr`, `lubridate`, and `forecast` packages.
@@ -34,11 +36,11 @@ Load `dplyr`, `lubridate`, and `forecast` packages.
 
 Download the `.csv` data from [here](https://zhu-group.github.io/ese5023/download/data_20201108.csv), take a quick glance at the file. 
 
-Then move the file (`data_20201108.csv`) to your `working directory`, load the file using `read.csv()`, and convert it to a `tibble` (named it as `COVID_tbl`) using the `as_tibble()` function. 
+Then move the file (`data_20201108.csv`， ~ 4MB) to your `working directory`, load the file using `read.csv()`, and convert it to a `tibble` (name it as `COVID_tbl`) using the `as_tibble()` function. 
 
 **1.3 Get the daily total number of newly reported cases worldwide ** 
 
-What you just read from `data.csv` is the daily number of new cases of COVID-19 by country worldwide (the `cases` column). Think about how to get daily **total** number of new cases of COVID-19 over the world.
+What you just read from `data_20201108.csv` is the daily number of new cases of COVID-19 by country worldwide (the `cases` column). Think about how to get daily **total** number of new cases of COVID-19 over the world.
 
 [Hint] You may find the following lines useful:
 
@@ -57,9 +59,9 @@ Plot the daily new cases, what do you observe? Do you see an exponential trend? 
 
 As you can see from the above figure, daily new case starts to increase exponentially since late March and early April. To make the time series more reliable (a.k.a, not effected by initial fluctuations), let's only use the data after April 1st, 2020. Do this using the `filter()` function.
 
-**1.5 Convert to a time series**
+**1.6 Convert a vector to a time series**
 
-Convert the vector from 1.5 to a time series using the `ts()` function. As we are dealing with daily data here, use *Julian Day* as the indicator of the time series. You can return the Julian Day of a certain date using the `yday()` function from the `lubridate` package. 
+Convert the vector from **1.5** to a time series using the `ts()` function. As we are dealing with daily data here, use *Julian Day* as the indicator of the time series. You can return the Julian Day of a certain date using the `yday()` function from the `lubridate` package. 
 
 Copy the following lines to your script, make sure you understand them before running.
 
@@ -68,7 +70,7 @@ Copy the following lines to your script, make sure you understand them before ru
 Date_start <- as.Date("2020-04-01")
 # End date of the time series, read from the .csv file
 Date_end   <- as.Date("2020-11-08")
-# Get the Julian Day of the end date
+# Get the Julian Day of the start date
 JD_start   <- yday(Date_start)
 # Convert the vector data to a time series 
 global_cases_ts <- ts(COVID_tbl$global_cases, 
@@ -80,11 +82,11 @@ inds            <- seq(Date_start, Date_end, by = "day")
 
 Plot the time series, what do you observe? 
 
-**1.6 Transform the time series**
-
-Take `log` to the `global_cases_ts` time series, and assign the results to a new object `global_cases_ts_log`. Plot `global_cases_ts_log`, also check acf and pacf of `global_cases_ts_log`. Do you see a trend in the time series? And is this time series stationary?
-
 **1.7 Transform the time series**
+
+Take `log` to the `global_cases_ts` time series, and assign the results to a new object `global_cases_ts_log`. Plot `global_cases_ts_log`, also check acf and pacf of `global_cases_ts_log`. Do you see a trend in the time series `global_cases_ts_log`? And is this time series stationary?
+
+**1.8 Transform the time series**
 
 One way to make a non-stationary time series stationary is to take the *difference*. For an ARIMA(`p`,`d`,`q`) model, `d=1` if difference is taken once, and `d=2` if difference is taken twice. In R, this is done with the `diff()` function:
 
@@ -95,7 +97,7 @@ plot(global_cases_ts_log_d1)
 
 What do you see from the time series plot? Does the time series look stationary now?
 
-**1.8 Auto ARIMA fitting**
+**1.9 Auto ARIMA fitting**
 
 In the `forecast` package, R provides a very useful function called `auto.arima()`, which returns the best ARIMA model according to either AIC, AICc or BIC value. The function conducts a search over possible models within the order constraints provided. 
 
@@ -108,7 +110,7 @@ model
 
 What is the best ARIMA model?
 
-**1.9 Make predictions**
+**1.10 Make predictions**
 
 Once you get an ARIMA model, you can use it to predict values, new cases in this demo, in the future time steps.
 
@@ -121,21 +123,22 @@ days_in_plot   <- 30
 # Make predictions using the forecast() function
 forecast_15days <- forecast(model, days_forecast)
 # Plot
-plot(forecast(model, days_forecast), include = days_in_plot, xlab="Time", ylab="log(global cases)",type="o",lwd=2) 
+plot(forecast(model, days_forecast), include=days_in_plot, 
+     xlab="Time", ylab="log(global cases)",type="o",lwd=2) 
 ```
 
 Here the blue line is the estimated values, the blue shaded area shows the 80% confidence interval, and the gray area shows the 95% confidence interval.
 
 Change `days_forecast` to, see how the predictions would vary.
 
-**1.10 Get predicted values**
+**1.11 Get predicted values**
 
 What is the predicted value on Nov. 09? And What is the predicted value on Nov. 30? Report estimated values and their 80% confidence intervals.
 
-**1.11 Verify the predictions**
+**1.12 Verify the predictions**
 
-Now download the latest data from [ECDC](https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv), compute the global total number of new cases of COVID-19 on Nov. 09. Compare this number with the predicted value from **1.9**. Do you get a reasonable prediction?
+Now download the latest data from [ECDC](https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv), compute the global total number of new cases of COVID-19 on Nov. 09. Compare this number with the predicted value from **1.11**. Do you get a reasonable prediction?
 
-**1.12 Even more: Fit a SARIMA model**
+**1.13 [optional] Even more: Fit a SARIMA model**
 
-In fact, the `global_cases_ts_log` shows weekly cycles, this is not considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where "S" stands for seasonal. Look at [Package ‘sarima’](https://cran.r-project.org/web/packages/sarima/sarima.pdf) for more.
+In fact, the `global_cases_ts_log` shows weekly cycles, this is not well considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where "S" stands for seasonal. Look at [Package ‘sarima’](https://cran.r-project.org/web/packages/sarima/sarima.pdf) for more.

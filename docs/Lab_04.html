@@ -505,13 +505,14 @@ div.tocify {
 <li><p>parameter estimation</p></li>
 <li><p>making predictions</p></li>
 </ul>
+<hr />
 <p><strong>1.1 Load the libraries</strong></p>
 <p>Load <code>dplyr</code>, <code>lubridate</code>, and <code>forecast</code> packages.</p>
 <p><strong>1.2 Load the daily new cases data</strong></p>
 <p>Download the <code>.csv</code> data from <a href="https://zhu-group.github.io/ese5023/download/data_20201108.csv">here</a>, take a quick glance at the file.</p>
-<p>Then move the file (<code>data_20201108.csv</code>) to your <code>working directory</code>, load the file using <code>read.csv()</code>, and convert it to a <code>tibble</code> (named it as <code>COVID_tbl</code>) using the <code>as_tibble()</code> function.</p>
+<p>Then move the file (<code>data_20201108.csv</code>， ~ 4MB) to your <code>working directory</code>, load the file using <code>read.csv()</code>, and convert it to a <code>tibble</code> (name it as <code>COVID_tbl</code>) using the <code>as_tibble()</code> function.</p>
 <p><strong>1.3 Get the daily total number of newly reported cases worldwide </strong></p>
-<p>What you just read from <code>data.csv</code> is the daily number of new cases of COVID-19 by country worldwide (the <code>cases</code> column). Think about how to get daily <strong>total</strong> number of new cases of COVID-19 over the world.</p>
+<p>What you just read from <code>data_20201108.csv</code> is the daily number of new cases of COVID-19 by country worldwide (the <code>cases</code> column). Think about how to get daily <strong>total</strong> number of new cases of COVID-19 over the world.</p>
 <p>[Hint] You may find the following lines useful:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>...</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">mutate</span>(<span class="dt">dateRep =</span> <span class="kw">as.Date</span>(dateRep, <span class="dt">format =</span> <span class="st">&#39;%d/%m/%Y&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -521,14 +522,14 @@ div.tocify {
 <p>Plot the daily new cases, what do you observe? Do you see an exponential trend? Why is that?</p>
 <p><strong>1.5 Filter the data</strong></p>
 <p>As you can see from the above figure, daily new case starts to increase exponentially since late March and early April. To make the time series more reliable (a.k.a, not effected by initial fluctuations), let’s only use the data after April 1st, 2020. Do this using the <code>filter()</code> function.</p>
-<p><strong>1.5 Convert to a time series</strong></p>
-<p>Convert the vector from 1.5 to a time series using the <code>ts()</code> function. As we are dealing with daily data here, use <em>Julian Day</em> as the indicator of the time series. You can return the Julian Day of a certain date using the <code>yday()</code> function from the <code>lubridate</code> package.</p>
+<p><strong>1.6 Convert a vector to a time series</strong></p>
+<p>Convert the vector from <strong>1.5</strong> to a time series using the <code>ts()</code> function. As we are dealing with daily data here, use <em>Julian Day</em> as the indicator of the time series. You can return the Julian Day of a certain date using the <code>yday()</code> function from the <code>lubridate</code> package.</p>
 <p>Copy the following lines to your script, make sure you understand them before running.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Start date of the time series, read from the .csv file</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>Date_start &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># End date of the time series, read from the .csv file</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>Date_end   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2020-11-08&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Get the Julian Day of the end date</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Get the Julian Day of the start date</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>JD_start   &lt;-<span class="st"> </span><span class="kw">yday</span>(Date_start)</span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Convert the vector data to a time series </span></span>
 <span id="cb2-8"><a href="#cb2-8"></a>global_cases_ts &lt;-<span class="st"> </span><span class="kw">ts</span>(COVID_tbl<span class="op">$</span>global_cases, </span>
@@ -537,21 +538,21 @@ div.tocify {
 <span id="cb2-11"><a href="#cb2-11"></a><span class="co"># The indicator of the time series</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a>inds            &lt;-<span class="st"> </span><span class="kw">seq</span>(Date_start, Date_end, <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>)</span></code></pre></div>
 <p>Plot the time series, what do you observe?</p>
-<p><strong>1.6 Transform the time series</strong></p>
-<p>Take <code>log</code> to the <code>global_cases_ts</code> time series, and assign the results to a new object <code>global_cases_ts_log</code>. Plot <code>global_cases_ts_log</code>, also check acf and pacf of <code>global_cases_ts_log</code>. Do you see a trend in the time series? And is this time series stationary?</p>
 <p><strong>1.7 Transform the time series</strong></p>
+<p>Take <code>log</code> to the <code>global_cases_ts</code> time series, and assign the results to a new object <code>global_cases_ts_log</code>. Plot <code>global_cases_ts_log</code>, also check acf and pacf of <code>global_cases_ts_log</code>. Do you see a trend in the time series <code>global_cases_ts_log</code>? And is this time series stationary?</p>
+<p><strong>1.8 Transform the time series</strong></p>
 <p>One way to make a non-stationary time series stationary is to take the <em>difference</em>. For an ARIMA(<code>p</code>,<code>d</code>,<code>q</code>) model, <code>d=1</code> if difference is taken once, and <code>d=2</code> if difference is taken twice. In R, this is done with the <code>diff()</code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>global_cases_ts_log_d1 &lt;-<span class="st"> </span><span class="kw">diff</span>(global_cases_ts_log)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">plot</span>(global_cases_ts_log_d1)</span></code></pre></div>
 <p>What do you see from the time series plot? Does the time series look stationary now?</p>
-<p><strong>1.8 Auto ARIMA fitting</strong></p>
+<p><strong>1.9 Auto ARIMA fitting</strong></p>
 <p>In the <code>forecast</code> package, R provides a very useful function called <code>auto.arima()</code>, which returns the best ARIMA model according to either AIC, AICc or BIC value. The function conducts a search over possible models within the order constraints provided.</p>
 <p>Run the following lines:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Automated forecasting using an ARIMA model</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>model &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(global_cases_ts_log)</span>
 <span id="cb4-3"><a href="#cb4-3"></a>model</span></code></pre></div>
 <p>What is the best ARIMA model?</p>
-<p><strong>1.9 Make predictions</strong></p>
+<p><strong>1.10 Make predictions</strong></p>
 <p>Once you get an ARIMA model, you can use it to predict values, new cases in this demo, in the future time steps.</p>
 <p>Run the following lines:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Number of days to predict</span></span>
@@ -561,15 +562,16 @@ div.tocify {
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Make predictions using the forecast() function</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a>forecast_15days &lt;-<span class="st"> </span><span class="kw">forecast</span>(model, days_forecast)</span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Plot</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">plot</span>(<span class="kw">forecast</span>(model, days_forecast), <span class="dt">include =</span> days_in_plot, <span class="dt">xlab=</span><span class="st">&quot;Time&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;log(global cases)&quot;</span>,<span class="dt">type=</span><span class="st">&quot;o&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>) </span></code></pre></div>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">plot</span>(<span class="kw">forecast</span>(model, days_forecast), <span class="dt">include=</span>days_in_plot, </span>
+<span id="cb5-9"><a href="#cb5-9"></a>     <span class="dt">xlab=</span><span class="st">&quot;Time&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;log(global cases)&quot;</span>,<span class="dt">type=</span><span class="st">&quot;o&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>) </span></code></pre></div>
 <p>Here the blue line is the estimated values, the blue shaded area shows the 80% confidence interval, and the gray area shows the 95% confidence interval.</p>
 <p>Change <code>days_forecast</code> to, see how the predictions would vary.</p>
-<p><strong>1.10 Get predicted values</strong></p>
+<p><strong>1.11 Get predicted values</strong></p>
 <p>What is the predicted value on Nov. 09? And What is the predicted value on Nov. 30? Report estimated values and their 80% confidence intervals.</p>
-<p><strong>1.11 Verify the predictions</strong></p>
-<p>Now download the latest data from <a href="https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv">ECDC</a>, compute the global total number of new cases of COVID-19 on Nov. 09. Compare this number with the predicted value from <strong>1.9</strong>. Do you get a reasonable prediction?</p>
-<p><strong>1.12 Even more: Fit a SARIMA model</strong></p>
-<p>In fact, the <code>global_cases_ts_log</code> shows weekly cycles, this is not considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where “S” stands for seasonal. Look at <a href="https://cran.r-project.org/web/packages/sarima/sarima.pdf">Package ‘sarima’</a> for more.</p>
+<p><strong>1.12 Verify the predictions</strong></p>
+<p>Now download the latest data from <a href="https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/data.csv">ECDC</a>, compute the global total number of new cases of COVID-19 on Nov. 09. Compare this number with the predicted value from <strong>1.11</strong>. Do you get a reasonable prediction?</p>
+<p><strong>1.13 [optional] Even more: Fit a SARIMA model</strong></p>
+<p>In fact, the <code>global_cases_ts_log</code> shows weekly cycles, this is not well considered in the model. You can make an even better ARIMA model by removing this pattern, or by fitting a SARIMA model, where “S” stands for seasonal. Look at <a href="https://cran.r-project.org/web/packages/sarima/sarima.pdf">Package ‘sarima’</a> for more.</p>
 </div>
 
 
