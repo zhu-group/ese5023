@@ -540,7 +540,7 @@ div.tocify {
 <p>Plot the time series, what do you observe?</p>
 <p><strong>1.7 Transform the time series</strong></p>
 <p>Take <code>log</code> to the <code>global_cases_ts</code> time series, and assign the results to a new object <code>global_cases_ts_log</code>. Plot <code>global_cases_ts_log</code>, also check acf and pacf of <code>global_cases_ts_log</code>. Do you see a trend in the time series <code>global_cases_ts_log</code>? And is this time series stationary?</p>
-<p><strong>1.8 Transform the time series</strong></p>
+<p><strong>1.8 Take the difference</strong></p>
 <p>One way to make a non-stationary time series stationary is to take the <em>difference</em>. For an ARIMA(<code>p</code>,<code>d</code>,<code>q</code>) model, <code>d=1</code> if difference is taken once, and <code>d=2</code> if difference is taken twice. In R, this is done with the <code>diff()</code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>global_cases_ts_log_d1 &lt;-<span class="st"> </span><span class="kw">diff</span>(global_cases_ts_log)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">plot</span>(global_cases_ts_log_d1)</span></code></pre></div>

@@ -86,7 +86,7 @@ Plot the time series, what do you observe?
 
 Take `log` to the `global_cases_ts` time series, and assign the results to a new object `global_cases_ts_log`. Plot `global_cases_ts_log`, also check acf and pacf of `global_cases_ts_log`. Do you see a trend in the time series `global_cases_ts_log`? And is this time series stationary?
 
-**1.8 Transform the time series**
+**1.8 Take the difference**
 
 One way to make a non-stationary time series stationary is to take the *difference*. For an ARIMA(`p`,`d`,`q`) model, `d=1` if difference is taken once, and `d=2` if difference is taken twice. In R, this is done with the `diff()` function:
 
