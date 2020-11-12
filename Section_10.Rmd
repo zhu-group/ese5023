@@ -1,5 +1,5 @@
 ---
-title: "Section 10 Spatial data analysis"
+title: "Section 10 Spatial Data Types in R"
 output:
   html_document:
     toc: true
