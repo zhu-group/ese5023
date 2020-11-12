@@ -738,8 +738,8 @@ div.tocify {
 <span id="cb34-3"><a href="#cb34-3"></a>         <span class="dt">layer =</span><span class="st">&quot;Population&quot;</span>, <span class="dt">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span></code></pre></div>
 <p>We can also read in spatial data using <code>readOGR()</code> (for vector) and <code>readGDAL()</code> (for raster/grids) functions from the <code>rgdal</code> package. When reading in a shape file, <code>readOGR()</code> requires the following two arguments:</p>
 <ul>
-<li><p>Datasource name (dsn), this is the path to the folder that contains the files.</p></li>
-<li><p>Layer name (layer), this is the shapefile name WITHOUT extension.</p></li>
+<li><p>Data source name (<code>dsn</code>), this is the path to the folder that contains the files.</p></li>
+<li><p>Layer name (<code>layer</code>), this is the shape file name WITHOUT extension.</p></li>
 </ul>
 <p>Let’s use the shape file of China map as an example, <a href="https://zhu-group.github.io/ese5023/download/China_map.zip">download it</a>. Decompress it. Open the folder, you will see there are three files of different formats (<code>.dbf</code>, <code>.shp</code>, <code>.shx</code>). In R, we can read in the shape via:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Read china map, a shape file</span></span>
@@ -861,10 +861,10 @@ div.tocify {
 <p>You can also use <code>crop()</code> function to select an area of interest:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># Define the crop extent</span></span>
 <span id="cb57-2"><a href="#cb57-2"></a>Crop_box &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">125</span>,<span class="dv">15</span>,<span class="dv">30</span>)</span>
-<span id="cb57-3"><a href="#cb57-3"></a><span class="co">#crop the raster</span></span>
+<span id="cb57-3"><a href="#cb57-3"></a><span class="co"># Crop the raster</span></span>
 <span id="cb57-4"><a href="#cb57-4"></a>Wind_Nov_crop &lt;-<span class="st"> </span><span class="kw">crop</span>(Wind_Nov, Crop_box)</span>
-<span id="cb57-5"><a href="#cb57-5"></a><span class="co">#plot cropped DEM</span></span>
-<span id="cb57-6"><a href="#cb57-6"></a><span class="kw">image</span>(Wind_Nov_crop,  <span class="dt">main=</span><span class="st">&quot;Wind speed in Nov.&quot;</span>, <span class="dt">col=</span>col)</span></code></pre></div>
+<span id="cb57-5"><a href="#cb57-5"></a><span class="co"># Plot cropped DEM</span></span>
+<span id="cb57-6"><a href="#cb57-6"></a><span class="kw">plot</span>(Wind_Nov_crop, <span class="dt">main=</span><span class="st">&quot;Wind speed in Nov.&quot;</span>)</span></code></pre></div>
 <p><img src="Section_10_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <hr />
 </div>
@@ -872,7 +872,7 @@ div.tocify {
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>Add one more river (<code>River2</code>) with a flux of <code>20</code> (<code>water_per_second</code>) to the <code>MyLines_sp_dfr</code> object. Plot your result.</p>
+<p>Add one more river (<code>River2</code>) with a flux of <code>20</code> (<code>water_per_day</code>) to the <code>MyLines_sp_dfr</code> object. Plot your result.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
@@ -880,11 +880,11 @@ div.tocify {
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise #3</h2>
-<p>Count how many provinces have an area of between <code>0.1 million</code> and <code>0.2 million</code> km<sup>2</sup> in the <code>China_map</code> object. Plot those provinces in red.</p>
+<p>Count how many provinces have areas of between <code>0.1 million</code> and <code>0.2 million</code> km<sup>2</sup> according to the <code>China_map</code> object. Plot those provinces in red.</p>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
-<p>Plot wind speed in Nov. near your hometown using the <code>Wind_Nov</code> object.</p>
+<p>Plot wind speed in Nov. near your hometown (a 10 degree by 10 degree domain) using the <code>Wind_Nov</code> object.</p>
 <hr />
 </div>
 </div>
