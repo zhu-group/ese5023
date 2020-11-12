@@ -123,7 +123,7 @@ See here for how to create a `SpatialLinesDataframe` and a `SpatialPolygonsDataf
 
 # Data frame
 # Note how we use the ID from above!
-Attribute1 <- data.frame(id="River1", use="Flux", water_per_second = 10) 
+Attribute1 <- data.frame(id="River1", use="Flux", water_per_day = 10) 
 
 # Add the attributes
 MyLines_sp_dfr <- SpatialLinesDataFrame(MyLines_sp, Attribute1, match.ID = "id")

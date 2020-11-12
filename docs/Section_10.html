@@ -664,16 +664,16 @@ div.tocify {
 <p>See here for how to create a <code>SpatialLinesDataframe</code> and a <code>SpatialPolygonsDataframe</code>:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Data frame</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="co"># Note how we use the ID from above!</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>Attribute1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id=</span><span class="st">&quot;River1&quot;</span>, <span class="dt">use=</span><span class="st">&quot;Flux&quot;</span>, <span class="dt">water_per_second =</span> <span class="dv">10</span>) </span>
+<span id="cb28-3"><a href="#cb28-3"></a>Attribute1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id=</span><span class="st">&quot;River1&quot;</span>, <span class="dt">use=</span><span class="st">&quot;Flux&quot;</span>, <span class="dt">water_per_day =</span> <span class="dv">10</span>) </span>
 <span id="cb28-4"><a href="#cb28-4"></a></span>
 <span id="cb28-5"><a href="#cb28-5"></a><span class="co"># Add the attributes</span></span>
 <span id="cb28-6"><a href="#cb28-6"></a>MyLines_sp_dfr &lt;-<span class="st"> </span><span class="kw">SpatialLinesDataFrame</span>(MyLines_sp, Attribute1, <span class="dt">match.ID =</span> <span class="st">&quot;id&quot;</span>)</span>
 <span id="cb28-7"><a href="#cb28-7"></a><span class="kw">str</span>(MyLines_sp_dfr)</span></code></pre></div>
 <pre><code>## Formal class &#39;SpatialLinesDataFrame&#39; [package &quot;sp&quot;] with 4 slots
 ##   ..@ data       :&#39;data.frame&#39;:  1 obs. of  3 variables:
-##   .. ..$ id              : chr &quot;River1&quot;
-##   .. ..$ use             : chr &quot;Flux&quot;
-##   .. ..$ water_per_second: num 10
+##   .. ..$ id           : chr &quot;River1&quot;
+##   .. ..$ use          : chr &quot;Flux&quot;
+##   .. ..$ water_per_day: num 10
 ##   ..@ lines      :List of 1
 ##   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
 ##   .. .. .. ..@ Lines:List of 1
