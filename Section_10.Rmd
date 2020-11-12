@@ -8,7 +8,7 @@ output:
       smooth_scroll: false
 ---
 
-> "Smart don’t come out of books. Smart is making the right decision at the right time." - Stick, Daredevil, S1. Ep7.
+> "Maps are like campfires – everyone gathers around them, because they allow people to understand complex issues at a glance, and find agreement about how to help the land." - Sonoma Ecology Center
 
 # Prerequisites  
 
@@ -32,7 +32,7 @@ library("raster")
 
 ***
 
-*The notes below are modified from the excellent [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html/) freely available on the github.*
+*The notes below are modified from the excellent [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html/) freely available on the GitHub.*
 
 ***
 
@@ -48,7 +48,7 @@ In vector GIS, there are four key objects to deal with:
 
 * grid
 
-The first package to provide classes and methods for spatial data types in R is `sp`, which provides classes and methods to create *points*, *lines*, *polygons*, and *grids* and to operate on them. About 350 of the spatial analysis packages use the spatial data types that are implemented in `sp`, i.e. they “depend” on the `sp` package and many more are indirectly dependent.
+The first package to provide classes and methods for spatial data types in R is `sp`, which provides classes and methods to create *points*, *lines*, *polygons*, and *grids* and to operate on them. About 350 of the spatial analysis packages use the spatial data types that are implemented in `sp`, i.e., they “depend” on the `sp` package, and many more are indirectly dependent.
 
 The foundational structure for any spatial object in `sp` is the `Spatial` class. It has two “slots”:
 
@@ -64,11 +64,11 @@ To build up a spatial object in `sp` we could follow these steps.
 
 **Points** (which may have 2 or 3 dimensions) are the most basic spatial data objects. They are generated out of either a single coordinate or a set of coordinates, like a two-column matrix or a dataframe with a column for latitude and one for longitude.
 
-**Lines** are generated out of `Line` objects. A `Line` object is a collection of 2D coordinates and is generated out of a two-column matrix or a dataframe with a column for latitude and one for longitude. A `Lines` object is a **list** of one or more `Line` objects, for example all the contours at a single elevation.
+**Lines** are generated out of `Line` objects. A `Line` object is a collection of 2D coordinates and is generated out of a two-column matrix or a dataframe with a column for latitude and one for longitude. A `Lines` object is a **list** of one or more `Line` objects, for example, all the contours at a single elevation.
 
-**Polygons** are generated out of `Polygon` objects. A `Polygon` object is a collection of 2D coordinates with equal first and last coordinates and is generated out of a two-column matrix or a dataframe with a column for latitude and one for longitude. A `Polygons` object is a **list** of one or more `Polygon` objects, for example islands belonging to the same country.
+**Polygons** are generated out of `Polygon` objects. A `Polygon` object is a collection of 2D coordinates with equal first and last coordinates and is generated out of a two-column matrix or a dataframe with a column for latitude and one for longitude. A `Polygons` object is a **list** of one or more `Polygon` objects, for example, islands belonging to the same country.
 
-See here for a very simple example for how to create `Line` and `Polygon` object:
+See here for a very simple example of how to create `Line` and `Polygon` object:
 
 ```{r}
 
@@ -153,21 +153,21 @@ For example, we can save `MyPolygons_sp_dfr` to a Shape file (`MyPolygons`) with
 
 ```{r,eval=F}
 # Save the SpatialPolygons object as a Shape file
-writeOGR(MyPolygons_sp_dfr,dsn = "/data/MyPolygons",
+writeOGR(MyPolygons_sp_dfr,dsn = "D://class/MyPolygons",
          layer ="Population", driver="ESRI Shapefile")
 ```
 
-We can also read in spatial data using `readOGR()` (for vector) and `readGDAL()` (for raster/grids) functions from the `rgdal` package. When reading in a shapefile, `readOGR()` requires the following two arguments:
+We can also read in spatial data using `readOGR()` (for vector) and `readGDAL()` (for raster/grids) functions from the `rgdal` package. When reading in a shape file, `readOGR()` requires the following two arguments:
 
 * Datasource name (dsn), this is the path to the folder that contains the files.
 
 * Layer name (layer), this is the shapefile name WITHOUT extension.
 
-Let's use the shape file of China map as an example, [download it](ss). Uncompress it. Open the folder, you will see there are three files of different formats (`.dbf`, `.shp`, `.shx`). In R, we can read in the shape via:
+Let's use the shape file of China map as an example, [download it](https://zhu-group.github.io/ese5023/download/China_map.zip). Decompress it. Open the folder, you will see there are three files of different formats (`.dbf`, `.shp`, `.shx`). In R, we can read in the shape via:
 
 ```{r}
 # Read china map, a shape file
-China_map <- readOGR("/data/China_map", "bou2_4p") 
+China_map <- readOGR("D://class/China_map", "bou2_4p") 
 ```
 
 Next we can check the attributes of this shape file, and plot it:
@@ -183,7 +183,7 @@ head(China_map)
 plot(China_map)
 ```
 
-In R you can handel the shape file object directly. For example, we can filter provinces with area larger than `100*10000` km^2^ by uisng the `subset()` function:
+In R you can handel the shape file object directly. For example, we can filter provinces with area larger than `1 million` km^2^ by uisng the `subset()` function:
 
 ```{r}
 China_map_s1 <- subset(China_map, AREA > 100)
@@ -195,7 +195,7 @@ plot(China_map_s1, add=T, col="blue")
 
 # Raster data
 
-**Raster** files have a much more compact data structure than vectors. Because of their regular structure the coordinates do not need to be recorded for each pixel or cell in the rectangular extent. A raster is defined by:  
+**Raster** files have a much more compact data structure than vectors. Because of their regular structure, the coordinates do not need to be recorded for each pixel or cell in the rectangular extent. A raster is defined by:  
 
 * CRS
 
@@ -209,7 +209,7 @@ plot(China_map_s1, add=T, col="blue")
 
 Given this structure, coordinates for any cell can be computed and don’t need to be stored.
 
-The `raster` package is a major extension of spatial data classes to access large rasters and in particular to process very large files. It includes `RasterLayer` and functions for converting among different classes, and operators for computations on the raster data.
+The `raster` package is a major extension of spatial data classes to access large rasters and in particular, to process very large files. It includes `RasterLayer` and functions for converting among different classes and operators for computations on the raster data.
 
 Let's create a raster object `MyRaster` of type `RasterLayer`:
 
@@ -220,9 +220,9 @@ class(MyRaster)
 MyRaster
 ```
 
-As you can see, if the `crs` argument is missing when creating the `Raster` object, the `x` coordinates are within `-360` and `360` and the `y` coordinates are within `-90` and `90`, the `WGS84` projection is used by default.
+As you can see, if the `crs` argument is missing when creating the `Raster` object, the `x` coordinates are within `-360` and `360`, and the `y` coordinates are within `-90` and `90`, the `WGS84` projection is used by default.
 
-Now the `RasterLayer` is empty, we can add some values to the cells as following. 
+Now the `RasterLayer` is empty, we can add some values to the cells as follows: 
 
 ```{r}
 # Set values to the cells
@@ -235,12 +235,12 @@ contour(MyRaster)
 
 Notice R fills the cells from the top-left to the bottom-right. 
 
-We can also use `raster()` to read in raster files. Download this [tiff file]() (`wc2.1_10m_wind_11.tif`, ~ 2.4MB), which is the mean wind speed (m s^-1^) in Nov. from 1970-2000 provided by the [WorldClim](https://worldclim.org/data/worldclim21.html). The data is at a resolution of 10 minutes (~ 340 km^2^).
+We can also use `raster()` to read in raster files. Download this [tiff file](https://zhu-group.github.io/ese5023/download/wc2.1_10m_wind_11.tif) (`wc2.1_10m_wind_11.tif`, ~ 2.4MB), which is the mean wind speed (m s^-1^) in Nov. from 1970-2000 provided by the [WorldClim](https://worldclim.org/data/worldclim21.html). The data is at a resolution of 10 minutes (~ 340 km^2^).
 In R, we can load it as:
 
 ```{r}
 # Read tiff file
-Wind_Nov <- raster("/home/lei/Downloads/wc2.1_10m_wind/wc2.1_10m_wind_11.tif")
+Wind_Nov <- raster("D://class/wc2.1_10m_wind_11.tif")
 # Look at the raster attributes
 Wind_Nov
 ```
@@ -284,7 +284,7 @@ Add one more area (`Region2`) with a population of `500` (`Population_count`) to
 
 ## Exercise #3
 
-Count how many provenices have an area of between `0.1 million` and `0.2 million` km^2^ in the `China_map` object. Plot those provenices in red.
+Count how many provinces have an area of between `0.1 million` and `0.2 million` km^2^ in the `China_map` object. Plot those provinces in red.
 
 
 ## Exercise #4

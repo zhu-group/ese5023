@@ -23,15 +23,16 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -41,14 +42,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -57,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -501,32 +504,32 @@ div.tocify {
 <h1>Quick summaries</h1>
 <p>R has built-in functions for a large number of summary statistics. For numeric variables, we can summarize data with the center and spread. We have covered many of the summary functions, make sure you understand what the following functions return: <code>mean()</code>, <code>median()</code>, <code>range()</code>, <code>max()</code>, <code>min()</code>, <code>sd()</code>, <code>var()</code>, <code>IQR()</code>, <code>summary()</code>. Pay attention to data sets containing <code>NA</code> values.</p>
 <p>Recall the <code>Keeling_Data</code>, call the above functions:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">Keeling_Data     &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">Keeling_Data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(Keeling_Data)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># Add a new column to the original tibble</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">Keeling_Data_tbl &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># Notice we use pull() to get a vector from a tibble</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">Month_CO2 &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="st">  </span><span class="kw">pull</span>(co2_new)</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co"># Summary and descriptive statistics</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw">mean</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>Keeling_Data     &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>Keeling_Data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(Keeling_Data)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Add a new column to the original tibble</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>Keeling_Data_tbl &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>))</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Notice we use pull() to get a vector from a tibble</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>Month_CO2 &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="st">  </span><span class="kw">pull</span>(co2_new)</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># Summary and descriptive statistics</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">mean</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 355.6515</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">median</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">median</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 352.98</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">range</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">range</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 313.20 417.07</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">sd</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">sd</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 28.74672</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">var</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">var</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 826.3739</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">IQR</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">IQR</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 49.4675</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">summary</span>(Month_CO2, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">summary</span>(Month_CO2, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##   313.2   329.4   353.0   355.7   378.8   417.1       7</code></pre>
 <hr />
@@ -537,64 +540,64 @@ div.tocify {
 <div id="histograms" class="section level2">
 <h2>Histograms</h2>
 <p>When visualizing a single numerical variable, a histogram will be our go-to tool, which can be created in R using the <code>hist()</code> function.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">hist</span>(Month_CO2)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">hist</span>(Month_CO2)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The histogram function has a number of parameters which can be changed to make our plot look much nicer. Use the <code>?</code> operator to read the documentation for the <code>hist()</code> to see a full list of these parameters.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">hist</span>(Month_CO2,</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">     <span class="dt">xlab =</span> <span class="st">&quot;Monthly CO2 mixing ratios (ppm)&quot;</span>,</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">     <span class="dt">main =</span> <span class="st">&quot;Histogram of Monthly CO2&quot;</span>,</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">     <span class="dt">breaks =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">     <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>,</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">     <span class="dt">border =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">hist</span>(Month_CO2,</span>
+<span id="cb16-2"><a href="#cb16-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Monthly CO2 mixing ratios (ppm)&quot;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Histogram of Monthly CO2&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>     <span class="dt">breaks =</span> <span class="dv">20</span>,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>     <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>     <span class="dt">border =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">box</span>(<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>By default R will attempt to intelligently guess a good number of <code>breaks</code>, but as we can see here, it is sometimes useful to modify this yourself.</p>
 </div>
 <div id="barplots" class="section level2">
 <h2>Barplots</h2>
 <p>Somewhat similar to a histogram, a barplot can provide a visual summary of a <strong>categorical variable</strong>, or a numeric variable with a finite number of values, like a ranking from 1 to 10.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">barplot</span>(<span class="kw">table</span>(Keeling_Data_tbl<span class="op">$</span>month),</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;Frequency&quot;</span>,</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;Number of observations&quot;</span>,</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>,</a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="dt">border =</span> <span class="st">&quot;darkorange&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(Keeling_Data_tbl<span class="op">$</span>month),</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="dt">ylab =</span> <span class="st">&quot;Frequency&quot;</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="dt">main =</span> <span class="st">&quot;Number of observations&quot;</span>,</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>,</span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="dt">border =</span> <span class="st">&quot;darkorange&quot;</span>)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="boxplots" class="section level2">
 <h2>Boxplots</h2>
 <p>To visualize the relationship between a numerical and categorical variable, we will use a boxplot. In the <code>Keeling_Data_tbl</code> dataset, the <code>month</code> is a categorical variable. First, note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in R, we use the <code>boxplot()</code> function.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">boxplot</span>(Month_CO2)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">boxplot</span>(Month_CO2)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Or try to plot the raw data:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">boxplot</span>(Keeling_Data<span class="op">$</span>co2)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">boxplot</span>(Keeling_Data<span class="op">$</span>co2)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>However, more often, we will use boxplots to compare a numerical variable for different values of a categorical variable.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Here we used the <code>boxplot()</code> command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The R syntax <code>co2_new ~ month, data = Keeling_Data_tbl</code> reads “Plot the <code>co2_new</code> variable against the <code>month</code> variable using the <code>Keeling_Data_tbl</code> dataset.” We see the use of a <code>~</code> (which specifies a formula) and also a <code>data = argument</code>. This will be a syntax that is common to many functions we will use later.</p>
 <p>Again, <code>boxplot()</code> has a number of additional arguments which have the ability to make our plot more visually appealing.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl,</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;Monthly CO2&quot;</span>,</a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="dt">cex =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>,</a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="dt">border =</span> <span class="st">&quot;darkgreen&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">boxplot</span>(co2_new <span class="op">~</span><span class="st"> </span>month, <span class="dt">data=</span>Keeling_Data_tbl,</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="dt">xlab =</span> <span class="st">&quot;Month&quot;</span>,</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="dt">main =</span> <span class="st">&quot;Monthly CO2&quot;</span>,</span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="dt">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>,</span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="dt">border =</span> <span class="st">&quot;darkgreen&quot;</span>)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="scatterplots" class="section level2">
 <h2>Scatterplots</h2>
 <p>Lastly, to visualize the relationship between two numeric variables, we will use a scatterplot. This can be done with the <code>plot()</code> function and the <code>~</code> syntax we just used with a boxplot. (The function <code>plot()</code> can also be used more generally; see the documentation for details.)</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl,</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>,</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;CO2 vs Year&quot;</span>,</a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>,</a>
-<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="dt">cex =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="dt">col =</span> <span class="st">&quot;navy&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">plot</span>(co2_new <span class="op">~</span><span class="st"> </span>year, <span class="dt">data=</span>Keeling_Data_tbl,</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>,</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="dt">main =</span> <span class="st">&quot;CO2 vs Year&quot;</span>,</span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>,</span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="dt">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="dt">col =</span> <span class="st">&quot;navy&quot;</span>)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
@@ -617,17 +620,17 @@ div.tocify {
 <li><code>rname</code> generates a random draw from a particular distribution.</li>
 </ul>
 <p>Note that <code>name</code> represents the <code>name</code> of the given distribution. For example, consider a random variable <code>X</code> which is <span class="math inline">\(N(\mu=2, \sigma^{2}=25)\)</span>. To calculate the value of the pdf at <code>x = 3</code>, that is, the height of the curve at <code>x = 3</code>, use:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.07820854</code></pre>
 <p>To calculate the value of the cdf at <code>x = 3</code>, that is, <span class="math inline">\(P(X&lt;=3)\)</span>, the probability that <code>X</code> is less than or equal to 3, use:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5792597</code></pre>
 <p>Or, to calculate the quantile for probability 0.975, use:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n = 5</code>, use:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a></code></pre></div>
-<pre><code>## [1] -5.5604348 -5.6164430  0.7856312 -4.5996966  3.6717277</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] -1.54587005 -6.19901535 -5.28178908 -3.46979794 -0.08443419</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <ul>
 <li><code>binom</code> for <code>Binomial</code> distribution</li>
@@ -643,116 +646,117 @@ div.tocify {
 <div id="correlation" class="section level2">
 <h2>Correlation</h2>
 <p>Correlation describes how closely related two variables are. <em>Pearson’s test</em> assumes your data is normally distributed and measures linear correlation. <em>Spearman’s test</em> does not assume normality and measures non-linear correlation. And <em>Kendall’s test</em> also does not assume normality and measures non-linear correlation, and is a more robust test - but it is harder to compute by hand, and as such is less commonly seen.</p>
-<p>In R, <code>cor(Vector1, Vector2)</code> provides correlation coefficients, while <code>cor.test(Vector1, Vector2)</code> performs the statistical test, giving test statistics, p values, and other outputs. Both perform the Pearson test by default, but can be changed by providing the argument <code>method = &quot;spearman&quot;</code> or <code>method = &quot;kendall&quot;</code>.</p>
+<p>In R, <code>cor(Vector1, Vector2)</code> provides correlation coefficients, while <code>cor.test(Vector1, Vector2)</code> performs the statistical test, giving test statistics, p values, and other outputs. Both perform the Pearson test by default, but can be changed by providing the argument <code>method = "spearman"</code> or <code>method = "kendall"</code>.</p>
 <p>Let’s generate two random samples, both with a size of <code>n = 50</code> from the <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span> distribution, and use different tests:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co"># perform the Pearson test by default</span></a>
-<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">cor</span>(Sample1, Sample2)</a></code></pre></div>
-<pre><code>## [1] -0.1382013</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1382013</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1595678</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1118367</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">cor.test</span>(Sample1, Sample2)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a>Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># perform the Pearson test by default</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">cor</span>(Sample1, Sample2)</span></code></pre></div>
+<pre><code>## [1] 0.06856966</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.06856966</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1471789</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">cor</span>(Sample1, Sample2, <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1053061</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">cor.test</span>(Sample1, Sample2)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  Sample1 and Sample2
-## t = -0.96676, df = 48, p-value = 0.3385
+## t = 0.47619, df = 48, p-value = 0.6361
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.4011188  0.1457533
+##  -0.2138598  0.3404201
 ## sample estimates:
 ##        cor 
-## -0.1382013</code></pre>
+## 0.06856966</code></pre>
 </div>
 <div id="t-test" class="section level2">
 <h2>t-test</h2>
 <p>The t-test is a method of comparing the mean(s). For one-sample t-test, the <em>null hypothesis</em> is the sample mean equals to a fixed value. For example, let’s generate a random sample of size <code>n = 50</code> from <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span>, and use t-test to check whether the mean is sigificantly different from zero.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">Sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">t.test</span>(Sample, <span class="dt">mu=</span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>Sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="kw">t.test</span>(Sample, <span class="dt">mu=</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
 ## data:  Sample
-## t = 0.6789, df = 49, p-value = 0.5004
+## t = 1.7524, df = 49, p-value = 0.08597
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.901324  1.821012
+##  -0.1886401  2.7590482
 ## sample estimates:
 ## mean of x 
-## 0.4598442</code></pre>
+##  1.285204</code></pre>
 <p>Two-sample t-test is almost the same as one-sample t-Test, but now the <em>null hypothesis</em> changes. Let’s generate two random samples, both with a size of <code>n = 50</code> from the <span class="math inline">\(N(\mu=0, \sigma^{2}=25)\)</span> distribution, and use t-test to check whether the means are sigificantly different.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="kw">t.test</span>(Sample1, Sample2)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>Sample1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb44-2"><a href="#cb44-2"></a>Sample2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="kw">t.test</span>(Sample1, Sample2)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
 ## data:  Sample1 and Sample2
-## t = 0.58226, df = 97.991, p-value = 0.5617
+## t = 0.23676, df = 97.063, p-value = 0.8133
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -1.318404  2.413334
+##  -1.678923  2.133737
 ## sample estimates:
-##   mean of x   mean of y 
-##  0.05422051 -0.49324454</code></pre>
+## mean of x mean of y 
+## 0.4153980 0.1879909</code></pre>
 <p>You can use <code>t.test()</code> to test independent or paired samples, use <code>?</code> to see more.</p>
 </div>
 </div>
 <div id="simple-linear-regression" class="section level1">
 <h1>Simple linear regression</h1>
 <p>This is the most used statistical model in all fields - simple but powerful. We first fit the model using <code>lm()</code> then use <code>summary()</code> to view the results in greater detail.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</a>
-<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="kw">plot</span>(x,y)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb46-2"><a href="#cb46-2"></a>a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb46-3"><a href="#cb46-3"></a>b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb46-4"><a href="#cb46-4"></a>y &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</span>
+<span id="cb46-5"><a href="#cb46-5"></a><span class="kw">plot</span>(x,y)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">summary</span>(fit)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -12.7012  -3.8506  -0.5243   3.9699  14.3658 
+## -13.1663  -4.4515  -0.4723   3.7777  14.9066 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   1.6322     0.8668   1.883 0.065768 .  
-## x             0.6761     0.1730   3.909 0.000291 ***
+## (Intercept)   0.2885     0.8966   0.322    0.749    
+## x             0.7688     0.1531   5.022 7.49e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 6.119 on 48 degrees of freedom
-## Multiple R-squared:  0.2414, Adjusted R-squared:  0.2256 
-## F-statistic: 15.28 on 1 and 48 DF,  p-value: 0.0002905</code></pre>
+## Residual standard error: 6.324 on 48 degrees of freedom
+## Multiple R-squared:  0.3444, Adjusted R-squared:  0.3307 
+## F-statistic: 25.22 on 1 and 48 DF,  p-value: 7.492e-06</code></pre>
 <p>You can extract the regression information directly with the <code>names()</code> function:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(fit))</a></code></pre></div>
-<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot;  &quot;aliased&quot;       &quot;sigma&quot;        
-##  [7] &quot;df&quot;            &quot;r.squared&quot;     &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">summary</span>(fit)<span class="op">$</span>coefficients</a></code></pre></div>
-<pre><code>##              Estimate Std. Error  t value     Pr(&gt;|t|)
-## (Intercept) 1.6322226  0.8668202 1.883000 0.0657678707
-## x           0.6760627  0.1729598 3.908786 0.0002905498</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">names</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
+<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot;  &quot;aliased&quot;      
+##  [6] &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;     &quot;adj.r.squared&quot; &quot;fstatistic&quot;   
+## [11] &quot;cov.unscaled&quot;</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">summary</span>(fit)<span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) 0.2885436  0.8965898 0.3218234 7.489839e-01
+## x           0.7688425  0.1531095 5.0215188 7.491631e-06</code></pre>
 <p>As you can see, the <code>names()</code> function tells us what information is available, and then we use the <code>$</code> operator and coefficients to extract the information we are interested in.</p>
 <p>We can plot the regression line by:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>,</a>
-<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="dt">ylab =</span> <span class="st">&quot;y&quot;</span>,</a>
-<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="dt">main =</span> <span class="st">&quot;y vs x&quot;</span>,</a>
-<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="dt">pch =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb53-6" data-line-number="6"><span class="dt">cex =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb53-7" data-line-number="7"><span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
-<a class="sourceLine" id="cb53-8" data-line-number="8"><span class="kw">abline</span>(fit, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb53-9" data-line-number="9"><span class="kw">points</span>(<span class="kw">mean</span>(x), <span class="kw">mean</span>(y), <span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>, <span class="dt">cex =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>,</span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="dt">ylab =</span> <span class="st">&quot;y&quot;</span>,</span>
+<span id="cb53-4"><a href="#cb53-4"></a><span class="dt">main =</span> <span class="st">&quot;y vs x&quot;</span>,</span>
+<span id="cb53-5"><a href="#cb53-5"></a><span class="dt">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb53-6"><a href="#cb53-6"></a><span class="dt">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb53-7"><a href="#cb53-7"></a><span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb53-8"><a href="#cb53-8"></a><span class="kw">abline</span>(fit, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb53-9"><a href="#cb53-9"></a><span class="kw">points</span>(<span class="kw">mean</span>(x), <span class="kw">mean</span>(y), <span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>, <span class="dt">cex =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Section_06_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <hr />
 </div>
