@@ -23,16 +23,15 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -42,16 +41,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -60,9 +57,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -499,8 +496,8 @@ div.tocify {
 <p>In this exercise, we look at some of the data on wealth and life expectancy of countries overtime used by Hans Rosling in his famous <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen">TED talk</a>.</p>
 <p>The data has been conveniently packaged in the R package <code>gapminder</code>, a subset of the original data set available at <a href="https://www.gapminder.org/">Gapminder</a>. For each of 142 countries, the package provides values for life expectancy, GDP per capita, and population, every five years, from 1952 to 2007. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p><strong>1.1</strong> Install the <code>gapminder</code> package if you haven’t. Then load the data by:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load the gapminder library</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(gapminder)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Load the gapminder library</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(gapminder)</a></code></pre></div>
 <p>Using the <code>class()</code> function to verify <code>gapminder</code> is a <code>tibble</code>.</p>
 <p>You are required to use functions from <code>tidyr</code>, <code>dplyr</code>, and <code>ggplot2</code> to finish the following questions:</p>
 <p><strong>1.2</strong> Plot life expectancy of China from 1952 to 2007.</p>
@@ -509,17 +506,17 @@ div.tocify {
 <p><strong>1.5</strong> Calculate the standard error of the life expectancy for each continent.</p>
 <p><strong>1.6</strong> Plot the difference in total GDP (defined as <code>population * GDP per capita</code>) between the USA and China from 1952 to 2007.</p>
 <p><strong>1.7</strong> Create a <code>tibble</code> contains only <code>country</code>, <code>year</code>, and <code>pop</code>, named it as <code>Country_Pop</code>. Create another <code>tibble</code> named <code>Country_LifeExp</code> that contains <code>country</code>, <code>year</code>, and <code>lifeExp</code>. Run:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Save objects to a RData file</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">save</span>(Country_Pop, Country_LifeExp, <span class="dt">file=</span><span class="st">&quot;My.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Save objects to a RData file</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">save</span>(Country_Pop, Country_LifeExp, <span class="dt">file=</span><span class="st">&quot;My.RData&quot;</span>)</a></code></pre></div>
 <p>Check your <code>working direction</code>, where should now have a new file <code>My.RData</code>.</p>
 <p>Here we have used the <code>save()</code> function to save two R objects to a specified file (<code>My.RData</code> in this case). Using <code>?</code> to learn more about how to use the <code>save()</code> function.</p>
 <p><strong>1.8</strong> Close RStudio. Re-open it, and run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Load a RData file</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">load</span>(<span class="st">&quot;My.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Load a RData file</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">load</span>(<span class="st">&quot;My.RData&quot;</span>)</a></code></pre></div>
 <p>Here we call the <code>load()</code> function to read the two R objects (<code>Country_Pop</code> and <code>Country_LifeExp</code>) back from the file. Use the <code>ls()</code> function to check. Consider saving your temporary data as <code>.RData</code> files to save time.</p>
 <p><strong>1.9</strong> Run:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Save objects to a .csv file</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">write.csv</span>(Country_LifeExp, <span class="dt">file=</span><span class="st">&quot;Country_LifeExp.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Save objects to a .csv file</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">write.csv</span>(Country_LifeExp, <span class="dt">file=</span><span class="st">&quot;Country_LifeExp.csv&quot;</span>)</a></code></pre></div>
 <p>Check your <code>working direction</code>, you should now find a new file <code>Country_LifeExp.csv</code>. Check this file. Using <code>?</code> to learn more about how to use the <code>write.csv()</code> function.</p>
 <p><strong>1.10</strong> Now save your results from 1.4 to a <code>.csv</code> file using the <code>write.csv()</code> function.</p>
 <hr />
@@ -530,7 +527,7 @@ div.tocify {
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="http://euclid.psych.yorku.ca/www/psy6135/tutorials/gapminder.html">ggplot2 tutorial: gapminder data</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><a href="http://euclid.psych.yorku.ca/www/psy6135/tutorials/gapminder.html">ggplot2 tutorial: gapminder data</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

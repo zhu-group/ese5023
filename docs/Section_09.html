@@ -23,16 +23,15 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -42,16 +41,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -60,9 +57,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -500,27 +497,27 @@ div.tocify {
 <h1>The nature of time series data</h1>
 <p>Time series data are data points collected over a period of time as a <strong>sequence of time gap</strong>. Time series data analysis means analyzing the available data to find out the pattern or trend in the data to predict some future values which will, in turn, help more effective and optimize decisions. Time series analysis examples are Financial, Stock prices, Weather data, Utility Studies and many more. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>Let’s use the ‘Keeling_Data’ CO<sub>2</sub> data again as an example to take a closer look at a time series.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read data</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>Keeling_Data     &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Handel missing values</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>Keeling_Data<span class="op">$</span>co2[<span class="kw">which</span>(Keeling_Data<span class="op">$</span>co2<span class="op">&lt;</span><span class="dv">0</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Keeling_Data<span class="op">$</span>co2)){</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="cf">if</span>( <span class="kw">is.na</span>(Keeling_Data<span class="op">$</span>co2[i])){</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    Keeling_Data<span class="op">$</span>co2[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(Keeling_Data<span class="op">$</span>co2[(i<span class="dv">-2</span>)<span class="op">:</span>(i<span class="op">+</span><span class="dv">2</span>)],<span class="dt">na.rm=</span>T )</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  }</span>
-<span id="cb1-11"><a href="#cb1-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Read data</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">Keeling_Data     &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Handel missing values</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">Keeling_Data<span class="op">$</span>co2[<span class="kw">which</span>(Keeling_Data<span class="op">$</span>co2<span class="op">&lt;</span><span class="dv">0</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Keeling_Data<span class="op">$</span>co2)){</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="cf">if</span>( <span class="kw">is.na</span>(Keeling_Data<span class="op">$</span>co2[i])){</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    Keeling_Data<span class="op">$</span>co2[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(Keeling_Data<span class="op">$</span>co2[(i<span class="dv">-2</span>)<span class="op">:</span>(i<span class="op">+</span><span class="dv">2</span>)],<span class="dt">na.rm=</span>T )</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">}</a></code></pre></div>
 <p>Notice that here we use 5-month average to replace the missing values.</p>
 <p>Use <code>ts()</code> to convert a vector into a time series. Use <code>?</code> to learn more.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Apply the ts() function</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>co2 &lt;-<span class="st"> </span><span class="kw">ts</span>(Keeling_Data<span class="op">$</span>co2, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">1958</span>,<span class="dv">3</span>), <span class="dt">frequency=</span><span class="dv">12</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Quick plot</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">plot</span>(co2, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Apply the ts() function</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">co2 &lt;-<span class="st"> </span><span class="kw">ts</span>(Keeling_Data<span class="op">$</span>co2, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">1958</span>,<span class="dv">3</span>), <span class="dt">frequency=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Quick plot</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">plot</span>(co2, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Check the data type</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">str</span>(co2)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Check the data type</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">str</span>(co2)</a></code></pre></div>
 <pre><code>##  Time-Series [1:749] from 1958 to 2020: 316 317 318 316 316 ...</code></pre>
 <hr />
 </div>
@@ -534,16 +531,16 @@ div.tocify {
 <li><p>Then, the seasonal figure is computed by averaging, for each time unit, over all periods. The seasonal figure is then centered.</p></li>
 <li><p>Finally, the error component is determined by removing trend and seasonal figure (recycled as needed) from the original time series.</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>co2_components &lt;-<span class="st"> </span><span class="kw">decompose</span>(co2)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">plot</span>(co2_components)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">co2_components &lt;-<span class="st"> </span><span class="kw">decompose</span>(co2)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">plot</span>(co2_components)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>In the above example, <code>co2_components</code> contains the information/values of the three components. Check the distribution of the error component (<code>random</code>) to verify it’s a white noise.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Plot hist</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">hist</span>(co2_components<span class="op">$</span>random, <span class="dt">prob=</span><span class="ot">TRUE</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># Add pdf</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">curve</span>(<span class="kw">dnorm</span>(x, <span class="dt">mean=</span><span class="kw">mean</span>(co2_components<span class="op">$</span>random,<span class="dt">na.rm=</span>T),</span>
-<span id="cb6-5"><a href="#cb6-5"></a>            <span class="dt">sd=</span><span class="kw">sd</span>(co2_components<span class="op">$</span>random,<span class="dt">na.rm=</span>T)),</span>
-<span id="cb6-6"><a href="#cb6-6"></a>      <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Plot hist</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">hist</span>(co2_components<span class="op">$</span>random, <span class="dt">prob=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co"># Add pdf</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">curve</span>(<span class="kw">dnorm</span>(x, <span class="dt">mean=</span><span class="kw">mean</span>(co2_components<span class="op">$</span>random,<span class="dt">na.rm=</span>T),</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">            <span class="dt">sd=</span><span class="kw">sd</span>(co2_components<span class="op">$</span>random,<span class="dt">na.rm=</span>T)),</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">      <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>As you can see the distribution is a Gaussian white noise, which is a particularly useful white noise series.</p>
 <hr />
@@ -565,11 +562,11 @@ div.tocify {
 <p><span class="math display">\[x_t = \phi_1x_{t-1} + \phi_2x_{t-2} + ... + \phi_px_{t-p} + w_t\]</span></p>
 <p>where <span class="math inline">\(x_t\)</span> is stationary, <span class="math inline">\(w_t ∼ wn(0, \sigma^2_w)\)</span>, and <span class="math inline">\(\phi_1\)</span>, <span class="math inline">\(\phi_2\)</span>, …, <span class="math inline">\(\phi_p\)</span> are constants.</p>
 <p>The following R code can be used to obtain two AR(1) models:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">ar=</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">AR</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>phi<span class="op">==+</span>.<span class="dv">9</span>)))</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">ar=</span><span class="op">-</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">AR</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>phi<span class="op">==-</span>.<span class="dv">9</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">ar=</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">AR</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>phi<span class="op">==+</span>.<span class="dv">9</span>)))</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">ar=</span><span class="op">-</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">AR</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>phi<span class="op">==-</span>.<span class="dv">9</span>)))</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="ma-model" class="section level2">
@@ -579,11 +576,11 @@ div.tocify {
 <p><span class="math display">\[x_t = w_t + \theta_1w_{t-1} + \theta_2w_{t-2} + ... + \theta_qw_{t-q} \]</span></p>
 <p>where <span class="math inline">\(w_t ∼ wn(0, \sigma^2_w)\)</span>, and <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, …, <span class="math inline">\(\theta_q\)</span> are parameters.</p>
 <p>The following R code can be used to obtain two MA(1) models:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ma=</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">MA</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>theta<span class="op">==+</span>.<span class="dv">9</span>)))</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ma=</span><span class="op">-</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">MA</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>theta<span class="op">==-</span>.<span class="dv">9</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ma=</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">MA</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>theta<span class="op">==+</span>.<span class="dv">9</span>)))</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw">plot</span>(<span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ma=</span><span class="op">-</span>.<span class="dv">9</span>), <span class="dt">n=</span><span class="dv">100</span>), <span class="dt">ylab=</span><span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="dt">main=</span>(<span class="kw">expression</span>(<span class="kw">MA</span>(<span class="dv">1</span>)<span class="op">~</span><span class="er">~~</span>theta<span class="op">==-</span>.<span class="dv">9</span>)))</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="acf-and-pacf" class="section level2">
@@ -591,18 +588,18 @@ div.tocify {
 <p>The autocorrelation function (ACF) measures the linear predictability of the series at time <code>t</code>, say <span class="math inline">\(x_t\)</span>, using only the value <span class="math inline">\(x_s\)</span>.</p>
 <p>The partial auto-correlation function (PACF) is a measure of the correlation between observations of a time series that are separated by <code>k</code> time units (<span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t-k}\)</span>).</p>
 <p>To show ACF and the PACF of a AR model, AR(2), in R we can use the following lines:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>ACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="op">-</span>.<span class="dv">75</span>), <span class="dt">ma=</span><span class="dv">0</span>, <span class="dv">24</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb9-2"><a href="#cb9-2"></a>PACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="op">-</span>.<span class="dv">75</span>), <span class="dt">ma=</span><span class="dv">0</span>, <span class="dv">24</span>, <span class="dt">pacf=</span><span class="ot">TRUE</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">plot</span>(ACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">plot</span>(PACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">ACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="op">-</span>.<span class="dv">75</span>), <span class="dt">ma=</span><span class="dv">0</span>, <span class="dv">24</span>)[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">PACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="op">-</span>.<span class="dv">75</span>), <span class="dt">ma=</span><span class="dv">0</span>, <span class="dv">24</span>, <span class="dt">pacf=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">plot</span>(ACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">plot</span>(PACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>To show ACF and the PACF of a MA model, MA(2), in R we can use the following lines:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>ACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="dv">0</span>, <span class="dt">ma=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb10-2"><a href="#cb10-2"></a>PACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="dv">0</span>, <span class="dt">ma=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>, <span class="dt">pacf=</span><span class="ot">TRUE</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">plot</span>(ACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">plot</span>(PACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">ACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="dv">0</span>, <span class="dt">ma=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>)[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">PACF =<span class="st"> </span><span class="kw">ARMAacf</span>(<span class="dt">ar=</span><span class="dv">0</span>, <span class="dt">ma=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.6</span>), <span class="dv">24</span>, <span class="dt">pacf=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw">plot</span>(ACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw">plot</span>(PACF, <span class="dt">type=</span><span class="st">&quot;h&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;lag&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,<span class="dv">1</span>)); <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Behavior of the ACF and PACF for ARMA Models can be summarized as:</p>
 <ul>
@@ -614,22 +611,21 @@ div.tocify {
 <div id="an-example" class="section level2">
 <h2>An example</h2>
 <p>Consider the global temperature series record (<code>globtemp</code>) in the <code>astsa</code> package. The data are the global mean land–ocean temperature index from 1880 to 2015, with the base period 1951-1980. We want to git an ARIMA model to this time series.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">library</span>(astsa)</span></code></pre></div>
-<pre><code>## Warning: package &#39;astsa&#39; was built under R version 4.0.3</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(astsa)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;astsa&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:maps&#39;:
 ## 
 ##     unemp</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">plot</span>(globtemp, <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">plot</span>(globtemp, <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Global Temperature Deviations&quot;</span>)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There is a clear trend, so the first step is to de-trend the data.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>trModel &lt;-<span class="st"> </span><span class="kw">lm</span>(globtemp <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(globtemp)))</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">plot</span>(<span class="kw">resid</span>(trModel), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">trModel &lt;-<span class="st"> </span><span class="kw">lm</span>(globtemp <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(globtemp)))</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">resid</span>(trModel), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">acf</span>(<span class="kw">resid</span>(trModel))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">acf</span>(<span class="kw">resid</span>(trModel))</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">pacf</span>(<span class="kw">resid</span>(trModel))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">pacf</span>(<span class="kw">resid</span>(trModel))</a></code></pre></div>
 <p><img src="Section_09_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
 <p>Based on the acf and pacf, we estimate it may be an ARIMA(1,0,0) model.</p>
 </div>
@@ -659,7 +655,7 @@ div.tocify {
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://datascienceplus.com/time-series-analysis-using-arima-model-in-r/">Time Series Analysis Using ARIMA Model In R</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><a href="https://datascienceplus.com/time-series-analysis-using-arima-model-in-r/">Time Series Analysis Using ARIMA Model In R</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

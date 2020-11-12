@@ -1,0 +1,308 @@
+---
+title: "Section 10 Spatial data analysis"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> "Smart don’t come out of books. Smart is making the right decision at the right time." - Stick, Daredevil, S1. Ep7.
+
+# Prerequisites  
+
+Install the following packages for this section:
+
+```{r, eval=F}
+install.packages("sp")
+install.packages("rgdal")
+install.packages("sf")
+install.packages("raster")
+```
+
+Load the libraries:
+
+```{r}
+library("sp")
+library("rgdal")
+library("sf")
+library("raster")
+```
+
+***
+
+*The notes below are modified from the excellent [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html/) freely available on the github.*
+
+***
+
+# Spatial objects
+
+In vector GIS, there are four key objects to deal with:
+
+* point
+
+* line
+
+* polygon
+
+* grid
+
+The first package to provide classes and methods for spatial data types in R is `sp`, which provides classes and methods to create *points*, *lines*, *polygons*, and *grids* and to operate on them. About 350 of the spatial analysis packages use the spatial data types that are implemented in `sp`, i.e. they “depend” on the `sp` package and many more are indirectly dependent.
+
+The foundational structure for any spatial object in `sp` is the `Spatial` class. It has two “slots”:
+
+* a bounding box
+
+* a CRS class object to define the **Coordinate Reference System**
+
+This basic structure is then extended, depending on the characteristics of the spatial object (point, line, polygon).
+
+To build up a spatial object in `sp` we could follow these steps.
+
+## Create geometric objects
+
+**Points** (which may have 2 or 3 dimensions) are the most basic spatial data objects. They are generated out of either a single coordinate or a set of coordinates, like a two-column matrix or a dataframe with a column for latitude and one for longitude.
+
+**Lines** are generated out of `Line` objects. A `Line` object is a collection of 2D coordinates and is generated out of a two-column matrix or a dataframe with a column for latitude and one for longitude. A `Lines` object is a **list** of one or more `Line` objects, for example all the contours at a single elevation.
+
+**Polygons** are generated out of `Polygon` objects. A `Polygon` object is a collection of 2D coordinates with equal first and last coordinates and is generated out of a two-column matrix or a dataframe with a column for latitude and one for longitude. A `Polygons` object is a **list** of one or more `Polygon` objects, for example islands belonging to the same country.
+
+See here for a very simple example for how to create `Line` and `Polygon` object:
+
+```{r}
+
+# Set up some basic points
+x <- c(1, 2, 3, 2, 1.5, 1)
+y <- c(1, 1, 1.5, 2, 3, 2)
+
+# Create a Line object
+MyLine <- Line(cbind(x,y))
+str(MyLine)
+
+# Create a Lines object
+MyLines <- Lines(list(MyLine), ID = "River1") # this contains just one Line!
+str(MyLines)
+
+# Create a Polygon object
+MyPolygon <- Polygon(cbind(x,y))
+str(MyPolygon)
+
+# Create a Polygons object
+MyPolygons <- Polygons(list(MyPolygon), ID = "Region1") # this contains just one Line!
+str(MyPolygons)
+
+```
+
+## Create spatial objects
+
+We get geometric objects from the previous setp, the next setp is to add the *bounding box* (automatically) and the slot for the *Coordinate Reference System* or CRS (which needs to be filled with a value manually). `SpatialPoints` can be directly generated out of the coordinates. `SpatialLines` and `SpatialPolygons` objects are generated using lists of `Lines` or `Polygons` objects respectively.
+
+See here for how to create a `SpatialLines` and `SpatialPolygons` object:  
+
+```{r}
+
+# Create a SpatialLines object
+MyLines_sp <- SpatialLines(list(MyLines))
+str(MyLines_sp)
+
+# Create a SpatialPolygons object
+MyPolygons_sp <- SpatialPolygons(list(MyPolygons))
+str(MyPolygons_sp)
+```
+
+## Add attributes 
+
+Add a data frame with attribute data, which will turn your `Spatial*` (`*` stands for Points, Lines, or Polygons) object into a `Spatial*DataFrame` object. The points in a `SpatialPoints` object may be associated with a row of attributes to create a `SpatialPointsDataFrame` object. The coordinates and attributes may, but do not have to be keyed to each other using ID values.
+
+`SpatialLinesDataFrame` and `SpatialPolygonsDataFrame` objects are defined using `SpatialLines` and `SpatialPolygons` objects and data frames. The `ID` fields are here required to match the data frame row names.
+
+See here for how to create a `SpatialLinesDataframe` and a `SpatialPolygonsDataframe`:
+
+```{r}
+
+# Data frame
+# Note how we use the ID from above!
+Attribute1 <- data.frame(id="River1", use="Flux", water_per_second = 10) 
+
+# Add the attributes
+MyLines_sp_dfr <- SpatialLinesDataFrame(MyLines_sp, Attribute1, match.ID = "id")
+str(MyLines_sp_dfr)
+plot(MyLines_sp_dfr)
+
+# Data frame
+# Note how we use the ID from above!
+Attribute2 <- data.frame(id="Region1", use="Population", Population_count=10000) 
+
+# Add the attributes
+MyPolygons_sp_dfr <- SpatialPolygonsDataFrame(MyPolygons_sp, Attribute2, match.ID = "id")
+str(MyPolygons_sp_dfr)
+plot(MyPolygons_sp_dfr)
+
+```
+
+***
+
+# Shape file
+
+In the above sub-section, we learn how to creat `Spatial*` objects, you can save the `Spatial*` objects using `writeOGR()` (for vector) from the `rgdal` package. 
+
+The parameters provided for each function vary depending on the exact spatial file type you are reading. We will take an *ESRI shapefile* as an example. A shapefile - as you know - consists of various files of the same name, but with different extensions. They should all be in one directory.
+
+For example, we can save `MyPolygons_sp_dfr` to a Shape file (`MyPolygons`) with the following line of script:
+
+```{r,eval=F}
+# Save the SpatialPolygons object as a Shape file
+writeOGR(MyPolygons_sp_dfr,dsn = "/data/MyPolygons",
+         layer ="Population", driver="ESRI Shapefile")
+```
+
+We can also read in spatial data using `readOGR()` (for vector) and `readGDAL()` (for raster/grids) functions from the `rgdal` package. When reading in a shapefile, `readOGR()` requires the following two arguments:
+
+* Datasource name (dsn), this is the path to the folder that contains the files.
+
+* Layer name (layer), this is the shapefile name WITHOUT extension.
+
+Let's use the shape file of China map as an example, [download it](ss). Uncompress it. Open the folder, you will see there are three files of different formats (`.dbf`, `.shp`, `.shx`). In R, we can read in the shape via:
+
+```{r}
+# Read china map, a shape file
+China_map <- readOGR("/data/China_map", "bou2_4p") 
+```
+
+Next we can check the attributes of this shape file, and plot it:
+
+```{r}
+# Check the attributes 
+summary(China_map)
+class(China_map)
+names(China_map)
+head(China_map) 
+
+# Quick Plot
+plot(China_map)
+```
+
+In R you can handel the shape file object directly. For example, we can filter provinces with area larger than `100*10000` km^2^ by uisng the `subset()` function:
+
+```{r}
+China_map_s1 <- subset(China_map, AREA > 100)
+plot(China_map)
+plot(China_map_s1, add=T, col="blue")
+```
+
+***
+
+# Raster data
+
+**Raster** files have a much more compact data structure than vectors. Because of their regular structure the coordinates do not need to be recorded for each pixel or cell in the rectangular extent. A raster is defined by:  
+
+* CRS
+
+* coordinates of its origin
+
+* a distance or cell size in each direction
+
+* a dimension or numbers of cells in each direction
+
+* an array of cell values
+
+Given this structure, coordinates for any cell can be computed and don’t need to be stored.
+
+The `raster` package is a major extension of spatial data classes to access large rasters and in particular to process very large files. It includes `RasterLayer` and functions for converting among different classes, and operators for computations on the raster data.
+
+Let's create a raster object `MyRaster` of type `RasterLayer`:
+
+```{r}
+# Create an empty raster
+MyRaster <- raster(xmn=-10, ymn=-10, xmx=10, ymx=10, resolution=c(1,1))
+class(MyRaster)
+MyRaster
+```
+
+As you can see, if the `crs` argument is missing when creating the `Raster` object, the `x` coordinates are within `-360` and `360` and the `y` coordinates are within `-90` and `90`, the `WGS84` projection is used by default.
+
+Now the `RasterLayer` is empty, we can add some values to the cells as following. 
+
+```{r}
+# Set values to the cells
+MyRaster <- setValues(MyRaster, seq(1,400,by=1))
+# Quick Plot
+plot(MyRaster)
+# Plot contour lines
+contour(MyRaster)
+```
+
+Notice R fills the cells from the top-left to the bottom-right. 
+
+We can also use `raster()` to read in raster files. Download this [tiff file]() (`wc2.1_10m_wind_11.tif`, ~ 2.4MB), which is the mean wind speed (m s^-1^) in Nov. from 1970-2000 provided by the [WorldClim](https://worldclim.org/data/worldclim21.html). The data is at a resolution of 10 minutes (~ 340 km^2^).
+In R, we can load it as:
+
+```{r}
+# Read tiff file
+Wind_Nov <- raster("/home/lei/Downloads/wc2.1_10m_wind/wc2.1_10m_wind_11.tif")
+# Look at the raster attributes
+Wind_Nov
+```
+
+We can plot it using `plot()` or `image()` function:
+
+```{r}
+# plot()
+plot(Wind_Nov, main="Wind speed in Nov.")
+
+# image()
+# Set color
+col <- terrain.colors(30)
+image(Wind_Nov,  main="Wind speed in Nov.", col=col)
+# Add contour lines
+contour(Wind_Nov, add=T, col="red")
+```
+
+You can also use `crop()` function to select an area of interest:  
+
+```{r}
+# Define the crop extent
+Crop_box <- c(100,125,15,30)
+#crop the raster
+Wind_Nov_crop <- crop(Wind_Nov, Crop_box)
+#plot cropped DEM
+image(Wind_Nov_crop,  main="Wind speed in Nov.", col=col)
+```
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Add one more river (`River2`) with a flux of `20` (`water_per_second`) to the `MyLines_sp_dfr` object. Plot your result. 
+
+## Exercise #2
+
+Add one more area (`Region2`) with a population of `500` (`Population_count`) to the `MyPolygons_sp_dfr` object. Save `MyPolygons_sp_dfr` to a new shape file named `MyPolygons_new`.
+
+## Exercise #3
+
+Count how many provenices have an area of between `0.1 million` and `0.2 million` km^2^ in the `China_map` object. Plot those provenices in red.
+
+
+## Exercise #4
+
+Plot wind speed in Nov. near your hometown using the `Wind_Nov` object.
+
+***
+
+# Further reading
+
+* [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html)
+
+* [Introduction to Mapping and Spatial Analysis with R](https://cengel.github.io/rspatial/)
+
+* [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html)
+
+* [Mapping Spatial Data in R](https://hautahi.com/rmaps)
+
+* [Raster Data in R - The Basics](https://www.neonscience.org/resources/learning-hub/tutorials/raster-data-r)
+
+* Roger S. Bivand, Edzer J. Pebesma, Virgilio Gómez-Rubio, Applied Spatial Data Analysis with R.

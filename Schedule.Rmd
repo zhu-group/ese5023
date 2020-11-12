@@ -23,8 +23,8 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |7   |10/27|Tu. |[Lab 03](https://zhu-group.github.io/ese5023/Lab_03.html)                             |              |              |
 |7   |10/29|Th. |[Section 08 Plotting in R](https://zhu-group.github.io/ese5023/Section_08.html)       |              |              |
 |8   |11/05|Th. |[Section 09 Time series analysis](https://zhu-group.github.io/ese5023/Section_09.html)| [Assignment 4](https://zhu-group.github.io/ese5023/Assignment_04.html) |  3   |
-|9   |11/10|Tu. |[Lab 04](https://zhu-group.github.io/ese5023/Lab_04.html)              |              |              |
-|9   |11/12|Th. |Section 10 Spatial data analysis                                                      |              |              |
+|9   |11/10|Tu. |[Lab 04](https://zhu-group.github.io/ese5023/Lab_04.html)                             |              |              |
+|9   |11/12|Th. |[Section 10 Spatial Data Types in R](https://zhu-group.github.io/ese5023/Section_10.html)            |              |              |
 |10  |11/19|Th. |Section 11 Linux: Basics                                                              |  5           |  4           |
 |11  |11/24|Tu. |Lab 05                                                                                |              |              |
 |11  |11/26|Th. |Section 12 Linux: Shell scripts                                                       |              |              |
