@@ -23,15 +23,16 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -41,14 +42,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -57,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -493,13 +496,14 @@ div.tocify {
 <blockquote>
 <p>“In real open source, you have the right to control your own destiny.” - Linus Torvalds</p>
 </blockquote>
+<p><img src="figs/Windows_Vs_Mac_Vs_Linux_13.jpg" alt="drawing" width="700"/></p>
 <hr />
 <p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/shell-novice/">online tutorial</a> freely available on the Software Carpentry website.</em></p>
 <hr />
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
 <p>Log in Taiyi, in your home directory, type:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">cp</span> /work/ese-ouycc/data_demo .</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">cp</span> /work/ese-ouycc/data_demo .</span></code></pre></div>
 <p>We will explain the meaning of this code shortly.</p>
 <hr />
 </div>
@@ -523,12 +527,13 @@ div.tocify {
 <h2>Home directory</h2>
 <p>Once log in Taiyi, you see a header like <code>[ese-xxx@login02 ~]$</code>. Here <code>ese-xxx</code> is your username, <code>login02</code> is the login in node, and the dollar sign <code>$</code> is a <strong>prompt</strong>, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.</p>
 <p>Next, let’s find out where we are by running a command called <code>pwd</code> (which stands for “print working directory”). At any moment, our <strong>current working directory</strong> is our current default directory, <em>i.e.</em>, the directory that the computer assumes we want to run commands in unless we explicitly specify something else.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">pwd</span></a></code></pre></div>
-<p>In your case, it should be something like <code>/work/XXX</code>, which is your <strong>home directory</strong>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">pwd</span></span></code></pre></div>
+<p>In your case, it should be something like <code>/work/ese-xxx</code>, which is your <strong>home directory</strong>.</p>
 </div>
 <div id="taiyi-file-system" class="section level2">
 <h2>Taiyi file system</h2>
 <p>To understand what a ‘home directory’ is, let’s have a look at how the file system as a whole is organized. On Taiyi, the filesystem looks like this:</p>
+<p><img src="figs/Taiyi_folder.png" alt="drawing" width="800"/></p>
 <p>At the top is the <strong>root directory</strong> that holds everything else. We refer to it using a slash character, <code>/</code>, on its own; this is the leading slash in <code>/work/ese-ouycc</code>.</p>
 <p>Inside the <code>root</code> directory are several other directories: <code>bin</code> (which is where some built-in programs are stored), <code>data</code> (for miscellaneous data files), <code>work</code> (where users’ personal directories are located), <code>tmp</code> (for temporary files that don’t need to be stored long-term), and so on.</p>
 <p>We know that our current working directory <code>/work/ese-ouycc</code> is stored inside <code>/work</code> because <code>/work</code> is the first part of its name. Similarly, we know that <code>/work</code> is stored inside the <code>root</code> directory <code>/</code> because its name begins with <code>/</code>.</p>
@@ -536,19 +541,19 @@ div.tocify {
 <div id="navigating-with-ls-and-cd" class="section level2">
 <h2>Navigating with <code>ls</code> and <code>cd</code></h2>
 <p>Now let’s learn the command that will let us see the contents of our own filesystem. We can see what’s in my home directory by running <code>ls</code>, which stands for “listing”:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">ls</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p><code>ls</code> prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We can make its output more comprehensible by using the <strong>flag</strong> <code>-F</code>, which tells <code>ls</code> to add a trailing <code>/</code> to the names of directories:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">ls</span> -F</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ls</span> -F</span></code></pre></div>
 <p><code>ls</code> has lots of other options. To find out what they are, we can type: <code>man ls</code>.</p>
 <p><code>man</code> is the Unix “manual” command: it prints a description of a command and its options, and (if you’re lucky) provides a few examples of how to use it. To navigate through the <code>man</code> pages, you may use the up and down arrow keys to move line-by-line, or try the “b” and spacebar keys to skip up and down by full page. Quit the <code>man</code> pages by typing <code>q</code>.</p>
 <p>Here, we can see that my working directory contains a few <strong>sub-directories</strong>. Any names in the output that don’t have trailing slashes, are plain <strong>files</strong>.</p>
 <p>We can also use <code>ls</code> to see the contents of a different directory. Let’s take a look at the <code>data_demo</code> directory by running <code>ls -F data_demo</code>, <em>i.e.</em>, the command <code>ls</code> with the <strong>arguments</strong> <code>-F</code> and <code>data_demo</code>. The second argument, the one without a leading dash, tells <code>ls</code> that we want a listing of something other than our current working directory:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">ls</span> -F data_demo</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ls</span> -F data_demo</span></code></pre></div>
 <p>Your output should be a list of all the files and sub-directories in the <code>data_demo</code> directory.</p>
 <p>The command to change locations is <code>cd</code> followed by a directory name to change our working directory. <code>cd</code> stands for “change directory”.</p>
 <p>Let’s say we want to move to the <code>data</code> directory we saw above. We can use the following series of commands to get there:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">cd</span> data_demo</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="bu">cd</span> data</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">cd</span> data_demo</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">cd</span> data</span></code></pre></div>
 <p>These commands will move us from our home directory into the <code>data_demo</code> directory, then into the <code>data</code> directory. <code>cd</code> doesn’t print anything, but if we run <code>pwd</code> after it, we can see that we are now in <code>/work/ese-ouycc/data_demo/data</code>. If we run <code>ls</code> without arguments now, it lists the contents of <code>/work/ese-ouycc/data_demo/data</code>.</p>
 </div>
 <div id="shortcuts" class="section level2">
@@ -566,7 +571,7 @@ div.tocify {
 <div id="general-syntax-of-a-shell-command" class="section level1">
 <h1>General syntax of a shell command</h1>
 <p>Consider the command below as a general example of a command, which we will dissect into its component parts:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">ls</span> -F /</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ls</span> -F /</span></code></pre></div>
 <p><code>ls</code> is the <strong>command</strong>, with an <strong>option</strong> <code>-F</code> and an <strong>argument</strong> <code>/</code>. We’ve already encountered options (also called switches or flags) which either start with a single dash (<code>-</code>) or two dashes (<code>--</code>), and they change the behaviour of a command. Arguments tell the command what to operate on (<em>e.g.</em> files and directories). Sometimes options and arguments are referred to as <strong>parameters</strong>. A command can be called with more than one option and more than one argument: but a command doesn’t always require an argument or an option.</p>
 <p>Each part is <strong>separated by spaces</strong>: if you omit the space between <code>ls</code> and <code>-F</code> the shell will look for a command called <code>ls-F</code>, which doesn’t exist. Also, capitalization can be important. For example, <code>ls -s</code> will display the size of files and directories alongside the names, while <code>ls -S</code> will sort the files and directories by size.</p>
 <p>Putting all that together, our command above gives us a listing of files and directories in the root directory <code>/</code>. Try this.</p>
@@ -577,17 +582,17 @@ div.tocify {
 <div id="creating-directories" class="section level2">
 <h2>Creating directories</h2>
 <p>Let’s create a new directory called <code>thesis</code> using the command</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="bu">cd</span> ~/data_demo</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="fu">mkdir</span> thesis</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">cd</span> ~/data_demo</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">mkdir</span> thesis</span></code></pre></div>
 <p>As you might guess from its name, <code>mkdir</code> means ‘make directory’. Since <code>thesis</code> is a <em>relative path</em> (i.e., does not have a leading slash), the new directory is created in the current working directory.</p>
 <p>Note that <code>mkdir</code> is not limited to creating single directories one at a time. The <code>-p</code> option allows mkdir to create a directory with any number of nested subdirectories in a single operation:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">mkdir</span> thesis/chapter_1/section_1/subsection_1</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">mkdir</span> thesis/chapter_1/section_1/subsection_1</span></code></pre></div>
 </div>
 <div id="creating-a-text-file" class="section level2">
 <h2>Creating a text file</h2>
 <p>Let’s change our working directory to <code>thesis</code> using <code>cd</code>, then run a text editor called <code>Nano</code> to create a file called <code>draft.txt</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="bu">cd</span> thesis</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="fu">nano</span> draft.txt</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">cd</span> thesis</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">nano</span> draft.txt</span></code></pre></div>
 <p>Let’s type in a few lines of text. Once we’re happy with our text, we can press <code>Ctrl+O</code> (press the <code>Ctrl</code> or <code>Control</code> key and, while holding it down, press the <code>O</code> key) to write our data to disk. You’ll be asked what file we want to save this to: press <code>Return</code> to accept the suggested default of <code>draft.txt</code>.</p>
 <p>Once our file is saved, we can use <code>Ctrl</code>+<code>X</code> to quit the editor and return to the shell.</p>
 <p>On Linux , many programmers use <a href="http://www.gnu.org/software/emacs/">Emacs</a> or <a href="https://www.vim.org/">Vim</a> (both of which require more time to learn), or a graphical editor such as <a href="https://wiki.gnome.org/Apps/Gedit">Gedit</a>. On Windows, you may wish to use <a href="https://notepad-plus-plus.org/">Notepad++</a>. Windows also has a built-in editor called <code>notepad</code> that can be run from the command line in the same way as <code>nano</code> for the purposes of this lesson.</p>
@@ -595,54 +600,103 @@ div.tocify {
 <div id="moving-files-and-directories" class="section level2">
 <h2>Moving files and directories</h2>
 <p>Returning to the <code>data_demo</code> directory:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="bu">cd</span> ~/data_demo</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">cd</span> ~/data_demo</span></code></pre></div>
 <p>In our <code>thesis</code> directory we have a file <code>draft.txt</code> which isn’t a particularly informative name, so let’s change the file’s name using <code>mv</code>, which is short for ‘move’:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="fu">mv</span> /thesis/draft.txt /thesis/my_paper.txt</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">mv</span> /thesis/draft.txt /thesis/my_paper.txt</span></code></pre></div>
 <p>The first argument tells <code>mv</code> what we’re ‘moving’, while the second is where it’s to go. In this case, we’re moving <code>thesis/draft.txt</code> to <code>thesis/my_paper.txt</code>, which has the same effect as renaming the file. Use <code>ls</code> to show that <code>thesis</code> now contains one file called <code>my_paper.txt</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="fu">ls</span> thesis</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ls</span> thesis</span></code></pre></div>
 <p>Note that <code>mv</code> also works on directories. Let’s move <code>my_paper.txt</code> into the current working directory.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="fu">mv</span> thesis/my_paper.txt .</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">mv</span> thesis/my_paper.txt .</span></code></pre></div>
 <p>We use <code>mv</code> once again, but this time we’ll use just the name of a directory as the second argument to tell mv that we want to keep the filename, but put the file somewhere new. In this case, the directory name we use is the special directory name <code>.</code> that we mentioned earlier.</p>
 <p>The effect is to move the file from the directory it was in to the current working directory. <code>ls</code> now shows us that thesis is empty:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="fu">ls</span> thesis</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ls</span> thesis</span></code></pre></div>
 </div>
 <div id="copying-files-and-directories" class="section level2">
 <h2>Copying files and directories</h2>
 <p>The <code>cp</code> command works very much like <code>mv</code>, except it copies a file instead of moving it.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="fu">cp</span> my_paper.txt thesis/my_paper.txt</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cp</span> my_paper.txt thesis/my_paper.txt</span></code></pre></div>
 <p>We can also copy a directory and all its contents by using the <strong>recursive</strong> option <code>-r</code>, <em>e.g.</em> to back up a directory:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="fu">cp</span> -r thesis thesis_backup</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">cp</span> -r thesis thesis_backup</span></code></pre></div>
 <p>Now check the result by listing the contents of both the <code>thesis</code> and <code>thesis_backup</code> directory:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="fu">ls</span> thesis thesis_backup</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ls</span> thesis thesis_backup</span></code></pre></div>
 </div>
 <div id="removing-files-and-directories" class="section level2">
 <h2>Removing files and directories</h2>
 <p>Returning to the <code>data_demo</code> directory, let’s tidy up this directory by removing the <code>quotes.txt</code> file we created. The Linux command we’ll use for this is <code>rm</code> (short for ‘remove’):</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="fu">rm</span> quotes.txt</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">rm</span> quotes.txt</span></code></pre></div>
 <p><strong>NOTE: Deleting Is Forever</strong></p>
 <p>The Linux shell doesn’t have a trash bin that we can recover deleted files from. Instead, when we delete files, they are unlinked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.</p>
 <p>So think twice before you type!!!</p>
 <p>If we try to remove the <code>thesis</code> directory using <code>rm</code> thesis, we get an error message:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="fu">rm</span> thesis</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">rm</span> thesis</span></code></pre></div>
 <p>This happens because <code>rm</code> by default only works on files, not directories.</p>
 <p><code>rm</code> can remove a directory and all its contents if we use the recursive option <code>-r</code>, and it will do so without any confirmation prompts.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="fu">rm</span> -r thesis</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">rm</span> -r thesis</span></code></pre></div>
 </div>
 <div id="using-wildcards" class="section level2">
 <h2>Using wildcards</h2>
-<p><code>*</code> is a <strong>wildcard</strong>, which matches zero or more characters. Let’s consider the <code>data_demo/molecules</code> directory: <code>*.pdb</code> matches <code>ethane.pdb</code>, <code>propane.pdb</code>, and every file that ends with <code>.pdb</code>. On the other hand, <code>p*.pdb</code> only matches <code>pentane.pdb</code> and <code>propane.pdb</code>, because the <code>p</code> at the front only matches filenames that begin with the letter <code>p</code>.</p>
-<p><code>?</code> is also a wildcard, but it matches exactly one character. So <code>?ethane.pdb</code> would match <code>methane.pdb</code> whereas <code>*ethane.pdb</code> matches both <code>ethane.pdb</code>, <code>and methane.pdb</code>.</p>
+<p><code>*</code> is a <strong>wildcard</strong>, which matches <strong>zero or more characters</strong>. For example, <code>*.txt</code> matches all files ending in <code>.txt</code>. Let’s consider the <code>data_demo/molecules</code> directory: <code>*.pdb</code> matches <code>ethane.pdb</code>, <code>propane.pdb</code>, and every file that ends with <code>.pdb</code>. On the other hand, <code>p*.pdb</code> only matches <code>pentane.pdb</code> and <code>propane.pdb</code>, because the <code>p</code> at the front only matches filenames that begin with the letter <code>p</code>.</p>
+<p><code>?</code> is also a wildcard, but it matches exactly <strong>one character</strong>. For example, <code>?.txt</code> matches <code>a.txt</code> but not <code>any.txt</code>. So <code>?ethane.pdb</code> would match <code>methane.pdb</code> whereas <code>*ethane.pdb</code> matches both <code>ethane.pdb</code>, <code>and methane.pdb</code>.</p>
 <p>Wildcards can be used in combination with each other <em>e.g.</em> <code>???ane.pdb</code> matches three characters followed by <code>ane.pdb</code>, giving <code>cubane.pdb</code>, <code>ethane.pdb</code>, and <code>octane.pdb</code>.</p>
+<hr />
 </div>
 </div>
 <div id="pipes-and-filters" class="section level1">
 <h1>Pipes and Filters</h1>
-<p>Page Under construction.</p>
+<p>Now that we know a few basic commands, we can finally look at the shell’s most powerful feature: the ease with which it lets us combine existing programs in new ways. We’ll start with the directory called <code>data_demo/molecules</code> that contains six files describing some simple organic molecules.</p>
+<p>Let’s go into that directory with <code>cd</code> and run the command <code>wc cubane.pdb</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">cd</span> molecules</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">wc</span> cubane.pdb </span></code></pre></div>
+<p><code>wc</code> is the ‘word count’ command: it counts the number of lines, words, and characters in files (from left to right, in that order).</p>
+<p>If we run the command <code>wc *.pdb</code>, the <code>*</code> in <code>*.pdb</code> matches zero or more characters, so the shell turns <code>*.pdb</code> into a list of all <code>.pdb</code> files in the current directory:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">wc</span> *.pdb </span></code></pre></div>
+<p>Note that <code>wc *.pdb</code> also shows the total number of all lines in the last line of the output.</p>
+<p>If we run <code>wc -l</code> instead of just <code>wc</code>, the output shows only the number of lines per file:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">wc</span> -l *.pdb </span></code></pre></div>
+<p>The vertical bar, <code>|</code>, between the two commands is called a <strong>pipe</strong>. It tells the shell that we want to use the output of the command on the left as the input to the command on the right.</p>
+<p>We can for example send the output of <code>wc</code> directly to <code>sort</code>,:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">wc</span> -l *.pdb <span class="kw">|</span> <span class="fu">sort</span> -n</span></code></pre></div>
+<p>And now we send the output of this pipe, through another pipe, to <code>head</code> to show the first line only, so that the full pipeline becomes:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">wc</span> -l *.pdb <span class="kw">|</span> <span class="fu">sort</span> -n <span class="kw">|</span> <span class="fu">head</span> -n 1</span></code></pre></div>
+<hr />
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>1.1 In your home directroy, creat a folder <code>TEST</code>, and three subfolders <code>t1</code>, <code>t2</code>, and <code>t3</code> inside <code>TEST</code>.</p>
+<p>1.2 Change your directory to <code>t1</code>, creat a text file <code>my.txt</code>, write your name and student ID in it, and save the file.</p>
+<p>1.3 Copy <code>my.txt</code> in <code>t1</code> to <code>TEST</code>, and rename it to `<code>my_new.txt</code>.</p>
+<p>1.4 Delete <code>t1</code>, <code>t2</code>, and <code>t3</code>.</p>
+<p>1.5 In <code>TEST</code>, type <code>cat my_new.txt</code>. What do you see? Use <code>man cat</code> to learn more about <code>cat</code>, and quite the help document by typing <code>q</code>.</p>
+<p>1.6 Delete <code>TEST</code>.</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>Change your directory to <code>data_demo/molecules</code>, type the following lines:</p>
+<ul>
+<li><p><code>ls *t*ane.pdb</code></p></li>
+<li><p><code>ls *t?ne.*</code></p></li>
+<li><p><code>ls *t??ne.pdb</code></p></li>
+<li><p><code>ls ethane.*</code></p></li>
+</ul>
+<p>What do you get? Can you explain why?</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
+<p>Change your directory to <code>data_demo/molecules</code>, type the following line:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">wc</span> -l *.pdb <span class="kw">|</span> <span class="fu">sort</span> -n <span class="kw">|</span> <span class="fu">tail</span> -n 5 <span class="kw">|</span> <span class="fu">head</span> -n 1</span></code></pre></div>
+<p>What do you get? Can you explain why? Use <code>man tail</code> to learn more about <code>tail</code>.</p>
+</div>
+<div id="exercise-4" class="section level2">
+<h2>Exercise #4</h2>
+<p>The <code>data_demo/north-pacific-gyre/2012-07-03</code> folder stores some obervations from a cruise campigan. Each file should contain 300 lines of data points. But there is one file contains less lines than the rest of files. Can figure out which one?</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="http://swcarpentry.github.io/shell-novice" class="uri">http://swcarpentry.github.io/shell-novice</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="http://swcarpentry.github.io/shell-novice" class="uri">http://swcarpentry.github.io/shell-novice</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
