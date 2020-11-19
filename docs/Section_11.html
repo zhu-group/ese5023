@@ -496,7 +496,7 @@ div.tocify {
 <blockquote>
 <p>“In real open source, you have the right to control your own destiny.” - Linus Torvalds</p>
 </blockquote>
-<p><img src="figs/Windows_Vs_Mac_Vs_Linux_13.jpg" alt="drawing" width="700"/></p>
+<p><img src="figs/Windows_Vs_Mac_Vs_Linux_13.jpg" alt="drawing" width="600"/></p>
 <hr />
 <p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/shell-novice/">online tutorial</a> freely available on the Software Carpentry website.</em></p>
 <hr />
@@ -511,12 +511,12 @@ div.tocify {
 <h1>Background</h1>
 <div id="gui-vs-cli" class="section level2">
 <h2>GUI vs CLI</h2>
-<p>The most widely used way to interact with personal computers is <strong><em>graphical user interface</em></strong> (GUI). With a GUI, we give instructions by clicking a mouse and using menu-driven interactions. GUI makes it intuitive to learn how to use a computer, however it’s not efficient in handeling large amount of jobs. This is where we take advantage of the <strong><em>Linux</em></strong>. The Linux shell is both a <strong><em>command-line interface</em></strong> (CLI) and a scripting language, allowing repetitive tasks to be done automatically and fast.</p>
+<p>The most widely used way to interact with personal computers is the <strong><em>graphical user interface</em></strong> (GUI). With a GUI, we give instructions by clicking a mouse and using menu-driven interactions. GUI makes it intuitive to learn how to use a computer, however, it’s not efficient in handling a large amount of jobs. This is where we take advantage of the <strong><em>Linux</em></strong>. The Linux shell is both a <strong><em>command-line interface</em></strong> (CLI) and a scripting language, allowing repetitive tasks to be done automatically and fast.</p>
 </div>
 <div id="linux" class="section level2">
 <h2>Linux</h2>
 <p>Linux is an operating system (OS) built by Linus Torvalds at the University of Helsinki in 1991. The name “Linux” comes from the Linux kernel.</p>
-<p>Linux has survived so long because it’s <strong>a power tool that allows people to do complex things with just a few keystrokes</strong>. More importantly, it helps them <strong>combine existing programs in new ways and automate repetitive tasks</strong> so they aren’t typing the same things over and over again. Use of Linux <strong><em>shell</em></strong> is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Linux has survived so long because it’s <strong>a powerful tool that allows people to do complex things with just a few keystrokes</strong>. More importantly, it helps them <strong>combine existing programs in new ways and automate repetitive tasks</strong>, so they aren’t typing the same things over and over again. The use of Linux <strong><em>shell</em></strong> is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p>These lessons will start you on a path towards using Linux and Shell on the TaiYi HPC supercomputer.</p>
 <hr />
 </div>
@@ -525,7 +525,7 @@ div.tocify {
 <h1>Navigating Files and Directories</h1>
 <div id="home-directory" class="section level2">
 <h2>Home directory</h2>
-<p>Once log in Taiyi, you see a header like <code>[ese-xxx@login02 ~]$</code>. Here <code>ese-xxx</code> is your username, <code>login02</code> is the login in node, and the dollar sign <code>$</code> is a <strong>prompt</strong>, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.</p>
+<p>Once log in to Taiyi, you see a header like <code>[ese-xxx@login02 ~]$</code>. Here <code>ese-xxx</code> is your username, <code>login02</code> is the login in node, and the dollar sign <code>$</code> is a <strong>prompt</strong>, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.</p>
 <p>Next, let’s find out where we are by running a command called <code>pwd</code> (which stands for “print working directory”). At any moment, our <strong>current working directory</strong> is our current default directory, <em>i.e.</em>, the directory that the computer assumes we want to run commands in unless we explicitly specify something else.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">pwd</span></span></code></pre></div>
 <p>In your case, it should be something like <code>/work/ese-xxx</code>, which is your <strong>home directory</strong>.</p>
@@ -572,7 +572,7 @@ div.tocify {
 <h1>General syntax of a shell command</h1>
 <p>Consider the command below as a general example of a command, which we will dissect into its component parts:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ls</span> -F /</span></code></pre></div>
-<p><code>ls</code> is the <strong>command</strong>, with an <strong>option</strong> <code>-F</code> and an <strong>argument</strong> <code>/</code>. We’ve already encountered options (also called switches or flags) which either start with a single dash (<code>-</code>) or two dashes (<code>--</code>), and they change the behaviour of a command. Arguments tell the command what to operate on (<em>e.g.</em> files and directories). Sometimes options and arguments are referred to as <strong>parameters</strong>. A command can be called with more than one option and more than one argument: but a command doesn’t always require an argument or an option.</p>
+<p><code>ls</code> is the <strong>command</strong>, with an <strong>option</strong> <code>-F</code> and an <strong>argument</strong> <code>/</code>. We’ve already encountered options (also called switches or flags) which either start with a single dash (<code>-</code>) or two dashes (<code>--</code>), and they change the behavior of a command. Arguments tell the command what to operate on (<em>e.g.</em> files and directories). Sometimes options and arguments are referred to as <strong>parameters</strong>. A command can be called with more than one option and more than one argument: but a command doesn’t always require an argument or an option.</p>
 <p>Each part is <strong>separated by spaces</strong>: if you omit the space between <code>ls</code> and <code>-F</code> the shell will look for a command called <code>ls-F</code>, which doesn’t exist. Also, capitalization can be important. For example, <code>ls -s</code> will display the size of files and directories alongside the names, while <code>ls -S</code> will sort the files and directories by size.</p>
 <p>Putting all that together, our command above gives us a listing of files and directories in the root directory <code>/</code>. Try this.</p>
 <hr />
@@ -590,7 +590,7 @@ div.tocify {
 </div>
 <div id="creating-a-text-file" class="section level2">
 <h2>Creating a text file</h2>
-<p>Let’s change our working directory to <code>thesis</code> using <code>cd</code>, then run a text editor called <code>Nano</code> to create a file called <code>draft.txt</code>:</p>
+<p>Let’s change our working directory to <code>thesis</code> using <code>cd</code>, then run a text editor called <code>nano</code> to create a file called <code>draft.txt</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">cd</span> thesis</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="fu">nano</span> draft.txt</span></code></pre></div>
 <p>Let’s type in a few lines of text. Once we’re happy with our text, we can press <code>Ctrl+O</code> (press the <code>Ctrl</code> or <code>Control</code> key and, while holding it down, press the <code>O</code> key) to write our data to disk. You’ll be asked what file we want to save this to: press <code>Return</code> to accept the suggested default of <code>draft.txt</code>.</p>
@@ -601,14 +601,14 @@ div.tocify {
 <h2>Moving files and directories</h2>
 <p>Returning to the <code>data_demo</code> directory:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">cd</span> ~/data_demo</span></code></pre></div>
-<p>In our <code>thesis</code> directory we have a file <code>draft.txt</code> which isn’t a particularly informative name, so let’s change the file’s name using <code>mv</code>, which is short for ‘move’:</p>
+<p>In our <code>thesis</code> directory, we have a file <code>draft.txt</code> which isn’t a particularly informative name, so let’s change the file’s name using <code>mv</code>, which is short for ‘move’:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">mv</span> /thesis/draft.txt /thesis/my_paper.txt</span></code></pre></div>
 <p>The first argument tells <code>mv</code> what we’re ‘moving’, while the second is where it’s to go. In this case, we’re moving <code>thesis/draft.txt</code> to <code>thesis/my_paper.txt</code>, which has the same effect as renaming the file. Use <code>ls</code> to show that <code>thesis</code> now contains one file called <code>my_paper.txt</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ls</span> thesis</span></code></pre></div>
 <p>Note that <code>mv</code> also works on directories. Let’s move <code>my_paper.txt</code> into the current working directory.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">mv</span> thesis/my_paper.txt .</span></code></pre></div>
 <p>We use <code>mv</code> once again, but this time we’ll use just the name of a directory as the second argument to tell mv that we want to keep the filename, but put the file somewhere new. In this case, the directory name we use is the special directory name <code>.</code> that we mentioned earlier.</p>
-<p>The effect is to move the file from the directory it was in to the current working directory. <code>ls</code> now shows us that thesis is empty:</p>
+<p>The effect is to move the file from the directory it was in to the current working directory. <code>ls</code> now shows us that <code>thesis</code> is empty:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ls</span> thesis</span></code></pre></div>
 </div>
 <div id="copying-files-and-directories" class="section level2">
@@ -653,8 +653,8 @@ div.tocify {
 <p>Note that <code>wc *.pdb</code> also shows the total number of all lines in the last line of the output.</p>
 <p>If we run <code>wc -l</code> instead of just <code>wc</code>, the output shows only the number of lines per file:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">wc</span> -l *.pdb </span></code></pre></div>
-<p>The vertical bar, <code>|</code>, between the two commands is called a <strong>pipe</strong>. It tells the shell that we want to use the output of the command on the left as the input to the command on the right.</p>
-<p>We can for example send the output of <code>wc</code> directly to <code>sort</code>,:</p>
+<p>The vertical bar, <code>|</code>, between the two commands, is called a <strong>pipe</strong>. It tells the shell that we want to use the output of the command on the left as the input to the command on the right.</p>
+<p>We can, for example, send the output of <code>wc</code> directly to <code>sort</code>,:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">wc</span> -l *.pdb <span class="kw">|</span> <span class="fu">sort</span> -n</span></code></pre></div>
 <p>And now we send the output of this pipe, through another pipe, to <code>head</code> to show the first line only, so that the full pipeline becomes:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">wc</span> -l *.pdb <span class="kw">|</span> <span class="fu">sort</span> -n <span class="kw">|</span> <span class="fu">head</span> -n 1</span></code></pre></div>
@@ -664,8 +664,8 @@ div.tocify {
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>1.1 In your home directroy, creat a folder <code>TEST</code>, and three subfolders <code>t1</code>, <code>t2</code>, and <code>t3</code> inside <code>TEST</code>.</p>
-<p>1.2 Change your directory to <code>t1</code>, creat a text file <code>my.txt</code>, write your name and student ID in it, and save the file.</p>
+<p>1.1 In your home directory, create a folder <code>TEST</code>, and three subfolders <code>t1</code>, <code>t2</code>, and <code>t3</code> inside <code>TEST</code>.</p>
+<p>1.2 Change your directory to <code>t1</code>, create a text file <code>my.txt</code>, write your name and student ID in it, and save the file.</p>
 <p>1.3 Copy <code>my.txt</code> in <code>t1</code> to <code>TEST</code>, and rename it to `<code>my_new.txt</code>.</p>
 <p>1.4 Delete <code>t1</code>, <code>t2</code>, and <code>t3</code>.</p>
 <p>1.5 In <code>TEST</code>, type <code>cat my_new.txt</code>. What do you see? Use <code>man cat</code> to learn more about <code>cat</code>, and quite the help document by typing <code>q</code>.</p>
@@ -690,7 +690,7 @@ div.tocify {
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
-<p>The <code>data_demo/north-pacific-gyre/2012-07-03</code> folder stores some obervations from a cruise campigan. Each file should contain 300 lines of data points. But there is one file contains less lines than the rest of files. Can figure out which one?</p>
+<p>The <code>data_demo/north-pacific-gyre/2012-07-03</code> folder stores some observations from a cruise campaign Each file should contain 300 lines of data points. But there is one file that contains fewer lines than the rest of the files. Can you figure out which one?</p>
 </div>
 </div>
 <div class="footnotes">

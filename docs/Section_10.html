@@ -760,19 +760,27 @@ div.tocify {
 ## Is projected: NA 
 ## proj4string : [NA]
 ## Data attributes:
-##       AREA          PERIMETER         BOU2_4M_          BOU2_4M_ID           ADCODE93         ADCODE99          NAME          
-##  Min.   :  0.00   Min.   :  0.006   Length:925         Length:925         Min.   :     0   Min.   :     0   Length:925        
-##  1st Qu.:  0.00   1st Qu.:  0.024   Class :character   Class :character   1st Qu.:330000   1st Qu.:330000   Class :character  
-##  Median :  0.00   Median :  0.043   Mode  :character   Mode  :character   Median :350000   Median :350000   Mode  :character  
-##  Mean   :  1.04   Mean   :  1.503                                         Mean   :405762   Mean   :405751                     
-##  3rd Qu.:  0.00   3rd Qu.:  0.087                                         3rd Qu.:440000   3rd Qu.:440000                     
-##  Max.   :175.59   Max.   :129.933                                         Max.   :810000   Max.   :810000</code></pre>
+##       AREA          PERIMETER         BOU2_4M_          BOU2_4M_ID       
+##  Min.   :  0.00   Min.   :  0.006   Length:925         Length:925        
+##  1st Qu.:  0.00   1st Qu.:  0.024   Class :character   Class :character  
+##  Median :  0.00   Median :  0.043   Mode  :character   Mode  :character  
+##  Mean   :  1.04   Mean   :  1.503                                        
+##  3rd Qu.:  0.00   3rd Qu.:  0.087                                        
+##  Max.   :175.59   Max.   :129.933                                        
+##     ADCODE93         ADCODE99          NAME          
+##  Min.   :     0   Min.   :     0   Length:925        
+##  1st Qu.:330000   1st Qu.:330000   Class :character  
+##  Median :350000   Median :350000   Mode  :character  
+##  Mean   :405762   Mean   :405751                     
+##  3rd Qu.:440000   3rd Qu.:440000                     
+##  Max.   :810000   Max.   :810000</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">class</span>(China_map)</span></code></pre></div>
 <pre><code>## [1] &quot;SpatialPolygonsDataFrame&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;sp&quot;</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">names</span>(China_map)</span></code></pre></div>
-<pre><code>## [1] &quot;AREA&quot;       &quot;PERIMETER&quot;  &quot;BOU2_4M_&quot;   &quot;BOU2_4M_ID&quot; &quot;ADCODE93&quot;   &quot;ADCODE99&quot;   &quot;NAME&quot;</code></pre>
+<pre><code>## [1] &quot;AREA&quot;       &quot;PERIMETER&quot;  &quot;BOU2_4M_&quot;   &quot;BOU2_4M_ID&quot; &quot;ADCODE93&quot;   &quot;ADCODE99&quot;  
+## [7] &quot;NAME&quot;</code></pre>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">head</span>(China_map) </span></code></pre></div>
 <pre><code>##      AREA PERIMETER BOU2_4M_ BOU2_4M_ID ADCODE93 ADCODE99             NAME
 ## 0  54.447    68.489        2         23   230000   230000         黑龙江省

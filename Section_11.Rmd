@@ -10,7 +10,7 @@ output:
 
 > “In real open source, you have the right to control your own destiny.” - Linus Torvalds
 
-<img src="figs/Windows_Vs_Mac_Vs_Linux_13.jpg" alt="drawing" width="700"/>  
+<img src="figs/Windows_Vs_Mac_Vs_Linux_13.jpg" alt="drawing" width="600"/>  
 
 
 ***
@@ -35,13 +35,13 @@ We will explain the meaning of this code shortly.
 
 ## GUI vs CLI
 
-The most widely used way to interact with personal computers is ***graphical user interface*** (GUI). With a GUI, we give instructions by clicking a mouse and using menu-driven interactions. GUI makes it intuitive to learn how to use a computer, however it's not efficient in handeling large amount of jobs. This is where we take advantage of the ***Linux***. The Linux shell is both a ***command-line interface*** (CLI) and a scripting language, allowing repetitive tasks to be done automatically and fast. 
+The most widely used way to interact with personal computers is the ***graphical user interface*** (GUI). With a GUI, we give instructions by clicking a mouse and using menu-driven interactions. GUI makes it intuitive to learn how to use a computer, however, it's not efficient in handling a large amount of jobs. This is where we take advantage of the ***Linux***. The Linux shell is both a ***command-line interface*** (CLI) and a scripting language, allowing repetitive tasks to be done automatically and fast. 
 
 ## Linux 
 
 Linux is an operating system (OS) built by Linus Torvalds at the University of Helsinki in 1991. The name "Linux" comes from the Linux kernel.   
 
-Linux has survived so long because it’s **a power tool that allows people to do complex things with just a few keystrokes**. More importantly, it helps them **combine existing programs in new ways and automate repetitive tasks** so they aren’t typing the same things over and over again. Use of Linux ***shell*** is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers [^1].   
+Linux has survived so long because it’s **a powerful tool that allows people to do complex things with just a few keystrokes**. More importantly, it helps them **combine existing programs in new ways and automate repetitive tasks**, so they aren’t typing the same things over and over again. The use of Linux ***shell*** is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers [^1].   
 
 These lessons will start you on a path towards using Linux and Shell on the TaiYi HPC supercomputer.
 
@@ -53,7 +53,7 @@ These lessons will start you on a path towards using Linux and Shell on the TaiY
 
 ## Home directory
 
-Once log in Taiyi, you see a header like `[ese-xxx@login02 ~]$`. Here `ese-xxx` is your username, `login02` is the login in node, and the dollar sign `$` is a **prompt**, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.
+Once log in to Taiyi, you see a header like `[ese-xxx@login02 ~]$`. Here `ese-xxx` is your username, `login02` is the login in node, and the dollar sign `$` is a **prompt**, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.
 
 Next, let's find out where we are by running a command called `pwd` (which stands for "print working directory"). At any moment, our **current working directory** is our current default directory, *i.e.*, the directory that the computer assumes we want to run commands in unless we explicitly specify something else.
 
@@ -136,7 +136,7 @@ Consider the command below as a general example of a command, which we will diss
 ls -F /
 ```
 
-`ls` is the **command**, with an **option** `-F` and an **argument** `/`. We’ve already encountered options (also called switches or flags) which either start with a single dash (`-`) or two dashes (`--`), and they change the behaviour of a command. Arguments tell the command what to operate on (*e.g.* files and directories). Sometimes options and arguments are referred to as **parameters**. A command can be called with more than one option and more than one argument: but a command doesn’t always require an argument or an option.
+`ls` is the **command**, with an **option** `-F` and an **argument** `/`. We’ve already encountered options (also called switches or flags) which either start with a single dash (`-`) or two dashes (`--`), and they change the behavior of a command. Arguments tell the command what to operate on (*e.g.* files and directories). Sometimes options and arguments are referred to as **parameters**. A command can be called with more than one option and more than one argument: but a command doesn’t always require an argument or an option.
 
 Each part is **separated by spaces**: if you omit the space between `ls` and `-F` the shell will look for a command called `ls-F`, which doesn’t exist. Also, capitalization can be important. For example, `ls -s` will display the size of files and directories alongside the names, while `ls -S` will sort the files and directories by size.
 
@@ -165,7 +165,7 @@ mkdir thesis/chapter_1/section_1/subsection_1
 
 ## Creating a text file
 
-Let’s change our working directory to `thesis` using `cd`, then run a text editor called `Nano` to create a file called `draft.txt`:
+Let’s change our working directory to `thesis` using `cd`, then run a text editor called `nano` to create a file called `draft.txt`:
 
 ```{bash, eval=F}
 cd thesis
@@ -186,7 +186,7 @@ Returning to the `data_demo` directory:
 cd ~/data_demo
 ```
 
-In our `thesis` directory we have a file `draft.txt` which isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for ‘move’:
+In our `thesis` directory, we have a file `draft.txt` which isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for ‘move’:
 
 ```{bash, eval=F}
 mv /thesis/draft.txt /thesis/my_paper.txt
@@ -206,7 +206,7 @@ mv thesis/my_paper.txt .
 
 We use `mv` once again, but this time we’ll use just the name of a directory as the second argument to tell mv that we want to keep the filename, but put the file somewhere new. In this case, the directory name we use is the special directory name `.` that we mentioned earlier.
 
-The effect is to move the file from the directory it was in to the current working directory. `ls` now shows us that thesis is empty:
+The effect is to move the file from the directory it was in to the current working directory. `ls` now shows us that `thesis` is empty:
 
 ```{bash, eval=F}
 ls thesis
@@ -297,9 +297,9 @@ If we run `wc -l` instead of just `wc`, the output shows only the number of line
 wc -l *.pdb 
 ```
 
-The vertical bar, `|`, between the two commands is called a **pipe**. It tells the shell that we want to use the output of the command on the left as the input to the command on the right.
+The vertical bar, `|`, between the two commands, is called a **pipe**. It tells the shell that we want to use the output of the command on the left as the input to the command on the right.
 
-We can for example send the output of `wc` directly to `sort`,:
+We can, for example, send the output of `wc` directly to `sort`,:
 
 ```{bash, eval=F}
 wc -l *.pdb | sort -n
@@ -317,9 +317,9 @@ wc -l *.pdb | sort -n | head -n 1
 
 ## Exercise #1
 
-1.1 In your home directroy, creat a folder `TEST`, and three subfolders `t1`, `t2`, and `t3` inside `TEST`. 
+1.1 In your home directory, create a folder `TEST`, and three subfolders `t1`, `t2`, and `t3` inside `TEST`. 
 
-1.2 Change your directory to `t1`, creat a text file `my.txt`, write your name and student ID in it, and save the file.
+1.2 Change your directory to `t1`, create a text file `my.txt`, write your name and student ID in it, and save the file.
 
 1.3 Copy `my.txt` in `t1` to `TEST`, and rename it to ``my_new.txt`.
 
@@ -355,4 +355,4 @@ What do you get? Can you explain why? Use `man tail` to learn more about `tail`.
 
 ## Exercise #4
 
-The `data_demo/north-pacific-gyre/2012-07-03` folder stores some obervations from a cruise campigan. Each file should contain 300 lines of data points. But there is one file contains less lines than the rest of files. Can figure out which one?
+The `data_demo/north-pacific-gyre/2012-07-03` folder stores some observations from a cruise campaign Each file should contain 300 lines of data points. But there is one file that contains fewer lines than the rest of the files. Can you figure out which one?
