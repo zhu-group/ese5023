@@ -11,7 +11,7 @@
 
 
 
-<title>Resource</title>
+<title>Assignment 05</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -398,44 +398,56 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Resource</h1>
+<h1 class="title toc-ignore">Assignment 05</h1>
 
 </div>
 
 
-<div id="rstudio-desktop" class="section level1">
-<h1>RStudio Desktop</h1>
-<p>We will use <a href="https://rstudio.com/">RStudio</a> to learn <a href="https://www.r-project.org/">R</a> programming. Make sure you install R first before installing RStudio Desktop.</p>
+<p><strong>Out: 11/20 19:00 </strong><br />
+<strong>Due: 12/03 19:00 </strong></p>
+<p>For problem set <em>i</em>, create a script named <code>PS5_i.R</code>. Write your results briefly in a report (<code>Report_PS5.pdf</code>). Upload your <strong>R scripts</strong> and <strong>report</strong> to the <code>ESE5023_Assignments</code> repository before the deadline.</p>
+<hr />
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong><br />
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
 <ul>
-<li>Install <a href="https://mirrors.tongji.edu.cn/CRAN/">R (v4.0.2)</a></li>
-<li>Install <a href="https://rstudio.com/products/rstudio/download/">RStudio Desktop (v1.3.1073)</a></li>
+<li>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in the problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</li>
+<li>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</li>
 </ul>
+<p><strong>Late Submission:</strong><br />
+Late submissions will not receive full credit. <strong>Half credit</strong> will be awarded to correct solutions submitted within <strong>24 hours</strong> of the original deadline. Otherwise, no credit will be given.</p>
+<p><strong>Submitting your assignment:</strong><br />
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.</p>
+<hr />
 </div>
-<div id="git" class="section level1">
-<h1>Git</h1>
+<div id="potential-renewable-energy-spots-in-china" class="section level1">
+<h1>1. Potential Renewable Energy Spots in China</h1>
+<p>In this exercise, we will search for some potential renewable energy spots in China. The data sets we will use are GeoTiff (.tif) files provided by the <a href="https://worldclim.org/data/worldclim21.html">WorldClim</a>.</p>
+<p><strong>1.1 [5 points]</strong> Download the following data sets and load them in R:</p>
 <ul>
-<li><p>Client: We use <a href="https://www.gitkraken.com/git-client">GitKraken</a> as the Git client. There are also many other third-party GUI tools, such as <a href="https://desktop.github.com/">GitHub Desktop</a>, <a href="https://www.sourcetreeapp.com/">SourceTree</a>, etc.</p></li>
-<li><p>Platform: We use <a href="https://github.com">GitHub</a> as the repository version control platform. Follow <a href="https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration">this page</a> for Github account setup and configuration. Other software/platform, like <a href="https://about.gitlab.com">gitlab</a> or <a href="https://bitbucket.org">bitbucket</a>, will not be covered in the class.</p></li>
+<li><p>Solar radiation, 2.5 minutes</p></li>
+<li><p>Precipitation, 2.5 minutes</p></li>
+<li><p>Wind speed, 2.5 minutes</p></li>
 </ul>
+<p><strong>1.2 [10 points]</strong> Plot the above data sets over China. You should make three plots, each should contain its own legend.</p>
+<p><strong>1.3 [5 points]</strong> First, let’s search for regions with relatively high wind speed to build wind farms. Define a reasonable wind speed as the threshold, and describe your favorite spots.</p>
+<p><strong>1.4 [5 points]</strong> Second, let’s search for regions with relatively high solar radiation and low precipitation as potential locations of photovoltaics (PV) farms. Describe your favorite spots of PV farms.</p>
 </div>
-<div id="ssh-client-tools" class="section level1">
-<h1>SSH Client Tools</h1>
-<p>You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you connect to your Linux servers.</p>
-<ul>
-<li>Windows: <a href="https://mobaxterm.mobatek.net">MobaXterm</a>, <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty">PuTTY</a>, <a href="https://www.netsarang.com/en/xshell">Xshell</a><br />
-</li>
-<li>macOS: Terminal (pre-installed), <a href="https://www.iterm2.com/">iTerm2</a><br />
-</li>
-<li>Ubuntu: Terminal (pre-installed), <a href="https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window">Terminator</a><br />
-</li>
-<li>Others: <a href="http://www.hostbuf.com">Finalshell</a>, <a href="https://termius.com">Termius</a></li>
-</ul>
-<p>The instructor will use <a href="https://mobaxterm.mobatek.net">MobaXterm</a> in the class.</p>
-</div>
-<div id="taiyi-hpc-supercomputer" class="section level1">
-<h1>TaiYi HPC supercomputer</h1>
-<p>Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check <a href="http://hpc.sustech.edu.cn/index.html">instructions</a> on how to use TaiYi.</p>
-<p>The log in node of Taiyi is: <code>172.18.6.175</code>.</p>
+<div id="more-linux-commands" class="section level1">
+<h1>2. More Linux Commands</h1>
+<p>In this exercise, we will learn a few more Linux commands. For each command, please use <code>man</code> to learn what it does and how to use it correctly. First, change your directory to <code>~</code>.</p>
+<p>(In you report, please insert of a screenshot of your Linux code and output. No need to upload R scripts for this exercise.)</p>
+<p><strong>2.1 [2 points]</strong> Make a link called <code>data_demo_link</code> to <code>data_demo</code> folder using <code>ln</code></p>
+<p><strong>2.2 [2 points]</strong> Go to <code>data_demo/data/</code>, make an empty file <code>planets.txt_1st</code> with <code>touch</code>.</p>
+<p><strong>2.3 [2 points]</strong> Print your home directory using <code>echo</code>.</p>
+<p><strong>2.4 [3 points]</strong> Find how many files in <code>data_demo/data/pdb/</code> using <code>find</code>.</p>
+<p><strong>2.5 [3 points]</strong> Count how many <code>C</code> character appears in <code>data_demo/data/pdb/tnt.pdb</code> with <code>grep</code>.</p>
+<p><strong>2.6 [2 points]</strong> Compare <code>data_demo/data/pdb/ethane.pdb</code> and <code>data_demo/data/pdb/ethanol.pdb</code> with <code>diff</code></p>
+<p><strong>2.7 [2 points]</strong> Check the total file size of the <code>data_demo</code> folder using <code>df</code>.</p>
+<p><strong>2.8 [3 points]</strong> Copy the <code>data_demo</code> folder to <code>data_demo_new</code>, compress it using <code>zip</code>, and decompress the <code>.zip</code> file with <code>unzip</code>.</p>
+<p><strong>2.9 [3 points]</strong> Change the file permissions flags on <code>data_demo_new</code> to <code>drwxr-x---</code> using <code>chmod</code>.</p>
+<p><strong>2.10 [3 points]</strong> Print the last 10 commands you made using <code>history</code>.</p>
 </div>
 
 
