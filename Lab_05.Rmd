@@ -12,7 +12,7 @@ output:
 
 # 1. More Linux commands
 
-In this exercise, we will learn more Linux commands. Use `man` to learn what a command does with different options. 
+In this exercise, we will learn more Linux commands. Remember to use `man` to learn about different options of a command. 
 
 1.1 Print the calendar of 2020-11 and 2020-12 using `cal`.
 
@@ -28,17 +28,17 @@ In this exercise, we will learn more Linux commands. Use `man` to learn what a c
 
 1.7 Go to `~`, figure out what `watch -n 3 'date'` does.
 
-1.8 Go to `data_demo`, type `ls data > log1` twice, and `ls data > log2` twice, compare `log1` and `log2`.
+1.8 Go to `data_demo`, type `ls data > log1` twice, and `ls data >> log2` twice, compare `log1` and `log2`.
 
 1.9 Can you figure out what is the difference between `>` and `>>`?
 
-1.10 Use `module avail` to check the installed softwares (modules) on TaiYi. Then choose one to load using `module load`.
+1.10 Use `module avail` to check installed softwares (modules) on TaiYi. Then choose one to load using `module load`.
 
 # 2. Run an R script on TaiYi
 
-Write a simple R script, name it as `test.R`. Then load `R` using `module load R`.
+Write a simple R script, name it as `test.R`. Then load `R` module on TaiYi using `module load R`.
 
-Try the following two ways of running `test.R`
+Try the following two ways of running `test.R`:
 
 * Type `R` to enter the R Console, change the working directory, then type `source test.R`.
 
@@ -64,15 +64,15 @@ do
 done
 ```
 
-Now print file size (in bytes) of each `*.pdb` file, line by line.
+Can you print file size (in bytes) of each `*.pdb` file, line by line?
 
 # 4. Environment Variables
 
 An *environment variable* is a dynamic-named value containing information about your login session, set configuration options, and customize the shell environment in Linux-based operating systems. In simple terms, an environment variable is used to define a location for storing a value, you can also refer to with its symbolic name. These values are stored within the system and are used by command-line applications. The stored value can be deleted, displayed, edited and re-saved.
 
-4.1 Use `printenv` to print all or the specified environment variables.
+4.1 Use `printenv` to print all environment variables.
 
-4.2 You can set a temporary environment variable like:
+4.2 You can set a temporary environment variable by:
 
 ```{bash, eval=F}
 MY_NAME=TAIYI
@@ -84,7 +84,9 @@ Then call this variable as `$MY_NAME`, for example:
 echo $MY_NAME
 ```
 
-Notice that the above environment variables are available only for the current session. If you open a new shell, or if you log out, all variables will be lost. Please verify this.
+Notice that the above environment variables are available only for the current session. If you open a new shell, or if you log out, all variables will be lost. 
+
+Please verify this.
 
 4.3 Setting a Persistent Environment Variable
 
@@ -94,14 +96,12 @@ One way to set a persistent environment variable is to use the user-based config
 export MY_NAME=TAIYI
 ```
 
-Please add the above line to your `.bash_profile`, save `.bash_profile`.
+Please add the above line to your `.bash_profile`, then save `.bash_profile`.
 
-To update your current environment variables, run:
+To update current environment variables, run:
 
 ```{bash, eval=F}
 source .bash_profile
 ```
 
-Now we have made `$MY_NAME` a persistent environment variable, so it is loaded every time you log in.  
-
-
+Now, we have made `$MY_NAME` a persistent environment variable, and it will be loaded every time you log in.  
