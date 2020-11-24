@@ -519,7 +519,6 @@ div.tocify {
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(ggplot2)</span></code></pre></div>
-<pre><code>## Learn more about the underlying theory at https://ggplot2-book.org/</code></pre>
 </div>
 <div id="tidy-data" class="section level1">
 <h1>Tidy data</h1>
@@ -528,8 +527,8 @@ div.tocify {
 <h2>Tibble</h2>
 <p>For now, we will use <code>tibble</code> instead of R’s traditional <code>data.frame</code>. Tibble is a data frame, but they tweak some older behaviors to make life a little easier.</p>
 <p>Let’s use <code>Keeling_Data</code> as an example:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>Keeling_Data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">head</span>(Keeling_Data)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>Keeling_Data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;co2_mm_mlo.csv&quot;</span>, <span class="dt">header =</span> T)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">head</span>(Keeling_Data)</span></code></pre></div>
 <pre><code>##   year  month decimal_date    co2 quality
 ## 1 1958  March     1958.208 315.71       1
 ## 2 1958  April     1958.292 317.45       1
@@ -538,8 +537,8 @@ div.tocify {
 ## 5 1958   July     1958.542 315.86       1
 ## 6 1958 August     1958.625 314.93       1</code></pre>
 <p>You can coerce a <code>data.frame</code> to a <code>tibble</code> using the <code>as_tibble()</code> function:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>Keeling_Data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(Keeling_Data)</span>
-<span id="cb10-2"><a href="#cb10-2"></a>Keeling_Data_tbl</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>Keeling_Data_tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(Keeling_Data)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>Keeling_Data_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 749 x 5
 ##     year month     decimal_date   co2 quality
 ##    &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -583,7 +582,7 @@ div.tocify {
 <div id="using-select" class="section level2">
 <h2>Using <code>select()</code></h2>
 <p>Use the <code>select()</code> function to keep only the variables (cplumns) you select.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">select</span>(Keeling_Data_tbl,year,co2,quality)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">select</span>(Keeling_Data_tbl,year,co2,quality)</span></code></pre></div>
 <pre><code>## # A tibble: 749 x 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -598,7 +597,7 @@ div.tocify {
 ##  9  1958  313.       1
 ## 10  1958  315.       1
 ## # ... with 739 more rows</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">select</span>(Keeling_Data_tbl,co2)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">select</span>(Keeling_Data_tbl,co2)</span></code></pre></div>
 <pre><code>## # A tibble: 749 x 1
 ##      co2
 ##    &lt;dbl&gt;
@@ -618,8 +617,8 @@ div.tocify {
 <h2>The pipe symbol <code>%&gt;%</code></h2>
 <p>Above we used ‘normal’ grammar, but the strengths of <code>dplyr</code> and <code>tidyr</code> lie in combining several functions using <strong>pipes</strong>. Since the pipes grammar is unlike anything we’ve seen in R before, let’s repeat what we’ve done above using pipes.</p>
 <p><code>x %&gt;% f(y)</code> is the same as <code>f(x, y)</code></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span><span class="kw">select</span>(year,co2,quality)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="st">  </span><span class="kw">select</span>(year,co2,quality)</span></code></pre></div>
 <pre><code>## # A tibble: 749 x 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -639,8 +638,8 @@ div.tocify {
 <div id="using-filter" class="section level2">
 <h2>Using <code>filter()</code></h2>
 <p>Use <code>filter()</code> to get values (rows):</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2000</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 12 x 5
 ##     year month     decimal_date   co2 quality
 ##    &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -657,9 +656,9 @@ div.tocify {
 ## 11  2000 November         2001.  368.       1
 ## 12  2000 December         2001.  370.       1</code></pre>
 <p>If we now want to move forward with the above tibble, but only with <code>quality == 1</code> , we can combine <code>select()</code> and <code>filter()</code> functions:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="st">  </span><span class="kw">select</span>(year,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="st">  </span><span class="kw">select</span>(year,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 742 x 3
 ##     year   co2 quality
 ##    &lt;int&gt; &lt;dbl&gt;   &lt;int&gt;
@@ -679,10 +678,10 @@ div.tocify {
 <div id="using-group_by-and-summarize" class="section level2">
 <h2>Using <code>group_by()</code> and <code>summarize()</code></h2>
 <p>Now try to ‘group’ monthly data using the <code>group_by()</code> function, notice how the ouput tibble changes:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="st">  </span><span class="kw">group_by</span>(month)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="st">  </span><span class="kw">group_by</span>(month)</span></code></pre></div>
 <pre><code>## # A tibble: 742 x 4
 ## # Groups:   month [12]
 ##     year month       co2 quality
@@ -699,11 +698,11 @@ div.tocify {
 ## 10  1959 February   316.       1
 ## # ... with 732 more rows</code></pre>
 <p>The <code>group_by()</code> function is much more exciting in conjunction with the <code>summarize()</code> function. This will allow us to create new variable(s) by using functions that repeat for each of the continent-specific data frames. That is to say, using the <code>group_by()</code> function, we <strong>split our original dataframe into multiple pieces</strong>, then we can run functions (<em>e.g.</em>, <code>mean()</code> or <code>sd()</code>) within <code>summarize()</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2))</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 12 x 2
 ##    month     monthly_mean
@@ -722,12 +721,12 @@ div.tocify {
 ## 12 September         352.</code></pre>
 <p>Here we create a new variable (column) <code>monthly_mean</code>, and append it to the groups (<code>month</code> in this case). Now, we get a so-called <em>monthly climatology</em>.</p>
 <p>You can also use <code>arrange()</code> and <code>desc()</code> to sort the data:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb27-5"><a href="#cb27-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="st">  </span><span class="kw">arrange</span>(monthly_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="st">  </span><span class="kw">arrange</span>(monthly_mean)</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 12 x 2
 ##    month     monthly_mean
@@ -744,12 +743,12 @@ div.tocify {
 ## 10 May               358.
 ## 11 June              359.
 ## 12 April             359.</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-5"><a href="#cb30-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-6"><a href="#cb30-6"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(monthly_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(monthly_mean))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 12 x 2
 ##    month     monthly_mean
@@ -767,13 +766,13 @@ div.tocify {
 ## 11 October           353.
 ## 12 September         352.</code></pre>
 <p>Let’s add more statistics to the monthly climatology:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2), <span class="dt">monthly_sd =</span> <span class="kw">sd</span>(co2),</span>
-<span id="cb33-6"><a href="#cb33-6"></a>            <span class="dt">monthly_min =</span> <span class="kw">min</span>(co2), <span class="dt">monthly_max =</span> <span class="kw">max</span>(co2),</span>
-<span id="cb33-7"><a href="#cb33-7"></a>            <span class="dt">monthly_se =</span> <span class="kw">sd</span>(co2)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2,quality) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="st">  </span><span class="kw">filter</span>(quality <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">monthly_mean =</span> <span class="kw">mean</span>(co2), <span class="dt">monthly_sd =</span> <span class="kw">sd</span>(co2),</span>
+<span id="cb32-6"><a href="#cb32-6"></a>            <span class="dt">monthly_min =</span> <span class="kw">min</span>(co2), <span class="dt">monthly_max =</span> <span class="kw">max</span>(co2),</span>
+<span id="cb32-7"><a href="#cb32-7"></a>            <span class="dt">monthly_se =</span> <span class="kw">sd</span>(co2)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 12 x 6
 ##    month     monthly_mean monthly_sd monthly_min monthly_max monthly_se
@@ -795,8 +794,8 @@ div.tocify {
 <div id="using-mutate" class="section level2">
 <h2>Using <code>mutate()</code></h2>
 <p>We can also create new variables (columns) using the <code>mutate()</code> function. Here we create a new column <code>co2_ppb</code> by simply scaling <code>co2</code> by a factor of <code>1000</code>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_ppb =</span> co2 <span class="op">*</span><span class="st"> </span><span class="fl">1e3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_ppb =</span> co2 <span class="op">*</span><span class="st"> </span><span class="fl">1e3</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 749 x 6
 ##     year month     decimal_date   co2 quality co2_ppb
 ##    &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;
@@ -813,8 +812,8 @@ div.tocify {
 ## # ... with 739 more rows</code></pre>
 <p>When creating new variables, we can hook this with a logical condition. A simple combination of <code>mutate()</code> and <code>ifelse()</code> facilitates filtering right where it is needed: in the moment of creating something new. This easy-to-read statement is a fast and powerful way of discarding certain data or for updating values depending on this given condition.</p>
 <p>Let’s create a new variable <code>co2_new</code>, it is equal to <code>co2</code> when <code>quality==1</code>, otherwise it’s <code>NA</code>:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_ppb =</span> co2 <span class="op">*</span><span class="st"> </span><span class="fl">1e3</span>, <span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_ppb =</span> co2 <span class="op">*</span><span class="st"> </span><span class="fl">1e3</span>, <span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 749 x 7
 ##     year month     decimal_date   co2 quality co2_ppb co2_new
 ##    &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -834,28 +833,28 @@ div.tocify {
 <h2>Combining <code>dplyr</code> and <code>ggplot2</code></h2>
 <p>Just as we used <code>%&gt;%</code> to pipe data along a chain of <code>dplyr</code> functions we can use it to pass data to <code>ggplot()</code>. Because <code>%&gt;%</code> replaces <strong>the first argument</strong> in a function we don’t need to specify the <code>data = argument</code> in the <code>ggplot()</code> function.</p>
 <p>By combining <code>dplyr</code> and <code>ggplot2</code> functions, we can make figures without creating any new variables or modifying the data.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-3"><a href="#cb40-3"></a><span class="st">  </span><span class="co"># Make the plot</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb40-5"><a href="#cb40-5"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="st">  </span><span class="co"># Make the plot</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <p><img src="Section_05_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>As you will see, this is much easier than what we have done in <a href="https://zhu-group.github.io/ese5023/Section_03.html#Loading_csv_file">Section 3</a>. This is the power of a tidy dataset and its related functions!</p>
 <p>Let’s plot CO<sub>2</sub> of the same month as a function of <code>decimal_date</code>, with the <code>color</code> option:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb41-2"><a href="#cb41-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb41-3"><a href="#cb41-3"></a><span class="st">  </span><span class="co"># Make the plot</span></span>
-<span id="cb41-4"><a href="#cb41-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new, <span class="dt">color=</span>month)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb41-5"><a href="#cb41-5"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="st">  </span><span class="co"># Make the plot</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new, <span class="dt">color=</span>month)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 2 row(s) containing missing values (geom_path).</code></pre>
 <p><img src="Section_05_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Or plot the same data but in panels (facets), with the <code>facet_wrap</code> function:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb43-2"><a href="#cb43-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb43-3"><a href="#cb43-3"></a><span class="st">  </span><span class="co"># Make the plot</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new, <span class="dt">color=</span>month)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb43-5"><a href="#cb43-5"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>month)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">co2_new =</span> <span class="kw">ifelse</span>(quality<span class="op">==</span><span class="dv">1</span>, co2, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="st">  </span><span class="co"># Make the plot</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>decimal_date, <span class="dt">y=</span>co2_new, <span class="dt">color=</span>month)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>month)</span></code></pre></div>
 <pre><code>## Warning: Removed 2 row(s) containing missing values (geom_path).</code></pre>
 <p><img src="Section_05_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
@@ -875,10 +874,10 @@ div.tocify {
 <div id="long-to-wide-format-with-spread" class="section level2">
 <h2>Long to wide format with <code>spread()</code></h2>
 <p>Spread rows into columns:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>Keeling_Data_tbl_wide &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb45-2"><a href="#cb45-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb45-3"><a href="#cb45-3"></a><span class="st">  </span><span class="kw">spread</span>(month, co2) </span>
-<span id="cb45-4"><a href="#cb45-4"></a>Keeling_Data_tbl_wide</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>Keeling_Data_tbl_wide &lt;-<span class="st"> </span>Keeling_Data_tbl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="st">  </span><span class="kw">select</span>(year,month,co2) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="st">  </span><span class="kw">spread</span>(month, co2) </span>
+<span id="cb44-4"><a href="#cb44-4"></a>Keeling_Data_tbl_wide</span></code></pre></div>
 <pre><code>## # A tibble: 63 x 13
 ##     year April August December February January  July  June March   May November October September
 ##    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
@@ -897,10 +896,10 @@ div.tocify {
 <div id="wide-to-long-format-with-gather" class="section level2">
 <h2>Wide to long format with <code>gather()</code></h2>
 <p>Gather columns into rows:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>Keeling_Data_tbl_<span class="dv">2000</span> &lt;-<span class="st"> </span>Keeling_Data_tbl_wide <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb47-2"><a href="#cb47-2"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2000</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb47-3"><a href="#cb47-3"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;MONTH&quot;</span>,<span class="st">&quot;co2&quot;</span>) </span>
-<span id="cb47-4"><a href="#cb47-4"></a>Keeling_Data_tbl_<span class="dv">2000</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>Keeling_Data_tbl_<span class="dv">2000</span> &lt;-<span class="st"> </span>Keeling_Data_tbl_wide <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2000</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;MONTH&quot;</span>,<span class="st">&quot;co2&quot;</span>) </span>
+<span id="cb46-4"><a href="#cb46-4"></a>Keeling_Data_tbl_<span class="dv">2000</span></span></code></pre></div>
 <pre><code>## # A tibble: 13 x 2
 ##    MONTH       co2
 ##    &lt;chr&gt;     &lt;dbl&gt;
