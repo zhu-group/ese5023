@@ -324,7 +324,7 @@ wc -l *.pdb | sort -n | head -n 1
 
 1.4 Delete `t1`, `t2`, and `t3`.
 
-1.5 In `TEST`, type `cat my_new.txt`. What do you see? Use `man cat` to learn more about `cat`, and quite the help document by typing `q`.
+1.5 In `TEST`, type `cat my_new.txt`. What do you see? Use `man cat` to learn more about `cat`, and quit the help document by typing `q`.
 
 1.6 Delete `TEST`.
 
