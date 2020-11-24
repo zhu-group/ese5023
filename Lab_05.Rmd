@@ -44,7 +44,7 @@ Try the following two ways of running `test.R`:
 
 * In the Linux environment, type `Rscript test.R`. 
 
-# 3. Loop
+# 3. BASH `for` Loop
 
 The general form of a BASH loop goes like:
 
