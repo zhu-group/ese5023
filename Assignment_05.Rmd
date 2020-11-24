@@ -67,7 +67,7 @@ In this exercise, we will learn a few more Linux commands. For each command, ple
 
 **2.6 [2 points]** Compare `data_demo/data/pdb/ethane.pdb` and `data_demo/data/pdb/ethanol.pdb` with `diff`
 
-**2.7 [2 points]** Check the total file size of the `data_demo` folder using `df`.
+**2.7 [2 points]** Check the total file size of the `data_demo` folder using `du`.
 
 **2.8 [3 points]** Copy the `data_demo` folder to `data_demo_new`, compress it using `zip`, and decompress the `.zip` file with `unzip`.
 

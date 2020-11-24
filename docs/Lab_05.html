@@ -11,7 +11,7 @@
 
 
 
-<title>Assignment 05</title>
+<title>Lab 05</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,6 +28,99 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -398,56 +491,65 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Assignment 05</h1>
+<h1 class="title toc-ignore">Lab 05</h1>
 
 </div>
 
 
-<p><strong>Out: 11/20 19:00 </strong><br />
-<strong>Due: 12/03 19:00 </strong></p>
-<p>For problem set <em>i</em>, create a script named <code>PS5_i.R</code>. Write your results briefly in a report (<code>Report_PS5.pdf</code>). Upload your <strong>R scripts</strong> and <strong>report</strong> to the <code>ESE5023_Assignments</code> repository before the deadline.</p>
 <hr />
-<div id="instructions" class="section level1">
-<h1>Instructions</h1>
-<p><strong>Collaboration:</strong><br />
-Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
-<ul>
-<li>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in the problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</li>
-<li>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</li>
-</ul>
-<p><strong>Late Submission:</strong><br />
-Late submissions will not receive full credit. <strong>Half credit</strong> will be awarded to correct solutions submitted within <strong>24 hours</strong> of the original deadline. Otherwise, no credit will be given.</p>
-<p><strong>Submitting your assignment:</strong><br />
-Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.</p>
-<hr />
-</div>
-<div id="potential-renewable-energy-spots-in-china" class="section level1">
-<h1>1. Potential Renewable Energy Spots in China</h1>
-<p>In this exercise, we will search for some potential renewable energy spots in China. The data sets we will use are GeoTiff (.tif) files provided by the <a href="https://worldclim.org/data/worldclim21.html">WorldClim</a>.</p>
-<p><strong>1.1 [5 points]</strong> Download the following data sets and load them in R:</p>
-<ul>
-<li><p>Solar radiation, 2.5 minutes</p></li>
-<li><p>Precipitation, 2.5 minutes</p></li>
-<li><p>Wind speed, 2.5 minutes</p></li>
-</ul>
-<p><strong>1.2 [10 points]</strong> Plot the above data sets over China. You should make three plots, each should contain its own legend.</p>
-<p><strong>1.3 [5 points]</strong> First, let’s search for regions with relatively high wind speed to build wind farms. Define a reasonable wind speed as the threshold, and describe your favorite spots.</p>
-<p><strong>1.4 [5 points]</strong> Second, let’s search for regions with relatively high solar radiation and low precipitation as potential locations of photovoltaics (PV) farms. Describe your favorite spots of PV farms.</p>
-</div>
 <div id="more-linux-commands" class="section level1">
-<h1>2. More Linux Commands</h1>
-<p>In this exercise, we will learn a few more Linux commands. For each command, please use <code>man</code> to learn what it does and how to use it correctly. First, change your directory to <code>~</code>.</p>
-<p>(In you report, please insert of a screenshot of your Linux code and output. No need to upload R scripts for this exercise.)</p>
-<p><strong>2.1 [2 points]</strong> Make a link called <code>data_demo_link</code> to <code>data_demo</code> folder using <code>ln</code></p>
-<p><strong>2.2 [2 points]</strong> Go to <code>data_demo/data/</code>, make an empty file <code>planets.txt_1st</code> with <code>touch</code>.</p>
-<p><strong>2.3 [2 points]</strong> Print your home directory using <code>echo</code>.</p>
-<p><strong>2.4 [3 points]</strong> Find how many files in <code>data_demo/data/pdb/</code> using <code>find</code>.</p>
-<p><strong>2.5 [3 points]</strong> Count how many <code>C</code> character appears in <code>data_demo/data/pdb/tnt.pdb</code> with <code>grep</code>.</p>
-<p><strong>2.6 [2 points]</strong> Compare <code>data_demo/data/pdb/ethane.pdb</code> and <code>data_demo/data/pdb/ethanol.pdb</code> with <code>diff</code></p>
-<p><strong>2.7 [2 points]</strong> Check the total file size of the <code>data_demo</code> folder using <code>du</code>.</p>
-<p><strong>2.8 [3 points]</strong> Copy the <code>data_demo</code> folder to <code>data_demo_new</code>, compress it using <code>zip</code>, and decompress the <code>.zip</code> file with <code>unzip</code>.</p>
-<p><strong>2.9 [3 points]</strong> Change the file permissions flags on <code>data_demo_new</code> to <code>drwxr-x---</code> using <code>chmod</code>.</p>
-<p><strong>2.10 [3 points]</strong> Print the last 10 commands you made using <code>history</code>.</p>
+<h1>1. More Linux commands</h1>
+<p>In this exercise, we will learn more Linux commands. Use <code>man</code> to learn what a command does with different options.</p>
+<p>1.1 Print the calendar of 2020-11 and 2020-12 using <code>cal</code>.</p>
+<p>1.2 Print current UTC time and date using <code>date</code>.</p>
+<p>1.3 Print current UTC time using <code>date</code>, <code>|</code>, and <code>cut</code>.</p>
+<p>1.4 What does <code>top</code> do? [Hint: you can always use <code>Ctrl+x</code> to quit a process]</p>
+<p>1.5 How does <code>rm -r</code> differ from <code>rmdir</code>?</p>
+<p>1.6 Type <code>sleep 3</code>, explain what happens.</p>
+<p>1.7 Go to <code>~</code>, figure out what <code>watch -n 3 'date'</code> does.</p>
+<p>1.8 Go to <code>data_demo</code>, type <code>ls data &gt; log1</code> twice, and <code>ls data &gt; log2</code> twice, compare <code>log1</code> and <code>log2</code>.</p>
+<p>1.9 Can you figure out what is the difference between <code>&gt;</code> and <code>&gt;&gt;</code>?</p>
+<p>1.10 Use <code>module avail</code> to check the installed softwares (modules) on TaiYi. Then choose one to load using <code>module load</code>.</p>
+</div>
+<div id="run-an-r-script-on-taiyi" class="section level1">
+<h1>2. Run an R script on TaiYi</h1>
+<p>Write a simple R script, name it as <code>test.R</code>. Then load <code>R</code> using <code>module load R</code>.</p>
+<p>Try the following two ways of running <code>test.R</code></p>
+<ul>
+<li><p>Type <code>R</code> to enter the R Console, change the working directory, then type <code>source test.R</code>.</p></li>
+<li><p>In the Linux environment, type <code>Rscript test.R</code>.</p></li>
+</ul>
+</div>
+<div id="loop" class="section level1">
+<h1>3. Loop</h1>
+<p>The general form of a BASH loop goes like:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">for</span> <span class="ex">thing</span> in list_of_things</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">do</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="ex">operation_using</span> <span class="va">$thing</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">done</span></span></code></pre></div>
+<p>For example, the following lines would print the first line of each <code>*.pdb</code> file in <code>data_demo/data/pdb/</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">for</span> <span class="fu">file</span> in *.pdb</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">do</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="fu">cat</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">head</span> -n 1</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">done</span></span></code></pre></div>
+<p>Now print file size (in bytes) of each <code>*.pdb</code> file, line by line.</p>
+</div>
+<div id="environment-variables" class="section level1">
+<h1>4. Environment Variables</h1>
+<p>An <em>environment variable</em> is a dynamic-named value containing information about your login session, set configuration options, and customize the shell environment in Linux-based operating systems. In simple terms, an environment variable is used to define a location for storing a value, you can also refer to with its symbolic name. These values are stored within the system and are used by command-line applications. The stored value can be deleted, displayed, edited and re-saved.</p>
+<p>4.1 Use <code>printenv</code> to print all or the specified environment variables.</p>
+<p>4.2 You can set a temporary environment variable like:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="va">MY_NAME=</span>TAIYI</span></code></pre></div>
+<p>Then call this variable as <code>$MY_NAME</code>, for example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">echo</span> <span class="va">$MY_NAME</span></span></code></pre></div>
+<p>Notice that the above environment variables are available only for the current session. If you open a new shell, or if you log out, all variables will be lost. Please verify this.</p>
+<p>4.3 Setting a Persistent Environment Variable</p>
+<p>One way to set a persistent environment variable is to use the user-based configuration file <code>.bash_profile</code> in your home directory. With Bash, you can declare the variables in the following format:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">export</span> <span class="va">MY_NAME=</span>TAIYI</span></code></pre></div>
+<p>Please add the above line to your <code>.bash_profile</code>, save <code>.bash_profile</code>.</p>
+<p>To update your current environment variables, run:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">source</span> .bash_profile</span></code></pre></div>
+<p>Now we have made <code>$MY_NAME</code> a persistent environment variable, so it is loaded every time you log in.</p>
 </div>
 
 

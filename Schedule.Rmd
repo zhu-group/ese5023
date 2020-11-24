@@ -26,7 +26,7 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |9   |11/10|Tu. |[Lab 04](https://zhu-group.github.io/ese5023/Lab_04.html)                             |              |              |
 |9   |11/12|Th. |[Section 10 Spatial Data Types in R](https://zhu-group.github.io/ese5023/Section_10.html)            |              |              |
 |10  |11/19|Th. |[Section 11 Linux: Basics](https://zhu-group.github.io/ese5023/Section_11.html)       | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html)           |  4           |
-|11  |11/24|Tu. |Lab 05                                                                                |              |              |
+|11  |11/24|Tu. |[Lab 05](https://zhu-group.github.io/ese5023/Lab_05.html)                             |              |              |
 |11  |11/26|Th. |Section 12 Linux: Shell scripts                                                       |              |              |
 |12  |12/03|Th. |Section 13 FORTRAN: Basics                                                            |  6           |  5           |
 |13  |12/08|Tu. |Lab 06                                                                                |              |              |
