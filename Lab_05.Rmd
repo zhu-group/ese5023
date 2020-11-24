@@ -40,7 +40,7 @@ Write a simple R script, name it as `test.R`. Then load `R` module on TaiYi usin
 
 Try the following two ways of running `test.R`:
 
-* Type `R` to enter the R Console, change the working directory, then type `source(test.R)`.
+* Type `R` to enter the R Console, change the working directory, then type `source("test.R")`.
 
 * In the Linux environment, type `Rscript test.R`. 
 
