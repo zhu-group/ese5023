@@ -60,7 +60,7 @@ Now, replace the text `menthol.pdb` with the special variable called `$1`:
 head -n 8 "$1" | tail -n 5
 ```
 
-Inside a shell script, `$1` means "the first filename (or other argument) on the command line". We can now run our script like this:
+Inside a shell script, `$1` means "the first filename (or argument) on the command line". We can now run our script like this:
 
 ```{bash, eval=F}
 ./print.sh menthol.pdb
@@ -84,7 +84,7 @@ Can you guess what it does? Check the output like:
 ./print.sh pentane.pdb 10 2
 ```
 
-So you can see that, by changing the arguments to our command we can change our script’s behavior.
+So you can see that, by changing the arguments to our command, we can change our script’s behavior.
 
 ## Adding comments
 
@@ -104,7 +104,7 @@ A comment starts with a `#` character and runs to the end of the line. The compu
 
 ## Introduction to TaiYi
 
-Open the [instructions to TaiYi](https://hpc.sustech.edu.cn/ref/taiyi_User_Manual_v0.6.pdf), the instructor will go over it in Chinese.
+Open the [instructions to TaiYi](https://hpc.sustech.edu.cn/ref/taiyi_User_Manual_v0.6.pdf); the instructor will go over it in Chinese.
 
 ## A simple R script
 
@@ -123,7 +123,7 @@ Copy the above lines to a new R script `t1.R`, and save it to your home director
 
 ## LSF job file
 
-TaiYi uses IBM [load sharing facility (LSF)](https://hpc.sustech.edu.cn/ref/lsf_users_guide_v10.1.pdf) for job management. Put is simply, you need to prepare a LSF job file that clearly describe a job, including computational resources, libraries, log files, commands, executable files, and other options. In our case, the LSF (`job.sh`) is written as:
+TaiYi uses IBM [load sharing facility (LSF)](https://hpc.sustech.edu.cn/ref/lsf_users_guide_v10.1.pdf) for job management. Put is simply, you need to prepare a LSF job file that clearly describes the job, including computational resources, libraries, log files, commands, executable files, and even more options or requirements. In our case, the LSF (`job.sh`) is written as:
 
 ```{bash, eval=F}
 #!/bin/sh
@@ -152,7 +152,7 @@ Rscript t1.R > result.log
 
   + `-n 1` means we ask for `1` core (CPU) to run our job.
   
-  + `-W 00:10` means we ask the compytational resource for `00` hours and `10` minutes.
+  + `-W 00:10` means we ask the computational resource for `00` hours and `10` minutes.
   
   + `-e err.log` means the error message (if any) will be written to `err.log`.
   
@@ -170,7 +170,7 @@ Submit the LSF job `job.sh` to TaiYi:
 bsub < job.sh
 ```
 
-Once the job is submitted, it be assigned with a job ID (e.g., `890825`). Notice that the job may not be run immediately, depending the availability of computational resources. You can check the status of a job with:
+Once the job is submitted, it will be assigned with a job ID (e.g., `890825`). Notice that the job may not be run immediately, depending on the availability of computational resources. You can check the status of a job with:
 
 ```{bash, eval=F}
 bjobs -l <JOB ID>
