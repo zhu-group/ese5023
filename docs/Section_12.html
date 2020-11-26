@@ -506,8 +506,8 @@ div.tocify {
 <h1>BASH scripts</h1>
 <div id="a-simple-bash-script" class="section level2">
 <h2>A simple BASH script</h2>
-<p>In the <a href="https://zhu-group.github.io/ese5023/Section_11.html">last section</a> and <a href="https://zhu-group.github.io/ese5023/Lab_05.html">Lab 05</a>, we have covered some basic Linux commands. Now we are going to take the commands we repeat frequently and save them in files so that we can re-run all those operations again later by typing a single command. For historical reasons, a bunch of commands saved in a file is usually called a <strong>shell script</strong>, but these are actually small programs.</p>
-<p>Let’s start by going to <code>data_demo/data/pdb</code>. Suppose we want to print line 5-8 of <code>menthol.pdb</code>, one way to do this is to run:</p>
+<p>In the <a href="https://zhu-group.github.io/ese5023/Section_11.html">Section 11</a> and <a href="https://zhu-group.github.io/ese5023/Lab_05.html">Lab 05</a>, we have covered some basic Linux commands. Now we are going to take the commands we repeat frequently and save them in files so that we can re-run all those operations again later by typing a single command. For historical reasons, a bunch of commands saved in a file is usually called a <strong>shell script</strong>, but these are actually small programs.</p>
+<p>Let’s start by going to <code>data_demo/data/pdb</code>. Suppose we want to print line 3-8 of <code>menthol.pdb</code>, one way to do this is to run:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">head</span> -n 8 menthol.pdb <span class="kw">|</span> <span class="fu">tail</span> -n 5</span></code></pre></div>
 <p>Let’s copy the following line to a new file <code>print.sh</code> to create a shell script. Notice we are not running it as a command yet - we just put the commands in a file.</p>
 <p>Once we have saved the file, we can ask the shell (BASH) to execute the commands it contains. Because our shell is called bash, so we run the following command:</p>
@@ -547,7 +547,7 @@ div.tocify {
 <h1>Running jobs on TaiYi</h1>
 <div id="introduction-to-taiyi" class="section level2">
 <h2>Introduction to TaiYi</h2>
-<p>Open the <a href="https://hpc.sustech.edu.cn/ref/taiyi_User_Manual_v0.6.pdf">instructions to TaiYi</a>; the instructor will go over it in Chinese.</p>
+<p>Open the <a href="https://hpc.sustech.edu.cn/ref/taiyi_User_Manual_v0.6.pdf">user manual of TaiYi</a>; the instructor will go over it in Chinese.</p>
 </div>
 <div id="a-simple-r-script" class="section level2">
 <h2>A simple R script</h2>
@@ -560,8 +560,8 @@ div.tocify {
 <span id="cb11-6"><a href="#cb11-6"></a><span class="kw">print</span>(<span class="st">&quot;This is done with TaiYi!&quot;</span>)</span></code></pre></div>
 <p>Copy the above lines to a new R script <code>t1.R</code>, and save it to your home directory.</p>
 </div>
-<div id="lsf-job-file" class="section level2">
-<h2>LSF job file</h2>
+<div id="lsf-job-files" class="section level2">
+<h2>LSF job files</h2>
 <p>TaiYi uses IBM <a href="https://hpc.sustech.edu.cn/ref/lsf_users_guide_v10.1.pdf">load sharing facility (LSF)</a> for job management. Put is simply, you need to prepare a LSF job file that clearly describes the job, including computational resources, libraries, log files, commands, executable files, and even more options or requirements. In our case, the LSF (<code>job.sh</code>) is written as:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">#!/bin/sh</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="co">#BSUB -J test     ## job name</span></span>

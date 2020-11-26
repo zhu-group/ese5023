@@ -20,9 +20,9 @@ output:
 
 ## A simple BASH script
 
-In the [last section](https://zhu-group.github.io/ese5023/Section_11.html) and [Lab 05](https://zhu-group.github.io/ese5023/Lab_05.html), we have covered some basic Linux commands. Now we are going to take the commands we repeat frequently and save them in files so that we can re-run all those operations again later by typing a single command. For historical reasons, a bunch of commands saved in a file is usually called a **shell script**, but these are actually small programs.
+In the [Section 11](https://zhu-group.github.io/ese5023/Section_11.html) and [Lab 05](https://zhu-group.github.io/ese5023/Lab_05.html), we have covered some basic Linux commands. Now we are going to take the commands we repeat frequently and save them in files so that we can re-run all those operations again later by typing a single command. For historical reasons, a bunch of commands saved in a file is usually called a **shell script**, but these are actually small programs.
 
-Let's start by going to `data_demo/data/pdb`. Suppose we want to print line 5-8 of `menthol.pdb`, one way to do this is to run:
+Let's start by going to `data_demo/data/pdb`. Suppose we want to print line 3-8 of `menthol.pdb`, one way to do this is to run:
 
 ```{bash, eval=F}
 head -n 8 menthol.pdb | tail -n 5
@@ -104,7 +104,7 @@ A comment starts with a `#` character and runs to the end of the line. The compu
 
 ## Introduction to TaiYi
 
-Open the [instructions to TaiYi](https://hpc.sustech.edu.cn/ref/taiyi_User_Manual_v0.6.pdf); the instructor will go over it in Chinese.
+Open the [user manual of TaiYi](https://hpc.sustech.edu.cn/ref/taiyi_User_Manual_v0.6.pdf); the instructor will go over it in Chinese.
 
 ## A simple R script
 
@@ -121,7 +121,7 @@ print("This is done with TaiYi!")
 
 Copy the above lines to a new R script `t1.R`, and save it to your home directory.
 
-## LSF job file
+## LSF job files
 
 TaiYi uses IBM [load sharing facility (LSF)](https://hpc.sustech.edu.cn/ref/lsf_users_guide_v10.1.pdf) for job management. Put is simply, you need to prepare a LSF job file that clearly describes the job, including computational resources, libraries, log files, commands, executable files, and even more options or requirements. In our case, the LSF (`job.sh`) is written as:
 
