@@ -752,7 +752,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <span id="cb2-7"><a href="#cb2-7"></a><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</span></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.13867777194203&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.04496628852148&quot;</code></pre>
 <p>Simulation with 100,000 random points yields a better result</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Draw 1E5 points</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>TotalDraw &lt;-<span class="st"> </span><span class="fl">1E5</span></span>
@@ -763,7 +763,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <span id="cb5-7"><a href="#cb5-7"></a><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</span></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.12234948943723&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.14261962583276&quot;</code></pre>
 <hr />
 </div>
 </div>

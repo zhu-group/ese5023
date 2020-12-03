@@ -1,0 +1,510 @@
+---
+title: "Section 13 FORTRAN: Basics"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> “FORTRAN programmers just DO it.” - Unknown
+
+***
+
+*The notes below are modified from the excellent [online tutorial](http://swcarpentry.github.io/shell-novice/) freely available on the Software Carpentry website.*
+
+***
+
+# Introduction to FORTRAN
+
+[Fortran](https://fortran-lang.org/) was originally developed by a team at IBM in 1957 for scientific calculations. Fortran stands for Formula Translation. It is a powerful language for creating fast and memory-efficient codes for heavy numerical computations. 
+
+Fortran is not very user-friendly, compared with R, Python, and MATLAB:
+
++ Fortran is a more verbose language than R, Python, and MATLAB, so it generally will take you much longer to write Fortran codes compared to an equivalent code in R. 
+
++ Unlike R, which can easily be run interactively, Fortran codes must be **compiled** before you can run them in a terminal shell. That makes debugging and testing a bit slower too. 
+
++ Fortran doesn't have a built-in graphics library, so you can't interactively plot results like you can with R. So, with those points in mind, we recommend you stick to R, Python or MATLAB for you day-to-day scientific computing tasks. 
+
+However, Fortran is good when you have some computational problem where you need it to run as fast as possible, for example when it would take days to run on R, Python or MATLAB. Learning the basics of Fortran will also be useful for when you come across Fortran codes that do some computational task you need and you want to interface those codes with your own codes or you might want to modify them for your own research needs.
+
+## Programs
+
+Fortran is a procedural language where you define a **sequence** of commands to execute in a program file. The program file is then compiled using a Fortran **compiler**. The compiler turns the program commands in the text file into machine language instructions that will execute on the computer's CPU. You run the compiled code from a terminal shell.
+
+Let's begin by looking at a simple example showing the basic workflow for using Fortran. Start by making a plain text file named `HelloWorld.f90` that has the following content:
+
+```{fortran, eval=F}
+program HelloWorld
+  print*, 'Hello world'
+end program HelloWorld
+```
+
+Compile the code using the command:
+
+```{bash, eval=F}
+gfortran HelloWorld.f90 -o HelloWorld
+```
+
+Run the code in the terminal using:
+
+```{bash, eval=F}
+./HelloWorld
+```
+
+A Fortran program has to have a single program file (usually `.f` or `.f90` files) that lists the sequence of commands to execute. The program file has to start with the first command being the word `program` and it must end with the last command being the keyword `end`. The words `program HelloWorld` after the final end statement aren't necessary, but they are a useful organization construct for pointing out what exactly is ending, especially when your program file is very long and also contains subroutine and function code beneath the program section.
+
+## Compiling
+
+In the example above, we compiled the code by calling our *compiler*, here the `gfortran` compiler which is open source and freely available. Intel's `ifort` compiler is a commercial compiler that is fairly ubiquitous, especially on cluster systems. For some codes, `ifort` can produce an executable that runs 10-20x faster than what `gfortran` produces.
+
+To compile our `HelloWorld.f90` code, we used the output **flag** `-o` and then listed the name we wanted to use for the compiled program that was output. Here we used `HelloWorld` for the name, but if for some (not recommended!) reason we wanted to name it `MyProgram` instead, we could compile it using:
+
+```{bash, eval=F}
+gfortran HelloWorld.f90 -o MyProgram
+```
+
+If you don't specify `-o` and the output program name, then the compiler will by default name the program `a.out`:
+
+```{bash, eval=F}
+gfortran HelloWorld.f90 
+```
+
+If there are any errors with your code, the compiler should let you know what the problem is. For example, try compiling the code below, which has an errant 'a' character:
+
+```{fortran, eval=F}
+program HelloWorld
+  print*, 'Hello world'
+  a
+end program HelloWorld
+```
+
+The compiler returns an error message. Check this.
+
+```{fortran, eval=F}
+HelloWorld.f90:3.2:
+
+  a
+  1
+Error: Unclassifiable statement at (1)
+```
+
+The statement `HelloWorld.f90:3:2:` specifies that the `Unclassifiable statement` is in file `HelloWorld.f90` on line `3`, column `2`. It then prints out what is on that line (here the errant letter `a`). When there are errors in long and complicated Fortran codes, the first error the compiler finds can lead it to other errors, which stem from it not being able to interpret the code that had the first error. So if you get more than one error message when compiling a code, **go fix the first listed error** and try recompiling the code to see if the other errors are now gone.
+
+## Comments
+
+Anything to the right of an exclamation point `!` in a Fortran code is considered a comment. For example a commented version of our `HelloWorld.f90` program is
+
+```{fortran, eval=F}
+!
+! This program writes 'Hello world' to the shell.
+! Version 0.1, Dec. 03, 2020
+!
+program HelloWorld
+
+!
+! Send a message to the world:
+!
+  print*, 'Hello world'
+
+!
+! All done, goodbye
+!
+end program HelloWorld
+```
+
+Comments are an essential part of good coding practice. You can use them to document what each section of a code does; this can be very helpful for when you return to a code you wrote a long time ago and are trying to remember what it does, or when you get someone else's code and are trying to understand what it does. You can also use code comments as an outline when first starting to write a long and complicated code. The comments can outline the sequence of steps you intend the code to do. Once your outline is complete, you can start coding by filling in the necessary commands below each section of comments.
+
+At a minimum, your code should have at least a few comments at the start of the text file that indicates what the codes does. This is also a place where you can add a date stamp and possibly a version number. You can also list the authorship of the code, which can be useful if it will be shared with other or is part of a collaborative effort .
+
+***
+
+# Variables
+
+## Variable types
+
+Unlike R, Fortran requires you to **declare the type of each variable**. For example, you need to declare whether a variable is an `integer`, `real`, `complex`, `logical`, or `character`. Here is an example program declaring several different variable types:
+
+```{fortran, eval=F}
+
+program VariableShowcase
+
+implicit none
+
+! Declare variables:
+integer         :: i
+real(8)         :: x
+complex(8)      :: z
+logical         :: bTest
+character(32)   :: sFileName
+
+i = 1
+x = 1.0
+z = cmplx(0.5,2.0)
+! logical types are .true. or .false.
+bTest = .false.    
+sFileName = 'data.txt'
+
+write(*,*) 'i: ', i
+write(*,*) 'x: ', x
+write(*,*) 'z: ', z
+write(*,*) 'bTest: ', bTest
+write(*,*) 'sFileName: ', sFileName
+
+end program VariableShowcase
+
+```
+
+Compile and run this demo:
+
+```{bash, eval=F}
+$ gfortran VariableShowcase.f90 -o VariableShowcase 
+./VariableShowcase
+```
+
+Note that the variable declarations in Fortran have to be made **at the start of the program** (or subroutine or function), before any commands are made. Unlike R, you can't declare a new variable in the middle of a sequence of commands. If you try to, the compiler will throw an error message.
+
+Pay attention that, Fortran is **case insensitive**, meaning that it will treat variables `x` and `X` as the same quantity.
+
+## Variable precision
+
+`real(8)` declared above means a real variable that has `8` bytes (64 bits) of precision. This is what is known as *double precision*, which is the default precision in MATLAB and Python. You can also declare a lower or higher order precision (e.g. `real(4)` and `real(16)`) but you should only do this if you have a very good reason to do so. 99.99% of the time you should just use `real(8)` rather than `(4)` or `(16)`. 
+
+The `complex(8)` declaration means a complex number with `8` bytes of precision for each of the real and imaginary parts of the number. 
+
+For integers, you typically don't need to specify the precision and most of the time you can just use integer and then let the compiler assign the precision (usually either `4` or `8` bytes).
+
+You can use the `huge()` intrinsic function to show the largest numbers that can be represented by each precision. For example, compile and run this code to see the largest possible values that can be represented by each numerical variable type:
+
+```{fortran, eval=F}
+
+program PrecisionTest
+
+implicit none
+
+! Declare variables:
+integer         :: i
+integer(4)      :: i4
+integer(8)      :: i8
+real(4)         :: x4
+real(8)         :: x8
+
+write(*,*) 'integer:    ', huge(i)
+write(*,*) 'integer:    ', huge(i)
+write(*,*) 'integer(4): ', huge(i4)
+write(*,*) 'integer(8): ', huge(i8)
+write(*,*) 'real(4):    ', huge(x4)
+write(*,*) 'real(8):    ', huge(x8)
+
+end program PrecisionTest
+
+```
+
+Here we are using modern Fortran syntax to define the variables. However, there are older ways of defining variables that you should be aware of since you may come across them. The older syntax does not use the `::` separator between the declaration and the list of variable names and has slightly different type names. Most Fortran compilers support the older and modern syntax:
+
+```{fortran, eval=F}
+
+! Old style Fortran variable types:
+double precision      ! same as real(8)
+real*8                ! same as real(8)
+real*4                ! same as real(4)
+double complex        ! same as complex(8)
+complex*16            ! same as complex(8)
+integer*4             ! same as integer(4)
+
+```
+
+## Integer division
+
+Be careful when dividing integers in Fortran. For example, the expression `fraction = (N-1)/N` where `N` is an integer and fraction has been declared as `real(8)` will result in fraction being assigned the value `0`. Why is this? Because all the terms in `(N-1)/N` are integers so the compiler uses integer division. You can easily fix this by making at least one of the terms in the expression a floating point number. Either of the following expressions will force the compiler to use floating point arithmetic and fraction will then be assigned the intended value:
+
+```{fortran, eval=F}
+
+fraction = (N-1.)/N
+
+```
+
+```{fortran, eval=F}
+
+fraction = (dble(N)-1)/N
+
+```
+
+where the `dble()` function turns integer `N` into a double precision value.
+
+## Implicit none
+
+You should **always include the statement** `implicit none` at the start of your Fortran codes (programs, subroutines and functions).
+
+By default, Fortran has a rather insidious implicit typing for variables that have certain first letters in their names. Unless specified otherwise, all variables starting with letters `I`, `J`, `K`, `L`, `M`, and `N` are default integers, and all others are default real. This can lead to nasty programming errors if you aren't careful. For example, consider the following code: 
+
+```{fortran, eval=F}
+
+program ImplicitTypeTest
+
+ireal = 1.5   ! we want this to be a real number, but since the variable
+              ! name starts with an i Fortran thinks its an integer.
+
+write(*,*) 'ireal is: ', ireal
+
+end program ImplicitTypeTest
+
+```
+
+Try running this program and you will see that it prints out `ireal` as the integer `1`. If instead, you use `implicit none` at the start of this code, the compiler will issue an error because `ireal` was not yet declared. If we had instead used `implicit none` at the start of the code, the compiler would have warned us that `ireal` was undeclared.
+
+Here's another example where `implicit none` would help avoid getting the wrong result. Can you spot the error?
+
+```{fortran, eval=F}
+
+program TestUndeclared
+
+real(8)  :: distance, velocity, time
+
+time     = 2.0
+velocity = 5.0
+
+distance = velocity*times
+
+write(*,*) 'distance: ', distance
+
+end program TestUndeclared
+
+```
+
+# Relational operators
+
+| Older Fortran | Newer Fortran | R    | Description              |
+|:-------------:|:-------------:|:----:|:-------------------------|
+|`.eq.`         |`==`           |`==`  | equality                 |
+|`.ne.`         |`/=`           |`!=`  | not equality             |
+|`.lt.`         |`<`            |`<`   | less than                |
+|`.le.`         |`<=`           |`<=`  | less than or equal to    |
+|`.gt.`         |`>`            |`>`   | greater than             |
+|`.ge.`         |`>=`           |`>=`  | greater than or equal to |
+|`.and.`        |`.and.`        |`&`   | logical and              |
+|`.or.`         |`.or.`         |`|`   | logical or               |
+|`.not.`        |`.not.`        |`!`   | logical not              |
+
+Try the following `TestRelationalOps.f90`:
+
+```{fortran, eval=F}
+
+program TestRelationalOps
+
+real(8) :: x,y,z
+logical :: ltest1, ltest2, ltest3
+
+x = 1.0
+y = 2.0
+z = 1.0
+
+ltest1 = x < y
+ltest2 = x == z
+ltest3 = (ltest1 .and. ltest2)
+
+write(*,*) 'ltest1: ', ltest1
+write(*,*) 'ltest2: ', ltest2
+write(*,*) 'ltest3: ', ltest3
+
+end program TestRelationalOps
+
+```
+
+***
+
+# If statements
+
+These are similar to R, except that you need to include the keyword `then` after the logical statement. The `if` statement also ends with the keyword `endif`.
+
+```{fortran, eval=F}
+
+program IfElseTest
+
+real(8) :: x,y
+
+x = 1.5
+y = 3.0
+
+if (x < y) then
+    write(*,*) 'x is less than y'
+elseif (x > y ) then
+    write(*,*) 'x is greater than y'
+elseif (x == y ) then
+    write(*,*) 'x equals y'
+else
+    write(*,*) 'this case should never be found'      
+endif
+
+end program IfElseTest
+
+```
+
+***
+
+# Do loops
+
+Loops in Fortran are done using the `do` and `enddo` construct:
+
+```{fortran, eval=F}
+
+program DoLoopTest
+implicit none
+
+integer :: i, n
+
+n = 10
+
+do i = 1,n
+  write(*,*) 'i is ', i
+enddo
+
+end program DoLoopTest
+
+```
+
+Note that unlike R, you don't need to indent the commands inside the `do` and `enddo` construct. However, it helps to make your code much more readable if you do indent the commands. Indenting is also super helpful if you loop has spaned a page or more of code, since the indentation is a visual guide to the scope of the loop. Indenting is also helpful when you have nested loops. For example, both of these loops below are valid Fortran, but which one is easier to read?
+
+```{fortran, eval=F}
+
+do i = 1,l
+do j = 1,m
+do k = 1,n
+write(*,*) i,j,k
+enddo
+endo
+enddo
+
+```
+
+
+```{fortran, eval=F}
+
+do i = 1,l
+  do j = 1,m
+    do k = 1,n
+      write(*,*) i,j,k
+    enddo
+  endo
+enddo
+
+```
+
+# Do while loops
+
+The `do` `while` loop is similar but instead of using a counter, it uses a logical variable to exit the loop.
+
+```{fortran, eval=F}
+
+program DoWhileTest
+
+implicit none
+
+integer :: i, iCounter
+logical :: lKeepGoing
+
+lKeepGoing = .true.
+iCounter   = 0
+
+do while (lKeepGoing)
+
+  iCounter = iCounter + 1
+  write(*,*) 'iCounter: ',iCounter
+
+  if (iCounter == 10 ) lKeepGoing = .false.
+
+enddo
+
+write(*,*) 'All done'
+
+end program DoWhileTest
+
+```
+
+# Arrays
+
+## Define arrays
+
+The modern way of declaring a fixed size array in Fortran is to use the `dimension()` keyword. For example:
+
+```{fortran, eval=F}
+
+program TestArray
+
+real(8), dimension(10) :: xArray
+integer                :: i
+
+do i = 1,size(xArray)
+  xArray(i) = 5.0*i
+enddo
+
+write(*,*) 'xArray: ', xArray
+
+end program TestArray
+
+```
+
+Arrays can have multiple dimensions, otherwise referred to as the *rank* of the array. The Fortran2008 standard allows up to rank `15`, whereas the previous standard only allowed a maximum rank of `7`. Here are some examples:
+
+```{fortran, eval=F}
+
+real(8), dimension(10)          :: xArray1D
+real(8), dimension(10,20)       :: xArray2D
+real(8), dimension(10,20,10)    :: xArray3D
+integer, dimension(10,5,30,50)  :: xArray4D
+
+```
+
+## Allocatable arrays
+
+The arrays above are fixed dimensional, meaning that we declared their sizes in the declaration statements. A more flexible construct is the *allocatable array*. In Fortran you need to explicitly declare them using the `allocatable` keyword.
+
+```{fortran, eval=F}
+
+real(8),dimension(:),   allocatable :: xArray1D
+real(8),dimension(:,:), allocatable :: xArray2D
+
+m = 5
+n = 10
+
+allocate(xArray1D(m))
+allocate(xArray2D(m,n))
+
+```
+
+You can then assign values to the elements of the arrays.
+
+If you need to **free up memory later on in your program**, you can `deallocate` the arrays:
+
+```{fortran, eval=F}
+
+deallocate(xArray1D, xArray2D)
+
+```
+
+# In-class exercises
+
+## Exercise #1
+
+Go over the scripts, make sure you understand them and be able to run those scripts.
+
+## Exercise #2
+
+Write a Fortran script `TestLeapYear.f90` to determine whether the year of 2021 is a leap year.
+
+## Exercise #3
+
+Load Intel fortran compiler `ifort` on TaiYi:
+
+```{bash, eval=F}
+module load intel/2018.4
+```
+
+Then compile `TestLeapYear.f90` with `ifort` and run it.
+
+## Exercise #4
+
+Declare an array `MyArray` with a size of `100`, fill `MyArray` with `100` numbers, and print it.
+
