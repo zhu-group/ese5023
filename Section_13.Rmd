@@ -12,7 +12,7 @@ output:
 
 ***
 
-*The notes below are modified from the excellent [online tutorial](http://swcarpentry.github.io/shell-novice/) freely available on the Software Carpentry website.*
+*The notes below are modified from the excellent [online tutorial](https://rabernat.github.io/research_computing/intro-to-fortran.html) freely available on GitHub.*
 
 ***
 
@@ -274,6 +274,8 @@ end program TestUndeclared
 
 ```
 
+***
+
 # Relational operators
 
 | Older Fortran | Newer Fortran | R    | Description              |
@@ -392,6 +394,8 @@ enddo
 
 ```
 
+***
+
 # Do while loops
 
 The `do` `while` loop is similar but instead of using a counter, it uses a logical variable to exit the loop.
@@ -422,6 +426,8 @@ write(*,*) 'All done'
 end program DoWhileTest
 
 ```
+
+***
 
 # Arrays
 
@@ -484,6 +490,8 @@ deallocate(xArray1D, xArray2D)
 
 ```
 
+***
+
 # In-class exercises
 
 ## Exercise #1
@@ -492,7 +500,7 @@ Go over the scripts, make sure you understand them and be able to run those scri
 
 ## Exercise #2
 
-Write a Fortran script `TestLeapYear.f90` to determine whether the year of 2021 is a leap year.
+Write a Fortran script `TestLeapYear.f90` to determine whether the year of `2021` is a leap year.
 
 ## Exercise #3
 
