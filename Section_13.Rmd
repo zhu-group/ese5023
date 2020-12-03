@@ -376,7 +376,7 @@ do j = 1,m
 do k = 1,n
 write(*,*) i,j,k
 enddo
-endo
+enddo
 enddo
 
 ```
@@ -389,7 +389,7 @@ do i = 1,l
     do k = 1,n
       write(*,*) i,j,k
     enddo
-  endo
+  enddo
 enddo
 
 ```
