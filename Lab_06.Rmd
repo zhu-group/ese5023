@@ -51,6 +51,6 @@ Write a Fortran program `SetPassWord.f90`:
 
 **3.2.** Second, the program asks you to re-type the password again. 
 
-**3.3.** If you type the same password in **2.1** and **2.2**, the program will end and print some success messages. 
+**3.3.** If you type the same password in **3.1** and **3.2**, the program will end and print some success messages. 
 
 **3.4.** Otherwise, it will print some error messages and ask you to retype again. If you have failed three times, the program will be terminated with error messages.
