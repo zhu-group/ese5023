@@ -29,7 +29,7 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |11  |11/24|Tu. |[Lab 05](https://zhu-group.github.io/ese5023/Lab_05.html)                             |              |              |
 |11  |11/26|Th. |[Section 12 Linux: Shell scripts](https://zhu-group.github.io/ese5023/Section_12.html)|              |              |
 |12  |12/03|Th. |[Section 13 FORTRAN: Basics](https://zhu-group.github.io/ese5023/Section_13.html)     |              |  5           |
-|13  |12/08|Tu. |Lab 06                                                                                |              |              |
+|13  |12/08|Tu. |[Lab 06](https://zhu-group.github.io/ese5023/Lab_06.html)                             |              |              |
 |13  |12/10|Th. |Section 14 FORTRAN: Intermediate                                                      |  6           |              |
 |14  |12/17|Th. |Section 15 Miscellaneous                                                              |              |              |
 |15  |12/22|Tu. |Lab 07 Wrap-up                                                                        |              |  6           |
