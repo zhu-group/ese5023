@@ -11,7 +11,7 @@
 
 
 
-<title>Section 13 FORTRAN: Intermediate</title>
+<title>Section 14 FORTRAN: Intermediate</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -491,7 +491,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 13 FORTRAN: Intermediate</h1>
+<h1 class="title toc-ignore">Section 14 FORTRAN: Intermediate</h1>
 
 </div>
 
@@ -589,24 +589,22 @@ div.tocify {
 <span id="cb2-39"><a href="#cb2-39"></a></span>
 <span id="cb2-40"><a href="#cb2-40"></a><span class="kw">End Program</span> FileWriteTest</span></code></pre></div>
 <p>As you may notice, the output file <code>new1.dat</code> has only one line. This is because <code>write()</code> is called once to write two vectors. Try the following code chuck to save the values, see what will happen:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb3-1"><a href="#cb3-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">! Write the values to a new file, line by line</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new2.dat&#39;</span><span class="fu">)</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">write(</span>u, <span class="fu">*)</span> a(i), b(i)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">enddo</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">close(</span>u<span class="fu">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">! Write the values to a new file, line by line</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new2.dat&#39;</span><span class="fu">)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">write(</span>u, <span class="fu">*)</span> a(i), b(i)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">enddo</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">close(</span>u<span class="fu">)</span></span></code></pre></div>
 </div>
 <div id="format-specifiers" class="section level2">
 <h2>Format specifiers</h2>
 <p>In all of our <code>read</code> and <code>write</code> examples above, we used the generic <code>*</code> for the <em>format specifier</em>. When writing, Fortran will write out the <strong>full precision</strong> of each floating-point number. For example, <code>18.9779778</code>. You can use the format specifier to specify another format. In Fortran, they are often referred to as <strong>edit descriptors</strong>. Change the writing chuck to the following:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb4-1"><a href="#cb4-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">! Write the values to a new file, in a certain format</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new3.dat&#39;</span><span class="fu">)</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">write(</span>u, <span class="st">&#39;(f5.1,E10.3)&#39;</span><span class="fu">)</span> a(i), b(i)</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">enddo</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="fu">close(</span>u<span class="fu">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">! Write the values to a new file, in a certain format</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new3.dat&#39;</span><span class="fu">)</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">write(</span>u, <span class="st">&#39;(f5.1,E10.3)&#39;</span><span class="fu">)</span> a(i), b(i)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">enddo</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">close(</span>u<span class="fu">)</span></span></code></pre></div>
 <p>Here <code>f</code> is for a floating-point format, <code>E</code> is for scientific notation. For a <code>w.d</code> format, <code>w</code>is the width (number of characters) and <code>d</code> is the number of decimal places. See this <a href="https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html">note</a> for more about Fortran format.</p>
 <hr />
 </div>
@@ -614,127 +612,121 @@ div.tocify {
 <div id="functions" class="section level1">
 <h1>Functions</h1>
 <p>Like R, we can define <em>functions</em> in Fortran. This is done with the <code>function</code> keyword. Functions are useful when you need to do a complicated calculation that has only one result. Functions need to be either in a separate <code>.f90</code> file or have to be listed <strong>outside</strong> the main program. For example:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb5-1"><a href="#cb5-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">program</span> FunctionTest</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="dt">real(4)</span> <span class="dt">::</span> a, b, c, Get_the_larger</span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">c = Get_the_larger(a,b)</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">end program</span> FunctionTest</span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">! This is the external function</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="dt">real(4)</span> <span class="kw">function</span> Get_the_larger(x,y)</span>
-<span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="dt">real(4)</span> <span class="dt">::</span> x, y</span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="kw">if</span>(x <span class="op">&gt;</span> y) <span class="kw">then</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a>  Get_the_larger <span class="kw">=</span> x</span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="kw">else</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a>  Get_the_larger <span class="kw">=</span> y</span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="kw">endif</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="kw">end function</span> Get_the_larger</span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">program</span> FunctionTest</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="dt">real(4)</span> <span class="dt">::</span> a, b, c, Get_the_larger</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">c = Get_the_larger(a,b)</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">end program</span> FunctionTest</span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">! This is the external function</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="dt">real(4)</span> <span class="kw">function</span> Get_the_larger(x,y)</span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="dt">real(4)</span> <span class="dt">::</span> x, y</span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="kw">if</span>(x <span class="op">&gt;</span> y) <span class="kw">then</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>  Get_the_larger <span class="kw">=</span> x</span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="kw">else</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>  Get_the_larger <span class="kw">=</span> y</span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="kw">endif</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="kw">end function</span> Get_the_larger</span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co">!-----------------------------------</span></span></code></pre></div>
 <hr />
 </div>
 <div id="subroutines" class="section level1">
 <h1>Subroutines</h1>
 <p>Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb6-1"><a href="#cb6-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">program</span> SubRoutineTest</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="dt">real(4)</span> <span class="dt">::</span> a,b,c,d</span>
-<span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">call</span> subroutineA(a,b,c)  <span class="co">! a and b are input, c is returned</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="kw">call</span> subroutineB(a,b,c,d)  <span class="co">! a,b and c are input, d is returned</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;d is: &#39;</span>, d</span>
-<span id="cb6-15"><a href="#cb6-15"></a></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="kw">end program</span> SubRoutineTest</span>
-<span id="cb6-17"><a href="#cb6-17"></a></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="kw">subroutine</span> subroutineA(a,b,c)</span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b</span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> c</span>
-<span id="cb6-23"><a href="#cb6-23"></a></span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="co">c = a*b</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="kw">end subroutine</span> subroutineA</span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="kw">subroutine</span> subroutineB(a,b,c,d)</span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b,c</span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> d</span>
-<span id="cb6-32"><a href="#cb6-32"></a></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="dt">real(4)</span>              <span class="dt">::</span> x</span>
-<span id="cb6-34"><a href="#cb6-34"></a></span>
-<span id="cb6-35"><a href="#cb6-35"></a>x <span class="kw">=</span> <span class="fl">10.0</span></span>
-<span id="cb6-36"><a href="#cb6-36"></a></span>
-<span id="cb6-37"><a href="#cb6-37"></a>d <span class="kw">=</span> a <span class="kw">+</span> b <span class="kw">+</span> x<span class="kw">*</span>c</span>
-<span id="cb6-38"><a href="#cb6-38"></a></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="kw">end subroutine</span> subroutineB</span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="co">!-----------------------------------</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">program</span> SubRoutineTest</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="dt">real(4)</span> <span class="dt">::</span> a,b,c,d</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="kw">call</span> subroutineA(a,b,c)  <span class="co">! a and b are input, c is returned</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">call</span> subroutineB(a,b,c,d)  <span class="co">! a,b and c are input, d is returned</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;d is: &#39;</span>, d</span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="kw">end program</span> SubRoutineTest</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="kw">subroutine</span> subroutineA(a,b,c)</span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b</span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> c</span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">c = a*b</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="kw">end subroutine</span> subroutineA</span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="kw">subroutine</span> subroutineB(a,b,c,d)</span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b,c</span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> d</span>
+<span id="cb6-31"><a href="#cb6-31"></a></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="dt">real(4)</span>              <span class="dt">::</span> x</span>
+<span id="cb6-33"><a href="#cb6-33"></a></span>
+<span id="cb6-34"><a href="#cb6-34"></a>x <span class="kw">=</span> <span class="fl">10.0</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a></span>
+<span id="cb6-36"><a href="#cb6-36"></a>d <span class="kw">=</span> a <span class="kw">+</span> b <span class="kw">+</span> x<span class="kw">*</span>c</span>
+<span id="cb6-37"><a href="#cb6-37"></a></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="kw">end subroutine</span> subroutineB</span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">!-----------------------------------</span></span></code></pre></div>
 <hr />
 </div>
 <div id="modules" class="section level1">
 <h1>Modules</h1>
 <p>Modern Fortran best practices are to put all subroutines and functions into one or more module files. In a module, you can define variables and all the actions that work on them. You can have <em>public</em> and <em>private</em> variables, subroutines, and functions. Your main program can then <code>use</code> the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available).</p>
 <p>First, let’s define a module:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb7-1"><a href="#cb7-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">module</span> constants  </span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">implicit</span> <span class="kw">none</span> </span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> pi <span class="kw">=</span> <span class="fl">3.1415926536</span>  </span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> e <span class="kw">=</span> <span class="fl">2.7182818285</span> </span>
-<span id="cb7-8"><a href="#cb7-8"></a>   </span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">contains      </span></span>
-<span id="cb7-10"><a href="#cb7-10"></a></span>
-<span id="cb7-11"><a href="#cb7-11"></a>   <span class="kw">subroutine</span> show_consts()          </span>
-<span id="cb7-12"><a href="#cb7-12"></a>      <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
-<span id="cb7-13"><a href="#cb7-13"></a>      <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
-<span id="cb7-14"><a href="#cb7-14"></a>   <span class="kw">end subroutine</span> show_consts </span>
-<span id="cb7-15"><a href="#cb7-15"></a>   </span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">end module</span> constants</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">module</span> constants  </span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">implicit</span> <span class="kw">none</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> pi <span class="kw">=</span> <span class="fl">3.1415926536</span>  </span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> e <span class="kw">=</span> <span class="fl">2.7182818285</span> </span>
+<span id="cb7-7"><a href="#cb7-7"></a>   </span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">contains      </span></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a>   <span class="kw">subroutine</span> show_consts()          </span>
+<span id="cb7-11"><a href="#cb7-11"></a>      <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
+<span id="cb7-12"><a href="#cb7-12"></a>      <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
+<span id="cb7-13"><a href="#cb7-13"></a>   <span class="kw">end subroutine</span> show_consts </span>
+<span id="cb7-14"><a href="#cb7-14"></a>   </span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">end module</span> constants</span></code></pre></div>
 <p>Then we can use this module in the main program (<code>module_example.f90</code>) with <code>use</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb8-1"><a href="#cb8-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">program</span> module_example    </span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">use</span> constants      </span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">implicit</span> <span class="kw">none</span>     </span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="dt">   real</span> <span class="dt">::</span> x, ePowerx, area, radius </span>
-<span id="cb8-9"><a href="#cb8-9"></a>   x <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>   radius <span class="kw">=</span> <span class="fl">7.0</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>   ePowerx <span class="kw">=</span> e <span class="kw">**</span> x</span>
-<span id="cb8-12"><a href="#cb8-12"></a>   area <span class="kw">=</span> pi <span class="kw">*</span> radius<span class="kw">**</span><span class="dv">2</span>     </span>
-<span id="cb8-13"><a href="#cb8-13"></a>   </span>
-<span id="cb8-14"><a href="#cb8-14"></a>   <span class="kw">call</span> show_consts() </span>
-<span id="cb8-15"><a href="#cb8-15"></a>   </span>
-<span id="cb8-16"><a href="#cb8-16"></a>   <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;e raised to the power of 2.0 = &quot;</span>, ePowerx</span>
-<span id="cb8-17"><a href="#cb8-17"></a>   <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Area of a circle with radius 7.0 = &quot;</span>, area  </span>
-<span id="cb8-18"><a href="#cb8-18"></a>   </span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="kw">end program</span> module_example</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">program</span> module_example    </span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">use</span> constants      </span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">implicit</span> <span class="kw">none</span>     </span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="dt">   real</span> <span class="dt">::</span> x, ePowerx, area, radius </span>
+<span id="cb8-8"><a href="#cb8-8"></a>   x <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>   radius <span class="kw">=</span> <span class="fl">7.0</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>   ePowerx <span class="kw">=</span> e <span class="kw">**</span> x</span>
+<span id="cb8-11"><a href="#cb8-11"></a>   area <span class="kw">=</span> pi <span class="kw">*</span> radius<span class="kw">**</span><span class="dv">2</span>     </span>
+<span id="cb8-12"><a href="#cb8-12"></a>   </span>
+<span id="cb8-13"><a href="#cb8-13"></a>   <span class="kw">call</span> show_consts() </span>
+<span id="cb8-14"><a href="#cb8-14"></a>   </span>
+<span id="cb8-15"><a href="#cb8-15"></a>   <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;e raised to the power of 2.0 = &quot;</span>, ePowerx</span>
+<span id="cb8-16"><a href="#cb8-16"></a>   <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Area of a circle with radius 7.0 = &quot;</span>, area  </span>
+<span id="cb8-17"><a href="#cb8-17"></a>   </span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="kw">end program</span> module_example</span></code></pre></div>
 <p>To compile the module and program:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">gfortran</span> constants.f90 ModuleTest.f90 -o ModuleTest.x</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">gfortran</span> constants.f90 ModuleTest.f90 -o ModuleTest.x</span></code></pre></div>
 <p>Note that in this command, the module appears before the main program (<code>ModuleTest.f90</code>) so that the functions are defined before they are referenced in the main program.</p>
 <hr />
 </div>
@@ -743,59 +735,54 @@ div.tocify {
 <p>When working on large projects, especially projects that are shared between a number of users, it is useful to create <em>object files</em> or <em>libraries of object files</em> that can be shared between programmers and users.</p>
 <p>Suppose we have multiple source files, for example:</p>
 <p><code>sub1.f90</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb10-1"><a href="#cb10-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">subroutine</span> sub1(x)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="dt">  real(4)</span>    <span class="dt">::</span> x</span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">print</span> <span class="kw">*</span>, <span class="st">&quot;This is from sub1, x:&quot;</span>, x</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">subroutine</span> sub1(x)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="dt">  real(4)</span>    <span class="dt">::</span> x</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">print</span> <span class="kw">*</span>, <span class="st">&quot;This is from sub1, x:&quot;</span>, x</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">end</span></span></code></pre></div>
 <p><code>sub2.f90</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb11-1"><a href="#cb11-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">subroutine</span> sub2(x)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="dt">  real(4)</span>    <span class="dt">::</span> x</span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">print</span> <span class="kw">*</span>, <span class="st">&quot;This is from sub2, x^2:&quot;</span>, x<span class="kw">**</span><span class="dv">2</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">subroutine</span> sub2(x)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="dt">  real(4)</span>    <span class="dt">::</span> x</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">print</span> <span class="kw">*</span>, <span class="st">&quot;This is from sub2, x^2:&quot;</span>, x<span class="kw">**</span><span class="dv">2</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">end</span></span></code></pre></div>
 <p><code>constants.f90</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb12-1"><a href="#cb12-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">module</span> constants  </span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">implicit</span> <span class="kw">none</span> </span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> pi <span class="kw">=</span> <span class="fl">3.1415926536</span>  </span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> e <span class="kw">=</span> <span class="fl">2.7182818285</span> </span>
-<span id="cb12-8"><a href="#cb12-8"></a>   </span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">contains </span></span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a>   <span class="kw">subroutine</span> show_consts()          </span>
-<span id="cb12-12"><a href="#cb12-12"></a>      <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
-<span id="cb12-13"><a href="#cb12-13"></a>      <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
-<span id="cb12-14"><a href="#cb12-14"></a>      <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;This is from module constants&quot;</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a>   <span class="kw">end subroutine</span> show_consts </span>
-<span id="cb12-16"><a href="#cb12-16"></a>   </span>
-<span id="cb12-17"><a href="#cb12-17"></a><span class="kw">end module</span> constants</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">module</span> constants  </span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">implicit</span> <span class="kw">none</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> pi <span class="kw">=</span> <span class="fl">3.1415926536</span>  </span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="dt">   real</span>, <span class="dt">parameter</span> <span class="dt">::</span> e <span class="kw">=</span> <span class="fl">2.7182818285</span> </span>
+<span id="cb12-7"><a href="#cb12-7"></a>   </span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">contains </span></span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a>   <span class="kw">subroutine</span> show_consts()          </span>
+<span id="cb12-11"><a href="#cb12-11"></a>      <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
+<span id="cb12-12"><a href="#cb12-12"></a>      <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
+<span id="cb12-13"><a href="#cb12-13"></a>      <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;This is from module constants&quot;</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>   <span class="kw">end subroutine</span> show_consts </span>
+<span id="cb12-15"><a href="#cb12-15"></a>   </span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="kw">end module</span> constants</span></code></pre></div>
 <p>We want to call/use the above programs in the <code>Main.f90</code> program:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb13-1"><a href="#cb13-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">program</span> Main</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="kw">use</span> constants</span>
-<span id="cb13-5"><a href="#cb13-5"></a></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="dt">  real</span> <span class="dt">::</span> a</span>
-<span id="cb13-9"><a href="#cb13-9"></a></span>
-<span id="cb13-10"><a href="#cb13-10"></a>  a<span class="kw">=</span><span class="fl">2.0</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a></span>
-<span id="cb13-12"><a href="#cb13-12"></a>  <span class="kw">call</span> sub1(a)</span>
-<span id="cb13-13"><a href="#cb13-13"></a>  <span class="kw">call</span> sub2(a)</span>
-<span id="cb13-14"><a href="#cb13-14"></a></span>
-<span id="cb13-15"><a href="#cb13-15"></a>  <span class="kw">call</span> show_consts()</span>
-<span id="cb13-16"><a href="#cb13-16"></a></span>
-<span id="cb13-17"><a href="#cb13-17"></a><span class="kw">end program</span> Main</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">program</span> Main</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">use</span> constants</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="dt">  real</span> <span class="dt">::</span> a</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  a<span class="kw">=</span><span class="fl">2.0</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="kw">call</span> sub1(a)</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="kw">call</span> sub2(a)</span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="kw">call</span> show_consts()</span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="kw">end program</span> Main</span></code></pre></div>
 <p>Completed subprograms can be compiled into object files that can be linked during the compilation of the whole program:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">gfortran</span> -c sub1.f90</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="ex">gfortran</span> -c sub2.f90</span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="ex">gfortran</span> -c constants.f90</span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="ex">gfortran</span> Main.f90 sub1.o sub2.o constants.o -o Main.x</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">gfortran</span> -c sub1.f90</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">gfortran</span> -c sub2.f90</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="ex">gfortran</span> -c constants.f90</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="ex">gfortran</span> Main.f90 sub1.o sub2.o constants.o -o Main.x</span></code></pre></div>
 <p>Note that the <code>-c</code> option is lowercase, which means: compile to object (<code>.o</code>) only, do not link.</p>
 <p>However, if many object files are to be linked, then it is convenient to place them in a library. Libraries can be created using the <code>ar</code> command (see <code>man ar</code> ). Object files can be placed in a library, for example, as follows:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ar</span> rcvf libsubs.a sub1.o sub2.o</span>
@@ -806,7 +793,7 @@ div.tocify {
 <p>The contents of a library can be listed with:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ar</span> tv libsubs.a</span></code></pre></div>
 <p>Subroutines and functions in the library can be listed with:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a>  <span class="fu">nm</span> libsubs.a</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">nm</span> libsubs.a</span></code></pre></div>
 <p>Objects can be deleted from the library with:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ar</span> dv libsubs.a sub.o</span></code></pre></div>
 <p>Once libraries have been created, it can be linked in a compilation as follows:</p>

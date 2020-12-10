@@ -1,5 +1,5 @@
 ---
-title: "Section 13 FORTRAN: Intermediate"
+title: "Section 14 FORTRAN: Intermediate"
 output:
   html_document:
     toc: true
@@ -59,7 +59,6 @@ enddo
 deallocate( a, b )
 
 End Program FileReadTest
-
 ```
 
 The `unit` is an integer that tells Fortran where to read or write the data from. Here, you pick a number (`50`) and assign that as the file unit (`u`). `status = 'old'` tells Fortran that the file exists already. This is optional, but can be helpful since if the file doesn't exist, Fortran will issue a helpful error message. For the read commands, here we are using the asterisk `*` to denote a *free-format* read, which means that Fortran will decide what the format is.
@@ -109,20 +108,17 @@ close(u)
 deallocate( a, b )
 
 End Program FileWriteTest
-
 ```
 
 As you may notice, the output file `new1.dat` has only one line. This is because `write()` is called once to write two vectors. Try the following code chuck to save the values, see what will happen:
 
 ```{fortran, eval=F}
-
 ! Write the values to a new file, line by line
 open(unit=u, file='new2.dat')
 do i = 1,n
   write(u, *) a(i), b(i)
 enddo
 close(u)
-
 ```
 
 ## Format specifiers
@@ -130,14 +126,12 @@ close(u)
 In all of our `read` and `write` examples above, we used the generic `*` for the *format specifier*. When writing, Fortran will write out the **full precision** of each floating-point number. For example, `18.9779778`. You can use the format specifier to specify another format. In Fortran, they are often referred to as **edit descriptors**. Change the writing chuck to the following:
 
 ```{fortran, eval=F}
-
 ! Write the values to a new file, in a certain format
 open(unit=u, file='new3.dat')
 do i = 1,n
   write(u, '(f5.1,E10.3)') a(i), b(i)
 enddo
 close(u)
-
 ```
 
 Here `f` is for a floating-point format, `E` is for scientific notation. For a `w.d` format, `w `is the width (number of characters) and `d` is the number of decimal places. See this [note](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html) for more about Fortran format. 
@@ -149,7 +143,6 @@ Here `f` is for a floating-point format, `E` is for scientific notation. For a `
 Like R, we can define *functions* in Fortran. This is done with the `function` keyword. Functions are useful when you need to do a complicated calculation that has only one result. Functions need to be either in a separate `.f90` file or have to be listed **outside** the main program. For example: 
 
 ```{fortran, eval=F}
-
 program FunctionTest
 
 implicit none
@@ -179,7 +172,6 @@ endif
 
 end function Get_the_larger
 !-----------------------------------
-  
 ```
 
 ***
@@ -189,7 +181,6 @@ end function Get_the_larger
 Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name.
 
 ```{fortran, eval=F}
-
 program SubRoutineTest
 
 implicit none
@@ -229,7 +220,6 @@ d = a + b + x*c
 
 end subroutine subroutineB
 !-----------------------------------
-
 ```
 
 ***
@@ -241,7 +231,6 @@ Modern Fortran best practices are to put all subroutines and functions into one 
 First, let's define a module:
 
 ```{fortran, eval=F}
-
 module constants  
 
 implicit none 
@@ -257,13 +246,11 @@ contains
    end subroutine show_consts 
    
 end module constants
-
 ```
 
 Then we can use this module in the main program (`module_example.f90`) with `use`:
 
 ```{fortran, eval=F}
-
 program module_example    
 
 use constants      
@@ -282,15 +269,12 @@ implicit none
    print*, "Area of a circle with radius 7.0 = ", area  
    
 end program module_example
-
 ```
 
 To compile the module and program:
 
 ```{bash, eval=F}
-
 gfortran constants.f90 ModuleTest.f90 -o ModuleTest.x
-
 ```
 
 Note that in this command, the module appears before the main program (`ModuleTest.f90`) so that the functions are defined before they are referenced in the main program.
@@ -306,29 +290,24 @@ Suppose we have multiple source files, for example:
 `sub1.f90`:
 
 ```{fortran, eval=F}
-
 subroutine sub1(x)
   real(4)    :: x
   print *, "This is from sub1, x:", x
 end
-
 ```
 
 `sub2.f90`:
 
 ```{fortran, eval=F}
-
 subroutine sub2(x)
   real(4)    :: x
   print *, "This is from sub2, x^2:", x**2
 end
-
 ```
 
 `constants.f90`:
 
 ```{fortran, eval=F}
-
 module constants  
 
 implicit none 
@@ -345,13 +324,11 @@ contains
    end subroutine show_consts 
    
 end module constants
-
 ```
 
 We want to call/use the above programs in the `Main.f90` program:
 
 ```{fortran, eval=F}
-
 program Main
 
 use constants
@@ -368,18 +345,15 @@ use constants
   call show_consts()
 
 end program Main
-
 ```
 
 Completed subprograms can be compiled into object files that can be linked during the compilation of the whole program:
 
 ```{bash, eval=F}
-
 gfortran -c sub1.f90
 gfortran -c sub2.f90
 gfortran -c constants.f90
 gfortran Main.f90 sub1.o sub2.o constants.o -o Main.x
-
 ```
 
 Note that the `-c` option is lowercase, which means: compile to object (`.o`) only, do not link. 
@@ -406,7 +380,7 @@ ar tv libsubs.a
 
 Subroutines and functions in the library can be listed with:
 ```{bash, eval=F}
-  nm libsubs.a
+nm libsubs.a
 ```
 
 Objects can be deleted from the library with:
