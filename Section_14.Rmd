@@ -62,7 +62,7 @@ End Program FileReadTest
 
 ```
 
-The `unit` is an integer which tells Fortran where to read or write the data from. Here, you pick a number (`50`) and assign that as the file unit (`u`). `status = 'old'` tells Fortran that the file exists already. This is optional, but can be helpful since if the file doesn't exist, Fortran will issue a helpful error message. For the read commands, here we are using the asterisk `*` to denote a *free-format* read, which means that Fortran will decide what the format is.
+The `unit` is an integer that tells Fortran where to read or write the data from. Here, you pick a number (`50`) and assign that as the file unit (`u`). `status = 'old'` tells Fortran that the file exists already. This is optional, but can be helpful since if the file doesn't exist, Fortran will issue a helpful error message. For the read commands, here we are using the asterisk `*` to denote a *free-format* read, which means that Fortran will decide what the format is.
 
 ## Writing data to a file
 
@@ -127,7 +127,7 @@ close(u)
 
 ## Format specifiers
 
-In all of our `read` and `write` examples above, we used the generic `*` for the *format specifier*. When writing, Fortran will write out the **full precision** of each floating point number. For example: `18.9779778`. You can use the format specifier to specify another format. In Fortran, they are often referred to as **edit descriptors**. Change the writing chuck to the following:
+In all of our `read` and `write` examples above, we used the generic `*` for the *format specifier*. When writing, Fortran will write out the **full precision** of each floating-point number. For example, `18.9779778`. You can use the format specifier to specify another format. In Fortran, they are often referred to as **edit descriptors**. Change the writing chuck to the following:
 
 ```{fortran, eval=F}
 
@@ -140,7 +140,9 @@ close(u)
 
 ```
 
-Here `f` is for a floating point format, `E` is for scientific notation. For a `w.d` format, `w `is the width (number of characters) and `d` is the number of decimal places. See this [note](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html) for more.
+Here `f` is for a floating-point format, `E` is for scientific notation. For a `w.d` format, `w `is the width (number of characters) and `d` is the number of decimal places. See this [note](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html) for more about Fortran format. 
+
+***
 
 # Functions
 
@@ -180,9 +182,11 @@ end function Get_the_larger
   
 ```
 
+***
+
 # Subroutines
 
-Use a subroutine to break your code up unto various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name.
+Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name.
 
 ```{fortran, eval=F}
 
@@ -228,9 +232,11 @@ end subroutine subroutineB
 
 ```
 
+***
+
 # Modules
 
-Modern Fortran best practices are to put all subroutines and functions into one or more module files. In a module you can define variables and all the actions that work on them. You can have *public* and *private* variables, subroutines and functions. Your main program can then `use` the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available). 
+Modern Fortran best practices are to put all subroutines and functions into one or more module files. In a module, you can define variables and all the actions that work on them. You can have *public* and *private* variables, subroutines, and functions. Your main program can then `use` the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available). 
 
 First, let's define a module:
 
@@ -254,7 +260,7 @@ end module constants
 
 ```
 
-Then we can use this module in a main program with `use`:
+Then we can use this module in the main program (`module_example.f90`) with `use`:
 
 ```{fortran, eval=F}
 
@@ -287,7 +293,9 @@ gfortran constants.f90 ModuleTest.f90 -o ModuleTest.x
 
 ```
 
-Note that in this command the module appears before the main program (`ModuleTest.f90`) so that the functions are defined before they are referenced in the main program.
+Note that in this command, the module appears before the main program (`ModuleTest.f90`) so that the functions are defined before they are referenced in the main program.
+
+***
 
 # Creating library files
 
@@ -376,7 +384,7 @@ gfortran Main.f90 sub1.o sub2.o constants.o -o Main.x
 
 Note that the `-c` option is lowercase, which means: compile to object (`.o`) only, do not link. 
 
-However, if many object files are to be linked then it is convenient to place them in a library. Libraries can be created using the `ar` command (see `man ar` ). Object files can be placed in a library for example as follows:
+However, if many object files are to be linked, then it is convenient to place them in a library. Libraries can be created using the `ar` command (see `man ar` ). Object files can be placed in a library, for example, as follows:
 
 ```{bash, eval=F}
 ar rcvf libsubs.a sub1.o sub2.o
@@ -412,9 +420,9 @@ Once libraries have been created, it can be linked in a compilation as follows:
 gfortran Main.f90 -o Main.x -L. -lsubs -lconst
 ```
 
-The `-L.` options tells the linker that the libraries can be found in the current directory. `lsubs` is short for `libsubs.a`, and `lconst` is short for `libconst.a`.
+The `-L.` option tells the linker that the libraries can be found in the current directory. `lsubs` is short for `libsubs.a`, and `lconst` is short for `libconst.a`.
 
-If the libraries are not in the current directory then you should give the path, for example:
+If the libraries are not in the current directory, then you should give the path, for example:
 
 ```{bash, eval=F}
 gfortran Main.f90 -o Main.x -Llib/ -lsubs -lconst
@@ -448,11 +456,11 @@ Write a Fortran program to write some numbers to a file that has `20` lines and 
 
 ## Exercise #3
 
-Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from a main program (`my.f90`) to check whether `2021` is a leap year. 
+Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from the main program (`my.f90`) to check whether `2021` is a leap year. 
 
 ## Exercise #4
 
-Write a module `GetDays.f90` to print total number of days in a given year. Then `use` this module in `my.f90` to print total number of days for `2021`.
+Write a module `GetDays.f90` to print the total number of days in a given year. Then `use` this module in `my.f90` to print the total number of days for `2021`.
 
 ## Exercise #5
 
@@ -462,3 +470,12 @@ Write a module `GetDays.f90` to print total number of days in a given year. Then
 
 **5.3.** Compile and run `my.f90` using the two libraries.
 
+***
+
+# Further reading
+
+* [Fortran 90 Tutorial](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html)
+
+* [Fortran Tutorial](https://www.tutorialspoint.com/fortran/index.htm)
+
+* [Compiling and Running Fortran Programs - a basic guide](http://www.fortran.gantep.edu.tr/compiling-g95-basic-guide.html)
