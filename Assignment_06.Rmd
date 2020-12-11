@@ -9,9 +9,9 @@ output:
 ---
 
 **Out: 12/11 19:00 **  
-**Due: 12/22 19:00 **  
+**Due: 12/24 19:00 **  
 
-Upload your **Fortran programs** and **report** to the `ESE5023_Assignments` repository before the deadline.
+Upload your **Fortran programs** to the `ESE5023_Assignments` repository before the deadline.
 
 ***
 
@@ -43,7 +43,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 # 2. Calculate the solar zenith angle
 
-The Solar Zenith Angle (SZA; $\theta_Z$ in the following figure [^1]) is the angle between the local zenith and the line of sight from that point to the Sun. This means that the higher the Sun is in the sky, to lower the SZA is. The value of the SZA depends on the position on the Earth and the local date and time.
+The Solar Zenith Angle (SZA; $\theta_Z$ in the following figure [^1]) is the angle between the local zenith and the line of sight from that point to the Sun. This means that the higher the Sun is in the sky, to lower the SZA is. The value of the SZA depends on the location on the Earth and the local date and time.
 
 Please read this [note](http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf) (page 1-2) for more about how to calculate SZA.
 
@@ -51,7 +51,7 @@ Please read this [note](http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf) (p
 
 [^1]: [source](https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/sun-position/)
 
-**2.1 [5 points]** Write a module `Declination_angle` to calculate the *declination angle* in a certain date. 
+**2.1 [5 points]** Write a module `Declination_angle` to calculate the *declination angle* on a certain date. 
 
 [**Hint:** using equation 2]
 
@@ -63,6 +63,6 @@ Please read this [note](http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf) (p
 
 [**Hint:** using equation 6-7]
 
-**2.3 [5 points]** Create a library (`libsolar.a`) that contains `Declination_angle.o` and `AST.o`. Compile `Cal_SZA.f90` using `libsolar.a`.
+**2.4 [5 points]** Create a library (`libsolar.a`) that contains `Declination_angle.o` and `AST.o`. Compile `Cal_SZA.f90` using `libsolar.a`.
 
-**2.4 [5 points]** Print the SZA for Shenzhen (`22.542883N, 114.062996E`) at `14:35` (local time) on `2020-12-20`.
+**2.5 [5 points]** Print the SZA for Shenzhen (`22.542883N, 114.062996E`) at `14:35` (local time) on `2020-12-20`.

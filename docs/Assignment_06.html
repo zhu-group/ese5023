@@ -407,8 +407,8 @@ div.tocify {
 
 
 <p><strong>Out: 12/11 19:00 </strong><br />
-<strong>Due: 12/22 19:00 </strong></p>
-<p>Upload your <strong>Fortran programs</strong> and <strong>report</strong> to the <code>ESE5023_Assignments</code> repository before the deadline.</p>
+<strong>Due: 12/24 19:00 </strong></p>
+<p>Upload your <strong>Fortran programs</strong> to the <code>ESE5023_Assignments</code> repository before the deadline.</p>
 <hr />
 <div id="instructions" class="section level1">
 <h1>Instructions</h1>
@@ -433,17 +433,17 @@ Submit your scripts and report via GitHub. The submission time will be determine
 </div>
 <div id="calculate-the-solar-zenith-angle" class="section level1">
 <h1>2. Calculate the solar zenith angle</h1>
-<p>The Solar Zenith Angle (SZA; <span class="math inline">\(\theta_Z\)</span> in the following figure <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>) is the angle between the local zenith and the line of sight from that point to the Sun. This means that the higher the Sun is in the sky, to lower the SZA is. The value of the SZA depends on the position on the Earth and the local date and time.</p>
+<p>The Solar Zenith Angle (SZA; <span class="math inline">\(\theta_Z\)</span> in the following figure <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>) is the angle between the local zenith and the line of sight from that point to the Sun. This means that the higher the Sun is in the sky, to lower the SZA is. The value of the SZA depends on the location on the Earth and the local date and time.</p>
 <p>Please read this <a href="http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf">note</a> (page 1-2) for more about how to calculate SZA.</p>
 <p><img src="figs/sun_position_b.jpg" alt="drawing" width="400"/></p>
-<p><strong>2.1 [5 points]</strong> Write a module <code>Declination_angle</code> to calculate the <em>declination angle</em> in a certain date.</p>
+<p><strong>2.1 [5 points]</strong> Write a module <code>Declination_angle</code> to calculate the <em>declination angle</em> on a certain date.</p>
 <p>[<strong>Hint:</strong> using equation 2]</p>
 <p><strong>2.2 [10 points]</strong> Write a module <code>AST</code> to calculate the <em>apparent solar time</em> (AST; or <em>local solar time</em>) in a certain location for a certain date and time.</p>
 <p>[<strong>Hint:</strong> using equation 3-5]</p>
 <p><strong>2.3 [10 points]</strong> Write a main program (<code>Cal_SZA.f90</code>) that uses module <code>Declination_angle</code> and <code>AST</code> to print the SZA in a certain location for a certain date and time.</p>
 <p>[<strong>Hint:</strong> using equation 6-7]</p>
-<p><strong>2.3 [5 points]</strong> Create a library (<code>libsolar.a</code>) that contains <code>Declination_angle.o</code> and <code>AST.o</code>. Compile <code>Cal_SZA.f90</code> using <code>libsolar.a</code>.</p>
-<p><strong>2.4 [5 points]</strong> Print the SZA for Shenzhen (<code>22.542883N, 114.062996E</code>) at <code>14:35</code> (local time) on <code>2020-12-20</code>.</p>
+<p><strong>2.4 [5 points]</strong> Create a library (<code>libsolar.a</code>) that contains <code>Declination_angle.o</code> and <code>AST.o</code>. Compile <code>Cal_SZA.f90</code> using <code>libsolar.a</code>.</p>
+<p><strong>2.5 [5 points]</strong> Print the SZA for Shenzhen (<code>22.542883N, 114.062996E</code>) at <code>14:35</code> (local time) on <code>2020-12-20</code>.</p>
 </div>
 <div class="footnotes">
 <hr />
