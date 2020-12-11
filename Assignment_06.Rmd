@@ -1,0 +1,68 @@
+---
+title: "Assignment 06"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 12/11 19:00 **  
+**Due: 12/22 19:00 **  
+
+Upload your **Fortran programs** and **report** to the `ESE5023_Assignments` repository before the deadline.
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get  clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, “XXX explained to me what is asked in the problem set 3”). Or cite online resources (*e.g.*, “I got inspired by reading XXX”) that helped you.
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Late Submission:**   
+Late submissions will not receive full credit. **Half credit** will be awarded to correct solutions submitted within **24 hours** of the original deadline. Otherwise, no credit will be given. 
+
+**Submitting your assignment:**  
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.  
+
+***
+
+# 1. Matrix multiplication
+
+**1.1 [5 points]** Write a subroutine `Matrix_multip.f90` to do matrix multiplication. 
+
+**1.2 [5 points]** Write a program `Main.f90` to read `/work/ese-ouycc/fortran_2/M.dat` as the matrix `M`, and  `/work/ese-ouycc/fortran_2/N.dat` as the matrix `N`.
+
+**1.3 [5 points]** Call subroutine `Matrix_multip()` from `Main.f90` to compute `M*N`; write the output to a new file `MN.dat`, values are in formats of `f8.1`.
+
+***
+
+# 2. Calculate the solar zenith angle
+
+The Solar Zenith Angle (SZA; $\theta_Z$ in the following figure [^1]) is the angle between the local zenith and the line of sight from that point to the Sun. This means that the higher the Sun is in the sky, to lower the SZA is. The value of the SZA depends on the position on the Earth and the local date and time.
+
+Please read this [note](http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf) (page 1-2) for more about how to calculate SZA.
+
+<img src="figs/sun_position_b.jpg" alt="drawing" width="400"/>  
+
+[^1]: [source](https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/sun-position/)
+
+**2.1 [5 points]** Write a module `Declination_angle` to calculate the *declination angle* in a certain date. 
+
+[**Hint:** using equation 2]
+
+**2.2 [10 points]** Write a module `AST` to calculate the *apparent solar time* (AST; or *local solar time*) in a certain location for a certain date and time.
+
+[**Hint:** using equation 3-5]
+
+**2.3 [10 points]** Write a main program (`Cal_SZA.f90`) that uses module `Declination_angle` and `AST` to print the SZA in a certain location for a certain date and time.
+
+[**Hint:** using equation 6-7]
+
+**2.3 [5 points]** Create a library (`libsolar.a`) that contains `Declination_angle.o` and `AST.o`. Compile `Cal_SZA.f90` using `libsolar.a`.
+
+**2.4 [5 points]** Print the SZA for Shenzhen (`22.542883N, 114.062996E`) at `14:35` (local time) on `2020-12-20`.

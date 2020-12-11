@@ -11,7 +11,7 @@
 
 
 
-<title>Resource</title>
+<title>Assignment 06</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -401,44 +401,55 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Resource</h1>
+<h1 class="title toc-ignore">Assignment 06</h1>
 
 </div>
 
 
-<div id="rstudio-desktop" class="section level1">
-<h1>RStudio Desktop</h1>
-<p>We will use <a href="https://rstudio.com/">RStudio</a> to learn <a href="https://www.r-project.org/">R</a> programming. Make sure you install R first before installing RStudio Desktop.</p>
+<p><strong>Out: 12/11 19:00 </strong><br />
+<strong>Due: 12/22 19:00 </strong></p>
+<p>Upload your <strong>Fortran programs</strong> and <strong>report</strong> to the <code>ESE5023_Assignments</code> repository before the deadline.</p>
+<hr />
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong><br />
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
 <ul>
-<li>Install <a href="https://mirrors.tongji.edu.cn/CRAN/">R (v4.0.2)</a></li>
-<li>Install <a href="https://rstudio.com/products/rstudio/download/">RStudio Desktop (v1.3.1073)</a></li>
+<li>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in the problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</li>
+<li>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</li>
 </ul>
+<p><strong>Late Submission:</strong><br />
+Late submissions will not receive full credit. <strong>Half credit</strong> will be awarded to correct solutions submitted within <strong>24 hours</strong> of the original deadline. Otherwise, no credit will be given.</p>
+<p><strong>Submitting your assignment:</strong><br />
+Submit your scripts and report via GitHub. The submission time will be determined based on your GitHub records.</p>
+<hr />
 </div>
-<div id="git" class="section level1">
-<h1>Git</h1>
-<ul>
-<li><p>Client: We use <a href="https://www.gitkraken.com/git-client">GitKraken</a> as the Git client. There are also many other third-party GUI tools, such as <a href="https://desktop.github.com/">GitHub Desktop</a>, <a href="https://www.sourcetreeapp.com/">SourceTree</a>, etc.</p></li>
-<li><p>Platform: We use <a href="https://github.com">GitHub</a> as the repository version control platform. Follow <a href="https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration">this page</a> for Github account setup and configuration. Other software/platform, like <a href="https://about.gitlab.com">gitlab</a> or <a href="https://bitbucket.org">bitbucket</a>, will not be covered in the class.</p></li>
-</ul>
+<div id="matrix-multiplication" class="section level1">
+<h1>1. Matrix multiplication</h1>
+<p><strong>1.1 [5 points]</strong> Write a subroutine <code>Matrix_multip.f90</code> to do matrix multiplication.</p>
+<p><strong>1.2 [5 points]</strong> Write a program <code>Main.f90</code> to read <code>/work/ese-ouycc/fortran_2/M.dat</code> as the matrix <code>M</code>, and <code>/work/ese-ouycc/fortran_2/N.dat</code> as the matrix <code>N</code>.</p>
+<p><strong>1.3 [5 points]</strong> Call subroutine <code>Matrix_multip()</code> from <code>Main.f90</code> to compute <code>M*N</code>; write the output to a new file <code>MN.dat</code>, values are in formats of <code>f8.1</code>.</p>
+<hr />
 </div>
-<div id="ssh-client-tools" class="section level1">
-<h1>SSH Client Tools</h1>
-<p>You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you connect to your Linux servers.</p>
-<ul>
-<li>Windows: <a href="https://mobaxterm.mobatek.net">MobaXterm</a>, <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty">PuTTY</a>, <a href="https://www.netsarang.com/en/xshell">Xshell</a><br />
-</li>
-<li>macOS: Terminal (pre-installed), <a href="https://www.iterm2.com/">iTerm2</a><br />
-</li>
-<li>Ubuntu: Terminal (pre-installed), <a href="https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window">Terminator</a><br />
-</li>
-<li>Others: <a href="http://www.hostbuf.com">Finalshell</a>, <a href="https://termius.com">Termius</a></li>
-</ul>
-<p>The instructor will use <a href="https://mobaxterm.mobatek.net">MobaXterm</a> in the class.</p>
+<div id="calculate-the-solar-zenith-angle" class="section level1">
+<h1>2. Calculate the solar zenith angle</h1>
+<p>The Solar Zenith Angle (SZA; <span class="math inline">\(\theta_Z\)</span> in the following figure <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>) is the angle between the local zenith and the line of sight from that point to the Sun. This means that the higher the Sun is in the sky, to lower the SZA is. The value of the SZA depends on the position on the Earth and the local date and time.</p>
+<p>Please read this <a href="http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf">note</a> (page 1-2) for more about how to calculate SZA.</p>
+<p><img src="figs/sun_position_b.jpg" alt="drawing" width="400"/></p>
+<p><strong>2.1 [5 points]</strong> Write a module <code>Declination_angle</code> to calculate the <em>declination angle</em> in a certain date.</p>
+<p>[<strong>Hint:</strong> using equation 2]</p>
+<p><strong>2.2 [10 points]</strong> Write a module <code>AST</code> to calculate the <em>apparent solar time</em> (AST; or <em>local solar time</em>) in a certain location for a certain date and time.</p>
+<p>[<strong>Hint:</strong> using equation 3-5]</p>
+<p><strong>2.3 [10 points]</strong> Write a main program (<code>Cal_SZA.f90</code>) that uses module <code>Declination_angle</code> and <code>AST</code> to print the SZA in a certain location for a certain date and time.</p>
+<p>[<strong>Hint:</strong> using equation 6-7]</p>
+<p><strong>2.3 [5 points]</strong> Create a library (<code>libsolar.a</code>) that contains <code>Declination_angle.o</code> and <code>AST.o</code>. Compile <code>Cal_SZA.f90</code> using <code>libsolar.a</code>.</p>
+<p><strong>2.4 [5 points]</strong> Print the SZA for Shenzhen (<code>22.542883N, 114.062996E</code>) at <code>14:35</code> (local time) on <code>2020-12-20</code>.</p>
 </div>
-<div id="taiyi-hpc-supercomputer" class="section level1">
-<h1>TaiYi HPC supercomputer</h1>
-<p>Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check <a href="http://hpc.sustech.edu.cn/index.html">instructions</a> on how to use TaiYi.</p>
-<p>The log in node of Taiyi is: <code>172.18.6.175</code>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/sun-position/">source</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 
