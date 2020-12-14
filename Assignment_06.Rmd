@@ -65,4 +65,4 @@ Please read this [note](http://holbert.faculty.asu.edu/eee463/SolarCalcs.pdf) (p
 
 **2.4 [5 points]** Create a library (`libsolar.a`) that contains `Declination_angle.o` and `AST.o`. Compile `Cal_SZA.f90` using `libsolar.a`.
 
-**2.5 [5 points]** Print the SZA for Shenzhen (`22.542883N, 114.062996E`) at `14:35` (local time) on `2020-12-20`.
+**2.5 [5 points]** Print the SZA for Shenzhen (`22.542883N, 114.062996E`) at `14:35` (Beijing time; UTC+8) on `2020-12-20`.
