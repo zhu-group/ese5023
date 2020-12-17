@@ -506,7 +506,11 @@ div.tocify {
 <div id="r-markdown" class="section level1">
 <h1>R Markdown</h1>
 <p><a href="https://rmarkdown.rstudio.com/">R Markdown</a> is a file format for making dynamic documents with R. An R Markdown document is written in markdown (an easy-to-write plain text format) and contains chunks of embedded code. R Markdown files are designed to be used with the <code>rmarkdown</code> package. <code>rmarkdown</code> comes installed with the RStudio IDE.</p>
-<p>R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both + save and execute code + generate high-quality reports that can be shared with an audience</p>
+<p>R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both</p>
+<ul>
+<li><p>save and execute code,</p></li>
+<li><p>generate high-quality reports that can be shared with an audience.</p></li>
+</ul>
 <p>R Markdown documents are fully reproducible and support dozens of static and dynamic output formats. In this section, we will learn how to convert an R Markdown file into <code>html</code> files.</p>
 <hr />
 </div>
@@ -516,8 +520,8 @@ div.tocify {
 <h2>Creating a repository on Github</h2>
 <ul>
 <li><p>Open GitKraken, make a new repository <code>web_test</code> by clicking <code>Start a hosted repo</code>, then fill the information, and save this repository locally (e.g., <code>C://web_test/</code>).</p></li>
-<li><p>Download <a href="https://zhu-group.github.io/ese5023/download/web_demo.zip">this demo</a>, decompress it, and copy all items (including files and folders) to the local repository folder.</p></li>
-<li><p>Stage and commit all changes, and push the repository to Github.</p></li>
+<li><p>Download <a href="https://zhu-group.github.io/ese5023/download/web_demo.zip">this demo</a>, decompress it, and copy all items (including files and folders) to the local repository folder <code>web_test</code>.</p></li>
+<li><p>Stage and commit all changes, and push the local repository to Github.</p></li>
 </ul>
 </div>
 <div id="home-page" class="section level2">
@@ -615,10 +619,10 @@ div.tocify {
 <h1>Publish the website on Github</h1>
 <p>Go to Github:</p>
 <ul>
-<li>Open the remote repository on Github</li>
+<li>Open the remote <code>web_test</code> repository on Github</li>
 <li>Click <code>Settings</code><br />
 </li>
-<li>under <code>GitHub Pages</code> section, use <code>main</code> branch and <code>/docs</code> folder.</li>
+<li>Under <code>GitHub Pages</code> section, use <code>main</code> branch and <code>/docs</code> folder, then click <code>save</code>. You may receive an error email from Github, this is because remote repository is not updated yet. Ignore this error for now.</li>
 </ul>
 <p>Open GitKraken, stage and commit all changes. And wait for a few minutes as Github is publishing the website.</p>
 <p>You should be able to view your website at: <code>https://xxx.github.io/web_test/</code>, where <code>xxx</code> is your Github user name.</p>

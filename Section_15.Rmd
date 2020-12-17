@@ -17,8 +17,10 @@ output:
 [R Markdown](https://rmarkdown.rstudio.com/) is a file format for making dynamic documents with R. An R Markdown document is written in markdown (an easy-to-write plain text format) and contains chunks of embedded code. R Markdown files are designed to be used with the `rmarkdown` package. `rmarkdown` comes installed with the RStudio IDE.
 
 R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both
-+ save and execute code
-+ generate high-quality reports that can be shared with an audience
+
++ save and execute code,  
+
++ generate high-quality reports that can be shared with an audience.
 
 R Markdown documents are fully reproducible and support dozens of static and dynamic output formats. In this section, we will learn how to convert an R Markdown file into `html` files.
 
@@ -30,9 +32,9 @@ R Markdown documents are fully reproducible and support dozens of static and dyn
 
 + Open GitKraken, make a new repository `web_test` by clicking `Start a hosted repo`, then fill the information, and save this repository locally (e.g., `C://web_test/`).
 
-+ Download [this demo](https://zhu-group.github.io/ese5023/download/web_demo.zip), decompress it, and copy all items (including files and folders) to the local repository folder.
++ Download [this demo](https://zhu-group.github.io/ese5023/download/web_demo.zip), decompress it, and copy all items (including files and folders) to the local repository folder `web_test`.
 
-+ Stage and commit all changes, and push the repository to Github.
++ Stage and commit all changes, and push the local repository to Github.
 
 ## Home page
 
@@ -145,9 +147,9 @@ In the demo, a website (and all `html` files) will be created in `docs/`. New yo
 
 Go to Github:
 
-+ Open the remote repository on Github
++ Open the remote `web_test` repository on Github 
 + Click `Settings`  
-+ under `GitHub Pages` section, use `main` branch and `/docs` folder.
++ Under `GitHub Pages` section, use `main` branch and `/docs` folder, then click `save`. You may receive an error email from Github, this is because remote repository is not updated yet. Ignore this error for now.
 
 Open GitKraken, stage and commit all changes. And wait for a few minutes as Github is publishing the website. 
 
