@@ -31,7 +31,7 @@ Tuesday (odd week only) / Thursday, 19:00-21:00
 |12  |12/03|Th. |[Section 13 FORTRAN: Basics](https://zhu-group.github.io/ese5023/Section_13.html)     |              |  5           |
 |13  |12/08|Tu. |[Lab 06](https://zhu-group.github.io/ese5023/Lab_06.html)                             |              |              |
 |13  |12/10|Th. |[Section 14 FORTRAN: Intermediate](https://zhu-group.github.io/ese5023/Section_14.html) | [Assignment 6](https://zhu-group.github.io/ese5023/Assignment_06.html)           |              |
-|14  |12/17|Th. |Section 15 Miscellaneous                                                              |              |              |
+|14  |12/17|Th. |[Section 15 Making websites with R Markdown](https://zhu-group.github.io/ese5023/Section_15.html)    |              |              |
 |15  |12/22|Tu. |Lab 07 Wrap-up                                                                        |              |              |
 |15  |12/24|Th. |Final project presentation: Section 1                                                 |[Final project instruction](https://zhu-group.github.io/ese5023/download/Final_project_2020.pdf)                      | 6            |  
 |16  |12/31|Th. |Final project presentation: Section 2                                                 |              |              |
