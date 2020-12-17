@@ -506,23 +506,23 @@ div.tocify {
 <div id="r-markdown" class="section level1">
 <h1>R Markdown</h1>
 <p><a href="https://rmarkdown.rstudio.com/">R Markdown</a> is a file format for making dynamic documents with R. An R Markdown document is written in markdown (an easy-to-write plain text format) and contains chunks of embedded code. R Markdown files are designed to be used with the <code>rmarkdown</code> package. <code>rmarkdown</code> comes installed with the RStudio IDE.</p>
-<p>R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both + save and execute code + generate high quality reports that can be shared with an audience</p>
+<p>R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both + save and execute code + generate high-quality reports that can be shared with an audience</p>
 <p>R Markdown documents are fully reproducible and support dozens of static and dynamic output formats. In this section, we will learn how to convert an R Markdown file into <code>html</code> files.</p>
 <hr />
 </div>
 <div id="building-a-website" class="section level1">
 <h1>Building a website</h1>
-<div id="making-a-repository-on-github" class="section level2">
-<h2>1. Making a repository on Github</h2>
+<div id="creating-a-repository-on-github" class="section level2">
+<h2>Creating a repository on Github</h2>
 <ul>
-<li><p>Open GitKraken, make a new repository <code>web_test</code> by clicking <code>Start a hosted repo</code>, then fill the information, and save this repository locally (e.g., <code>C://web_test</code>).</p></li>
+<li><p>Open GitKraken, make a new repository <code>web_test</code> by clicking <code>Start a hosted repo</code>, then fill the information, and save this repository locally (e.g., <code>C://web_test/</code>).</p></li>
 <li><p>Download <a href="https://zhu-group.github.io/ese5023/download/web_demo.zip">this demo</a>, decompress it, and copy all items (including files and folders) to the local repository folder.</p></li>
 <li><p>Stage and commit all changes, and push the repository to Github.</p></li>
 </ul>
 </div>
 <div id="home-page" class="section level2">
-<h2>2. Home page</h2>
-<p>Each website requires a <code>.Rmd</code> file named <code>index.Rmd</code>, which provides the content for the home page of your website. Take the demo as an example, the <code>index.Rmd</code> provides basic description of the website.</p>
+<h2>Home page</h2>
+<p>Each website requires a <code>.Rmd</code> file named <code>index.Rmd</code>, which provides the content for the home page of your website. Take the demo as an example, the <code>index.Rmd</code> provides a basic description of the website.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">---</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="ex">title</span>: <span class="st">&quot;My Website&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="ex">output</span>:</span>
@@ -532,10 +532,10 @@ div.tocify {
 <span id="cb1-7"><a href="#cb1-7"></a></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="ex">Welcome</span> to my website!  </span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="ex">I</span> am a student at SUSTech, my research area is about xxx.</span></code></pre></div>
-<p>Here line 1-6 means that the output file will be in <code>html</code> format. And line 8-9 can be replaced by real information.</p>
+<p>Here lines 1-6 mean that the output file will be in <code>html</code> format. And lines 8-9 can be replaced by real information.</p>
 </div>
 <div id="global-yaml-header" class="section level2">
-<h2>3. Global YAML header</h2>
+<h2>Global YAML header</h2>
 <p>Another necessary file is <code>_site.yml</code>, which provides the global YAML header for the whole site. In the demo, the <code>_site.yml</code> is written as:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">name</span>: <span class="st">&quot;My Website&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="ex">output_dir</span>: <span class="st">&quot;docs&quot;</span>  <span class="co"># docs directory of master branch</span></span>
@@ -581,7 +581,7 @@ div.tocify {
 <li>simplex</li>
 <li>yeti</li>
 </ul>
-<p>You can check the above themes at this <a href="https://www.datadreaming.org/post/r-markdown-theme-gallery/">gallery</a>. Pass null for no theme (in this case you can use the <code>css</code> parameter to add your own styles).</p>
+<p>You can check the above themes at this <a href="https://www.datadreaming.org/post/r-markdown-theme-gallery/">gallery</a>. Pass null for no theme (in this case, you can use the <code>css</code> parameter to add your own styles).</p>
 <p><code>highlight</code> specifies the syntax highlighting style. Supported styles include:</p>
 <ul>
 <li>default</li>
@@ -605,7 +605,7 @@ div.tocify {
 <div id="build-a-site" class="section level2">
 <h2>5. Build a site</h2>
 <p>You can check the current page by clicking <code>Knit</code>, a new window will pop up to show the <code>html</code> file.</p>
-<p>Finally, when everything looks fine, set working directory to local repository. In R console, run:</p>
+<p>Finally, when everything looks fine, set the <code>working directory</code> to the local repository (in this case, <code>C://web_test/</code>). In R console, run:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">rmarkdown::render_site()</span></span></code></pre></div>
 <p>In the demo, a website (and all <code>html</code> files) will be created in <code>docs/</code>. New your website is ready to be launched.</p>
 <hr />
@@ -624,8 +624,8 @@ div.tocify {
 <p>You should be able to view your website at: <code>https://xxx.github.io/web_test/</code>, where <code>xxx</code> is your Github user name.</p>
 <hr />
 </div>
-<div id="general-workflow" class="section level1">
-<h1>General workflow</h1>
+<div id="general-workflow-of-updating-the-website" class="section level1">
+<h1>General workflow of updating the website</h1>
 <ul>
 <li><p><strong>Step 1:</strong> Make changes to source files (<code>.Rmd</code>)</p></li>
 <li><p><strong>Step 2:</strong> Check with <code>knit</code></p></li>

@@ -18,7 +18,7 @@ output:
 
 R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both
 + save and execute code
-+ generate high quality reports that can be shared with an audience
++ generate high-quality reports that can be shared with an audience
 
 R Markdown documents are fully reproducible and support dozens of static and dynamic output formats. In this section, we will learn how to convert an R Markdown file into `html` files.
 
@@ -26,17 +26,17 @@ R Markdown documents are fully reproducible and support dozens of static and dyn
 
 # Building a website
 
-## 1. Making a repository on Github
+## Creating a repository on Github
 
-+ Open GitKraken, make a new repository `web_test` by clicking `Start a hosted repo`, then fill the information, and save this repository locally (e.g., `C://web_test`).
++ Open GitKraken, make a new repository `web_test` by clicking `Start a hosted repo`, then fill the information, and save this repository locally (e.g., `C://web_test/`).
 
 + Download [this demo](https://zhu-group.github.io/ese5023/download/web_demo.zip), decompress it, and copy all items (including files and folders) to the local repository folder.
 
 + Stage and commit all changes, and push the repository to Github.
 
-## 2. Home page
+## Home page
 
-Each website requires a `.Rmd` file named `index.Rmd`, which provides the content for the home page of your website. Take the demo as an example, the `index.Rmd` provides basic description of the website.  
+Each website requires a `.Rmd` file named `index.Rmd`, which provides the content for the home page of your website. Take the demo as an example, the `index.Rmd` provides a basic description of the website.  
 
 ```{bash, eval=F}
 ---
@@ -50,9 +50,9 @@ Welcome to my website!
 I am a student at SUSTech, my research area is about xxx.
 ```
 
-Here line 1-6 means that the output file will be in `html` format. And line 8-9 can be replaced by real information.
+Here lines 1-6 mean that the output file will be in `html` format. And lines 8-9 can be replaced by real information.
 
-## 3. Global YAML header
+## Global YAML header
 
 Another necessary file is `_site.yml`, which provides the global YAML header for the whole site. In the demo, the `_site.yml` is written as:
 
@@ -104,7 +104,7 @@ Here we define a home page with `index.Rmd`. `Page1` to `Page2` are static pages
 + simplex
 + yeti
 
-You can check the above themes at this [gallery](https://www.datadreaming.org/post/r-markdown-theme-gallery/). Pass null for no theme (in this case you can use the `css` parameter to add your own styles). 
+You can check the above themes at this [gallery](https://www.datadreaming.org/post/r-markdown-theme-gallery/). Pass null for no theme (in this case, you can use the `css` parameter to add your own styles). 
 
 `highlight` specifies the syntax highlighting style. Supported styles include:  
 
@@ -131,7 +131,7 @@ See `Page1.Rmd` for basic syntax in R Markdown. More are available at this [R Ma
 
 You can check the current page by clicking `Knit`, a new window will pop up to show the `html` file.
 
-Finally, when everything looks fine, set working directory to local repository. In R console, run:
+Finally, when everything looks fine, set the `working directory` to the local repository (in this case, `C://web_test/`). In R console, run:
 
 ```{bash, eval=F}
 rmarkdown::render_site()
@@ -155,7 +155,7 @@ You should be able to view your website at: `https://xxx.github.io/web_test/`, w
 
 *** 
 
-# General workflow
+# General workflow of updating the website
 
 + **Step 1:** Make changes to source files (`.Rmd`)
 
