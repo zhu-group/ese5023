@@ -90,7 +90,7 @@ output:
 
 Here we define a home page with `index.Rmd`. `Page1` to `Page2` are static pages, and `Page4` has a drop-down menu. 
 
-`theme` specifies the (Bootstrap)[https://bootswatch.com/3/] theme to use for the page (themes are drawn from the Bootswatch theme library). Valid themes include:  
+`theme` specifies the [Bootstrap](https://bootswatch.com/3/) theme to use for the page (themes are drawn from the Bootswatch theme library). Valid themes include:  
 
 + default
 + cerulean
@@ -119,7 +119,7 @@ You can check the above themes at this [gallery](https://www.datadreaming.org/po
 + zenburn
 + haddock
 + breezedark
-+ textmate. 
++ textmate  
 
 Pass null to prevent syntax highlighting.
 
@@ -192,3 +192,5 @@ Launch your own website. When it's ready, share it with the class.
 * [R Markdown Websites](https://rmarkdown.rstudio.com/lesson-13.html)
 
 * [R Markdown Websites](https://garrettgman.github.io/rmarkdown/rmarkdown_websites.html)
+
+* [Source code for ESE5023](https://github.com/zhu-group/ese5023)
