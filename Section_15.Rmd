@@ -123,11 +123,11 @@ Pass null to prevent syntax highlighting.
 
 More about `_site.yml` can be found [here](http://rmarkdown.rstudio.com/html_document_format.html#appearance_and_style).
 
-## 4. Markdown Syntax
+## Markdown Syntax
 
 See `Page1.Rmd` for basic syntax in R Markdown. More are available at this [R Markdown cheat sheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf).  
 
-## 5. Build a site
+## Build a site
 
 You can check the current page by clicking `Knit`, a new window will pop up to show the `html` file.
 
@@ -157,15 +157,15 @@ You should be able to view your website at: `https://xxx.github.io/web_test/`, w
 
 # General workflow of updating the website
 
-+ **Step 1:** Make changes to source files (`.Rmd`)
++ **Step 1:** Make changes to the source files (`.Rmd`)
 
-+ **Step 2:** Check with `knit`
++ **Step 2:** Check and verify with `knit`
 
-+ **Step 3:** Re-build the whole site with `rmarkdown::render_site()`
++ **Step 3:** Re-build the website with `rmarkdown::render_site()`
 
-+ **Step 4:** Stage and commit with GitKraken
++ **Step 4:** Stage and commit changes with GitKraken
 
-+ **Step 5:** Push with GitKraken, and wait for a few minutes. If you get an error message email from Github, go back to Step 1-4, fix the bug, and push again.
++ **Step 5:** Push with GitKraken, and wait for a few minutes for updates take place. If you get an error message email from Github, go back to Step 1-4, fix the bug(s), and push again.
 
 ***
 

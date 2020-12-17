@@ -599,11 +599,11 @@ div.tocify {
 <p>More about <code>_site.yml</code> can be found <a href="http://rmarkdown.rstudio.com/html_document_format.html#appearance_and_style">here</a>.</p>
 </div>
 <div id="markdown-syntax" class="section level2">
-<h2>4. Markdown Syntax</h2>
+<h2>Markdown Syntax</h2>
 <p>See <code>Page1.Rmd</code> for basic syntax in R Markdown. More are available at this <a href="https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">R Markdown cheat sheet</a>.</p>
 </div>
 <div id="build-a-site" class="section level2">
-<h2>5. Build a site</h2>
+<h2>Build a site</h2>
 <p>You can check the current page by clicking <code>Knit</code>, a new window will pop up to show the <code>html</code> file.</p>
 <p>Finally, when everything looks fine, set the <code>working directory</code> to the local repository (in this case, <code>C://web_test/</code>). In R console, run:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">rmarkdown::render_site()</span></span></code></pre></div>
@@ -627,11 +627,11 @@ div.tocify {
 <div id="general-workflow-of-updating-the-website" class="section level1">
 <h1>General workflow of updating the website</h1>
 <ul>
-<li><p><strong>Step 1:</strong> Make changes to source files (<code>.Rmd</code>)</p></li>
-<li><p><strong>Step 2:</strong> Check with <code>knit</code></p></li>
-<li><p><strong>Step 3:</strong> Re-build the whole site with <code>rmarkdown::render_site()</code></p></li>
-<li><p><strong>Step 4:</strong> Stage and commit with GitKraken</p></li>
-<li><p><strong>Step 5:</strong> Push with GitKraken, and wait for a few minutes. If you get an error message email from Github, go back to Step 1-4, fix the bug, and push again.</p></li>
+<li><p><strong>Step 1:</strong> Make changes to the source files (<code>.Rmd</code>)</p></li>
+<li><p><strong>Step 2:</strong> Check and verify with <code>knit</code></p></li>
+<li><p><strong>Step 3:</strong> Re-build the website with <code>rmarkdown::render_site()</code></p></li>
+<li><p><strong>Step 4:</strong> Stage and commit changes with GitKraken</p></li>
+<li><p><strong>Step 5:</strong> Push with GitKraken, and wait for a few minutes for updates take place. If you get an error message email from Github, go back to Step 1-4, fix the bug(s), and push again.</p></li>
 </ul>
 <hr />
 </div>
