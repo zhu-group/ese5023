@@ -9,7 +9,7 @@ output:
 ---
 
 **Out: 12/11 19:00 **  
-**Due: 12/24 19:00 **  
+**Due: 12/31 19:00 **  
 
 Upload your **Fortran programs** to the `ESE5023_Assignments` repository before the deadline.
 
