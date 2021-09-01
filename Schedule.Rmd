@@ -2,12 +2,12 @@
 title: "Schedule"
 ---
 **Class Time:**   
-Tuesday (odd week only) / Thursday, 19:00-21:00
+Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 
 **Location:**   
-401, Teaching Building 1
+308, Building #2, Li Yuan  
 
-**2020 Fall:**
+**2021 Fall:**
 
 |Week|Date |Day | Topic                                                                                |Assignment Out|Assignment Due|
 |:--:|:---:|:--:|:-------------------------------------------------------------------------------------|:------------:|:------------:|
