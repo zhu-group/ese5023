@@ -17,8 +17,7 @@ output:
 **2. Are you familiar with the following languages?**  
 
   * FORTRAN  
-  * C  
-  * C++
+  * C/C++  
   * Java
   * Other
   * I know English, maybe some Cantonese
@@ -81,7 +80,7 @@ output:
 
 ***
 
-# Course topics
+# Course topics to be covered
 
 Research in the ESE field (In fact, any field) is all about data:  
 <img src="figs/phd053104s.gif" alt="drawing" width="700"/>  
@@ -89,46 +88,39 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 **Course topics:**
 
-* Three languages: R, Shell (BASH), and FORTRAN
+* Three languages: Python, Shell (BASH), and FORTRAN
 * One operation system: Linux  
 * At the end of the semester, you should be able to:
-  + Handle common file formats with R
-    - plain text, .csv, .nc, .hdf, .RData, etc.
-  + Work with data neatly
-    - Dataframe, dplyr, tidyr
-  + Proceed statistical sleuth with R
-    - comparing distributing, ANOVA, regressions, etc.  
-  + Make time series analysis with R
-    - MA, AR, seasonal decomposition, ARIMA, forecasting,  etc.
-  + Conduct spatial analysis with R
-    - raster and shape files, interpolation, spatial regression, etc. 
-  + Create publication-quality figures with R
-    - ggplot, image.plot, lattice, etc.
   + Use Git for version control
-    - Github, GitKraken, etc.
+    - Github, GitKraken, etc.  
+  + Handle common file formats with Python
+    - plain text, .csv, .nc, .hdf, etc.
+  + Work with data neatly
+  + Proceed statistical sleuth with Python
+    - comparing distributing, ANOVA, regressions, etc.  
+  + Create publication-quality figures with Python
+  + Conduct parallel computing in Python
   + Write, compile, and run FORTRAN scripts
     - gfortran, intel-fortran, functions, modules, etc.
   + Use the Linux environment
     - basics, BASH scripts, installing software, loading modules, etc.
   + Run jobs on TaiYi high-performance computer
-    - SSH, managing jobs, scp, etc.
+    - SSH, managing jobs, etc.
   + [Optional] Build and launch a website
-    - Rmarkdown (In fact, this website is built with Rmarkdown), Parallel computing in R
-  + [Optional] Use other useful tools
-    - CDO, Panoply, hdfview, MRT, etc.
+    - Rmarkdown (In fact, this website is built with Rmarkdown)
 
-<img src="figs/R.png" alt="drawing" width="200"/>
+<img src="figs/Python.png" alt="drawing" width="200"/>
 <img src="figs/Git.jpeg" alt="drawing" width="200"/>
 <img src="figs/Linux.jpeg" alt="drawing" width="200"/>
 
 # Course structure
 
-* Thursday class   
-  + New material demonstrated (50 mins)
-  + In-class exercises (50 mins)
+* Wednesday class   
+  + New material demonstrated (45-60 mins)
+  + In-class exercises (30-45 mins)
 
-* Tuesday class (odd week only)
-  + In-class exercises (50 mins)
+* Friday class (even weeks only)
+  + In-class exercises (45-60 mins)
   + Working on assignments
   + Discussing the final project
   + One-on-one interactions
@@ -148,9 +140,9 @@ This course is designed for ESE graduate students having ***no or weak*** progra
 Good reasons for ***not*** taking the course:
 
 * After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
-* I have a strong programming background with other tools (C, C++, Java, MATLAB, Python, IDL, etc.)
+* I have a strong programming background with other tools (C, C++, Java, MATLAB, R, IDL, etc.)
 * I am able to model, analyze, and visualize data sets through programming efforts already
-* I want to learn other programming languages (C, C++, Java, MATLAB, Python, IDL, etc.)
+* I want to learn other programming languages (C, C++, Java, MATLAB, R, IDL, etc.)
 * I want to take an “easy” class to meet the graduation requirement
 * I don't want to spend much time on the course; instead, I want to focus more on my research  
 
