@@ -15,7 +15,9 @@ navbar:
       href: Resource.html      
     - text: "Assignments"
       icon: fa-laptop
-      menu:         
+      menu:
+        - text: "Assignment 01"
+          href: Assignment_01.html          
 output:
   html_document:
     theme: readable
