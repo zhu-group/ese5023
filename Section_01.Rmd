@@ -95,9 +95,9 @@ Hopefully, this course will make your life easier when it comes to interpret and
     - Github, GitKraken, etc.  
   + Handle common file formats with Python
     - plain text, .csv, .nc, .hdf, etc.
-  + Work with data neatly
-  + Proceed statistical sleuth with Python
-    - comparing distributing, ANOVA, regressions, etc.  
+  + Work with data neatly using common packages like `numpy`, `matplotlib`, `pandas`, and `xarray`
+  + Proceed statistical tests with Python
+    - comparing means, ANOVA, regressions, etc.  
   + Create publication-quality figures with Python
   + Conduct parallel computing in Python
   + Write, compile, and run FORTRAN scripts
@@ -137,20 +137,20 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on Python, FORTRAN, Git, and Linux.
 
-Good reasons for ***not*** taking the course:
+**Good reasons** for NOT taking the course:
 
 * After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
-* I have a strong programming background with Python and other tools (C, C++, Java, MATLAB, R, IDL, etc.)
+* I have a strong programming background with Python or other tools (C, C++, Java, MATLAB, R, IDL, etc.) already
 * I am able to model, analyze, and visualize data sets through programming efforts already
 * I want to learn other programming languages (C, C++, Java, MATLAB, R, IDL, etc.)
 * I want to take an “easy” class to meet the graduation requirement
 * I don't want to spend much time on the course; instead, I want to focus more on my research  
 
-Bad reasons for ***not*** taking the course:
+**Bad reasons** for NOT taking the course:
 
-* I don’t have (any) coding/programming experience
-* Programming is intimidating; perhaps I can never learn it
-* My project does not require programming efforts
+* I don’t have (any) coding/programming experience/background
+* Programming is intimidating; perhaps I can never master it
+* My project requires no coding/programming skills, I can finish all analysis with Excel
 
 **By taking the course, you commit yourself to work on time-consuming assignments and final project.**
 

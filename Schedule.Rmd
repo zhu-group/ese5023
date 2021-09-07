@@ -17,10 +17,10 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |3   |09/22|W.  |Section 03 Python: Basics (I)                                                         |              |              |
 |4   |09/29|W.  |Section 04 Python: Basics (II)                                                        |              |              |
 |4   |10/08|F.  |Lab 02  Python Basics                                                                 | Assignment 2 |  1           |
-|5   |10/13|W.  |Section 05 Intermediate Python: `NumPy` and `matplotlib`                              |              |              |
-|6   |10/20|W.  |Section 06 Intermediate Python: `Pandas`                                              |              |              |
+|5   |10/13|W.  |Section 05 Intermediate Python: `numPy` and `matplotlib`                              |              |              |
+|6   |10/20|W.  |Section 06 Intermediate Python: `pandas`                                              |              |              |
 |6   |10/22|F.  |Lab 03  Python Intermediate                                                           | Assignment 3 |  2           |
-|7   |10/27|W.  |Section 07 Intermediate Python: `Xarray`                                              |              |              |
+|7   |10/27|W.  |Section 07 Intermediate Python: `xarray`                                              |              |              |
 |8   |11/03|W.  |Section 08 Python: Plotting                                                           |              |              |
 |8   |11/05|F.  |Lab 04  Python Intermediate and plotting                                              | Assignment 4 |  3           |
 |9   |11/10|W.  |Section 09 Python: Map making                                                         |              |              |

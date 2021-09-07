@@ -586,10 +586,10 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <ul>
 <li>plain text, .csv, .nc, .hdf, etc.</li>
 </ul></li>
-<li>Work with data neatly</li>
-<li>Proceed statistical sleuth with Python
+<li>Work with data neatly using common packages like <code>numpy</code>, <code>matplotlib</code>, <code>pandas</code>, and <code>xarray</code></li>
+<li>Proceed statistical tests with Python
 <ul>
-<li>comparing distributing, ANOVA, regressions, etc.<br />
+<li>comparing means, ANOVA, regressions, etc.<br />
 </li>
 </ul></li>
 <li>Create publication-quality figures with Python</li>
@@ -643,20 +643,20 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <div id="take-the-course-or-not" class="section level1">
 <h1>Take the course or not?</h1>
 <p>This course is designed for ESE graduate students having <strong><em>no or weak</em></strong> programming background, with emphasis on Python, FORTRAN, Git, and Linux.</p>
-<p>Good reasons for <strong><em>not</em></strong> taking the course:</p>
+<p><strong>Good reasons</strong> for NOT taking the course:</p>
 <ul>
 <li>After browsing the <a href="https://zhu-group.github.io/ese5023/Syllabus.html">syllabus</a> and <a href="https://zhu-group.github.io/ese5023/Schedule.html">schedule</a>, there is nothing new for me</li>
-<li>I have a strong programming background with Python and other tools (C, C++, Java, MATLAB, R, IDL, etc.)</li>
+<li>I have a strong programming background with Python or other tools (C, C++, Java, MATLAB, R, IDL, etc.) already</li>
 <li>I am able to model, analyze, and visualize data sets through programming efforts already</li>
 <li>I want to learn other programming languages (C, C++, Java, MATLAB, R, IDL, etc.)</li>
 <li>I want to take an “easy” class to meet the graduation requirement</li>
 <li>I don’t want to spend much time on the course; instead, I want to focus more on my research</li>
 </ul>
-<p>Bad reasons for <strong><em>not</em></strong> taking the course:</p>
+<p><strong>Bad reasons</strong> for NOT taking the course:</p>
 <ul>
-<li>I don’t have (any) coding/programming experience</li>
-<li>Programming is intimidating; perhaps I can never learn it</li>
-<li>My project does not require programming efforts</li>
+<li>I don’t have (any) coding/programming experience/background</li>
+<li>Programming is intimidating; perhaps I can never master it</li>
+<li>My project requires no coding/programming skills, I can finish all analysis with Excel</li>
 </ul>
 <p><strong>By taking the course, you commit yourself to work on time-consuming assignments and final project.</strong></p>
 <hr />
@@ -723,7 +723,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <span id="cb2-7"><a href="#cb2-7"></a><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</span></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.14216490221318&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.09396459107498&quot;</code></pre>
 <p>Simulation with 100,000 random points yields a better result</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Draw 1E5 points</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>TotalDraw &lt;-<span class="st"> </span><span class="fl">1E5</span></span>
@@ -734,7 +734,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <span id="cb5-7"><a href="#cb5-7"></a><span class="kw">text</span>(<span class="fl">0.25</span><span class="op">*</span>TotalDraw,<span class="fl">3.5</span>,<span class="st">&quot;3.1415926&quot;</span>,<span class="dt">cex=</span><span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="Section_01_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean Pi from the last 100 steps is: &quot;</span>,<span class="kw">mean</span>(Results[TotalDraw<span class="dv">-99</span><span class="op">:</span>TotalDraw])))</span></code></pre></div>
-<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.13007456244638&quot;</code></pre>
+<pre><code>## [1] &quot;Mean Pi from the last 100 steps is:  3.13439910363782&quot;</code></pre>
 <hr />
 </div>
 </div>
