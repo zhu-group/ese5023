@@ -82,7 +82,7 @@ output:
 
 # Course topics to be covered
 
-Research in the ESE field (In fact, any field) is all about data:  
+Research in the ESE field (in fact, any field) is all about data:  
 <img src="figs/phd053104s.gif" alt="drawing" width="700"/>  
 Hopefully, this course will make your life easier when it comes to interpret and visualize data.
 
@@ -135,12 +135,12 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 # Take the course or not?
 
-This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on R, FORTRAN, Git, and Linux.
+This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on Python, FORTRAN, Git, and Linux.
 
 Good reasons for ***not*** taking the course:
 
 * After browsing the [syllabus](https://zhu-group.github.io/ese5023/Syllabus.html) and [schedule](https://zhu-group.github.io/ese5023/Schedule.html), there is nothing new for me
-* I have a strong programming background with other tools (C, C++, Java, MATLAB, R, IDL, etc.)
+* I have a strong programming background with Python and other tools (C, C++, Java, MATLAB, R, IDL, etc.)
 * I am able to model, analyze, and visualize data sets through programming efforts already
 * I want to learn other programming languages (C, C++, Java, MATLAB, R, IDL, etc.)
 * I want to take an “easy” class to meet the graduation requirement
@@ -148,7 +148,7 @@ Good reasons for ***not*** taking the course:
 
 Bad reasons for ***not*** taking the course:
 
-* I don’t have coding/programming experience
+* I don’t have (any) coding/programming experience
 * Programming is intimidating; perhaps I can never learn it
 * My project does not require programming efforts
 
