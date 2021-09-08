@@ -158,9 +158,13 @@ This course is designed for ESE graduate students having ***no or weak*** progra
 
 # A closer look at programming process 
 
+Very often, we find programming difficult because we fail to break down the initial research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. 
+
+The most crucial step is to have a **well-defined** *conceptual model*. This involves simplifying and generalizing your initial question so that you can describe the gist in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do.   
+
 <img src="figs/flow_01.jpg" alt="drawing" width="800"/>
 
-Very often, we find programming difficult because we fail to break down the initial research question into small parts, which I refer as *conceptual model*, *math or logic model*, and *computer model*. The most crucial step is to have a **well-defined** *conceptual model*. This involves simplifying and generalizing your initial question so that you can describe the gist in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do. The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
+The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models **iteratively** before finally solving the question, so the chart would be more like as follow.
 
 <img src="figs/flow_02.jpg" alt="drawing" width="800"/>
 
@@ -200,48 +204,7 @@ $$n/N = \pi / 4$$
 
 ## The computer model
 
-Put this in R, and the code would be like [^3]
-
-```{r}
-# Define a function to compute pi
-Simulation <- function(N){
-  c <- rep(0,N)
-  numberIn <-  0
-  for(i in 1:N){
-    x <- runif(2,-1,1)
-    if(sqrt(x[1]*x[1] + x[2]*x[2]) <= 1){
-      numberIn <- numberIn + 1
-    }
-    prop  <- numberIn / i
-    piHat <- prop *4
-    c[i]  <- piHat
-  }
-  return(c)
-}
-```
-Let's start by drawing 1000 random points
-```{r}
-# Draw 100 points
-TotalDraw <- 1000
-Results   <- Simulation(TotalDraw)
-# Plot
-plot( seq(1,TotalDraw,by=1), Results, type='l', xlab='Step', ylab='pi',lwd=1.5)
-abline(h=3.141592,col="red",lty=2)
-text(0.25*TotalDraw,3.5,"3.1415926",cex=1,col="red")
-print(paste("Mean Pi from the last 100 steps is: ",mean(Results[TotalDraw-99:TotalDraw])))
-```
-
-Simulation with 100,000 random points yields a better result
-```{r}
-# Draw 1E5 points
-TotalDraw <- 1E5
-Results   <- Simulation(TotalDraw)
-# Plot
-plot( seq(1,TotalDraw,by=1), Results, type='l', xlab='Step', ylab='pi',lwd=1.5)
-abline(h=3.141592,col="red",lty=2)
-text(0.25*TotalDraw,3.5,"3.1415926",cex=1,col="red")
-print(paste("Mean Pi from the last 100 steps is: ",mean(Results[TotalDraw-99:TotalDraw])))
-```  
+We will learn how to do this with python in later sections.
 
 ***
 
