@@ -143,7 +143,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 # Take the course or not?
 
-This course is designed for ESE graduate students having ***no or weak*** programming background, with emphasis on Python, FORTRAN, Git, and Linux.
+This course is designed for ESE graduate students having **NO or WEAK** programming background, with emphasis on Python, FORTRAN, Git, and Linux (BASH).
 
 **Good reasons** for NOT taking the course:
 
