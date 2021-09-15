@@ -77,7 +77,7 @@ Git has three main states that your files can reside in: **modified**, **staged*
 
 * Committed means that the data is safely stored in your local database.
 
-This leads us to the three main sections of a Git project: the working tree, the staging area, and the Git directory.
+This leads us to the three main sections of a Git project: the working directory, the staging area, and the Git directory.
 
 <img src="figs/areas.png" alt="drawing" width="600"/>  
 
@@ -91,7 +91,7 @@ The Git directory is where Git stores the metadata and object database for your 
 
 The basic Git workflow goes something like this:
 
-* You modify files in your working tree.
+* You modify files in your working directory.
 
 * You selectively stage just those changes you want to be part of your next commit, which adds only those changes to the staging area.
 
