@@ -155,7 +155,7 @@ Navigate yourself with the Interface.
 
 * Modify the `README` file
 * Staging adds selected file contents to the index, which is like flagging your work as good to go. To start, select the `//WIP` node to see all your files on the Commit Panel. `WIP` stands for work in progress.
-* Once the `//WIP` node is selected, a will appear when you hover over a file in the Commit Panel.
+* Once the `//WIP` node is selected, a `Stage File` tab will appear when you hover over a file in the Commit Panel.
 * You may also click on a file for review in the diff or click the `Stage all changes`. 
 
 ## Unstaging
@@ -205,7 +205,7 @@ Now close GitKraken, and delete the local repository. What happens to the `remot
 ## Clone a remote repository
 
 `New Tab` -> `Clone a repo` -> `Clone`. 
-Provide the URL of the `remote`, then click `Clone the repo`. By doing so, your repository will go back soon.
+Provide the URL of the `remote`, then click `Clone the repo!`. Or select the remote repository under the `Github.com` tab, then click `Clone the repo!`. By doing so, your repository will go back soon.
 
 ## Other important usages
 
@@ -227,19 +227,19 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 * Write some sentences in the `README`, describing the purpose of this repository.
 
-* Add an R script to this folder, stage and then commit your change.
+* Add a text file to this folder, stage and then commit your change.
 
-* Modify the above R script, stage and then commit your change.
+* Modify the above text file by adding and deleting a few lines, stage and then commit your change.
 
-* Add another file (e.g., in `.csv` or `.txt` format) to the folder, stage and then commit your change.
+* Add another file (e.g., in `.csv` or `.pdf` format) to the folder, stage and then commit your change.
 
 * Add *two* files at the same time to the folder, stage and then commit your changes.
 
 * Now `push` the local repository to GitHub. Check your *filesystem* on GitHub.
 
-* Upload a file via GitHub, commit the change.
+* Upload another file via GitHub, commit the change.
 
-* Edit your R script online by clicking the file, then `Edit this file`, commit the change.
+* Edit your text file online by clicking the file, then `Edit this file`, commit the change.
 
 * Now `pull` the `remote` repository to update your local repository.
 
@@ -247,15 +247,15 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 * Now close GitKraken, and delete your local folder.
 
-* Reopen GitKraken, `clone` the `remote` repository.
+* Reopen GitKraken, `clone` the `NewRepo` repository from GitHub.
 
 ## Exercise #3
 
-* Create a local repository `ESE5023_Assignments`
+* Create a local repository `ESE5023_Assignments_XXX`, where `XXX` is your SUSTech ID.
 
-* Push it to GitHub as a `remote` repository. This is the place you are going to turn in your assignments, *e.g*., `PS1_1.R`, `PS1_2.R`, `PS3_3.R`,...
+* Push it to GitHub as a `remote` repository. This is the place you are going to turn in your assignments, *e.g*., `PS1_1.py`, `PS1_2.py`, `PS3_3.py`,...
 
-* Go to GitHub, click `ESE5023_Assignments` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `MingYang-Hydrate` and `topleo` as collaboratos. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignments` repository, and they will grade your assignments and provide necessary feedback. 
+* Go to GitHub, click `ESE5023_Assignments_XXX` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `Wenfu-Sun`, `HowHuang`, and `juanli1007` as collaborators. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignments_XXX` repository, and they will grade your assignments and provide necessary feedback in the future. 
 
 ***
 
