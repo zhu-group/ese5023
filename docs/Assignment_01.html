@@ -11,7 +11,7 @@
 
 
 
-<title>Resource</title>
+<title>Assignment 01</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -386,46 +386,64 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Resource</h1>
+<h1 class="title toc-ignore">Assignment 01</h1>
 
 </div>
 
 
+<p><strong>Out: 09/22 19:00 </strong><br />
+<strong>Due: 10/13 19:00 </strong></p>
 <hr />
-<div id="git" class="section level1">
-<h1>Git</h1>
+<div id="requirements" class="section level1">
+<h1>Requirements</h1>
 <ul>
-<li><p>Client: We use <a href="https://www.gitkraken.com/git-client">GitKraken</a> as the Git client. There are also many other third-party GUI tools, such as <a href="https://desktop.github.com/">GitHub Desktop</a>, <a href="https://www.sourcetreeapp.com/">SourceTree</a>, etc.</p></li>
-<li><p>Platform: We use <a href="https://github.com">GitHub</a> as the repository version control platform. Follow <a href="https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration">this page</a> for Github account setup and configuration. Other software/platform, like <a href="https://about.gitlab.com">gitlab</a> or <a href="https://bitbucket.org">bitbucket</a>, will not be covered in the class.</p></li>
+<li><p>Please write a report <code>PS1.pdf</code>.</p></li>
+<li><p>For problem set <em>i</em>, create a script named <code>PS1_i.py</code>.</p></li>
+<li><p>Upload your <code>Python</code> scripts <strong>AND</strong> report to the <code>ESE5023_Assignments_XXX</code> repository (where <code>XXX</code> is your SUSTech ID) before the due time.</p></li>
 </ul>
 <hr />
 </div>
-<div id="python" class="section level1">
-<h1>Python</h1>
-<p>We will use a distribution of Python called <code>Anaconda</code>, which includes a range of useful packages for scientific coding, such as <code>matplotlib</code>, <code>numpy</code>, and <code>pandas</code>. It all comes with the <code>conda</code> package manager - a tool for easily installing other Python add-on packages that you may want to use. It also comes with a few useful programs which can be used to write Python code.</p>
-<p>Download <a href="https://www.anaconda.com/products/individual">Anaconda</a>. Make sure to install a <strong>Python 3</strong> version specific to your operating system.</p>
-<p>We will first use <code>Spyder</code> to get familiar with Python basics, then switch to <code>Jupyter Notebook</code> as we move on through the course.</p>
-<hr />
-</div>
-<div id="ssh-client-tools" class="section level1">
-<h1>SSH Client Tools</h1>
-<p>You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you connect to your Linux servers.</p>
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong><br />
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
 <ul>
-<li>Windows: <a href="https://mobaxterm.mobatek.net">MobaXterm</a>, <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty">PuTTY</a>, <a href="https://www.netsarang.com/en/xshell">Xshell</a><br />
-</li>
-<li>macOS: Terminal (pre-installed), <a href="https://www.iterm2.com/">iTerm2</a><br />
-</li>
-<li>Ubuntu: Terminal (pre-installed), <a href="https://www.2daygeek.com/terminator-linux-terminal-emulator-supports-multiple-terminals-in-one-window">Terminator</a><br />
-</li>
-<li>Others: <a href="http://www.hostbuf.com">Finalshell</a>, <a href="https://termius.com">Termius</a></li>
+<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</p></li>
 </ul>
-<p>The instructor will use <a href="https://mobaxterm.mobatek.net">MobaXterm</a> in the class.</p>
+<p><strong>Late Submission:</strong><br />
+Late submissions will not receive any credit.</p>
+<p><strong>Submitting your assignment:</strong><br />
+Submit your scripts and report via GitHub. The submission time will be determined based on your latest GitHub records.</p>
 <hr />
 </div>
-<div id="taiyi-hpc-supercomputer" class="section level1">
-<h1>TaiYi HPC supercomputer</h1>
-<p>Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check <a href="http://hpc.sustech.edu.cn/index.html">instructions</a> on how to use TaiYi.</p>
-<p>The log in node of Taiyi is: <code>172.18.6.175</code>.</p>
+<div id="flowchart" class="section level1">
+<h1>1. Flowchart</h1>
+<p><strong>[5 points]</strong> Write a function <code>Print_values</code> with arguments <code>a</code>, <code>b</code>, and <code>c</code> to reflect the following flowchart. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random <code>a</code>, <code>b</code>, and <code>c</code> values.</p>
+<p><img src="figs/flowchart_a1.png" alt="drawing" width="450"/></p>
+<hr />
+</div>
+<div id="matrix-multiplication" class="section level1">
+<h1>2. Matrix multiplication</h1>
+<p><strong>2.1 [5 points]</strong> Make two matrices <code>M1</code> (<code>5</code> rows and <code>10</code> columns ) and <code>M2</code> (<code>10</code> rows and <code>5</code> columns ); both are filled with random integers from <code>0</code> and <code>50</code>.</p>
+<p><strong>2.2 [5 points]</strong> Write a function <code>Matrix_multip</code> to do matrix multiplication, <em>i.e.</em>, <code>M1 * M2</code>. Here you are <strong>ONLY</strong> allowed to use <code>for</code> loop, <code>*</code> operator, and <code>+</code> operator.</p>
+<hr />
+</div>
+<div id="pascal-triangle" class="section level1">
+<h1>3. Pascal triangle</h1>
+<p><strong>[10 points]</strong> One of the most interesting number patterns is <a href="https://www.mathsisfun.com/pascals-triangle.html">Pascal’s triangle</a> (named after Blaise Pascal). Write a function <code>Pascal_triangle</code> with an argument <code>k</code> to print the <em>k</em><sup>th</sup> line of the Pascal triangle. Report <code>Pascal_triangle(100)</code> and <code>Pascal_triangle(200)</code>.</p>
+<hr />
+</div>
+<div id="add-or-double" class="section level1">
+<h1>4. Add or double</h1>
+<p><strong>[15 points]</strong> If you start with <code>1</code> RMB and, with each move, you can either double your money or add another <code>1</code> RMB, what is the smallest number of moves you have to make to get to exactly <em>x</em> RMB? Here <em>x</em> is an integer randomly selected from <code>1</code> to <code>100</code>. Write a function <code>Least_moves</code> to print your results. For example, <code>Least_moves(2)</code> should print <code>1</code>, and <code>Least_moves(5)</code> should print <code>3</code>.</p>
+<hr />
+</div>
+<div id="dynamic-programming" class="section level1">
+<h1>5. Dynamic programming</h1>
+<p>Insert <code>+</code> or <code>-</code> operation anywhere between the digits <code>123456789</code> in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order.</p>
+<p><strong>5.1 [15 points]</strong> Write a function <code>Find_expression</code>, which should be able to print every possible solution that makes the expression evaluate to a random integer from <code>1</code> to <code>100</code>. For example, <code>Find_expression(50)</code> should print lines include: <span class="math display">\[ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 \]</span> and <span class="math display">\[ 1 + 2 + 34 - 56 + 78 - 9 = 50 \]</span></p>
+<p><strong>5.2 [5 points]</strong> Count the total number of suitable solutions for any integer <em>i</em> from <code>1</code> to <code>100</code>, assign the count to a list called <code>Total_solutions</code>. Plot the list <code>Total_solutions</code>, so which number(s) yields the maximum and minimum of <code>Total_solutions</code>?</p>
 </div>
 
 

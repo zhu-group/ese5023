@@ -8,16 +8,24 @@ output:
       smooth_scroll: false
 ---
 
+***
+
 # Git
 * Client: We use [GitKraken](https://www.gitkraken.com/git-client) as the Git client. There are also many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc.  
 
 * Platform: We use [GitHub](https://github.com) as the repository version control platform. Follow [this page](https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration) for Github account setup and configuration. Other software/platform, like [gitlab](https://about.gitlab.com) or [bitbucket](https://bitbucket.org), will not be covered in the class. 
 
+***
+
 # Python
 
-We will use a distribution of Python called `Anaconda`, which includes a range of useful packages for scientific coding, such as `matplotlib`, `numpy`, and `pandas`. It all comes with the `conda` package manager - a tool for easily installing other Python add-on packages that you may want to use. It also comes with a few useful programmes which can be used to write Python code.  
+We will use a distribution of Python called `Anaconda`, which includes a range of useful packages for scientific coding, such as `matplotlib`, `numpy`, and `pandas`. It all comes with the `conda` package manager - a tool for easily installing other Python add-on packages that you may want to use. It also comes with a few useful programs which can be used to write Python code.  
 
 Download [Anaconda](https://www.anaconda.com/products/individual). Make sure to install a **Python 3** version specific to your operating system.  
+
+We will first use `Spyder` to get familiar with Python basics, then switch to `Jupyter Notebook` as we move on through the course.
+
+***
 
 # SSH Client Tools
 You need to have the Secure Shell (SSH), which is a network protocol that enables you to connect to Linux and Unix servers over the network. It uses public key cryptography to authenticate the remote computer. You can use SSH by several ways, either by using it automatically or by using a password authentication to log in. Here are some SSH clients let you connect to your Linux servers. 
@@ -32,6 +40,8 @@ Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux
 [Finalshell](http://www.hostbuf.com),  [Termius](https://termius.com)  
 
 The instructor will use [MobaXterm](https://mobaxterm.mobatek.net) in the class.
+
+***
 
 # TaiYi HPC supercomputer
 Students will be given educational accounts on the TaiYi high-performance computing (HPC) supercomputer. Check [instructions](http://hpc.sustech.edu.cn/index.html) on how to use TaiYi.
