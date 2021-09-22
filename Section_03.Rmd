@@ -290,6 +290,8 @@ ceil(3.7)
 sqrt(36)
 ```
 
+`from math import *` means we import all functions from the `math` library.
+
 Find more functions and how to use them at [Mathematical functions](https://docs.python.org/3.8/library/math.html).
 
 ## User inputs 
@@ -591,7 +593,7 @@ This will load up a help page.
 
 **When your code doesn’t work: seeking help from your peers**
 
-If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have **already been answered** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[python-3.x]` tag. You will always find Google is your good friend.
+If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have **already been answered** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[python-3.x]` tag. Finally, you will always find Google is your good friend.
 
 ***
 
@@ -615,7 +617,7 @@ X5  = X1 > X2
 ```
 What will be the value of each variable after each statement in the program? 
 
-* Now type the above codes in **Console**, check your results.  
+* Now type the above lines in **Console**, check your results.  
 * Write a command to compare `X3` to `X4`. Which one is larger?
 * Clean up your variables by deleting the `X1`, `X2`, and `X3`. 
 
