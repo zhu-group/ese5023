@@ -489,48 +489,47 @@ div.tocify {
 </blockquote>
 <hr />
 <div id="what-is-python" class="section level1">
-<h1>What is Python?</h1>
-<p>Python, one of the most popular programming languages in the world, has created everything from Netflix’s recommendation algorithm to the software that controls self-driving cars. Python is a general-purpose language, which means it’s designed to be used in a range of applications, including <strong>data science</strong>, <strong>software and web development</strong>, <strong>automation</strong>, and generally <strong>getting stuff done</strong>.</p>
-<p>Python is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis. Python is a <strong><em>general-purpose language</em></strong>, meaning it can be used to create a variety of different programs and isn’t specialized for any specific problems. This versatility, along with its beginner-friendliness, has made it one of the most-used programming languages today. A survey conducted by industry analyst firm RedMonk found that it was the most popular programming language among developers in 2020.</p>
+<h1>What is <code>Python</code>?</h1>
+<p><code>Python</code>, one of the most popular programming languages in the world, has created everything from Netflix’s recommendation algorithm to the software that controls self-driving cars. <code>Python</code> is a general-purpose language, which means it’s designed to be used in a range of applications, including <strong>data science</strong>, <strong>software and web development</strong>, <strong>automation</strong>, and generally <strong>getting stuff done</strong>.</p>
+<p><code>Python</code> is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis. <code>Python</code> is a <strong>general-purpose language</strong>, meaning it can be used to create a variety of different programs and isn’t specialized for any specific problems. This versatility, along with its beginner-friendliness, has made it one of the most-used programming languages today. A survey found that it was the most popular programming language among developers in 2020.</p>
 <p><img src="figs/lan_trend.png" alt="drawing" width="800"/></p>
 <p><a href="https://www.reddit.com/r/ColorBlind/comments/ftir2q/a_graph_i_found_on_stack_overflow/">Figure source</a></p>
 <hr />
 </div>
 <div id="why-python" class="section level1">
-<h1>Why Python?</h1>
-<p>Python is popular for a number of reasons. Here’s a deeper look at what makes it so versatile and easy to use for coders.</p>
+<h1>Why <code>Python</code>?</h1>
+<p><code>Python</code> is popular for a number of reasons. Here’s a deeper look at what makes it so versatile and easy to use for coders.</p>
 <ul>
 <li><p>It has a <strong>simple syntax</strong> that mimics natural language, so it’s easier to read and understand. This makes it quicker to build projects, and faster to improve on them.</p></li>
-<li><p>It’s <strong>versatile</strong>. Python can be used for many different tasks, from web development to machine learning.</p></li>
-<li><p>It’s <strong>beginner friendly</strong>, making it popular for entry-level coders.</p></li>
+<li><p>It’s <strong>versatile</strong>. <code>Python</code> can be used for many different tasks, from web development to machine learning.</p></li>
+<li><p>It’s <strong>beginner-friendly</strong>, making it popular for entry-level coders.</p></li>
 <li><p>It’s <strong>open source</strong>, which means it’s free to use and distribute, even for commercial purposes.</p></li>
-<li><p>Python’s <strong>archive of modules and libraries</strong>, bundles of code that third-party users have created to expand Python’s capabilities, is vast and growing.</p></li>
-<li><p>Python has <strong>a large and active community</strong> that contributes to Python’s pool of modules and libraries, and acts as a helpful resource for other programmers. The vast support community means that if coders run into a stumbling block, finding a solution is relatively easy; somebody is bound to have run into the same problem before.</p></li>
+<li><p><code>Python</code>’s <strong>archive of modules and libraries</strong>, bundles of code that third-party users have created to expand <code>Python</code>’s capabilities, is vast and growing.</p></li>
+<li><p><code>Python</code> has <strong>a large and active community</strong> that contributes to <code>Python</code>’s pool of modules and libraries, and acts as a helpful resource for other programmers. The vast support community means that if coders run into a stumbling block, finding a solution is relatively easy; somebody is bound to have run into the same problem before.</p></li>
 </ul>
-<p><img src="figs/python_fly.jpg" alt="drawing" width="700"/></p>
+<p><img src="figs/python_fly.jpg" alt="drawing" width="650"/></p>
 <p><a href="https://9gag.com/gag/a9AgB0D">Figure source</a></p>
 <hr />
 </div>
 <div id="first-look-at-spyder" class="section level1">
 <h1>First look at <code>Spyder</code></h1>
-<p>Follow <a href="https://zhu-group.github.io/ese5023/Resource.html#Python">instructions</a> to install <code>Spyder</code></p>
-<p>The <code>Spyder</code> IDE (Integrated Development Environment) is a simple and beginner-friendly integrated development environment for R. It allows you to write, run, and debug your Python code.</p>
+<p>Follow <a href="https://zhu-group.github.io/ese5023/Resource.html#Python">instructions</a> to install <code>Spyder</code>.</p>
+<p>The <code>Spyder</code> IDE (Integrated Development Environment) is a simple and beginner-friendly integrated development environment for <code>Python</code>. It allows you to write, run, and debug your <code>Python</code> code.</p>
 <p><img src="figs/spyder_layout.png" alt="drawing" width="800"/></p>
-<hr />
-<p><em>The notes below are modified from the excellent <a href="http://swcarpentry.github.io/r-novice-gapminder/">online R tutorial</a> freely available on the Software Carpentry website.</em></p>
 <hr />
 </div>
 <div id="introduction-to-python" class="section level1">
-<h1>Introduction to Python</h1>
+<h1>Introduction to <code>Python</code></h1>
 <div id="the-flow" class="section level2">
 <h2>The flow</h2>
-<p>By default, <code>Python</code> runs line by line. For example, if you run the following lines, a triangle would show up in your Console.</p>
+<p>By default, <code>Python</code> runs the <em>script</em> line by line. For example, if you run the following lines, a triangle would show up in your Console.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Print a triangle</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="bu">print</span>(<span class="st">&quot;    /|&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(<span class="st">&quot;   / |&quot;</span>)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="bu">print</span>(<span class="st">&quot;  /  |&quot;</span>)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="bu">print</span>(<span class="st">&quot; /   |&quot;</span>)</span></code></pre></div>
-<p>Or, we can write a few lines with meaningful information:</p>
+<p>Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by <code>Python</code> when it executes code.</p>
+<p>We can write a few lines with meaningful information:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Print a few lines with meaningful information</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="bu">print</span>(<span class="st">&quot;Once there is a guy Lei, &quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="bu">print</span>(<span class="st">&quot;he is 35 years old.&quot;</span>)</span>
@@ -553,9 +552,9 @@ div.tocify {
 <span id="cb4-3"><a href="#cb4-3"></a>age  <span class="op">=</span> <span class="st">&quot;18&quot;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Use variables</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">print</span>(<span class="st">&quot;Once there is a guy&quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, &quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">print</span>(<span class="st">&quot;Once there is a guy &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, &quot;</span>)</span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="bu">print</span>(<span class="st">&quot;he is &quot;</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">&quot; years old.&quot;</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="bu">print</span>(<span class="st">&quot;He likes the name + name + &quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="bu">print</span>(<span class="st">&quot;He likes the name &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, &quot;</span>)</span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="bu">print</span>(<span class="st">&quot;but does not like being &quot;</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
 <p>Here you see we use <code>=</code> to assign the variables. A <em>string</em> is defined with the <code>""</code>, and we use <code>+</code> to combine two strings.</p>
 <p>Now change the <code>name</code> and <code>age</code> to feel the power of variables:</p>
@@ -564,9 +563,9 @@ div.tocify {
 <span id="cb5-3"><a href="#cb5-3"></a>age  <span class="op">=</span> <span class="st">&quot;180&quot;</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Use variables</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">print</span>(<span class="st">&quot;Once there is a guy&quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, &quot;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">print</span>(<span class="st">&quot;Once there is a guy &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, &quot;</span>)</span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="bu">print</span>(<span class="st">&quot;he is &quot;</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">&quot; years old.&quot;</span>)</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="bu">print</span>(<span class="st">&quot;He likes the name + name + &quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="bu">print</span>(<span class="st">&quot;He likes the name &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, &quot;</span>)</span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="bu">print</span>(<span class="st">&quot;but does not like being &quot;</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
 <p>Or use <code>\n</code> inside a string as <code>ENTER</code> to start a new line:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Create a variable</span></span>
@@ -603,9 +602,9 @@ div.tocify {
 <span id="cb8-13"><a href="#cb8-13"></a><span class="co"># Get the length of the string</span></span>
 <span id="cb8-14"><a href="#cb8-14"></a><span class="bu">print</span>(<span class="bu">len</span>(school))</span></code></pre></div>
 <p>Here we use <code>.</code> to call a function, and then apply the function to <code>school</code>. You may also use several functions one after another:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">print</span>(school.upper().isupper())</span></code></pre></div>
-<p>If you want to get a specific character, use <em>index</em>.</p>
-<p><strong>Remember, index in <code>Python</code> starts from <code>0</code></strong>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Call upper() first, then pass the output to isupper()</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="bu">print</span>(school.upper().isupper())</span></code></pre></div>
+<p>If you want to get a specific character, use <em>index</em>. <strong>Remember, index in <code>Python</code> starts from <code>0</code></strong>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Print the 1st character</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="bu">print</span>(school[<span class="dv">0</span>])</span>
 <span id="cb10-3"><a href="#cb10-3"></a></span>
@@ -613,20 +612,26 @@ div.tocify {
 <span id="cb10-5"><a href="#cb10-5"></a><span class="bu">print</span>(school[<span class="dv">1</span>])</span>
 <span id="cb10-6"><a href="#cb10-6"></a></span>
 <span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Print a substring </span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="bu">print</span>(school[<span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre></div>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="bu">print</span>(school[<span class="dv">5</span>:<span class="dv">10</span>])</span></code></pre></div>
 <p>Use <code>index()</code> to return the index of a string, or <code>replace()</code> to replace a string with something else.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Use index()</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co"># School of Environment</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co"># 012345678901123456789</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="bu">print</span>(school.index(<span class="st">&quot;E&quot;</span>))</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="bu">print</span>(school.index(<span class="st">&quot;o&quot;</span>))</span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="bu">print</span>(school.index(<span class="st">&quot;Env&quot;</span>))</span>
-<span id="cb11-7"><a href="#cb11-7"></a></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co"># Try this, can you find z?</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="bu">print</span>(school.index(<span class="st">&quot;z&quot;</span>))</span>
-<span id="cb11-10"><a href="#cb11-10"></a></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co"># Use replace()</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="bu">print</span>(note.replace(<span class="st">&quot;Environment&quot;</span>,<span class="st">&quot;Chemistry&quot;</span>))</span></code></pre></div>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># Return the 1st match case</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="bu">print</span>(school.index(<span class="st">&quot;o&quot;</span>))</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co"># Return the index of the substring</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="bu">print</span>(school.index(<span class="st">&quot;Env&quot;</span>))</span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co"># Try this, can you find z?</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="bu">print</span>(school.index(<span class="st">&quot;z&quot;</span>))</span>
+<span id="cb11-14"><a href="#cb11-14"></a></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co"># Use replace()</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="bu">print</span>(school)</span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="bu">print</span>(school.replace(<span class="st">&quot;Environment&quot;</span>,<span class="st">&quot;Chemistry&quot;</span>))</span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="bu">print</span>(school)</span></code></pre></div>
 </div>
 <div id="working-with-numbers" class="section level2">
 <h2>Working with numbers</h2>
@@ -639,7 +644,6 @@ div.tocify {
 <li>Add: <code>+</code></li>
 <li>Subtract: <code>-</code></li>
 </ul>
-<p>Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol <code>#</code> is ignored by <code>Python</code> when it executes code.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Get the square root of 100</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="dv">100</span> <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div>
 <p>Really small or large numbers get a <em>scientific notation</em>:</p>
@@ -658,7 +662,7 @@ div.tocify {
 </div>
 <div id="mathematical-functions" class="section level2">
 <h2>Mathematical functions</h2>
-<p>R has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses <code>()</code>. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
+<p><code>Python</code> has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses <code>()</code>. Anything we type inside the parentheses is called the function’s <em>arguments</em>:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Get the mod</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span>)</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
@@ -675,17 +679,20 @@ div.tocify {
 <span id="cb16-14"><a href="#cb16-14"></a><span class="co"># Round</span></span>
 <span id="cb16-15"><a href="#cb16-15"></a><span class="bu">round</span>(<span class="fl">3.2</span>)</span>
 <span id="cb16-16"><a href="#cb16-16"></a><span class="bu">round</span>(<span class="fl">3.7</span>)</span>
-<span id="cb16-17"><a href="#cb16-17"></a><span class="bu">round</span>(<span class="fl">3.71</span>,<span class="dv">1</span>)</span></code></pre></div>
+<span id="cb16-17"><a href="#cb16-17"></a></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="co"># Round with 1 digit</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="bu">round</span>(<span class="fl">3.71</span>,<span class="dv">1</span>)</span></code></pre></div>
 <p>You can find more mathematical functions in the <code>math</code> library. To import those functions, we type:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">from</span> math <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a>floor(<span class="fl">3.7</span>)</span>
 <span id="cb17-3"><a href="#cb17-3"></a>ceil(<span class="fl">3.7</span>)</span>
 <span id="cb17-4"><a href="#cb17-4"></a>sqrt(<span class="dv">36</span>)</span></code></pre></div>
+<p>Find more functions and how to use them at <a href="https://docs.python.org/3.8/library/math.html">Mathematical functions</a>.</p>
 </div>
 <div id="user-inputs" class="section level2">
 <h2>User inputs</h2>
 <p>Use <code>input()</code> to ask for inputs from the user:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Ask for input from a user</span></span>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Ask for inputs from a user</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Please enter your name: &quot;</span>)</span>
 <span id="cb18-3"><a href="#cb18-3"></a>age  <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Please enter your age: &quot;</span>)</span>
 <span id="cb18-4"><a href="#cb18-4"></a></span>
@@ -705,196 +712,208 @@ div.tocify {
 <span id="cb19-9"><a href="#cb19-9"></a><span class="co"># Greater than</span></span>
 <span id="cb19-10"><a href="#cb19-10"></a><span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">&gt;</span> <span class="dv">1</span><span class="op">/</span><span class="dv">5</span></span>
 <span id="cb19-11"><a href="#cb19-11"></a><span class="co"># Greater than or equal to</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="dv">-100</span> <span class="op">&gt;</span> <span class="dv">-200</span></span></code></pre></div>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="dv">-100</span> <span class="op">&gt;</span> <span class="dv">-200</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co"># Use not() function</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="kw">not</span>(<span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Such <code>True</code> or <code>False</code> is called <code>bool</code> type. So far, we have covered <code>int</code>, <code>float</code>, <code>string</code>, and <code>bool</code>. You can always use <code>type()</code> function to determine the type of a variable.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Use type() function</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="bu">type</span>(<span class="dv">1</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="bu">type</span>(<span class="fl">1.0</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="bu">type</span>(<span class="st">&quot;1&quot;</span>)</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="bu">type</span>(<span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span>)</span></code></pre></div>
 </div>
 <div id="list" class="section level2">
 <h2>List</h2>
 <p>Python has a great built-in list type named <code>list</code>. <code>List</code> literals are written within square brackets <code>[ ]</code>. Lists work similarly to strings - use the <code>len()</code> function and square brackets <code>[ ]</code> to access data, with the first element at index <code>0</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Make a list</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>my_list <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="dv">9</span>, <span class="fl">10.1</span>]</span>
-<span id="cb20-3"><a href="#cb20-3"></a></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="co"># Print the list</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="bu">print</span>(my_list)</span>
-<span id="cb20-6"><a href="#cb20-6"></a></span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="co"># Show the 1st element</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="bu">print</span>(my_list[<span class="dv">0</span>])</span>
-<span id="cb20-9"><a href="#cb20-9"></a></span>
-<span id="cb20-10"><a href="#cb20-10"></a><span class="co"># Show the last element</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a><span class="bu">print</span>(my_list[<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb20-12"><a href="#cb20-12"></a></span>
-<span id="cb20-13"><a href="#cb20-13"></a><span class="co"># Show the 2nd and 3rd element</span></span>
-<span id="cb20-14"><a href="#cb20-14"></a><span class="bu">print</span>(my_list[<span class="dv">1</span>:<span class="dv">2</span>])</span>
-<span id="cb20-15"><a href="#cb20-15"></a></span>
-<span id="cb20-16"><a href="#cb20-16"></a><span class="co"># Show the 2nd element and afterward</span></span>
-<span id="cb20-17"><a href="#cb20-17"></a><span class="bu">print</span>(my_list[<span class="dv">1</span>:])</span></code></pre></div>
-<p>Some common functions to handel lists:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Make a list</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>firends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>,<span class="st">&quot;Xiaoguang&quot;</span>,<span class="st">&quot;Xiaoping&quot;</span>]</span>
+<span id="cb21-2"><a href="#cb21-2"></a>my_list <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="dv">9</span>, <span class="fl">10.1</span>]</span>
 <span id="cb21-3"><a href="#cb21-3"></a></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># Make another list</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>ages    <span class="op">=</span> [<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>]</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># Print the list</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="bu">print</span>(my_list)</span>
 <span id="cb21-6"><a href="#cb21-6"></a></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co"># Extend the list by appending all the items from the iterable</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>firends.extend(ages)</span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-10"><a href="#cb21-10"></a></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="co"># Add an item to the end of the list</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>firends.append(<span class="st">&quot;99&quot;</span>)</span>
-<span id="cb21-13"><a href="#cb21-13"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-14"><a href="#cb21-14"></a></span>
-<span id="cb21-15"><a href="#cb21-15"></a><span class="co"># Return index in the list of the first item whose value is equal to x</span></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="bu">print</span>(firends.index(<span class="st">&quot;Xiaoli&quot;</span>))</span>
-<span id="cb21-17"><a href="#cb21-17"></a><span class="bu">print</span>(firends.index(<span class="st">&quot;Xiaoniu&quot;</span>))</span>
-<span id="cb21-18"><a href="#cb21-18"></a></span>
-<span id="cb21-19"><a href="#cb21-19"></a><span class="co"># Insert an item at a given position</span></span>
-<span id="cb21-20"><a href="#cb21-20"></a>firends.insert(<span class="dv">0</span>,<span class="st">&quot;Xiaoyong&quot;</span>)</span>
-<span id="cb21-21"><a href="#cb21-21"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-22"><a href="#cb21-22"></a></span>
-<span id="cb21-23"><a href="#cb21-23"></a><span class="co"># Remove the first item from the list whose value is equal to x</span></span>
-<span id="cb21-24"><a href="#cb21-24"></a>firends.remove(<span class="st">&quot;Xiaoli&quot;</span>)</span>
-<span id="cb21-25"><a href="#cb21-25"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-26"><a href="#cb21-26"></a></span>
-<span id="cb21-27"><a href="#cb21-27"></a><span class="co"># Remove all items from the list</span></span>
-<span id="cb21-28"><a href="#cb21-28"></a>firends.clear()</span>
-<span id="cb21-29"><a href="#cb21-29"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-30"><a href="#cb21-30"></a></span>
-<span id="cb21-31"><a href="#cb21-31"></a><span class="co">#------------------------------</span></span>
-<span id="cb21-32"><a href="#cb21-32"></a><span class="co"># Make a new list</span></span>
-<span id="cb21-33"><a href="#cb21-33"></a></span>
-<span id="cb21-34"><a href="#cb21-34"></a>firends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>,<span class="st">&quot;Xiaoguang&quot;</span>,<span class="st">&quot;Xiaoping&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>]</span>
-<span id="cb21-35"><a href="#cb21-35"></a></span>
-<span id="cb21-36"><a href="#cb21-36"></a><span class="co"># Return the number of times x appears in the list</span></span>
-<span id="cb21-37"><a href="#cb21-37"></a>firends.count(<span class="st">&quot;Xiaoming&quot;</span>)</span>
-<span id="cb21-38"><a href="#cb21-38"></a></span>
-<span id="cb21-39"><a href="#cb21-39"></a><span class="co"># Sort the items of the list</span></span>
-<span id="cb21-40"><a href="#cb21-40"></a>firends.sort()</span>
-<span id="cb21-41"><a href="#cb21-41"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-42"><a href="#cb21-42"></a></span>
-<span id="cb21-43"><a href="#cb21-43"></a>ages.sort()</span>
-<span id="cb21-44"><a href="#cb21-44"></a><span class="bu">print</span>(ages)</span>
-<span id="cb21-45"><a href="#cb21-45"></a></span>
-<span id="cb21-46"><a href="#cb21-46"></a><span class="co"># Reverse the elements of the list </span></span>
-<span id="cb21-47"><a href="#cb21-47"></a>firends.reverse()</span>
-<span id="cb21-48"><a href="#cb21-48"></a><span class="bu">print</span>(firends)</span>
-<span id="cb21-49"><a href="#cb21-49"></a></span>
-<span id="cb21-50"><a href="#cb21-50"></a>ages.reverse()</span>
-<span id="cb21-51"><a href="#cb21-51"></a><span class="bu">print</span>(ages)</span>
-<span id="cb21-52"><a href="#cb21-52"></a></span>
-<span id="cb21-53"><a href="#cb21-53"></a><span class="co"># Return a shallow copy of the list</span></span>
-<span id="cb21-54"><a href="#cb21-54"></a>firends2 <span class="op">=</span> firends.copy()</span>
-<span id="cb21-55"><a href="#cb21-55"></a><span class="bu">print</span>(firends2)</span></code></pre></div>
-<p>For more functions, please refer to <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python Data Structures - More on List</a></p>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co"># Show the 1st element</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="bu">print</span>(my_list[<span class="dv">0</span>])</span>
+<span id="cb21-9"><a href="#cb21-9"></a></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co"># Show the last element</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="bu">print</span>(my_list[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb21-12"><a href="#cb21-12"></a></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="co"># Includes element at index 2 and 3,</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="co"># excludes element at index 4</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="bu">print</span>(my_list[<span class="dv">2</span>:<span class="dv">4</span>])</span>
+<span id="cb21-16"><a href="#cb21-16"></a></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="co"># Show the 2nd element and afterward</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="bu">print</span>(my_list[<span class="dv">1</span>:])</span></code></pre></div>
+<p>Some common functions to handel lists:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Make a list</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>firends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>,<span class="st">&quot;Xiaoguang&quot;</span>,<span class="st">&quot;Xiaoping&quot;</span>]</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># Make another list</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>ages    <span class="op">=</span> [<span class="dv">20</span>,<span class="dv">31</span>,<span class="dv">18</span>,<span class="dv">29</span>,<span class="dv">45</span>,<span class="dv">15</span>]</span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># Extend the list by appending all the items from the iterable</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>firends.extend(ages)</span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-10"><a href="#cb22-10"></a></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="co"># Add an item to the end of the list</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>firends.append(<span class="st">&quot;99&quot;</span>)</span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-14"><a href="#cb22-14"></a></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="co"># Return index in the list of the first item whose value is equal to x</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="bu">print</span>(firends.index(<span class="st">&quot;Xiaoli&quot;</span>))</span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="bu">print</span>(firends.index(<span class="st">&quot;Xiaoniu&quot;</span>))</span>
+<span id="cb22-18"><a href="#cb22-18"></a></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co"># Insert an item at a given position</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a>firends.insert(<span class="dv">0</span>,<span class="st">&quot;Xiaoyong&quot;</span>)</span>
+<span id="cb22-21"><a href="#cb22-21"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-22"><a href="#cb22-22"></a></span>
+<span id="cb22-23"><a href="#cb22-23"></a><span class="co"># Remove the first item from the list whose value is equal to x</span></span>
+<span id="cb22-24"><a href="#cb22-24"></a>firends.remove(<span class="st">&quot;Xiaoli&quot;</span>)</span>
+<span id="cb22-25"><a href="#cb22-25"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-26"><a href="#cb22-26"></a></span>
+<span id="cb22-27"><a href="#cb22-27"></a><span class="co"># Remove all items from the list</span></span>
+<span id="cb22-28"><a href="#cb22-28"></a>firends.clear()</span>
+<span id="cb22-29"><a href="#cb22-29"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-30"><a href="#cb22-30"></a></span>
+<span id="cb22-31"><a href="#cb22-31"></a><span class="co">#------------------------------</span></span>
+<span id="cb22-32"><a href="#cb22-32"></a><span class="co"># Make a new list</span></span>
+<span id="cb22-33"><a href="#cb22-33"></a>firends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>,<span class="st">&quot;Xiaoguang&quot;</span>,<span class="st">&quot;Xiaoping&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>]</span>
+<span id="cb22-34"><a href="#cb22-34"></a></span>
+<span id="cb22-35"><a href="#cb22-35"></a><span class="co"># Return the number of times x appears in the list</span></span>
+<span id="cb22-36"><a href="#cb22-36"></a>firends.count(<span class="st">&quot;Xiaoming&quot;</span>)</span>
+<span id="cb22-37"><a href="#cb22-37"></a></span>
+<span id="cb22-38"><a href="#cb22-38"></a><span class="co"># Sort the items of the list</span></span>
+<span id="cb22-39"><a href="#cb22-39"></a>firends.sort()</span>
+<span id="cb22-40"><a href="#cb22-40"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-41"><a href="#cb22-41"></a></span>
+<span id="cb22-42"><a href="#cb22-42"></a>ages.sort()</span>
+<span id="cb22-43"><a href="#cb22-43"></a><span class="bu">print</span>(ages)</span>
+<span id="cb22-44"><a href="#cb22-44"></a></span>
+<span id="cb22-45"><a href="#cb22-45"></a><span class="co"># Reverse the elements of the list </span></span>
+<span id="cb22-46"><a href="#cb22-46"></a>firends.reverse()</span>
+<span id="cb22-47"><a href="#cb22-47"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-48"><a href="#cb22-48"></a></span>
+<span id="cb22-49"><a href="#cb22-49"></a>ages.reverse()</span>
+<span id="cb22-50"><a href="#cb22-50"></a><span class="bu">print</span>(ages)</span>
+<span id="cb22-51"><a href="#cb22-51"></a></span>
+<span id="cb22-52"><a href="#cb22-52"></a><span class="co"># Return a shallow copy of the list</span></span>
+<span id="cb22-53"><a href="#cb22-53"></a>firends2 <span class="op">=</span> firends.copy()</span>
+<span id="cb22-54"><a href="#cb22-54"></a><span class="bu">print</span>(firends2)</span></code></pre></div>
+<p>For more functions, please refer to <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python Data Structures - More on List</a>.</p>
 </div>
 <div id="tuple" class="section level2">
 <h2>Tuple</h2>
-<p>A <code>tuple</code> is a collection of objects which are ordered and <code>immutable</code>. Tuples are sequences, just like <code>lists. The differences between tuples and lists are, the tuples</code>cannot be changed<code>unlike lists and tuples use parentheses</code>()<code>, whereas lists use square brackets</code>[]`.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Define a tuple</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>coordinates <span class="op">=</span> (<span class="fl">25.6</span>, <span class="fl">119.8</span>)</span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># Print the tuple</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="bu">print</span>(coordinates)</span>
-<span id="cb22-6"><a href="#cb22-6"></a></span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># Print the 2nd element</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="bu">print</span>(coordinates[<span class="dv">1</span>])</span>
-<span id="cb22-9"><a href="#cb22-9"></a></span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="co"># Can you change it?</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>coordinates[<span class="dv">1</span>] <span class="op">=</span> <span class="fl">120.7</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a></span>
-<span id="cb22-13"><a href="#cb22-13"></a><span class="co"># A more complex tuple</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a>coordinates <span class="op">=</span> [(<span class="fl">25.6</span>, <span class="fl">119.8</span>), (<span class="fl">22.9</span>, <span class="fl">118.8</span>), (<span class="fl">21.7</span>, <span class="fl">116.2</span>)]</span>
-<span id="cb22-15"><a href="#cb22-15"></a></span>
-<span id="cb22-16"><a href="#cb22-16"></a><span class="co"># Print the tuple</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a><span class="bu">print</span>(coordinates)</span>
-<span id="cb22-18"><a href="#cb22-18"></a></span>
-<span id="cb22-19"><a href="#cb22-19"></a><span class="co"># Print the 2nd element</span></span>
-<span id="cb22-20"><a href="#cb22-20"></a><span class="bu">print</span>(coordinates[<span class="dv">1</span>])</span></code></pre></div>
-<p>For more functions, please refer to <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Python Data Structures - Tuples and Sequences</a></p>
+<p>A <code>tuple</code> is a collection of objects which are ordered and <strong>immutable</strong>. Tuples are sequences, just like lists. The differences between tuples and lists are, the tuples <strong>cannot be changed</strong> unlike lists; and tuples use parentheses <code>()</code>, whereas lists use square brackets <code>[]</code>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Define a tuple</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>coordinates <span class="op">=</span> (<span class="fl">25.6</span>, <span class="fl">119.8</span>)</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co"># Print the tuple</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="bu">print</span>(coordinates)</span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co"># Print the 2nd element</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="bu">print</span>(coordinates[<span class="dv">1</span>])</span>
+<span id="cb23-9"><a href="#cb23-9"></a></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="co"># Can you change it?</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>coordinates[<span class="dv">1</span>] <span class="op">=</span> <span class="fl">120.7</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="co"># A more complex tuple</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a>coordinates <span class="op">=</span> [(<span class="fl">25.6</span>, <span class="fl">119.8</span>), (<span class="fl">22.9</span>, <span class="fl">118.8</span>), (<span class="fl">21.7</span>, <span class="fl">116.2</span>)]</span>
+<span id="cb23-15"><a href="#cb23-15"></a></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="co"># Print the tuple</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="bu">print</span>(coordinates)</span>
+<span id="cb23-18"><a href="#cb23-18"></a></span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="co"># Print the 2nd element</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="bu">print</span>(coordinates[<span class="dv">1</span>])</span>
+<span id="cb23-21"><a href="#cb23-21"></a></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="co"># What does this print?</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a><span class="bu">print</span>(coordinates[<span class="dv">1</span>][<span class="dv">1</span>])</span></code></pre></div>
+<p>For more functions, please refer to <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Python Data Structures - Tuples and Sequences</a>.</p>
 </div>
 <div id="function" class="section level2">
 <h2>Function</h2>
 <p>A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.</p>
-<p>As you already know, Python gives you many built-in functions like <code>print()</code>, etc. but you can also create your own functions. These functions are called user-defined functions.</p>
+<p>As you already know, <code>Python</code> gives you many built-in functions like <code>print()</code>, etc., but you can also create your own functions. These functions are called user-defined functions.</p>
 <p>Let’s define a simple function to say hi:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Define a function</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">def</span> say_hi():</span>
-<span id="cb23-3"><a href="#cb23-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hi there!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Define a function to say hi</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="kw">def</span> say_hi():</span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hi there!&quot;</span>)</span></code></pre></div>
 <p>Function blocks begin with the keyword <code>def</code>, followed by the function name and parentheses <code>( )</code>. The code block within every function starts with a colon <code>:</code> and is <strong>indented</strong> - things not indented are not part of the function.</p>
 <p>Call the function by:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Call the function</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>say_hi()</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Call the function</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>say_hi()</span></code></pre></div>
 <p>We can pass a variable, aka <code>parameter</code>, in the function like:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Define a function</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">def</span> say_hi(name):</span>
-<span id="cb25-3"><a href="#cb25-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hi &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;!&quot;</span>)</span>
-<span id="cb25-4"><a href="#cb25-4"></a></span>
-<span id="cb25-5"><a href="#cb25-5"></a>say_hi(<span class="st">&quot;ESE5023ers&quot;</span>)</span></code></pre></div>
-<p>You can pass more than one parameter:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Define a function</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">def</span> say_hi(name, age):</span>
-<span id="cb26-3"><a href="#cb26-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hi &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, you are &quot;</span> <span class="op">+</span> age)</span>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Define a function with one parameter</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">def</span> say_hi(name):</span>
+<span id="cb26-3"><a href="#cb26-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hi &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;!&quot;</span>)</span>
 <span id="cb26-4"><a href="#cb26-4"></a></span>
-<span id="cb26-5"><a href="#cb26-5"></a>say_hi(<span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;20&quot;</span>)</span></code></pre></div>
+<span id="cb26-5"><a href="#cb26-5"></a>say_hi(<span class="st">&quot;ESE5023ers&quot;</span>)</span></code></pre></div>
+<p>You can pass more than one parameter:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Define a function with two parameters</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">def</span> say_hi(name, age):</span>
+<span id="cb27-3"><a href="#cb27-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hi &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;, you are &quot;</span> <span class="op">+</span> age)</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a>say_hi(<span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;20&quot;</span>)</span></code></pre></div>
 </div>
 <div id="return-values-from-a-function" class="section level2">
 <h2>Return values from a function</h2>
 <p>The statement <code>return</code> exits a function, optionally passing back an expression to the caller. A return statement with no arguments is the same as return <code>None</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Define a function to return the square of a number</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">def</span> get_square(num):</span>
-<span id="cb27-3"><a href="#cb27-3"></a>    <span class="cf">return</span> num<span class="op">*</span>num</span>
-<span id="cb27-4"><a href="#cb27-4"></a></span>
-<span id="cb27-5"><a href="#cb27-5"></a>get_square(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Define a function to return the square of a number</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">def</span> get_square(num):</span>
+<span id="cb28-3"><a href="#cb28-3"></a>    <span class="cf">return</span> num<span class="op">*</span>num</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>get_square(<span class="dv">10</span>)</span></code></pre></div>
 <p>Or you can assign the return value into a variable:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>result <span class="op">=</span> get_square(<span class="dv">10</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="bu">print</span>(result)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>result <span class="op">=</span> get_square(<span class="dv">50</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="bu">print</span>(result)</span></code></pre></div>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional statements</h2>
-<p>Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
+<p>Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met.</p>
 <p>There are several ways you can control flow in <code>Python</code>. For conditional statements, the most commonly used approaches are the <code>if</code> and <code>else</code> constructs.</p>
 <p>Given today’s AQI (Air Quality Index) value, suppose we want to write a piece of code to check whether the Air Quality is excellent (AQI &lt;= <code>50</code>) or not.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>AQI <span class="op">=</span> <span class="dv">59</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># If this condition is TRUE</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span> <span class="dv">50</span>):</span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="co"># Do the following</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span></code></pre></div>
-<p>The print statement does not appear in the <strong>console</strong> because <code>AQI</code> is larger than <code>50</code>. To print a different message for numbers larger than <code>50</code>, we can add an <code>else</code> statement.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># If this condition is TRUE</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span> <span class="dv">50</span>):</span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="co"># Do the following</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
-<span id="cb30-5"><a href="#cb30-5"></a><span class="co"># If this condition is FALSE  </span></span>
-<span id="cb30-6"><a href="#cb30-6"></a><span class="cf">else</span>:</span>
-<span id="cb30-7"><a href="#cb30-7"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is NOT Excellent&quot;</span>)</span>
-<span id="cb30-8"><a href="#cb30-8"></a>}</span></code></pre></div>
-<p>You can also test multiple conditions by using <code>elif</code> (means else if).</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span> <span class="dv">50</span>):</span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="co"># Do the following</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="cf">elif</span> (AQI <span class="op">&lt;=</span> <span class="dv">100</span>):</span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is GOOD&quot;</span>)</span>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>AQI <span class="op">=</span> <span class="dv">59</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="co"># If this condition is TRUE</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span> <span class="dv">50</span>):</span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="co"># Do the following</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span></code></pre></div>
+<p>The print statement does not appear in the <strong>Console</strong> because <code>AQI</code> is larger than <code>50</code>. To print a different message for numbers larger than <code>50</code>, we can add an <code>else</code> statement.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># If this condition is TRUE</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span> <span class="dv">50</span>):</span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="co"># Do the following</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="co"># If this condition is FALSE  </span></span>
 <span id="cb31-6"><a href="#cb31-6"></a><span class="cf">else</span>:</span>
-<span id="cb31-7"><a href="#cb31-7"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Pollution!&quot;</span>)</span></code></pre></div>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is NOT Excellent&quot;</span>)</span></code></pre></div>
+<p>You can also test multiple conditions by using <code>elif</code> (means else if).</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Now use else if  </span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="cf">if</span> (AQI <span class="op">&lt;=</span> <span class="dv">50</span>):</span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="co"># Do the following line</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is Excellent&quot;</span>)</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="cf">elif</span> (AQI <span class="op">&lt;=</span> <span class="dv">100</span>):</span>
+<span id="cb32-6"><a href="#cb32-6"></a>  <span class="co"># Do the following line</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Quality is GOOD&quot;</span>)</span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="cf">else</span>:</span>
+<span id="cb32-9"><a href="#cb32-9"></a>  <span class="co"># Do the following line</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a>  <span class="bu">print</span>(<span class="st">&quot;Air Pollution!&quot;</span>)</span></code></pre></div>
 <p>Change <code>AQI</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the output.</p>
 <p><strong>Important</strong>: when <code>Python</code> evaluates the condition inside <code>if</code> statements, it is looking for a logical element (<code>bool</code>), <em>i.e.</em>, <code>TRUE</code> or <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>AQI1 <span class="op">=</span> <span class="dv">69</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>AQI2 <span class="op">=</span> <span class="dv">140</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a></span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="cf">if</span> (AQI1 <span class="op">&lt;=</span> <span class="dv">100</span> <span class="kw">or</span> AQI2 <span class="op">&lt;=</span> <span class="dv">100</span>):</span>
-<span id="cb32-5"><a href="#cb32-5"></a>  <span class="bu">print</span>(<span class="st">&quot;There is at least 1 site with a GOOD air quality&quot;</span>)</span>
-<span id="cb32-6"><a href="#cb32-6"></a></span>
-<span id="cb32-7"><a href="#cb32-7"></a><span class="cf">if</span> (AQI1 <span class="op">&lt;=</span> <span class="dv">100</span> <span class="kw">and</span> AQI2 <span class="op">&lt;=</span> <span class="dv">100</span>):</span>
-<span id="cb32-8"><a href="#cb32-8"></a>  <span class="bu">print</span>(<span class="st">&quot;Both sites have GOOD air quality&quot;</span>)</span></code></pre></div>
-<p>Change <code>AQI1</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the output. Change <code>AQI2</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the output.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>AQI1 <span class="op">=</span> <span class="dv">69</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>AQI2 <span class="op">=</span> <span class="dv">140</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="cf">if</span> (AQI1 <span class="op">&lt;=</span> <span class="dv">100</span> <span class="kw">or</span> AQI2 <span class="op">&lt;=</span> <span class="dv">100</span>):</span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="bu">print</span>(<span class="st">&quot;There is at least 1 site with a GOOD air quality&quot;</span>)</span>
+<span id="cb33-6"><a href="#cb33-6"></a></span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="cf">if</span> (AQI1 <span class="op">&lt;=</span> <span class="dv">100</span> <span class="kw">and</span> AQI2 <span class="op">&lt;=</span> <span class="dv">100</span>):</span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="bu">print</span>(<span class="st">&quot;Both sites have GOOD air quality&quot;</span>)</span></code></pre></div>
+<p>Change <code>AQI2</code> to <code>40</code>, <code>80</code>, and <code>120</code>, check the output.</p>
 </div>
 <div id="seeking-help" class="section level2">
 <h2>Seeking Help</h2>
 <p><strong>Reading Help files</strong></p>
-<p><code>Python</code>, and every package, provide help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive R session):</p>
+<p><code>Python</code>, and every library, provide help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a library imported into your namespace (your interactive <code>Python</code> session):</p>
 <p><code>help(function_name)</code></p>
 <p>This will load up a help page.</p>
 <p><strong>When your code doesn’t work: seeking help from your peers</strong></p>
-<p>If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have <strong><em>already been answered</em></strong> on <a href="https://stackoverflow.com/">Stack Overflow</a>. You can search using the <code>[python-3.x]</code> tag.</p>
+<p>If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have <strong>already been answered</strong> on <a href="https://stackoverflow.com/">Stack Overflow</a>. You can search using the <code>[python-3.x]</code> tag. You will always find Google is your good friend.</p>
 <hr />
 </div>
 </div>
@@ -908,16 +927,16 @@ div.tocify {
 <li>Windows: In <code>C:\</code> or <code>D:\</code> disk</li>
 <li>macOS: In <code>/home/</code></li>
 </ul></li>
-<li>Change <code>Spyder</code> <code>Working directory</code> to the above folder</li>
+<li>Change <code>Spyder</code> <code>Working directory</code> to the above folder.</li>
 </ul>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>X1  <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>X2  <span class="op">=</span> <span class="dv">120</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a>X3  <span class="op">=</span> X2 <span class="op">*</span> <span class="fl">2.0</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>X4  <span class="op">=</span> X1 <span class="op">-</span> <span class="dv">20</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a>X5  <span class="op">=</span> X1 <span class="op">&gt;</span> X2</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>X1  <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>X2  <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>X3  <span class="op">=</span> X2 <span class="op">*</span> <span class="fl">2.0</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>X4  <span class="op">=</span> X1 <span class="op">-</span> <span class="dv">20</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>X5  <span class="op">=</span> X1 <span class="op">&gt;</span> X2</span></code></pre></div>
 <p>What will be the value of each variable after each statement in the program?</p>
 <ul>
 <li>Now type the above codes in <strong>Console</strong>, check your results.<br />
@@ -930,41 +949,41 @@ div.tocify {
 <h2>Exercise #3</h2>
 <p>Build a basic calculator:</p>
 <ul>
-<li><p>First, it asks a user to input two numbers</p></li>
-<li><p>Then it prints the addition of the two variables</p></li>
+<li><p>First, it asks a user to input two numbers.</p></li>
+<li><p>Then it prints the addition of the two variables.</p></li>
 </ul>
-<p>[Hint: you may find <code>float()</code> function useful to convert a string to a number]</p>
+<p>[Hint: you may find <code>float()</code> function useful to convert a string into a number]</p>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
 <ul>
-<li><p>Create a function named <code>f2c</code> to return temperatures in degrees Fahrenheit (<em>F</em>) to Celsius (<em>C</em>) using the equation: <span class="math display">\[C = (F - 32) * 5/9\]</span></p></li>
-<li><p>Check output with <em>F</em>=32 and <em>F</em>=100</p></li>
+<li><p>Create a function <code>f2c</code> that returns temperatures in degrees Celsius (<em>C</em>) with Fahrenheit temperature (<em>F</em>) as input parameter, based on the following equation: <span class="math display">\[C = (F - 32) * 5/9\]</span></p></li>
+<li><p>Check output with <em>F</em>=32 and <em>F</em>=100.</p></li>
 <li><p>Can you create its inverse function <code>c2f</code> to convert temperatures in degrees Celsius (<em>C</em>) to Fahrenheit (<em>F</em>) ?</p></li>
 </ul>
 </div>
 <div id="exercise-5" class="section level2">
 <h2>Exercise #5</h2>
-<p>A <a href="https://www.programiz.com/article/flowchart-programming">Flowchart</a> is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn the flowchart with <code>if</code> and <code>else</code> in <code>Python</code>.</p>
-<p>Type the following lines in the script:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># importing &quot;random&quot; for random operations</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> random</span>
-<span id="cb34-3"><a href="#cb34-3"></a></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="co"># Using random() function to generate one random value between 0 and 1</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>Score  <span class="op">=</span> <span class="bu">round</span>(random.random()<span class="op">*</span><span class="dv">100</span>)</span>
-<span id="cb34-6"><a href="#cb34-6"></a><span class="bu">print</span>(Score)</span>
-<span id="cb34-7"><a href="#cb34-7"></a></span>
-<span id="cb34-8"><a href="#cb34-8"></a><span class="co"># Get level</span></span>
-<span id="cb34-9"><a href="#cb34-9"></a><span class="cf">if</span> (Score <span class="op">&gt;=</span> <span class="dv">90</span>):</span>
-<span id="cb34-10"><a href="#cb34-10"></a>  <span class="bu">print</span>(<span class="st">&quot;Excellent&quot;</span>) </span>
-<span id="cb34-11"><a href="#cb34-11"></a><span class="cf">elif</span> (Score <span class="op">&gt;=</span> <span class="dv">60</span>):</span>
-<span id="cb34-12"><a href="#cb34-12"></a>  <span class="bu">print</span>(<span class="st">&quot;Pass&quot;</span>)</span>
-<span id="cb34-13"><a href="#cb34-13"></a><span class="cf">else</span>:</span>
-<span id="cb34-14"><a href="#cb34-14"></a>  <span class="bu">print</span>(<span class="st">&quot;Fail&quot;</span>)</span></code></pre></div>
+<p>A <a href="https://www.programiz.com/article/flowchart-programming">Flowchart</a> is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance.</p>
+<p>Here we begin to learn the flowchart with <code>if</code> and <code>else</code> in <code>Python</code>. Copy the following lines into your script:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># importing &quot;random&quot; for random operations</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="im">import</span> random</span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># Using random() function to generate one random value between 0 and 1</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>Score  <span class="op">=</span> <span class="bu">round</span>(random.random()<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="bu">print</span>(Score)</span>
+<span id="cb35-7"><a href="#cb35-7"></a></span>
+<span id="cb35-8"><a href="#cb35-8"></a><span class="co"># Get level</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="cf">if</span> (Score <span class="op">&gt;=</span> <span class="dv">90</span>):</span>
+<span id="cb35-10"><a href="#cb35-10"></a>  <span class="bu">print</span>(<span class="st">&quot;Excellent&quot;</span>) </span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="cf">elif</span> (Score <span class="op">&gt;=</span> <span class="dv">60</span>):</span>
+<span id="cb35-12"><a href="#cb35-12"></a>  <span class="bu">print</span>(<span class="st">&quot;Pass&quot;</span>)</span>
+<span id="cb35-13"><a href="#cb35-13"></a><span class="cf">else</span>:</span>
+<span id="cb35-14"><a href="#cb35-14"></a>  <span class="bu">print</span>(<span class="st">&quot;Fail&quot;</span>)</span></code></pre></div>
 <ul>
 <li><p>Selecting all the lines, and then run the script, what is your result in <strong>Console</strong>? Here <code>Score</code> is randomly generated using <code>random()</code> function from the <code>random</code> library. Type <code>help(random)</code> for help. You can play with this script a few times to get different outputs.</p></li>
 <li><p>Draw a flow chart based on this script.</p></li>
-<li><p>Update your script to reflect the following flowchart</p></li>
+<li><p>Update your script to reflect the following flowchart.</p></li>
 </ul>
 <p><img src="figs/Score.png" alt="drawing" width="600"/></p>
 <hr />
@@ -980,9 +999,6 @@ div.tocify {
 <li><a href="http://swcarpentry.github.io/python-novice-gapminder/index.html">Plotting and Programming in Python</a></li>
 <li><a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a></li>
 </ul>
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
 </div>
 
 

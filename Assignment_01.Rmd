@@ -13,16 +13,6 @@ output:
 
 ***
 
-# Requirements
-
-* Please write a report `PS1.pdf`. 
-
-* For problem set *i*, create a script named `PS1_i.py`. 
-
-* Upload your `Python` scripts **AND** report to the `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
-
-***
-
 # Instructions  
 
 **Collaboration:**  
@@ -32,17 +22,22 @@ Collaboration on solving the assignment is allowed, after you have thought about
 
 * Write your scripts and report **independently** - the scripts and report must come from you only.
 
-**Late Submission:**   
-Late submissions will not receive any credit. 
-
 **Submitting your assignment:**  
-Submit your scripts and report via GitHub. The submission time will be determined based on your latest GitHub records.  
+
+* Please write a report `PS1.pdf`. 
+
+* For problem set *i*, create a script named `PS1_i.py`. 
+
+* Upload your `Python` scripts **AND** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**   
+Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.
 
 ***
 
 # 1. Flowchart 
 
-**[5 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random `a`, `b`, and `c` values.  
+**[10 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random `a`, `b`, and `c` values.  
 
 <img src="figs/flowchart_a1.png" alt="drawing" width="450"/>
 
@@ -52,19 +47,19 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 **2.1 [5 points]** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ); both are filled with random integers from `0` and `50`.
 
-**2.2 [5 points]** Write a function `Matrix_multip` to do matrix multiplication, *i.e.*, `M1 * M2`. Here you are **ONLY** allowed to use `for` loop, `*` operator, and `+` operator. 
+**2.2 [10 points]** Write a function `Matrix_multip` to do matrix multiplication, *i.e.*, `M1 * M2`. Here you are **ONLY** allowed to use `for` loop, `*` operator, and `+` operator. 
 
 ***
 
 # 3. Pascal triangle
 
-**[10 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `k` to print the *k*^th^ line of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
+**[20 points]** One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `k` to print the *k*^th^ line of the Pascal triangle. Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
 
 ***
 
 # 4. Add or double
 
-**[15 points]** If you start with `1` RMB and, with each move, you can either double your money or add another `1` RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `1`, and `Least_moves(5)` should print `3`.
+**[20 points]** If you start with `1` RMB and, with each move, you can either double your money or add another `1` RMB, what is the smallest number of moves you have to make to get to exactly *x* RMB? Here *x* is an integer randomly selected from `1` to `100`. Write a function `Least_moves` to print your results. For example, `Least_moves(2)` should print `1`, and `Least_moves(5)` should print `3`.
 
 ***
 
@@ -72,7 +67,7 @@ Submit your scripts and report via GitHub. The submission time will be determine
 
 Insert `+` or `-` operation anywhere between the digits `123456789` in a way that the expression evaluates to an integer number. You may join digits together to form a bigger number. However, the digits must stay in the original order. 
 
-**5.1 [15 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `1` to `100`. For example, `Find_expression(50)` should print lines include:
+**5.1 [30 points]** Write a function `Find_expression`, which should be able to print every possible solution that makes the expression evaluate to a random integer from `1` to `100`. For example, `Find_expression(50)` should print lines include:
 $$ 1 - 2 + 34 + 5 + 6 + 7 + 8 - 9 = 50 $$
 and
 $$ 1 + 2 + 34 - 56 + 78 - 9 = 50 $$

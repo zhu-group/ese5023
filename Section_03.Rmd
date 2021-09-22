@@ -12,11 +12,11 @@ output:
 
 ***
 
-# What is Python? 
+# What is `Python`? 
 
-Python, one of the most popular programming languages in the world, has created everything from Netflix’s recommendation algorithm to the software that controls self-driving cars. Python is a general-purpose language, which means it’s designed to be used in a range of applications, including **data science**, **software and web development**, **automation**, and generally **getting stuff done**.
+`Python`, one of the most popular programming languages in the world, has created everything from Netflix’s recommendation algorithm to the software that controls self-driving cars. `Python` is a general-purpose language, which means it’s designed to be used in a range of applications, including **data science**, **software and web development**, **automation**, and generally **getting stuff done**.
 
-Python is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis. Python is a ***general-purpose language***, meaning it can be used to create a variety of different programs and isn’t specialized for any specific problems. This versatility, along with its beginner-friendliness, has made it one of the most-used programming languages today. A survey conducted by industry analyst firm RedMonk found that it was the most popular programming language among developers in 2020.
+`Python` is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis. `Python` is a **general-purpose language**, meaning it can be used to create a variety of different programs and isn’t specialized for any specific problems. This versatility, along with its beginner-friendliness, has made it one of the most-used programming languages today. A survey found that it was the most popular programming language among developers in 2020.
 
 <img src="figs/lan_trend.png" alt="drawing" width="800"/>
 
@@ -24,23 +24,23 @@ Python is a computer programming language often used to build websites and softw
 
 ***
 
-# Why Python? 
+# Why `Python`? 
 
-Python is popular for a number of reasons. Here’s a deeper look at what makes it so versatile and easy to use for coders.
+`Python` is popular for a number of reasons. Here’s a deeper look at what makes it so versatile and easy to use for coders.
 
 + It has a **simple syntax** that mimics natural language, so it’s easier to read and understand. This makes it quicker to build projects, and faster to improve on them.
 
-+ It’s **versatile**. Python can be used for many different tasks, from web development to machine learning.
++ It’s **versatile**. `Python` can be used for many different tasks, from web development to machine learning.
 
-+ It’s **beginner friendly**, making it popular for entry-level coders.
++ It’s **beginner-friendly**, making it popular for entry-level coders.
 
 + It’s **open source**, which means it’s free to use and distribute, even for commercial purposes.
 
-+ Python’s **archive of modules and libraries**, bundles of code that third-party users have created to expand Python’s capabilities, is vast and growing.
++ `Python`’s **archive of modules and libraries**, bundles of code that third-party users have created to expand `Python`’s capabilities, is vast and growing.
 
-+ Python has **a large and active community** that contributes to Python’s pool of modules and libraries, and acts as a helpful resource for other programmers. The vast support community means that if coders run into a stumbling block, finding a solution is relatively easy; somebody is bound to have run into the same problem before.
++ `Python` has **a large and active community** that contributes to `Python`’s pool of modules and libraries, and acts as a helpful resource for other programmers. The vast support community means that if coders run into a stumbling block, finding a solution is relatively easy; somebody is bound to have run into the same problem before.
 
-<img src="figs/python_fly.jpg" alt="drawing" width="700"/>
+<img src="figs/python_fly.jpg" alt="drawing" width="650"/>
 
 [Figure source](https://9gag.com/gag/a9AgB0D)
 
@@ -48,23 +48,19 @@ Python is popular for a number of reasons. Here’s a deeper look at what makes 
 
 # First look at `Spyder`
 
-Follow [instructions](https://zhu-group.github.io/ese5023/Resource.html#Python) to install `Spyder`
+Follow [instructions](https://zhu-group.github.io/ese5023/Resource.html#Python) to install `Spyder`.
 
-The `Spyder` IDE (Integrated Development Environment) is a simple and beginner-friendly integrated development environment for R. It allows you to write, run, and debug your Python code.
+The `Spyder` IDE (Integrated Development Environment) is a simple and beginner-friendly integrated development environment for `Python`. It allows you to write, run, and debug your `Python` code.
 
 <img src="figs/spyder_layout.png" alt="drawing" width="800"/>
 
 ***
 
-*The notes below are modified from the excellent [online R tutorial](http://swcarpentry.github.io/r-novice-gapminder/) freely available on the Software Carpentry website.*
-
-***
-
-# Introduction to Python
+# Introduction to `Python`
 
 ## The flow
 
-By default, `Python` runs line by line. For example, if you run the following lines, a triangle would show up in your Console.
+By default, `Python` runs the *script* line by line. For example, if you run the following lines, a triangle would show up in your Console.
 
 ```{python, eval=F}
 # Print a triangle
@@ -74,7 +70,9 @@ print("  /  |")
 print(" /   |")
 ```
 
-Or, we can write a few lines with meaningful information:
+Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as "comments". Anything that follows after the hash symbol `#` is ignored by `Python` when it executes code.
+
+We can write a few lines with meaningful information:
 
 ```{python, eval=F}
 # Print a few lines with meaningful information
@@ -107,9 +105,9 @@ name = "Lei"
 age  = "18"
 
 # Use variables
-print("Once there is a guy" + name + ", ")
+print("Once there is a guy " + name + ", ")
 print("he is " + age + " years old.")
-print("He likes the name + name + ", "")
+print("He likes the name " + name + ", ")
 print("but does not like being " + age + ".")
 ```
 
@@ -123,9 +121,9 @@ name = "Superman"
 age  = "180"
 
 # Use variables
-print("Once there is a guy" + name + ", ")
+print("Once there is a guy " + name + ", ")
 print("he is " + age + " years old.")
-print("He likes the name + name + ", "")
+print("He likes the name " + name + ", ")
 print("but does not like being " + age + ".")
 ```
 
@@ -178,12 +176,11 @@ print(len(school))
 Here we use `.` to call a function, and then apply the function to `school`. You may also use several functions one after another:
 
 ```{python, eval=F}
+# Call upper() first, then pass the output to isupper()
 print(school.upper().isupper())
 ```
 
-If you want to get a specific character, use *index*. 
-
-**Remember, index in `Python` starts from `0`**.
+If you want to get a specific character, use *index*. **Remember, index in `Python` starts from `0`**.
 
 ```{python, eval=F}
 # Print the 1st character
@@ -193,7 +190,7 @@ print(school[0])
 print(school[1])
 
 # Print a substring 
-print(school[0:3])
+print(school[5:10])
 ```
 
 Use `index()` to return the index of a string, or `replace()` to replace a string with something else.
@@ -204,14 +201,20 @@ Use `index()` to return the index of a string, or `replace()` to replace a strin
 # School of Environment
 # 012345678901123456789
 print(school.index("E"))
+
+# Return the 1st match case
 print(school.index("o"))
+
+# Return the index of the substring
 print(school.index("Env"))
 
 # Try this, can you find z?
 print(school.index("z"))
 
 # Use replace()
-print(note.replace("Environment","Chemistry"))
+print(school)
+print(school.replace("Environment","Chemistry"))
+print(school)
 ```
 
 ## Working with numbers
@@ -224,8 +227,6 @@ When using `Python` as a calculator, the order of operations is the same as you 
 * Divide: `/`
 * Add: `+`
 * Subtract: `-`
-
-Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as “comments”. Anything that follows after the hash symbol `#` is ignored by `Python` when it executes code.
 
 ```{python, eval=F}
 # Get the square root of 100
@@ -256,7 +257,7 @@ print(age + " is my age")
 
 ## Mathematical functions
 
-R has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses `()`. Anything we type inside the parentheses is called the function’s *arguments*:
+`Python` has many built-in mathematical functions. To call a function, we can type its name, followed by open and closing parentheses `()`. Anything we type inside the parentheses is called the function’s *arguments*:
 
 ```{python, eval=F}
 # Get the mod
@@ -275,6 +276,8 @@ min(4, 6)
 # Round
 round(3.2)
 round(3.7)
+
+# Round with 1 digit
 round(3.71,1)
 ```
 
@@ -287,12 +290,14 @@ ceil(3.7)
 sqrt(36)
 ```
 
+Find more functions and how to use them at [Mathematical functions](https://docs.python.org/3.8/library/math.html).
+
 ## User inputs 
 
 Use `input()` to ask for inputs from the user:
 
 ```{python, eval=F}
-# Ask for input from a user
+# Ask for inputs from a user
 name = input("Please enter your name: ")
 age  = input("Please enter your age: ")
 
@@ -316,9 +321,19 @@ We can also do comparisons:
 1/3 > 1/5
 # Greater than or equal to
 -100 > -200
+# Use not() function
+not(1 == 1)
 ```
 
 Such `True` or `False` is called `bool` type. So far, we have covered `int`, `float`, `string`, and `bool`. You can always use `type()` function to determine the type of a variable.
+
+```{python, eval=F}
+# Use type() function
+type(1)
+type(1.0)
+type("1")
+type(1 == 1)
+```
 
 ## List
 
@@ -337,8 +352,9 @@ print(my_list[0])
 # Show the last element
 print(my_list[-1])
 
-# Show the 2nd and 3rd element
-print(my_list[1:2])
+# Includes element at index 2 and 3,
+# excludes element at index 4
+print(my_list[2:4])
 
 # Show the 2nd element and afterward
 print(my_list[1:])
@@ -351,7 +367,7 @@ Some common functions to handel lists:
 firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan","Xiaoguang","Xiaoping"]
 
 # Make another list
-ages    = [10,11,12,13,14,15]
+ages    = [20,31,18,29,45,15]
 
 # Extend the list by appending all the items from the iterable
 firends.extend(ages)
@@ -379,7 +395,6 @@ print(firends)
 
 #------------------------------
 # Make a new list
-
 firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan","Xiaoguang","Xiaoping", "Xiaoming"]
 
 # Return the number of times x appears in the list
@@ -405,11 +420,11 @@ print(firends2)
 
 ```
 
-For more functions, please refer to [Python Data Structures - More on List](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)
+For more functions, please refer to [Python Data Structures - More on List](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists).
 
 ## Tuple
 
-A `tuple` is a collection of objects which are ordered and `immutable`. Tuples are sequences, just like `lists. The differences between tuples and lists are, the tuples `cannot be changed` unlike lists and tuples use parentheses `()`, whereas lists use square brackets `[]`.
+A `tuple` is a collection of objects which are ordered and **immutable**. Tuples are sequences, just like lists. The differences between tuples and lists are, the tuples **cannot be changed** unlike lists; and tuples use parentheses `()`, whereas lists use square brackets `[]`.
 
 ```{python, eval=F}
 # Define a tuple
@@ -432,20 +447,23 @@ print(coordinates)
 
 # Print the 2nd element
 print(coordinates[1])
+
+# What does this print?
+print(coordinates[1][1])
 ```
 
-For more functions, please refer to [Python Data Structures - Tuples and Sequences](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)
+For more functions, please refer to [Python Data Structures - Tuples and Sequences](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences).
 
 ## Function
 
 A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.
 
-As you already know, Python gives you many built-in functions like `print()`, etc. but you can also create your own functions. These functions are called user-defined functions.
+As you already know, `Python` gives you many built-in functions like `print()`, etc., but you can also create your own functions. These functions are called user-defined functions.
 
 Let's define a simple function to say hi:
 
 ```{python, eval=F}
-# Define a function
+# Define a function to say hi
 def say_hi():
     print("Hi there!")
 ```
@@ -462,7 +480,7 @@ say_hi()
 We can pass a variable, aka `parameter`, in the function like:
 
 ```{python, eval=F}
-# Define a function
+# Define a function with one parameter
 def say_hi(name):
     print("Hi " + name + "!")
 
@@ -472,7 +490,7 @@ say_hi("ESE5023ers")
 You can pass more than one parameter:
 
 ```{python, eval=F}
-# Define a function
+# Define a function with two parameters
 def say_hi(name, age):
     print("Hi " + name + ", you are " + age)
 
@@ -494,13 +512,13 @@ get_square(10)
 Or you can assign the return value into a variable:
 
 ```{python, eval=F}
-result = get_square(10)
+result = get_square(50)
 print(result)
 ```
 
 ## Conditional statements 
 
-Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
+Often when we’re coding, we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. 
 
 There are several ways you can control flow in `Python`. For conditional statements, the most commonly used approaches are the `if` and `else` constructs.
 
@@ -514,7 +532,7 @@ if (AQI <= 50):
   print("Air Quality is Excellent")
 ```
 
-The print statement does not appear in the **console** because `AQI` is larger than `50`. To print a different message for numbers larger than `50`, we can add an `else` statement.
+The print statement does not appear in the **Console** because `AQI` is larger than `50`. To print a different message for numbers larger than `50`, we can add an `else` statement.
 
 ```{python, eval=F}
 
@@ -525,19 +543,20 @@ if (AQI <= 50):
 # If this condition is FALSE  
 else:
   print("Air Quality is NOT Excellent")
-}
 ```
 
 You can also test multiple conditions by using `elif` (means else if).
 
 ```{python, eval=F}
-
+# Now use else if  
 if (AQI <= 50):
-  # Do the following
+  # Do the following line
   print("Air Quality is Excellent")
 elif (AQI <= 100):
+  # Do the following line
   print("Air Quality is GOOD")
 else:
+  # Do the following line
   print("Air Pollution!")
 ```
 
@@ -557,14 +576,14 @@ if (AQI1 <= 100 and AQI2 <= 100):
   
 ```
 
-Change `AQI1` to `40`, `80`, and `120`, check the output. Change `AQI2` to `40`, `80`, and `120`, check the output. 
+Change `AQI2` to `40`, `80`, and `120`, check the output. 
 
 
 ## Seeking Help
 
 **Reading Help files**
 
-`Python`, and every package, provide help files for functions. The general syntax to search for help on any function, “function_name”, from a specific function that is in a package loaded into your namespace (your interactive R session): 
+`Python`, and every library, provide help files for functions. The general syntax to search for help on any function, "function_name", from a specific function that is in a library imported into your namespace (your interactive `Python` session): 
 
 `help(function_name)`
 
@@ -572,7 +591,7 @@ This will load up a help page.
 
 **When your code doesn’t work: seeking help from your peers**
 
-If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have ***already been answered*** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[python-3.x]` tag.
+If you’re having trouble using a function, 9 times out of 10, the answers you are seeking have **already been answered** on [Stack Overflow](https://stackoverflow.com/). You can search using the `[python-3.x]` tag. You will always find Google is your good friend.
 
 ***
 
@@ -583,7 +602,7 @@ If you’re having trouble using a function, 9 times out of 10, the answers you 
 * Create a folder named `ESE5023` 
   + Windows: In `C:\` or `D:\` disk
   + macOS: In `/home/`
-* Change `Spyder` `Working directory` to the above folder
+* Change `Spyder` `Working directory` to the above folder.
 
 ## Exercise #2
 
@@ -604,28 +623,27 @@ What will be the value of each variable after each statement in the program?
 
 Build a basic calculator:
 
-+ First, it asks a user to input two numbers
++ First, it asks a user to input two numbers.
 
-+ Then it prints the addition of the two variables
++ Then it prints the addition of the two variables.
 
-[Hint: you may find `float()` function useful to convert a string to a number]
+[Hint: you may find `float()` function useful to convert a string into a number]
 
 
 ## Exercise #4
 
-* Create a function named `f2c` to return temperatures in degrees Fahrenheit (*F*) to Celsius (*C*) using the equation:
+* Create a function `f2c` that returns temperatures in degrees Celsius (*C*) with Fahrenheit temperature (*F*) as input parameter, based on the following equation:
 $$C = (F - 32) * 5/9$$
 
-* Check output with *F*=32 and *F*=100
+* Check output with *F*=32 and *F*=100.
 
 * Can you create its inverse function `c2f` to convert temperatures in degrees Celsius  (*C*) to Fahrenheit (*F*) ?
 
-
 ## Exercise #5
 
-A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. Here we begin to learn the flowchart with `if` and `else` in `Python`.
+A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. 
 
-Type the following lines in the script:
+Here we begin to learn the flowchart with `if` and `else` in `Python`. Copy the following lines into your script:
 
 ```{python eval=FALSE}
 # importing "random" for random operations
@@ -648,7 +666,7 @@ else:
 
 * Draw a flow chart based on this script.  
 
-* Update your script to reflect the following flowchart
+* Update your script to reflect the following flowchart.
 
 <img src="figs/Score.png" alt="drawing" width="600"/>
 
@@ -662,5 +680,3 @@ else:
 * [Google's Python Class](https://developers.google.com/edu/python) (May need a vpn)
 * [Plotting and Programming in Python](http://swcarpentry.github.io/python-novice-gapminder/index.html)
 * [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/)
-
-# References  
