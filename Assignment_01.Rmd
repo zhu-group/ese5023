@@ -37,9 +37,9 @@ Late submissions will not receive any credit. The submission time will be determ
 
 # 1. Flowchart 
 
-**[10 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart. Here the red-ish parallelogram operator is to print values in the given order. Report your output with some random `a`, `b`, and `c` values.  
+**[10 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart. Here the purple parallelogram operator is to print values in the given order. Report your output with some random `a`, `b`, and `c` values.  
 
-<img src="figs/flowchart_a1.png" alt="drawing" width="450"/>
+<img src="figs/flowchart_a1.png" alt="drawing" width="500"/>
 
 ***
 
