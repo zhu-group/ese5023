@@ -1,0 +1,342 @@
+---
+title: "Section 04 Python: Basics (II)"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> "My favorite language for maintainability is Python. It has simple, clean syntax, object encapsulation, good library support, and optional named parameters." - Bram Cohen
+
+***
+
+# Introduction to `Python` (continued)
+
+## Set
+
+A `set` is an **unordered** collection data type that is **unchangeable** and **does not allow duplicate values**. Python’s set class represents the mathematical notion of a set. The major advantage of using a set, as opposed to a list, is that it has a highly optimized method for checking whether a specific element is contained in the set. 
+
+```{python, eval=F}
+# Create a set
+Air_pollutants = {"PM10", "PM2.5", "O3", "CO", "SO2", "NO2"}
+print(Air_pollutants) 
+
+# A set is a collection that is both unordered and unindexed
+Air_pollutants[0]
+
+# Once a set is created, you cannot change its items
+Air_pollutants[0] = "VOCs"
+```
+
+Here are some functions to handle a set:
+
+```{python, eval=F}
+# Update a set
+New_pollutants = {"VOCs", "PAH"}
+Air_pollutants.update(New_pollutants)
+print(Air_pollutants)
+
+# Remove an item using remove
+Air_pollutants.remove("PAH")
+print(Air_pollutants)
+
+# Remove an item using discard
+Air_pollutants.discard("VOCs")
+print(Air_pollutants)
+```
+
+For more functions, please refer to [Built-in Types - Set Types](https://docs.python.org/3.8/library/stdtypes.html#set).
+
+## Dictionary
+
+Finally, a dictionary is a collection which is **ordered**, changeable and does not allow duplicates. Dictionaries are used to store data values in `key: value` **pairs**. Let's define a `dictionary` for the `6` air pollutants as follow:
+
+```{python, eval=F}
+# Create and print a dictionary:
+Air_pollutants = {
+  "PM10": "Inhalable particles",
+  "PM2.5": "Fine particulate matter",
+  "O3": "Ozone",
+  "CO": "Carbon monoxide",
+  "SO2": "Sulfur dioxide",
+  "NO2": "Nitrogen dioxide",
+}
+print(Air_pollutants) 
+```
+
+Dictionary items can be referred to by using the key name:
+
+```{python, eval=F}
+print(Air_pollutants["CO"])
+```
+
+The key and value are not necessarily at `string` type. Numbers also work.
+
+```{python, eval=F}
+# Key and value can be other types
+Air_pollutants = {
+  "PM10": "Inhalable particles",
+  "PM2.5": "Fine particulate matter",
+  "O3": "Ozone",
+  "CO": "Carbon monoxide",
+  "SO2": "Sulfur dioxide",
+  "NO2": "Nitrogen dioxide",
+  100:   "The number 100",
+  "Density": 1.69
+}
+
+Air_pollutants[100]
+Air_pollutants["Density"]
+
+# Show all keys
+Air_pollutants.keys()
+
+# Show all values
+Air_pollutants.values()
+
+# Get the value
+Air_pollutants.get("SO2")
+Air_pollutants.get("PO2")
+
+# If key is not found, return default value
+Air_pollutants.get("PO2", "Not a valid key")
+
+```
+
+Some functions to handle a dictionary:
+
+```{python, eval=F}
+# Change the value
+Air_pollutants["Density"] = 1.99
+Air_pollutants
+
+# Add a new item
+Air_pollutants[200] = "The number 200"
+Air_pollutants
+
+# Remove an item with pop()
+Air_pollutants.pop(200)
+Air_pollutants
+
+# Remove an item with del
+del Air_pollutants["Density"]
+Air_pollutants
+```
+
+For more functions, please refer to [Built-in Types - Dictionaries](https://docs.python.org/3.8/tutorial/datastructures.html#dictionaries).
+
+## Summary of types
+
+So far, we have covered all `4` built-in data types in `Python` to store collections of data: `list`, `tuple`, `set`, and `dictionary`. Here is a quick summary:
+
+Type|Ordered|Changeable|Allow duplicate members|How to define|
+|:--|:------|:---------|:----------------------|:------------|
+|List |  Y  |     Y    | Y                     | `[ ]`       |
+|Tuple|  Y  |     N    | Y                     | `( )`       |
+|Set  |  N  |     N    | N                     | `{ }`       |
+|Dictionary |  Y (as of v3.7)  |     Y    | N         | `{ }` with key       |
+
+## `while` loop
+
+With the `while` loop, we can execute a set of statements as long as a condition is true.
+
+```{python, eval=F}
+# Initialize the ID
+ID = 0
+
+# while loop, print the first 5 numbers
+while ID < 5 :
+    print(ID)
+    ID = ID + 1
+    # Another way to write the increment 
+    # ID += 1
+```
+
+The code can be translated as: As long as `ID` is less than `5`, `python` will print `ID` and then increase it by `1`. Now can you figure out what is `ID` after the `while` loop?
+
+You can also use the `else` statement to run a block of code once when the condition is no longer true. For example:
+
+```{python, eval=F}
+# Initialize the ID
+ID = 0
+
+# while loop, print the first 5 numbers
+while ID < 5 :
+    print(ID)
+    ID = ID + 1
+# if the condition is no longer true, do following
+else:
+    print("ID is beyond 4, ID = " + str(ID))
+```
+
+Even more, you can use `break` and `continue` combined with `if` statement to control the flow.
+
+```{python, eval=F}
+# use break and continue to control the flow
+  
+# Initialize the ID
+ID = 0
+
+# while loop, print the first 5 numbers
+while ID < 5 :
+    print(ID)
+    ID = ID + 1
+    # use continue
+    if ID == 2 :
+        print("ID becomes 2 now")
+        continue
+    # use break
+    if ID == 3 :
+        print("Breaks with ID = 3")
+        break
+# if the condition is no longer true, do following
+else:
+    print("ID is beyond 4, ID = " + str(ID))
+```
+
+## `for` loop
+
+A `for` loop is used for iterating over a sequence (i.e. list, tuple, dictionary, set, or string).
+
+Let's use `for` loop to print each element in a collection:
+
+```{python, eval=F}
+# Loop element in a collection (list, tuple, dict, and set)
+for x in Air_pollutants:
+    print(x)
+```
+
+This also works for a `string`:
+
+```{python, eval=F}
+# for loop also works for a string
+for letter in "ESE5023":
+    print(letter)
+```
+
+Similar to the `while` loop, one can use `for` combined with `break`, `continue`, and `if` to control the flow:
+
+```{python, eval=F}
+# for loop with if, break, and continue
+for letter in "ESE5023":
+    if letter == "E":
+        print(letter.lower())
+        continue
+    else:
+        print(letter)
+    if letter == "5":
+        break
+```
+
+To loop through a set of code a specified number of times, we can use the `range()` function, which returns a sequence of numbers, starting from `0` by default, and increments by `1` (by default), and ends at a specified number.
+
+```{python, eval=F}
+# for loop with range, starting from 0
+for i in range(5):
+    print(i)        
+
+# for loop with range, starting from 1
+for i in range(1,5):
+    print(i)    
+
+# for loop with range, starting from 1, increment 2
+for i in range(1,5,2):
+    print(i)   
+```
+
+Finally, you can run nested `for` loop:
+
+```{python, eval=F}
+# nested for loop
+for letter in "ESE5023":
+    for i in range(3):
+        print(letter)
+```
+
+## Modules
+
+A `module` allows you to logically organize your `Python` code. Grouping related code into a module makes the code easier to understand and use. A `module` is a `Python` object with arbitrarily named attributes that you can bind and reference. Simply, a `module` is **a file consisting of `Python` code**. A module can define functions, classes, and variables. 
+
+For example, copy the following lines and save the file as `my_module.py` to your working directory.
+
+```{python, eval=F}
+# Create a function to print say hi
+def say_hi():
+    name = input("Please type you name: ")
+    print("Hello " + name)
+
+# Also define some variables
+age = 28
+gender = "Male"
+```
+
+To import `my_module.py`:
+```{python, eval=F}
+import my_module
+```
+
+We can then use functions and variables defined in the above module:
+
+```{python, eval=F}
+# Call a function from the imported module
+say_hi()
+
+# Call a variable from the imported module
+my_module.age
+```
+
+`Python` provides a range of official modules to do various tasks, see [Python Module](https://docs.python.org/3.8/py-modindex.html) for the comprehensive list. For example, we previously imported `ramdom` module to generate random values:
+
+```{python, eval=F}
+# import python official modules
+import random
+random.random()
+```
+
+As we are using `Python` from `Anaconda`, official module files are located at: `C:\Users\xxx\anaconda3\Lib`, where `xxx` is your user name.
+
+`Python` also has a huge collection of third-party modules available for you to install. To do so, we use a package manager called `pip` (Pip Installs Packages). 
+
+* Open `Anaconda Prompt (anaconda3)`
+
+* Type `pip install yyy`, where `yyy` is the package name (for example `python-docx`)
+
+* The new package will be installed at `C:\Users\xxx\anaconda3\Lib\site-packages\`, where `xxx` is your user name.
+
+* To uninstall the package `yyy`, type `pip uninstall yyy`.
+
+***
+
+# In-class exercises
+
+## Exercise #1 Fibonacci series
+
+Use `for` loop to display Fibonacci series up to `100` terms.
+
+## Exercise #2 Building a guessing game
+
++ Set a secret integer from `0` to `9`, name the integer `answer`. Make sure your deskmate does not know the secret number.
+
++ Write a function that does the following: if your deskmate is able to guess your secret number correctly within `3` tries, print `You Win!`, otherwise print `You Lose! I Win!`
+
++ Let your deskmate play the game. 
+
++ Now it's your turn to play your deskmate's game.
+
+[Hint: consider creating a module and later import it]
+
+***
+
+# Further reading
+
+* Python Cheat Sheet (from [finxter.com](https://app.finxter.com/learn/computer/science/))
+  + [Keywords](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-1_-Keywords1.pdf)
+  + [Basic Data Types](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-2_-Data-Structures.docx.pdf)
+  + [Complex Data Types](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-3_-Complex-Data-Types.pdf)
+  + [Classes](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-4_-Classes.pdf)
+  + [Functions and Tricks](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-5_-Functions-and-Tricks.pdf)
+* [Python in a Hurry for Experienced Programmers](https://pyhurry.readthedocs.io/en/latest/index.html) (A nice quick introduction to Python for people who have programmed in other languages)
+* [The 30 Best Python Libraries and Packages for Beginners](https://www.ubuntupit.com/best-python-libraries-and-packages-for-beginners/)
+* [Python Usuful Modules](https://wiki.python.org/moin/UsefulModules)

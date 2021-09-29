@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 04 Python: Basics (II)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Computing and Programming for Environmental Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Section 04 Python: Basics (II)</h1>
+
+</div>
+
+
+<blockquote>
+<p>“My favorite language for maintainability is Python. It has simple, clean syntax, object encapsulation, good library support, and optional named parameters.” - Bram Cohen</p>
+</blockquote>
+<hr />
+<div id="introduction-to-python-continued" class="section level1">
+<h1>Introduction to <code>Python</code> (continued)</h1>
+<div id="set" class="section level2">
+<h2>Set</h2>
+<p>A <code>set</code> is an <strong>unordered</strong> collection data type that is <strong>unchangeable</strong> and <strong>does not allow duplicate values</strong>. Python’s set class represents the mathematical notion of a set. The major advantage of using a set, as opposed to a list, is that it has a highly optimized method for checking whether a specific element is contained in the set.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Create a set</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>Air_pollutants <span class="op">=</span> {<span class="st">&quot;PM10&quot;</span>, <span class="st">&quot;PM2.5&quot;</span>, <span class="st">&quot;O3&quot;</span>, <span class="st">&quot;CO&quot;</span>, <span class="st">&quot;SO2&quot;</span>, <span class="st">&quot;NO2&quot;</span>}</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(Air_pollutants) </span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># A set is a collection that is both unordered and unindexed</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>Air_pollutants[<span class="dv">0</span>]</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Once a set is created, you cannot change its items</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>Air_pollutants[<span class="dv">0</span>] <span class="op">=</span> <span class="st">&quot;VOCs&quot;</span></span></code></pre></div>
+<p>Here are some functions to handle a set:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Update a set</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>New_pollutants <span class="op">=</span> {<span class="st">&quot;VOCs&quot;</span>, <span class="st">&quot;PAH&quot;</span>}</span>
+<span id="cb2-3"><a href="#cb2-3"></a>Air_pollutants.update(New_pollutants)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">print</span>(Air_pollutants)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Remove an item using remove</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>Air_pollutants.remove(<span class="st">&quot;PAH&quot;</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="bu">print</span>(Air_pollutants)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Remove an item using discard</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>Air_pollutants.discard(<span class="st">&quot;VOCs&quot;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="bu">print</span>(Air_pollutants)</span></code></pre></div>
+<p>For more functions, please refer to <a href="https://docs.python.org/3.8/library/stdtypes.html#set">Built-in Types - Set Types</a>.</p>
+</div>
+<div id="dictionary" class="section level2">
+<h2>Dictionary</h2>
+<p>Finally, a dictionary is a collection which is <strong>ordered</strong>, changeable and does not allow duplicates. Dictionaries are used to store data values in <code>key: value</code> <strong>pairs</strong>. Let’s define a <code>dictionary</code> for the <code>6</code> air pollutants as follow:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Create and print a dictionary:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>Air_pollutants <span class="op">=</span> {</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="st">&quot;PM10&quot;</span>: <span class="st">&quot;Inhalable particles&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="st">&quot;PM2.5&quot;</span>: <span class="st">&quot;Fine particulate matter&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="st">&quot;O3&quot;</span>: <span class="st">&quot;Ozone&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="st">&quot;CO&quot;</span>: <span class="st">&quot;Carbon monoxide&quot;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="st">&quot;SO2&quot;</span>: <span class="st">&quot;Sulfur dioxide&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="st">&quot;NO2&quot;</span>: <span class="st">&quot;Nitrogen dioxide&quot;</span>,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="bu">print</span>(Air_pollutants) </span></code></pre></div>
+<p>Dictionary items can be referred to by using the key name:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">print</span>(Air_pollutants[<span class="st">&quot;CO&quot;</span>])</span></code></pre></div>
+<p>The key and value are not necessarily at <code>string</code> type. Numbers also work.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Key and value can be other types</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>Air_pollutants <span class="op">=</span> {</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="st">&quot;PM10&quot;</span>: <span class="st">&quot;Inhalable particles&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="st">&quot;PM2.5&quot;</span>: <span class="st">&quot;Fine particulate matter&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="st">&quot;O3&quot;</span>: <span class="st">&quot;Ozone&quot;</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="st">&quot;CO&quot;</span>: <span class="st">&quot;Carbon monoxide&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="st">&quot;SO2&quot;</span>: <span class="st">&quot;Sulfur dioxide&quot;</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="st">&quot;NO2&quot;</span>: <span class="st">&quot;Nitrogen dioxide&quot;</span>,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="dv">100</span>:   <span class="st">&quot;The number 100&quot;</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="st">&quot;Density&quot;</span>: <span class="fl">1.69</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>}</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a>Air_pollutants[<span class="dv">100</span>]</span>
+<span id="cb5-14"><a href="#cb5-14"></a>Air_pollutants[<span class="st">&quot;Density&quot;</span>]</span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co"># Show all keys</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>Air_pollutants.keys()</span>
+<span id="cb5-18"><a href="#cb5-18"></a></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co"># Show all values</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>Air_pollutants.values()</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co"># Get the value</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>Air_pollutants.get(<span class="st">&quot;SO2&quot;</span>)</span>
+<span id="cb5-24"><a href="#cb5-24"></a>Air_pollutants.get(<span class="st">&quot;PO2&quot;</span>)</span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co"># If key is not found, return default value</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>Air_pollutants.get(<span class="st">&quot;PO2&quot;</span>, <span class="st">&quot;Not a valid key&quot;</span>)</span></code></pre></div>
+<p>Some functions to handle a dictionary:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Change the value</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>Air_pollutants[<span class="st">&quot;Density&quot;</span>] <span class="op">=</span> <span class="fl">1.99</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>Air_pollutants</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Add a new item</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>Air_pollutants[<span class="dv">200</span>] <span class="op">=</span> <span class="st">&quot;The number 200&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>Air_pollutants</span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># Remove an item with pop()</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>Air_pollutants.pop(<span class="dv">200</span>)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>Air_pollutants</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Remove an item with del</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">del</span> Air_pollutants[<span class="st">&quot;Density&quot;</span>]</span>
+<span id="cb6-15"><a href="#cb6-15"></a>Air_pollutants</span></code></pre></div>
+<p>For more functions, please refer to <a href="https://docs.python.org/3.8/tutorial/datastructures.html#dictionaries">Built-in Types - Dictionaries</a>.</p>
+</div>
+<div id="summary-of-types" class="section level2">
+<h2>Summary of types</h2>
+<p>So far, we have covered all <code>4</code> built-in data types in <code>Python</code> to store collections of data: <code>list</code>, <code>tuple</code>, <code>set</code>, and <code>dictionary</code>. Here is a quick summary:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Ordered</th>
+<th align="left">Changeable</th>
+<th align="left">Allow duplicate members</th>
+<th align="left">How to define</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">List</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+<td align="left"><code>[ ]</code></td>
+</tr>
+<tr class="even">
+<td align="left">Tuple</td>
+<td align="left">Y</td>
+<td align="left">N</td>
+<td align="left">Y</td>
+<td align="left"><code>( )</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Set</td>
+<td align="left">N</td>
+<td align="left">N</td>
+<td align="left">N</td>
+<td align="left"><code>{ }</code></td>
+</tr>
+<tr class="even">
+<td align="left">Dictionary</td>
+<td align="left">Y (as of v3.7)</td>
+<td align="left">Y</td>
+<td align="left">N</td>
+<td align="left"><code>{ }</code> with key</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="while-loop" class="section level2">
+<h2><code>while</code> loop</h2>
+<p>With the <code>while</code> loop, we can execute a set of statements as long as a condition is true.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Initialize the ID</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>ID <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># while loop, print the first 5 numbers</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="cf">while</span> ID <span class="op">&lt;</span> <span class="dv">5</span> :</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="bu">print</span>(ID)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    ID <span class="op">=</span> ID <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="co"># Another way to write the increment </span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="co"># ID += 1</span></span></code></pre></div>
+<p>The code can be translated as: As long as <code>ID</code> is less than <code>5</code>, <code>python</code> will print <code>ID</code> and then increase it by <code>1</code>. Now can you figure out what is <code>ID</code> after the <code>while</code> loop?</p>
+<p>You can also use the <code>else</code> statement to run a block of code once when the condition is no longer true. For example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Initialize the ID</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>ID <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># while loop, print the first 5 numbers</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="cf">while</span> ID <span class="op">&lt;</span> <span class="dv">5</span> :</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="bu">print</span>(ID)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    ID <span class="op">=</span> ID <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co"># if the condition is no longer true, do following</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="cf">else</span>:</span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="bu">print</span>(<span class="st">&quot;ID is beyond 4, ID = &quot;</span> <span class="op">+</span> <span class="bu">str</span>(ID))</span></code></pre></div>
+<p>Even more, you can use <code>break</code> and <code>continue</code> combined with <code>if</code> statement to control the flow.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># use break and continue to control the flow</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  </span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Initialize the ID</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>ID <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># while loop, print the first 5 numbers</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="cf">while</span> ID <span class="op">&lt;</span> <span class="dv">5</span> :</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="bu">print</span>(ID)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    ID <span class="op">=</span> ID <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="co"># use continue</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="cf">if</span> ID <span class="op">==</span> <span class="dv">2</span> :</span>
+<span id="cb9-12"><a href="#cb9-12"></a>        <span class="bu">print</span>(<span class="st">&quot;ID becomes 2 now&quot;</span>)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>        <span class="cf">continue</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="co"># use break</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="cf">if</span> ID <span class="op">==</span> <span class="dv">3</span> :</span>
+<span id="cb9-16"><a href="#cb9-16"></a>        <span class="bu">print</span>(<span class="st">&quot;Breaks with ID = 3&quot;</span>)</span>
+<span id="cb9-17"><a href="#cb9-17"></a>        <span class="cf">break</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co"># if the condition is no longer true, do following</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="cf">else</span>:</span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="bu">print</span>(<span class="st">&quot;ID is beyond 4, ID = &quot;</span> <span class="op">+</span> <span class="bu">str</span>(ID))</span></code></pre></div>
+</div>
+<div id="for-loop" class="section level2">
+<h2><code>for</code> loop</h2>
+<p>A <code>for</code> loop is used for iterating over a sequence (i.e. list, tuple, dictionary, set, or string).</p>
+<p>Let’s use <code>for</code> loop to print each element in a collection:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Loop element in a collection (list, tuple, dict, and set)</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="cf">for</span> x <span class="kw">in</span> Air_pollutants:</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="bu">print</span>(x)</span></code></pre></div>
+<p>This also works for a <code>string</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># for loop also works for a string</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="cf">for</span> letter <span class="kw">in</span> <span class="st">&quot;ESE5023&quot;</span>:</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="bu">print</span>(letter)</span></code></pre></div>
+<p>Similar to the <code>while</code> loop, one can use <code>for</code> combined with <code>break</code>, <code>continue</code>, and <code>if</code> to control the flow:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># for loop with if, break, and continue</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="cf">for</span> letter <span class="kw">in</span> <span class="st">&quot;ESE5023&quot;</span>:</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="cf">if</span> letter <span class="op">==</span> <span class="st">&quot;E&quot;</span>:</span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="bu">print</span>(letter.lower())</span>
+<span id="cb12-5"><a href="#cb12-5"></a>        <span class="cf">continue</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="cf">else</span>:</span>
+<span id="cb12-7"><a href="#cb12-7"></a>        <span class="bu">print</span>(letter)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="cf">if</span> letter <span class="op">==</span> <span class="st">&quot;5&quot;</span>:</span>
+<span id="cb12-9"><a href="#cb12-9"></a>        <span class="cf">break</span></span></code></pre></div>
+<p>To loop through a set of code a specified number of times, we can use the <code>range()</code> function, which returns a sequence of numbers, starting from <code>0</code> by default, and increments by <code>1</code> (by default), and ends at a specified number.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># for loop with range, starting from 0</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="bu">print</span>(i)        </span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># for loop with range, starting from 1</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>):</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="bu">print</span>(i)    </span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># for loop with range, starting from 1, increment 2</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">2</span>):</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="bu">print</span>(i)   </span></code></pre></div>
+<p>Finally, you can run nested <code>for</code> loop:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># nested for loop</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="cf">for</span> letter <span class="kw">in</span> <span class="st">&quot;ESE5023&quot;</span>:</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb14-4"><a href="#cb14-4"></a>        <span class="bu">print</span>(letter)</span></code></pre></div>
+</div>
+<div id="modules" class="section level2">
+<h2>Modules</h2>
+<p>A <code>module</code> allows you to logically organize your <code>Python</code> code. Grouping related code into a module makes the code easier to understand and use. A <code>module</code> is a <code>Python</code> object with arbitrarily named attributes that you can bind and reference. Simply, a <code>module</code> is <strong>a file consisting of <code>Python</code> code</strong>. A module can define functions, classes, and variables.</p>
+<p>For example, copy the following lines and save the file as <code>my_module.py</code> to your working directory.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Create a function to print say hi</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">def</span> say_hi():</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    name <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Please type you name: &quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="bu">print</span>(<span class="st">&quot;Hello &quot;</span> <span class="op">+</span> name)</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># Also define some variables</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>age <span class="op">=</span> <span class="dv">28</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>gender <span class="op">=</span> <span class="st">&quot;Male&quot;</span></span></code></pre></div>
+<p>To import <code>my_module.py</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> my_module</span></code></pre></div>
+<p>We can then use functions and variables defined in the above module:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Call a function from the imported module</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>say_hi()</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Call a variable from the imported module</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>my_module.age</span></code></pre></div>
+<p><code>Python</code> provides a range of official modules to do various tasks, see <a href="https://docs.python.org/3.8/py-modindex.html">Python Module</a> for the comprehensive list. For example, we previously imported <code>ramdom</code> module to generate random values:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># import python official modules</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="im">import</span> random</span>
+<span id="cb18-3"><a href="#cb18-3"></a>random.random()</span></code></pre></div>
+<p>As we are using <code>Python</code> from <code>Anaconda</code>, official module files are located at: <code>C:\Users\xxx\anaconda3\Lib</code>, where <code>xxx</code> is your user name.</p>
+<p><code>Python</code> also has a huge collection of third-party modules available for you to install. To do so, we use a package manager called <code>pip</code> (Pip Installs Packages).</p>
+<ul>
+<li><p>Open <code>Anaconda Prompt (anaconda3)</code></p></li>
+<li><p>Type <code>pip install yyy</code>, where <code>yyy</code> is the package name (for example <code>python-docx</code>)</p></li>
+<li><p>The new package will be installed at <code>C:\Users\xxx\anaconda3\Lib\site-packages\</code>, where <code>xxx</code> is your user name.</p></li>
+<li><p>To uninstall the package <code>yyy</code>, type <code>pip uninstall yyy</code>.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1-fibonacci-series" class="section level2">
+<h2>Exercise #1 Fibonacci series</h2>
+<p>Use <code>for</code> loop to display Fibonacci series up to <code>100</code> terms.</p>
+</div>
+<div id="exercise-2-building-a-guessing-game" class="section level2">
+<h2>Exercise #2 Building a guessing game</h2>
+<ul>
+<li><p>Set a secret integer from <code>0</code> to <code>9</code>, name the integer <code>answer</code>. Make sure your deskmate does not know the secret number.</p></li>
+<li><p>Write a function that does the following: if your deskmate is able to guess your secret number correctly within <code>3</code> tries, print <code>You Win!</code>, otherwise print <code>You Lose! I Win!</code></p></li>
+<li><p>Let your deskmate play the game.</p></li>
+<li><p>Now it’s your turn to play your deskmate’s game.</p></li>
+</ul>
+<p>[Hint: consider creating a module and later import it]</p>
+<hr />
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li>Python Cheat Sheet (from <a href="https://app.finxter.com/learn/computer/science/">finxter.com</a>)
+<ul>
+<li><a href="https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-1_-Keywords1.pdf">Keywords</a></li>
+<li><a href="https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-2_-Data-Structures.docx.pdf">Basic Data Types</a></li>
+<li><a href="https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-3_-Complex-Data-Types.pdf">Complex Data Types</a></li>
+<li><a href="https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-4_-Classes.pdf">Classes</a></li>
+<li><a href="https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-5_-Functions-and-Tricks.pdf">Functions and Tricks</a></li>
+</ul></li>
+<li><a href="https://pyhurry.readthedocs.io/en/latest/index.html">Python in a Hurry for Experienced Programmers</a> (A nice quick introduction to Python for people who have programmed in other languages)</li>
+<li><a href="https://www.ubuntupit.com/best-python-libraries-and-packages-for-beginners/">The 30 Best Python Libraries and Packages for Beginners</a></li>
+<li><a href="https://wiki.python.org/moin/UsefulModules">Python Usuful Modules</a></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

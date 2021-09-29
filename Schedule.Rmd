@@ -5,7 +5,7 @@ title: "Schedule"
 Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 
 **Location:**   
-308, Building #2, Li Yuan  
+405, Building #6, Li Yuan  
 
 **2021 Fall:**
 
@@ -15,7 +15,7 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |2   |09/15|W.  |[Section 02 Version control with Git](https://zhu-group.github.io/ese5023/Section_02.html)           |              |              |
 |2   |09/17|F.  |[Lab 01 Github and Python setup](https://zhu-group.github.io/ese5023/Lab_01.html)     |              |              |
 |3   |09/22|W.  |[Section 03 Python: Basics (I)](https://zhu-group.github.io/ese5023/Section_03.html)  | [Assignment 1](https://zhu-group.github.io/ese5023/Assignment_01.html) |              |
-|4   |09/29|W.  |Section 04 Python: Basics (II)                                                        |              |              |
+|4   |09/29|W.  |[Section 04 Python: Basics (II)](https://zhu-group.github.io/ese5023/Section_04.html) |              |              |
 |4   |10/08|F.  |Lab 02  Python Basics                                                                 |              |              |
 |5   |10/13|W.  |Section 05 Intermediate Python: `numPy` and `matplotlib`                              | Assignment 2 |     1        |
 |6   |10/20|W.  |Section 06 Intermediate Python: `pandas`                                              |              |              |
