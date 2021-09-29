@@ -20,14 +20,14 @@ A `set` is an **unordered** collection data type that is **unchangeable** and **
 
 ```{python, eval=F}
 # Create a set
-Air_pollutants = {"PM10", "PM2.5", "O3", "CO", "SO2", "NO2"}
-print(Air_pollutants) 
+Pollutants = {"PM10", "PM2.5", "O3", "CO", "SO2", "NO2"}
+print(Pollutants) 
 
 # A set is a collection that is both unordered and unindexed
-Air_pollutants[0]
+Pollutants[0]
 
 # Once a set is created, you cannot change its items
-Air_pollutants[0] = "VOCs"
+Pollutants[0] = "VOCs"
 ```
 
 Here are some functions to handle a set:
@@ -35,16 +35,16 @@ Here are some functions to handle a set:
 ```{python, eval=F}
 # Update a set
 New_pollutants = {"VOCs", "PAH"}
-Air_pollutants.update(New_pollutants)
-print(Air_pollutants)
+Pollutants.update(New_pollutants)
+print(Pollutants)
 
 # Remove an item using remove
-Air_pollutants.remove("PAH")
-print(Air_pollutants)
+Pollutants.remove("PAH")
+print(Pollutants)
 
 # Remove an item using discard
-Air_pollutants.discard("VOCs")
-print(Air_pollutants)
+Pollutants.discard("VOCs")
+print(Pollutants)
 ```
 
 For more functions, please refer to [Built-in Types - Set Types](https://docs.python.org/3.8/library/stdtypes.html#set).
@@ -280,8 +280,11 @@ import my_module
 We can then use functions and variables defined in the above module:
 
 ```{python, eval=F}
-# Call a function from the imported module
+# Does this work?
 say_hi()
+
+# Call a function from the imported module
+my_module.say_hi()
 
 # Call a variable from the imported module
 my_module.age
@@ -318,6 +321,8 @@ Use `for` loop to display Fibonacci series up to `100` terms.
 ## Exercise #2 Building a number translator
 
 Build a translator that first asks a user to input a string, then converts every number in the string to `*`, and finally prints the result.
+
+[Hint: you may find the keyword `in` useful]
 
 ## Exercise #3 Building a guessing game
 

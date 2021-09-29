@@ -494,27 +494,27 @@ div.tocify {
 <h2>Set</h2>
 <p>A <code>set</code> is an <strong>unordered</strong> collection data type that is <strong>unchangeable</strong> and <strong>does not allow duplicate values</strong>. Python’s set class represents the mathematical notion of a set. The major advantage of using a set, as opposed to a list, is that it has a highly optimized method for checking whether a specific element is contained in the set.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Create a set</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>Air_pollutants <span class="op">=</span> {<span class="st">&quot;PM10&quot;</span>, <span class="st">&quot;PM2.5&quot;</span>, <span class="st">&quot;O3&quot;</span>, <span class="st">&quot;CO&quot;</span>, <span class="st">&quot;SO2&quot;</span>, <span class="st">&quot;NO2&quot;</span>}</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(Air_pollutants) </span>
+<span id="cb1-2"><a href="#cb1-2"></a>Pollutants <span class="op">=</span> {<span class="st">&quot;PM10&quot;</span>, <span class="st">&quot;PM2.5&quot;</span>, <span class="st">&quot;O3&quot;</span>, <span class="st">&quot;CO&quot;</span>, <span class="st">&quot;SO2&quot;</span>, <span class="st">&quot;NO2&quot;</span>}</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(Pollutants) </span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="co"># A set is a collection that is both unordered and unindexed</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>Air_pollutants[<span class="dv">0</span>]</span>
+<span id="cb1-6"><a href="#cb1-6"></a>Pollutants[<span class="dv">0</span>]</span>
 <span id="cb1-7"><a href="#cb1-7"></a></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Once a set is created, you cannot change its items</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>Air_pollutants[<span class="dv">0</span>] <span class="op">=</span> <span class="st">&quot;VOCs&quot;</span></span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a>Pollutants[<span class="dv">0</span>] <span class="op">=</span> <span class="st">&quot;VOCs&quot;</span></span></code></pre></div>
 <p>Here are some functions to handle a set:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Update a set</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>New_pollutants <span class="op">=</span> {<span class="st">&quot;VOCs&quot;</span>, <span class="st">&quot;PAH&quot;</span>}</span>
-<span id="cb2-3"><a href="#cb2-3"></a>Air_pollutants.update(New_pollutants)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">print</span>(Air_pollutants)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>Pollutants.update(New_pollutants)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">print</span>(Pollutants)</span>
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Remove an item using remove</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>Air_pollutants.remove(<span class="st">&quot;PAH&quot;</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="bu">print</span>(Air_pollutants)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>Pollutants.remove(<span class="st">&quot;PAH&quot;</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="bu">print</span>(Pollutants)</span>
 <span id="cb2-9"><a href="#cb2-9"></a></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Remove an item using discard</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>Air_pollutants.discard(<span class="st">&quot;VOCs&quot;</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="bu">print</span>(Air_pollutants)</span></code></pre></div>
+<span id="cb2-11"><a href="#cb2-11"></a>Pollutants.discard(<span class="st">&quot;VOCs&quot;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="bu">print</span>(Pollutants)</span></code></pre></div>
 <p>For more functions, please refer to <a href="https://docs.python.org/3.8/library/stdtypes.html#set">Built-in Types - Set Types</a>.</p>
 </div>
 <div id="dictionary" class="section level2">
@@ -723,11 +723,14 @@ div.tocify {
 <p>To import <code>my_module.py</code>:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> my_module</span></code></pre></div>
 <p>We can then use functions and variables defined in the above module:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Call a function from the imported module</span></span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Does this work?</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a>say_hi()</span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Call a variable from the imported module</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>my_module.age</span></code></pre></div>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Call a function from the imported module</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>my_module.say_hi()</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Call a variable from the imported module</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>my_module.age</span></code></pre></div>
 <p><code>Python</code> provides a range of official modules to do various tasks, see <a href="https://docs.python.org/3.8/py-modindex.html">Python Module</a> for the comprehensive list. For example, we previously imported <code>ramdom</code> module to generate random values:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># import python official modules</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="im">import</span> random</span>
@@ -752,6 +755,7 @@ div.tocify {
 <div id="exercise-2-building-a-number-translator" class="section level2">
 <h2>Exercise #2 Building a number translator</h2>
 <p>Build a translator that first asks a user to input a string, then converts every number in the string to <code>*</code>, and finally prints the result.</p>
+<p>[Hint: you may find the keyword <code>in</code> useful]</p>
 </div>
 <div id="exercise-3-building-a-guessing-game" class="section level2">
 <h2>Exercise #3 Building a guessing game</h2>
