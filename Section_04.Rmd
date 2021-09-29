@@ -315,7 +315,11 @@ As we are using `Python` from `Anaconda`, official module files are located at: 
 
 Use `for` loop to display Fibonacci series up to `100` terms.
 
-## Exercise #2 Building a guessing game
+## Exercise #2 Building a number translator
+
+Build a translator that first asks a user to input a string, then converts every number in the string to `*`, and finally prints the result.
+
+## Exercise #3 Building a guessing game
 
 + Set a secret integer from `0` to `9`, name the integer `answer`. Make sure your deskmate does not know the secret number.
 
