@@ -82,7 +82,9 @@ plt.show
 
 To convert a notebook file (e.g., `xxx.ipynb`) to a `python` file (e.g., `xxx.py`), open `Anaconda Powershell Prompt (anaconda3)`, change to the path contains the notebook file, type: 
 
-`ipython nbconvert --to script xxx.ipynb`
+```{python, eval=F}
+ipython nbconvert --to script xxx.ipynb
+```
 
 Finally, here are some further readings for `Jupyter Notebook`:
 
