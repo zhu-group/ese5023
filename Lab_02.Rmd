@@ -53,6 +53,8 @@ plt.title("Monthly mean temperature in Shenzhen")
 plt.show
 ```
 
++ To convert a notebook file (e.g., `xxx.ipynb`) to a `python` file (e.g., `xxx.py`), open `Anaconda Powershell Prompt (anaconda3)`, change to the path contains the notebook file, type: `ipython nbconvert --to script xxx.ipynb`
+
 Here are some further readings:
 
 + [How to Use Jupyter Notebook in 2020: A Beginner’s Tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/)
