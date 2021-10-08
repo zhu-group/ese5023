@@ -10,7 +10,34 @@ output:
 
 ***
 
-# 1. Using `Jupyter Notebook`
+# 1. Building a guessing game
+
++ Set a secret integer from `0` to `9`, name the integer `answer`. Make sure your deskmate does not know the secret number.
+
++ Write a function that does the following: if your deskmate is able to guess your secret number correctly within `3` tries, print `You Win!`, otherwise print `You Lose! I Win!`
+
++ Let your deskmate play the game. 
+
++ Now it's your turn to play your deskmate's game.
+
+[Hint: consider creating a module and later import it]
+
+
+***
+
+# 2. Rock, paper, and scissors
+
+In this mini-project, we will build a rock, paper, scissors game in the following steps:
+
++ Define a list `["rock", "paper", "scissors"]`, use `choice()` function from `random` module to randomly select an element from the list, name it `computer_choice`.
+
++ Write a `while` loop to ask for user input. The loop should ask for a new input if the previous input value is not in the list. Name the input `your_choice`.
+
++ Using `if`, `elif`, and `else` to determine who wins.
+
+***
+
+# 3. Using `Jupyter Notebook`
 
 <img src="figs/jupyter.png" alt="drawing" width="200"/>
 
@@ -66,31 +93,3 @@ Here are some further readings:
 + [The Jupyter Notebook official documentation](https://jupyter-notebook.readthedocs.io/en/latest/)
 
 + [Jupyter IPython official documentation](https://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Index.ipynb)
-
-***
-
-# 2. Building a guessing game
-
-+ Set a secret integer from `0` to `9`, name the integer `answer`. Make sure your deskmate does not know the secret number.
-
-+ Write a function that does the following: if your deskmate is able to guess your secret number correctly within `3` tries, print `You Win!`, otherwise print `You Lose! I Win!`
-
-+ Let your deskmate play the game. 
-
-+ Now it's your turn to play your deskmate's game.
-
-[Hint: consider creating a module and later import it]
-
-
-***
-
-# 3. Rock, paper, and scissors
-
-In this mini-project, we will build a rock, paper, scissors game in the following steps:
-
-+ Define a list `["rock", "paper", "scissors"]`, use `choice()` function from `random` module to randomly select an element from the list, name it `computer_choice`.
-
-+ Write a `while` loop to ask for user input. The loop should ask for a new input if the previous input value is not in the list. Name the input `your_choice`.
-
-+ Using `if`, `elif`, and `else` to determine who wins.
-
