@@ -173,7 +173,7 @@ One thing new is integer array indexing:
 
 ```{python, eval=F}
 # Make up an array
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
+a = np.linspace(1,12,12).reshape(3,4)
 print(a)
 
 # integer array indexing: [0,2] and [1,0]
@@ -195,7 +195,7 @@ You can also use boolean indexing:
 
 ```{python, eval=F}
 # Make up an array
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
+a = np.linspace(1,12,12).reshape(3,4)
 print(a)
 
 # Find the elements of a that are bigger than 5
@@ -269,9 +269,8 @@ print(np.dot(x1, x2))
 To transpose a matrix, simply use the `T` attribute of an array object:
 
 ```{python, eval=F}
-x1 = np.array([[1,2],[3,4]])
-print(x)
-print(x.T)
+print(x1)
+print(x1.T)
 ```
 
 ## Array operations: statistics 
@@ -296,6 +295,12 @@ np.amax(x, axis=0)
 
 ```
 
+
+This figure shows the concept of "axis"
+
+<img src="figs/axis.png" alt="drawing" width="800"/>
+
+
 Please check [Statistics functions](https://numpy.org/doc/stable/reference/routines.statistics.html) for a list of all available functions in `numpy`.
 
 ## Broadcasting
@@ -308,9 +313,9 @@ When operating on two arrays, `NumPy` compares their shapes element-wise. It sta
 
 + they are equal, or
 
-+ one of them is 1
++ one of them is `1`
 
-If these conditions are not met, a `ValueError: operands could not be broadcast together` exception is thrown, indicating that the arrays have incompatible shapes. The size of the resulting array is the size that is not 1 along each axis of the inputs.
+If these conditions are not met, a `ValueError: operands could not be broadcast together` exception is thrown, indicating that the arrays have incompatible shapes. The size of the resulting array is the size that is not `1` along each axis of the inputs.
 
 ```{python, eval=F}
 
@@ -358,7 +363,6 @@ arr1 = np.array([[1, 2], [3, 4]])
 arr2 = np.array([[5, 6], [7, 8]])
 arr = np.concatenate((arr1, arr2), axis=1)
 print(arr) 
-
 ```
 
 Similar to `concatenate()`, `hstack()`, `vstack()`, and `dstack()` can also join arrays. Try those for yourself.
@@ -403,7 +407,7 @@ Create an array with `np.arange(20)`, replace all odd numbers in the array with 
 
 ## Exercise #6
 
-Create two arrays (`x` and `y`) with `np.random.randint(10)`, find elements in `x` where its value is more than its corresponding element in `y`.
+Create two arrays (`x` and `y`) with `np.random.randint()`, find elements in `x` where its value is more than its corresponding element in `y`.
 
 [Hint: try `np.where()` function]
 
@@ -412,7 +416,8 @@ Create two arrays (`x` and `y`) with `np.random.randint(10)`, find elements in `
 Run the following lines:
 
 ```{python, eval=F}
-x = np.random.randint(10)
+x = np.linspace(1,10,10)
+print(x)
 y = x
 y[1] = -99
 print(x)
@@ -425,6 +430,7 @@ It's strange, `x` also changes even we only changes `y`. Now try `y = np.cppy(x)
 # Further reading
 
 + [Data Science Cheat SheetNumPy](https://s3.amazonaws.com/dq-blog-files/numpy-cheat-sheet.pdf)
++ [Python Numpy Array Tutorial](https://www.datacamp.com/community/tutorials/python-numpy-tutorial)
 + [Numpy official manual](https://numpy.org/doc/stable/index.html)
 + [100 numpy exercises](https://www.kaggle.com/utsav15/100-numpy-exercises)
 + [Learn numpy](https://numpy.org/learn/) (with a lot of resources)
