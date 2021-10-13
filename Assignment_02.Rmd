@@ -37,15 +37,13 @@ Late submissions will not receive any credit. The submission time will be determ
 
 # 1. Significant earthquakes since 2150 B.C.
 
-The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data) contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in `.tsv` format by clicking the `Download TSV File` button. Click the variable name for more information.
+The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data) contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in `.tsv` format by clicking the `Download TSV File` button. Click the variable name for more information. Read the file (e.g., `earthquakes-2021-10-13_13-22-50_+0800.tsv`) as an object and name it `Sig_Eqs`.
 
-**1.1 [5 points]** Read the file (e.g., `earthquakes-2021-10-13_13-22-50_+0800.tsv`) as an object and name it `Sig_Eqs`.
+**1.1 [5 points]** Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top ten countries along with the total number of deaths.
 
-**1.2 [5 points]** Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top ten countries along with the total number of deaths.
+**1.2 [10 points]** Compute the total number of earthquakes with magnitude larger than `6.0` (use column `Mag` as the magnitude) worldwide each year, and then plot the time series. Do you observe any trend? Explain why or why not? 
 
-**1.3 [10 points]** Compute the total number of earthquakes with magnitude larger than `6.0` (use column `Mag` as the magnitude) worldwide each year, and then plot the time series. Do you observe any trend? Explain why or why not? 
-
-**1.4 [10 points]** Write a function `CountEq_LargestEq` that returns both (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) the date of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to every country in the file, report your results in a descending order.
+**1.3 [10 points]** Write a function `CountEq_LargestEq` that returns both (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) the date of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to every country in the file, report your results in a descending order.
 
 ***
 
