@@ -39,7 +39,7 @@ Terminal (pre-installed), [Terminator](https://www.2daygeek.com/terminator-linux
 * Others:
 [Finalshell](http://www.hostbuf.com),  [Termius](https://termius.com)  
 
-The instructor will use [MobaXterm](https://mobaxterm.mobatek.net) in the class.
+The instructor will use [MobaXterm](https://mobaxterm.mobatek.net) (Home Edition) in the class.
 
 ***
 

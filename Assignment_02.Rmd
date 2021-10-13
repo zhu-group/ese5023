@@ -1,0 +1,70 @@
+---
+title: "Assignment 02"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 10/13 19:00 **  
+**Due: 10/27 19:00 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 3"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Submitting your assignment:**  
+
+* Please write a report `PS2.pdf`. 
+
+* For problem set *i*, create a script named `PS2_i.py`. 
+
+* Upload your `Python` scripts **AND** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**   
+Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.
+
+***
+
+# 1. Significant earthquakes since 2150 B.C.
+
+The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data) contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in `.tsv` format by clicking the `Download TSV File` button. Click the variable name for more information.
+
+**1.1 [5 points]** Read the file (e.g., `earthquakes-2021-10-13_13-22-50_+0800.tsv`) as an object and name it `Sig_Eqs`.
+
+**1.2 [5 points]** Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top ten countries along with the total number of deaths.
+
+**1.3 [10 points]** Compute the total number of earthquakes with magnitude larger than `6.0` (use column `Mag` as the magnitude) worldwide each year, and then plot the time series. Do you observe any trend? Explain why or why not? 
+
+**1.4 [10 points]** Write a function `CountEq_LargestEq` that returns both (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) the date of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to every country in the file, report your results in a descending order.
+
+***
+
+# 2. Wind speed in Shenzhen during the past 10 years
+
+In this problem set, we will examine how wind speed changes in Shenzhen during the past `10` years, we will take a look at the hourly weather data measured at the BaoAn International Airport. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Download the file [2281305.zip](https://zhu-group.github.io/ese5023/download/2281305.zip), where the number `2281305` is the site ID.  Extract the zip file, you should see a file named `2281305.csv`. Save the `.csv` file to your `working directory`. 
+
+Read page `8`-`9` of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the wind data. Explain how you filter the data in your report. 
+
+**[10 points]** Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed within the past `10` years? 
+
+***
+
+# 3. Explore a data set
+
+Browse the [CASEarth](http://data.casearth.cn/), [NOAA Land-Based Datasets and Products](https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets), or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
+
+**3.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.
+
+**3.2 [5 points]** Plot the time series of a certain variable.  
+
+**3.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.

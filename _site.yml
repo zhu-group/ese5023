@@ -18,6 +18,8 @@ navbar:
       menu:
         - text: "Assignment 01"
           href: Assignment_01.html    
+        - text: "Assignment 02"
+          href: Assignment_02.html    
 output:
   html_document:
     theme: readable

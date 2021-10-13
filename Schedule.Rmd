@@ -9,16 +9,16 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 
 **2021 Fall:**
 
-|Week|Date |Day | Topic                                                                                |Assignment Out|Assignment Due|
-|:--:|:---:|:--:|:-------------------------------------------------------------------------------------|:------------:|:------------:|
-|1   |09/08|W.  |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)        |              |              |
-|2   |09/15|W.  |[Section 02 Version control with Git](https://zhu-group.github.io/ese5023/Section_02.html)           |              |              |
-|2   |09/17|F.  |[Lab 01 Github and Python setup](https://zhu-group.github.io/ese5023/Lab_01.html)     |              |              |
-|3   |09/22|W.  |[Section 03 Python: Basics (I)](https://zhu-group.github.io/ese5023/Section_03.html)  | [Assignment 1](https://zhu-group.github.io/ese5023/Assignment_01.html) |              |
-|4   |09/29|W.  |[Section 04 Python: Basics (II)](https://zhu-group.github.io/ese5023/Section_04.html) |              |              |
-|4   |10/08|F.  |[Lab 02  Python Basics](https://zhu-group.github.io/ese5023/Lab_02.html)              |              |              |
-|5   |10/13|W.  |Section 05 Intermediate Python: `numPy` and `matplotlib`                              | Assignment 2 |     1        |
-|6   |10/20|W.  |Section 06 Intermediate Python: `pandas`                                              |              |              |
+|Week|Date |Day | Topic                                                                                         |Assignment Out|Assignment Due|
+|:--:|:---:|:--:|:-----------------------------------------------------------------------------------------------|:------------:|:------------:|
+|1   |09/08|W.  |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)                  |              |              |
+|2   |09/15|W.  |[Section 02 Version control with Git](https://zhu-group.github.io/ese5023/Section_02.html)      |              |              |
+|2   |09/17|F.  |[Lab 01 Github and Python setup](https://zhu-group.github.io/ese5023/Lab_01.html)               |              |              |
+|3   |09/22|W.  |[Section 03 Python: Basics (I)](https://zhu-group.github.io/ese5023/Section_03.html)            | [Assignment 1](https://zhu-group.github.io/ese5023/Assignment_01.html) |              |
+|4   |09/29|W.  |[Section 04 Python: Basics (II)](https://zhu-group.github.io/ese5023/Section_04.html)           |              |              |
+|4   |10/08|F.  |[Lab 02  Python Basics](https://zhu-group.github.io/ese5023/Lab_02.html)                        |              |              |
+|5   |10/13|W.  |[Section 05 Intermediate Python: `numPy`](https://zhu-group.github.io/ese5023/Section_05.html)  | [Assignment 2](https://zhu-group.github.io/ese5023/Assignment_02.html) |     1        |
+|6   |10/20|W.  |Section 06 Intermediate Python: `matplotlib` and `pandas`                                       |              |              |
 |6   |10/22|F.  |Lab 03  Python Intermediate                                                           |              |              |
 |7   |10/27|W.  |Section 07 Intermediate Python: `xarray`                                              | Assignment 3 |     2        |
 |8   |11/03|W.  |Section 08 Python: Plotting                                                           |              |              |
