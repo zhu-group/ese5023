@@ -18,7 +18,7 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |4   |09/29|W.  |[Section 04 Python: Basics (II)](https://zhu-group.github.io/ese5023/Section_04.html)           |              |              |
 |4   |10/08|F.  |[Lab 02  Python Basics](https://zhu-group.github.io/ese5023/Lab_02.html)                        |              |              |
 |5   |10/13|W.  |[Section 05 Intermediate Python: `numPy`](https://zhu-group.github.io/ese5023/Section_05.html)  | [Assignment 2](https://zhu-group.github.io/ese5023/Assignment_02.html) |     1        |
-|6   |10/20|W.  |Section 06 Intermediate Python: `matplotlib` and `pandas`                                       |              |              |
+|6   |10/20|W.  |[Section 06 Intermediate Python: `pandas`](https://zhu-group.github.io/ese5023/Section_06.html) |              |              |
 |6   |10/22|F.  |Lab 03  Python Intermediate                                                           |              |              |
 |7   |10/27|W.  |Section 07 Intermediate Python: `xarray`                                              | Assignment 3 |     2        |
 |8   |11/03|W.  |Section 08 Python: Plotting                                                           |              |              |
