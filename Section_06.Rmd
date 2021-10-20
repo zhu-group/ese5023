@@ -336,15 +336,15 @@ Use `read_excel()` to read [this file](https://zhu-group.github.io/ese5023/downl
 
 ## Exercise #4
 
-1. Download [daily ozone data file](https://zhu-group.github.io/ese5023/download/ozone_data.csv) and read it with `pandas`
+1. Download [daily ozone data file](https://zhu-group.github.io/ese5023/download/ozone_data.csv) and read it with `pandas`.
 
 2. Get the lowest temperature.
 
 3. Count the total number of days with ozone higher than `40`.
 
-4. Get the date that has the higher ozone
+4. Get the date that has the higher ozone.
 
-5. Plot a histogram of ozone
+5. Plot a histogram of ozone.
 
 6. Get the mean pressure in May.
 
