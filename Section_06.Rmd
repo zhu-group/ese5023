@@ -255,7 +255,7 @@ We can save a dataframe to `csv`, `text`, or `xlsx` files:
 
 ```{python, eval=F}
 # Only use a few columns
-met2 = met[['ND', 'P', 'WS']]
+met2 = met[['T', 'P', 'WS']]
 
 # Check head
 met2.head()
