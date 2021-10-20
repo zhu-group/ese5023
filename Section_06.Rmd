@@ -342,7 +342,7 @@ Use `read_excel()` to read [this file](https://zhu-group.github.io/ese5023/downl
 
 3. Count the total number of days with ozone higher than `40`.
 
-4. Get the date that has the higher ozone.
+4. Get the date that has the highest ozone.
 
 5. Plot a histogram of ozone.
 
