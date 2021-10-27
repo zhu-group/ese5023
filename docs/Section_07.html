@@ -712,8 +712,8 @@ div.tocify {
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>ds.tas.isel(time<span class="op">=</span><span class="dv">0</span>).sel(lon<span class="op">=</span><span class="bu">slice</span>(<span class="dv">20</span>, <span class="dv">160</span>), lat<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">80</span>, <span class="dv">25</span>)).plot()</span></code></pre></div>
 </div>
 </div>
-<div id="basic-plotting-with-via-.plot" class="section level2">
-<h2>Basic plotting with via <code>.plot()</code></h2>
+<div id="basic-plotting-with-.plot" class="section level2">
+<h2>Basic plotting with <code>.plot()</code></h2>
 <p><code>Xarray</code> provides a <code>.plot()</code> method on <code>DataArray</code> and <code>Dataset.</code> This method is a wrapper around <code>Matplotlib</code>’s <code>matplotlib.pyplot.plot()</code>. <code>xarray</code> will automatically guess the type of plot based on the dimensionality of the data. By default <code>.plot()</code> creates:</p>
 <ul>
 <li><p>a <strong>line</strong> plot for 1-D arrays using <code>matplotlib.pyplot.plot()</code></p></li>
@@ -876,6 +876,8 @@ div.tocify {
 <span id="cb37-5"><a href="#cb37-5"></a>sample.where((sample.lat <span class="op">&lt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (sample.lat <span class="op">&gt;</span> <span class="dv">-5</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&gt;</span> <span class="dv">190</span>) <span class="op">&amp;</span> </span>
 <span id="cb37-6"><a href="#cb37-6"></a>             (sample.lon <span class="op">&lt;</span> <span class="dv">240</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <p>For more, see <a href="https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where">Masking with where</a>.</p>
+<hr />
+<p><em>The notes are modified from the excellent <a href="https://rabernat.github.io/research_computing/">Research Computing in Earth Sciences</a> and <a href="https://github.com/andersy005/xarray-tutorial/tree/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0">xarray-tutorial</a> freely available on the GitHub.</em></p>
 <hr />
 </div>
 </div>

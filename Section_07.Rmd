@@ -325,7 +325,7 @@ Operators can be chained, so multiple operations can be used sequentially. For e
 ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
 ```
 
-## Basic plotting with via `.plot()`
+## Basic plotting with `.plot()`
 
 `Xarray` provides a `.plot()` method on `DataArray` and `Dataset.` This method is a wrapper around `Matplotlib`'s `matplotlib.pyplot.plot()`. `xarray` will automatically guess the type of plot based on the dimensionality of the data. By default `.plot()` creates:
 
@@ -566,6 +566,11 @@ sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) &
 ```
 
 For more, see [Masking with where](https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where).
+
+***
+
+*The notes are modified from the excellent [Research Computing in Earth Sciences](https://rabernat.github.io/research_computing/) and [xarray-tutorial](https://github.com/andersy005/xarray-tutorial/tree/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0) freely available on the GitHub.*
+
 
 ***
 
