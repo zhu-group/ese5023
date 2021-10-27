@@ -1,0 +1,82 @@
+---
+title: "Assignment 03"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 10/27 19:00 **  
+**Due: 11/10 19:00 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 3"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Submitting your assignment:**  
+
+* Please write a report `PS3.pdf`. 
+
+* Create a jupyter notebook named `PS3.ipynb`. 
+
+* Upload your jupyter notebook **AND** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**   
+Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.
+
+***
+
+# 1. Niño 3.4 index
+
+The *Niño 3.4 anomalies* may be thought of as representing the average equatorial SSTs across the Pacific from about the dateline to the South American coast (`5N-5S`, `170W-120W`). The Niño 3.4 index typically uses a 3-month running mean, and El Niño or La Niña events are defined when the Niño 3.4 SSTs exceed `+/- 0.5°C` for a period of `5` months or more. Check [Equatorial Pacific Sea Surface Temperatures](https://www.ncdc.noaa.gov/teleconnections/enso/indicators/sst/) for more about the Niño 3.4 index.
+
+In this problem set, you will use the sea surface temperature (SST) data from [NOAA](https://www.noaa.gov/). Download the `netCDF4` file (`NOAA_NCDC_ERSST_v3b_SST.nc`) [here](http://10.20.7.229/index.php/s/do68CdKJbscS6QD).
+
+**1.1 [5 points]** Compute monthly climatology for SST from Niño 3.4 region, and subtract climatology from SST time series to obtain anomalies.
+
+**1.2 [5 points]** Visualize the computed Niño 3.4. Your plot should look similar to [this one](https://www.ncdc.noaa.gov/monitoring-content/teleconnections/eln-5-pg.gif).
+
+***
+
+# 2. Earth’s energy budget
+
+In this problem set, you will analyze top-of-atmosphere (TOA) radiation data from [NASA's CERES project](https://eosweb.larc.nasa.gov/project/ceres/ceres_table). Read [this post](https://www.nasa.gov/feature/langley/what-is-earth-s-energy-budget-five-questions-with-a-guy-who-knows) for more about Earth’s energy budget.
+
+<img src="figs/energy_budget.jpg" alt="drawing" width="800"/>  
+
+[Figure source](https://www.nasa.gov/feature/langley/what-is-earth-s-energy-budget-five-questions-with-a-guy-who-knows)
+
+Download the data (`CERES_EBAF-TOA_200003-201701.nc`) [here](http://10.20.7.229/index.php/s/CHH6wiN3xCJxQeS). The size of the data file is `702.5 MB`. It will take a minute or two to download. Start by importing `xarray`, `numpy`, and `matplotlib`.
+
+**2.1 [5 points]** Make a 2D plot of the time-mean TOA longwave, shortwave, and solar radiation for all-sky conditions. Add up the three variables above and verify (visually) that they are equivalent to the TOA net flux.
+
+**2.2 [5 points]** Calculate and verify that the TOA incoming solar, outgoing longwave, and outgoing shortwave approximately match up with the cartoon above. 
+
+[Hint: Consider calculating the area of each grid]
+
+**2.3 [5 points]** Verify that the TOA incoming solar, outgoing longwave, and outgoing shortwave approximately match up with the cartoon above.
+
+**2.4 [5 points]** Calculate and plot the total amount of net radiation in each 1-degree latitude band. Label with correct units.
+
+**2.5 [5 points]** Calculate and plot composites of time-mean outgoing shortwave and longwave radiation for low and high cloud area regions. Here we define low cloud area as `≤25%` and high cloud area as `≥75%`. Your results should be 2D maps.
+
+**2.6 [5 points]** Calculate the global mean values of shortwave and longwave radiation, composited in high and low cloud regions. What is the overall effect of clouds on shortwave and longwave radiation?
+
+***
+
+# 3. Explore a `netCDF` dataset
+
+Browse the NASA's Goddard Earth Sciences Data and Information Services Center (GES DISC) [website](https://disc.gsfc.nasa.gov/). Search and download a dataset you are interested in. You are also welcome to use data from your group in this problem set. But the dataset should be in `netCDF` format, and have temporal information. 
+
+**3.1 [5 points]** Plot a time series of a certain variable with monthly seasonal cycle removed.  
+
+**3.2 [5 points]** Make at least `5` different plots using the dataset.
