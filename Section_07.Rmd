@@ -601,4 +601,4 @@ Plot monthly climatology in temperature in `12` panels.
 + [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
 + [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
 + [Pythia Resource Gallery](https://projectpythia.org/gallery.html) (very comprehensive, contains many courses and tutorials)
-+ [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files)
++ [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files, requires `java runtime environment 9`)
