@@ -139,7 +139,7 @@ Constructing Datasets manually is a bit more involved in terms of syntax. The `D
 
 + `attrs` should be a dictionary
 
-For the rest of Section, we will use [an output file]() from the [Community Earth System Model (CESM)](https://www.cesm.ucar.edu/models/cesm2/) to show basics of `xarray` and how to handle `Dataset` files. The file contains global monthly near surface temperature from `2000` to `2014`. Please download the file, and move it to your working directory.
+For the rest of Section, we will use [an output file](https://zhu-group.github.io/ese5023/download/CESM2_200001-201412.nc) (`CESM2_200001-201412.nc`) from the [Community Earth System Model (CESM)](https://www.cesm.ucar.edu/models/cesm2/) to show basics of `xarray` and how to handle `Dataset` files. The file contains global monthly near surface temperature from `2000` to `2014`. Please download the file, and move it to your working directory.
 
 
 ## Loading data from a netCDF file
@@ -452,7 +452,7 @@ For more, check [`xarray` computation](https://xarray.pydata.org/en/stable/user-
 
 Simple aggregations can give useful summary of our dataset, but often we would prefer to aggregate **conditionally** on some coordinate labels or groups. `Xarray` provides the so-called `groupby` operation which enables the `split-apply-combine` workflow on `xarray` `DataArrays` and `Datasets.` The `split-apply-combine` operation is illustrated in this figure.
 
-<img src="figs/xarray-split-apply-combine.png" alt="drawing" width="800"/>  
+<img src="figs/xarray-split-apply-combine.png" alt="drawing" width="700"/>  
 
 [Figure source](https://raw.githubusercontent.com/andersy005/xarray-tutorial/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0/images/xarray-split-apply-combine.png)
 
@@ -554,7 +554,8 @@ masked_sample.plot(ax=axes[1], robust=True)
 sample.where((sample > 250) & (sample < 300)).plot(size=6, robust=True);
 
 # More than one conditions
-sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) & (sample.lon < 240)).plot(size=6, robust=True)
+sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) & 
+             (sample.lon < 240)).plot(size=6, robust=True)
 ```
 
 For more, see [Masking with where](https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where).

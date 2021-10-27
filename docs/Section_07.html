@@ -577,7 +577,7 @@ div.tocify {
 <li><p><code>coords</code> should be a dictionary of the same form as <code>data_vars</code></p></li>
 <li><p><code>attrs</code> should be a dictionary</p></li>
 </ul>
-<p>For the rest of Section, we will use <a href="">an output file</a> from the <a href="https://www.cesm.ucar.edu/models/cesm2/">Community Earth System Model (CESM)</a> to show basics of <code>xarray</code> and how to handle <code>Dataset</code> files. The file contains global monthly near surface temperature from <code>2000</code> to <code>2014</code>. Please download the file, and move it to your working directory.</p>
+<p>For the rest of Section, we will use <a href="https://zhu-group.github.io/ese5023/download/CESM2_200001-201412.nc">an output file</a> (<code>CESM2_200001-201412.nc</code>) from the <a href="https://www.cesm.ucar.edu/models/cesm2/">Community Earth System Model (CESM)</a> to show basics of <code>xarray</code> and how to handle <code>Dataset</code> files. The file contains global monthly near surface temperature from <code>2000</code> to <code>2014</code>. Please download the file, and move it to your working directory.</p>
 </div>
 <div id="loading-data-from-a-netcdf-file" class="section level2">
 <h2>Loading data from a netCDF file</h2>
@@ -796,7 +796,7 @@ div.tocify {
 <div id="groupby-split-apply-combine" class="section level3">
 <h3>GroupBy: split, apply, combine</h3>
 <p>Simple aggregations can give useful summary of our dataset, but often we would prefer to aggregate <strong>conditionally</strong> on some coordinate labels or groups. <code>Xarray</code> provides the so-called <code>groupby</code> operation which enables the <code>split-apply-combine</code> workflow on <code>xarray</code> <code>DataArrays</code> and <code>Datasets.</code> The <code>split-apply-combine</code> operation is illustrated in this figure.</p>
-<p><img src="figs/xarray-split-apply-combine.png" alt="drawing" width="800"/></p>
+<p><img src="figs/xarray-split-apply-combine.png" alt="drawing" width="700"/></p>
 <p><a href="https://raw.githubusercontent.com/andersy005/xarray-tutorial/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0/images/xarray-split-apply-combine.png">Figure source</a></p>
 <p>This makes clear what the <code>groupby</code> accomplishes:</p>
 <ul>
@@ -866,7 +866,8 @@ div.tocify {
 <span id="cb37-2"><a href="#cb37-2"></a>sample.where((sample <span class="op">&gt;</span> <span class="dv">250</span>) <span class="op">&amp;</span> (sample <span class="op">&lt;</span> <span class="dv">300</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span>
 <span id="cb37-3"><a href="#cb37-3"></a></span>
 <span id="cb37-4"><a href="#cb37-4"></a><span class="co"># More than one conditions</span></span>
-<span id="cb37-5"><a href="#cb37-5"></a>sample.where((sample.lat <span class="op">&lt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (sample.lat <span class="op">&gt;</span> <span class="dv">-5</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&gt;</span> <span class="dv">190</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&lt;</span> <span class="dv">240</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<span id="cb37-5"><a href="#cb37-5"></a>sample.where((sample.lat <span class="op">&lt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (sample.lat <span class="op">&gt;</span> <span class="dv">-5</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&gt;</span> <span class="dv">190</span>) <span class="op">&amp;</span> </span>
+<span id="cb37-6"><a href="#cb37-6"></a>             (sample.lon <span class="op">&lt;</span> <span class="dv">240</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <p>For more, see <a href="https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where">Masking with where</a>.</p>
 <hr />
 </div>
