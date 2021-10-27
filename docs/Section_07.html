@@ -548,18 +548,22 @@ div.tocify {
 <span id="cb3-4"><a href="#cb3-4"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
 <p>A simple <code>DataArray</code> without dimensions or coordinates isn’t much use:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">-1</span>, <span class="dv">2</span>])</span>
-<span id="cb4-2"><a href="#cb4-2"></a>da</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create a xr dataarray</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">-1</span>, <span class="dv">2</span>])</span>
+<span id="cb4-3"><a href="#cb4-3"></a>da</span></code></pre></div>
 <p>You can add a dimension name to the <code>DataArray</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">-1</span>, <span class="dv">2</span>], dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>])</span>
-<span id="cb5-2"><a href="#cb5-2"></a>da</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Add a dimension name</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">-1</span>, <span class="dv">2</span>], dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>])</span>
+<span id="cb5-3"><a href="#cb5-3"></a>da</span></code></pre></div>
 <p>But things get most interesting when you add a coordinate:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">-1</span>, <span class="dv">2</span>],</span>
-<span id="cb6-2"><a href="#cb6-2"></a>                  dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>],</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                  coords<span class="op">=</span>{<span class="st">&#39;x&#39;</span>: [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]})</span>
-<span id="cb6-4"><a href="#cb6-4"></a>da</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Add a coordinate</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">-1</span>, <span class="dv">2</span>],</span>
+<span id="cb6-3"><a href="#cb6-3"></a>                  dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>],</span>
+<span id="cb6-4"><a href="#cb6-4"></a>                  coords<span class="op">=</span>{<span class="st">&#39;x&#39;</span>: [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]})</span>
+<span id="cb6-5"><a href="#cb6-5"></a>da</span></code></pre></div>
 <p>You can use <code>xarray</code> built-in plotting:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>da.plot(marker<span class="op">=</span><span class="st">&#39;o&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Simple plot with xr built-in plot function</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>da.plot(marker<span class="op">=</span><span class="st">&#39;o&#39;</span>)</span></code></pre></div>
 </div>
 <div id="datasets" class="section level2">
 <h2><code>Datasets</code></h2>
@@ -583,12 +587,15 @@ div.tocify {
 <h2>Loading data from a netCDF file</h2>
 <p>In fact, <code>Xarray</code>’s interface is heavily inspired by the <code>netCDF</code> data model. And <code>xarray</code>’s <code>Dataset</code> is designed as an in-memory representation of a netCDF dataset.</p>
 <p>First, let’s open the CESM netCDF file (<code>CESM2_200001-201412.nc</code>) using the <code>xarray.open_dataset()</code> function:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Open a netCDF4 file</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span></code></pre></div>
 <p>By default, <code>xarray.open_dataset()</code> function uses lazy loading, i.e. it just loads in the <em>coordinate</em> and <em>attribute</em> metadata and not the data that correspond to data variables themselves. The data variables are loaded only on actual values access (e.g. when performing some calculation, slicing, …) or with <code>.load()</code> method. The <code>xarray.open_dataset()</code> is also able to load files in other formats (e.g., <code>grib</code>, <code>tiff</code>, or <code>zarr</code>), check <a href="https://xarray.pydata.org/en/stable/user-guide/io.html">Reading and writing files</a> for more.</p>
 <p>Now take a look at the loaded dataset:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>ds</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Show dataset</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>ds</span></code></pre></div>
 <p>To check the corresponding netCDF representation, we can use the <code>.info()</code> method:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>ds.info()</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Show dataset info</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>ds.info()</span></code></pre></div>
 </div>
 <div id="checking-datasets-properties" class="section level2">
 <h2>Checking <code>Datasets</code> properties</h2>
@@ -629,13 +636,13 @@ div.tocify {
 <span id="cb13-4"><a href="#cb13-4"></a><span class="co"># The actual array data</span></span>
 <span id="cb13-5"><a href="#cb13-5"></a>ds[<span class="st">&#39;tas&#39;</span>].data</span>
 <span id="cb13-6"><a href="#cb13-6"></a></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co"># datarray coordinates</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co"># Datarray coordinates</span></span>
 <span id="cb13-8"><a href="#cb13-8"></a>ds[<span class="st">&#39;tas&#39;</span>].coords</span>
 <span id="cb13-9"><a href="#cb13-9"></a></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co"># dataarray attributes</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co"># Dataarray attributes</span></span>
 <span id="cb13-11"><a href="#cb13-11"></a>ds[<span class="st">&#39;tas&#39;</span>].attrs</span>
 <span id="cb13-12"><a href="#cb13-12"></a></span>
-<span id="cb13-13"><a href="#cb13-13"></a><span class="co"># dataarray name</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co"># Dataarray name</span></span>
 <span id="cb13-14"><a href="#cb13-14"></a>ds[<span class="st">&#39;tas&#39;</span>].name</span></code></pre></div>
 </div>
 <div id="indexing-and-selecting-data" class="section level2">
@@ -719,18 +726,18 @@ div.tocify {
 <span id="cb20-2"><a href="#cb20-2"></a>ds.tas.plot()</span>
 <span id="cb20-3"><a href="#cb20-3"></a></span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="co"># Histogram for a subset of data</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot()<span class="op">;</span></span></code></pre></div>
+<span id="cb20-5"><a href="#cb20-5"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot()</span></code></pre></div>
 </div>
 <div id="d-line-plots" class="section level3">
 <h3>1D line plots</h3>
 <p>Let’s select one spatial location and plot a time series of the near surface temperature:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Time series of the near surface temperature at Shenzhen</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)<span class="op">;</span></span></code></pre></div>
+<span id="cb21-2"><a href="#cb21-2"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span></code></pre></div>
 <p>Lets say we want to compare plots of temperature at three different latitudes. We can use the <code>hue</code> keyword argument to do this.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Time series of the near surface temperature at 3 latitudes</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>ds.tas.sel(lat<span class="op">=</span>[<span class="op">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>], time<span class="op">=</span><span class="st">&quot;2013-03&quot;</span>, method<span class="op">=</span><span class="st">&quot;nearest&quot;</span>).plot(</span>
 <span id="cb22-3"><a href="#cb22-3"></a>    x<span class="op">=</span><span class="st">&quot;lon&quot;</span>, hue<span class="op">=</span><span class="st">&quot;lat&quot;</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>)</span>
-<span id="cb22-4"><a href="#cb22-4"></a>)<span class="op">;</span></span></code></pre></div>
+<span id="cb22-4"><a href="#cb22-4"></a>)</span></code></pre></div>
 </div>
 <div id="d-plots" class="section level3">
 <h3>2D plots</h3>
@@ -760,7 +767,7 @@ div.tocify {
 <h3>Faceting</h3>
 <p>Faceting is an effective way of visualizing variations of 3D data where 2D slices are visualized in a panel (subplot) and the third dimensions is varied between panels (subplots).</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Plot monthly mean near surface temperture in 2010 and 2011, one at a panel</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot(col<span class="op">=</span><span class="st">&quot;time&quot;</span>, col_wrap<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span></code></pre></div>
+<span id="cb25-2"><a href="#cb25-2"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot(col<span class="op">=</span><span class="st">&quot;time&quot;</span>, col_wrap<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <p>See the <a href="https://xarray.pydata.org/en/stable/user-guide/plotting.html"><code>xarray</code> documentation</a> for more on “faceted” plots or subplots.</p>
 </div>
 </div>
@@ -880,6 +887,19 @@ div.tocify {
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
+<p>Compute the global mean temperature between <code>2005-01</code> and <code>2010-12</code>.</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
+<p>Plot the the seasonal cycle (“climatology”) in temperature near your hometown.</p>
+</div>
+<div id="exercise-4" class="section level2">
+<h2>Exercise #4</h2>
+<p>Plot anomalies at your hometown, do you observe a trend?</p>
+</div>
+<div id="exercise-5" class="section level2">
+<h2>Exercise #5</h2>
+<p>Plot monthly climatology in temperature in <code>12</code> panels.</p>
 <hr />
 </div>
 </div>
@@ -892,6 +912,7 @@ div.tocify {
 <li><a href="https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f"><code>xarray</code> Example Cheatsheet</a></li>
 <li><a href="http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf"><code>Python</code>: a tutorial introduction to <code>xarray</code></a></li>
 <li><a href="https://projectpythia.org/gallery.html">Pythia Resource Gallery</a> (very comprehensive, contains many courses and tutorials)</li>
+<li><a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a> (great tool to visualize and check netCDF files)</li>
 </ul>
 </div>
 

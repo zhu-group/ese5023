@@ -92,6 +92,7 @@ from matplotlib import pyplot as plt
 A simple `DataArray` without dimensions or coordinates isn't much use:
 
 ```{python, eval=F}
+# Create a xr dataarray
 da = xr.DataArray([1, 2, 3, -1, 2])
 da
 ```
@@ -99,6 +100,7 @@ da
 You can add a dimension name to the `DataArray`:
 
 ```{python, eval=F}
+# Add a dimension name
 da = xr.DataArray([1, 2, 3, -1, 2], dims=['x'])
 da
 ```
@@ -106,6 +108,7 @@ da
 But things get most interesting when you add a coordinate:
 
 ```{python, eval=F}
+# Add a coordinate
 da = xr.DataArray([1, 2, 3, -1, 2],
                   dims=['x'],
                   coords={'x': [10, 20, 30, 40, 50]})
@@ -115,6 +118,7 @@ da
 You can use `xarray` built-in plotting:
 
 ```{python, eval=F}
+# Simple plot with xr built-in plot function
 da.plot(marker='o')
 ```
 
@@ -149,6 +153,7 @@ In fact, `Xarray`'s interface is heavily inspired by the `netCDF` data model. An
 First, let's open the CESM netCDF file (`CESM2_200001-201412.nc`) using the `xarray.open_dataset()` function:
 
 ```{python, eval=F}
+# Open a netCDF4 file
 ds = xr.open_dataset("CESM2_200001-201412.nc", engine="netcdf4")
 ```
 
@@ -157,12 +162,14 @@ By default, `xarray.open_dataset()` function uses lazy loading, i.e. it just loa
 Now take a look at the loaded dataset:
 
 ```{python, eval=F}
+# Show dataset
 ds
 ```
 
 To check the corresponding netCDF representation, we can use the `.info()` method:
 
 ```{python, eval=F}
+# Show dataset info
 ds.info()
 ```
 
@@ -213,13 +220,13 @@ ds['tas']
 # The actual array data
 ds['tas'].data
 
-# datarray coordinates
+# Datarray coordinates
 ds['tas'].coords
 
-# dataarray attributes
+# Dataarray attributes
 ds['tas'].attrs
 
-# dataarray name
+# Dataarray name
 ds['tas'].name
 ```
 
@@ -335,7 +342,7 @@ ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
 ds.tas.plot()
 
 # Histogram for a subset of data
-ds.tas.sel(time=slice("2010", "2011")).plot();
+ds.tas.sel(time=slice("2010", "2011")).plot()
 ```
 
 ### 1D line plots
@@ -344,7 +351,7 @@ Let's select one spatial location and plot a time series of the near surface tem
 
 ```{python, eval=F}
 # Time series of the near surface temperature at Shenzhen
-ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6);
+ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
 ```
 
 Lets say we want to compare plots of temperature at three different latitudes. We can use the `hue` keyword argument to do this.
@@ -353,7 +360,7 @@ Lets say we want to compare plots of temperature at three different latitudes. W
 # Time series of the near surface temperature at 3 latitudes
 ds.tas.sel(lat=[-50, 0, 50], time="2013-03", method="nearest").plot(
     x="lon", hue="lat", figsize=(8, 6)
-);
+)
 ```
 
 ### 2D plots
@@ -394,7 +401,7 @@ Faceting is an effective way of visualizing variations of 3D data where 2D slice
 
 ```{python, eval=F}
 # Plot monthly mean near surface temperture in 2010 and 2011, one at a panel
-ds.tas.sel(time=slice("2010", "2011")).plot(col="time", col_wrap=6, robust=True);
+ds.tas.sel(time=slice("2010", "2011")).plot(col="time", col_wrap=6, robust=True)
 ```
 
 See the [`xarray` documentation](https://xarray.pydata.org/en/stable/user-guide/plotting.html) for more on "faceted" plots or subplots.
@@ -570,8 +577,19 @@ Go over the notes, make sure you understand the scripts.
 
 ## Exercise #2
 
+Compute the global mean temperature between `2005-01` and `2010-12`.
 
+## Exercise #3
 
+Plot the the seasonal cycle ("climatology") in temperature near your hometown.
+
+## Exercise #4
+
+Plot anomalies at your hometown, do you observe a trend?
+
+## Exercise #5
+
+Plot monthly climatology in temperature in `12` panels.
 
 ***
 
@@ -583,3 +601,4 @@ Go over the notes, make sure you understand the scripts.
 + [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
 + [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
 + [Pythia Resource Gallery](https://projectpythia.org/gallery.html) (very comprehensive, contains many courses and tutorials)
++ [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files)
