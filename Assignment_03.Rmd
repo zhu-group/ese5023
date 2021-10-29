@@ -59,17 +59,15 @@ Download the data (`CERES_EBAF-TOA_200003-201701.nc`) [here](http://10.20.7.229/
 
 **2.1 [5 points]** Make a 2D plot of the time-mean TOA longwave, shortwave, and solar radiation for all-sky conditions. Add up the three variables above and verify (visually) that they are equivalent to the TOA net flux.
 
-**2.2 [5 points]** Calculate and verify that the TOA incoming solar, outgoing longwave, and outgoing shortwave approximately match up with the cartoon above. 
+**2.2 [10 points]** Calculate and verify that the TOA incoming solar, outgoing longwave, and outgoing shortwave approximately match up with the cartoon above. 
 
 [Hint: Consider calculating the area of each grid]
 
-**2.3 [5 points]** Verify that the TOA incoming solar, outgoing longwave, and outgoing shortwave approximately match up with the cartoon above.
+**2.3 [5 points]** Calculate and plot the total amount of net radiation in each 1-degree latitude band. Label with correct units.
 
-**2.4 [5 points]** Calculate and plot the total amount of net radiation in each 1-degree latitude band. Label with correct units.
+**2.4 [5 points]** Calculate and plot composites of time-mean outgoing shortwave and longwave radiation for low and high cloud area regions. Here we define low cloud area as `≤25%` and high cloud area as `≥75%`. Your results should be 2D maps.
 
-**2.5 [5 points]** Calculate and plot composites of time-mean outgoing shortwave and longwave radiation for low and high cloud area regions. Here we define low cloud area as `≤25%` and high cloud area as `≥75%`. Your results should be 2D maps.
-
-**2.6 [5 points]** Calculate the global mean values of shortwave and longwave radiation, composited in high and low cloud regions. What is the overall effect of clouds on shortwave and longwave radiation?
+**2.5 [5 points]** Calculate the global mean values of shortwave and longwave radiation, composited in high and low cloud regions. What is the overall effect of clouds on shortwave and longwave radiation?
 
 ***
 
