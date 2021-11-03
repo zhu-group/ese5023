@@ -569,7 +569,8 @@ plt.scatter('Temperature', 'Wind.Speed', data=ozone_data,
             edgecolors='black', linewidths=0.5)
 
 # Title
-plt.title("Bubble Plot of Wind speed vs Temperature\n(color: 'Pressure', size: 'Ozone')", fontsize=16)
+plt.title("Bubble Plot of Wind speed vs Temperature\n(color: 'Pressure', size: 'Ozone')", 
+          fontsize=16)
 
 # xy lables
 plt.xlabel('Temperature [F]', fontsize=18)

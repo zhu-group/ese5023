@@ -938,21 +938,22 @@ div.tocify {
 <span id="cb27-7"><a href="#cb27-7"></a>            edgecolors<span class="op">=</span><span class="st">&#39;black&#39;</span>, linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb27-8"><a href="#cb27-8"></a></span>
 <span id="cb27-9"><a href="#cb27-9"></a><span class="co"># Title</span></span>
-<span id="cb27-10"><a href="#cb27-10"></a>plt.title(<span class="st">&quot;Bubble Plot of Wind speed vs Temperature</span><span class="ch">\n</span><span class="st">(color: &#39;Pressure&#39;, size: &#39;Ozone&#39;)&quot;</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb27-11"><a href="#cb27-11"></a></span>
-<span id="cb27-12"><a href="#cb27-12"></a><span class="co"># xy lables</span></span>
-<span id="cb27-13"><a href="#cb27-13"></a>plt.xlabel(<span class="st">&#39;Temperature [F]&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb27-14"><a href="#cb27-14"></a>plt.ylabel(<span class="st">&#39;Wind speed [m/s]&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb27-15"><a href="#cb27-15"></a></span>
-<span id="cb27-16"><a href="#cb27-16"></a><span class="co"># Show colorbar</span></span>
-<span id="cb27-17"><a href="#cb27-17"></a>plt.colorbar()</span>
-<span id="cb27-18"><a href="#cb27-18"></a></span>
-<span id="cb27-19"><a href="#cb27-19"></a><span class="co"># Save the figure</span></span>
-<span id="cb27-20"><a href="#cb27-20"></a><span class="co"># Make sure this line goes before plt.show()</span></span>
-<span id="cb27-21"><a href="#cb27-21"></a>plt.savefig(<span class="st">&quot;bubbleplot.png&quot;</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb27-22"><a href="#cb27-22"></a></span>
-<span id="cb27-23"><a href="#cb27-23"></a><span class="co"># Show plot</span></span>
-<span id="cb27-24"><a href="#cb27-24"></a>plt.show() </span></code></pre></div>
+<span id="cb27-10"><a href="#cb27-10"></a>plt.title(<span class="st">&quot;Bubble Plot of Wind speed vs Temperature</span><span class="ch">\n</span><span class="st">(color: &#39;Pressure&#39;, size: &#39;Ozone&#39;)&quot;</span>, </span>
+<span id="cb27-11"><a href="#cb27-11"></a>          fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb27-12"><a href="#cb27-12"></a></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="co"># xy lables</span></span>
+<span id="cb27-14"><a href="#cb27-14"></a>plt.xlabel(<span class="st">&#39;Temperature [F]&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb27-15"><a href="#cb27-15"></a>plt.ylabel(<span class="st">&#39;Wind speed [m/s]&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb27-16"><a href="#cb27-16"></a></span>
+<span id="cb27-17"><a href="#cb27-17"></a><span class="co"># Show colorbar</span></span>
+<span id="cb27-18"><a href="#cb27-18"></a>plt.colorbar()</span>
+<span id="cb27-19"><a href="#cb27-19"></a></span>
+<span id="cb27-20"><a href="#cb27-20"></a><span class="co"># Save the figure</span></span>
+<span id="cb27-21"><a href="#cb27-21"></a><span class="co"># Make sure this line goes before plt.show()</span></span>
+<span id="cb27-22"><a href="#cb27-22"></a>plt.savefig(<span class="st">&quot;bubbleplot.png&quot;</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb27-23"><a href="#cb27-23"></a></span>
+<span id="cb27-24"><a href="#cb27-24"></a><span class="co"># Show plot</span></span>
+<span id="cb27-25"><a href="#cb27-25"></a>plt.show() </span></code></pre></div>
 <p>Here, by varying the size and color of points, we create nice-looking bubble plots. Another convenience is you can directly use a <code>pandas</code> dataframe to set the <code>x</code> and <code>y</code> values, specifying the source dataframe in the data argument. You can also set the color <code>c</code> and size <code>s</code> of the points from one of the dataframe columns itself.</p>
 </div>
 <div id="beyond-matplotlib" class="section level2">
