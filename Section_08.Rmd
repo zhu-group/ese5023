@@ -1,5 +1,5 @@
 ---
-title: "Section 08 Python: Plotting with `matplotlib`"
+title: "Section 08 Plotting with `matplotlib`"
 output:
   html_document:
     toc: true
@@ -217,7 +217,7 @@ As you can see, the code is much neat now as we use the object-oriented syntax. 
 
 There are `3` basic things you will probably need in `matplotlib` when it comes to manipulating axis ticks:
 
-+ Control the position and tick labels? (using `plt.xticks()` or `ax.setxticks()` and `ax.setxticklabels()`)
++ Control the position and tick labels (using `plt.xticks()` or `ax.setxticks()` and `ax.setxticklabels()`)
 
 + Control which axis’s ticks (top/bottom/left/right) should be displayed (using `plt.tick_params()`)
 
@@ -338,6 +338,8 @@ plt.show()
 
 # Plot using color: light mint green from XKCD_COLORS
 plt.plot(ozone_data['Ozone'], color='xkcd:light mint green')
+
+# Show plot
 plt.show()
 ```
 
@@ -406,6 +408,8 @@ plt.legend([myplot1[0], myplot2[0]],       # plot items
            shadow=False,                   # shadow on
            borderpad=1,                    # thickness of border
            title='Ozone and temperature ') # title
+
+# Show plot
 plt.show()
 ```
 
