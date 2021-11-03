@@ -117,7 +117,7 @@ Suppose we want to draw `Ozone` and `Temperature` in two separate plots side-by-
 
 + The axes (subplots) inside the figure
 
-Previously, I called `plt.plot()` to draw the points. Since there was only **one axes** by default, it drew the points on that axes itself. But now, since we want the points to be drawn on different subplots (axes), we have to call the `plot` function in the respective axes (`ax1` and `ax2` in below code) instead of `plt`.
+Previously, we called `plt.plot()` to draw the points. Since there was only **one axes** by default, it drew the points on that axes itself. But now, since we want the points to be drawn on different subplots (axes), we have to call the `plot` function in the respective axes (`ax1` and `ax2` in below code) instead of `plt`.
 
 ```{python, eval=F}
 # Create Figure and Subplots
@@ -188,7 +188,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-The `plt.plot()` or `plt.{anything}` will always act on the plot in the **current** axes, whereas, `ax.{anything}` (object-oriented) will modify the plot inside that specific `ax`. Even though the object-oriented version might look a little confusing because it has a mix of both `ax1` and `plt` commands, you can avoid writing repetitive code by looping through the axes. For example, the following will plot `4` panels:
+The `plt.plot()` or `plt.{anything}` will always act on the plot in the **current axes**, whereas, `ax.{anything}` (object-oriented) will modify the plot inside that specific `ax`. Even though the object-oriented version might look a little confusing because it has a mix of both `ax1` and `plt` commands, you can avoid writing repetitive code by looping through the axes. For example, the following will plot `4` panels:
 
 ```{python, eval=F}
 # Draw multiple plots using for-loops using object oriented syntax
@@ -445,7 +445,7 @@ plt.show()
 
 Notice, all the text we plotted above was in relation to the data. That is, the `x` and `y` position in the `plt.text()` corresponds to the values along the `x` and `y` axes. 
 
-However, sometimes you might work with data of different scales on different subplots, and you want to write the texts in the same position on all the subplots. In such case, instead of manually computing the `x` and `y` positions for each axes, you can specify the `x` and `y` values *in relation to the axes* (instead of `x` and `y` axis values). You can do this by setting `transform=ax.transData`. The lower-left corner of the axes has `(x,y) = (0,0)` and the top-right corner will correspond to `(x,y) = (1,1)`.
+However, sometimes you might work with data of different scales on different subplots, and you want to write the texts in the same position on all the subplots. In such case, instead of manually computing the `x` and `y` positions for each axes, you can specify the `x` and `y` values *in relation to the axes* (instead of `X` and `Y` axis values). You can do this by setting `transform=ax.transData`. The lower-left corner of the axes has `(x,y) = (0,0)` and the top-right corner will correspond to `(x,y) = (1,1)`.
 
 The below plot shows the position of texts for the same values of `(x,y) = (0.5, 0.05)` with respect to the Data(`transData`), Axes(`transAxes`), and Figure(`transFigure`), respectively.
 
