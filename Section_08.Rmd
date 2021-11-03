@@ -28,8 +28,8 @@ In this section, we will use the [daily ozone data file](https://zhu-group.githu
 
 ```{python, eval=F}
 # Read ozone data
+import pandas as pd
 ozone_data =  pd.read_csv('ozone_data.csv')
-
 # Check the data
 ozone_data.head()
 ```
@@ -54,7 +54,8 @@ The following piece of code is found in pretty much any python code that has `ma
 Suppose you want to draw a specific type of plot, say a scatterplot, the first thing you want to check out are the methods under `plt` (type `dir(plt)`). Let’s begin by making a simple but full-featured scatterplot and take it from there. Let’s see what `plt.plot()` creates if you an arbitrary sequence of numbers.
 
 ```{python, eval=F}
-# This will return the plot object itself besides drawing the plot.
+# This will return the plot object itself (0x192c810d940) 
+# besides drawing the plot.
 plt.plot(ozone_data['Ozone'])
 ```
 
@@ -76,14 +77,17 @@ plt.show()
 
 For a complete list of colors, markers, and linestyles, check out the `help(plt.plot)` command.
 
+## A slightly complex scatterplot
+
 Now add more details to the figure:
 
 ```{python, eval=F}
 # Set the figure size
-plt.figure(figsize=(8,4)) # 8 is width, 4 is height
+# 8 is width, 5 is height
+plt.figure(figsize=(8, 5))
 
-# Plot
-plt.plot(ozone_data['Ozone'],'ko', label='Ozone') 
+# Plot with a label
+plt.plot(ozone_data['Ozone'], 'ko', label='Ozone') 
 
 # Title, x and y labels, y lim, and legend
 plt.title('Daily Ozone')  
@@ -109,15 +113,15 @@ The following figure summaries well about different parts of a figure. We will g
 
 Suppose we want to draw `Ozone` and `Temperature` in two separate plots side-by-side. You can do that by creating two separate *subplots*, aka, *axes* using `plt.subplots(1, 2)`. This creates and returns two objects:
 
-+ the figure
++ The figure
 
-+ the axes (subplots) inside the figure
++ The axes (subplots) inside the figure
 
-Previously, I called `plt.plot()` to draw the points. Since there was only **one axes** by default, it drew the points on that axes itself. But now, since we want the points as drawn on different subplots (axes), we have to call the plot function in the respective axes (`ax1` and `ax2` in below code) instead of `plt`.
+Previously, I called `plt.plot()` to draw the points. Since there was only **one axes** by default, it drew the points on that axes itself. But now, since we want the points to be drawn on different subplots (axes), we have to call the `plot` function in the respective axes (`ax1` and `ax2` in below code) instead of `plt`.
 
 ```{python, eval=F}
 # Create Figure and Subplots
-fig, (ax1, ax2) = plt.subplots(1,2, figsize=(8,4), sharey=False, dpi=120)
+fig, (ax1, ax2) = plt.subplots(1,2, figsize=(8,5), sharey=False, dpi=120)
 
 # Plot
 ax1.plot(ozone_data['Ozone'], 'go')  # green dots
@@ -134,7 +138,7 @@ plt.tight_layout()
 plt.show()
 ``` 
 
-Setting `sharey=False` in `plt.subplots()` means not sharing the Y axis between the two subplots. And `dpi=120` increased the number of dots per inch of the plot to make it look more sharp and clear. You will notice a distinct improvement in clarity on increasing the dpi, especially in jupyter notebooks.
+Setting `sharey=False` in `plt.subplots()` means not sharing the Y-axis between the two subplots. And `dpi=120` increased the number of dots per inch of the plot to make it look more sharp and clear. You will notice a distinct improvement in clarity on increasing the dpi, especially in jupyter notebooks.
 
 The `ax1` and `ax2` objects, like `plt`, has equivalent `set_title`, `set_xlabel` and `set_ylabel` functions. In fact, the `plt.title()` actually calls the current axes `set_title()` to do the job.
 
@@ -159,11 +163,11 @@ plt.show()
 
 ## `Matlab` like syntax
 
-The syntax we’ve seen is the *Object-oriented syntax*, which plot `axes` one after another. Since the original purpose of `matplotlib` was to recreate the plotting facilities of `matlab` in python, the *matlab-like-syntax* relies on a global state and a flat namespace. For example, the above figure can be made by:
+The syntax we’ve seen is the *Object-oriented syntax*, which plot `axes` one after another. Since the original purpose of `matplotlib` was to recreate the plotting facilities of `Matlab` in python, the *matlab-like-syntax* relies on a global state and a flat name space. For example, the above figure can be made by:
 
 ```{python, eval=F}
 # Create Figure and Subplots
-plt.figure(figsize=(8,4), dpi=120) # 8 is width, 4 is height
+plt.figure(figsize=(8,5), dpi=120) 
 
 # Left hand side plot
 plt.subplot(1,2,1)  # (nRows, nColumns, axes number to plot)
@@ -208,7 +212,6 @@ plt.show()
 ```
 
 As you can see, the code is much neat now as we use the object-oriented syntax. Here, the `plt.suptitle()` adds a main title at figure level title, and the `verticalalignment='bottom'` parameter denotes the hinge-point should be at the bottom of the title text, so that the main title is pushed slightly upwards.
-
 
 ## Modifying axis ticks and labels
 
@@ -283,7 +286,7 @@ plt.show()
 mpl.rcParams.update(mpl.rcParamsDefault)
 ```
 
-Besides those pre-built styles, the look and feel of various components of a `matplotlib` plot can be set globally using `rcParams`. The complete list of `rcParams` can be viewed by typing:
+Besides those pre-built styles, the look of various components of a `matplotlib` plot can be set globally using `rcParams`. The complete list of `rcParams` can be viewed by typing:
 
 ```{python, eval=F}
 # Check rcParam
@@ -325,7 +328,7 @@ mpl.colors.BASE_COLORS  # 8 colors
 And use those colors:
 
 ```{python, eval=F}
-# Plot using color: red from BASE_COLORS
+# Plot using color: blue from BASE_COLORS
 plt.plot(ozone_data['Ozone'], color='b')
 plt.show()
 
@@ -347,7 +350,7 @@ You can activate the right hand side Y-axis using `ax.twinx()` to create a secon
 
 ```{python, eval=F}
 # Plot Line1 (Left Y Axis)
-fig, ax1 = plt.subplots(1,1,figsize=(8,5), dpi= 160)
+fig, ax1 = plt.subplots(1,1,figsize=(8,5), dpi=100)
 ax1.plot(ozone_data['Ozone'], color='g')
 
 # Plot Line2 (Right Y Axis)
@@ -363,6 +366,8 @@ ax1.tick_params(axis='y', rotation=0, labelcolor='g')
 # ax2 (right Y axis)
 ax2.set_ylabel('Temperature [F]', color='b', fontsize=15)
 ax2.tick_params(axis='y', labelcolor='b')
+
+# Set title
 ax2.set_title("Daily ozone and temperature", fontsize=15)
 
 # Show plot
@@ -406,7 +411,7 @@ plt.show()
 
 ## Adding texts, arrows, and annotations
 
-`plt.text` and `plt.annotate` adds the texts and annotations respectively. If you have to plot multiple texts you need to call `plt.text()` as many times, typically in a `for-loop`. Let’s annotate the peaks and troughs adding `arrowprops` and a `bbox` for the text.
+`plt.text` and `plt.annotate` adds the texts and annotations respectively. If you have to plot multiple texts you need to call `plt.text()` as many times, typically in a `for` loop. Let’s annotate the peaks and troughs adding `arrowprops` and a `bbox` for the text.
 
 ```{python, eval=F}
 # Texts, Arrows and Annotations Example
@@ -440,9 +445,9 @@ plt.show()
 
 Notice, all the text we plotted above was in relation to the data. That is, the `x` and `y` position in the `plt.text()` corresponds to the values along the `x` and `y` axes. 
 
-However, sometimes you might work with data of different scales on different subplots, and you want to write the texts in the same position on all the subplots. In such case, instead of manually computing the `x` and `y` positions for each axes, you can specify the `x` and `y` values *in relation to the axes* (instead of x and y axis values). You can do this by setting `transform=ax.transData`. The lower-left corner of the axes has `(x,y) = (0,0)` and the top-right corner will correspond to `(1,1)`.
+However, sometimes you might work with data of different scales on different subplots, and you want to write the texts in the same position on all the subplots. In such case, instead of manually computing the `x` and `y` positions for each axes, you can specify the `x` and `y` values *in relation to the axes* (instead of `x` and `y` axis values). You can do this by setting `transform=ax.transData`. The lower-left corner of the axes has `(x,y) = (0,0)` and the top-right corner will correspond to `(x,y) = (1,1)`.
 
-The below plot shows the position of texts for the same values of `(x,y) = (0.5, 0.05)` with respect to the `Data(transData)`, `Axes(transAxes)`, and `Figure(transFigure)` respectively.
+The below plot shows the position of texts for the same values of `(x,y) = (0.5, 0.05)` with respect to the Data(`transData`), Axes(`transAxes`), and Figure(`transFigure`), respectively.
 
 ```{python, eval=F}
 # Texts, Arrows and Annotations Example
@@ -477,6 +482,7 @@ plt.show()
 
 ```{python, eval=F}
 # Supplot2grid approach
+# Object-oriented syntax
 
 # Set the subgrids
 fig = plt.figure(figsize=(10,6),dpi=120)
@@ -517,6 +523,7 @@ Using `plt.GridSpec`, you can use either a `plt.subplot()` interface which takes
 # GridSpec Approach 
 # Matlab-like syntax
 
+# Set the subgrids
 fig = plt.figure(figsize=(10,6), dpi=120)
 grid = plt.GridSpec(3, 3)  # 3 rows 3 cols
 
@@ -525,14 +532,17 @@ plt.subplot(grid[0:2, 0:2])  # top left
 plt.plot(ozone_data[fields[0]] , marker=markers[0], color=colors[0])  
 plt.title(fields[0])
 
+# Plot each axes
 plt.subplot(grid[0:3, 2])   # top right
 plt.plot(ozone_data[fields[1]] , marker=markers[1], color=colors[1])  
 plt.title(fields[1])
 
+# Plot each axes
 plt.subplot(grid[2, 0])  # bottom left
 plt.plot(ozone_data[fields[2]] , marker=markers[2], color=colors[2])  
 plt.title(fields[2])
 
+# Plot each axes
 plt.subplot(grid[2, 1])  # bottom right
 plt.plot(ozone_data[fields[3]] , marker=markers[3], color=colors[3])  
 plt.title(fields[3])
@@ -547,15 +557,14 @@ plt.show()
 
 ## Using `plt.scatter`
 
-`Matplotlib` provides many built-in functions. Here we use `plt.scatter()` as an example to get a sense of what inputs a certain function may expect.
+`Matplotlib` provides many [built-in functions](https://matplotlib.org/stable/tutorials/introductory/sample_plots.html). Here we use `plt.scatter()` as an example to get a sense of what inputs a certain function may expect.
 
 ```{python, eval=F}
-
 # Plot
-fig = plt.figure(figsize=(10,6), dpi=100)
+plt.figure(figsize=(8,5), dpi=100)
 
 # Scatter plot
-plt.scatter('Temperature','Wind.Speed', data=ozone_data, 
+plt.scatter('Temperature', 'Wind.Speed', data=ozone_data, 
             s='Ozone', c='Pressure', cmap='Reds', 
             edgecolors='black', linewidths=0.5)
 
@@ -569,19 +578,21 @@ plt.ylabel('Wind speed [m/s]', fontsize=18)
 # Show colorbar
 plt.colorbar()
 
+# Save the figure
+# Make sure this line goes before plt.show()
+plt.savefig("bubbleplot.png", transparent=True, dpi=100)
+
 # Show plot
-plt.show()   
+plt.show() 
 ```
 
-Here, by varying the size and color of points, we create nice-looking bubble plots. Another convenience is you can directly use a `pandas` dataframe to set the `x` and `y` values, provided you specify the source dataframe in the data argument. You can also set the color `c` and size `s` of the points from one of the dataframe columns itself.
-
-Check the links provided at the end for various built-in functions.
+Here, by varying the size and color of points, we create nice-looking bubble plots. Another convenience is you can directly use a `pandas` dataframe to set the `x` and `y` values, specifying the source dataframe in the data argument. You can also set the color `c` and size `s` of the points from one of the dataframe columns itself.
 
 ## Beyond `matplotlib`
 
-As the charts get more complex, the more the code you’ve got to write. This is the time to consider using a higher level package like `seaborn`, and use one of its pre-built functions. We are not going in-depth into `seaborn`. A lot of `seaborn`’s plots are suitable for data analysis and the library works seamlessly with `pandas` dataframes. `Seaborn` is typically imported as `sns`. Like `matplotlib` it comes with its own set of pre-built styles and palettes. Feel free to go to the [official `seaborn` page](https://seaborn.pydata.org/) for good examples for you to start with.
+As the plots get more complex, the more the code you need to write. This is the time to consider using a higher level package like `seaborn`, and use one of its pre-built functions. We are not going in-depth into `seaborn`. A lot of `seaborn`’s plots are suitable for data analysis and the library works seamlessly with `pandas` dataframes. Like `matplotlib`, `seaborn` comes with its own set of pre-built styles and palettes. Feel free to go to the [official `seaborn` page](https://seaborn.pydata.org/) for good examples for you to start with.
 
-We have covered the syntax and overall structure of creating `matplotlib` plots, saw how to modify various components of a plot, customized subplots layout, plots styling, colors, palettes, etc. 
+So fat, we have covered the **syntax** and **overall structure** of creating `matplotlib` plots, seen how to modify various components of a plot, customized subplots layout, plots styling, colors, palettes, etc. 
 
 A good way to learn plotting is to browse plots (and scripts!) in the graph galleries. **Find the plots you want to mimic, edit and customize the scripts based on your need.**
 
@@ -596,27 +607,27 @@ A good way to learn plotting is to browse plots (and scripts!) in the graph gall
 
 ## Exercise #1
 
-Make a figure with `6` subplots (panels), and plot the following figures in those subplots one by one:
+Make a plot with `6` subplots (panels), and create the following figures in those subplots one by one:
 
-+ a scatter plot between Ozone and Pressure (try `plt.scatter()`)
++ a scatter plot between `Ozone` and `Pressure` (try `plt.scatter()`)
 
-+ step chart of Ozone (try `plt.step()`)
++ step chart of `Ozone` (try `plt.step()`)
 
-+ bar chart of Ozone (try `plt.bar()`)
++ bar chart of `Ozone` (try `plt.bar()`)
 
-+ box plot of Ozone (try `plt.boxplot()`)
++ box plot of `Ozone` (try `plt.boxplot()`)
 
-+ histogram of Ozone (try `plt.hist()`)
++ histogram of `Ozone` (try `plt.hist()`)
 
-+ time series of Ozone
++ time series of `Ozone`
 
 ## Exercise #2
 
-Plot a violin plot to show Ozone in different months. Check [statistics example code: boxplot_vs_violin_demo.py](https://matplotlib.org/2.0.2/examples/statistics/boxplot_vs_violin_demo.html) for demos.
+Plot a *violin plot* to show `Ozone` in different months. Check [statistics example code: boxplot_vs_violin_demo.py](https://matplotlib.org/2.0.2/examples/statistics/boxplot_vs_violin_demo.html) for demos.
 
 ## Exercise #3
 
-Plot a [Hexbin plot](https://datavizproject.com/data-type/hexagonal-binning/) with marginal distributions between Ozone and Temperature. Check [Hexbin plot with marginal distributions](https://seaborn.pydata.org/examples/hexbin_marginals.html) for demos.
+Plot a [Hexbin plot](https://datavizproject.com/data-type/hexagonal-binning/) with marginal distributions between `Ozone` and `Temperature`. Check [Hexbin plot with marginal distributions](https://seaborn.pydata.org/examples/hexbin_marginals.html) for demos.
 
 ***
 
