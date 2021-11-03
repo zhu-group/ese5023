@@ -641,7 +641,8 @@ Plot a [Hexbin plot](https://datavizproject.com/data-type/hexagonal-binning/) wi
 ## Guide and notes
 
 + [`Matplotlib`: visualization with Python](https://matplotlib.org/stable/index.html) (official guide)
-+ [`Matplotlib` cheatsheet](https://github.com/matplotlib/cheatsheets)
++ [`Matplotlib` cheatsheet](https://github.com/matplotlib/cheatsheets) (complex version from `Matplotlib` official Github)
++ [`Matplotlib` cheatsheet](https://zhu-group.github.io/ese5023/download/python-cheatsheets_Matplotlib.pdf) (simple version from Data Camp)
 + [`Matplotlib`: plotting](https://scipy-lectures.org/intro/matplotlib/index.html) (from `scipy` lecture notes)
 + [Visualization with `matplotlib`](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html) (from *`Python` Data Science Handbook*)
 + [`Matplotlib` external resources](https://matplotlib.org/stable/resources/index.html)
