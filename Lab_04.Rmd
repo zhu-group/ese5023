@@ -24,13 +24,13 @@ pip install hvplot
 
 In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product](https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html), a widely used and trusted gridded compilation of historical data going back to `1854`.
 
-**1.** Download the [sst.mnmean.nc](https://psl.noaa.gov/thredds/fileServer/Datasets/noaa.ersst.v5/sst.mnmean.nc) (~ `80 MB`). Read it with `pandas` as the object `ds` 
+**1.** Download the [sst.mnmean.nc](https://psl.noaa.gov/thredds/fileServer/Datasets/noaa.ersst.v5/sst.mnmean.nc) (~ `80 MB`). Read it with `pandas` as the data object `ds`. 
 
 **2.** Plot mean SST in the latest month. Show a 2-D figure.
 
-**3.** Plot a time series of global monthly mean SST from `1854-01` to `2021-10`.
+**3.** Plot a time series of global monthly mean SST from `1900-01` to `2020-12`.
 
-**4.** It turns out that the previous figure is not correct, since it didn't account for the real area of the `2 degree x2 degree` grids. For this exercise, let's create a `weights` array proportional to the cosine of latitude, as the correct area-weighting factor for data on a regular lat-lon grid. 
+**4.** It turns out that the previous figure is not correct, since it didn't account for the real area of the `2 degrees x 2 degrees` grids. For this exercise, let's create a `weights` array proportional to the cosine of latitude, as the correct area-weighting factor for data on a regular lat-lon grid. 
 
 **5.** Now use `weights` array to compute and plot the correct global monthly SST `1854-01` to `2021-10`. You results show look like this:
 
