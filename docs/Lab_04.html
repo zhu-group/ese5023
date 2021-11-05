@@ -491,6 +491,12 @@ div.tocify {
 
 
 <hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>In <code>Anaconda Powershell</code>, install <code>hvplot</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>pip install hvplot</span></code></pre></div>
+<hr />
+</div>
 <div id="global-sea-surface-temperature" class="section level1">
 <h1>1. Global sea surface temperature</h1>
 <p>In this exercise, we will use the <a href="https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html">NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product</a>, a widely used and trusted gridded compilation of historical data going back to <code>1854</code>.</p>
@@ -507,52 +513,52 @@ div.tocify {
 <p>[Hint: use the <code>plot.contourf()</code> function]</p>
 <p><strong>9.</strong> Remove the seasonal cycle from <code>sst</code>, and plot a timeseries of the anomalies at the point (<code>114.55E, 19.15N</code>).</p>
 <p><strong>10.</strong> Run the following lines:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Group data by month</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>group_data <span class="op">=</span> ds.sst.groupby(<span class="st">&#39;time.month&#39;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Apply mean to grouped data, and then compute the anomalies </span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>sst_anom <span class="op">=</span> group_data <span class="op">-</span> group_data.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>sst_anom</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Use resample() function at a frequency of 3 years</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>resample_obj <span class="op">=</span> sst_anom.resample(time<span class="op">=</span><span class="st">&quot;3Y&quot;</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Show the resample object</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>resample_obj</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co"># Apply mean() function to the resample object and get results</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>ds_anom_resample <span class="op">=</span> resample_obj.mean(dim<span class="op">=</span><span class="st">&quot;time&quot;</span>)</span>
-<span id="cb1-16"><a href="#cb1-16"></a>ds_anom_resample</span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co"># Plot anomalies</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>sst_anom.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
-<span id="cb1-20"><a href="#cb1-20"></a>             method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
-<span id="cb1-24"><a href="#cb1-24"></a>                     method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Group data by month</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>group_data <span class="op">=</span> ds.sst.groupby(<span class="st">&#39;time.month&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Apply mean to grouped data, and then compute the anomalies </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>sst_anom <span class="op">=</span> group_data <span class="op">-</span> group_data.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>sst_anom</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Use resample() function at a frequency of 3 years</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>resample_obj <span class="op">=</span> sst_anom.resample(time<span class="op">=</span><span class="st">&quot;3Y&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Show the resample object</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>resample_obj</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Apply mean() function to the resample object and get results</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>ds_anom_resample <span class="op">=</span> resample_obj.mean(dim<span class="op">=</span><span class="st">&quot;time&quot;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a>ds_anom_resample</span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># Plot anomalies</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>sst_anom.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
+<span id="cb2-20"><a href="#cb2-20"></a>             method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
+<span id="cb2-24"><a href="#cb2-24"></a>                     method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span></code></pre></div>
 <p>Check <a href="http://xarray.pydata.org/en/stable/generated/xarray.Dataset.resample.html">xarray.Dataset.resample</a> to teach yourself how to use the <code>resample()</code> function. Now resample the anomalies at a frequency of <code>180</code> days, replot, and what do you observe?</p>
 <p><strong>11.</strong> Run the following lines:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Compute rolling means</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>ds_anom_rolling <span class="op">=</span> sst_anom.rolling(time<span class="op">=</span><span class="dv">12</span>, center<span class="op">=</span><span class="va">True</span>).mean()</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Show rolling means</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>ds_anom_rolling</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Plot anomalies</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>sst_anom.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    label<span class="op">=</span><span class="st">&quot;monthly anomalies&quot;</span>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    label<span class="op">=</span><span class="st">&quot;3-year resample&quot;</span>)</span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># Plot 12-month rolling mean</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>ds_anom_rolling.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    label<span class="op">=</span><span class="st">&quot;12-month rolling mean&quot;</span>)</span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Add the legend</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>plt.legend()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Compute rolling means</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>ds_anom_rolling <span class="op">=</span> sst_anom.rolling(time<span class="op">=</span><span class="dv">12</span>, center<span class="op">=</span><span class="va">True</span>).mean()</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Show rolling means</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>ds_anom_rolling</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Plot anomalies</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>sst_anom.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    label<span class="op">=</span><span class="st">&quot;monthly anomalies&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    label<span class="op">=</span><span class="st">&quot;3-year resample&quot;</span>)</span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co"># Plot 12-month rolling mean</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>ds_anom_rolling.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb3-17"><a href="#cb3-17"></a>    label<span class="op">=</span><span class="st">&quot;12-month rolling mean&quot;</span>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co"># Add the legend</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>plt.legend()</span></code></pre></div>
 <p>Check <a href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.rolling.html">xarray.DataArray.rolling</a> to teach yourself how to use the <code>rolling()</code> function. Now compute the rolling means a frequency of <code>3</code> years, replot, and what do you observe?</p>
 <p><strong>12.</strong> Make a timeseries of the anomalies within the lat range (<code>20S</code>-<code>20N</code>) and lon range (<code>170</code>E to <code>170 W</code>), show resample means and rolling means at the desired frequencies. Use the tips we covered in the <a href="https://zhu-group.github.io/ese5023/Section_08.html">last Section</a>, modify the plot as much as you can.</p>
 <hr />
@@ -561,20 +567,20 @@ div.tocify {
 <h1>2. Interactive visualization using <code>hvplot</code></h1>
 <p>Let’s switch gears and look at how we can produce <strong>interactive plots</strong> via <a href="https://hvplot.holoviz.org/index.html"><code>hvplot</code></a>, which allows easy visualization of <code>xarray</code> (and other) objects.</p>
 <p>To enable the <code>.hvplot</code> interface on <code>xarray</code> object, let’s import the <code>hvplot.xarray</code> module:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> hvplot.xarray</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> hvplot.xarray</span></code></pre></div>
 <p><strong>1.</strong> To use <code>hvplot</code> instead of <code>matplotlib</code>, we use the <code>.hvplot()</code> method:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>ds.sst.hvplot()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>ds.sst.hvplot()</span></code></pre></div>
 <p>As you can see, calling <code>.hvplot()</code> behaves the same as <code>.plot()</code>, i.e. it uses the same heuristics as <code>.plot()</code>. In this case, it produces a histogram for data with more than <code>3</code> dimensions.</p>
 <p><strong>2.</strong> To plot a <code>pcolormesh</code>, let’s reduce the dimensionality of our data to 2D and call <code>.hvplot()</code> again:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>).hvplot(cmap<span class="op">=</span><span class="st">&quot;fire&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>).hvplot(cmap<span class="op">=</span><span class="st">&quot;fire&quot;</span>)</span></code></pre></div>
 <p>Or:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>, lon<span class="op">=</span><span class="dv">100</span>).hvplot()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>, lon<span class="op">=</span><span class="dv">100</span>).hvplot()</span></code></pre></div>
 <p>Or:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ds.sst.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).hvplot()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>ds.sst.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).hvplot()</span></code></pre></div>
 <p><strong>3.</strong> So far we have had to subset our data in order to produce plots. <code>Hvplot</code> provides convenient functionality for producing plots on-demand via interactive widgets. Let’s create a series of 2D for each time slice, We will use the groupby parameter to let <code>hvplot</code> know that we want to create a widget (a slider) for the time dimension:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
-<p>Or you can add more features to the time widget:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
+<p>Or you can add more features to the time widget:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
 <p><strong>4.</strong> Feel free to use <code>hvplot</code> to create a few interactive plots.</p>
 <p>For more about <code>hvplot</code>, check its <a href="https://hvplot.holoviz.org/reference/index.html">Reference Gallery</a>.</p>
 </div>

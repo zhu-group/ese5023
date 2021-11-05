@@ -10,6 +10,16 @@ output:
 
 ***
 
+# Prerequisites
+
+In `Anaconda Powershell`, install `hvplot`:
+
+```{python, eval=F}
+pip install hvplot
+```
+
+***
+
 # 1. Global sea surface temperature
 
 In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product](https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html), a widely used and trusted gridded compilation of historical data going back to `1854`.
