@@ -501,10 +501,11 @@ div.tocify {
 <p><strong>5.</strong> Now use <code>weights</code> array to compute and plot the correct global monthly SST <code>1854-01</code> to <code>2021-10</code>. You results show look like this:</p>
 <p><img src="figs/corrected_SST.png" alt="drawing" width="700"/></p>
 <p><strong>6.</strong> Plot the averaged global SST at <code>June</code>. Show a 2-D figure.</p>
-<p><strong>7.</strong> Plot the monthly climatology at a point (<code>114.55 E, 19.15N</code>) in the South China Sea. Show a 1-D figure.</p>
-<p><strong>8.</strong> Plot the zonal mean climatology. Show a 2-D figure. You results show look like this:</p>
+<p><strong>7.</strong> Plot the monthly climatology at a point (<code>114.55E, 19.15N</code>) in the South China Sea. Show a 1-D figure.</p>
+<p><strong>8.</strong> Plot a contour map of the zonal mean climatology. Show a 2-D figure. You results show look like this:</p>
 <p><img src="figs/zonal_mean.png" alt="drawing" width="700"/></p>
-<p><strong>9.</strong> Remove the seasonal cycle from <code>sst</code>, and plot a timeseries of the anomalies at the point (<code>114.55 E, 19.15N</code>).</p>
+<p>[Hint: use the <code>plot.contourf()</code> function]</p>
+<p><strong>9.</strong> Remove the seasonal cycle from <code>sst</code>, and plot a timeseries of the anomalies at the point (<code>114.55E, 19.15N</code>).</p>
 <p><strong>10.</strong> Run the following lines:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Group data by month</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>group_data <span class="op">=</span> ds.sst.groupby(<span class="st">&#39;time.month&#39;</span>)</span>
@@ -530,10 +531,10 @@ div.tocify {
 <span id="cb1-22"><a href="#cb1-22"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
 <span id="cb1-23"><a href="#cb1-23"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
 <span id="cb1-24"><a href="#cb1-24"></a>                     method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span></code></pre></div>
-<p>Use the <code>help()</code> function to teach yourself how to use <code>resample()</code> function. Now resample the anomalies at a frequency of <code>180</code> days, replot, and what do you observe?</p>
+<p>Check <a href="http://xarray.pydata.org/en/stable/generated/xarray.Dataset.resample.html">xarray.Dataset.resample</a> to teach yourself how to use the <code>resample()</code> function. Now resample the anomalies at a frequency of <code>180</code> days, replot, and what do you observe?</p>
 <p><strong>11.</strong> Run the following lines:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Compute rolling means</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>ds_anom_rolling <span class="op">=</span> sst_anom.rolling(time<span class="op">=</span><span class="dv">36</span>, center<span class="op">=</span><span class="va">True</span>).mean()</span>
+<span id="cb2-2"><a href="#cb2-2"></a>ds_anom_rolling <span class="op">=</span> sst_anom.rolling(time<span class="op">=</span><span class="dv">12</span>, center<span class="op">=</span><span class="va">True</span>).mean()</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Show rolling means</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a>ds_anom_rolling</span>
@@ -548,12 +549,12 @@ div.tocify {
 <span id="cb2-14"><a href="#cb2-14"></a></span>
 <span id="cb2-15"><a href="#cb2-15"></a><span class="co"># Plot 12-month rolling mean</span></span>
 <span id="cb2-16"><a href="#cb2-16"></a>ds_anom_rolling.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    label<span class="op">=</span><span class="st">&quot;12 month rolling mean&quot;</span>)</span>
+<span id="cb2-17"><a href="#cb2-17"></a>    label<span class="op">=</span><span class="st">&quot;12-month rolling mean&quot;</span>)</span>
 <span id="cb2-18"><a href="#cb2-18"></a></span>
 <span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Add the legend</span></span>
 <span id="cb2-20"><a href="#cb2-20"></a>plt.legend()</span></code></pre></div>
-<p>Use the <code>help()</code> function to teach yourself how to use <code>rolling()</code> function. Now compute the rolling means a frequency of <code>3</code> years, replot, and what do you observe?</p>
-<p><strong>12.</strong> Make a timeseries of the anomalies within lat range (<code>20S</code>-<code>20N</code>) and lon range (<code>170</code>E to <code>170 W</code>), show resample means and rolling means at the desired frequency. Use the tips we covered in the <a href="https://zhu-group.github.io/ese5023/Section_08.html">last Section</a>, modify the plot as much as you can.</p>
+<p>Check <a href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.rolling.html">xarray.DataArray.rolling</a> to teach yourself how to use the <code>rolling()</code> function. Now compute the rolling means a frequency of <code>3</code> years, replot, and what do you observe?</p>
+<p><strong>12.</strong> Make a timeseries of the anomalies within the lat range (<code>20S</code>-<code>20N</code>) and lon range (<code>170</code>E to <code>170 W</code>), show resample means and rolling means at the desired frequencies. Use the tips we covered in the <a href="https://zhu-group.github.io/ese5023/Section_08.html">last Section</a>, modify the plot as much as you can.</p>
 <hr />
 </div>
 <div id="interactive-visualization-using-hvplot" class="section level1">

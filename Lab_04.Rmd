@@ -28,13 +28,15 @@ In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Tempe
 
 **6.** Plot the averaged global SST at `June`. Show a 2-D figure.
 
-**7.** Plot the monthly climatology at a point (`114.55 E, 19.15N`) in the South China Sea. Show a 1-D figure.
+**7.** Plot the monthly climatology at a point (`114.55E, 19.15N`) in the South China Sea. Show a 1-D figure.
 
-**8.** Plot the zonal mean climatology. Show a 2-D figure. You results show look like this:
+**8.** Plot a contour map of the zonal mean climatology. Show a 2-D figure. You results show look like this:
 
 <img src="figs/zonal_mean.png" alt="drawing" width="700"/>  
 
-**9.** Remove the seasonal cycle from `sst`, and plot a timeseries of the anomalies at the point (`114.55 E, 19.15N`).
+[Hint: use the `plot.contourf()` function]
+
+**9.** Remove the seasonal cycle from `sst`, and plot a timeseries of the anomalies at the point (`114.55E, 19.15N`).
 
 **10.** Run the following lines:
 
@@ -65,13 +67,13 @@ ds_anom_resample.sel(lon=114.55+180, lat=22.5,
                      method='nearest').plot()
 ```
 
-Use the `help()` function to teach yourself how to use `resample()` function. Now resample the anomalies at a frequency of `180` days, replot, and what do you observe?
+Check [xarray.Dataset.resample](http://xarray.pydata.org/en/stable/generated/xarray.Dataset.resample.html) to teach yourself how to use the `resample()` function. Now resample the anomalies at a frequency of `180` days, replot, and what do you observe?
 
 **11.** Run the following lines:
 
 ```{python, eval=F}
 # Compute rolling means
-ds_anom_rolling = sst_anom.rolling(time=36, center=True).mean()
+ds_anom_rolling = sst_anom.rolling(time=12, center=True).mean()
 
 # Show rolling means
 ds_anom_rolling
@@ -86,15 +88,15 @@ ds_anom_resample.sel(lon=114.55+180, lat=22.5, method='nearest').plot(
 
 # Plot 12-month rolling mean
 ds_anom_rolling.sel(lon=114.55+180, lat=22.5, method='nearest').plot(
-    label="12 month rolling mean")
+    label="12-month rolling mean")
 
 # Add the legend
 plt.legend()
 ```
 
-Use the `help()` function to teach yourself how to use `rolling()` function. Now compute the rolling means a frequency of `3` years, replot, and what do you observe?
+Check [xarray.DataArray.rolling](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.rolling.html) to teach yourself how to use the `rolling()` function. Now compute the rolling means a frequency of `3` years, replot, and what do you observe?
 
-**12.** Make a timeseries of the anomalies within lat range (`20S`-`20N`) and lon range (`170`E to `170 W`), show resample means and rolling means at the desired frequency. Use the tips we covered in the [last Section](https://zhu-group.github.io/ese5023/Section_08.html), modify the plot as much as you can.
+**12.** Make a timeseries of the anomalies within the lat range (`20S`-`20N`) and lon range (`170`E to `170 W`), show resample means and rolling means at the desired frequencies. Use the tips we covered in the [last Section](https://zhu-group.github.io/ese5023/Section_08.html), modify the plot as much as you can.
 
 ***
 
