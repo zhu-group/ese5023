@@ -23,7 +23,7 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |7   |10/27|W.  |[Section 07 Intermediate Python: `xarray`](https://zhu-group.github.io/ese5023/Section_07.html)      | [Assignment 3](https://zhu-group.github.io/ese5023/Assignment_03.html) |      2       |
 |8   |11/03|W.  |[Section 08 Plotting with `matplotlib`](https://zhu-group.github.io/ese5023/Section_08.html)         |                                                                        |              |
 |8   |11/05|F.  |[Lab 04  Python Intermediate and plotting](https://zhu-group.github.io/ese5023/Lab_04.html)          |                                                                        |              |
-|9   |11/10|W.  |Section 09 Python: Map making                                                         | Assignment 4 |     3        |
+|9   |11/10|W.  |[Section 09 Making maps with `cartopy`](https://zhu-group.github.io/ese5023/Section_09.html)         | [Assignment 4](https://zhu-group.github.io/ese5023/Assignment_04.html) |      3       |
 |10  |11/17|W.  |Section 10 Parallel programming in Python                                             |              |              |
 |10  |11/19|F.  |Lab 05  Python exercises                                                              |              |              |
 |11  |11/24|W.  |Section 11 Linux: Basics                                                              | Assignment 5 |     4        |
