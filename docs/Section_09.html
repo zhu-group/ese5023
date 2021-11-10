@@ -877,31 +877,30 @@ div.tocify {
 <span id="cb16-19"><a href="#cb16-19"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax2, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
 <span id="cb16-20"><a href="#cb16-20"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
 <span id="cb16-21"><a href="#cb16-21"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-22"><a href="#cb16-22"></a></span>
-<span id="cb16-23"><a href="#cb16-23"></a><span class="co"># Mask ocean data by adding ocean feature and changing its zorder</span></span>
-<span id="cb16-24"><a href="#cb16-24"></a>ax2.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-25"><a href="#cb16-25"></a>plt.title(<span class="st">&quot;Applying ocean mask&quot;</span>)</span>
-<span id="cb16-26"><a href="#cb16-26"></a></span>
-<span id="cb16-27"><a href="#cb16-27"></a><span class="co"># Plot third plot</span></span>
-<span id="cb16-28"><a href="#cb16-28"></a>ax3 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, projection<span class="op">=</span>proj)</span>
-<span id="cb16-29"><a href="#cb16-29"></a>ax3.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb16-30"><a href="#cb16-30"></a><span class="co"># Contourf-plot data</span></span>
-<span id="cb16-31"><a href="#cb16-31"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax3, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
-<span id="cb16-32"><a href="#cb16-32"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
-<span id="cb16-33"><a href="#cb16-33"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-34"><a href="#cb16-34"></a><span class="co"># Mask land data by adding land feature and changing its zorder</span></span>
-<span id="cb16-35"><a href="#cb16-35"></a>ax3.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>,</span>
-<span id="cb16-36"><a href="#cb16-36"></a>                linewidths<span class="op">=</span><span class="fl">0.5</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-37"><a href="#cb16-37"></a>plt.title(<span class="st">&quot;Applying land mask&quot;</span>)</span>
-<span id="cb16-38"><a href="#cb16-38"></a></span>
-<span id="cb16-39"><a href="#cb16-39"></a><span class="co"># Plot fourth plot</span></span>
-<span id="cb16-40"><a href="#cb16-40"></a>ax4 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, projection<span class="op">=</span>proj)</span>
-<span id="cb16-41"><a href="#cb16-41"></a>ax4.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb16-42"><a href="#cb16-42"></a><span class="co"># Contourf-plot data</span></span>
-<span id="cb16-43"><a href="#cb16-43"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax4, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
-<span id="cb16-44"><a href="#cb16-44"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
-<span id="cb16-45"><a href="#cb16-45"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-46"><a href="#cb16-46"></a>plt.title(<span class="st">&quot;No mask data only&quot;</span>)</span></code></pre></div>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="co"># Mask ocean data by adding ocean feature and changing its zorder</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a>ax2.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-24"><a href="#cb16-24"></a>plt.title(<span class="st">&quot;Applying ocean mask&quot;</span>)</span>
+<span id="cb16-25"><a href="#cb16-25"></a></span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="co"># Plot third plot</span></span>
+<span id="cb16-27"><a href="#cb16-27"></a>ax3 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, projection<span class="op">=</span>proj)</span>
+<span id="cb16-28"><a href="#cb16-28"></a>ax3.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-29"><a href="#cb16-29"></a><span class="co"># Contourf-plot data</span></span>
+<span id="cb16-30"><a href="#cb16-30"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax3, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb16-31"><a href="#cb16-31"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
+<span id="cb16-32"><a href="#cb16-32"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-33"><a href="#cb16-33"></a><span class="co"># Mask land data by adding land feature and changing its zorder</span></span>
+<span id="cb16-34"><a href="#cb16-34"></a>ax3.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>,</span>
+<span id="cb16-35"><a href="#cb16-35"></a>                linewidths<span class="op">=</span><span class="fl">0.5</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-36"><a href="#cb16-36"></a>plt.title(<span class="st">&quot;Applying land mask&quot;</span>)</span>
+<span id="cb16-37"><a href="#cb16-37"></a></span>
+<span id="cb16-38"><a href="#cb16-38"></a><span class="co"># Plot fourth plot</span></span>
+<span id="cb16-39"><a href="#cb16-39"></a>ax4 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, projection<span class="op">=</span>proj)</span>
+<span id="cb16-40"><a href="#cb16-40"></a>ax4.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-41"><a href="#cb16-41"></a><span class="co"># Contourf-plot data</span></span>
+<span id="cb16-42"><a href="#cb16-42"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax4, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb16-43"><a href="#cb16-43"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
+<span id="cb16-44"><a href="#cb16-44"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-45"><a href="#cb16-45"></a>plt.title(<span class="st">&quot;No mask data only&quot;</span>)</span></code></pre></div>
 <hr />
 <p><em>The notes are modified from the excellent <a href="https://rabernat.github.io/research_computing_2018/maps-with-cartopy.html">Maps in Scientific Python</a> and <a href="https://github.com/michaelavs/cartopy_tutorial/blob/main/cartopy_tutorial_filledin.ipynb">Python Tutorial Seminar Series: <code>Cartopy</code></a>, both available freely online.</em></p>
 <hr />

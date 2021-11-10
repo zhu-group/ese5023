@@ -470,7 +470,6 @@ ax2.coastlines(linewidths=0.5)
 surface_T.plot.contourf(ax=ax2, transform=ccrs.PlateCarree(),
                vmin=250, vmax=300, levels=11, cmap='magma',
                add_colorbar=False)
-
 # Mask ocean data by adding ocean feature and changing its zorder
 ax2.add_feature(cfeature.OCEAN, zorder=1)
 plt.title("Applying ocean mask")
