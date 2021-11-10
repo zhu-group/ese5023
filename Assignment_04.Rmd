@@ -37,7 +37,7 @@ Late submissions will not receive any credit. The submission time will be determ
 
 # 1. Global Earthquakes
 
-In this problem set, we will use [this file](https://zhu-group.github.io/ese5023/download/usgs_earthquakes.csv) from the USGS Earthquakes Database. The dataset is similar to the one you use in [Assignment 02](https://zhu-group.github.io/ese5023/Assignment_02.html#1_Significant_earthquakes_since_2150_BC). Use the file provided (`usgs_earthquakes.csv`) to recreate the following map. Use the `mag` column for magnitude. ** [10 points]** 
+In this problem set, we will use [this file](https://zhu-group.github.io/ese5023/download/usgs_earthquakes.csv) from the USGS Earthquakes Database. The dataset is similar to the one you use in [Assignment 02](https://zhu-group.github.io/ese5023/Assignment_02.html#1_Significant_earthquakes_since_2150_BC). Use the file provided (`usgs_earthquakes.csv`) to recreate the following map. Use the `mag` column for magnitude. **[10 points]** 
 
 <img src="figs/earthquakes.png" alt="drawing" width="800"/>  
 
