@@ -825,7 +825,7 @@ div.tocify {
 <p>The core concept is that the projection of your axes is <strong>independent</strong> of the coordinate system your data is defined in. The projection argument is used when creating plots and determines the projection of the resulting plot (i.e. what the plot looks like). The <code>transform</code> argument to plotting functions tells <code>cartopy</code> what coordinate system your data are defined in. In our case, lat and lon are defined in degrees and in <code>PlateCarree</code> projection. For more, check <a href="https://scitools.org.uk/cartopy/docs/latest/tutorials/understanding_transform.html">understanding the transform and projection keywords</a>.</p>
 </div>
 <div id="xarray-integration" class="section level2">
-<h2>Xarray Integration</h2>
+<h2>Xarray integration</h2>
 <p><code>Cartopy</code> transforms can be passed to <code>xarray</code>, this creates a very quick path for creating professional-looking maps from <code>netCDF</code> data.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Create and define the size of a figure object </span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>

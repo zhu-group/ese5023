@@ -412,7 +412,7 @@ Notice, the data also have to be transformed to the projection space. This is do
 
 The core concept is that the projection of your axes is **independent** of the coordinate system your data is defined in. The projection argument is used when creating plots and determines the projection of the resulting plot (i.e. what the plot looks like). The `transform` argument to plotting functions tells `cartopy` what coordinate system your data are defined in. In our case, lat and lon are defined in degrees and in `PlateCarree` projection. For more, check [understanding the transform and projection keywords](https://scitools.org.uk/cartopy/docs/latest/tutorials/understanding_transform.html).
 
-## Xarray Integration
+## Xarray integration
 
 `Cartopy` transforms can be passed to `xarray`, this creates a very quick path for creating professional-looking maps from `netCDF` data.
 
