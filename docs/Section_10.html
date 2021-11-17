@@ -555,8 +555,8 @@ div.tocify {
 <p>Outside of the scientific python community, the most common way to install packages is to search for them on the <a href="https://pypi.org/">official <code>PyPI</code> index</a>. Once you’ve found the package you want to install (you may have also just found it on Github or elsewhere), you use the <code>pip</code> command from the command line:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pip</span> install XXXX</span></code></pre></div>
 <p>If you can’t find a package on either <code>PyPI</code> or <code>conda-forge</code>, you can always install it directly from the source code. If the package is on <code>github</code>, <code>pip</code> already has an alias to do this for you:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">pip</span> install git+https://github.com/YYYY/XXXX.git</span></code></pre></div>
-<p>Where <code>YYYY</code> is the username of github.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">pip</span> install git+https://github.com/.../XXXX.git</span></code></pre></div>
+<p>Where <code>https://github.com/.../XXXX.git</code> indicates the url of the module.</p>
 <p>Now let’s install some modules under the <code>cper</code> environment. Make sure you have activated the <code>cper</code> environment; otherwise, modules will be installed under the <code>base</code> environment.</p>
 <p>First, we will install modules via <code>conda</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">conda</span> install numpy pandas matplotlib netCDF4 xarray notebook cartopy dask python-graphviz</span></code></pre></div>
@@ -571,8 +571,8 @@ div.tocify {
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">conda</span> env export --name cper <span class="op">&gt;</span> my_environment.yml</span></code></pre></div>
 <p>The <code>&gt;</code> indicates that the output is writing to a file called <code>my_environment.yml</code>. If there were any contents in <code>my_environment.yml</code> before this command, they would be overwritten. Now in your working directory, a file <code>my_environment.yml</code> was just created, open it, you will see a list of configurations of the <code>cper</code> environment.</p>
 <p>The environment file (<code>my_environment.yml</code>) is very useful, as it allows creating an <strong>identical</strong> environment. You can use different environment files for different projects, or share an environment file with someone to grantee <strong>reproducible research</strong>.</p>
-<p>To create an environment through existing environment file (say <code>ZZZZ.yml</code>), go to the folder that contains this environment file, type:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">conda</span> env create -f ZZZZ.yml</span></code></pre></div>
+<p>To create a new environment (say <code>cper_new</code>) through existing environment file (say <code>ZZZZ.yml</code>), go to the folder that contains this environment file, type:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">conda</span> env create --name cper_new --file ZZZZ.yml</span></code></pre></div>
 <hr />
 </div>
 </div>
@@ -715,7 +715,7 @@ div.tocify {
 </div>
 <div id="python-next" class="section level1">
 <h1><code>Python</code> next?</h1>
-<p>So far we have covered the basics of <code>Python</code> and fundamental modules to make plots and analyze data. Looking forward, the learning curve is still steep, be patient as it takes time. Use Google and <a href="https://stackoverflow.com/">stackoverflow</a> without hesitation, as you will find 9 out 10 times your question/issue has been reported and solved already. Have fun!</p>
+<p>So far we have covered the basics of <code>Python</code> and fundamental modules to make plots and analyze data. Looking forward, the learning curve is still steep, be patient as it takes time. Use Google and <a href="https://stackoverflow.com/">stackoverflow</a> without hesitation, as you will find 9 out 10 times your questions/issues have been reported and solved (luckily) already. Have fun!</p>
 <hr />
 <p><em>The notes are modified from the excellent <a href="https://rabernat.github.io/research_computing_2018/dask-for-parallel-computing-and-big-data.html">Dask for Parallel Computing and Big Data</a>, <a href="https://rabernat.github.io/research_computing_2018/python-environments.html">Python Environments</a>, and <a href="https://towardsdatascience.com/getting-started-with-python-environments-using-conda-32e9f2779307">Getting started with Python environments (using Conda)</a>, all available freely online.</em></p>
 <hr />
@@ -730,11 +730,11 @@ div.tocify {
 <p><strong>1.4</strong> Create a new <code>conda</code> environment called <code>test_mate</code> using your deskmate’s environment file.</p>
 <p><strong>1.5</strong> Activate the <code>test_mate</code> environment, and verify it contains the module your deskmate specified in his/her environment file.</p>
 <p><strong>1.6</strong> Deactivate both <code>test</code> and <code>test_mate</code> environments.</p>
-<p><strong>1.7</strong> Remove both <code>test</code> and <code>test_mate</code> environments, along with their modules.</p>
+<p><strong>1.7</strong> Remove both <code>test</code> and <code>test_mate</code> environments, along with modules installed.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>Compute and plot the variance in daily ssh anomalies with <code>dask</code>.</p>
+<p>Compute and plot the variance in daily <code>ssh</code> anomalies with <code>dask</code>.</p>
 <hr />
 </div>
 </div>
@@ -742,6 +742,7 @@ div.tocify {
 <h1>Further reading</h1>
 <ul>
 <li><a href="https://conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf">Conda Cheat sheet</a></li>
+<li><a href="https://carpentries-incubator.github.io/introduction-to-conda-for-data-scientists/04-sharing-environments/index.html">Sharing Environments</a></li>
 <li><a href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html">Getting started with conda</a></li>
 <li><a href="https://github.com/dask/dask-tutorial"><code>Dask</code> tutorial</a></li>
 <li><a href="https://saturncloud.io/blog/a-data-scientist-s-guide-to-lazy-evaluation-with-dask/">A Data Scientist’s Guide to Lazy Evaluation with <code>Dask</code></a></li>
