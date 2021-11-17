@@ -591,7 +591,7 @@ div.tocify {
 <p><code>Dask</code> has several ways of executing code in parallel. We’ll use the <a href="http://distributed.dask.org/en/stable/">distributed scheduler</a> by creating a <code>dask.distributed.Client</code>. For now, this will provide us with some nice diagnostics.</p>
 <p>Let’s make a local client (<code>my_client</code>) with <code>4</code> workers (<code>1</code> thread per worker):</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Use the distributed scheduler to form a local client (cluster)</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># 4 works, 1 thread (CPU) per work</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># 4 workers, 1 thread (CPU) per worker</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a>my_client <span class="op">=</span> Client(n_workers<span class="op">=</span><span class="dv">4</span>, threads_per_worker<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb19-4"><a href="#cb19-4"></a></span>
 <span id="cb19-5"><a href="#cb19-5"></a><span class="co"># Show information of the local client</span></span>

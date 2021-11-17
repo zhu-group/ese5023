@@ -204,7 +204,7 @@ Let's make a local client (`my_client`) with `4` workers (`1` thread per worker)
 
 ```{python, eval=F}
 # Use the distributed scheduler to form a local client (cluster)
-# 4 works, 1 thread (CPU) per work
+# 4 workers, 1 thread (CPU) per worker
 my_client = Client(n_workers=4, threads_per_worker=1)
 
 # Show information of the local client
