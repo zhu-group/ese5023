@@ -499,7 +499,7 @@ div.tocify {
 <hr />
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
-<p>In this section, we will use daily data from the <a href="https://www.aviso.altimetry.fr/en/home.html">AVISO</a> sea-surface height satellite altimetry dataset. Download the file (<code>aviso_2015.zip</code>, ~ <code>390 MB</code>) <a href="http://10.20.7.229/index.php/s/JB2Fs9NmBHYa3nT">from here</a>, unzip it, you will have a folder (<code>aviso_2015</code>) containing <code>365</code> nc files. Move the folder to your working directory.</p>
+<p>In this section, we will use daily data from the <a href="https://www.aviso.altimetry.fr/en/home.html">AVISO</a> sea-surface height satellite altimetry dataset. Download the file (<code>aviso_2015.zip</code>, ~ <code>390 MB</code>) <a href="">from here</a>, unzip it, you will have a folder (<code>aviso_2015</code>) containing <code>365</code> nc files. Move the folder to your working directory.</p>
 <hr />
 </div>
 <div id="python-environments" class="section level1">
@@ -707,6 +707,9 @@ div.tocify {
 <span id="cb33-3"><a href="#cb33-3"></a></span>
 <span id="cb33-4"><a href="#cb33-4"></a><span class="co"># Plot annual mean</span></span>
 <span id="cb33-5"><a href="#cb33-5"></a>ssh_2015_mean.plot()</span></code></pre></div>
+<p>Finally, close the client (local cluster):</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Close the client (local cluster)</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>my_client.close()</span></code></pre></div>
 <hr />
 </div>
 </div>

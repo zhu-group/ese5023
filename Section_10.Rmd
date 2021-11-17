@@ -14,7 +14,7 @@ output:
 
 # Prerequisites
 
-In this section, we will use daily data from the [AVISO](https://www.aviso.altimetry.fr/en/home.html) sea-surface height satellite altimetry dataset. Download the file (`aviso_2015.zip`, ~ `390 MB`) [from here](http://10.20.7.229/index.php/s/JB2Fs9NmBHYa3nT), unzip it, you will have a folder (`aviso_2015`) containing `365` nc files. Move the folder to your working directory.
+In this section, we will use daily data from the [AVISO](https://www.aviso.altimetry.fr/en/home.html) sea-surface height satellite altimetry dataset. Download the file (`aviso_2015.zip`, ~ `390 MB`) [from here](), unzip it, you will have a folder (`aviso_2015`) containing `365` nc files. Move the folder to your working directory.
 
 ***
 
@@ -381,6 +381,13 @@ ssh_2015_mean.load()
 
 # Plot annual mean
 ssh_2015_mean.plot()
+```
+
+Finally, close the client (local cluster):
+
+```{python, eval=F}
+# Close the client (local cluster)
+my_client.close()
 ```
 
 ***
