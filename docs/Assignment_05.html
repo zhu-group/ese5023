@@ -11,7 +11,7 @@
 
 
 
-<title>Assignment 02</title>
+<title>Assignment 05</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,6 +28,99 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -398,53 +491,55 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Assignment 02</h1>
+<h1 class="title toc-ignore">Assignment 05</h1>
 
 </div>
 
 
-<p><strong>Out: 10/13 19:00 </strong><br />
-<strong>Due: 10/27 19:00 </strong></p>
+<p><strong>Out: 11/24 19:00 </strong><br />
+<strong>Due: 12/08 19:00 </strong></p>
 <hr />
 <div id="instructions" class="section level1">
 <h1>Instructions</h1>
-<p><strong>Collaboration:</strong><br />
-Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements:</p>
 <ul>
-<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
-<li><p>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</p></li>
+<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 2”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
+<li><p>Write your commands and report <strong>independently</strong> - the commands and report must come from you only.</p></li>
 </ul>
 <p><strong>Submitting your assignment:</strong></p>
 <ul>
-<li><p>Please write a report <code>PS2.pdf</code>.</p></li>
-<li><p>For problem set <em>i</em>, create a script named <code>PS2_i.py</code>.</p></li>
-<li><p>Upload your <code>Python</code> scripts <strong>AND</strong> report to your Github <code>ESE5023_Assignments_XXX</code> repository (where <code>XXX</code> is your SUSTech ID) before the due time.</p></li>
+<li><p>Please write a report <code>PS5.pdf</code>.</p></li>
+<li><p>In you report, please insert of a screenshot of your Linux commands and output. No need to upload <code>Python</code> scripts for this assignment.</p></li>
+<li><p>Upload your report to your Github <code>ESE5023_Assignments_XXX</code> repository (where <code>XXX</code> is your SUSTech ID) before the due time.</p></li>
 </ul>
-<p><strong>Late Submission:</strong><br />
-Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.</p>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.</p>
 <hr />
 </div>
-<div id="significant-earthquakes-since-2150-b.c." class="section level1">
-<h1>1. Significant earthquakes since 2150 B.C.</h1>
-<p>The <a href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data">Significant Earthquake Database</a> contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in <code>.tsv</code> format by clicking the <code>Download TSV File</code> button. Click the variable name for more information. Read the file (e.g., <code>earthquakes-2021-10-13_13-22-50_+0800.tsv</code>) as an object and name it <code>Sig_Eqs</code>.</p>
-<p><strong>1.1 [5 points]</strong> Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top ten countries along with the total number of deaths.</p>
-<p><strong>1.2 [10 points]</strong> Compute the total number of earthquakes with magnitude larger than <code>6.0</code> (use column <code>Mag</code> as the magnitude) worldwide each year, and then plot the time series. Do you observe any trend? Explain why or why not?</p>
-<p><strong>1.3 [10 points]</strong> Write a function <code>CountEq_LargestEq</code> that returns both (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) the date of the largest earthquake ever happened in this country. Apply <code>CountEq_LargestEq</code> to every country in the file, report your results in a descending order.</p>
+<div id="more-linux-commands" class="section level1">
+<h1>1. More Linux Commands</h1>
+<p>In this exercise, we will learn a few more Linux commands. For each command, please use <code>man</code> to learn what it does and how to use it correctly. First, change your directory to <code>~</code>.</p>
+<p><strong>1.1 [2 points]</strong> Make a link called <code>data_demo_link</code> to <code>data_demo</code> folder using <code>ln</code>.</p>
+<p><strong>1.2 [2 points]</strong> Print your home directory using <code>echo</code>.</p>
+<p><strong>1.3 [2 points]</strong> Go to <code>data_demo/molecules/</code>, make an empty file <code>test.pdb</code> with <code>touch</code>.</p>
+<p><strong>1.4 [3 points]</strong> Find how many files in <code>data_demo/data/elements/</code> using <code>find</code>.</p>
+<p><strong>1.5 [2 points]</strong> Compare <code>data_demo/data/pdb/ethane.pdb</code> and <code>data_demo/data/pdb/ethanol.pdb</code> with <code>diff</code></p>
+<p><strong>1.6 [3 points]</strong> Count how many <code>But she</code> string appears in <code>data_demo/writing/data/LittleWomen.txt</code> with <code>grep</code>.</p>
+<p><strong>1.7 [2 points]</strong> Check the total file size of the <code>data_demo/data/</code> folder using <code>du</code>.</p>
+<p><strong>1.8 [3 points]</strong> Copy the <code>data_demo/writing/</code> folder to <code>data_demo/writing_new/</code>, compress <code>data_demo/writing_new/</code> using <code>zip</code>, and decompress the <code>.zip</code> file with <code>unzip</code>.</p>
+<p><strong>1.9 [3 points]</strong> Change the file permissions flags on <code>writing_new</code> to <code>drwxr-x---</code> using <code>chmod</code>.</p>
+<p><strong>1.10 [3 points]</strong> Print the last <code>10</code> commands you made using <code>history</code>.</p>
 <hr />
 </div>
-<div id="wind-speed-in-shenzhen-during-the-past-10-years" class="section level1">
-<h1>2. Wind speed in Shenzhen during the past 10 years</h1>
-<p>In this problem set, we will examine how wind speed changes in Shenzhen during the past <code>10</code> years, we will take a look at the hourly weather data measured at the BaoAn International Airport. The data set is from <a href="https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html">NOAA Integrated Surface Dataset</a>. Download the file <a href="https://zhu-group.github.io/ese5023/download/2281305.zip">2281305.zip</a>, where the number <code>2281305</code> is the site ID. Extract the zip file, you should see a file named <code>2281305.csv</code>. Save the <code>.csv</code> file to your <code>working directory</code>.</p>
-<p>Read page <code>8</code>-<code>9</code> of the comprehensive <a href="https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf">user guide</a> for the detailed format of the wind data. Explain how you filter the data in your report.</p>
-<p><strong>[10 points]</strong> Plot monthly averaged wind speed as a function of the observation time. Is there a trend in monthly averaged wind speed within the past <code>10</code> years?</p>
-<hr />
-</div>
-<div id="explore-a-data-set" class="section level1">
-<h1>3. Explore a data set</h1>
-<p>Browse the <a href="http://data.casearth.cn/">CASEarth</a>, <a href="https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets">NOAA Land-Based Datasets and Products</a>, or <a href="https://agage.mit.edu/">Advanced Global Atmospheric Gases Experiment (AGAGE)</a> website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in <code>csv</code>, <code>XLS</code>, or <code>XLSX</code> format, and have temporal information.</p>
-<p><strong>3.1 [5 points]</strong> Load the <code>csv</code>, <code>XLS</code>, or <code>XLSX</code> file, and clean possible data points with missing values or bad quality.</p>
-<p><strong>3.2 [5 points]</strong> Plot the time series of a certain variable.</p>
-<p><strong>3.3 [5 points]</strong> Conduct at least <code>5</code> simple statistical checks with the variable, and report your findings.</p>
+<div id="bash-for-loop" class="section level1">
+<h1>2. BASH <code>for</code> Loop</h1>
+<p>The general syntax of a BASH loop goes like:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">for</span> <span class="ex">thing</span> in list_of_things</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">do</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="ex">operation_using</span> <span class="va">$thing</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">done</span></span></code></pre></div>
+<p><strong>[5 points]</strong> Write a shell script to print file size (in bytes) of each <code>*.pdb</code> file in <code>data_demo/data/pdb/</code>, line by line.</p>
 </div>
 
 

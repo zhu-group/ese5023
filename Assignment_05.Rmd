@@ -1,0 +1,77 @@
+---
+title: "Assignment 05"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 11/24 19:00 **  
+**Due: 12/08 19:00 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 2"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your commands and report **independently** - the commands and report must come from you only.
+
+**Submitting your assignment:**  
+
+* Please write a report `PS5.pdf`. 
+
+* In you report, please insert of a screenshot of your Linux commands and output. No need to upload `Python` scripts for this assignment.
+
+* Upload your report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**   
+
+Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.
+
+***
+
+# 1. More Linux Commands
+
+In this exercise, we will learn a few more Linux commands. For each command, please use `man` to learn what it does and how to use it correctly. First, change your directory to `~`.
+
+**1.1 [2 points]** Make a link called `data_demo_link` to `data_demo` folder using `ln`.
+
+**1.2 [2 points]** Print your home directory using `echo`.
+
+**1.3 [2 points]** Go to `data_demo/molecules/`, make an empty file `test.pdb` with `touch`.
+
+**1.4 [3 points]** Find how many files in `data_demo/data/elements/` using `find`.
+
+**1.5 [2 points]** Compare `data_demo/data/pdb/ethane.pdb` and `data_demo/data/pdb/ethanol.pdb` with `diff`
+
+**1.6 [3 points]** Count how many `But she` string appears in `data_demo/writing/data/LittleWomen.txt` with `grep`.
+
+**1.7 [2 points]** Check the total file size of the `data_demo/data/` folder using `du`.
+
+**1.8 [3 points]** Copy the `data_demo/writing/` folder to `data_demo/writing_new/`, compress `data_demo/writing_new/` using `zip`, and decompress the `.zip` file with `unzip`.
+
+**1.9 [3 points]** Change the file permissions flags on `writing_new` to `drwxr-x---` using `chmod`.
+
+**1.10 [3 points]** Print the last `10` commands you made using `history`.
+
+***
+
+# 2. BASH `for` Loop
+
+The general syntax of a BASH loop goes like:
+
+```{bash, eval=F}
+for thing in list_of_things
+do
+    operation_using $thing
+done
+```
+
+**[5 points]** Write a shell script to print file size (in bytes) of each `*.pdb` file in `data_demo/data/pdb/`, line by line.
