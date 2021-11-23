@@ -10,7 +10,9 @@ output:
 
 > “In real open source, you have the right to control your own destiny.” - Linus Torvalds
 
-<img src="figs/Windows_Vs_Mac_Vs_Linux_13.jpg" alt="drawing" width="600"/>  
+<img src="figs/linux-vs-mac-vs-windows.jpg" alt="drawing" width="600"/>  
+
+[Figure source](https://www.linuxadictos.com/wp-content/uploads/linux-vs-mac-vs-windows1.jpg.webp)
 
 ***
 

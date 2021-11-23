@@ -49,7 +49,7 @@ In this exercise, we will learn a few more Linux commands. For each command, ple
 
 **1.4 [3 points]** Find how many files in `data_demo/data/elements/` using `find`.
 
-**1.5 [2 points]** Compare `data_demo/data/pdb/ethane.pdb` and `data_demo/data/pdb/ethanol.pdb` with `diff`
+**1.5 [2 points]** Compare `data_demo/data/pdb/ethane.pdb` and `data_demo/data/pdb/ethanol.pdb` with `diff`.
 
 **1.6 [3 points]** Count how many `But she` string appears in `data_demo/writing/data/LittleWomen.txt` with `grep`.
 
