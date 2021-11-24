@@ -302,7 +302,7 @@ wc -l *.pdb | sort -n | head -n 3
 
 ***
 
-*The notes below are modified from the excellent [online tutorial](http://swcarpentry.github.io/shell-novice/) freely available on the Software Carpentry website.*
+*The notes are modified from the excellent [online tutorial](http://swcarpentry.github.io/shell-novice/) freely available on the Software Carpentry website.*
 
 ***
 
