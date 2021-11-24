@@ -32,5 +32,5 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |14  |12/15|W.  |Section 14 FORTRAN: Intermediate                                                      |              |              |
 |14  |12/17|F.  |Lab 06 TBD                                                                            |              |              |
 |15  |12/22|W.  |Section 15 Wrap-up                                                                    |              |     6        |
-|15  |12/24|Th. |Final project presentation: Session 1                                                 |[Final project](https://zhu-group.github.io/ese5023/download/Final_project_2021.pdf)   |              |  
+|15  |12/29|W.  |Final project presentation: Session 1                                                 |[Final project](https://zhu-group.github.io/ese5023/download/Final_project_2021.pdf)   |              |  
 |16  |12/31|F.  |Final project presentation: Session 2                                                 |              |              |
