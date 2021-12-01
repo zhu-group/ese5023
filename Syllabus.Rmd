@@ -43,7 +43,7 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 The course has a credit of 3.0, with a total class hour of 48
 
 **Overview:**   
-Computing is an indispensable tool for Environmental scientists. Being able to analyze and visualize data sets through programming efforts precisely has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech.   
+Computing is an indispensable tool for Environmental scientists. Being able to analyze and visualize data sets through programming efforts has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech.   
 
 This course will introduce students to modern computing software, programming tools, and practices that are broadly applicable in their later research. This course will include an introduction to Linux, version control and data backup with Git, programming in two commonly used languages (Python and FORTRAN), data analysis and visualization tools, and high-performance computing exercises on cluster computers. This course will boost students’ programming and computing skills, which are in high demand in the era of Big Data. 
 
