@@ -108,7 +108,7 @@ Open the [user manual of TaiYi](https://hpc.sustech.edu.cn/ref/taiyi_User_Manual
 
 ## A simple `Python` script
 
-Here we use a simple R script to demonstrate how to submit a job to TaiYi. The script goes like:
+Here we use a simple `Python` script to demonstrate how to submit a job to TaiYi. The script goes like:
 
 ```{python, eval=F}
 # Import modules
@@ -127,7 +127,7 @@ print('This is done with TaiYi!')
 
 ```
 
-Copy the above lines to a new R script `t1.py`, and save it to your home directory.
+Copy the above lines to a new `Python` script `t1.py`, and save it to your home directory.
 
 ## LSF job files
 
@@ -191,7 +191,7 @@ Here `<JOB ID>` is ID of a submitted job (e.g., `2622287`).
 
 ## Exercise #1
 
-Go to `data_demo/data/pdb`, create a shell script `count.sh` with an argument `X` to print the total line numbers of file `X`.
+Go to `data_demo/data/pdb`, create a shell script `count.sh` with one argument to print the total line numbers of a given file.
 
 ## Exercise #2
 
