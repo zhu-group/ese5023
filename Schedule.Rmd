@@ -25,9 +25,9 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |8   |11/05|F.  |[Lab 04  Python Intermediate and plotting](https://zhu-group.github.io/ese5023/Lab_04.html)          |                                                                        |              |
 |9   |11/10|W.  |[Section 09 Making maps with `cartopy`](https://zhu-group.github.io/ese5023/Section_09.html)         | [Assignment 4](https://zhu-group.github.io/ese5023/Assignment_04.html) | Assignment 3 |
 |10  |11/17|W.  |[Section 10 Python environments and parallel computing with `dask`](https://zhu-group.github.io/ese5023/Section_10.html) |                                                    |              |
-|11  |11/24|W.  |[Section 11 Linux: Basics](https://zhu-group.github.io/ese5023/Section_11.html)                      | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4|
+|11  |11/24|W.  |[Section 11 Linux: Basics](https://zhu-group.github.io/ese5023/Section_11.html)                      | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4 |
 |12  |12/01|W.  |[Section 12 Linux: Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Section_12.html)|                                                                        |              |
-|12  |12/03|F.  |Lab 05 Linux and TaiYi                                                                |              |              |
+|12  |12/03|F.  |[Lab 05 Linux and TaiYi](https://zhu-group.github.io/ese5023/Lab_05.html)                            |                                                                        |              |
 |13  |12/08|W.  |Section 13 FORTRAN: Basics                                                            | Assignment 6 | Assignment 5 |
 |14  |12/15|W.  |Section 14 FORTRAN: Intermediate                                                      |              |              |
 |14  |12/17|F.  |Lab 06 TBD                                                                            |              |              |
