@@ -47,7 +47,7 @@ Late submissions will not receive any credit. The submission time will be determ
 
 ***
 
-# 2. Calculate the solar elevation angle
+# 2. Calculate the Solar Elevation Angle
 
 The solar elevation angle (SEA) is the angle between the imaginary horizontal plane on which you are standing and the sun in the sky. SEA is very important in deciding the inclination of solar panels, in both photovoltaics (PV) and thermal. The value of the SEA depends on the location on the Earth and the local date and time.
 
