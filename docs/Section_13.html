@@ -668,7 +668,7 @@ div.tocify {
 <span id="cb16-6"><a href="#cb16-6"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ireal is: &#39;</span>, ireal</span>
 <span id="cb16-7"><a href="#cb16-7"></a></span>
 <span id="cb16-8"><a href="#cb16-8"></a><span class="kw">end program</span> ImplicitTypeTest</span></code></pre></div>
-<p>Try running this program and you will see that it prints out <code>ireal</code> as the integer <code>1</code>. If instead, you use <code>implicit none</code> at the start of this code, the compiler will issue an error because <code>ireal</code> was not yet declared. If we had instead used <code>implicit none</code> at the start of the code, the compiler would have warned us that <code>ireal</code> was undeclared.</p>
+<p>Try running this program and you will see that it prints out <code>ireal</code> as the integer <code>1</code>. If instead, you use <code>implicit none</code> at the start of this code, the compiler will issue an error because <code>ireal</code> was not yet declared.</p>
 <p>Here’s another example where <code>implicit none</code> would help avoid getting the wrong result. Can you spot the error?</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">program</span> TestUndeclared</span>
 <span id="cb17-2"><a href="#cb17-2"></a></span>
@@ -818,7 +818,7 @@ div.tocify {
 <span id="cb20-11"><a href="#cb20-11"></a><span class="kw">enddo</span></span>
 <span id="cb20-12"><a href="#cb20-12"></a></span>
 <span id="cb20-13"><a href="#cb20-13"></a><span class="kw">end program</span> DoLoopTest</span></code></pre></div>
-<p>Note that unlike `<code>Python, you don't need to indent the commands inside the</code>do<code>and</code>enddo<code>construct with</code>Fortran`.</p>
+<p>Note that unlike <code>Python</code>, you don’t need to indent the commands inside the <code>do</code> and <code>enddo</code> construct with <code>Fortran</code>.</p>
 <p>However, it helps to make your code much more readable if you do indent the commands. Indenting is helpful if you loop has spaned a page or more of code, since the indentation is a visual guide to the scope of the loop. Indenting is also very helpful when you have nested loops. For example, both of these loops below are valid <code>Fortran</code>, but which one is easier to read?</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>

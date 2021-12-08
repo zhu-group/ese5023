@@ -256,7 +256,7 @@ write(*,*) 'ireal is: ', ireal
 end program ImplicitTypeTest
 ```
 
-Try running this program and you will see that it prints out `ireal` as the integer `1`. If instead, you use `implicit none` at the start of this code, the compiler will issue an error because `ireal` was not yet declared. If we had instead used `implicit none` at the start of the code, the compiler would have warned us that `ireal` was undeclared.
+Try running this program and you will see that it prints out `ireal` as the integer `1`. If instead, you use `implicit none` at the start of this code, the compiler will issue an error because `ireal` was not yet declared. 
 
 Here's another example where `implicit none` would help avoid getting the wrong result. Can you spot the error?
 
@@ -369,7 +369,7 @@ enddo
 end program DoLoopTest
 ```
 
-Note that unlike ``Python, you don't need to indent the commands inside the `do` and `enddo` construct with `Fortran`. 
+Note that unlike `Python`, you don't need to indent the commands inside the `do` and `enddo` construct with `Fortran`. 
 
 However, it helps to make your code much more readable if you do indent the commands. Indenting is helpful if you loop has spaned a page or more of code, since the indentation is a visual guide to the scope of the loop. Indenting is also very helpful when you have nested loops. For example, both of these loops below are valid `Fortran`, but which one is easier to read?
 
