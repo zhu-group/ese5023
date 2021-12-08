@@ -64,7 +64,7 @@ Run the code in the terminal using:
 
 A `Fortran` program has to have a single program file (usually `.f` or `.f90` files) that lists the sequence of commands to execute. 
 
-The program file has to start with the first command being the word `program` and it must end with the last command being the keyword `end`. The words `program HelloWorld` after the final end statement aren't necessary, but they are a useful organization construct for pointing out what exactly is ending, especially when your program file is very long and also contains subroutine and function code beneath the program section.
+The program file has to start with the first command being the word `program` and it must end with the last command being the keyword `end`. The words `program HelloWorld` after the final `end` statement aren't necessary, but they are a useful organization construct for pointing out what exactly is ending, especially when your program file is very long and also contains subroutine and function code beneath the program section.
 
 ## Compiling
 
