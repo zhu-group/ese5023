@@ -29,8 +29,8 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 |12  |12/01|W.  |[Section 12 Linux: Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Section_12.html)|                                                                        |              |
 |12  |12/03|F.  |[Lab 05 Linux and TaiYi](https://zhu-group.github.io/ese5023/Lab_05.html)                            |                                                                        |              |
 |13  |12/08|W.  |[Section 13 Fortran: Basics](https://zhu-group.github.io/ese5023/Section_13.html)                    | [Assignment 6](https://zhu-group.github.io/ese5023/Assignment_06.html) | Assignment 5 |
-|14  |12/15|W.  |Section 14 FORTRAN: Intermediate                                                      |              |              |
-|14  |12/17|F.  |Lab 06 TBD                                                                            |              |              |
+|14  |12/15|W.  |[Section 14 Fortran: Intermediate](https://zhu-group.github.io/ese5023/Section_14.html)              |                                                                        |              |
+|14  |12/17|F.  |Lab 06 Fortran Intermediate                                                                          |              |              |
 |15  |12/22|W.  |Section 15 Wrap-up                                                                    |              | Assignment 6 |
 |15  |12/29|W.  |Final project presentation: Session 1                                                 |[Final project](https://zhu-group.github.io/ese5023/download/Final_project_2021.pdf)   |              |  
-|16  |12/31|F.  |Final project presentation: Session 2                                                 |              |              |
+|16  |12/31|F.  |Final project presentation: Session 2                                                 |                                                                                       |              |

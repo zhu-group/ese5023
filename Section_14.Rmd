@@ -1,0 +1,483 @@
+---
+title: "Section 14 `Fortran`: Intermediate"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> “In the good old days physicists repeated each other's experiments, just to be sure. Today they stick to FORTRAN, so that they can share each other's programs, bugs included.” - Edsger W. Dijkstra
+
+***
+
+# Prerequisites  
+
+Log in to Taiyi (`172.18.6.175`), then in your home directory, type:
+
+```{bash, eval=F}
+cp -r /work/ese-ouycc/fortran_demo2 .
+```
+
+***
+
+# Reading and writing data
+
+## Reading data from a file
+
+To read or write data from a file, you need to first open the file using the `open()` command. When you are done, you use the `close()` command. For example, to read data from an existing file:
+
+```{fortran, eval=F}
+Program FileReadTest
+
+Implicit none
+
+integer                            :: u, n, i
+real(4), dimension(:), allocatable :: a, b
+
+! File unit
+u = 50
+
+! Open the file
+open(unit=u, file='test.dat', status='old')
+
+! The first line of the file has the number of values for arrays a and b
+read(u,*) n
+
+! Allocate the arrays
+allocate( a(n), b(n) )
+
+! Read data line by line
+do i = 1,n
+  read(u, *) a(i), b(i)
+enddo
+
+! Close the file
+close(u)
+
+! Display the values
+do i = 1,n
+  write(*,*) "Line ", i, " : ", a(i), b(i)
+enddo
+
+! Deallocate the arrays
+deallocate( a, b )
+
+End Program FileReadTest
+```
+
+The `unit` is an integer that tells `Fortran` where to read or write the data from. Here, you pick a number (`50`) and assign that as the file unit (`u`). `status = 'old'` tells `Fortran` that the file exists already. This is optional, but can be helpful since if the file doesn't exist, `Fortran` will issue a helpful error message. For the read commands, here we are using the asterisk `*` to denote a *free-format* read, which means that `Fortran` will decide what the format is.
+
+## Writing data to a file
+
+Suppose we have modified `a` and `b`, and want to save those values to a new file (`new1.dat`). This can be done using:
+
+```{fortran, eval=F}
+Program FileWriteTest
+
+implicit none
+
+integer                            :: u, n, i
+real(4), dimension(:), allocatable :: a, b
+
+! File unit
+u = 50
+
+! Open the file
+open(unit=u, file='test.dat', status='old')
+
+! The first line of the file has the number of values for arrays a and b
+read(u,*) n
+
+! Allocate the arrays
+allocate( a(n), b(n) )
+
+! Read data line by line
+do i = 1,n
+  read(u, *) a(i), b(i)
+enddo
+
+! Close the file
+close(u)
+
+! Change the values
+a = a * 2.0
+b = b + 1
+
+! Write the values to a new file
+open(unit=u, file='new1.dat', status='replace')
+write(u, *) a, b
+close(u)
+
+! Deallocate the arrays
+deallocate( a, b )
+
+End Program FileWriteTest
+```
+
+As you may notice, the output file `new1.dat` has only one line. This is because `write()` is called once to write two vectors. Try the following code chuck to save the values, see what will happen:
+
+```{fortran, eval=F}
+! Write the values to a new file, line by line
+open(unit=u, file='new2.dat')
+do i = 1,n
+  write(u, *) a(i), b(i)
+enddo
+close(u)
+```
+
+## Format specifiers
+
+In all of our `read` and `write` examples above, we used the generic `*` for the *format specifier*. When writing, Fortran will write out the **full precision** of each floating-point number. For example, `18.9779778`. You can use the format specifier to specify another format. In `Fortran`, they are often referred to as **edit descriptors**. Change the writing chuck to the following:
+
+```{fortran, eval=F}
+! Write the values to a new file, in a certain format
+open(unit=u, file='new3.dat')
+do i = 1,n
+  write(u, '(f5.1,E10.3)') a(i), b(i)
+enddo
+close(u)
+```
+
+Here `f` is for a floating-point format, `E` is for scientific notation. For a `w.d` format, `w `is the width (number of characters) and `d` is the number of decimal places. See this [note](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html) for more about `Fortran` format. 
+
+***
+
+# Functions
+
+Like `Python`, we can define *functions* in `Fortran`. This is done with the `function` keyword. Functions are useful when you need to do a complicated calculation that has only one result. Functions need to be either in a separate `.f90` file or have to be listed **outside** the main program. For example: 
+
+```{fortran, eval=F}
+program FunctionTest
+
+implicit none
+
+real(4) :: a, b, c, Get_the_larger
+
+a = 2.0
+b = 5.0
+
+c = Get_the_larger(a,b)
+
+write(*,*) 'c is: ', c
+
+end program FunctionTest
+
+!-----------------------------------
+! This is the external function
+!-----------------------------------
+real(4) function Get_the_larger(x,y)
+
+real(4) :: x, y
+if(x > y) then
+  Get_the_larger = x
+else
+  Get_the_larger = y
+endif
+
+end function Get_the_larger
+```
+
+***
+
+# Subroutines
+
+Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name.
+
+```{fortran, eval=F}
+program SubRoutineTest
+
+implicit none
+
+real(4) :: a,b,c,d
+
+a = 2.0
+b = 5.0
+
+call subroutineA(a,b,c)  ! a and b are input, c is returned
+call subroutineB(a,b,c,d)  ! a,b and c are input, d is returned
+write(*,*) 'c is: ', c
+write(*,*) 'd is: ', d
+
+end program SubRoutineTest
+
+!-----------------------------------
+! This is a subroutine
+!-----------------------------------
+
+subroutine subroutineA(a,b,c)
+implicit none
+real(4), intent(in)  :: a,b
+real(4), intent(out) :: c
+
+c = a*b
+
+end subroutine subroutineA
+
+!-----------------------------------
+! This is another subroutine
+!-----------------------------------
+   
+subroutine subroutineB(a,b,c,d)
+implicit none
+real(4), intent(in)  :: a,b,c
+real(4), intent(out) :: d
+
+real(4)              :: x
+
+x = 10.0
+
+d = a + b + x*c
+
+end subroutine subroutineB
+```
+
+***
+
+# Modules
+
+Modern `Fortran` best practices are to put all subroutines and functions into one or more module files. 
+
+In a module, you can define variables and all the actions that work on them. You can have *public* and *private* variables, subroutines, and functions. Your main program can then `use` the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available). 
+
+First, let's define a module `Constants.f90`:
+
+```{fortran, eval=F}
+module Constants  
+
+implicit none 
+
+  real, parameter :: pi = 3.1415926536  
+  real, parameter :: e = 2.7182818285 
+   
+contains      
+
+  subroutine show_consts()          
+    print*, "Pi = ", pi          
+    print*,  "e = ", e     
+  end subroutine show_consts 
+   
+end module Constants
+```
+
+Then we can use this module in the main program (`ModuleTest.f90`) with `use`:
+
+```{fortran, eval=F}
+program ModuleTest   
+
+use Constants      
+
+implicit none     
+
+real :: x, ePowerx, area, radius 
+
+x = 2.0
+radius = 7.0
+ePowerx = e ** x
+area = pi * radius**2     
+
+! Call the subroutine from the constants module
+call show_consts() 
+   
+print*, "e raised to the power of 2.0 = ", ePowerx
+print*, "Area of a circle with radius 7.0 = ", area  
+   
+end program ModuleTest
+```
+
+To compile the module and program:
+
+```{bash, eval=F}
+gfortran Constants.f90 ModuleTest.f90 -o ModuleTest.x
+```
+
+Note that in this command, the module appears before the main program (`ModuleTest.f90`) so that the functions are defined before they are referenced in the main program.
+
+***
+
+# Creating library files
+
+When working on large projects, especially projects that are shared between a number of users, it is useful to create *object files* or *libraries of object files* that can be shared between programmers and users. 
+
+Suppose we have multiple source files, for example:
+
+`Sub1.f90`:
+
+```{fortran, eval=F}
+subroutine func1(x)
+  real(4)    :: x
+  print *, "This is from sub1, x:", x
+end
+```
+
+`Sub2.f90`:
+
+```{fortran, eval=F}
+subroutine func2(x)
+  real(4)    :: x
+  print *, "This is from sub2, x^2:", x**2
+end
+```
+
+`Constants.f90`:
+
+```{fortran, eval=F}
+module Constants  
+
+implicit none 
+
+  real, parameter :: pi = 3.1415926536  
+  real, parameter :: e = 2.7182818285 
+   
+contains      
+
+  subroutine show_consts()          
+    print*, "Pi = ", pi          
+    print*,  "e = ", e     
+  end subroutine show_consts 
+   
+end module Constants
+```
+
+We want to call/use the above programs in the `Main.f90` program:
+
+```{fortran, eval=F}
+program Main
+
+use Constants
+
+implicit none
+
+real :: a
+
+a=2.0
+
+! Call func1 from the Sub1 subroutine
+call func1(a)
+
+! Call func2 from the Sub2 subroutine
+call func2(a)
+
+! Call show_consts from the Constants module
+call show_consts()
+
+end program Main
+```
+
+Completed subprograms can be compiled into object files that can be linked during the compilation of the whole program:
+
+```{bash, eval=F}
+gfortran -c Sub1.f90
+gfortran -c Sub2.f90
+gfortran -c Constants.f90
+gfortran Main.f90 Sub1.o Sub2.o Constants.o -o Main.x
+```
+
+Note that the `-c` option is lowercase, which means: compile to object (`.o`) only, do not link. 
+
+However, if many object files are to be linked, then it is convenient to place them in a library. Libraries can be created using the `ar` command (see `man ar` ). Object files can be placed in a library, for example, as follows:
+
+```{bash, eval=F}
+ar rcvf libsubs.a Sub1.o Sub2.o
+ar rcvf libconst.a Constants.o
+```
+
+Here we have created two libraries (`libsubs.a` and `libconst.a`):
+
++ `libsubs.a` contains two objects `Sub1.o` and `Sub2.o`
+
++ `libconst.a` contains `Constants.o`. 
+
+Note that the name of the library **must** begin with `lib` and end with `.a`.
+
+More objects (say `ANOTHER.o`) can be added to the library with:
+
+```{bash, eval=F}
+ar rcvf libsubs.a ANOTHER.o
+```
+
+The contents of a library can be listed with:
+
+```{bash, eval=F}
+ar tv libsubs.a
+```
+
+Subroutines and functions in the library can be listed with:
+
+```{bash, eval=F}
+nm libsubs.a
+```
+
+Objects (say `NON_USEFUL.o`) can be deleted from the library with:
+
+```{bash, eval=F}
+ar dv libsubs.a NON_USEFUL.o
+```
+
+Once libraries have been created, it can be linked in a compilation as follows:
+
+```{bash, eval=F}
+gfortran Main.f90 -o Main.x -L. -lsubs -lconst
+```
+
+The `-L.` option tells the linker that the libraries can be found in the **current** directory (indicated by `.`). `lsubs` is short for `libsubs.a`, and `lconst` is short for `libconst.a`.
+
+If the libraries are not in the current directory, then you should give the path, for example:
+
+```{bash, eval=F}
+gfortran Main.f90 -o Main.x -Llib/ -lsubs -lconst
+```
+
+Here we have copied `libsubs.a` and `libconst.a` to `lib/` folder before the compilation.
+
+Now copy `libsubs.a` in `lib_sub/` and `libconst.a` in `lib_const/`, the main program can be compiled as:
+
+```{bash, eval=F}
+gfortran Main.f90 -o Main.x -Llib_sub/ -lsubs -Llib_const/ -lconst
+```
+
+or:
+
+```{bash, eval=F}
+gfortran Main.f90 -o Main.x -Llib_sub/ -Llib_const/ -lsubs -lconst
+```
+
+***
+
+*The notes above are modified from the excellent [online tutorial](https://rabernat.github.io/research_computing/intro-to-fortran.html) freely available on GitHub.*
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Write a `Fortran` program to write some numbers to a file that has `20` lines and `2` columns. The first column is in a format of `f10.3`, and the second column is in a format of `f15.5`. 
+
+## Exercise #2
+
+Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from the main program (`my.f90`) to check whether `2022` is a leap year. 
+
+## Exercise #3
+
+Write a module `GetDays.f90` to print the total number of days in a given year. Then `use` this module in `my.f90` to print the total number of days for `2022`.
+
+## Exercise #4
+
+**4.1.** Build a library `libleap.a` which contains the `TestLeapYear.o`. Move it to a new folder. 
+
+**4.2.** Build another library `libdays.a` which contains the `GetDays.o`. Move it to a different folder as you did in **4.1**. 
+
+**4.3.** Compile and run `my.f90` using the two libraries.
+
+***
+
+# Further reading
+
++ [Compiling and Running Fortran Programs - a basic guide](http://www.fortran.gantep.edu.tr/compiling-g95-basic-guide.html)
++ [Introduction to Fortran](https://ourcodingclub.github.io/tutorials/fortran-intro/)
++ [Fortran Cheat Sheet](https://github.com/StanislavRadkov/Fortran-Cheat-Sheet)
++ [Fortran 90 Tutorial](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html)
++ [Fortran Tutorial](https://www.tutorialspoint.com/fortran/index.htm)
++ [Modern Fortran in Science and Technology](https://modern-fortran-in-science-and-technology.readthedocs.io/en/latest/index.html)

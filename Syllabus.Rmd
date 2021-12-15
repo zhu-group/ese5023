@@ -40,7 +40,7 @@ Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
 405, Building #6, Li Yuan  
 
 **Credit:**   
-The course has a credit of 3.0, with a total class hour of 48
+The course has a credit of 3.0, with a total class hour of 48.
 
 **Overview:**   
 Computing is an indispensable tool for Environmental scientists. Being able to analyze and visualize data sets through programming efforts has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech.   
@@ -53,7 +53,7 @@ This course is a **hands-on and project-oriented** course that facilitates stude
 The course will meet on Wednesday weekly and on Friday every other week (even weeks only). On Wednesday, new material will be demonstrated by the instructor, followed by in-class exercises. On Friday, the class will turn into a lab, Friday class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
 
 **Prerequisites:**  
-C or C++; Applied Mathematics; Or permission of the instructor
+C or C++; Applied Mathematics; Or permission of the instructor.
 
 **Textbook:**   
 There is no required textbook. Readings will be freely available from online resources made available through the course website.
