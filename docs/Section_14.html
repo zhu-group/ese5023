@@ -513,7 +513,7 @@ div.tocify {
 <h1>Reading and writing data</h1>
 <div id="reading-data-from-a-file" class="section level2">
 <h2>Reading data from a file</h2>
-<p>To read or write data from a file, you need to first open the file using the <code>open()</code> command. When you are done, you use the <code>close()</code> command. For example, to read data from an existing file:</p>
+<p>To read or write data from a file, you need to first open the file using the <code>open()</code> command. When you are done, you use the <code>close()</code> command. For example, to read data from an existing file (<code>test.dat</code>):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">Program</span> FileReadTest</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">Implicit</span> <span class="kw">none</span></span>
@@ -550,7 +550,7 @@ div.tocify {
 <span id="cb2-34"><a href="#cb2-34"></a><span class="kw">deallocate</span>( a, b )</span>
 <span id="cb2-35"><a href="#cb2-35"></a></span>
 <span id="cb2-36"><a href="#cb2-36"></a><span class="kw">End Program</span> FileReadTest</span></code></pre></div>
-<p>The <code>unit</code> is an integer that tells <code>Fortran</code> where to read or write the data from. Here, you pick a number (<code>50</code>) and assign that as the file unit (<code>u</code>). <code>status = 'old'</code> tells <code>Fortran</code> that the file exists already. This is optional, but can be helpful since if the file doesn’t exist, <code>Fortran</code> will issue a helpful error message. For the read commands, here we are using the asterisk <code>*</code> to denote a <em>free-format</em> read, which means that <code>Fortran</code> will decide what the format is.</p>
+<p>The <code>unit</code> is an integer that tells <code>Fortran</code> where to read or write the data from. Here, you pick a number (<code>50</code>) and assign that as the file unit (<code>u</code>). <code>status = 'old'</code> tells <code>Fortran</code> that the file exists already. This is optional, but can be helpful since if the file doesn’t exist, <code>Fortran</code> will issue a helpful error message. For the <code>read</code> commands, here we are using the asterisk <code>*</code> to denote a <em>free-format</em> read, which means that <code>Fortran</code> will decide what the format is.</p>
 </div>
 <div id="writing-data-to-a-file" class="section level2">
 <h2>Writing data to a file</h2>
@@ -612,12 +612,12 @@ div.tocify {
 <span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">write(</span>u, <span class="st">&#39;(f5.1,E10.3)&#39;</span><span class="fu">)</span> a(i), b(i)</span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="kw">enddo</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="fu">close(</span>u<span class="fu">)</span></span></code></pre></div>
-<p>Here <code>f</code> is for a floating-point format, <code>E</code> is for scientific notation. For a <code>w.d</code> format, <code>w</code>is the width (number of characters) and <code>d</code> is the number of decimal places. See this <a href="https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html">note</a> for more about <code>Fortran</code> format.</p>
+<p>Here <code>f</code> is for a floating-point format, <code>E</code> is for scientific notation. For a <code>w.d</code> format, <code>w</code>is the width (number of characters) and <code>d</code> is the number of decimal places. See <a href="https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html">this note</a> for more about <code>Fortran</code> format.</p>
 <hr />
 </div>
 </div>
-<div id="functions" class="section level1">
-<h1>Functions</h1>
+<div id="function" class="section level1">
+<h1>Function</h1>
 <p>Like <code>Python</code>, we can define <em>functions</em> in <code>Fortran</code>. This is done with the <code>function</code> keyword. Functions are useful when you need to do a complicated calculation that has only one result. Functions need to be either in a separate <code>.f90</code> file or have to be listed <strong>outside</strong> the main program. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">program</span> FunctionTest</span>
 <span id="cb6-2"><a href="#cb6-2"></a></span>
@@ -649,9 +649,9 @@ div.tocify {
 <span id="cb6-28"><a href="#cb6-28"></a><span class="kw">end function</span> Get_the_larger</span></code></pre></div>
 <hr />
 </div>
-<div id="subroutines" class="section level1">
-<h1>Subroutines</h1>
-<p>Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name.</p>
+<div id="subroutine" class="section level1">
+<h1>Subroutine</h1>
+<p>Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name. You will also have to use <code>call</code> before a subroutine.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">program</span> SubRoutineTest</span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
@@ -661,42 +661,50 @@ div.tocify {
 <span id="cb7-7"><a href="#cb7-7"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
 <span id="cb7-8"><a href="#cb7-8"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
 <span id="cb7-9"><a href="#cb7-9"></a></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="kw">call</span> subroutineA(a,b,c)  <span class="co">! a and b are input, c is returned</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="kw">call</span> subroutineB(a,b,c,d)  <span class="co">! a,b and c are input, d is returned</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;d is: &#39;</span>, d</span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">end program</span> SubRoutineTest</span>
-<span id="cb7-16"><a href="#cb7-16"></a></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co">! This is a subroutine</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">! Call subroutineA</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="kw">call</span> subroutineA(a,b,c)  <span class="co">! a and b are input, c is returned</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">! Call subroutineB</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="kw">call</span> subroutineB(a,b,c,d)  <span class="co">! a,b and c are input, d is returned</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;d is: &#39;</span>, d</span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="kw">end program</span> SubRoutineTest</span>
 <span id="cb7-20"><a href="#cb7-20"></a></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="kw">subroutine</span> subroutineA(a,b,c)</span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b</span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> c</span>
-<span id="cb7-25"><a href="#cb7-25"></a></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="co">c = a*b</span></span>
-<span id="cb7-27"><a href="#cb7-27"></a></span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="kw">end subroutine</span> subroutineA</span>
-<span id="cb7-29"><a href="#cb7-29"></a></span>
-<span id="cb7-30"><a href="#cb7-30"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co">! This is another subroutine</span></span>
-<span id="cb7-32"><a href="#cb7-32"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-33"><a href="#cb7-33"></a>   </span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="kw">subroutine</span> subroutineB(a,b,c,d)</span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b,c</span>
-<span id="cb7-37"><a href="#cb7-37"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> d</span>
-<span id="cb7-38"><a href="#cb7-38"></a></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="dt">real(4)</span>              <span class="dt">::</span> x</span>
-<span id="cb7-40"><a href="#cb7-40"></a></span>
-<span id="cb7-41"><a href="#cb7-41"></a>x <span class="kw">=</span> <span class="fl">10.0</span></span>
-<span id="cb7-42"><a href="#cb7-42"></a></span>
-<span id="cb7-43"><a href="#cb7-43"></a>d <span class="kw">=</span> a <span class="kw">+</span> b <span class="kw">+</span> x<span class="kw">*</span>c</span>
-<span id="cb7-44"><a href="#cb7-44"></a></span>
-<span id="cb7-45"><a href="#cb7-45"></a><span class="kw">end subroutine</span> subroutineB</span></code></pre></div>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">! This is a subroutine</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="kw">subroutine</span> subroutineA(a,b,c)</span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b</span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> c</span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">c = a*b</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="kw">end subroutine</span> subroutineA</span>
+<span id="cb7-35"><a href="#cb7-35"></a></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">! This is another subroutine</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">!-----------------------------------</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a>   </span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="kw">subroutine</span> subroutineB(a,b,c,d)</span>
+<span id="cb7-41"><a href="#cb7-41"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b,c</span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> d</span>
+<span id="cb7-46"><a href="#cb7-46"></a></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="dt">real(4)</span>              <span class="dt">::</span> x</span>
+<span id="cb7-48"><a href="#cb7-48"></a></span>
+<span id="cb7-49"><a href="#cb7-49"></a>x <span class="kw">=</span> <span class="fl">10.0</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a></span>
+<span id="cb7-51"><a href="#cb7-51"></a>d <span class="kw">=</span> a <span class="kw">+</span> b <span class="kw">+</span> x<span class="kw">*</span>c</span>
+<span id="cb7-52"><a href="#cb7-52"></a></span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="kw">end subroutine</span> subroutineB</span></code></pre></div>
 <hr />
 </div>
 <div id="modules" class="section level1">
@@ -716,9 +724,10 @@ div.tocify {
 <span id="cb8-10"><a href="#cb8-10"></a>  <span class="kw">subroutine</span> show_consts()          </span>
 <span id="cb8-11"><a href="#cb8-11"></a>    <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
 <span id="cb8-12"><a href="#cb8-12"></a>    <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
-<span id="cb8-13"><a href="#cb8-13"></a>  <span class="kw">end subroutine</span> show_consts </span>
-<span id="cb8-14"><a href="#cb8-14"></a>   </span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="kw">end module</span> Constants</span></code></pre></div>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;This is from module Constants&quot;</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="kw">end subroutine</span> show_consts </span>
+<span id="cb8-15"><a href="#cb8-15"></a>   </span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="kw">end module</span> Constants</span></code></pre></div>
 <p>Then we can use this module in the main program (<code>ModuleTest.f90</code>) with <code>use</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">program</span> ModuleTest   </span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
@@ -772,9 +781,10 @@ div.tocify {
 <span id="cb13-10"><a href="#cb13-10"></a>  <span class="kw">subroutine</span> show_consts()          </span>
 <span id="cb13-11"><a href="#cb13-11"></a>    <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
 <span id="cb13-12"><a href="#cb13-12"></a>    <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
-<span id="cb13-13"><a href="#cb13-13"></a>  <span class="kw">end subroutine</span> show_consts </span>
-<span id="cb13-14"><a href="#cb13-14"></a>   </span>
-<span id="cb13-15"><a href="#cb13-15"></a><span class="kw">end module</span> Constants</span></code></pre></div>
+<span id="cb13-13"><a href="#cb13-13"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;This is from module Constants&quot;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="kw">end subroutine</span> show_consts </span>
+<span id="cb13-15"><a href="#cb13-15"></a>   </span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="kw">end module</span> Constants</span></code></pre></div>
 <p>We want to call/use the above programs in the <code>Main.f90</code> program:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">program</span> Main</span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
@@ -802,7 +812,7 @@ div.tocify {
 <span id="cb15-3"><a href="#cb15-3"></a><span class="ex">gfortran</span> -c Constants.f90</span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="ex">gfortran</span> Main.f90 Sub1.o Sub2.o Constants.o -o Main.x</span></code></pre></div>
 <p>Note that the <code>-c</code> option is lowercase, which means: compile to object (<code>.o</code>) only, do not link.</p>
-<p>However, if many object files are to be linked, then it is convenient to place them in a library. Libraries can be created using the <code>ar</code> command (see <code>man ar</code> ). Object files can be placed in a library, for example, as follows:</p>
+<p>However, if many object files are to be linked, then it is convenient to place them in a <em>library</em>. Libraries can be created using the <code>ar</code> command (see <code>man ar</code> ). Object files can be placed in a library, for example, as follows:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ar</span> rcvf libsubs.a Sub1.o Sub2.o</span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="fu">ar</span> rcvf libconst.a Constants.o</span></code></pre></div>
 <p>Here we have created two libraries (<code>libsubs.a</code> and <code>libconst.a</code>):</p>
@@ -829,6 +839,8 @@ div.tocify {
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">gfortran</span> Main.f90 -o Main.x -Llib_sub/ -lsubs -Llib_const/ -lconst</span></code></pre></div>
 <p>or:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="ex">gfortran</span> Main.f90 -o Main.x -Llib_sub/ -Llib_const/ -lsubs -lconst</span></code></pre></div>
+<p>You can also use absolute path of the libraries:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">gfortran</span> Main.f90 -o Main.x -L/work/ese-ouycc/fortran_demo2/lib_sub/ -lsubs -L/work/ese-ouycc/fortran_demo2/lib_const/ -lconst</span></code></pre></div>
 <hr />
 <p><em>The notes above are modified from the excellent <a href="https://rabernat.github.io/research_computing/intro-to-fortran.html">online tutorial</a> freely available on GitHub.</em></p>
 <hr />
