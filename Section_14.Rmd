@@ -243,7 +243,7 @@ end subroutine subroutineB
 
 ***
 
-# Modules
+# Module
 
 Modern `Fortran` best practices are to put all subroutines and functions into one or more module files. 
 
@@ -305,7 +305,7 @@ Note that in this command, the module appears before the main program (`ModuleTe
 
 ***
 
-# Creating library files
+# Using library files
 
 When working on large projects, especially projects that are shared between a number of users, it is useful to create *object files* or *libraries of object files* that can be shared between programmers and users. 
 

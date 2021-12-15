@@ -707,8 +707,8 @@ div.tocify {
 <span id="cb7-53"><a href="#cb7-53"></a><span class="kw">end subroutine</span> subroutineB</span></code></pre></div>
 <hr />
 </div>
-<div id="modules" class="section level1">
-<h1>Modules</h1>
+<div id="module" class="section level1">
+<h1>Module</h1>
 <p>Modern <code>Fortran</code> best practices are to put all subroutines and functions into one or more module files.</p>
 <p>In a module, you can define variables and all the actions that work on them. You can have <em>public</em> and <em>private</em> variables, subroutines, and functions. Your main program can then <code>use</code> the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available).</p>
 <p>First, let’s define a module <code>Constants.f90</code>:</p>
@@ -754,8 +754,8 @@ div.tocify {
 <p>Note that in this command, the module appears before the main program (<code>ModuleTest.f90</code>) so that the functions are defined before they are referenced in the main program.</p>
 <hr />
 </div>
-<div id="creating-library-files" class="section level1">
-<h1>Creating library files</h1>
+<div id="using-library-files" class="section level1">
+<h1>Using library files</h1>
 <p>When working on large projects, especially projects that are shared between a number of users, it is useful to create <em>object files</em> or <em>libraries of object files</em> that can be shared between programmers and users.</p>
 <p>Suppose we have multiple source files, for example:</p>
 <p><code>Sub1.f90</code>:</p>
