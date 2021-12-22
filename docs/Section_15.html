@@ -507,7 +507,7 @@ div.tocify {
 <h1>Prerequisites</h1>
 <ul>
 <li><p>We will use <a href="https://www.google.com/intl/en_us/chrome/">Google Chrome</a> in this section.</p></li>
-<li><p>Download the <a href="https://chromedriver.chromium.org/downloads">chromedriver_win32.zip file</a>, unzip it, and move the folder to your working directory. You may need to use different versions depending on the version of your Google Chrome.</p></li>
+<li><p>Download the <a href="https://chromedriver.chromium.org/downloads">chromedriver file</a>, unzip it, and <strong>move the folder to your working directory</strong>. You may need to use different versions depending on the version of your Google Chrome.</p></li>
 <li><p>Modules used in this section:</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load modules</span></span>
@@ -522,11 +522,12 @@ div.tocify {
 <div id="web-scraping" class="section level1">
 <h1>Web scraping</h1>
 <p>Web scraping refers to the process of <strong>extracting data</strong> from a website. This can, of course, be done manually: you could go to a website, find the relevant data or information, and enter that information into some data file that you have stored locally. But imagine that you want to pull a very large dataset from hundreds or thousands of individual URLs. In this case, extracting the data manually sounds overwhelming and time-consuming.</p>
-<p>In this article, we’ll see how to <strong>automate</strong> this process with <code>Python</code>, using the <a href="https://docs.python-requests.org/en/latest/"><code>requests</code></a>, <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"><code>BeautifulSoup</code></a>, and <a href="https://selenium-python.readthedocs.io/"><code>Selenium</code></a> libraries. <code>requests</code> is an elegant and simple HTTP library for <code>Python</code>, <code>BeautisulSoup</code> is a <code>Python</code> library for extracting and parsing data from HTML files, and <code>Selenium</code> is used to automate web browser interaction between <code>Python</code> and your browser.</p>
+<p>In this article, we’ll see how to <strong>automate</strong> this process with <code>Python</code>, using the <a href="https://docs.python-requests.org/en/latest/"><code>requests</code></a>, <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"><code>BeautifulSoup</code></a>, and <a href="https://selenium-python.readthedocs.io/"><code>Selenium</code></a> modules. <code>requests</code> is an elegant and simple HTTP library for <code>Python</code>, <code>BeautisulSoup</code> is a <code>Python</code> module for extracting and parsing data from HTML files, and <code>Selenium</code> is used to automate web browser interaction between <code>Python</code> and your browser.</p>
 <div id="installing-libraries" class="section level2">
 <h2>Installing libraries</h2>
-<p>Activate the <a href="https://zhu-group.github.io/ese5023/Section_10.html#Using_a_Python_environment"><code>cper</code> environment</a>, as we will install <code>BeautifulSoup</code> and <code>Selenium</code> under it. If you fail to find <code>cper</code>, follow <a href="https://zhu-group.github.io/ese5023/Section_10.html#Creating_a_Python_environment">Creating a <code>Python</code> environment</a> to create one.</p>
+<p>Activate the <a href="https://zhu-group.github.io/ese5023/Section_10.html#Using_a_Python_environment"><code>cper</code> environment</a>, as we will install <code>requests</code>, <code>BeautifulSoup</code>, and <code>Selenium</code> under it.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">conda</span> activate cper</span></code></pre></div>
+<p>If you fail to find <code>cper</code>, follow <a href="https://zhu-group.github.io/ese5023/Section_10.html#Creating_a_Python_environment">Creating a <code>Python</code> environment</a> to create one.</p>
 <p>To install <code>requests</code>, <code>BeautifulSoup</code>, and <code>Selenium</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">conda</span> install requests</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="ex">conda</span> install beautifulsoup4</span>
@@ -568,8 +569,9 @@ div.tocify {
 </div>
 <div id="using-web-drivers" class="section level2">
 <h2>Using web drivers</h2>
-<p>At this point, you also need to install <a href="https://chromedriver.chromium.org/">ChromeDriver</a>. If using Windows, download the <a href="https://chromedriver.chromium.org/downloads">chromedriver_win32.zip file</a>, unzip it, and move the folder to your working directory. You should have a single <code>.exe</code> file called <code>chromedriver.exe</code> in a folder called <code>chromedriver_win32</code>. Remember the path to this folder and file.</p>
-<p>Next, we’re going to write a <code>my_rendering</code> function that will run the <code>ChromeDriver</code>. This will open a Chrome window, load the web page fully, return the page HTML, and quit the <code>ChromeDriver</code>, closing the Chrome window. Be sure to update the path in the <code>webdriver.Chrome</code> function to the path where you installed the <code>ChromeDriver</code>.</p>
+<p>At this point, you also need to install <a href="https://chromedriver.chromium.org/">ChromeDriver</a>.</p>
+<p>Download the <a href="https://chromedriver.chromium.org/downloads">chromedriver_win32.zip file</a> (if you use Windows), unzip it, and <strong>move the folder to your working directory</strong>. You should have a single executable file called <code>chromedriver.exe</code> in a folder called <code>chromedriver_win32</code> (if you use Windows).</p>
+<p>Next, we’re going to write a <code>my_rendering</code> function that will run the <code>ChromeDriver</code>. This will open a Chrome window, load the web page fully, return the page HTML, and quit the <code>ChromeDriver</code>, closing the Chrome window. Be sure to update the path in the <code>webdriver.Chrome</code> function to the path where you installed the <code>ChromeDriver</code>, in our case, it’s <code>chromedriver_win32\\chromedriver.exe</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Define a rendering function that runs the ChromeDriver</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">def</span> my_rendering(url):</span>
 <span id="cb6-3"><a href="#cb6-3"></a>    <span class="co"># The path to the ChromeDriver, change if necessary</span></span>
@@ -811,7 +813,7 @@ div.tocify {
 <span id="cb10-86"><a href="#cb10-86"></a>                </span>
 <span id="cb10-87"><a href="#cb10-87"></a>            <span class="co"># Go to next date, i.e., next URL</span></span>
 <span id="cb10-88"><a href="#cb10-88"></a>            start_date <span class="op">+=</span> timedelta(days<span class="op">=</span><span class="dv">1</span>) </span></code></pre></div>
-<p>Now that we have our new <code>scrape_shenzhen_weather</code> function defined, let’s use it to scrape data for between <code>2021-01-01</code> and <code>2021-01-05</code>. To do this, we simply need to define the start_date and end_date parameters, and run the function.</p>
+<p>Now that we have our new <code>scrape_shenzhen_weather</code> function defined, let’s use it to scrape data for between <code>2021-01-01</code> and <code>2021-01-05</code>. To do this, we simply need to define the <code>start_date</code> and <code>end_date</code> parameters, and run the function.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Set start and end dates</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>start_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2021</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb11-3"><a href="#cb11-3"></a>end_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2021</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">3</span>)</span>
@@ -826,7 +828,8 @@ div.tocify {
 </div>
 <div id="in-class-exercise" class="section level1">
 <h1>In-class exercise</h1>
-<p>Modify the <code>scrape_shenzhen_weather()</code> function so that it can scrape the information contained in the Daily Observations table from Weather Underground pages for weather observations taken at any airport station within any date range.</p>
+<p>Modify the <code>scrape_shenzhen_weather()</code> function so that it scrapes the information contained in the Daily Observations table from <a href="https://www.wunderground.com">Weather Underground pages</a> for weather observations taken at ANY airport station within ANY date range.</p>
+<p>[<strong>Hint:</strong> Add another input parameter <code>station</code>]</p>
 <hr />
 </div>
 <div id="further-reading" class="section level1">
