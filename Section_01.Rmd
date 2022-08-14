@@ -68,7 +68,7 @@ output:
   * Just for fun
   * Other
 
-**9. In your view, why is programming hard?** (open question) [^2]
+**9. In your view, why is programming hard?** (open question, [source](https://makemeaprogrammer.com/is-programming-hard/))
   
   * Oh, I’m just really not a math person
   * Programmers are elite hackers, like in movies
@@ -76,7 +76,6 @@ output:
   * Programmers should be immediately good at all things about the computer
   * Other
 
-[^2]: [source](https://makemeaprogrammer.com/is-programming-hard/)
   
 **10. Name one thing you want to achieve at the end of the semester** (open question)  
 
@@ -97,17 +96,17 @@ Hopefully, this course will make your life easier when it comes to interpret and
     - Github, GitKraken, etc.  
   + Handle common file formats with Python
     - plain text, .csv, .nc, .hdf, etc.
-  + Work with data neatly using common packages like `numpy`, `matplotlib`, `pandas`, and `xarray`
+  + Work with data neatly using common packages like `numpy`, `scipy`, `matplotlib`, `pandas`, and `xarray`
   + Proceed statistical tests with Python
     - comparing means, ANOVA, regressions, etc.  
   + Create publication-quality figures with Python
   + Conduct parallel computing in Python
-  + Write, compile, and run FORTRAN scripts
-    - gfortran, intel-fortran, functions, modules, etc.
   + Use the Linux environment
     - basics, BASH scripts, installing software, loading modules, etc.
   + Run jobs on TaiYi high-performance computer
     - SSH, managing jobs, etc.
+  + [Optional] Write, compile, and run FORTRAN scripts
+    - gfortran, intel-fortran, functions, modules, etc.    
   + [Optional] Build and launch a website
     - Rmarkdown (In fact, this website is built with Rmarkdown)
 
@@ -194,9 +193,7 @@ A circle (red) in a square (black) is our solution. Indeed, this is very easy to
 
 <img src="figs/flow_03.jpg" alt="drawing" width="400"/>
 
-Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the *Monte Carlo method* here. If we uniformly drop *N* random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. [^3]
-
-[^3]: [Estimation of the number PI – A Monte Carlo simulation](https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/).
+Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the *Monte Carlo method* here. If we uniformly drop *N* random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. (source: [Estimation of the number PI – A Monte Carlo simulation](https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/))
 
 ## {-}
 

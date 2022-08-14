@@ -15,29 +15,13 @@ Email: zhul3@sustech.edu.cn
 Office Hours: By appointment*  
 
 **Teaching Assistants (TAs):**   
-Wenfu Sun    
-*School of Environmental Science and Engineering  
-Office: 903B, CoE North   
-Email: sunwf@mail.sustech.edu.cn  
-Office Hours: Thursday 16:00-17:00 *  
-
-Juan Li    
-*School of Environmental Science and Engineering  
-Office: 903B, CoE North    
-Email: 12149018@mail.sustech.edu.cn  
-Office Hours: Tuesday 19:00-20:00*  
-
-Hao Huang    
-*School of Environmental Science and Engineering  
-Office: 841A, CoE North   
-Email: 12131071@mail.sustech.edu.cn  
-Office Hours: Monday 16:00-17:00*  
+TBD
 
 **Class Time:**   
-Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
+Tu 19:00-21:00 / Th (odd weeks) 19:00-21:00
 
 **Location:**   
-405, Building #6, Li Yuan  
+503, Teaching Building #1 
 
 **Credit:**   
 The course has a credit of 3.0, with a total class hour of 48.
@@ -65,7 +49,7 @@ Students are **required** to bring laptops to the class to learn the material, p
 Students will be evaluated at the end of the semester based on their assignments (50%), final project (40%), and class participation (10%).
 
 **Schedule:**  
-[Schedule for 2021 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
+[Schedule for 2022 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
 
 ***
 

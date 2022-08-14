@@ -2,35 +2,41 @@
 title: "Schedule"
 ---
 **Class Time:**   
-Wednesday 19:00-21:00 / Friday (even weeks) 16:20-18:10
+Tu 19:00-21:00 / Th (odd weeks) 19:00-21:00
 
 **Location:**   
-405, Building #6, Li Yuan  
+503, Teaching Building #1   
 
-**2021 Fall:**
+**2022 Fall:**
 
-|Week|Date |Day | Topic                                                                                                                   | Assignment Out                                                         | Assignment Due  |
-|:--:|:---:|:--:|:------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------:|:---------------:|
-|1   |09/08|W.  |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)                                           |                                                                        |                 |
-|2   |09/15|W.  |[Section 02 Version control with Git](https://zhu-group.github.io/ese5023/Section_02.html)                               |                                                                        |                 |
-|2   |09/17|F.  |[Lab 01 Github and Python setup](https://zhu-group.github.io/ese5023/Lab_01.html)                                        |                                                                        |                 |
-|3   |09/22|W.  |[Section 03 Python: Basics (I)](https://zhu-group.github.io/ese5023/Section_03.html)                                     | [Assignment 1](https://zhu-group.github.io/ese5023/Assignment_01.html) |                 |
-|4   |09/29|W.  |[Section 04 Python: Basics (II)](https://zhu-group.github.io/ese5023/Section_04.html)                                    |                                                                        |                 |
-|4   |10/08|F.  |[Lab 02  Python Basics](https://zhu-group.github.io/ese5023/Lab_02.html)                                                 |                                                                        |                 |
-|5   |10/13|W.  |[Section 05 Intermediate Python: `numPy`](https://zhu-group.github.io/ese5023/Section_05.html)                           | [Assignment 2](https://zhu-group.github.io/ese5023/Assignment_02.html) | Assignment 1    |
-|6   |10/20|W.  |[Section 06 Intermediate Python: `pandas`](https://zhu-group.github.io/ese5023/Section_06.html)                          |                                                                        |                 |
-|6   |10/22|F.  |[Lab 03  Python Intermediate](https://zhu-group.github.io/ese5023/Lab_03.html)                                           |                                                                        |                 |
-|7   |10/27|W.  |[Section 07 Intermediate Python: `xarray`](https://zhu-group.github.io/ese5023/Section_07.html)                          | [Assignment 3](https://zhu-group.github.io/ese5023/Assignment_03.html) | Assignment 2    |
-|8   |11/03|W.  |[Section 08 Plotting with `matplotlib`](https://zhu-group.github.io/ese5023/Section_08.html)                             |                                                                        |                 |
-|8   |11/05|F.  |[Lab 04  Python Intermediate and plotting](https://zhu-group.github.io/ese5023/Lab_04.html)                              |                                                                        |                 |
-|9   |11/10|W.  |[Section 09 Making maps with `cartopy`](https://zhu-group.github.io/ese5023/Section_09.html)                             | [Assignment 4](https://zhu-group.github.io/ese5023/Assignment_04.html) | Assignment 3    |
-|10  |11/17|W.  |[Section 10 Python environments and parallel computing with `dask`](https://zhu-group.github.io/ese5023/Section_10.html) |                                                                        |                 |
-|11  |11/24|W.  |[Section 11 Linux: Basics](https://zhu-group.github.io/ese5023/Section_11.html)                                          | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4    |
-|12  |12/01|W.  |[Section 12 Linux: Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Section_12.html)                    |                                                                        |                 |
-|12  |12/03|F.  |[Lab 05 Linux and TaiYi](https://zhu-group.github.io/ese5023/Lab_05.html)                                                |                                                                        |                 |
-|13  |12/08|W.  |[Section 13 Fortran: Basics](https://zhu-group.github.io/ese5023/Section_13.html)                                        | [Assignment 6](https://zhu-group.github.io/ese5023/Assignment_06.html) | Assignment 5    |
-|14  |12/15|W.  |[Section 14 Fortran: Intermediate](https://zhu-group.github.io/ese5023/Section_14.html)                                  |                                                                        |                 |
-|14  |12/17|F.  |[Lab 06 Fortran Intermediate](https://zhu-group.github.io/ese5023/Lab_06.html)                                           |                                                                        |                 |
-|15  |12/22|W.  |[Section 15 Web scraping with Python and Class Wrap-up](https://zhu-group.github.io/ese5023/Section_15.html)             |                                                                        | Assignment 6    |
-|15  |12/29|W.  |Final project presentation: Session 1                                                                                    | [Final project](https://zhu-group.github.io/ese5023/download/Final_project_2021.pdf) |   |  
-|16  |12/31|F.  |Final project presentation: Session 2                                                                                    |                                                                        |                 |
+|Week|Date |Day | Topic                                                                           | Assignment Out        | Assignment Due  |
+|:--:|:---:|:--:|:--------------------------------------------------------------------------------|:---------------------:|:---------------:|
+|1   |09/06|Tu. |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)   |                       |                 |
+|1   |09/08|Th. |Lab 01 Python setup                                             |                       |                 |
+|2   |09/13|Tu. |Section 02 Version control with Git                             |                       |                 |
+|3   |09/20|Tu. |Section 03 Python: Basics (I)                                   |                       |                 |
+|3   |09/22|Th. |Lab 02  Python Basics                                           |                       |                 |
+|4   |09/27|Tu. |Section 04 Python: Basics (II)                                  |                       |                 |
+|5   |10/11|Tu. |Section 05 Intermediate Python: `numPy`                         |                       |                 |
+|5   |10/13|Th. |Lab 03  Python Intermediate                                     |                       |                 |
+|6   |10/18|Tu. |Section 06 Intermediate Python: `scipy`                         |                       |                 |
+|7   |10/25|Tu. |Section 07 Intermediate Python: `pandas`                        |                       |                 |
+|7   |10/27|Th. |Lab 04  Python Intermediate                                     |                       |                 |
+|8   |11/01|Tu. |Section 08 Intermediate Python: `xarray`                        |                       |                 |
+|9   |11/08|Tu. |Section 09 Plotting with `matplotlib`                           |                       |                 |
+|9   |11/10|Th. |Lab 05  Python Intermediate                                     |                       |                 |
+|10  |11/15|Tu. |Section 10 Making maps with `cartopy`                           |                       |                 |
+|11  |11/22|Tu. |Section 11 Python environments                                  |                       |                 |
+|11  |11/24|Th. |Lab 06 Plotting with Python                                     |                       |                 |
+|12  |11/29|Tu. |Section 12 Parallel computing with Python                       |                       |                 |
+|13  |12/06|Tu. |Section 13 Web scraping with Python                             |                       |                 |
+|13  |12/08|Th. |Lab 07 Python Intermediate                                      |                       |                 |
+|14  |12/13|Tu. |Section 14 Linux: Basics                                        |                       |                 |
+|15  |12/20|Tu. |Section 15 Linux: Shell scripts and Taiyi jobs                  |                       |                 |  
+|15  |12/22|Th. |Lab 08 Linux and TaiYi                                          |                       |                 |
+|16  |12/27|Tu. |Final project presentation                                      |                       |                 |
+
+**Supplements:**  
+Supplement 01: [Fortran: Basics](https://zhu-group.github.io/ese335/Sup_01.html)  
+Supplement 02: [Fortran: Intermediate](https://zhu-group.github.io/ese335/Sup_02.html)  
+Supplement 03: [Lab: Fortran Intermediate](https://zhu-group.github.io/ese335/Sup_03.html)  

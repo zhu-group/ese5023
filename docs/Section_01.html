@@ -13,49 +13,42 @@
 
 <title>Section 01 Introduction</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-
-
-
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
 
 
 
@@ -65,10 +58,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -85,40 +74,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 66px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h2 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h3 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h4 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h5 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h6 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -146,7 +108,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -158,7 +120,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -169,10 +131,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -184,7 +159,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -316,7 +290,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -372,21 +346,6 @@ div.tocify {
     <li>
       <a href="Assignment_01.html">Assignment 01</a>
     </li>
-    <li>
-      <a href="Assignment_02.html">Assignment 02</a>
-    </li>
-    <li>
-      <a href="Assignment_03.html">Assignment 03</a>
-    </li>
-    <li>
-      <a href="Assignment_04.html">Assignment 04</a>
-    </li>
-    <li>
-      <a href="Assignment_05.html">Assignment 05</a>
-    </li>
-    <li>
-      <a href="Assignment_06.html">Assignment 06</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -397,7 +356,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -476,7 +435,7 @@ div.tocify {
 <li>Just for fun</li>
 <li>Other</li>
 </ul>
-<p><strong>9. In your view, why is programming hard?</strong> (open question) <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><strong>9. In your view, why is programming hard?</strong> (open question, <a href="https://makemeaprogrammer.com/is-programming-hard/">source</a>)</p>
 <ul>
 <li>Oh, I’m just really not a math person</li>
 <li>Programmers are elite hackers, like in movies</li>
@@ -509,7 +468,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <ul>
 <li>plain text, .csv, .nc, .hdf, etc.</li>
 </ul></li>
-<li>Work with data neatly using common packages like <code>numpy</code>, <code>matplotlib</code>, <code>pandas</code>, and <code>xarray</code></li>
+<li>Work with data neatly using common packages like <code>numpy</code>, <code>scipy</code>, <code>matplotlib</code>, <code>pandas</code>, and <code>xarray</code></li>
 <li>Proceed statistical tests with Python
 <ul>
 <li>comparing means, ANOVA, regressions, etc.<br />
@@ -517,10 +476,6 @@ Hopefully, this course will make your life easier when it comes to interpret and
 </ul></li>
 <li>Create publication-quality figures with Python</li>
 <li>Conduct parallel computing in Python</li>
-<li>Write, compile, and run FORTRAN scripts
-<ul>
-<li>gfortran, intel-fortran, functions, modules, etc.</li>
-</ul></li>
 <li>Use the Linux environment
 <ul>
 <li>basics, BASH scripts, installing software, loading modules, etc.</li>
@@ -528,6 +483,11 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <li>Run jobs on TaiYi high-performance computer
 <ul>
 <li>SSH, managing jobs, etc.</li>
+</ul></li>
+<li>[Optional] Write, compile, and run FORTRAN scripts
+<ul>
+<li>gfortran, intel-fortran, functions, modules, etc.<br />
+</li>
 </ul></li>
 <li>[Optional] Build and launch a website
 <ul>
@@ -599,7 +559,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <h1>An example: Estimation of <span class="math inline">\(\pi\)</span></h1>
 <p>Now suppose our research question is:</p>
 <div id="question-how-to-estimate-the-number-of-pi" class="section level2 tabset tabset-fade tabset-pills">
-<h2>Question: How to estimate the number of <span class="math inline">\(\pi\)</span>?</h2>
+<h2 class="tabset tabset-fade tabset-pills">Question: How to estimate the number of <span class="math inline">\(\pi\)</span>?</h2>
 <div id="your-ideas" class="section level3">
 <h3>Your ideas</h3>
 <p>Can you think about a few ways to solve this?</p>
@@ -609,11 +569,11 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <p>If <em>r</em> is the radius of a circle, then the surface of this circle is <span class="math inline">\(\pi*r^{2}\)</span>. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate <span class="math inline">\(\pi\)</span>. Then how can we estimate the surface of a circle?</p>
 <p>A circle (red) in a square (black) is our solution. Indeed, this is very easy to know the surface of a square. It is the square of the length of one of its sides. Do you see where this is leading us? What if we were able to estimate the rate between the surface of the circle and the surface of the square? Then we would know the surface of the circle.</p>
 <p><img src="figs/flow_03.jpg" alt="drawing" width="400"/></p>
-<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. (source: <a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>)</p>
 </div>
 </div>
 <div id="section" class="section level2 unnumbered">
-<h2></h2>
+<h2 class="unnumbered"></h2>
 </div>
 <div id="the-conceptual-model" class="section level2">
 <h2>The conceptual model</h2>
@@ -637,13 +597,6 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <li><p>What is the math/logic model?</p></li>
 </ul>
 </div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p><a href="https://makemeaprogrammer.com/is-programming-hard/">source</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
 
 
 
@@ -656,7 +609,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -674,7 +627,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -683,6 +636,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
