@@ -1,5 +1,5 @@
 ---
-title: "Lab 06"
+title: "Lab: Fortran Intermediate"
 output:
   html_document:
     toc: true
