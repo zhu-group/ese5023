@@ -18,7 +18,7 @@ Office Hours: By appointment*
 TBD
 
 **Class Time:**   
-Tu 19:00-21:00 / Th (odd weeks) 19:00-21:00
+Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 
 **Location:**   
 503, Teaching Building #1 
@@ -34,7 +34,7 @@ This course will introduce students to modern computing software, programming to
 This course is a **hands-on and project-oriented** course that facilitates student learning through lectures, in-class exercises, labs, assignments, final project, and one-on-one interactions. Class topics will be taught through example data sets, demos, and research problems from Environmental Science.  
 
 **Structure:**   
-The course will meet on Wednesday weekly and on Friday every other week (even weeks only). On Wednesday, new material will be demonstrated by the instructor, followed by in-class exercises. On Friday, the class will turn into a lab, Friday class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
+The course will meet on Tuesday weekly and on Thursday every other week (odd weeks only). On Tuesday, new material will be demonstrated by the instructor, followed by in-class exercises. On Thursday, the class will turn into a lab, Thursday class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
 
 **Prerequisites:**  
 C or C++; Applied Mathematics; Or permission of the instructor.
