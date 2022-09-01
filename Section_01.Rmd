@@ -118,11 +118,11 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 # Course structure
 
-* Wednesday class   
+* Tuesday class   
   + New material demonstrated (45-60 mins)
   + In-class exercises (30-45 mins)
 
-* Friday class (even weeks only)
+* Thursday class (even weeks only)
   + In-class exercises (45-60 mins)
   + Working on assignments
   + Discussing the final project
