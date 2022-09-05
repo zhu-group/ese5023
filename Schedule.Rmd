@@ -9,11 +9,11 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 
 **2022 Fall:**
 
-|Week|Date |Day | Topic                                                                           | Assignment Out        | Assignment Due  |
-|:--:|:---:|:--:|:--------------------------------------------------------------------------------|:---------------------:|:---------------:|
-|1   |09/06|Tu. |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)   |                       |                 |
-|1   |09/08|Th. |Lab 01 Python setup                                             |                       |                 |
-|2   |09/13|Tu. |Section 02 Version control with Git                             |                       |                 |
+|Week|Date |Day | Topic                                                                                     | Assignment Out        | Assignment Due  |
+|:--:|:---:|:--:|:------------------------------------------------------------------------------------------|:---------------------:|:---------------:|
+|1   |09/06|Tu. |[Section 01 Introduction](https://zhu-group.github.io/ese5023/Section_01.html)             |                       |                 |
+|1   |09/08|Th. |[Section 02 Version control with Git](https://zhu-group.github.io/ese5023/Section_02.html) |                       |                 |
+|2   |09/13|Tu. |Lab 01 Python setup                                             |                       |                 |
 |3   |09/20|Tu. |Section 03 Python: Basics (I)                                   |                       |                 |
 |3   |09/22|Th. |Lab 02  Python Basics                                           |                       |                 |
 |4   |09/27|Tu. |Section 04 Python: Basics (II)                                  |                       |                 |
