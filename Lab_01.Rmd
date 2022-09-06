@@ -1,5 +1,5 @@
 ---
-title: "Lab 01"
+title: "Lab 01 Git and Python setup"
 output:
   html_document:
     toc: true
