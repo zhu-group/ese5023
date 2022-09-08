@@ -250,7 +250,7 @@ Imagine you drafted an excellent paragraph for a paper you are writing, but late
 
 * Push it to GitHub as a `remote` repository. This is the place you are going to turn in your assignments, *e.g*., `PS1/PS1_1.py`, `PS1/PS1_2.py`, `PS3/PS3_3.py`,...
 
-* Go to GitHub, click `ESE5023_Assignments_XXX` repository, then `Settings`. Under the `Manage access` sub-page, click `Invite a collaborator`, add invite `LIXicheng00`, and `chen-yuy` as collaborators. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignments_XXX` repository, and they will grade your assignments and provide necessary feedback in the future. 
+* Go to GitHub, click `ESE5023_Assignments_XXX` repository, then `Settings`. Under the `Collaborators` sub-page, then in `Manage access` box, click `Add people`, add invite `LIXicheng00` and then `chen-yuy` as collaborators. By doing so, your TAs will be able to get access to your GitHub `ESE5023_Assignments_XXX` repository, and they will grade your assignments and provide necessary feedback in the future. 
 
 ***
 
