@@ -77,24 +77,23 @@ We can write a few lines with meaningful information:
 ```{python, eval=F}
 # Print a few lines with meaningful information
 print("Once there is a guy Lei, ")
-print("he is 35 years old.")
+print("he is 36 years old.")
 print("He likes the name Lei,")
-print("but does not like being 35")
+print("but does not like being 36")
 ```
 
 The output in your Console will be in the same order.
 
 ## Variables
 
-Suppose you want to change the name `Lei` and age `35` in the previous chunk of code, something like:
+Suppose you want to change the name `Lei` and age `36` in the previous chunk of code, something like:
 
 ```{python, eval=F}
 # Print a few lines with meaningful information
-# Now I change the name and age
-print("Once there is a guy Hao, ")
-print("he is 25 years old.")
-print("He likes the name Hao,")
-print("but does not like being 25.")
+print("Once there is a guy Yuyang, ")
+print("he is 24 years old.")
+print("He likes the name Yuyang,")
+print("but does not like being 24.")
 ```
 
 It would be very handy if we could create **variables** to contain those pieces of information, and later use those variables directly. 
@@ -366,10 +365,10 @@ Some common functions to handel lists:
 
 ```{python, eval=F}
 # Make a list
-firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan","Xiaoguang","Xiaoping"]
+firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan", "Xiaoguang", "Xiaoping"]
 
 # Make another list
-ages    = [20,31,18,29,45,15]
+ages    = [20, 31, 18, 29, 45, 15]
 
 # Extend the list by appending all the items from the iterable
 firends.extend(ages)
@@ -397,7 +396,7 @@ print(firends)
 
 #------------------------------
 # Make a new list
-firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan","Xiaoguang","Xiaoping", "Xiaoming"]
+firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan", "Xiaoguang", "Xiaoping", "Xiaoming"]
 
 # Return the number of times x appears in the list
 firends.count("Xiaoming")
@@ -640,37 +639,6 @@ $$C = (F - 32) * 5/9$$
 * Check output with *F*=32 and *F*=100.
 
 * Can you create its inverse function `c2f` to convert temperatures in degrees Celsius  (*C*) to Fahrenheit (*F*) ?
-
-## Exercise #5
-
-A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. 
-
-Here we begin to learn the flowchart with `if` and `else` in `Python`. Copy the following lines into your script:
-
-```{python eval=FALSE}
-# importing "random" for random operations
-import random
-
-# Using random() function to generate one random value between 0 and 1
-Score  = round(random.random()*100)
-print(Score)
-
-# Get level
-if (Score >= 90):
-  print("Excellent") 
-elif (Score >= 60):
-  print("Pass")
-else:
-  print("Fail")
-```
-
-* Selecting all the lines, and then run the script, what is your result in **Console**?  Here `Score` is randomly generated using `random()` function from the `random` library. Type `help(random)` for help. You can play with this script a few times to get different outputs.
-
-* Draw a flow chart based on this script.  
-
-* Update your script to reflect the following flowchart.
-
-<img src="figs/Score.png" alt="drawing" width="600"/>
 
 ***
 
