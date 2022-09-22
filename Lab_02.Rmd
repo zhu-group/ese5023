@@ -10,7 +10,7 @@ output:
 
 ***
 
-## 1. Flowchart
+# 1. Flowchart
 
 A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. 
 
