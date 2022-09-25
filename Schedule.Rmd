@@ -16,7 +16,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 |2   |09/13|Tu. |[Lab 01 Git and Python setup](https://zhu-group.github.io/ese5023/Lab_01.html)             |                       |                 |
 |3   |09/20|Tu. |[Section 03 Python: Basics (I)](https://zhu-group.github.io/ese5023/Section_03.html)       |                       |                 |
 |3   |09/22|Th. |[Lab 02  Python Basics](https://zhu-group.github.io/ese5023/Lab_02.html)                   |                       |                 |
-|4   |09/27|Tu. |Section 04 Python: Basics (II)                                  |                       |                 |
+|4   |09/27|Tu. |[Section 04 Python: Basics (II)](https://zhu-group.github.io/ese5023/Section_04.html)      |                       |                 |
 |5   |10/11|Tu. |Section 05 Intermediate Python: `numPy`                         |                       |                 |
 |5   |10/13|Th. |Lab 03  Python Intermediate                                     |                       |                 |
 |6   |10/18|Tu. |Section 06 Intermediate Python: `scipy`                         |                       |                 |
