@@ -41,7 +41,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 # 1. Flowchart 
 
-**[10 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart. Here the purple parallelogram operator on a list `[x, y, z]` is to compute and print `x+y-10z`. Report your output with some random `a`, `b`, and `c` values.  
+**[10 points]** Write a function `Print_values` with arguments `a`, `b`, and `c` to reflect the following flowchart. Here the purple parallelogram operator on a list `[x, y, z]` is to compute and print `x+y-10z`. Try your output with some random `a`, `b`, and `c` values. Report your output when `a = 10, b = 5, c = 1`.
 
 <img src="figs/flowchart_a1.png" alt="drawing" width="500"/>
 
@@ -55,10 +55,9 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 # 3. Dice rolling
 
-**3.1 [15 points]** Given `6` dice each with `6` faces, numbered from `1` to `6`. Write a function `Find_number_of_ways` to find the number of ways to get sum `x`, defined as the sum of values on each face when all the dice are thrown.
+**3.1 [15 points]** Given `10` dice each with `6` faces, numbered from `1` to `6`. Write a function `Find_number_of_ways` to find the number of ways to get sum `x`, defined as the sum of values on each face when all the dice are thrown.
 
-**3.2 [5 points]** Count the number of ways for any `x` from `6` to `36`, assign the number of ways to a list called `Number_of_ways`, so which `x` yields the maximum `Number_of_ways`?
-
+**3.2 [5 points]** Count the number of ways for any `x` from `10` to `60`, assign the number of ways to a list called `Number_of_ways`, so which `x` yields the maximum `Number_of_ways`?
 
 ***
 
