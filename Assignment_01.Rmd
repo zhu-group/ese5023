@@ -76,7 +76,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 **5.1 [5 points]** Create a matrix with `N` rows and `M` columns, fill the right-bottom corner and top-left corner cells with `1`, and randomly fill the rest of matrix with integer `0` or `1`.
 
-**5.2 [25 points]** Consider a cell marked with `0` as a blockage or dead-end. Write a function `Count_path` to count total number of paths to reach the right-bottom corner cell from the top-left corner cell. 
+**5.2 [25 points]** Consider a cell marked with `0` as a blockage or dead-end, and a cell marked with `1` is good to go. Write a function `Count_path` to count total number of paths to reach the right-bottom corner cell from the top-left corner cell. 
 
 **Notice:** for a given cell, you are **only allowed** to move either rightward or downward.
 
