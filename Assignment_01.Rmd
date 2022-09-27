@@ -49,7 +49,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 # 2. Continuous celing function
 
-**[10 points]** Given a `N`-elements list of positive integers. For every element `x` of the list, find the value of continuous ceiling function defined as `F(x) = F(ceil(x/3)) + 2x`, where `F(1) = 1`. 
+**[10 points]** Given a list with `N` positive integers. For every element `x` of the list, find the value of continuous ceiling function defined as `F(x) = F(ceil(x/3)) + 2x`, where `F(1) = 1`. 
 
 ***
 
@@ -57,7 +57,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 **3.1 [15 points]** Given `10` dice each with `6` faces, numbered from `1` to `6`. Write a function `Find_number_of_ways` to find the number of ways to get sum `x`, defined as the sum of values on each face when all the dice are thrown.
 
-**3.2 [5 points]** Count the number of ways for any `x` from `10` to `60`, assign the number of ways to a list called `Number_of_ways`, so which `x` yields the maximum `Number_of_ways`?
+**3.2 [5 points]** Count the number of ways for any `x` from `10` to `60`, assign the number of ways to a list called `Number_of_ways`, so which `x` yields the maximum of `Number_of_ways`?
 
 ***
 
