@@ -44,7 +44,7 @@ arr = np.array([1, 2, 3, 4, 5, 6])
 type(arr)
 
 # Check the shape
-arr.shape
+np.shape(arr)
 
 ```
 
@@ -183,7 +183,7 @@ print(a[[0, 1], [2, 0]])
 print(a[[0, 1, -1, 2], [2, 0, -1, 2]]) 
 
 # one step more, change the array
-# can you figure out way
+# can you figure out why
 b = [0, 1, 2]
 print(a)
 a[np.arange(3), b] += 100
