@@ -423,7 +423,7 @@ y[1] = -99
 print(x)
 ```
 
-It's strange, `x` also changes even we only changes `y`. Now try `y = np.cppy(x)` instead of `y = x`.
+It's strange, `x` also changes even we only changes `y`. Now try `y = np.copy(x)` instead of `y = x`.
 
 ***
 
