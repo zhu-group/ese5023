@@ -1,0 +1,46 @@
+---
+title: "Lab 03 Python Basics and `numpy`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. Pascal triangle
+
+One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `k` to print the *k*^th^ line of the Pascal triangle. 
+
+Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
+
+***
+
+# 2. Matrix multiplication
+
+**2.1** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ); both are filled with random integers from `0` and `50`.
+
+**2.2** Write a function `Matrix_multip` to do matrix multiplication, *i.e.*, `M1 * M2`. 
+
+Here you are **ONLY** allowed to use `for` loop, `*` operator, and `+` operator. 
+
+**2.3** Verify your function with the `matmul()` function from `numpy`.
+
+***
+
+# 3. `numpy` exercises
+
+**3.1**  Convert a float (32 bits) array into an integer (32 bits).
+
+[Hint: Try the `astype()` function].
+
+**3.2**  Find the most frequent value in a `numpy` array.
+
+[Hint: Try the `bincount()` function].
+
+**3.3**  Find the `n` largest values of a `numpy` array.
+
+[Hint: Try the `argsort()` function].
+

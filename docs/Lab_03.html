@@ -11,7 +11,7 @@
 
 
 
-<title>Schedule</title>
+<title>Lab 03 Python Basics and numpy</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -234,6 +237,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -241,6 +313,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -304,229 +386,40 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Schedule</h1>
+<h1 class="title toc-ignore">Lab 03 Python Basics and <code>numpy</code></h1>
 
 </div>
 
 
-<p><strong>Class Time:</strong><br />
-Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00</p>
-<p><strong>Location:</strong><br />
-503, Teaching Building #1</p>
-<p><strong>2022 Fall:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Week</th>
-<th align="center">Date</th>
-<th align="center">Day</th>
-<th align="left">Topic</th>
-<th align="center">Assignment Out</th>
-<th align="center">Assignment Due</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center">09/06</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_01.html">Section 01 Introduction</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">1</td>
-<td align="center">09/08</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_02.html">Section 02 Version control with Git</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">2</td>
-<td align="center">09/13</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_01.html">Lab 01 Git and Python setup</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">3</td>
-<td align="center">09/20</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_03.html">Section 03 Python: Basics (I)</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">3</td>
-<td align="center">09/22</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_02.html">Lab 02 Python Basics</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">4</td>
-<td align="center">09/27</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_04.html">Section 04 Python: Basics (II)</a></td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/Assignment_01.html">Assignment 1</a></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">5</td>
-<td align="center">10/11</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_05.html">Section 05 Intermediate Python: <code>numPy</code></a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">5</td>
-<td align="center">10/13</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_03.html">Lab 03 Python Intermediate</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">6</td>
-<td align="center">10/18</td>
-<td align="center">Tu.</td>
-<td align="left">Section 06 Intermediate Python: <code>scipy</code></td>
-<td align="center"></td>
-<td align="center">Assignment 1</td>
-</tr>
-<tr class="even">
-<td align="center">7</td>
-<td align="center">10/25</td>
-<td align="center">Tu.</td>
-<td align="left">Section 07 Intermediate Python: <code>pandas</code></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">7</td>
-<td align="center">10/27</td>
-<td align="center">Th.</td>
-<td align="left">Lab 04 Python Intermediate</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">8</td>
-<td align="center">11/01</td>
-<td align="center">Tu.</td>
-<td align="left">Section 08 Intermediate Python: <code>xarray</code></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">9</td>
-<td align="center">11/08</td>
-<td align="center">Tu.</td>
-<td align="left">Section 09 Plotting with <code>matplotlib</code></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">9</td>
-<td align="center">11/10</td>
-<td align="center">Th.</td>
-<td align="left">Lab 05 Python Intermediate</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">10</td>
-<td align="center">11/15</td>
-<td align="center">Tu.</td>
-<td align="left">Section 10 Making maps with <code>cartopy</code></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">11</td>
-<td align="center">11/22</td>
-<td align="center">Tu.</td>
-<td align="left">Section 11 Python environments</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">11</td>
-<td align="center">11/24</td>
-<td align="center">Th.</td>
-<td align="left">Lab 06 Plotting with Python</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">12</td>
-<td align="center">11/29</td>
-<td align="center">Tu.</td>
-<td align="left">Section 12 Parallel computing with Python</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">13</td>
-<td align="center">12/06</td>
-<td align="center">Tu.</td>
-<td align="left">Section 13 Web scraping with Python</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">13</td>
-<td align="center">12/08</td>
-<td align="center">Th.</td>
-<td align="left">Lab 07 Python Intermediate</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">14</td>
-<td align="center">12/13</td>
-<td align="center">Tu.</td>
-<td align="left">Section 14 Linux: Basics</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">15</td>
-<td align="center">12/20</td>
-<td align="center">Tu.</td>
-<td align="left">Section 15 Linux: Shell scripts and Taiyi jobs</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">15</td>
-<td align="center">12/22</td>
-<td align="center">Th.</td>
-<td align="left">Lab 08 Linux and TaiYi</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">16</td>
-<td align="center">12/27</td>
-<td align="center">Tu.</td>
-<td align="left">Final project presentation</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Supplements:</strong><br />
-Supplement 01: <a href="https://zhu-group.github.io/ese5023/Sup_01.html">Fortran: Basics</a><br />
-Supplement 02: <a href="https://zhu-group.github.io/ese5023/Sup_02.html">Fortran: Intermediate</a><br />
-Supplement 03: <a href="https://zhu-group.github.io/ese5023/Sup_03.html">Lab: Fortran Intermediate</a></p>
+<hr />
+<div id="pascal-triangle" class="section level1">
+<h1>1. Pascal triangle</h1>
+<p>One of the most interesting number patterns is <a href="https://www.mathsisfun.com/pascals-triangle.html">Pascal’s triangle</a> (named after Blaise Pascal). Write a function <code>Pascal_triangle</code> with an argument <code>k</code> to print the <em>k</em><sup>th</sup> line of the Pascal triangle.</p>
+<p>Report <code>Pascal_triangle(100)</code> and <code>Pascal_triangle(200)</code>.</p>
+<hr />
+</div>
+<div id="matrix-multiplication" class="section level1">
+<h1>2. Matrix multiplication</h1>
+<p><strong>2.1</strong> Make two matrices <code>M1</code> (<code>5</code> rows and <code>10</code> columns ) and <code>M2</code> (<code>10</code> rows and <code>5</code> columns ); both are filled with random integers from <code>0</code> and <code>50</code>.</p>
+<p><strong>2.2</strong> Write a function <code>Matrix_multip</code> to do matrix multiplication, <em>i.e.</em>, <code>M1 * M2</code>.</p>
+<p>Here you are <strong>ONLY</strong> allowed to use <code>for</code> loop, <code>*</code> operator, and <code>+</code> operator.</p>
+<p><strong>2.3</strong> Verify your function with the <code>matmul()</code> function from <code>numpy</code>.</p>
+<hr />
+</div>
+<div id="numpy-exercises" class="section level1">
+<h1>3. <code>numpy</code> exercises</h1>
+<p><strong>3.1</strong> Convert a float (32 bits) array into an integer (32 bits).</p>
+<p>[Hint: Try the <code>astype()</code> function].</p>
+<p><strong>3.2</strong> Find the most frequent value in a <code>numpy</code> array.</p>
+<p>[Hint: Try the <code>bincount()</code> function].</p>
+<p><strong>3.3</strong> Find the <code>n</code> largest values of a <code>numpy</code> array.</p>
+<p>[Hint: Try the <code>argsort()</code> function].</p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -559,6 +452,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
