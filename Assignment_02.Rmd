@@ -27,9 +27,9 @@ There are two requirements about collaboration:
 
 **Submitting your assignment:**  
 
-* Please write a report `PS1.pdf`. 
+* Please write a report `PS2.pdf`. 
 
-* Create a jupyter notebook named `PS1.ipynb`. 
+* Create a jupyter notebook named `PS2.ipynb`. 
 
 * Upload your jupyter notebook **and** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
 
