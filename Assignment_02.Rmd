@@ -41,7 +41,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 # 1. Significant earthquakes since 2150 B.C.
 
-The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data) contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in `.tsv` format by clicking the `Download TSV File` button. Click the variable name for more information. Read the file (e.g., `earthquakes-2022-10-18_09-17-48_+0800.tsv`) as an object and name it `Sig_Eqs`.
+The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data) contains information on destructive earthquakes from 2150 B.C. to the present. On the top left corner, select all columns and download the entire significant earthquake data file in `.tsv` format by clicking the `Download TSV File` button. Click the variable name for more information. Read the file (e.g., `earthquakes-2022-10-18_09-17-48_+0800.tsv`) as an object and name it `Sig_Eqs`.
 
 **1.1 [5 points]** Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top `20` countries along with the total number of deaths.
 
@@ -51,13 +51,13 @@ The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazar
 
 ***
 
-# 2. Wind speed in Shenzhen during the past 10 years
+# 2. Air temperature in Shenzhen during the past 25 years
 
-In this problem set, we will examine how air temperature changes in Shenzhen during the past `25` years, we will take a look at the hourly weather data measured at the BaoAn International Airport. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Download the file [Baoan_Weather_1998_2022.csv](http://172.18.31.60/index.php/s/GnxWttgiSfFSp9x), move the `.csv` file to your `working directory`. 
+In this problem set, we will examine how air temperature changes in Shenzhen during the past `25` years, we will use the hourly weather data measured at the BaoAn International Airport. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Download the file [Baoan_Weather_1998_2022.csv](http://172.18.31.60/index.php/s/GnxWttgiSfFSp9x), move the `.csv` file to your `working directory`. 
 
 Read page `10`-`11` (`POS 88-92` and `POS 93-93`) of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the air temperature data (use column `TMP`). Explain how you filter the data in your report. 
 
-**[10 points]** Plot monthly averaged air temperature as a function of the observation time. Is there a trend in monthly averaged air temperature in the past `25` years? 
+**[10 points]** Plot monthly averaged air temperature against the observation time. Is there a trend in monthly averaged air temperature in the past `25` years? 
 
 ***
 
@@ -71,14 +71,14 @@ Below we provide an example to load the file as a `pandas` dataframe. Think abou
 
 ```{python, eval=F}
 df = pd.read_csv('ibtracs.ALL.list.v04r00.csv',
-                 usecols=range(17),
+                 usecols=range(17),concerconcer
                  skiprows=[1, 2], 
                  parse_dates=['ISO_TIME'],
                  na_values=['NOT_NAMED', 'NAME'])
 df.head()
 ```
 
-**3.1 [5 points]** Group the data on Storm Identifie (`SID`), report names (`NAME`) of the `10` largest hurricanes according to wind speed (a.k.a., `WMO_WIND`).
+**3.1 [5 points]** Group the data on Storm Identifie (`SID`), report names (`NAME`) of the `10` largest hurricanes according to wind speed (`WMO_WIND`).
 
 **3.2 [5 points]** Make a bar chart of the wind speed (`WMO_WIND`) of the `20` strongest-wind hurricanes.
 
@@ -86,26 +86,26 @@ df.head()
 
 **3.4 [5 points]** Make a [`hexbin` plot](https://www.geeksforgeeks.org/matplotlib-pyplot-hexbin-function-in-python/) of the location of datapoints in Latitude and Longitude. 
 
-**3.5 [5 points]** Find Typhoon `Mangkhut` (from `2018`) and plot its track as a scatter plot.
+**3.5 [5 points]** Find Typhoon `Mangkhut` (from 2018) and plot its track as a scatter plot.
 
 **3.6 [5 points]** Create a filtered dataframe that contains only data since `1970` from the Western North Pacific ("WP") and Eastern North Pacific ("EP") Basin. Use this for the rest of the problem set.
 
 **3.7 [5 points]** Plot the number of datapoints per day.
 
-**3.8 [5 points]** Calculate the climatology of datapoint counts as a function of `day of year`. [The day of year (DOY)](https://nsidc.org/data/user-resources/help-center/day-year-doy-calendar) is the sequential day number starting with day 1 on January 1st.  
+**3.8 [5 points]** Calculate the climatology of datapoint counts as a function of `day of year`. [The day of year (DOY)](https://nsidc.org/data/user-resources/help-center/day-year-doy-calendar) is the sequential day number starting with day 1 on January 1st.
 
 **3.9 [5 points]** Calculate the anomaly of daily counts from the climatology. 
 
-**3.10 [5 points]** `Resample` the anomaly timeseries at annual resolution and plot. So which years stand out as having anomalous hurricane activity?
+**3.10 [5 points]** [`Resample`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html) the anomaly timeseries at annual resolution and plot. So which years stand out as having anomalous hurricane activity?
 
 ***
 
 # 4. Explore a data set
 
-Browse the [CASEarth](http://data.casearth.cn/), [NOAA Land-Based Datasets and Products](https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets), or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
+Browse the [National Centers for Environmental Information](https://www.ncei.noaa.gov/) or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
 
 **3.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.
 
-**3.2 [5 points]** Plot the time series of a certain variable.  
+**3.2 [5 points]** Plot the time series of a certain variable.
 
 **3.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
