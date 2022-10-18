@@ -84,15 +84,15 @@ df.head()
 
 **3.3 [5 points]** Plot the count of all datapoints by Basin as a bar chart.
 
-**3.4 [5 points]** Make a [`hexbin` plot](https://www.geeksforgeeks.org/matplotlib-pyplot-hexbin-function-in-python/) of the location of datapoints in Latitude and Longitude. 
+**3.4 [5 points]** Make a [hexbin plot](https://www.geeksforgeeks.org/matplotlib-pyplot-hexbin-function-in-python/) of the location of datapoints in Latitude and Longitude. 
 
-**3.5 [5 points]** Find Typhoon `Mangkhut` (from 2018) and plot its track as a scatter plot.
+**3.5 [5 points]** Find Typhoon Mangkhut (from 2018) and plot its track as a scatter plot.
 
 **3.6 [5 points]** Create a filtered dataframe that contains only data since `1970` from the Western North Pacific ("WP") and Eastern North Pacific ("EP") Basin. Use this for the rest of the problem set.
 
 **3.7 [5 points]** Plot the number of datapoints per day.
 
-**3.8 [5 points]** Calculate the climatology of datapoint counts as a function of `day of year`. [The day of year (DOY)](https://nsidc.org/data/user-resources/help-center/day-year-doy-calendar) is the sequential day number starting with day 1 on January 1st.
+**3.8 [5 points]** Calculate the climatology of datapoint counts as a function of `day of year`. [The day of year](https://nsidc.org/data/user-resources/help-center/day-year-doy-calendar) is the sequential day number starting with day 1 on January 1st.
 
 **3.9 [5 points]** Calculate the anomaly of daily counts from the climatology. 
 
@@ -102,7 +102,7 @@ df.head()
 
 # 4. Explore a data set
 
-Browse the [National Centers for Environmental Information](https://www.ncei.noaa.gov/) or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
+Browse the [National Centers for Environmental Information (NCEI)](https://www.ncei.noaa.gov/) or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
 
 **3.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.
 
