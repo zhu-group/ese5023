@@ -71,7 +71,7 @@ Below we provide an example to load the file as a `pandas` dataframe. Think abou
 
 ```{python, eval=F}
 df = pd.read_csv('ibtracs.ALL.list.v04r00.csv',
-                 usecols=range(17),concerconcer
+                 usecols=range(17),
                  skiprows=[1, 2], 
                  parse_dates=['ISO_TIME'],
                  na_values=['NOT_NAMED', 'NAME'])
