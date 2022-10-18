@@ -104,8 +104,8 @@ df.head()
 
 Browse the [National Centers for Environmental Information (NCEI)](https://www.ncei.noaa.gov/) or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
 
-**3.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.
+**4.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.
 
-**3.2 [5 points]** Plot the time series of a certain variable.
+**4.2 [5 points]** Plot the time series of a certain variable.
 
-**3.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
+**4.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.
