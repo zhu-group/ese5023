@@ -1,0 +1,111 @@
+---
+title: "Assignment 02"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 10/18 19:00 **  
+**Due: 11/01 19:00 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. 
+
+There are two requirements about collaboration: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 3"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Submitting your assignment:**  
+
+* Please write a report `PS1.pdf`. 
+
+* Create a jupyter notebook named `PS1.ipynb`. 
+
+* Upload your jupyter notebook **and** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**  
+
+Late submissions will **not** receive any credit. The submission time will be determined based on your latest GitHub file records.
+
+***
+
+# 1. Significant earthquakes since 2150 B.C.
+
+The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data) contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in `.tsv` format by clicking the `Download TSV File` button. Click the variable name for more information. Read the file (e.g., `earthquakes-2022-10-18_09-17-48_+0800.tsv`) as an object and name it `Sig_Eqs`.
+
+**1.1 [5 points]** Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top `20` countries along with the total number of deaths.
+
+**1.2 [10 points]** Compute the total number of earthquakes with magnitude larger than `3.0` (use column `Ms` as the magnitude) worldwide each year, and then plot the time series. Do you observe any trend? Explain why or why not? 
+
+**1.3 [10 points]** Write a function `CountEq_LargestEq` that returns (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) date and Location of the largest earthquake ever happened in this country. Apply `CountEq_LargestEq` to every country in the file, report your results in a descending order.
+
+***
+
+# 2. Wind speed in Shenzhen during the past 10 years
+
+In this problem set, we will examine how air temperature changes in Shenzhen during the past `25` years, we will take a look at the hourly weather data measured at the BaoAn International Airport. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Download the file [Baoan_Weather_1998_2022.csv](http://172.18.31.60/index.php/s/GnxWttgiSfFSp9x), move the `.csv` file to your `working directory`. 
+
+Read page `10`-`11` (`POS 88-92` and `POS 93-93`) of the comprehensive [user guide](https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf) for the detailed format of the air temperature data (use column `TMP`). Explain how you filter the data in your report. 
+
+**[10 points]** Plot monthly averaged air temperature as a function of the observation time. Is there a trend in monthly averaged air temperature in the past `25` years? 
+
+***
+
+# 3. Global collection of hurricanes
+
+The [International Best Track Archive for Climate Stewardship (IBTrACS) project](https://www.ncei.noaa.gov/products/international-best-track-archive?name=ibtracs-data) is the most complete global collection of tropical cyclones available. It merges recent and historical tropical cyclone data from multiple agencies to create a unified, publicly available, best-track dataset that improves inter-agency comparisons. IBTrACS was developed collaboratively with all the World Meteorological Organization (WMO) Regional Specialized Meteorological Centres, as well as other organizations and individuals from around the world.  
+
+In this problem set, we will use all storms available in the IBTrACS record since 1842. Download the file [ibtracs.ALL.list.v04r00.csv](http://172.18.31.60/index.php/s/gDGRReCr2rPFN49), move the `.csv` file to your `working directory`. Read [Column Variable Descriptions](https://www.ncei.noaa.gov/sites/default/files/2021-07/IBTrACS_v04_column_documentation.pdf) for variables in the file. Examine the first few lines of the file. 
+
+Below we provide an example to load the file as a `pandas` dataframe. Think about the options being used and why, and modify when necessary.
+
+```{python, eval=F}
+df = pd.read_csv('ibtracs.ALL.list.v04r00.csv',
+                 usecols=range(17),
+                 skiprows=[1, 2], 
+                 parse_dates=['ISO_TIME'],
+                 na_values=['NOT_NAMED', 'NAME'])
+df.head()
+```
+
+**3.1 [5 points]** Group the data on Storm Identifie (`SID`), report names (`NAME`) of the `10` largest hurricanes according to wind speed (a.k.a., `WMO_WIND`).
+
+**3.2 [5 points]** Make a bar chart of the wind speed (`WMO_WIND`) of the `20` strongest-wind hurricanes.
+
+**3.3 [5 points]** Plot the count of all datapoints by Basin as a bar chart.
+
+**3.4 [5 points]** Make a [`hexbin` plot](https://www.geeksforgeeks.org/matplotlib-pyplot-hexbin-function-in-python/) of the location of datapoints in Latitude and Longitude. 
+
+**3.5 [5 points]** Find Typhoon `Mangkhut` (from `2018`) and plot its track as a scatter plot.
+
+**3.6 [5 points]** Create a filtered dataframe that contains only data since `1970` from the Western North Pacific ("WP") and Eastern North Pacific ("EP") Basin. Use this for the rest of the problem set.
+
+**3.7 [5 points]** Plot the number of datapoints per day.
+
+**3.8 [5 points]** Calculate the climatology of datapoint counts as a function of `day of year`. [The day of year (DOY)](https://nsidc.org/data/user-resources/help-center/day-year-doy-calendar) is the sequential day number starting with day 1 on January 1st.  
+
+**3.9 [5 points]** Calculate the anomaly of daily counts from the climatology. 
+
+**3.10 [5 points]** `Resample` the anomaly timeseries at annual resolution and plot. So which years stand out as having anomalous hurricane activity?
+
+***
+
+# 4. Explore a data set
+
+Browse the [CASEarth](http://data.casearth.cn/), [NOAA Land-Based Datasets and Products](https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets), or [Advanced Global Atmospheric Gases Experiment (AGAGE)](https://agage.mit.edu/) website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in `csv`, `XLS`, or `XLSX` format, and have temporal information.  
+
+**3.1 [5 points]** Load the `csv`, `XLS`, or `XLSX` file, and clean possible data points with missing values or bad quality.
+
+**3.2 [5 points]** Plot the time series of a certain variable.  
+
+**3.3 [5 points]** Conduct at least `5` simple statistical checks with the variable, and report your findings.

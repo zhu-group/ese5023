@@ -11,7 +11,7 @@
 
 
 
-<title>Lab: Fortran Intermediate</title>
+<title>Assignment 02</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -482,51 +482,77 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab: Fortran Intermediate</h1>
+<h1 class="title toc-ignore">Assignment 02</h1>
 
 </div>
 
 
+<p><strong>Out: 10/18 19:00 </strong><br />
+<strong>Due: 11/01 19:00 </strong></p>
 <hr />
-<div id="in-class-exercises-from-the-supplement-02" class="section level1">
-<h1>1. In-class exercises from the Supplement 02</h1>
-<p>If you have not completed the <a href="https://zhu-group.github.io/ese5023/Sup_02.html#In-class_exercises">in-class exercises of Supplement 02</a>, please do so. Those exercises are designed to guide you using modules and libraries.</p>
-<hr />
-</div>
-<div id="reading-inputs-from-the-terminal" class="section level1">
-<h1>2. Reading inputs from the terminal</h1>
-<p>In <code>Fortran</code>, you can also use the asterisk <code>*</code> to take inputs from the terminal shell. For example, to ask a question and read the answer, we can use:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">program</span> AskQuestions</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">INTEGER</span>       <span class="dt">::</span> ID</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">CHARACTER(16)</span> <span class="dt">::</span> Hometown</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;What is your Student ID?&#39;</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">read(*</span>,<span class="fu">*)</span> ID</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;You entered &#39;</span>, ID</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;Where is your hometown?&#39;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">read(*</span>,<span class="fu">*)</span> Hometown</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;You entered &#39;</span>, Hometown</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">end program</span> AskQuestions</span></code></pre></div>
-<p>Compile and run the above program.</p>
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own.</p>
+<p>There are two requirements about collaboration:</p>
+<ul>
+<li><p>Cite your collaborators <strong>fully and completely</strong> (<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”). Or cite online resources (<em>e.g.</em>, “I got inspired by reading XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> - the scripts and report must come from you only.</p></li>
+</ul>
+<p><strong>Submitting your assignment:</strong></p>
+<ul>
+<li><p>Please write a report <code>PS1.pdf</code>.</p></li>
+<li><p>Create a jupyter notebook named <code>PS1.ipynb</code>.</p></li>
+<li><p>Upload your jupyter notebook <strong>and</strong> report to your Github <code>ESE5023_Assignments_XXX</code> repository (where <code>XXX</code> is your SUSTech ID) before the due time.</p></li>
+</ul>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will <strong>not</strong> receive any credit. The submission time will be determined based on your latest GitHub file records.</p>
 <hr />
 </div>
-<div id="find-the-largest-real-value" class="section level1">
-<h1>3. Find the largest real value</h1>
-<p>Write a <code>Fortran</code> program to find approximately the largest value that can be stored in a <code>real(4)</code> variable.</p>
-<p><strong>[Hint:]</strong> You might, for example, repeatedly multiply a variable the power of <code>2</code> within a loop, printing the new value on the terminal, until the computer gives up.</p>
-<p>Change the real variable form <code>real(4)</code> to <code>real(8)</code>, check what happens.</p>
+<div id="significant-earthquakes-since-2150-b.c." class="section level1">
+<h1>1. Significant earthquakes since 2150 B.C.</h1>
+<p>The <a href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data">Significant Earthquake Database</a> contains information on destructive earthquakes from 2150 B.C. to the present. Select all columns and download the entire significant earthquake data file in <code>.tsv</code> format by clicking the <code>Download TSV File</code> button. Click the variable name for more information. Read the file (e.g., <code>earthquakes-2022-10-18_09-17-48_+0800.tsv</code>) as an object and name it <code>Sig_Eqs</code>.</p>
+<p><strong>1.1 [5 points]</strong> Compute the total number of deaths caused by earthquakes since 2150 B.C. in each country, and then print the top <code>20</code> countries along with the total number of deaths.</p>
+<p><strong>1.2 [10 points]</strong> Compute the total number of earthquakes with magnitude larger than <code>3.0</code> (use column <code>Ms</code> as the magnitude) worldwide each year, and then plot the time series. Do you observe any trend? Explain why or why not?</p>
+<p><strong>1.3 [10 points]</strong> Write a function <code>CountEq_LargestEq</code> that returns (1) the total number of earthquakes since 2150 B.C. in a given country AND (2) date and Location of the largest earthquake ever happened in this country. Apply <code>CountEq_LargestEq</code> to every country in the file, report your results in a descending order.</p>
 <hr />
 </div>
-<div id="set-a-password" class="section level1">
-<h1>4. Set a password</h1>
-<p>Write a <code>Fortran</code> program <code>SetPassWord.f90</code>:</p>
-<p><strong>4.1.</strong> First, the program asks you to enter a 4-digit code as the password.</p>
-<p><strong>4.2.</strong> Second, the program asks you to re-type the password again.</p>
-<p><strong>4.3.</strong> If you type the same password in <strong>3.1</strong> and <strong>3.2</strong>, the program will end and print some success messages.</p>
-<p><strong>4.4.</strong> Otherwise, it will print some error messages and ask you to retype again. If you have failed three times, the program will be terminated with error messages.</p>
+<div id="wind-speed-in-shenzhen-during-the-past-10-years" class="section level1">
+<h1>2. Wind speed in Shenzhen during the past 10 years</h1>
+<p>In this problem set, we will examine how air temperature changes in Shenzhen during the past <code>25</code> years, we will take a look at the hourly weather data measured at the BaoAn International Airport. The data set is from <a href="https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html">NOAA Integrated Surface Dataset</a>. Download the file <a href="http://172.18.31.60/index.php/s/GnxWttgiSfFSp9x">Baoan_Weather_1998_2022.csv</a>, move the <code>.csv</code> file to your <code>working directory</code>.</p>
+<p>Read page <code>10</code>-<code>11</code> (<code>POS 88-92</code> and <code>POS 93-93</code>) of the comprehensive <a href="https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf">user guide</a> for the detailed format of the air temperature data (use column <code>TMP</code>). Explain how you filter the data in your report.</p>
+<p><strong>[10 points]</strong> Plot monthly averaged air temperature as a function of the observation time. Is there a trend in monthly averaged air temperature in the past <code>25</code> years?</p>
+<hr />
+</div>
+<div id="global-collection-of-hurricanes" class="section level1">
+<h1>3. Global collection of hurricanes</h1>
+<p>The <a href="https://www.ncei.noaa.gov/products/international-best-track-archive?name=ibtracs-data">International Best Track Archive for Climate Stewardship (IBTrACS) project</a> is the most complete global collection of tropical cyclones available. It merges recent and historical tropical cyclone data from multiple agencies to create a unified, publicly available, best-track dataset that improves inter-agency comparisons. IBTrACS was developed collaboratively with all the World Meteorological Organization (WMO) Regional Specialized Meteorological Centres, as well as other organizations and individuals from around the world.</p>
+<p>In this problem set, we will use all storms available in the IBTrACS record since 1842. Download the file <a href="http://172.18.31.60/index.php/s/gDGRReCr2rPFN49">ibtracs.ALL.list.v04r00.csv</a>, move the <code>.csv</code> file to your <code>working directory</code>. Read <a href="https://www.ncei.noaa.gov/sites/default/files/2021-07/IBTrACS_v04_column_documentation.pdf">Column Variable Descriptions</a> for variables in the file. Examine the first few lines of the file.</p>
+<p>Below we provide an example to load the file as a <code>pandas</code> dataframe. Think about the options being used and why, and modify when necessary.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;ibtracs.ALL.list.v04r00.csv&#39;</span>,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>                 usecols<span class="op">=</span><span class="bu">range</span>(<span class="dv">17</span>),</span>
+<span id="cb1-3"><a href="#cb1-3"></a>                 skiprows<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb1-4"><a href="#cb1-4"></a>                 parse_dates<span class="op">=</span>[<span class="st">&#39;ISO_TIME&#39;</span>],</span>
+<span id="cb1-5"><a href="#cb1-5"></a>                 na_values<span class="op">=</span>[<span class="st">&#39;NOT_NAMED&#39;</span>, <span class="st">&#39;NAME&#39;</span>])</span>
+<span id="cb1-6"><a href="#cb1-6"></a>df.head()</span></code></pre></div>
+<p><strong>3.1 [5 points]</strong> Group the data on Storm Identifie (<code>SID</code>), report names (<code>NAME</code>) of the <code>10</code> largest hurricanes according to wind speed (a.k.a., <code>WMO_WIND</code>).</p>
+<p><strong>3.2 [5 points]</strong> Make a bar chart of the wind speed (<code>WMO_WIND</code>) of the <code>20</code> strongest-wind hurricanes.</p>
+<p><strong>3.3 [5 points]</strong> Plot the count of all datapoints by Basin as a bar chart.</p>
+<p><strong>3.4 [5 points]</strong> Make a <a href="https://www.geeksforgeeks.org/matplotlib-pyplot-hexbin-function-in-python/"><code>hexbin</code> plot</a> of the location of datapoints in Latitude and Longitude.</p>
+<p><strong>3.5 [5 points]</strong> Find Typhoon <code>Mangkhut</code> (from <code>2018</code>) and plot its track as a scatter plot.</p>
+<p><strong>3.6 [5 points]</strong> Create a filtered dataframe that contains only data since <code>1970</code> from the Western North Pacific (“WP”) and Eastern North Pacific (“EP”) Basin. Use this for the rest of the problem set.</p>
+<p><strong>3.7 [5 points]</strong> Plot the number of datapoints per day.</p>
+<p><strong>3.8 [5 points]</strong> Calculate the climatology of datapoint counts as a function of <code>day of year</code>. <a href="https://nsidc.org/data/user-resources/help-center/day-year-doy-calendar">The day of year (DOY)</a> is the sequential day number starting with day 1 on January 1st.</p>
+<p><strong>3.9 [5 points]</strong> Calculate the anomaly of daily counts from the climatology.</p>
+<p><strong>3.10 [5 points]</strong> <code>Resample</code> the anomaly timeseries at annual resolution and plot. So which years stand out as having anomalous hurricane activity?</p>
+<hr />
+</div>
+<div id="explore-a-data-set" class="section level1">
+<h1>4. Explore a data set</h1>
+<p>Browse the <a href="http://data.casearth.cn/">CASEarth</a>, <a href="https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets">NOAA Land-Based Datasets and Products</a>, or <a href="https://agage.mit.edu/">Advanced Global Atmospheric Gases Experiment (AGAGE)</a> website. Search and download a data set you are interested in. You are also welcome to use data from your group in this problem set. But the data set should be in <code>csv</code>, <code>XLS</code>, or <code>XLSX</code> format, and have temporal information.</p>
+<p><strong>3.1 [5 points]</strong> Load the <code>csv</code>, <code>XLS</code>, or <code>XLSX</code> file, and clean possible data points with missing values or bad quality.</p>
+<p><strong>3.2 [5 points]</strong> Plot the time series of a certain variable.</p>
+<p><strong>3.3 [5 points]</strong> Conduct at least <code>5</code> simple statistical checks with the variable, and report your findings.</p>
 </div>
 
 
