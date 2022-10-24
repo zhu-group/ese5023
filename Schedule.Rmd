@@ -20,7 +20,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 |5   |10/11|Tu. |[Section 05 Intermediate Python: `numPy`](https://zhu-group.github.io/ese5023/Section_05.html) |                                                                        |                 |
 |5   |10/13|Th. |[Lab 03  Python Basics and `numpy`](https://zhu-group.github.io/ese5023/Lab_03.html)           |                                                                        |                 |
 |6   |10/18|Tu. |[Section 06 Intermediate Python: `pandas`](https://zhu-group.github.io/ese5023/Section_06.html)| [Assignment 2](https://zhu-group.github.io/ese5023/Assignment_02.html) | Assignment 1    |
-|7   |10/25|Tu. |Section 07 Intermediate Python: `xarray`                        |                       |                 |
+|7   |10/25|Tu. |[Section 07 Intermediate Python: `xarray`](https://zhu-group.github.io/ese5023/Section_07.html)|                                                                        |                 |
 |7   |10/27|Th. |Lab 04  Python Intermediate                                     |                       |                 |
 |8   |11/01|Tu. |Section 08 Intermediate Python: `scipy`                         |                       | Assignment 2    |
 |9   |11/08|Tu. |Section 09 Plotting with `matplotlib`                           |                       |                 |
