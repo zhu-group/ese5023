@@ -866,10 +866,10 @@ div.tocify {
 <span id="cb36-11"><a href="#cb36-11"></a>sample.plot(ax<span class="op">=</span>axes[<span class="dv">0</span>], robust<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb36-12"><a href="#cb36-12"></a>masked_sample.plot(ax<span class="op">=</span>axes[<span class="dv">1</span>], robust<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <p><code>.where()</code> also allows providing multiple conditions. To do this, we need to make sure each conditional expression is enclosed in <code>()</code>. To combine conditions, we use the <code>&amp;</code> operator and/or <code>|</code>. let’s use where to mask locations with temperature values less than <code>250</code> and greater than <code>300</code>:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># More than one conditions</span></span>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># More than one condition</span></span>
 <span id="cb37-2"><a href="#cb37-2"></a>sample.where((sample <span class="op">&gt;</span> <span class="dv">250</span>) <span class="op">&amp;</span> (sample <span class="op">&lt;</span> <span class="dv">300</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span>
 <span id="cb37-3"><a href="#cb37-3"></a></span>
-<span id="cb37-4"><a href="#cb37-4"></a><span class="co"># More than one conditions</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co"># More than one condition</span></span>
 <span id="cb37-5"><a href="#cb37-5"></a>sample.where((sample.lat <span class="op">&lt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (sample.lat <span class="op">&gt;</span> <span class="dv">-5</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&gt;</span> <span class="dv">190</span>) <span class="op">&amp;</span> </span>
 <span id="cb37-6"><a href="#cb37-6"></a>             (sample.lon <span class="op">&lt;</span> <span class="dv">240</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <p>For more, see <a href="https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where">Masking with where</a>.</p>
@@ -910,7 +910,7 @@ div.tocify {
 <li><a href="https://xarray.pydata.org/en/stable/tutorials-and-videos.html"><code>xarray</code> Tutorials and Videos</a></li>
 <li><a href="https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f"><code>xarray</code> Example Cheatsheet</a></li>
 <li><a href="http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf"><code>Python</code>: a tutorial introduction to <code>xarray</code></a></li>
-<li><a href="https://projectpythia.org/gallery.html">Pythia Resource Gallery</a> (very comprehensive, contains many courses and tutorials)</li>
+<li><a href="https://projectpythia.org/resource-gallery.html">Pythia Resource Gallery</a> (very comprehensive, contains many courses and tutorials)</li>
 <li><a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a> (great tool to visualize and check netCDF files, requires <code>java runtime environment 9</code>)</li>
 </ul>
 </div>

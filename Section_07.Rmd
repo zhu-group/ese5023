@@ -557,10 +557,10 @@ masked_sample.plot(ax=axes[1], robust=True)
 `.where()` also allows providing multiple conditions. To do this, we need to make sure each conditional expression is enclosed in `()`. To combine conditions, we use the `&` operator and/or `|`. let's use where to mask locations with temperature values less than `250` and greater than `300`:
 
 ```{python, eval=F}
-# More than one conditions
+# More than one condition
 sample.where((sample > 250) & (sample < 300)).plot(size=6, robust=True);
 
-# More than one conditions
+# More than one condition
 sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) & 
              (sample.lon < 240)).plot(size=6, robust=True)
 ```
@@ -605,5 +605,5 @@ Plot monthly climatology in temperature in `12` panels.
 + [`xarray` Tutorials and Videos](https://xarray.pydata.org/en/stable/tutorials-and-videos.html)
 + [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
 + [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
-+ [Pythia Resource Gallery](https://projectpythia.org/gallery.html) (very comprehensive, contains many courses and tutorials)
++ [Pythia Resource Gallery](https://projectpythia.org/resource-gallery.html) (very comprehensive, contains many courses and tutorials)
 + [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files, requires `java runtime environment 9`)
