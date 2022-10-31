@@ -561,7 +561,7 @@ plt.show()
 
 ## Using `plt.scatter`
 
-`Matplotlib` provides many [built-in functions](https://matplotlib.org/stable/tutorials/introductory/sample_plots.html). Here we use `plt.scatter()` as an example to get a sense of what inputs a certain function may expect.
+`Matplotlib` provides many [built-in functions](https://matplotlib.org/stable/plot_types/index.html). Here we use `plt.scatter()` as an example to get a sense of what inputs a certain function may expect.
 
 ```{python, eval=F}
 # Plot
