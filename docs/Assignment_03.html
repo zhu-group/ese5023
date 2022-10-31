@@ -419,8 +419,8 @@ div.tocify {
 <p>Late submissions will <strong>not</strong> receive any credit. The submission time will be determined based on your latest GitHub file records.</p>
 <hr />
 </div>
-<div id="global-methane-levels-from-2002-to-the-present-derived-from-satellite-observations" class="section level1">
-<h1>1. Global methane levels from 2002 to the present derived from satellite observations</h1>
+<div id="global-methane-levels-from-2002" class="section level1">
+<h1>1. Global methane levels from 2002</h1>
 <p>Methane (CH<sub>4</sub>) is a naturally occurring Greenhouse Gas (GHG), but one whose abundance has been increased substantially above its pre-industrial value by human activities, primarily because of agricultural emissions (e.g., rice production, ruminants) and fossil fuel production and use. A clear annual cycle is largely due to seasonal wetland emissions.</p>
 <p>Atmospheric methane abundance is indirectly observed by various satellite instruments. These instruments measure spectrally resolved near-infrared and infrared radiation reflected or emitted by the Earth and its atmosphere. In the measured signal, molecular absorption signatures from methane and constituent gasses can be identified. It is through analysis of those absorption lines in these radiance observations that the averaged methane abundance in the sampled atmospheric column can be determined.</p>
 <p>For this problem set, methane levels have been determined by applying several algorithms to different satellite instruments. Download the <code>netCDF4</code> file (<code>200301_202006-C3S-L3_GHG-PRODUCTS-OBS4MIPS-MERGED-v4.3.nc</code>) <a href="http://172.18.31.60/index.php/s/32SrPszQGb57pR9">here</a>, which contains monthly-averaged methane levels (<code>xch4</code>) in the unit of <code>ppb</code> at each 5° (<code>lon</code>) x 5° (<code>lat</code>) grid over the globe from <code>2003-01</code> to <code>2020-06</code>.</p>
@@ -432,7 +432,7 @@ div.tocify {
 <div id="niño-3.4-index" class="section level1">
 <h1>2. Niño 3.4 index</h1>
 <p>The <em>Niño 3.4 anomalies</em> may be thought of as representing the average equatorial sea surface temperatures (SSTs) across the Pacific from about the dateline to the South American coast (<code>5N-5S</code>, <code>170W-120W</code>). The Niño 3.4 index typically uses a 3-month running mean, and El Niño or La Niña events are defined when the Niño 3.4 SSTs exceed <code>+/- 0.5°C</code> for a period of <code>5</code> months or more. Check <a href="https://www.ncdc.noaa.gov/teleconnections/enso/indicators/sst/">Equatorial Pacific Sea Surface Temperatures</a> for more about the Niño 3.4 index.</p>
-<p>In this problem set, you will use the sea surface temperature (SST) data from <a href="https://www.noaa.gov/">NOAA</a>. Download the <code>netCDF4</code> file (<code>NOAA_NCDC_ERSST_v3b_SST.nc</code>) <a href="http://10.20.7.229/index.php/s/do68CdKJbscS6QD">here</a>.</p>
+<p>In this problem set, you will use the sea surface temperature (SST) data from <a href="https://www.noaa.gov/">NOAA</a>. Download the <code>netCDF4</code> file (<code>NOAA_NCDC_ERSST_v3b_SST.nc</code>) <a href="http://172.18.31.60/index.php/s/do68CdKJbscS6QD">here</a>.</p>
 <p><strong>1.1 [10 points]</strong> Compute monthly climatology for SST from Niño 3.4 region, and subtract climatology from SST time series to obtain anomalies.</p>
 <p><strong>1.2 [10 points]</strong> Visualize the computed Niño 3.4. Your plot should look similar to <a href="https://www.ncdc.noaa.gov/monitoring-content/teleconnections/eln-5-pg.gif">this one</a>.</p>
 <hr />

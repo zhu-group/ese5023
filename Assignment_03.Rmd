@@ -39,7 +39,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 ***
 
-# 1. Global methane levels from 2002 to the present derived from satellite observations
+# 1. Global methane levels from 2002 
 
 Methane (CH~4~) is a naturally occurring Greenhouse Gas (GHG), but one whose abundance has been increased substantially above its pre-industrial value by human activities, primarily because of agricultural emissions (e.g., rice production, ruminants) and fossil fuel production and use. A clear annual cycle is largely due to seasonal wetland emissions.
 
@@ -59,7 +59,7 @@ For this problem set, methane levels have been determined by applying several al
 
 The *Niño 3.4 anomalies* may be thought of as representing the average equatorial sea surface temperatures (SSTs) across the Pacific from about the dateline to the South American coast (`5N-5S`, `170W-120W`). The Niño 3.4 index typically uses a 3-month running mean, and El Niño or La Niña events are defined when the Niño 3.4 SSTs exceed `+/- 0.5°C` for a period of `5` months or more. Check [Equatorial Pacific Sea Surface Temperatures](https://www.ncdc.noaa.gov/teleconnections/enso/indicators/sst/) for more about the Niño 3.4 index.
 
-In this problem set, you will use the sea surface temperature (SST) data from [NOAA](https://www.noaa.gov/). Download the `netCDF4` file (`NOAA_NCDC_ERSST_v3b_SST.nc`) [here](http://10.20.7.229/index.php/s/do68CdKJbscS6QD).
+In this problem set, you will use the sea surface temperature (SST) data from [NOAA](https://www.noaa.gov/). Download the `netCDF4` file (`NOAA_NCDC_ERSST_v3b_SST.nc`) [here](http://172.18.31.60/index.php/s/do68CdKJbscS6QD).
 
 **1.1 [10 points]** Compute monthly climatology for SST from Niño 3.4 region, and subtract climatology from SST time series to obtain anomalies.
 
