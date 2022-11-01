@@ -585,7 +585,7 @@ plt.colorbar()
 
 # Save the figure
 # Make sure this line goes before plt.show()
-plt.savefig("bubbleplot.png", transparent=True, dpi=100)
+plt.savefig("bubbleplot.png", transparent=False, dpi=100)
 
 # Show plot
 plt.show() 
