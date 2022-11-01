@@ -54,7 +54,7 @@ The following piece of code is found in pretty much any python code that has `ma
 Suppose you want to draw a specific type of plot, say a scatterplot, the first thing you want to check out are the methods under `plt` (type `dir(plt)`). Let’s begin by making a simple but full-featured scatterplot and take it from there. Let’s see what `plt.plot()` creates if you an arbitrary sequence of numbers.
 
 ```{python, eval=F}
-# This will return the plot object itself (0x192c810d940) 
+# This will return the plot object itself (0x253619a4910) 
 # besides drawing the plot.
 plt.plot(ozone_data['Ozone'])
 ```
@@ -84,7 +84,7 @@ Now add more details to the figure:
 ```{python, eval=F}
 # Set the figure size
 # 8 is width, 5 is height
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(8,5))
 
 # Plot with a label
 plt.plot(ozone_data['Ozone'], 'ko', label='Ozone') 
@@ -146,7 +146,7 @@ Alternately, to save keystrokes, you can set multiple things in one go using the
 
 ```{python, eval=F}
 # Create Figure and Subplots
-fig, (ax1, ax2) = plt.subplots(1,2, figsize=(8,4), sharey=False, dpi=120)
+fig, (ax1, ax2) = plt.subplots(1,2, figsize=(8,5), sharey=False, dpi=120)
 
 # Plot
 ax1.plot(ozone_data['Ozone'], 'go')  # green dots

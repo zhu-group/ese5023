@@ -520,7 +520,7 @@ div.tocify {
 <span id="cb3-2"><a href="#cb3-2"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
 <p><code>matplotlib.pyplot</code> is usually imported as <code>plt</code>. It is the core object that contains the methods to create all sorts of charts and features in a plot. The <code>%matplotlib inline</code> is a jupyter notebook specific command that let’s you see the plots in the notebook itself.</p>
 <p>Suppose you want to draw a specific type of plot, say a scatterplot, the first thing you want to check out are the methods under <code>plt</code> (type <code>dir(plt)</code>). Let’s begin by making a simple but full-featured scatterplot and take it from there. Let’s see what <code>plt.plot()</code> creates if you an arbitrary sequence of numbers.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># This will return the plot object itself (0x192c810d940) </span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># This will return the plot object itself (0x253619a4910) </span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co"># besides drawing the plot.</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>])</span></code></pre></div>
 <p>This draws a line automatically, assuming the values of the X-axis to start from zero going up to as many items in the data. Notice the line <code>matplotlib.lines.Line2D</code> in code output, this is because <code>matplotlib</code> returns the plot object itself besides drawing the plot. If you only want to see the plot, add one line:</p>
@@ -538,7 +538,7 @@ div.tocify {
 <p>Now add more details to the figure:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Set the figure size</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co"># 8 is width, 5 is height</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb7-3"><a href="#cb7-3"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
 <span id="cb7-4"><a href="#cb7-4"></a></span>
 <span id="cb7-5"><a href="#cb7-5"></a><span class="co"># Plot with a label</span></span>
 <span id="cb7-6"><a href="#cb7-6"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;ko&#39;</span>, label<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>) </span>
@@ -585,7 +585,7 @@ div.tocify {
 <p>The <code>ax1</code> and <code>ax2</code> objects, like <code>plt</code>, has equivalent <code>set_title</code>, <code>set_xlabel</code> and <code>set_ylabel</code> functions. In fact, the <code>plt.title()</code> actually calls the current axes <code>set_title()</code> to do the job.</p>
 <p>Alternately, to save keystrokes, you can set multiple things in one go using the <code>ax.set()</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Create Figure and Subplots</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>), sharey<span class="op">=</span><span class="va">False</span>, dpi<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), sharey<span class="op">=</span><span class="va">False</span>, dpi<span class="op">=</span><span class="dv">120</span>)</span>
 <span id="cb9-3"><a href="#cb9-3"></a></span>
 <span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Plot</span></span>
 <span id="cb9-5"><a href="#cb9-5"></a>ax1.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)  <span class="co"># green dots</span></span>
