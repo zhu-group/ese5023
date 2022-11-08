@@ -109,7 +109,7 @@ ax = plt.axes(projection=proj)
 ax.add_feature(cfeature.LAND, edgecolor='black', facecolor='grey', zorder=0)
 ```
 
-As you can see, `ccrs.PlateCarree()` creates an axes. We then use `add_feature()` to add land (`LAND`) feature to the axes. Here the pre-defined features are all small-scale (`1:110 million`) [Natural Earth datasets](https://www.naturalearthdata.com/):
+As you can see, `ccrs.PlateCarree()` creates an axes with a certain projection. We then use `add_feature()` to add land (`LAND`) feature to the axes. Here the pre-defined features are all small-scale (`1:110 million`) [Natural Earth datasets](https://www.naturalearthdata.com/):
 
 + `BORDERS` Country boundaries
 

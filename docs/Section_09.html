@@ -564,7 +564,7 @@ div.tocify {
 <span id="cb5-7"><a href="#cb5-7"></a></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co"># Add LAND feature to axes using cartopy.feature (cfeature)</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
-<p>As you can see, <code>ccrs.PlateCarree()</code> creates an axes. We then use <code>add_feature()</code> to add land (<code>LAND</code>) feature to the axes. Here the pre-defined features are all small-scale (<code>1:110 million</code>) <a href="https://www.naturalearthdata.com/">Natural Earth datasets</a>:</p>
+<p>As you can see, <code>ccrs.PlateCarree()</code> creates an axes with a certain projection. We then use <code>add_feature()</code> to add land (<code>LAND</code>) feature to the axes. Here the pre-defined features are all small-scale (<code>1:110 million</code>) <a href="https://www.naturalearthdata.com/">Natural Earth datasets</a>:</p>
 <ul>
 <li><p><code>BORDERS</code> Country boundaries</p></li>
 <li><p><code>COASTLINE</code> Coastline, including major islands</p></li>
