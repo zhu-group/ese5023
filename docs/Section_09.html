@@ -651,8 +651,8 @@ div.tocify {
 <span id="cb9-22"><a href="#cb9-22"></a>gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb9-23"><a href="#cb9-23"></a></span>
 <span id="cb9-24"><a href="#cb9-24"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
-<span id="cb9-25"><a href="#cb9-25"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">90</span>,<span class="dv">30</span>))</span>
-<span id="cb9-26"><a href="#cb9-26"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">180</span>, <span class="dv">30</span>))</span></code></pre></div>
+<span id="cb9-25"><a href="#cb9-25"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb9-26"><a href="#cb9-26"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
 <p>Here we use <code>gridlines()</code> to add a graticule (and optionally labels) to the axes, and use <code>xlocator()</code> and <code>ylocator()</code> to manipulate latitude and longitude gridline numbers and spacing.</p>
 </div>
 <div id="using-different-global-projections" class="section level2">
@@ -682,8 +682,8 @@ div.tocify {
 <span id="cb10-22"><a href="#cb10-22"></a>gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb10-23"><a href="#cb10-23"></a></span>
 <span id="cb10-24"><a href="#cb10-24"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
-<span id="cb10-25"><a href="#cb10-25"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">90</span>,<span class="dv">30</span>))</span>
-<span id="cb10-26"><a href="#cb10-26"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">180</span>, <span class="dv">30</span>))</span></code></pre></div>
+<span id="cb10-25"><a href="#cb10-25"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb10-26"><a href="#cb10-26"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
 <p>Or play with different projections from a list:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Define plotting function</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw">def</span> plot_map(my_projection):</span>
@@ -710,8 +710,8 @@ div.tocify {
 <span id="cb11-23"><a href="#cb11-23"></a>    gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb11-24"><a href="#cb11-24"></a></span>
 <span id="cb11-25"><a href="#cb11-25"></a>    <span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a>    gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">90</span>,<span class="dv">30</span>))</span>
-<span id="cb11-27"><a href="#cb11-27"></a>    gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">180</span>, <span class="dv">30</span>))</span>
+<span id="cb11-26"><a href="#cb11-26"></a>    gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb11-27"><a href="#cb11-27"></a>    gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span>
 <span id="cb11-28"><a href="#cb11-28"></a>    </span>
 <span id="cb11-29"><a href="#cb11-29"></a>    <span class="co"># Add title</span></span>
 <span id="cb11-30"><a href="#cb11-30"></a>    ax.set_title(<span class="ss">f&#39;</span><span class="sc">{</span><span class="bu">type</span>(my_projection)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
@@ -847,8 +847,8 @@ div.tocify {
 <span id="cb15-21"><a href="#cb15-21"></a>gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb15-22"><a href="#cb15-22"></a></span>
 <span id="cb15-23"><a href="#cb15-23"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
-<span id="cb15-24"><a href="#cb15-24"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">90</span>,<span class="dv">30</span>))</span>
-<span id="cb15-25"><a href="#cb15-25"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">180</span>, <span class="dv">30</span>))</span></code></pre></div>
+<span id="cb15-24"><a href="#cb15-24"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb15-25"><a href="#cb15-25"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
 </div>
 <div id="masking-a-map-projection" class="section level2">
 <h2>Masking a map projection</h2>
@@ -911,7 +911,7 @@ div.tocify {
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>Applying the <a href="https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html#lambertconformal"><code>LambertConformal</code> project</a>, plot the mean surface temperature in <code>June</code> from <code>2000</code> to <code>2010</code> near your hometown. Limit your figure to a <code>5 degrees</code> by <code>5 degrees</code> domain.</p>
+<p>Applying the <a href="https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html#lambertconformal"><code>LambertConformal</code> projection</a>, plot the mean surface temperature in <code>June</code> from <code>2000</code> to <code>2010</code> near your hometown. Limit your figure to a <code>5 degrees</code> by <code>5 degrees</code> domain.</p>
 <hr />
 </div>
 </div>

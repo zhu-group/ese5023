@@ -218,8 +218,8 @@ ax.add_feature(cfeature.NaturalEarthFeature(category='cultural',
 gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, color='black', alpha=0.5)
 
 # Manipulate latitude and longitude gridline numbers and spacing
-gl.ylocator = mticker.FixedLocator(np.arange(-90,90,30))
-gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30))
+gl.ylocator = mticker.FixedLocator(np.arange(-90,91,30))
+gl.xlocator = mticker.FixedLocator(np.arange(-180, 181, 30))
 ```
 
 Here we use `gridlines()` to add a graticule (and optionally labels) to the axes, and use `xlocator()` and `ylocator()` to manipulate latitude and longitude gridline numbers and spacing.
@@ -253,8 +253,8 @@ ax.add_feature(cfeature.NaturalEarthFeature(category='cultural',
 gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, color='black', alpha=0.5)
 
 # Manipulate latitude and longitude gridline numbers and spacing
-gl.ylocator = mticker.FixedLocator(np.arange(-90,90,30))
-gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30))
+gl.ylocator = mticker.FixedLocator(np.arange(-90,91,30))
+gl.xlocator = mticker.FixedLocator(np.arange(-180, 181, 30))
 ```
 
 Or play with different projections from a list:
@@ -285,8 +285,8 @@ def plot_map(my_projection):
     gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, color='black', alpha=0.5)
 
     # Manipulate latitude and longitude gridline numbers and spacing
-    gl.ylocator = mticker.FixedLocator(np.arange(-90,90,30))
-    gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30))
+    gl.ylocator = mticker.FixedLocator(np.arange(-90,91,30))
+    gl.xlocator = mticker.FixedLocator(np.arange(-180, 181, 30))
     
     # Add title
     ax.set_title(f'{type(my_projection)}')
@@ -440,8 +440,8 @@ ax.add_feature(cfeature.NaturalEarthFeature(category='cultural',
 gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, color='black', alpha=0.5)
 
 # Manipulate latitude and longitude gridline numbers and spacing
-gl.ylocator = mticker.FixedLocator(np.arange(-90,90,30))
-gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30))
+gl.ylocator = mticker.FixedLocator(np.arange(-90,91,30))
+gl.xlocator = mticker.FixedLocator(np.arange(-180, 181, 30))
 ```
 
 ## Masking a map projection
@@ -510,7 +510,7 @@ Go through the notes, make sure you understand the scripts.
 
 ## Exercise #2
 
-Applying the [`LambertConformal` project](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html#lambertconformal), plot the mean surface temperature in `June` from `2000` to `2010` near your hometown. Limit  your figure to a `5 degrees` by `5 degrees` domain.
+Applying the [`LambertConformal` projection](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html#lambertconformal), plot the mean surface temperature in `June` from `2000` to `2010` near your hometown. Limit  your figure to a `5 degrees` by `5 degrees` domain.
 
 ***
 
