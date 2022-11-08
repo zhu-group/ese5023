@@ -23,7 +23,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 |7   |10/25|Tu. |[Section 07 Intermediate Python: `xarray`](https://zhu-group.github.io/ese5023/Section_07.html)|                                                                        |                 |
 |7   |10/27|Th. |[Lab 04 `Pandas` and time series](https://zhu-group.github.io/ese5023/Lab_04.html)             |                                                                        |                 |
 |8   |11/01|Tu. |[Section 08 Plotting with `matplotlib`](https://zhu-group.github.io/ese5023/Section_08.html)   | [Assignment 3](https://zhu-group.github.io/ese5023/Assignment_03.html) | Assignment 2    |
-|9   |11/08|Tu. |Section 09 Making maps with `cartopy`                                                          |                                                                        |                 |
+|9   |11/08|Tu. |[Section 09 Making maps with `cartopy`](https://zhu-group.github.io/ese5023/Section_09.html)   |                                                                        |                 |
 |9   |11/10|Th. |Lab 05  Python Intermediate                                                                    |                                                                        |                 |
 |10  |11/15|Tu. |Section 10 Intermediate Python: `scipy`                                                        |                                                                        | Assignment 3    |
 |11  |11/22|Tu. |Section 11 Python environments                                  |                       |                 |
