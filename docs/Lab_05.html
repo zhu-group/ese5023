@@ -494,7 +494,7 @@ div.tocify {
 <div id="global-sea-surface-temperature" class="section level1">
 <h1>1. Global sea surface temperature</h1>
 <p>In this exercise, we will use the <a href="https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html">NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product</a>, a widely used and trusted gridded compilation of historical data going back to <code>1854</code>.</p>
-<p><strong>1.</strong> Download the <a href="https://psl.noaa.gov/thredds/fileServer/Datasets/noaa.ersst.v5/sst.mnmean.nc">sst.mnmean.nc</a> (~ <code>80 MB</code>). Read it with <code>pandas</code> as the data object <code>ds</code>.</p>
+<p><strong>1.</strong> Download the <a href="http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek">sst.mnmean.nc</a> (~ <code>80 MB</code>). Read it with <code>pandas</code> as the data object <code>ds</code>.</p>
 <p><strong>2.</strong> Plot mean SST in the latest month. Show a 2-D figure.</p>
 <p><strong>3.</strong> Plot a time series of global monthly mean SST from <code>1900-01</code> to <code>2020-12</code>.</p>
 <p><strong>4.</strong> It turns out that the previous figure is not correct, since it didn’t account for the real area of the <code>2 degrees x 2 degrees</code> grids. For this exercise, let’s create a <code>weights</code> array proportional to the cosine of latitude, as the correct area-weighting factor for data on a regular lat-lon grid.</p>
