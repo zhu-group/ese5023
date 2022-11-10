@@ -22,7 +22,7 @@ In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Tempe
 
 **4.** It turns out that the previous figure is not correct, since it didn't account for the real area of the `2 degrees x 2 degrees` grids. For this exercise, let's create a `weights` array proportional to the cosine of latitude, as the correct area-weighting factor for data on a regular lat-lon grid. 
 
-**5.** Now use `weights` array to compute and plot the correct global monthly SST `1854-01` to `2021-10`. You results show look like this:
+**5.** Now use `weights` array to compute and plot the correct global monthly SST `1854-01` to `2022-10`. You results show look like this:
 
 <img src="figs/corrected_SST.png" alt="drawing" width="700"/>  
 
