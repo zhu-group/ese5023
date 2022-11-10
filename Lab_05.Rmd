@@ -14,7 +14,7 @@ output:
 
 In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product](https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html), a widely used and trusted gridded compilation of historical data going back to `1854`.
 
-**1.** Download the [sst.mnmean.nc](http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek) (~ `90 MB`). Read it with `pandas` as the data object `ds`. 
+**1.** Download the [sst.mnmean.nc](http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek) (~ `90 MB`). Read it with `xarray` as the data object `ds`. 
 
 **2.** Plot mean SST in the latest month. Show a 2-D figure.
 
