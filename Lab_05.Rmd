@@ -96,7 +96,7 @@ plt.legend()
 
 Check [xarray.DataArray.rolling](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.rolling.html) to teach yourself how to use the `rolling()` function. Now compute the rolling means a frequency of `3` years, replot, and what do you observe?
 
-**12.** Make a timeseries of the anomalies within the lat range (`20S`-`20N`) and lon range (`170`E to `170 W`), show resample means and rolling means at the desired frequencies. Use the tips we covered in the [last Section](https://zhu-group.github.io/ese5023/Section_08.html), modify the plot as much as you can.
+**12.** Make a timeseries of the anomalies within the lat range (`20S`-`20N`) and lon range (`170`E to `170 W`), show resample means and rolling means at the desired frequencies. Use the tips we covered in the [ Section 08](https://zhu-group.github.io/ese5023/Section_08.html), modify the plot as much as you can.
 
 ***
 
