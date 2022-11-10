@@ -14,11 +14,11 @@ output:
 
 In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product](https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html), a widely used and trusted gridded compilation of historical data going back to `1854`.
 
-**1.** Download the [sst.mnmean.nc](http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek) (~ `80 MB`). Read it with `pandas` as the data object `ds`. 
+**1.** Download the [sst.mnmean.nc](http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek) (~ `90 MB`). Read it with `pandas` as the data object `ds`. 
 
 **2.** Plot mean SST in the latest month. Show a 2-D figure.
 
-**3.** Plot a time series of global monthly mean SST from `1900-01` to `2020-12`.
+**3.** Plot a time series of global monthly mean SST from `1900-01` to `2021-12`.
 
 **4.** It turns out that the previous figure is not correct, since it didn't account for the real area of the `2 degrees x 2 degrees` grids. For this exercise, let's create a `weights` array proportional to the cosine of latitude, as the correct area-weighting factor for data on a regular lat-lon grid. 
 
