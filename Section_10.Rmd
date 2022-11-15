@@ -73,6 +73,9 @@ This section is far from an introduction to numerical computing. As enumerating 
 Import mathematical constant, for example:
 
 ```{python, eval=F}
+
+from scipy import constants
+
 # Mathematical constants
 scipy.constants.pi
 ```
@@ -113,7 +116,7 @@ scipy.constants.mph
 scipy.constants.atmosphere
 ```
 
-Remembering all of these are a bit tough. The easy way to get which key is for which function is looking up things in the [`SciPy` Constants page](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants)
+Remembering all of these are a bit tough. The easy way to get which key is for which function is looking up things in the [`SciPy` Constants page](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants).
 
 ## Integrating with `scipy.integrate`
 
@@ -131,7 +134,7 @@ res = integrate.quad(f, 0, 1)
 print(res)
 ```
 
-Here we use a *lambda expression* and then call the quadrature method (for single integrals) on that function. The `quad` function returns the two values, in which the first number is the value of integral and the second value is the estimate of the absolute error in the value of integral. For multiple integrals or solving initial value problems for ODE systems, check [Integration and ODEs](https://docs.scipy.org/doc/scipy/reference/integrate.html).
+Here we use a [lambda expression](https://realpython.com/python-lambda/) and then call the quadrature method (for single integrals) on that function. The `quad` function returns the two values, in which the first number is the value of integral and the second value is the estimate of the absolute error in the value of integral. For multiple integrals or solving initial value problems for ODE systems, check [Integration and ODEs](https://docs.scipy.org/doc/scipy/reference/integrate.html).
 
 ## Interpolation with `scipy.interpolate`
 
@@ -214,7 +217,7 @@ Suppose we have data on a sine wave, with some noise:
 ```{python, eval=F}
 # Make up some data points
 x = np.linspace(-5, 5, num=50)
-y = 2.9 * np.sin(1.5 * x_data) + np.random.normal(size=50)
+y = 2.9 * np.sin(1.5 * x) + np.random.normal(size=50)
 
 # Plot data
 plt.plot(x, y, 'ko')
@@ -234,7 +237,7 @@ We then use `scipy.optimize.curve_fit` to find `a` and `b`:
 from scipy import optimize
 
 # Fit parameters
-params,_  = optimize.curve_fit(guess_func, x, y)
+params, _ = optimize.curve_fit(guess_func, x, y)
 print(params)
 
 # Plot fitted data
@@ -273,6 +276,7 @@ result
 To find a root, i.e. a point where `g(x) = 0`, of the function `g` above we can use `scipy.optimize.root`:
 
 ```{python, eval=F}
+# Using root() to find the roots
 root = optimize.root(g, x0=1) 
 root
 ```
@@ -285,28 +289,28 @@ For example, we can fit a sample to a distribution:
 
 ```{python, eval=F}
 # Generate a sample
-samples = np.random.normal(size=1000)
+sample = np.random.normal(size=1000)
 
 from scipy import stats
 
 # Fit a normal distribution
-stats.norm.fit(samples)
+stats.norm.fit(sample)
 ```
 
 A statistical test is a decision indicator. For instance, if we have two sets of observations, that we assume are generated from normal distributions, we can use a *t-test* to decide whether the means of two sets of observations are significantly different:
 
 ```{python, eval=F}
 # Sample 1
-a = np.random.normal(0, 1, size=20)
+sample1 = np.random.normal(0, 1, size=20)
 
 # Sample 2
-b = np.random.normal(1, 1, size=15)
+sample2 = np.random.normal(1, 1, size=15)
 
 # Independent t-test
-stats.ttest_ind(a, b) 
+stats.ttest_ind(sample1, sample2) 
 ```
 
-[The chapter on statistics](https://scipy-lectures.org/index.html) introduces much more elaborate tools for statistical testing and statistical data loading and visualization outside of `SciPy`.
+[The chapter on statistics](https://scipy-lectures.org/index.html) introduces much more elaborate tools for statistical testing and statistical data loading and visualization outside of `SciPy`. You are also welcome to check [ESE335 Environmental Data Analysis](https://zhu-group.github.io/ese335/index.html) for conducting statistical tests with the `R` language. 
 
 ## Clustering with `scipy.cluster`
 
@@ -355,17 +359,18 @@ The temperature extremes in Shenzhen for each month, starting in January, are gi
 `max: 19.8, 20.2, 22.7, 26.3, 29.5, 31.1, 32.3, 32.3, 31.3, 29.2, 25.4, 21.5, 26.8 `
 `min: 12.5, 13.8, 16.5, 20.3, 23.6, 25.6, 26.3, 26.1, 25.0, 22.5, 18.2, 13.8, 20.3 ` 
 
-**2.1** Plot these temperature extremes.
-**2.2** Define a function that can describe min and max temperatures. Hint: this function has to have a period of 1 year. Hint: include a time offset.
-**2.3** Fit this function to the data with scipy.optimize.curve_fit().
-**2.4** Plot the result. Is the fit reasonable? If not, why?
-**2.5** Is the time offset for min and max temperatures the same within the fit accuracy?
+**2.1** Plot these temperature extremes.  
+**2.2** Define a function that can describe min and max temperatures.   
+[Hint]: this function has to have a period of 1 year.   
+**2.3** Fit this function to the data with `scipy.optimize.curve_fit`.  
+**2.4** Plot the result. Is the fit reasonable? If not, why?  
+**2.5** Is the time offset for min and max temperatures the same within the fit accuracy?  
 
 ***
 
 # Further reading
 
-+ [SciPy 1.0: fundamental algorithms for scientific computing in Python](https://www.nature.com/articles/s41592-019-0686-2)
++ [SciPy User Guide](https://docs.scipy.org/doc/scipy/tutorial/index.html)  
++ [SciPy Tutorial](https://www.w3schools.com/python/scipy/index.php)
 + [Scientific Python: Using SciPy for Optimization](https://realpython.com/python-scipy-cluster-optimize/)
 + [SciPy - Quick Guide](https://www.tutorialspoint.com/scipy/scipy_quick_guide.htm)
-+ [SciPy User Guide](https://docs.scipy.org/doc/scipy/tutorial/index.html)
