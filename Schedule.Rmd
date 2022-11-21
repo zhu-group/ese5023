@@ -26,7 +26,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 |9   |11/08|Tu. |[Section 09 Making maps with `cartopy`](https://zhu-group.github.io/ese5023/Section_09.html)        |                                                                        |                 |
 |9   |11/10|Th. |[Lab 05 Plotting and interactive visualization](https://zhu-group.github.io/ese5023/Lab_05.html)    |                                                                        |                 |
 |10  |11/15|Tu. |[Section 10 Scientific computing with `SciPy`](https://zhu-group.github.io/ese5023/Section_10.html) | [Assignment 4](https://zhu-group.github.io/ese5023/Assignment_04.html) | Assignment 3    |
-|11  |11/22|Tu. |Section 11 Python environments                                                                      |                                                                        |                 |
+|11  |11/22|Tu. |[Section 11 Python environments](https://zhu-group.github.io/ese5023/Section_11.html)               |                                                                        |                 |
 |11  |11/24|Th. |Lab 06 Plotting with Python                                                                         |                                                                        |                 |
 |12  |11/29|Tu. |Section 12 Parallel computing with Python                                                           |                                                                        | Assignment 4    |
 |13  |12/06|Tu. |Section 13 Web scraping with Python                                                                 |                                                                        |                 |
