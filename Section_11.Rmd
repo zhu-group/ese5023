@@ -89,16 +89,6 @@ To stop using the `cper` environment, type in:
 conda deactivate cper
 ```
 
-If you would like to get rid of the entire `cper` environment, type in:
-
-```{bash, eval=F}
-conda remove --name cper --all
-```
-
-The `--all` flag is to remove all packages from the environment and is necessary to completely clean the environment.
-
-For extensive documentation on using environments, please see the [conda documentation](https://conda.io/projects/conda/en/latest/user-guide/concepts/environments.html). 
-
 ## Installing modules under a `Python` environment
 
 Once you have a basic `Python` environment, you can easily add or remove modules using the `conda` command-line utility. `Conda` was created to help manage the complex dependencies and pre-compiled binary libraries that are necessary in scientific python. If you set up your python environment using the `Anaconda` Python Distribution or with `miniconda`, you should already have the `conda` command available on the command line. With it, you can easily install modules from an official, curated set of packages which are built and tested for a number of different system configurations on Linux, Windows, and macOS.
@@ -190,6 +180,18 @@ conda-unpack
 ```
 
 to re-create symlinks and set everything up. Check [Moving Conda Environments](https://www.anaconda.com/blog/moving-conda-environments) for more.
+
+## Removing a conda environment 
+
+If you would like to get rid of the entire `cper` environment, deactivate it then type in:
+
+```{bash, eval=F}
+conda remove --name cper --all
+```
+
+The `--all` flag is to remove all packages from the environment and is necessary to completely clean the environment.
+
+For extensive documentation on using environments, please see the [conda documentation](https://conda.io/projects/conda/en/latest/user-guide/concepts/environments.html). 
 
 ***
 

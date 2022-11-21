@@ -532,51 +532,54 @@ div.tocify {
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">conda</span> list</span></code></pre></div>
 <p>To stop using the <code>cper</code> environment, type in:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">conda</span> deactivate cper</span></code></pre></div>
-<p>If you would like to get rid of the entire <code>cper</code> environment, type in:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">conda</span> remove --name cper --all</span></code></pre></div>
-<p>The <code>--all</code> flag is to remove all packages from the environment and is necessary to completely clean the environment.</p>
-<p>For extensive documentation on using environments, please see the <a href="https://conda.io/projects/conda/en/latest/user-guide/concepts/environments.html">conda documentation</a>.</p>
 </div>
 <div id="installing-modules-under-a-python-environment" class="section level2">
 <h2>Installing modules under a <code>Python</code> environment</h2>
 <p>Once you have a basic <code>Python</code> environment, you can easily add or remove modules using the <code>conda</code> command-line utility. <code>Conda</code> was created to help manage the complex dependencies and pre-compiled binary libraries that are necessary in scientific python. If you set up your python environment using the <code>Anaconda</code> Python Distribution or with <code>miniconda</code>, you should already have the <code>conda</code> command available on the command line. With it, you can easily install modules from an official, curated set of packages which are built and tested for a number of different system configurations on Linux, Windows, and macOS.</p>
 <p>To install a module (say <code>XXXX</code>), first activate the environment (say <code>cper</code>) under which you would like to install it:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">conda</span> activate cper</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">conda</span> activate cper</span></code></pre></div>
 <p>Then type:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">conda</span> install XXXX</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">conda</span> install XXXX</span></code></pre></div>
 <p>Additionally, there is a community-maintained collection of packages/recipes called <a href="https://conda-forge.org/">conda forge</a> which is accessible through <code>conda</code> as a special “channel”:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">conda</span> install -c conda-forge XXXX</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">conda</span> install -c conda-forge XXXX</span></code></pre></div>
 <p>While <code>conda</code> allows you to install almost any science-related package, there may be other general-use python packages you wish to you that are not available via <code>conda</code>. For these, you can use an alternative installation method.</p>
 <p>Outside of the scientific python community, the most common way to install packages is to search for them on the <a href="https://pypi.org/">official <code>PyPI</code> index</a>. Once you’ve found the package you want to install (you may have also just found it on Github or elsewhere), you use the <code>pip</code> command from the command line:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pip</span> install XXXX</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">pip</span> install XXXX</span></code></pre></div>
 <p>If you can’t find a package on either <code>PyPI</code> or <code>conda-forge</code>, you can always install it directly from the source code. If the package is on <code>github</code>, <code>pip</code> already has an alias to do this for you:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">pip</span> install git+https://github.com/.../XXXX.git</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pip</span> install git+https://github.com/.../XXXX.git</span></code></pre></div>
 <p>Where <code>https://github.com/.../XXXX.git</code> indicates the url of the module.</p>
 <p>Now let’s install some modules under the <code>cper</code> environment. Make sure you have activated the <code>cper</code> environment; otherwise, modules will be installed under the <code>base</code> environment.</p>
 <p>First, we will install modules via <code>conda</code>:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">conda</span> install numpy pandas matplotlib netCDF4 xarray notebook cartopy dask python-graphviz</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">conda</span> install numpy pandas matplotlib netCDF4 xarray notebook cartopy dask python-graphviz</span></code></pre></div>
 <p>Later, we use <code>pip</code> to install a module via a different channel:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">pip</span> install nc-time-axis</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">pip</span> install nc-time-axis</span></code></pre></div>
 <p>Now use <code>conda list</code> to verify that we have successfully installed the above modules.</p>
 </div>
 <div id="using-the-environment-file" class="section level2">
 <h2>Using the environment file</h2>
 <p>As you type <code>conda list</code>, you get a complete summary of all the modules installed in your environment, the channel they were installed from, and their full version info. Using this info, you are able to create an environment file in <a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html"><code>YAML</code> syntax</a> (YAML Ain’t Markup Language) which documents the exact contents of your environment.</p>
 <p>To export your current environment (<code>cper</code>) to a <code>yml</code> file (<code>my_environment.yml</code>):</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">conda</span> env export --name cper <span class="op">&gt;</span> my_environment.yml</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">conda</span> env export --name cper <span class="op">&gt;</span> my_environment.yml</span></code></pre></div>
 <p>The <code>&gt;</code> indicates that the output is writing to a file called <code>my_environment.yml</code>. If there were any contents in <code>my_environment.yml</code> before this command, they would be overwritten. Now in your working directory, a file <code>my_environment.yml</code> was just created, open it, you will see a list of configurations of the <code>cper</code> environment.</p>
 <p>The environment file (<code>my_environment.yml</code>) is very useful, as it allows creating an <strong>identical</strong> environment. You can use different environment files for different projects, or share an environment file with someone to grantee <strong>reproducible research</strong>.</p>
 <p>To create a new environment (say <code>cper_new</code>) through existing environment file (say <code>ZZZZ.yml</code>), go to the folder that contains this environment file, type:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">conda</span> env create --name cper_new --file ZZZZ.yml</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">conda</span> env create --name cper_new --file ZZZZ.yml</span></code></pre></div>
 </div>
 <div id="packaging-a-conda-environment" class="section level2">
 <h2>Packaging a conda environment</h2>
 <p>If you want to copy the environment, you may want to use <code>conda-pack</code> that allows you to package your entire environment as a compressed file (a <code>tar.gz</code>) you can just copy and paste somewhere, and it just works.</p>
 <p>Pack your environment:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">conda</span> pack</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">conda</span> pack</span></code></pre></div>
 <p>It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, Uncompress the environment in the folder, then Run:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">conda-unpack</span> </span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">conda-unpack</span> </span></code></pre></div>
 <p>to re-create symlinks and set everything up. Check <a href="https://www.anaconda.com/blog/moving-conda-environments">Moving Conda Environments</a> for more.</p>
+</div>
+<div id="removing-a-conda-environment" class="section level2">
+<h2>Removing a conda environment</h2>
+<p>If you would like to get rid of the entire <code>cper</code> environment, deactivate it then type in:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">conda</span> remove --name cper --all</span></code></pre></div>
+<p>The <code>--all</code> flag is to remove all packages from the environment and is necessary to completely clean the environment.</p>
+<p>For extensive documentation on using environments, please see the <a href="https://conda.io/projects/conda/en/latest/user-guide/concepts/environments.html">conda documentation</a>.</p>
 <hr />
 <p><em>The notes are modified from the excellent <a href="https://rabernat.github.io/research_computing_2018/python-environments.html">Python Environments</a>, and <a href="https://towardsdatascience.com/getting-started-with-python-environments-using-conda-32e9f2779307">Getting started with Python environments (using Conda)</a>, all available freely online.</em></p>
 <hr />
