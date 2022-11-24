@@ -427,8 +427,8 @@ x + 3y + 5z = 10 \\
 <div id="solving-odes" class="section level2">
 <h2>1.3 Solving ODEs</h2>
 <p>Consider the ODE:</p>
-<p><span class="math display">\[ \frac{df(t)}{dt}=-f(t)\]</span></p>
-<p>with an initial value of <code>f(0)=1</code>. Use <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html"><code>integrate.solve_ivp</code></a> to approximate the solution to this initial value problem over the interval <code>[0,1]</code>. Plot the approximate solution versus the exact solution, and the relative error over time.</p>
+<p><span class="math display">\[ \frac{df(t)}{dt}=-k f(t)\]</span></p>
+<p>Let’s <code>k=0.3</code> and the initial condition <code>f(0)=1</code>. Use <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html"><code>integrate.odeint</code></a> to approximate the solution over the interval <code>[0, 10]</code>.</p>
 </div>
 <div id="statistical-descriptions" class="section level2">
 <h2>1.4 Statistical descriptions</h2>
@@ -496,7 +496,7 @@ x + 3y + 5z = 10 \\
 </div>
 <div id="linear-regression" class="section level2">
 <h2>1.7 Linear regression</h2>
-<p>Using to <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html"><code>stats.linregress</code></a> to fit a regression line to the data points from 1.3. Is the slope significantly different than <code>0</code>?</p>
+<p>Using to <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html"><code>stats.linregress</code></a> to fit a regression line to the data points from 1.6. Is the slope significantly different from <code>0</code>?</p>
 <hr />
 </div>
 </div>
