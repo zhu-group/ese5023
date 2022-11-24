@@ -46,7 +46,7 @@ Let's `k=0.3` and the initial condition `f(0)=1`. Use [`integrate.odeint`](https
 
 ## 1.4 Statistical descriptions
 
-Make up an array with a size of `20`, then use [`stats.describe`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.describe.html) to compute several descriptive statistics of a passed array.
+Make up an array with a size of `20`, then use [`stats.describe`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.describe.html) to compute several descriptive statistics of this array.
 
 ## 1.5 Normality test
 
