@@ -28,7 +28,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 |10  |11/15|Tu. |[Section 10 Scientific computing with `SciPy`](https://zhu-group.github.io/ese5023/Section_10.html) | [Assignment 4](https://zhu-group.github.io/ese5023/Assignment_04.html) | Assignment 3    |
 |11  |11/22|Tu. |[Section 11 Python environments](https://zhu-group.github.io/ese5023/Section_11.html)               |                                                                        |                 |
 |11  |11/24|Th. |[Lab 06 `SciPy` exercises](https://zhu-group.github.io/ese5023/Lab_06.html)                         |                                                                        |                 |
-|12  |11/29|Tu. |[Section 12 Parallel computing with Python](https://zhu-group.github.io/ese5023/Section_12.htm)     | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4    |
+|12  |11/29|Tu. |[Section 12 Parallel computing with Python](https://zhu-group.github.io/ese5023/Section_12.html)    | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4    |
 |13  |12/06|Tu. |Section 13 Web scraping with Python                                                                 |                                                                        |                 |
 |13  |12/08|Th. |Lab 07 Python Intermediate                                                                          |                                                                        |                 |
 |14  |12/13|Tu. |Section 14 Linux: Basics                                                                            |                                                                        | Assignment 5    |
