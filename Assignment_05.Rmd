@@ -43,12 +43,15 @@ In this problem, we will build a box model to understand the Earth's carbon cycl
 
 **1.2 [20 points]** Following equation 3-4 (with the buffer effect), build a two-box model to compute the atmospheric CO~2~ level in ppm from 1987 to 2004.  
 
-**1.3 [5 points]** Based on your results from **1.1** and **1.2**, reproduce Figure 2 in Tomizuka (2009) as much as you can.
+**1.3 [5 points]** Based on your results from **1.1** and **1.2**, reproduce Figure 2 in Tomizuka (2009) as much as you can.  
+
+**[Bonus] [15 points]** Following equation 5-13, compute the atmospheric CO~2~ level in ppm and reproduce Figure 4 in Tomizuka (2009). 
 
 Useful data sets:  
 
 * [Global Fossil-Fuel CO~2~ Emissions](https://cdiac.ess-dive.lbl.gov/trends/emis/tre_glob.html)
 * [Mauna Loa CO~2~ annual mean data](https://gml.noaa.gov/ccgg/trends/data.html)
+* [Historical CO2 Records from the Law Dome DE08, DE08-2, and DSS Ice Cores](https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html)
 
 Source:   
 Tomizuka (2009), Is a box model effective for understanding the carbon cycle?, *American Journal of Physics*, 77, 156, doi: 10.1119/1.3013196.  
