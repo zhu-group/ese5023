@@ -137,7 +137,7 @@ with ProgressBar():
 result
 ```
 
-In fact, all the usual `numpy` methods work on `dask` arrays. You can also apply `numpy` function directly to a `dask` array, and it will stay lazy until the computation starts.  
+In fact, all the usual `numpy` methods work on `dask` arrays. You can also apply `numpy` function directly to a `dask` array, and it will stay "lazy" until the computation starts.  
 
 ```{python, eval=F}
 # Define the computation (lazy method)
@@ -212,7 +212,7 @@ z = fun2(x, y)
 
 Those two increment calls could be called in parallel, because they are totally **independent of one-another**.
 
-We'll transform the `fun1` and `fun2` functions using the `dask.delayed()` function. When we call the **delayed version** by passing the arguments, exactly as before, the original function **isn't** actually called yet - which is why the cell execution finishes very quickly. **Instead, a delayed object is made, which keeps track of the function to call and the arguments to pass to it.**  
+We'll transform the `fun1` and `fun2` functions using the `dask.delayed()` function. When we call the **delayed version** by passing the arguments, exactly as before, the original function isn't actually called yet - which is why the cell execution finishes very quickly. Instead, a delayed object is made, which keeps track of the function to call and the arguments to pass to it.    
 
 ```{python, eval=F}
 %%time
@@ -300,7 +300,7 @@ Visualize the task graph for this:
 total.visualize()
 ```
 
-Now enlarge `data` to a larger list, e.g, `[1, 2, 3, 4, 5, 6, 7, 8]`. Check what would happen to the running time of `total`? Can you figure out why?
+Now enlarge `data` to a larger list, *e.g*, `[1, 2, 3, 4, 5, 6, 7, 8]`. Check what would happen to the running time of `total`? Can you figure out why?
 
 ## Combing `dask` and `xarray`
 
@@ -387,7 +387,7 @@ Go through the notes, make sure you understand the scripts.
 
 ## Exercise #2
 
-Make a local client with 6 CPUs (only if your laptop allows!), then compute and plot the variance in daily `ssh` anomalies with `dask`.
+Make a local client with `6` CPUs (only if your laptop allows!), then compute and plot the variance in daily `ssh` anomalies with `dask`.
 
 ***
 

@@ -580,7 +580,7 @@ div.tocify {
 <span id="cb9-11"><a href="#cb9-11"></a></span>
 <span id="cb9-12"><a href="#cb9-12"></a><span class="co"># Show result</span></span>
 <span id="cb9-13"><a href="#cb9-13"></a>result</span></code></pre></div>
-<p>In fact, all the usual <code>numpy</code> methods work on <code>dask</code> arrays. You can also apply <code>numpy</code> function directly to a <code>dask</code> array, and it will stay lazy until the computation starts.</p>
+<p>In fact, all the usual <code>numpy</code> methods work on <code>dask</code> arrays. You can also apply <code>numpy</code> function directly to a <code>dask</code> array, and it will stay “lazy” until the computation starts.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Define the computation (lazy method)</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>calc2 <span class="op">=</span> (np.exp(big_ones)<span class="op">**</span><span class="dv">10</span>).mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb10-3"><a href="#cb10-3"></a>calc2</span></code></pre></div>
@@ -629,7 +629,7 @@ div.tocify {
 <span id="cb15-12"><a href="#cb15-12"></a><span class="co"># Call fun2</span></span>
 <span id="cb15-13"><a href="#cb15-13"></a>z <span class="op">=</span> fun2(x, y)</span></code></pre></div>
 <p>Those two increment calls could be called in parallel, because they are totally <strong>independent of one-another</strong>.</p>
-<p>We’ll transform the <code>fun1</code> and <code>fun2</code> functions using the <code>dask.delayed()</code> function. When we call the <strong>delayed version</strong> by passing the arguments, exactly as before, the original function <strong>isn’t</strong> actually called yet - which is why the cell execution finishes very quickly. <strong>Instead, a delayed object is made, which keeps track of the function to call and the arguments to pass to it.</strong></p>
+<p>We’ll transform the <code>fun1</code> and <code>fun2</code> functions using the <code>dask.delayed()</code> function. When we call the <strong>delayed version</strong> by passing the arguments, exactly as before, the original function isn’t actually called yet - which is why the cell execution finishes very quickly. Instead, a delayed object is made, which keeps track of the function to call and the arguments to pass to it.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">%%</span>time</span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="co"># This runs immediately, all it does is build a graph</span></span>
@@ -690,7 +690,7 @@ div.tocify {
 <p>Visualize the task graph for this:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Look at the task graph for total</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>total.visualize()</span></code></pre></div>
-<p>Now enlarge <code>data</code> to a larger list, e.g, <code>[1, 2, 3, 4, 5, 6, 7, 8]</code>. Check what would happen to the running time of <code>total</code>? Can you figure out why?</p>
+<p>Now enlarge <code>data</code> to a larger list, <em>e.g</em>, <code>[1, 2, 3, 4, 5, 6, 7, 8]</code>. Check what would happen to the running time of <code>total</code>? Can you figure out why?</p>
 </div>
 <div id="combing-dask-and-xarray" class="section level2">
 <h2>Combing <code>dask</code> and <code>xarray</code></h2>
@@ -747,7 +747,7 @@ div.tocify {
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>Make a local client with 6 CPUs (only if your laptop allows!), then compute and plot the variance in daily <code>ssh</code> anomalies with <code>dask</code>.</p>
+<p>Make a local client with <code>6</code> CPUs (only if your laptop allows!), then compute and plot the variance in daily <code>ssh</code> anomalies with <code>dask</code>.</p>
 <hr />
 </div>
 </div>
