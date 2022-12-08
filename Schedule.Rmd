@@ -31,7 +31,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
 |12  |11/29|Tu. |[Section 12 Parallel computing with Python](https://zhu-group.github.io/ese5023/Section_12.html)      | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4    |
 |13  |12/06|Tu. |[Section 13 Linux: Basics](https://zhu-group.github.io/ese5023/Section_13.html)                       |                                                                        |                 |
 |13  |12/08|Th. |[Section 14 Linux: Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Section_14.html) |                                                                        |                 |
-|14  |12/13|Tu. |Lab 08 Linux and TaiYi                                                                                |                                                                        | Assignment 5    |
+|14  |12/13|Tu. |Lab 07 Linux and TaiYi                                                                                |                                                                        | Assignment 5    |
 |15  |12/20|Tu. |Section 15 Web scraping with Python                                                                   |                                                                        |                 |  
 |15  |12/22|Th. |Section 16 TBD and course wrap-up                                                                     |                                                                        |                 |
 |16  |12/27|Tu. |Final project presentation                                                                            | [Final project](https://zhu-group.github.io/ese5023/download/Final_project_2022.pdf) |   |
