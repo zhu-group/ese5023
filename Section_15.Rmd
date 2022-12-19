@@ -1,5 +1,5 @@
 ---
-title: "Section 13 Web scraping with `Python`"
+title: "Section 15 Web scraping with `Python`"
 output:
   html_document:
     toc: true
@@ -16,7 +16,7 @@ output:
 
 + We will use [Google Chrome](https://www.google.com/intl/en_us/chrome/) in this section.
 
-+ Download the [chromedriver file](https://chromedriver.chromium.org/downloads), unzip it, and **move the folder to your working directory**. You may need to use different versions depending on the version of your Google Chrome.
++ Download the [chromedriver file](https://chromedriver.chromium.org/downloads), unzip it, and **move the folder to your working directory**. You need to use same version of Google Chrome, if you have installed it already.
 
 + Modules used in this section:
 
