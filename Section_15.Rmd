@@ -58,7 +58,7 @@ conda install selenium
 
 ## Fetching and rendering a web page
 
-First, let’s try rendering a web page *without* using `Selenium` and other tools, and try to parse the HTML. For this demo, we’re going to try to scrape the information contained in the Daily Observations table from a Weather Underground page for weather observations taken at the Shenzhen Bo'an international airport (ZGSZ) on December 5, 2022. Here’s the [URL](https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2022-12-5).
+First, let’s try rendering a web page *without* using `Selenium` and other tools, and try to parse the HTML. For this demo, we’re going to try to scrape the information contained in the Daily Observations table from a Weather Underground page for weather observations taken at the Shenzhen Bo'an international airport (ZGSZ) on December 10, 2022. Here’s the [URL](https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2022-12-10).
 
 Before we try rendering the web page, we want to inspect the HTML elements to determine what class we need to select. Go to the Daily Observations table, right-click and choose `Inspect`.
 
@@ -66,7 +66,7 @@ We can see that the entire Daily Observations table is contained under `lib-city
 
 ```{python, eval=F}
 # URL
-data_url = 'https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-5'
+data_url = 'https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10'
 
 # Use requests.get() method to load the page
 data_page = requests.get(data_url)
@@ -130,7 +130,7 @@ Now, using this function, let’s try again to get the Daily Observations table 
 
 ```{python, eval=F}
 # URL
-data_url = 'https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-5'
+data_url = 'https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10'
 
 # Use my_rendering function to load the page
 data_page = my_rendering(data_url)
@@ -205,7 +205,7 @@ for i, dat in enumerate(soup_data):
 
 ## Saving HTML Data to CSV File
 
-Now let's modify the above chunk of code to save data to a local file (`Shenzhen_20221205.csv`).
+Now let's modify the above chunk of code to save data to a local file (`Shenzhen_20221210.csv`).
 
 ```{python, eval=F}
 # Get the full table
@@ -236,7 +236,7 @@ value_tag = ['ng-star-inserted'    , 'wu-value wu-value-to', 'wu-value wu-value-
               'ng-star-inserted']
 
 # Open a file to save data
-outfile = 'Shenzhen_20221205.csv'
+outfile = 'Shenzhen_20221210.csv'
 
 with open(outfile, 'w') as f:
     # Write the header
@@ -265,7 +265,7 @@ with open(outfile, 'w') as f:
         # Print the row
         print(i, row)
         # Write the date of the recorded data into the file
-        f.write('2022-12-05,') 
+        f.write('2022-12-10,') 
         # Write data into the file
         f.write(','.join(row[:10])) 
         # New line, to append more rows to the same file later on
@@ -372,7 +372,7 @@ Now that we have our new `scrape_shenzhen_weather` function defined, let’s use
 ```{python, eval=F}
 # Set start and end dates
 start_date = datetime(year=2022, month=1, day=1)
-end_date = datetime(year=2022, month=1, day=3)
+end_date = datetime(year=2022, month=1, day=5)
 
 # Call the scraper function
 scrape_shenzhen_weather(start_date, end_date)

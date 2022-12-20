@@ -532,11 +532,11 @@ div.tocify {
 </div>
 <div id="fetching-and-rendering-a-web-page" class="section level2">
 <h2>Fetching and rendering a web page</h2>
-<p>First, let’s try rendering a web page <em>without</em> using <code>Selenium</code> and other tools, and try to parse the HTML. For this demo, we’re going to try to scrape the information contained in the Daily Observations table from a Weather Underground page for weather observations taken at the Shenzhen Bo’an international airport (ZGSZ) on December 5, 2022. Here’s the <a href="https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2022-12-5">URL</a>.</p>
+<p>First, let’s try rendering a web page <em>without</em> using <code>Selenium</code> and other tools, and try to parse the HTML. For this demo, we’re going to try to scrape the information contained in the Daily Observations table from a Weather Underground page for weather observations taken at the Shenzhen Bo’an international airport (ZGSZ) on December 10, 2022. Here’s the <a href="https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2022-12-10">URL</a>.</p>
 <p>Before we try rendering the web page, we want to inspect the HTML elements to determine what class we need to select. Go to the Daily Observations table, right-click and choose <code>Inspect</code>.</p>
 <p>We can see that the entire Daily Observations table is contained under <code>lib-city-history-observation</code>. Let’s use that tag to grab just the Daily Observations table elements from the HTML. We’ll also use the <code>.prettify()</code> method to print out the selected HTML to make it just a little more readable.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># URL</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>data_url <span class="op">=</span> <span class="st">&#39;https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-5&#39;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>data_url <span class="op">=</span> <span class="st">&#39;https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10&#39;</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Use requests.get() method to load the page</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a>data_page <span class="op">=</span> requests.get(data_url)</span>
@@ -585,7 +585,7 @@ div.tocify {
 <span id="cb6-14"><a href="#cb6-14"></a>    <span class="cf">return</span> render</span></code></pre></div>
 <p>Now, using this function, let’s try again to get the Daily Observations table elements from the HTML. Following the code written above, where, instead of using <code>requests.get()</code>, we’ll use our new rendering function:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># URL</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>data_url <span class="op">=</span> <span class="st">&#39;https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-5&#39;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>data_url <span class="op">=</span> <span class="st">&#39;https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10&#39;</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Use my_rendering function to load the page</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a>data_page <span class="op">=</span> my_rendering(data_url)</span>
@@ -655,7 +655,7 @@ div.tocify {
 </div>
 <div id="saving-html-data-to-csv-file" class="section level2">
 <h2>Saving HTML Data to CSV File</h2>
-<p>Now let’s modify the above chunk of code to save data to a local file (<code>Shenzhen_20221205.csv</code>).</p>
+<p>Now let’s modify the above chunk of code to save data to a local file (<code>Shenzhen_20221210.csv</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Get the full table</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>soup_data <span class="op">=</span> soup_container.find_all(<span class="st">&#39;tr&#39;</span>, class_<span class="op">=</span><span class="st">&#39;mat-row cdk-row ng-star-inserted&#39;</span>)</span>
 <span id="cb9-3"><a href="#cb9-3"></a></span>
@@ -684,7 +684,7 @@ div.tocify {
 <span id="cb9-26"><a href="#cb9-26"></a>              <span class="st">&#39;ng-star-inserted&#39;</span>]</span>
 <span id="cb9-27"><a href="#cb9-27"></a></span>
 <span id="cb9-28"><a href="#cb9-28"></a><span class="co"># Open a file to save data</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a>outfile <span class="op">=</span> <span class="st">&#39;Shenzhen_20221205.csv&#39;</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a>outfile <span class="op">=</span> <span class="st">&#39;Shenzhen_20221210.csv&#39;</span></span>
 <span id="cb9-30"><a href="#cb9-30"></a></span>
 <span id="cb9-31"><a href="#cb9-31"></a><span class="cf">with</span> <span class="bu">open</span>(outfile, <span class="st">&#39;w&#39;</span>) <span class="im">as</span> f:</span>
 <span id="cb9-32"><a href="#cb9-32"></a>    <span class="co"># Write the header</span></span>
@@ -713,7 +713,7 @@ div.tocify {
 <span id="cb9-55"><a href="#cb9-55"></a>        <span class="co"># Print the row</span></span>
 <span id="cb9-56"><a href="#cb9-56"></a>        <span class="bu">print</span>(i, row)</span>
 <span id="cb9-57"><a href="#cb9-57"></a>        <span class="co"># Write the date of the recorded data into the file</span></span>
-<span id="cb9-58"><a href="#cb9-58"></a>        f.write(<span class="st">&#39;2022-12-05,&#39;</span>) </span>
+<span id="cb9-58"><a href="#cb9-58"></a>        f.write(<span class="st">&#39;2022-12-10,&#39;</span>) </span>
 <span id="cb9-59"><a href="#cb9-59"></a>        <span class="co"># Write data into the file</span></span>
 <span id="cb9-60"><a href="#cb9-60"></a>        f.write(<span class="st">&#39;,&#39;</span>.join(row[:<span class="dv">10</span>])) </span>
 <span id="cb9-61"><a href="#cb9-61"></a>        <span class="co"># New line, to append more rows to the same file later on</span></span>
@@ -813,7 +813,7 @@ div.tocify {
 <p>Now that we have our new <code>scrape_shenzhen_weather</code> function defined, let’s use it to scrape data for between <code>2022-01-01</code> and <code>2022-01-03</code>. To do this, we simply need to define the <code>start_date</code> and <code>end_date</code> parameters, and run the function.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Set start and end dates</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>start_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2022</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>end_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2022</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>end_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2022</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb11-4"><a href="#cb11-4"></a></span>
 <span id="cb11-5"><a href="#cb11-5"></a><span class="co"># Call the scraper function</span></span>
 <span id="cb11-6"><a href="#cb11-6"></a>scrape_shenzhen_weather(start_date, end_date)</span></code></pre></div>
