@@ -34,7 +34,7 @@ Browse [`Seaborn` gallery](https://seaborn.pydata.org/examples/index.html).
 
 [`Altair`](https://altair-viz.github.io/) is also a statistical data visualization library in Python. It is based on [Vega and Vega-Lite](https://vega.github.io/vega/) which are a sort of declarative language for creating, saving, and sharing data visualization designs that are also interactive. `Altair` can be used to create beautiful data visualizations of plots such as bar charts, pie charts, histograms, scatterplots, error charts, power spectra, stemplots, etc. using a minimal amount of coding. You can open `Jupyter Notebook` or `JupyterLab` and execute any of the code to obtain that data visualizations in `Altair`. 
 
-Browse [`Seaborn` gallery](https://altair-viz.github.io/gallery/index.html).
+Browse [`Altair` gallery](https://altair-viz.github.io/gallery/index.html).
 
 ## `Bokeh`
 
@@ -60,7 +60,7 @@ Browse [`Plotly` gallery](https://dash.gallery/Portal/) to discover things you w
 
 [`Cartopy`](https://scitools.org.uk/cartopy/docs/latest/) makes use of the powerful `PROJ`, `numpy`, and `shapely` modules and includes a programmatic interface built on top of `matplotlib` for the creation of publication-quality maps. We have a [section](https://zhu-group.github.io/ese5023/Section_09.html) about this library. 
 
-Browse [`Seaborn` gallery](https://scitools.org.uk/cartopy/docs/latest/gallery/index.html).
+Browse [`Cartopy` gallery](https://scitools.org.uk/cartopy/docs/latest/gallery/index.html).
 
 ## `Geoplotlib`
 
@@ -95,7 +95,6 @@ The list below contains the core packages that you will use in the upcoming chap
   + [Seismology](https://www.javedali.net/post/python-resources-for-earth-sciences/#seismology)
 * [Machine learning and visualization in Python for Earth science](https://earthml.holoviz.org/)
 * [Python OS Ecosystem for GIS and Earth Observation](https://ecosystem.pythongis.org)
-* [Python for Earth Scientists](https://homepages.see.leeds.ac.uk/~earawa/PythonEarthSci/)
 * [Geo-Python 2022](https://geo-python-site.readthedocs.io/en/latest/)
 * [Open Source Python Packages in Hydrology](https://github.com/raoulcollenteur/Python-Hydrology-Tools)
 * [Python in Hydrology](https://greenteapress.com/pythonhydro/pythonhydro.html)
