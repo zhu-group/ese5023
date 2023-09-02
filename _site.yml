@@ -16,6 +16,8 @@ navbar:
     - text: "Assignments"
       icon: fa-laptop
       menu:
+        - text: "Assignment 01"
+          href: Assignment_01.html  
 output:
   html_document:
     theme: readable
