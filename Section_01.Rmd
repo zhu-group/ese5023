@@ -89,7 +89,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 **Course topics:**
 
-* Three languages: Python, Shell (BASH), and FORTRAN
+* Three languages: Python, Shell (BASH), and FORTRAN  
 * One operation system: Linux  
 * At the end of the semester, you should be able to:
   + Use Git for version control
@@ -118,12 +118,12 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 # Course structure
 
-* Tuesday class   
+* Class 09-10   
   + New material demonstrated (45-60 mins)
   + In-class exercises (30-45 mins)
 
-* Thursday class (odd weeks only)
-  + In-class exercises (45-60 mins)
+* Class 11 
+  + Lab exercises (15-30 mins)
   + Working on assignments
   + Discussing the final project
   + One-on-one interactions

@@ -1,5 +1,5 @@
 ---
-title: "Lab 03 Python Basics and `numpy`"
+title: "Lab 03 Python Basics (I) "
 output:
   html_document:
     toc: true
@@ -10,37 +10,45 @@ output:
 
 ***
 
-# 1. Pascal triangle
+# 1. Flowchart
 
-One of the most interesting number patterns is [Pascal's triangle](https://www.mathsisfun.com/pascals-triangle.html) (named after Blaise Pascal). Write a function `Pascal_triangle` with an argument `k` to print the *k*^th^ line of the Pascal triangle. 
+A [Flowchart](https://www.programiz.com/article/flowchart-programming) is a diagrammatic representation of an algorithm. It can be helpful for both writing programs and explaining the program to others. A Flowchart is very useful in programming, as it explains a process clearly through symbols and text. Moreover, a flowchart gives you the gist of the process flow in a single glance. 
 
-Report `Pascal_triangle(100)` and `Pascal_triangle(200)`.
+Here we begin to learn the flowchart with `if` and `else` in `Python`. Copy the following lines into your script:
+
+```{python eval=FALSE}
+# importing "random" for random operations
+import random
+
+# Using random() function to generate one random value between 0 and 1
+Score  = round(random.random()*100)
+print(Score)
+
+# Get level
+if (Score >= 90):
+  print("Excellent") 
+elif (Score >= 60):
+  print("Pass")
+else:
+  print("Fail")
+```
+
+* Selecting all the lines, and then run the script, what is your result in **Console**?  Here `Score` is randomly generated using `random()` function from the `random` library. Type `help(random)` for help. You can play with this script a few times to get different outputs.
+
+* Draw a flow chart based on this script.  
+
+* Update your script to reflect the following flowchart.
+
+<img src="figs/simple-grading-system.png" alt="drawing" width="300"/>
 
 ***
 
-# 2. Matrix multiplication
+# 2. Building a guessing game
 
-**2.1** Make two matrices `M1` (`5` rows and `10` columns ) and `M2` (`10` rows and `5` columns ); both are filled with random integers from `0` and `50`.
++ Set a secret integer from `0` to `9`, name the integer `answer`. Make sure your deskmate does not know the secret number.
 
-**2.2** Write a function `Matrix_multip` to do matrix multiplication, *i.e.*, `M1 * M2`. 
++ Write a function that does the following: if your deskmate is able to guess your secret number correctly, print `You Win!`, otherwise print `You Lose! I Win!`
 
-Here you are **ONLY** allowed to use `for` loop, `*` operator, and `+` operator. 
++ Let your deskmate play the game. 
 
-**2.3** Verify your function with the `matmul()` function from `numpy`.
-
-***
-
-# 3. `numpy` exercises
-
-**3.1**  Convert a float (32 bits) array into an integer (32 bits).
-
-[Hint: Try the `astype()` function].
-
-**3.2**  Find the most frequent value in a `numpy` array.
-
-[Hint: Try the `bincount()` function].
-
-**3.3**  Find the `n` largest values of a `numpy` array.
-
-[Hint: Try the `argsort()` function].
-
++ Now it's your turn to play your deskmate's game.

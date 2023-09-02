@@ -13,46 +13,40 @@
 
 <title>Schedule</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-
-
-
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
 
 
 
@@ -62,10 +56,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -82,40 +72,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 66px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h2 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h3 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h4 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h5 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h6 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -143,7 +109,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -155,7 +121,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -165,11 +131,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -181,13 +164,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -195,16 +177,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -248,7 +223,7 @@ $(document).ready(function () {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -279,7 +254,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-laptop"></span>
      
     Assignments
@@ -312,7 +287,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -322,18 +297,19 @@ $(document).ready(function () {
 
 
 <p><strong>Class Time:</strong><br />
-Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00</p>
+Wednesday 19:00-21:50</p>
 <p><strong>Location:</strong><br />
-503, Teaching Building #1</p>
-<p><strong>2022 Fall:</strong></p>
+212, Teaching Building #3</p>
+<p><strong>2023 Fall:</strong></p>
 <table>
 <colgroup>
 <col width="1%" />
-<col width="2%" />
 <col width="1%" />
-<col width="50%" />
-<col width="35%" />
-<col width="8%" />
+<col width="1%" />
+<col width="36%" />
+<col width="27%" />
+<col width="25%" />
+<col width="6%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -341,6 +317,7 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00</p>
 <th align="center">Date</th>
 <th align="center">Day</th>
 <th align="left">Topic</th>
+<th align="left">Lab</th>
 <th align="center">Assignment Out</th>
 <th align="center">Assignment Due</th>
 </tr>
@@ -348,202 +325,179 @@ Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00</p>
 <tbody>
 <tr class="odd">
 <td align="center">1</td>
-<td align="center">09/06</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_01.html">Section 01 Introduction</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">1</td>
-<td align="center">09/08</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_02.html">Section 02 Version control with Git</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">2</td>
 <td align="center">09/13</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_01.html">Lab 01 Git and Python setup</a></td>
+<td align="center">W.</td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Section_01.html">Section 01
+Introduction</a></td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Lab_01.html">Lab 01 Python
+setup</a></td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
-<td align="center">3</td>
+<td align="center">2</td>
 <td align="center">09/20</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_03.html">Section 03 Python: Basics (I)</a></td>
+<td align="center">W.</td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Section_02.html">Section 02
+Version control with Git</a></td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Lab_02.html">Lab 02 Git
+setup</a></td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="odd">
 <td align="center">3</td>
-<td align="center">09/22</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_02.html">Lab 02 Python Basics</a></td>
+<td align="center">09/27</td>
+<td align="center">W.</td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Section_03.html">Section 03
+Python: Basics (I)</a></td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Lab_03.html">Lab 03 Python
+Basics (I)</a></td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
 <td align="center">4</td>
-<td align="center">09/27</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_04.html">Section 04 Python: Basics (II)</a></td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/Assignment_01.html">Assignment 1</a></td>
+<td align="center">10/11</td>
+<td align="center">W.</td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Section_04.html">Section 04
+Python: Basics (II)</a></td>
+<td align="left"><a
+href="https://zhu-group.github.io/ese5023/Lab_04.html">Lab 04 Python
+Basics (II)</a></td>
+<td align="center">Assignment 1</td>
 <td align="center"></td>
 </tr>
 <tr class="odd">
 <td align="center">5</td>
-<td align="center">10/11</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_05.html">Section 05 Intermediate Python: <code>numPy</code></a></td>
+<td align="center">10/18</td>
+<td align="center">W.</td>
+<td align="left">Section 05 Intermediate Python: <code>numPy</code></td>
+<td align="left">Lab 05 <code>numPy</code> exercises</td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
-<td align="center">5</td>
-<td align="center">10/13</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_03.html">Lab 03 Python Basics and <code>numpy</code></a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
 <td align="center">6</td>
-<td align="center">10/18</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_06.html">Section 06 Intermediate Python: <code>pandas</code></a></td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/Assignment_02.html">Assignment 2</a></td>
+<td align="center">10/25</td>
+<td align="center">W.</td>
+<td align="left">Section 06 Intermediate Python:
+<code>pandas</code></td>
+<td align="left">Lab 06 <code>pandas</code> exercises</td>
+<td align="center">Assignment 2</td>
 <td align="center">Assignment 1</td>
 </tr>
-<tr class="even">
-<td align="center">7</td>
-<td align="center">10/25</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_07.html">Section 07 Intermediate Python: <code>xarray</code></a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
 <tr class="odd">
 <td align="center">7</td>
-<td align="center">10/27</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_04.html">Lab 04 <code>Pandas</code> and time series</a></td>
+<td align="center">11/01</td>
+<td align="center">W.</td>
+<td align="left">Section 07 Intermediate Python:
+<code>xarray</code></td>
+<td align="left">Lab 07 Time series</td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
 <td align="center">8</td>
-<td align="center">11/01</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_08.html">Section 08 Plotting with <code>matplotlib</code></a></td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/Assignment_03.html">Assignment 3</a></td>
+<td align="center">11/08</td>
+<td align="center">W.</td>
+<td align="left">Section 08 Plotting with <code>matplotlib</code></td>
+<td align="left">Lab 08 Plotting (I)</td>
+<td align="center">Assignment 3</td>
 <td align="center">Assignment 2</td>
 </tr>
 <tr class="odd">
 <td align="center">9</td>
-<td align="center">11/08</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_09.html">Section 09 Making maps with <code>cartopy</code></a></td>
+<td align="center">11/15</td>
+<td align="center">W.</td>
+<td align="left">Section 09 Making maps with <code>cartopy</code></td>
+<td align="left">Lab 09 Plotting (II)</td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
-<td align="center">9</td>
-<td align="center">11/10</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_05.html">Lab 05 Plotting and interactive visualization</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
 <td align="center">10</td>
-<td align="center">11/15</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_10.html">Section 10 Scientific computing with <code>SciPy</code></a></td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/Assignment_04.html">Assignment 4</a></td>
+<td align="center">11/22</td>
+<td align="center">W.</td>
+<td align="left">Section 10 Scientific computing with
+<code>SciPy</code></td>
+<td align="left">Lab 10 <code>SciPy</code> exercises</td>
+<td align="center">Assignment 4</td>
 <td align="center">Assignment 3</td>
 </tr>
-<tr class="even">
-<td align="center">11</td>
-<td align="center">11/22</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_11.html">Section 11 Python environments</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
 <tr class="odd">
 <td align="center">11</td>
-<td align="center">11/24</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_06.html">Lab 06 <code>SciPy</code> exercises</a></td>
+<td align="center">11/29</td>
+<td align="center">W.</td>
+<td align="left">Section 11 Python environments</td>
+<td align="left">Lab 11 Python environments</td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
 <td align="center">12</td>
-<td align="center">11/29</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_12.html">Section 12 Parallel computing with Python</a></td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/Assignment_05.html">Assignment 5</a></td>
+<td align="center">12/06</td>
+<td align="center">W.</td>
+<td align="left">Section 12 Parallel computing with Python</td>
+<td align="left">Lab 12 Parallel computing</td>
+<td align="center">Assignment 5</td>
 <td align="center">Assignment 4</td>
 </tr>
 <tr class="odd">
 <td align="center">13</td>
-<td align="center">12/06</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_13.html">Section 13 Linux: Basics</a></td>
+<td align="center">12/13</td>
+<td align="center">W.</td>
+<td align="left">Section 13 Linux: Basics</td>
+<td align="left">Lab 13 Linux</td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
-<td align="center">13</td>
-<td align="center">12/08</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_14.html">Section 14 Linux: Shell scripts and Taiyi jobs</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
 <td align="center">14</td>
-<td align="center">12/13</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Lab_07.html">Lab 07 Linux and TaiYi</a></td>
+<td align="center">12/20</td>
+<td align="center">W.</td>
+<td align="left">Section 14 Linux: Shell scripts and Taiyi jobs</td>
+<td align="left">Lab 14 Using TaiYi</td>
 <td align="center"></td>
 <td align="center">Assignment 5</td>
 </tr>
-<tr class="even">
-<td align="center">15</td>
-<td align="center">12/20</td>
-<td align="center">Tu.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_15.html">Section 15 Web scraping with Python</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
 <tr class="odd">
 <td align="center">15</td>
-<td align="center">12/22</td>
-<td align="center">Th.</td>
-<td align="left"><a href="https://zhu-group.github.io/ese5023/Section_16.html">Section 16 Course wrap-up</a></td>
+<td align="center">12/27</td>
+<td align="center">W.</td>
+<td align="left">Section 15 Web scraping</td>
+<td align="left">Course wrap-up</td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
 <td align="center">16</td>
-<td align="center">12/27</td>
-<td align="center">Tu.</td>
+<td align="center">01/03</td>
+<td align="center">W.</td>
 <td align="left">Final project presentation</td>
-<td align="center"><a href="https://zhu-group.github.io/ese5023/download/Final_project_2022.pdf">Final project</a></td>
+<td align="left"></td>
+<td align="center"></td>
 <td align="center"></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Supplements:</strong><br />
-Supplement 01: <a href="https://zhu-group.github.io/ese5023/Sup_01.html">Fortran: Basics</a><br />
-Supplement 02: <a href="https://zhu-group.github.io/ese5023/Sup_02.html">Fortran: Intermediate</a><br />
-Supplement 03: <a href="https://zhu-group.github.io/ese5023/Sup_03.html">Lab: Fortran Intermediate</a></p>
+Supplement 01: <a
+href="https://zhu-group.github.io/ese5023/Sup_01.html">Fortran:
+Basics</a><br />
+Supplement 02: <a
+href="https://zhu-group.github.io/ese5023/Sup_02.html">Fortran:
+Intermediate</a><br />
+Supplement 03: <a
+href="https://zhu-group.github.io/ese5023/Sup_03.html">Lab: Fortran
+Intermediate</a></p>
 
 
 
@@ -554,7 +508,7 @@ Supplement 03: <a href="https://zhu-group.github.io/ese5023/Sup_03.html">Lab: Fo
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -572,7 +526,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

@@ -15,23 +15,17 @@ Email: zhul3@sustech.edu.cn
 Office Hours: By appointment*  
 
 **Teaching Assistants (TAs):**   
-Xicheng Li   
+Peng Zhang   
 *School of Environmental Science and Engineering  
 Office: 903B, CoE North    
-Email: 12231101@mail.sustech.edu.cn  
-Office Hours: Friday 10:30-11:30* 
-
-Yuyang Chen   
-*School of Environmental Science and Engineering  
-Office: 903B, CoE North    
-Email: 12031006@mail.sustech.edu.cn  
-Office Hours: Monday 10:30-11:30* 
+Email: 12332277@mail.sustech.edu.cn  
+Office Hours: TBD* 
 
 **Class Time:**   
-Tuesday 19:00-21:00 / Thursday (odd weeks) 19:00-21:00
+Wednesday 19:00-21:50 
 
 **Location:**   
-503, Teaching Building #1 
+212, Teaching Building #3 
 
 **Credit:**   
 The course has a credit of 3.0, with a total class hour of 48.
@@ -44,7 +38,7 @@ This course will introduce students to modern computing software, programming to
 This course is a **hands-on and project-oriented** course that facilitates student learning through lectures, in-class exercises, labs, assignments, final project, and one-on-one interactions. Class topics will be taught through example data sets, demos, and research problems from Environmental Science.  
 
 **Structure:**   
-The course will meet on Tuesday weekly and on Thursday every other week (odd weeks only). On Tuesday, new material will be demonstrated by the instructor, followed by in-class exercises. On Thursday, the class will turn into a lab, Thursday class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
+The course will meet on Wednesday weekly. During class 09-10, new material will be demonstrated by the instructor, followed by in-class exercises. For class 11, the class will turn into a lab, when class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
 
 **Prerequisites:**  
 C or C++; Applied Mathematics; Or permission of the instructor.
@@ -59,7 +53,7 @@ Students are **required** to bring laptops to the class to learn the material, p
 Students will be evaluated at the end of the semester based on their assignments (50%), final project (40%), and class participation (10%).
 
 **Schedule:**  
-[Schedule for 2022 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
+[Schedule for 2023 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
 
 ***
 

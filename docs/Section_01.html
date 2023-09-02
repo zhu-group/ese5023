@@ -13,49 +13,43 @@
 
 <title>Section 01 Introduction</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-
-
-
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
 
 
 
@@ -65,10 +59,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -85,40 +75,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 66px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h2 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h3 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h4 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h5 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h6 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -146,7 +112,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -158,7 +124,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -168,11 +134,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -184,13 +167,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -198,16 +180,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -316,7 +291,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -330,7 +305,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -361,7 +336,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-laptop"></span>
      
     Assignments
@@ -394,7 +369,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -404,13 +379,20 @@ div.tocify {
 
 
 <blockquote>
-<p>“Without coding, computers would literally do nothing. They would be completely useless. That’s because source code is the set of instructions that tells the computer what to do. Computers have no free will, after all, so without explicit instruction, they’re just sophisticated hunks of metal.” - Travis Addair, Software Engineer, on Quora.</p>
+<p>“Without coding, computers would literally do nothing. They would be
+completely useless. That’s because source code is the set of
+instructions that tells the computer what to do. Computers have no free
+will, after all, so without explicit instruction, they’re just
+sophisticated hunks of metal.” - Travis Addair, Software Engineer, on
+Quora.</p>
 </blockquote>
 <hr />
 <div id="background-poll" class="section level1">
 <h1>Background Poll</h1>
-<p><strong>1. On a scale of 0 (not any) to 10 (sophisticated), how to describe your programming experience?</strong></p>
-<p><strong>2. Are you familiar with the following languages?</strong></p>
+<p><strong>1. On a scale of 0 (not any) to 10 (sophisticated), how to
+describe your programming experience?</strong></p>
+<p><strong>2. Are you familiar with the following
+languages?</strong></p>
 <ul>
 <li>FORTRAN<br />
 </li>
@@ -420,7 +402,8 @@ div.tocify {
 <li>Other</li>
 <li>I know English, maybe some Cantonese</li>
 </ul>
-<p><strong>3. Do you use the following languages for data analysis?</strong></p>
+<p><strong>3. Do you use the following languages for data
+analysis?</strong></p>
 <ul>
 <li>MATLAB<br />
 </li>
@@ -466,33 +449,41 @@ div.tocify {
 <li>Ubuntu</li>
 <li>Other</li>
 </ul>
-<p><strong>8. In your view, why is programming necessary?</strong> (open question)</p>
+<p><strong>8. In your view, why is programming necessary?</strong> (open
+question)</p>
 <ul>
 <li>Research</li>
 <li>Job hunting</li>
 <li>Just for fun</li>
 <li>Other</li>
 </ul>
-<p><strong>9. In your view, why is programming hard?</strong> (open question, <a href="https://makemeaprogrammer.com/is-programming-hard/">source</a>)</p>
+<p><strong>9. In your view, why is programming hard?</strong> (open
+question, <a
+href="https://makemeaprogrammer.com/is-programming-hard/">source</a>)</p>
 <ul>
 <li>Oh, I’m just really not a math person</li>
 <li>Programmers are elite hackers, like in movies</li>
 <li>I need a computer science degree to write code<br />
 </li>
-<li>Programmers should be immediately good at all things about the computer</li>
+<li>Programmers should be immediately good at all things about the
+computer</li>
 <li>Other</li>
 </ul>
-<p><strong>10. Name one thing you want to achieve at the end of the semester</strong> (open question)</p>
+<p><strong>10. Name one thing you want to achieve at the end of the
+semester</strong> (open question)</p>
 <hr />
 </div>
 <div id="course-topics-to-be-covered" class="section level1">
 <h1>Course topics to be covered</h1>
-<p>Research in the ESE field (in fact, any field) is all about data:<br />
+<p>Research in the ESE field (in fact, any field) is all about
+data:<br />
 <img src="figs/phd053104s.gif" alt="drawing" width="700"/><br />
-Hopefully, this course will make your life easier when it comes to interpret and visualize data.</p>
+Hopefully, this course will make your life easier when it comes to
+interpret and visualize data.</p>
 <p><strong>Course topics:</strong></p>
 <ul>
-<li>Three languages: Python, Shell (BASH), and FORTRAN</li>
+<li>Three languages: Python, Shell (BASH), and FORTRAN<br />
+</li>
 <li>One operation system: Linux<br />
 </li>
 <li>At the end of the semester, you should be able to:
@@ -506,7 +497,9 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <ul>
 <li>plain text, .csv, .nc, .hdf, etc.</li>
 </ul></li>
-<li>Work with data neatly using common packages like <code>numpy</code>, <code>scipy</code>, <code>matplotlib</code>, <code>pandas</code>, and <code>xarray</code></li>
+<li>Work with data neatly using common packages like <code>numpy</code>,
+<code>scipy</code>, <code>matplotlib</code>, <code>pandas</code>, and
+<code>xarray</code></li>
 <li>Proceed statistical tests with Python
 <ul>
 <li>comparing means, ANOVA, regressions, etc.<br />
@@ -516,7 +509,8 @@ Hopefully, this course will make your life easier when it comes to interpret and
 <li>Conduct parallel computing in Python</li>
 <li>Use the Linux environment
 <ul>
-<li>basics, BASH scripts, installing software, loading modules, etc.</li>
+<li>basics, BASH scripts, installing software, loading modules,
+etc.</li>
 </ul></li>
 <li>Run jobs on TaiYi high-performance computer
 <ul>
@@ -533,20 +527,22 @@ Hopefully, this course will make your life easier when it comes to interpret and
 </ul></li>
 </ul></li>
 </ul>
-<p><img src="figs/Python.png" alt="drawing" width="200"/> <img src="figs/Git.jpeg" alt="drawing" width="200"/> <img src="figs/Linux.jpeg" alt="drawing" width="200"/></p>
+<p><img src="figs/Python.png" alt="drawing" width="200"/>
+<img src="figs/Git.jpeg" alt="drawing" width="200"/>
+<img src="figs/Linux.jpeg" alt="drawing" width="200"/></p>
 <hr />
 </div>
 <div id="course-structure" class="section level1">
 <h1>Course structure</h1>
 <ul>
-<li>Tuesday class
+<li>Class 09-10
 <ul>
 <li>New material demonstrated (45-60 mins)</li>
 <li>In-class exercises (30-45 mins)</li>
 </ul></li>
-<li>Thursday class (odd weeks only)
+<li>Class 11
 <ul>
-<li>In-class exercises (45-60 mins)</li>
+<li>Lab exercises (15-30 mins)</li>
 <li>Working on assignments</li>
 <li>Discussing the final project</li>
 <li>One-on-one interactions</li>
@@ -566,60 +562,106 @@ Hopefully, this course will make your life easier when it comes to interpret and
 </div>
 <div id="take-the-course-or-not" class="section level1">
 <h1>Take the course or not?</h1>
-<p>This course is designed for ESE graduate students having <strong>NO or WEAK</strong> programming background, with emphasis on Python, FORTRAN, Git, and Linux (BASH).</p>
+<p>This course is designed for ESE graduate students having <strong>NO
+or WEAK</strong> programming background, with emphasis on Python,
+FORTRAN, Git, and Linux (BASH).</p>
 <p><strong>Good reasons</strong> for NOT taking the course:</p>
 <ul>
-<li>After browsing the <a href="https://zhu-group.github.io/ese5023/Syllabus.html">syllabus</a> and <a href="https://zhu-group.github.io/ese5023/Schedule.html">schedule</a>, there is nothing new for me</li>
-<li>I have a strong programming background with Python or other tools (C, C++, Java, MATLAB, R, IDL, etc.) already</li>
-<li>I am able to model, analyze, and visualize data sets through programming efforts already</li>
-<li>I want to learn other programming languages (C, C++, Java, MATLAB, R, IDL, etc.)</li>
-<li>I want to take an “easy” class to meet the graduation requirement</li>
-<li>I don’t want to spend much time on the course; instead, I want to focus more on my research</li>
+<li>After browsing the <a
+href="https://zhu-group.github.io/ese5023/Syllabus.html">syllabus</a>
+and <a
+href="https://zhu-group.github.io/ese5023/Schedule.html">schedule</a>,
+there is nothing new for me</li>
+<li>I have a strong programming background with Python or other tools
+(C, C++, Java, MATLAB, R, IDL, etc.) already</li>
+<li>I am able to model, analyze, and visualize data sets through
+programming efforts already</li>
+<li>I want to learn other programming languages (C, C++, Java, MATLAB,
+R, IDL, etc.)</li>
+<li>I want to take an “easy” class to meet the graduation
+requirement</li>
+<li>I don’t want to spend much time on the course; instead, I want to
+focus more on my research</li>
 </ul>
 <p><strong>Bad reasons</strong> for NOT taking the course:</p>
 <ul>
 <li>I don’t have (any) coding/programming experience/background</li>
 <li>Programming is intimidating; perhaps I can never master it</li>
-<li>My project requires no coding/programming skills, I can finish all analysis with Excel</li>
+<li>My project requires no coding/programming skills, I can finish all
+analysis with Excel</li>
 </ul>
-<p><strong>By taking the course, you commit yourself to work on time-consuming assignments and final project.</strong></p>
+<p><strong>By taking the course, you commit yourself to work on
+time-consuming assignments and final project.</strong></p>
 <hr />
 </div>
 <div id="a-closer-look-at-programming-process" class="section level1">
 <h1>A closer look at programming process</h1>
-<p>Very often, we find programming difficult because we fail to break down the initial research question into small parts, which I refer as <em>conceptual model</em>, <em>math or logic model</em>, and <em>computer model</em>.</p>
-<p>The most crucial step is to have a <strong>well-defined</strong> <em>conceptual model</em>. This involves simplifying and generalizing your initial question so that you can describe the gist in one sentence. Once you have a well-defined conceptual model, building a math or logic model would become straightforward. And coding is just the last step of the programming process where you use suitable languages and tools to let the computer know what you exactly want to do.</p>
+<p>Very often, we find programming difficult because we fail to break
+down the initial research question into small parts, which I refer as
+<em>conceptual model</em>, <em>math or logic model</em>, and
+<em>computer model</em>.</p>
+<p>The most crucial step is to have a <strong>well-defined</strong>
+<em>conceptual model</em>. This involves simplifying and generalizing
+your initial question so that you can describe the gist in one sentence.
+Once you have a well-defined conceptual model, building a math or logic
+model would become straightforward. And coding is just the last step of
+the programming process where you use suitable languages and tools to
+let the computer know what you exactly want to do.</p>
 <p><img src="figs/flow_01.jpg" alt="drawing" width="800"/></p>
-<p>The above process of programming, however, can not be ideal as you can probably not make it with one shot. In reality, you need to modify those models <strong>iteratively</strong> before finally solving the question, so the chart would be more like as follow.</p>
+<p>The above process of programming, however, can not be ideal as you
+can probably not make it with one shot. In reality, you need to modify
+those models <strong>iteratively</strong> before finally solving the
+question, so the chart would be more like as follow.</p>
 <p><img src="figs/flow_02.jpg" alt="drawing" width="800"/></p>
 </div>
 <div id="an-example-estimation-of-pi" class="section level1">
-<h1>An example: Estimation of <span class="math inline">\(\pi\)</span></h1>
+<h1>An example: Estimation of <span
+class="math inline">\(\pi\)</span></h1>
 <p>Now suppose our research question is:</p>
-<div id="question-how-to-estimate-the-number-of-pi" class="section level2 tabset tabset-fade tabset-pills">
-<h2>Question: How to estimate the number of <span class="math inline">\(\pi\)</span>?</h2>
+<div id="question-how-to-estimate-the-number-of-pi"
+class="section level2 tabset tabset-fade tabset-pills">
+<h2 class="tabset tabset-fade tabset-pills">Question: How to estimate
+the number of <span class="math inline">\(\pi\)</span>?</h2>
 <div id="your-ideas" class="section level3">
 <h3>Your ideas</h3>
 <p>Can you think about a few ways to solve this?</p>
 </div>
 <div id="hints" class="section level3">
 <h3>Hints</h3>
-<p>If <em>r</em> is the radius of a circle, then the surface of this circle is <span class="math inline">\(\pi*r^{2}\)</span>. Therefore, if we know the radius of a circle, and the surface of this circle, we can estimate <span class="math inline">\(\pi\)</span>. Then how can we estimate the surface of a circle?</p>
-<p>A circle (red) in a square (black) is our solution. Indeed, this is very easy to know the surface of a square. It is the square of the length of one of its sides. Do you see where this is leading us? What if we were able to estimate the rate between the surface of the circle and the surface of the square? Then we would know the surface of the circle.</p>
+<p>If <em>r</em> is the radius of a circle, then the surface of this
+circle is <span class="math inline">\(\pi*r^{2}\)</span>. Therefore, if
+we know the radius of a circle, and the surface of this circle, we can
+estimate <span class="math inline">\(\pi\)</span>. Then how can we
+estimate the surface of a circle?</p>
+<p>A circle (red) in a square (black) is our solution. Indeed, this is
+very easy to know the surface of a square. It is the square of the
+length of one of its sides. Do you see where this is leading us? What if
+we were able to estimate the rate between the surface of the circle and
+the surface of the square? Then we would know the surface of the
+circle.</p>
 <p><img src="figs/flow_03.jpg" alt="drawing" width="400"/></p>
-<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We can apply the <em>Monte Carlo method</em> here. If we uniformly drop <em>N</em> random points (blue) in the square and count how many of them are in the circle, then we have a proxy of the quantity surfaceCircle/surfaceSquare. (source: <a href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation of the number PI – A Monte Carlo simulation</a>)</p>
+<p>Finally, we just need to estimate (surfaceCircle/surfaceSquare). We
+can apply the <em>Monte Carlo method</em> here. If we uniformly drop
+<em>N</em> random points (blue) in the square and count how many of them
+are in the circle, then we have a proxy of the quantity
+surfaceCircle/surfaceSquare. (source: <a
+href="https://www.r-bloggers.com/estimation-of-the-number-pi-a-monte-carlo-simulation/">Estimation
+of the number PI – A Monte Carlo simulation</a>)</p>
 </div>
 </div>
 <div id="section" class="section level2 unnumbered">
-<h2></h2>
+<h2 class="unnumbered"></h2>
 </div>
 <div id="the-conceptual-model" class="section level2">
 <h2>The conceptual model</h2>
-<p>Following the above idea, the conceptual model would be: The proportion between the number of points within the circle (<em>n</em>) and the square (<em>N</em>) is equal to surfaceCircle/surfaceSquare.</p>
+<p>Following the above idea, the conceptual model would be: The
+proportion between the number of points within the circle (<em>n</em>)
+and the square (<em>N</em>) is equal to surfaceCircle/surfaceSquare.</p>
 </div>
 <div id="the-math-model" class="section level2">
 <h2>The math model</h2>
-<p>Simply translating the conceptual model, we have <span class="math display">\[n/N = \pi / 4\]</span></p>
+<p>Simply translating the conceptual model, we have <span
+class="math display">\[n/N = \pi / 4\]</span></p>
 </div>
 <div id="the-computer-model" class="section level2">
 <h2>The computer model</h2>
@@ -647,7 +689,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -665,7 +707,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -674,6 +716,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

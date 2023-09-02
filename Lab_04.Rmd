@@ -1,5 +1,5 @@
 ---
-title: "Lab 04 `Pandas` and time series"
+title: "Lab 04 Python Basics (II) "
 output:
   html_document:
     toc: true
@@ -10,95 +10,70 @@ output:
 
 ***
 
-# 1. `Pandas` data analysis practice
+# 1. Rock, paper, and scissors
 
-In this assignment, we will practice some of the concepts and skills covered [Section 06](https://zhu-group.github.io/ese5023/Section_06.html). 
+In this mini-project, we will build a rock, paper, scissors game in the following steps:
 
-**1.** Download the [demo file](https://zhu-group.github.io/ese5023/download/countries.csv) contains basic information of world countries, read it as dataframe `countries_df`.
++ Define a list `["rock", "paper", "scissors"]`, use `choice()` function from `random` module to randomly select an element from the list, name it `computer_choice`.
 
-**2.** How many countries does the dataframe contain? 
++ Now ask for user input. The input value should be in the list. Name the input `your_choice`.
 
-[Hint: Use the `.shape` method]
-
-**3.** Retrieve a list of continents from the dataframe?
-
-[Hint: Use the `.unique` method of a series]
-
-**4.** What is the total population of all the countries listed in this dataset?
-
-**5.** What is the overall life expectancy across the world?
-
-[Hint: You'll need to take a weighted average of life expectancy using populations as weights]
-
-**6.** Create a dataframe containing `10` countries with the highest population.
-
-**7.** Add a new column in `countries_df` to record the overall GDP per country.
-
-**8.** Create a dataframe containing `10` countries with the lowest GDP per capita, among the counties with a population greater than `100` million.
-
-**9.** Create a dataframe that counts the number of countries in each continent?
-
-**10.** Create a dataframe showing the total population of each continent.
-
-**11.** Let's download [another CSV file](https://zhu-group.github.io/ese5023/download/covid-countries-data.csv) containing overall COVID-19 stats for various countries, and read the data into another `pandas` dataframe `covid_data_df`.
-
-**12.** Count the number of countries for which the `total_tests` data is missing.
-
-[Hint: Use the `.isna` method]
-
-**13.** Let's merge the two dataframes (`countries_df` and `covid_data_df`) on the `location` column, and name the merged dataframe `combined_df`
-
-[Hint: Use the `.merge` method on `countries_df`. Search how to use `.merge` by yourself]
-
-**14.** Add columns `tests_per_million`, `cases_per_million` and `deaths_per_million` into `combined_df`.
-
-**15.** Create a dataframe with `10` counties that have the highest number of tests per million people.
-
-**16.** Create a dataframe with `10` counties that have the highest number of cases per million people.
-
-**17.** Count number of countries that feature in both the lists of "highest number of tests per million" (from question #15) and "highest number of cases per million" (from question #16).
-
-[Hint: Use the `.merge` method again]
-
-**18.** Count number of countries that feature in both the lists "`20` countries with the lowest GDP per capita" and "`20` countries with the lowest number of hospital beds per thousand population". Only consider countries with a population higher than `10` million while creating the list.
++ Using `if`, `elif`, and `else` to determine who wins.
 
 ***
 
-# 2. Basics of time series
+# 2. Using `Jupyter Notebook`
 
-In `Anaconda Powershell`, install `seaborn`:
+<img src="figs/jupyter.png" alt="drawing" width="200"/>
 
-```{python, eval=F}
-pip install seaborn
-```
+Jupyter is a loose acronym meaning `Julia`, `Python`, and `R`. The word "notebook" denotes documents that contain **both code and rich text elements**, such as figures, links, equations, etc. Because of the mix of code and text elements, these documents are the ideal place to bring together an analysis description, and its results, as well as, they can be executed perform the data analysis in real time.
 
-**1.** Read the [daily ozone data file](https://zhu-group.github.io/ese5023/download/ozone_data.csv) we used in [Section 06](https://zhu-group.github.io/ese5023/Section_06.html#Exercise_4). Read the data as `ozone_data` dataframe.
+`Jupyter` is a free, open-source, interactive web tool known as a computational notebook, which researchers can use to combine software code, computational output, explanatory text and multimedia resources in a single document. Jupyter is recommended by *Nature* as [data scientists’ computational notebook of choice](https://www.nature.com/articles/d41586-018-07196-1). 
 
-**2.** Create a new column `cDate` that contains string values in a format like `2020-05-01`. Here we use `2020` as the year of all observations.
++ `Jupyter` is installed along with `Anaconda`. Open `Anaconda Powershell Prompt (anaconda3)`, change working directory using `cd`. 
 
-[Hint: Use the `.astype` method to convert formats, and `+` to combine strings]
++ Type and run `jupyter notebook`. This will open your default web browser, and Jupyter dashboard will show up.
 
-**3.** Create a new column `Date`, where you convert `cDate` to `Date` with `to_datetime` method. By doing so, we convert `string` to `Timestamp`. See [this](https://pandas.pydata.org/docs/reference/api/pandas.Timestamp.html) for more about `Timestamp`.
++ Create a new note by clicking `New` then `Python3 (ipykernel)`.
 
-**4.** Create a time series by apply `ozone_data.set_index('Date')`.
++ Go over `User Interface Tour` under the `Help` tab to familiarize yourself with the layout.
 
-**5.** By far, we have created a time series. We will take a further look at how to analyze time series in the future. For now, simply type:
++ Copy the following lines to a cell, run the cell, see what happens. We will take a closer look at `matplotlib` in the future sections.
 
 ```{python, eval=F}
-ozone['Ozone'].plot()
-```
 
-You will get a ozone time series. For a plot with several panels, run:
-
-```{python, eval=F}
-# Import modules
+# import matplotlib
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Columns to plot
-cols_plot = ['Ozone', 'Temperature', 'Wind.Speed']
-axes = ozone[cols_plot].plot(marker='.', linestyle='None', figsize=(11, 9), subplots=True)
-axes[0].set_ylabel('Ozone (ppb)')
-axes[1].set_ylabel('Temperature (F)')
-axes[2].set_ylabel('Wind Speed (m/s)')
+# Get some data
+temperatrue = [15.4, 16.3, 19.0, 22.7, 26.0, 28.0,
+               28.9, 28.7, 27.7, 25.3, 21.2, 17.0]
+month = range(1,13)
+
+# Plot a line
+plt.plot(month, temperatrue)
+
+# Add x and y labels
+plt.xlabel("Month")
+plt.ylabel("Temperature")
+
+# Add figure title
+plt.title("Monthly mean temperature in Shenzhen (degree)")
+
+# Show plot
+plt.show
 ```
+
++ Feel free to look around, refer to [Python For Data Science Cheat Sheet Jupyter Notebook](https://zhu-group.github.io/ese5023/download/python-cheatsheets_Jupyter.pdf) if you have any questions.
+
+Here are some further readings for `Jupyter Notebook`:
+
++ [How to Use Jupyter Notebook in 2020: A Beginner’s Tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/)
+
++ [Jupyter Notebook Quickstart](https://test-jupyter.readthedocs.io/en/latest/content-quickstart.html)
+
++ [Jupyter Notebook Users Manual](https://jupyter.brynmawr.edu/services/public/dblank/Jupyter%20Notebook%20Users%20Manual.ipynb) (more on Markdown)
+
++ [The Jupyter Notebook official documentation](https://jupyter-notebook.readthedocs.io/en/latest/)
+
++ [Jupyter IPython official documentation](https://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Index.ipynb)
