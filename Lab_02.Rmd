@@ -1,5 +1,5 @@
 ---
-title: "Lab 02 Git setup"
+title: "Lab 02 Git branches"
 output:
   html_document:
     toc: true

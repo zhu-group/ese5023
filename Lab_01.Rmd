@@ -1,5 +1,5 @@
 ---
-title: "Lab 01 Python setup"
+title: "Lab 01 Software setup"
 output:
   html_document:
     toc: true
@@ -47,3 +47,15 @@ A `Hello World!` output message will show up.
 ```
 
 What is your result? Can you explain why?
+
+***
+
+# 3. Install `GitKraken`
+
+We use [GitKraken](https://www.gitkraken.com/git-client) as the Git client. There are also many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc. Make sure to install GitKraken software specific to your operating system.
+
+***
+
+# 4. `GitHub` account
+
+We use [GitHub](https://github.com) as the repository version control platform. Follow [this page](https://git-scm.com/book/en/v2/GitHub-Account-Setup-and-Configuration) for Github account setup and configuration. Other software/platform, like [gitlab](https://about.gitlab.com) or [bitbucket](https://bitbucket.org), will not be covered in the class. 
