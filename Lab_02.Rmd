@@ -14,7 +14,7 @@ output:
 
 In this exercise, we will learn how to create a branch, modify it, and merge it to the `main` with GitKraken.
 
-**1.** Create a local repository named `Lab1_Exercise` with GitKraken.
+**1.** Create a local repository named `Lab2_Exercise` with GitKraken.
 
 **2.** Modify the `README` file by adding one sentence, stage and then commit the change.
 
@@ -56,7 +56,7 @@ In this exercise, we will learn how to create a branch, modify it, and merge it 
 
 **1.** Go through [Understanding the GitHub flow](https://guides.github.com/introduction/flow/).
 
-**2.** Open GitKraken, push `Lab1_Exercise` to GitHub. Click `1 branche` next to the `main` drop-down menu for a quick overview of the branche.
+**2.** Open GitKraken, push `Lab2_Exercise` to GitHub. Click `1 branche` next to the `main` drop-down menu for a quick overview of the branche.
 
 **3.** Now follow [GitHub guide](https://guides.github.com/activities/hello-world/) step `2` to create a new branch `branch3`.
 
@@ -66,6 +66,6 @@ In this exercise, we will learn how to create a branch, modify it, and merge it 
 
 **6.** Follow step `5` to merge your Pull Request.
 
-**7.** Open GitKraken and pull `Lab1_Exercise` from GitHub. Check the flow. 
+**7.** Open GitKraken and pull `Lab2_Exercise` from GitHub. Check the flow. 
 
-**8.** Finally, go back to `Lab1_Exercise` on GitHub, click `Settings`, then scroll down to the bottom, click `Delete this repository`.
+**8.** Finally, go back to `Lab2_Exercise` on GitHub, click `Settings`, then scroll down to the bottom, click `Delete this repository`.
