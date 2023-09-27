@@ -68,6 +68,7 @@ print("    /|")
 print("   / |")
 print("  /  |")
 print(" /   |")
+print("______")
 ```
 
 Always think about clarifying your intentions, as others may later read your code. Here we call such intentions as "comments". Anything that follows after the hash symbol `#` is ignored by `Python` when it executes code.
@@ -79,7 +80,7 @@ We can write a few lines with meaningful information:
 print("Once there is a guy Lei, ")
 print("he is 36 years old.")
 print("He likes the name Lei,")
-print("but does not like being 36")
+print("but does not like being 36.")
 ```
 
 The output in your Console will be in the same order.
@@ -90,10 +91,10 @@ Suppose you want to change the name `Lei` and age `36` in the previous chunk of 
 
 ```{python, eval=F}
 # Print a few lines with meaningful information
-print("Once there is a guy Yuyang, ")
-print("he is 24 years old.")
-print("He likes the name Yuyang,")
-print("but does not like being 24.")
+print("Once there is a guy Peng, ")
+print("he is 22 years old.")
+print("He likes the name Peng,")
+print("but does not like being 22.")
 ```
 
 It would be very handy if we could create **variables** to contain those pieces of information, and later use those variables directly. 
