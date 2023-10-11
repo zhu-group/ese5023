@@ -174,7 +174,7 @@ else:
 Even more, you can use `break` and `continue` combined with `if` statement to control the flow.
 
 ```{python, eval=F}
-# use break and continue to control the flow
+# Use break and continue to control the flow
   
 # Initialize the ID
 ID = 0
@@ -346,6 +346,5 @@ Build a translator that first asks a user to input a string, then converts every
   + [Complex Data Types](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-3_-Complex-Data-Types.pdf)
   + [Classes](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-4_-Classes.pdf)
   + [Functions and Tricks](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-5_-Functions-and-Tricks.pdf)
-* [Python in a Hurry for Experienced Programmers](https://pyhurry.readthedocs.io/en/latest/index.html) (A nice quick introduction to Python for people who have programmed in other languages)
 * [The 30 Best Python Libraries and Packages for Beginners](https://www.ubuntupit.com/best-python-libraries-and-packages-for-beginners/)
 * [Python Usuful Modules](https://wiki.python.org/moin/UsefulModules)

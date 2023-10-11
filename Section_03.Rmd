@@ -199,7 +199,7 @@ Use `index()` to return the index of a string, or `replace()` to replace a strin
 
 # Use index()
 # School of Environment
-# 012345678901123456789
+# 012345678901234567890
 print(school.index("E"))
 
 # Return the 1st match case
