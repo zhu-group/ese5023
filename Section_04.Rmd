@@ -298,15 +298,15 @@ import random
 random.random()
 ```
 
-As we are using `Python` from `Anaconda`, official module files are located at: `C:\Users\xxx\anaconda3\Lib`, where `xxx` is your user name.
+As we are using `Python` from `Anaconda`, official module files are located at: `C:\Users\xxx\anaconda3\Lib`, where `xxx` is your user name. Or `C:\ProgramData\anaconda3\Lib` depending on your system.  
 
 `Python` also has a huge collection of third-party modules available for you to install. To do so, we use a package manager called `pip` (Pip Installs Packages). 
 
-* Open `Anaconda Prompt (anaconda3)`
+* Open `Anaconda Powershell Prompt `  
 
 * Type `pip install yyy`, where `yyy` is the package name (for example `python-docx`)
 
-* The new package will be installed at `C:\Users\xxx\anaconda3\Lib\site-packages\`, where `xxx` is your user name.
+* The new package will be installed at `C:\Users\xxx\anaconda3\Lib\site-packages\`, where `xxx` is your user name. Or `C:\ProgramData\anaconda3\Lib\site-packages\` depending on your system.  
 
 * To uninstall the package `yyy`, type `pip uninstall yyy`.
 
