@@ -1,0 +1,53 @@
+---
+title: "Lab 05 `numPy` exercises"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. `numpy` exercises
+
+**1.1**  Convert a float (32 bits) array into an integer (32 bits).
+
+[Hint: Try the `astype()` function].
+
+**1.2**  Find the most frequent value in a `numpy` array.
+
+[Hint: Try the `bincount()` function].
+
+**1.3**  Find the `n` largest values of a `numpy` array.
+
+[Hint: Try the `argsort()` function].
+
+**1.4**  Normalize a `5x5` random matrix.
+
+**1.5**  What is the output of the following script? Can you figure out why?  
+
+```
+print(sum(range(5),-1))
+from numpy import *
+print(sum(range(5),-1))
+```
+
+**1.6** How to get all the dates corresponding to the month of Oct. 2023?  
+
+[Hint: Try the `datetime64()` function].
+
+
+**1.7** Extract the integer part of a random array using `4` different methods.  
+
+
+**1.8** Generate a generic 2D Gaussian-like array.  
+
+
+**1.9** Find the nearest value from a given value in an array.  
+
+**1.10** How to find the most frequent value in an array?    
+
+
+
