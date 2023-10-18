@@ -26,12 +26,20 @@ output:
 
 **1.4**  Normalize a `5x5` random matrix.
 
-**1.5**  What is the output of the following script? Can you figure out why?  
+**1.5**  Consider an integer vector `arr`, which of these expressions are legal?  
 
 ```
-print(sum(range(5),-1))
-from numpy import *
-print(sum(range(5),-1))
+arr**arr
+
+2 << arr >> 2
+
+arr <- arr
+
+1j*arr
+
+arr/1/1
+
+arr < arr > arr
 ```
 
 **1.6** How to get all the dates corresponding to the month of Oct. 2023?  
@@ -41,13 +49,11 @@ print(sum(range(5),-1))
 
 **1.7** Extract the integer part of a random array using `4` different methods.  
 
+**1.8** Find the nearest value from a given value in an array.  
 
-**1.8** Generate a generic 2D Gaussian-like array.  
+**1.9** How to sort an array by the n^th^ column?   
 
-
-**1.9** Find the nearest value from a given value in an array.  
-
-**1.10** How to find the most frequent value in an array?    
+**1.10** Generate a generic 2D Gaussian-like array.  
 
 
 

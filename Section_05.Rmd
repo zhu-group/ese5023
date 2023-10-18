@@ -64,7 +64,7 @@ print(z.dtype)
 
 ```
 
-For more about numpy datatypes, check [Data type objects](https://numpy.org/doc/stable/reference/arrays.dtypes.html)
+For more about numpy datatypes, check [Data type objects](https://numpy.org/doc/stable/reference/arrays.dtypes.html).
 
 You can also create arrays on various dimensions:
 
@@ -257,11 +257,11 @@ y2 = np.array([11, 12])
 print(y1.dot(y2))
 print(np.dot(y1, y2))
 
-# Matrix / vector product
+# Matrix product
 print(x1.dot(y1))
 print(np.dot(x1, y1))
 
-# Matrix / matrix product
+# Matrix product
 print(x1.dot(x2))
 print(np.dot(x1, x2))
 ```
@@ -278,9 +278,7 @@ print(x1.T)
 `Numpy` also provides a range of functions to compute statistics of an array. For example:
 
 ```{python, eval=F}
-x = np.array([[ 0,  1,  2,  3],
-              [ 4,  5,  6,  7],
-              [ 8,  9, 10, 11]])
+x = np.linspace(1,12,12).reshape(4,3)
 
 # Get the sum
 np.sum(x)
@@ -407,7 +405,7 @@ Create an array with `np.arange(20)`, replace all odd numbers in the array with 
 
 ## Exercise #6
 
-Create two arrays (`x` and `y`) with `np.random.randint()`, find elements in `x` where its value is more than its corresponding element in `y`.
+Create two arrays (`x` and `y`) with `np.random.randint()`, find elements in `x` where its value is larger than its corresponding element in `y`.
 
 [Hint: try `np.where()` function]
 

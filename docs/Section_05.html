@@ -534,7 +534,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a hr
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="bu">print</span>(z.dtype)</span></code></pre></div>
 <p>For more about numpy datatypes, check <a
 href="https://numpy.org/doc/stable/reference/arrays.dtypes.html">Data
-type objects</a></p>
+type objects</a>.</p>
 <p>You can also create arrays on various dimensions:</p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># 0-D</span></span>
@@ -709,11 +709,11 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a h
 <span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="bu">print</span>(y1.dot(y2))</span>
 <span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="bu">print</span>(np.dot(y1, y2))</span>
 <span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co"># Matrix / vector product</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co"># Matrix product</span></span>
 <span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="bu">print</span>(x1.dot(y1))</span>
 <span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="bu">print</span>(np.dot(x1, y1))</span>
 <span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co"># Matrix / matrix product</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co"># Matrix product</span></span>
 <span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="bu">print</span>(x1.dot(x2))</span>
 <span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="bu">print</span>(np.dot(x1, x2))</span></code></pre></div>
 <p>To transpose a matrix, simply use the <code>T</code> attribute of an
@@ -727,20 +727,18 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a h
 <p><code>Numpy</code> also provides a range of functions to compute
 statistics of an array. For example:</p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>x <span class="op">=</span> np.array([[ <span class="dv">0</span>,  <span class="dv">1</span>,  <span class="dv">2</span>,  <span class="dv">3</span>],</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>              [ <span class="dv">4</span>,  <span class="dv">5</span>,  <span class="dv">6</span>,  <span class="dv">7</span>],</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>              [ <span class="dv">8</span>,  <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>]])</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Get the sum</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>np.<span class="bu">sum</span>(x)</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co"># Get the sum along an axis, make sure you understand</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>np.<span class="bu">sum</span>(x, axis<span class="op">=</span><span class="dv">0</span>) </span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>np.<span class="bu">sum</span>(x, axis<span class="op">=</span><span class="dv">1</span>) </span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co"># Get the max and min along an axis</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>np.amax(x) </span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>np.amax(x, axis<span class="op">=</span><span class="dv">0</span>) </span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">12</span>,<span class="dv">12</span>).reshape(<span class="dv">4</span>,<span class="dv">3</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># Get the sum</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>np.<span class="bu">sum</span>(x)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co"># Get the sum along an axis, make sure you understand</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>np.<span class="bu">sum</span>(x, axis<span class="op">=</span><span class="dv">0</span>) </span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>np.<span class="bu">sum</span>(x, axis<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co"># Get the max and min along an axis</span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>np.amax(x) </span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>np.amax(x, axis<span class="op">=</span><span class="dv">0</span>) </span></code></pre></div>
 <p>This figure shows the concept of “axis”</p>
 <p><img src="figs/axis.png" alt="drawing" width="800"/></p>
 <p>Please check <a
@@ -862,7 +860,8 @@ numbers in the array with <code>-1</code>.</p>
 <h2>Exercise #6</h2>
 <p>Create two arrays (<code>x</code> and <code>y</code>) with
 <code>np.random.randint()</code>, find elements in <code>x</code> where
-its value is more than its corresponding element in <code>y</code>.</p>
+its value is larger than its corresponding element in
+<code>y</code>.</p>
 <p>[Hint: try <code>np.where()</code> function]</p>
 </div>
 <div id="exercise-7" class="section level2">
