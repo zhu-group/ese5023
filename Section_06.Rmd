@@ -1,0 +1,362 @@
+---
+title: "Section 06 Intermediate `Python`: `pandas`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> "The exponential growth of `pandas` is due to the fact that it **just** works." - Ryan Abernathey
+
+***
+
+# Introduction to `pandas`
+
+[Pandas](https://pandas.pydata.org/) is an open-source library providing high-performance, easy-to-use data structures and data analysis tools. `Pandas` is particularly suited to the analysis of **tabular** data, i.e. data that can go into a table. In other words, if you can imagine the data in an Excel spreadsheet, then `pandas` is the tool for the job.
+
+As we covered in [Section 03](https://zhu-group.github.io/ese5023/Section_03.html#What_is_Python), python is the fastest growing and most widely used programming language in the world. This growth is driven by the data science packages such as `numpy`, `matplotlib`, and especially `pandas`. 
+
+Some highlights of `pandas` (from [`pandas` website](https://pandas.pydata.org/about/)):
+
++ A fast and efficient **DataFrame** object for data manipulation with integrated indexing;
+
++ Tools for **reading and writing data** between in-memory data structures and different formats: `CSV` and text files, Microsoft `Excel`, `SQL` databases, and the fast `HDF5` format;
+
++ Intelligent **data alignment** and integrated handling of **missing data**: gain automatic label-based alignment in computations and easily manipulate messy data into an orderly form;
+
++ Flexible **reshaping** and pivoting of data sets;
+
++ Intelligent label-based **slicing**, **fancy indexing**, and **subsetting** of large data sets;
+
++ Columns can be inserted and deleted from data structures for **size mutability**;
+
++ Aggregating or transforming data with a powerful **group by** engine allowing split-apply-combine operations on data sets;
+
++ High performance **merging** and **joining** of data sets;
+
++ **Hierarchical axis indexing** provides an intuitive way of working with high-dimensional data in a lower-dimensional data structure;
+
++ **Time series**-functionality: date range generation and frequency conversion, moving window statistics, date shifting, and lagging. Even create domain-specific time offsets and join time series without losing data;
+
++ Highly **optimized for performance**, with critical code paths written in `Cython` or `C`.
+
++ `Python` with `pandas` is in use in a wide variety of **academic and commercial domains**, including Finance, Neuroscience, Economics, Statistics, Advertising, Web Analytics, and more.
+
+
+***
+
+# `Pandas` basics
+
+In this section, we will go over the **basic capabilities** of `pandas`.
+
+`Pandas` is a **very deep** library, please dig into the [`pandas` documentation](https://pandas.pydata.org/pandas-docs/stable/) for more advanced usage.
+
+## Import `pandas`
+
+`pandas` should be installed along with `Anaconda`. To import it, run:
+
+```{python, eval=F}
+# import pandas 
+import pandas as pd
+# import numpy
+import numpy as np
+# import matplotlib
+from matplotlib import pyplot as plt
+# make plots appear and be stored within the notebook
+%matplotlib inline
+```
+
+## `Pandas` data structures: series
+
+A *series* represents a **one-dimensional array** of data. The main difference between a series and `numpy` array is that a series has an **index**. The index contains the labels that we use to access the data.
+
+There are many ways to [create a Series](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html). We will just show a few.
+
+Let's create a `pandas` series to store AQI (`2021-10-20 11:00`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
+
+```{python, eval=F}
+# Create a series
+city = ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen']
+aqi  = [55, 53, 52, 59]
+my_data = pd.Series(aqi, index=city)
+```
+
+You can show the series or even plot it:
+
+```{python, eval=F}
+# Show the series using city as the index
+my_data
+
+# Plot the series as bars
+my_data.plot(kind='bar')
+```
+
+Here we use `pandas` [built-in functions `plot`](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html) to plow the series as vertical bars (`kind='bar'`). Feel free to try other kinds (e.g., `barh`, `hist`, `box`, `area`, `pie`, etc.)
+
+Arithmetic operations and most `numpy` functions can be applied to a series. An important point is that the series keeps their index during such operations. For example:
+
+```{python, eval=F}
+# Apply operations and functions
+# The values make no sense, just for demonstration
+np.log(my_data) / my_data**2
+```
+
+Here are some useful functions to get access a series and its information:
+
+```{python, eval=F}
+# Get access the index object
+my_data.index
+
+# Get access the values
+my_data.values
+
+# Get values using the index via .loc attribute
+my_data.loc['Shenzhen']
+my_data.loc[['Shenzhen', 'Beijing']]
+
+# Or by raw position via .iloc
+my_data.iloc[0]
+my_data.iloc[0:2]
+
+```
+
+## `Pandas` data structures: dataframe
+
+Series are limited to a single "column". A more useful Pandas data structure is the `DataFrame`. A DataFrame is basically a bunch of series that share the same index. It's a lot like a table in a spreadsheet.
+
+In this part, let's use the [hourly meteorological data](https://zhu-group.github.io/ese5023/download/Met_2020.csv) observed in 2020 at Xichong, Shenzhen. Download the `Met_2020.csv` file, and move it to your working directory.
+
+### Read `csv` file
+
+To read a `csv` file, use the `read_csv()` function from the `pandas` module:
+
+```{python, eval=F}
+# Read a csv file
+met = pd.read_csv("Met_2020.csv")
+```
+
+Here `pandas` read the `Met_2020.csv` file, and save the object as a data frame named `met`. Here are some functions to check a data frame:
+
+```{python, eval=F}
+# Check information
+met.info()
+
+# Show column names
+met.columns
+
+# Show header
+met.head()
+met.head(10)
+
+# Show tail
+met.tail()
+met.tail(10)
+
+# Basic statistics
+met.describe()
+
+# Get access to a specific column
+met['P']
+```
+
+Similar to series, a dataframe can also be handled with `loc` and `iloc`:
+
+```{python, eval=F}
+# Get access to a certain row(s)
+met.loc[100:110]
+
+# Get access to a certain row(s) and column(s)
+met.iloc[1:4,2:6]
+```
+
+### Conditional choosing
+
+You may notice that some rows contain `-999.0`, which stands for `NaN` data or missing data. We can select those rows:
+
+```{python, eval=F}
+# Display which rows contain NA pressure values
+met.loc[ met['P'] == -999 ]
+```
+
+Or do more advanced filtering:
+
+```{python, eval=F}
+# Use & or |
+met.loc[ (met['P'] == -999) & (met['T'] == -999) ]
+
+# More advanced filtering
+met.loc[ (met['P'] >1000) & (met['T'] <30) ]
+
+# Contains a certain str
+met.loc[met['Time'].str.contains('13:00')]
+
+```
+
+### Sorting
+
+To sort a column or more columns:
+
+```{python, eval=F}
+# Sort in ascending order
+met.sort_values("T")
+
+# Sort in descending order
+met.sort_values("WS", ascending=False)
+
+# Sort more than one columns
+met.sort_values(["RH","T"], ascending=[1,1])
+
+```
+
+### Adding/droping columns
+
+To add one column:
+
+```{python, eval=F}
+# Check head
+met.head()
+
+# Creating a new column: number density
+met['ND'] = met['P']*100*6.02e23/8.314/met['T']*1e-6
+
+# Check again
+met.head()
+
+# Drop the column ND
+met = met.drop(columns=['ND'])
+
+# Check again
+met.head()
+
+```
+
+### Reseting index
+
+```{python, eval=F}
+# Making a new dataframe
+met2 = met.loc[ (met['P'] >1000) & (met['T'] <30) & (met['T'] >25) ]
+
+# The index is messy
+met2
+
+# Reset index and keeping the original index
+#met2.reset_index()
+
+# Reset index and discarding the original index
+met2.reset_index(drop=True, inplace=True)
+met2
+```
+
+### Saving to files
+
+We can save a dataframe to `csv`, `text`, or `xlsx` files:
+
+```{python, eval=F}
+# Only use a few columns
+met2 = met[['T', 'P', 'WS']]
+
+# Check head
+met2.head()
+
+# Save to a csv file with index
+#met2.to_csv('Met_2020_new.csv')
+
+# Save to a csv file without index
+met2.to_csv('Met_2020_new.csv', index=False)
+
+# Save to a xlsx file 
+met2.to_excel('Met_2020_new.xlsx', index=False)
+
+# Save to txt file, separated by tab
+met2.to_csv('Met_2020_new.txt', index=False, sep='\t')
+```
+
+### Group by
+
+Let's first create some categorical data for wind direction and remove missing data:
+
+```{python, eval=F}
+
+# Make a new column
+met['WD_new'] = 'N'
+
+# Assign wind dirctions
+met.loc[ (met['WD'] <=135 ) & (met['WD'] > 45 ), ['WD_new'] ] = 'E'
+met.loc[ (met['WD'] <=225 ) & (met['WD'] > 135 ), ['WD_new'] ] = 'S'
+met.loc[ (met['WD'] <=315 ) & (met['WD'] > 225 ), ['WD_new'] ] = 'W'
+
+# Remove missing data
+met = met.loc[ (met['WS']!=-999) & (met['WD']!=-999) & 
+               (met['T']!=-999) & (met['RH']!=-999) & (met['P']!=-999) & (met['Precip']!=-999) ]
+met.head()
+```
+
+Now let's group data by `WD_new`:
+
+```{python, eval=F}
+
+# Group by WD_new
+met.groupby(['WD_new']).mean()
+
+# Group by followed by sorting
+met.groupby(['WD_new']).mean().sort_values('T', ascending=True)
+```
+
+We can also create a new column `Hour` to save observation hours:
+
+```{python, eval=F}
+met['Hour'] = pd.to_datetime(met['Time']).dt.hour
+
+# Group by more groups
+met.groupby(['Hour', 'WD_new']).mean()
+
+# Plot
+met.groupby(['Hour']).mean()['T'].plot()
+
+```
+
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Go over the notes, make sure you understand the scripts.
+
+## Exercise #2
+
+`read_csv()` can also read `txt` file. Download [this file](https://zhu-group.github.io/ese5023/download/Met_2020.txt), take a look at it. Then read it with the opition `delimiter='\t'`.
+
+## Exercise #3
+
+Use `read_excel()` to read [this file](https://zhu-group.github.io/ese5023/download/Met_2020.xlsx).
+
+## Exercise #4
+
+1. Download [daily ozone data file](https://zhu-group.github.io/ese5023/download/ozone_data.csv) and read it with `pandas`.
+
+2. Get the lowest temperature.
+
+3. Count the total number of days with ozone higher than `40`.
+
+4. Get the date that has the highest ozone.
+
+5. Plot a histogram of ozone.
+
+6. Get the mean pressure in May.
+
+7. Get the mean pressure when the temperature is lower than `40` and wind speed is higher than `4.0`.
+
+8. Group the data by month, plot a bar plot to show mean ozone in different months.
+
+***
+
+# Further reading
+
++ [Pandas_Cheat_Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
++ [Pandas documentation](https://pandas.pydata.org/pandas-docs/stable/index.html)
++ [Chart Visualization](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
++ [Working with missing data](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html)
