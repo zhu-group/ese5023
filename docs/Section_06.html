@@ -565,20 +565,22 @@ the labels that we use to access the data.</p>
 href="https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html">create
 a Series</a>. We will just show a few.</p>
 <p>Let’s create a <code>pandas</code> series to store AQI
-(<code>2021-10-20 11:00</code>) at Beijing, Shanghai, Guangzhou, and
+(<code>2023-10-25 10:00</code>) at Beijing, Shanghai, Guangzhou, and
 Shenzhen with <code>city</code> as the index :</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Create a series</span></span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># AQI of 4 cities on 10/25/2023</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>city <span class="op">=</span> [<span class="st">&#39;Beijing&#39;</span>, <span class="st">&#39;Shanghai&#39;</span>, <span class="st">&#39;Guangzhou&#39;</span>, <span class="st">&#39;Shenzhen&#39;</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>aqi  <span class="op">=</span> [<span class="dv">55</span>, <span class="dv">53</span>, <span class="dv">52</span>, <span class="dv">59</span>]</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>my_data <span class="op">=</span> pd.Series(aqi, index<span class="op">=</span>city)</span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>aqi  <span class="op">=</span> [<span class="dv">172</span>, <span class="dv">151</span>, <span class="dv">157</span>, <span class="dv">97</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Create a pandas series</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>my_data <span class="op">=</span> pd.Series(aqi, index<span class="op">=</span>city)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co"># Show the series using &quot;city&quot; as the index</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>my_data</span></code></pre></div>
 <p>You can show the series or even plot it:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Show the series using city as the index</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>my_data</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Plot the series as bars</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>my_data.plot(kind<span class="op">=</span><span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Plot the series as bars</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>my_data.plot(kind<span class="op">=</span><span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
 <p>Here we use <code>pandas</code> <a
 href="https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html">built-in
 functions <code>plot</code></a> to plow the series as vertical bars
@@ -591,7 +593,8 @@ index during such operations. For example:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Apply operations and functions</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># The values make no sense, just for demonstration</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>np.log(my_data) <span class="op">/</span> my_data<span class="op">**</span><span class="dv">2</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>np.log(my_data) <span class="op">/</span> my_data<span class="op">**</span><span class="dv">2</span></span></code></pre></div>
 <p>Here are some useful functions to get access a series and its
 information:</p>
 <div class="sourceCode" id="cb5"><pre
@@ -603,11 +606,14 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Get values using the index via .loc attribute</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>my_data.loc[<span class="st">&#39;Shenzhen&#39;</span>]</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>my_data.loc[[<span class="st">&#39;Shenzhen&#39;</span>, <span class="st">&#39;Beijing&#39;</span>]]</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co"># Or by raw position via .iloc</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>my_data.iloc[<span class="dv">0</span>]</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>my_data.iloc[<span class="dv">0</span>:<span class="dv">2</span>]</span></code></pre></div>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>my_data.loc[[<span class="st">&#39;Shenzhen&#39;</span>, <span class="st">&#39;Beijing&#39;</span>]]</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Or by row position via .iloc</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>my_data.iloc[<span class="dv">0</span>]</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co"># .iloc is left inclusive but right exclusive</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>my_data.iloc[<span class="dv">0</span>:<span class="dv">2</span>]</span></code></pre></div>
 </div>
 <div id="pandas-data-structures-dataframe" class="section level2">
 <h2><code>Pandas</code> data structures: dataframe</h2>
@@ -653,7 +659,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a hr
 <p>Similar to series, a dataframe can also be handled with
 <code>loc</code> and <code>iloc</code>:</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Get access to a certain row(s)</span></span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Get access to a certain index(es)</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>met.loc[<span class="dv">100</span>:<span class="dv">110</span>]</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Get access to a certain row(s) and column(s)</span></span>
@@ -673,7 +679,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a h
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;P&#39;</span>] <span class="op">==</span> <span class="op">-</span><span class="dv">999</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">==</span> <span class="op">-</span><span class="dv">999</span>) ]</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># More advanced filtering</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;P&#39;</span>] <span class="op">&gt;</span><span class="dv">1000</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">&lt;</span><span class="dv">30</span>) ]</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;P&#39;</span>] <span class="op">&gt;</span> <span class="dv">1000</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">&lt;</span> <span class="dv">30</span>) ]</span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># Contains a certain str</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>met.loc[met[<span class="st">&#39;Time&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&#39;13:00&#39;</span>)]</span></code></pre></div>
@@ -689,7 +695,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a h
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>met.sort_values(<span class="st">&quot;WS&quot;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># Sort more than one columns</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>met.sort_values([<span class="st">&quot;RH&quot;</span>,<span class="st">&quot;T&quot;</span>], ascending<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">1</span>])</span></code></pre></div>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>met.sort_values([<span class="st">&quot;RH&quot;</span>, <span class="st">&quot;T&quot;</span>], ascending<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>])</span></code></pre></div>
 </div>
 <div id="addingdroping-columns" class="section level3">
 <h3>Adding/droping columns</h3>
@@ -714,9 +720,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a h
 <h3>Reseting index</h3>
 <div class="sourceCode" id="cb13"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Making a new dataframe</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>met2 <span class="op">=</span> met.loc[ (met[<span class="st">&#39;P&#39;</span>] <span class="op">&gt;</span><span class="dv">1000</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">&lt;</span><span class="dv">30</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">&gt;</span><span class="dv">25</span>) ]</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>met2 <span class="op">=</span> met.loc[ (met[<span class="st">&#39;P&#39;</span>] <span class="op">&gt;</span> <span class="dv">1000</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">&lt;</span> <span class="dv">30</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;T&#39;</span>] <span class="op">&gt;</span> <span class="dv">25</span>) ]</span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># The index is messy</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># Using the original index</span></span>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>met2</span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Reset index and keeping the original index</span></span>
@@ -738,16 +744,16 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a h
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>met2.head()</span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># Save to a csv file with index</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#met2.to_csv(&#39;Met_2020_new.csv&#39;)</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>met2.to_csv(<span class="st">&#39;Met_2020_new1.csv&#39;</span>)</span>
 <span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Save to a csv file without index</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>met2.to_csv(<span class="st">&#39;Met_2020_new.csv&#39;</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>met2.to_csv(<span class="st">&#39;Met_2020_new2.csv&#39;</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
 <span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co"># Save to a xlsx file </span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>met2.to_excel(<span class="st">&#39;Met_2020_new.xlsx&#39;</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>met2.to_excel(<span class="st">&#39;Met_2020_new3.xlsx&#39;</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a></span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co"># Save to txt file, separated by tab</span></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>met2.to_csv(<span class="st">&#39;Met_2020_new.txt&#39;</span>, index<span class="op">=</span><span class="va">False</span>, sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</span></code></pre></div>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>met2.to_csv(<span class="st">&#39;Met_2020_new4.txt&#39;</span>, index<span class="op">=</span><span class="va">False</span>, sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</span></code></pre></div>
 </div>
 <div id="group-by" class="section level3">
 <h3>Group by</h3>
@@ -757,15 +763,16 @@ remove missing data:</p>
 class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Make a new column</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>met[<span class="st">&#39;WD_new&#39;</span>] <span class="op">=</span> <span class="st">&#39;N&#39;</span></span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Assign wind dirctions</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&lt;=</span><span class="dv">135</span> ) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&gt;</span> <span class="dv">45</span> ), [<span class="st">&#39;WD_new&#39;</span>] ] <span class="op">=</span> <span class="st">&#39;E&#39;</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&lt;=</span><span class="dv">225</span> ) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&gt;</span> <span class="dv">135</span> ), [<span class="st">&#39;WD_new&#39;</span>] ] <span class="op">=</span> <span class="st">&#39;S&#39;</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&lt;=</span><span class="dv">315</span> ) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&gt;</span> <span class="dv">225</span> ), [<span class="st">&#39;WD_new&#39;</span>] ] <span class="op">=</span> <span class="st">&#39;W&#39;</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Assign wind directions</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&lt;=</span> <span class="dv">135</span> ) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&gt;</span> <span class="dv">45</span> ), [<span class="st">&#39;WD_new&#39;</span>] ] <span class="op">=</span> <span class="st">&#39;E&#39;</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&lt;=</span> <span class="dv">225</span> ) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&gt;</span> <span class="dv">135</span> ), [<span class="st">&#39;WD_new&#39;</span>] ] <span class="op">=</span> <span class="st">&#39;S&#39;</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>met.loc[ (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&lt;=</span> <span class="dv">315</span> ) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>] <span class="op">&gt;</span> <span class="dv">225</span> ), [<span class="st">&#39;WD_new&#39;</span>] ] <span class="op">=</span> <span class="st">&#39;W&#39;</span></span>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
 <span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># Remove missing data</span></span>
 <span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>met <span class="op">=</span> met.loc[ (met[<span class="st">&#39;WS&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;WD&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) <span class="op">&amp;</span> </span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>               (met[<span class="st">&#39;T&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;RH&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;P&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) <span class="op">&amp;</span> (met[<span class="st">&#39;Precip&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) ]</span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>met.head()</span></code></pre></div>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>               (met[<span class="st">&#39;T&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>)  <span class="op">&amp;</span> (met[<span class="st">&#39;RH&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) <span class="op">&amp;</span> </span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>               (met[<span class="st">&#39;P&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>)  <span class="op">&amp;</span> (met[<span class="st">&#39;Precip&#39;</span>]<span class="op">!=-</span><span class="dv">999</span>) ]</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>met.head()</span></code></pre></div>
 <p>Now let’s group data by <code>WD_new</code>:</p>
 <div class="sourceCode" id="cb16"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Group by WD_new</span></span>
@@ -776,13 +783,16 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a h
 <p>We can also create a new column <code>Hour</code> to save observation
 hours:</p>
 <div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>met[<span class="st">&#39;Hour&#39;</span>] <span class="op">=</span> pd.to_datetime(met[<span class="st">&#39;Time&#39;</span>]).dt.hour</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># Group by more groups</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>met.groupby([<span class="st">&#39;Hour&#39;</span>, <span class="st">&#39;WD_new&#39;</span>]).mean()</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Get the observation hour as a new column</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>met[<span class="st">&#39;Hour&#39;</span>] <span class="op">=</span> pd.to_datetime(met[<span class="st">&#39;Time&#39;</span>]).dt.hour</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>met.head()</span>
 <span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>met.groupby([<span class="st">&#39;Hour&#39;</span>]).mean()[<span class="st">&#39;T&#39;</span>].plot()</span></code></pre></div>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># Group by the observation hour, get hourly means, then plot</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>met.groupby([<span class="st">&#39;Hour&#39;</span>]).mean()[<span class="st">&#39;T&#39;</span>].plot()</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co"># Group by the observation hour then by wind direction</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>met.groupby([<span class="st">&#39;Hour&#39;</span>, <span class="st">&#39;WD_new&#39;</span>]).mean()</span></code></pre></div>
 <hr />
 </div>
 </div>
@@ -829,14 +839,14 @@ different months.</p></li>
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
 <ul>
-<li><a
-href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf">Pandas_Cheat_Sheet</a></li>
+<li><a href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf">Data
+Wrangling with pandas: a cheat sheet</a></li>
 <li><a
 href="https://pandas.pydata.org/pandas-docs/stable/index.html">Pandas
-documentation</a></li>
+official documentation</a></li>
 <li><a
 href="https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html">Chart
-Visualization</a></li>
+Visualization with Pandas</a></li>
 <li><a
 href="https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html">Working
 with missing data</a></li>

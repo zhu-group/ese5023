@@ -74,21 +74,23 @@ A *series* represents a **one-dimensional array** of data. The main difference b
 
 There are many ways to [create a Series](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html). We will just show a few.
 
-Let's create a `pandas` series to store AQI (`2021-10-20 11:00`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
+Let's create a `pandas` series to store AQI (`2023-10-25 10:00`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
 
 ```{python, eval=F}
-# Create a series
+# AQI of 4 cities on 10/25/2023
 city = ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen']
-aqi  = [55, 53, 52, 59]
+aqi  = [172, 151, 157, 97]
+
+# Create a pandas series
 my_data = pd.Series(aqi, index=city)
+
+# Show the series using "city" as the index
+my_data
 ```
 
 You can show the series or even plot it:
 
 ```{python, eval=F}
-# Show the series using city as the index
-my_data
-
 # Plot the series as bars
 my_data.plot(kind='bar')
 ```
@@ -100,6 +102,7 @@ Arithmetic operations and most `numpy` functions can be applied to a series. An 
 ```{python, eval=F}
 # Apply operations and functions
 # The values make no sense, just for demonstration
+
 np.log(my_data) / my_data**2
 ```
 
@@ -114,10 +117,13 @@ my_data.values
 
 # Get values using the index via .loc attribute
 my_data.loc['Shenzhen']
+
 my_data.loc[['Shenzhen', 'Beijing']]
 
-# Or by raw position via .iloc
+# Or by row position via .iloc
 my_data.iloc[0]
+
+# .iloc is left inclusive but right exclusive
 my_data.iloc[0:2]
 
 ```
@@ -164,7 +170,7 @@ met['P']
 Similar to series, a dataframe can also be handled with `loc` and `iloc`:
 
 ```{python, eval=F}
-# Get access to a certain row(s)
+# Get access to a certain index(es)
 met.loc[100:110]
 
 # Get access to a certain row(s) and column(s)
@@ -187,7 +193,7 @@ Or do more advanced filtering:
 met.loc[ (met['P'] == -999) & (met['T'] == -999) ]
 
 # More advanced filtering
-met.loc[ (met['P'] >1000) & (met['T'] <30) ]
+met.loc[ (met['P'] > 1000) & (met['T'] < 30) ]
 
 # Contains a certain str
 met.loc[met['Time'].str.contains('13:00')]
@@ -206,7 +212,7 @@ met.sort_values("T")
 met.sort_values("WS", ascending=False)
 
 # Sort more than one columns
-met.sort_values(["RH","T"], ascending=[1,1])
+met.sort_values(["RH", "T"], ascending=[1, 1])
 
 ```
 
@@ -236,9 +242,9 @@ met.head()
 
 ```{python, eval=F}
 # Making a new dataframe
-met2 = met.loc[ (met['P'] >1000) & (met['T'] <30) & (met['T'] >25) ]
+met2 = met.loc[ (met['P'] > 1000) & (met['T'] < 30) & (met['T'] > 25) ]
 
-# The index is messy
+# Using the original index
 met2
 
 # Reset index and keeping the original index
@@ -261,16 +267,16 @@ met2 = met[['T', 'P', 'WS']]
 met2.head()
 
 # Save to a csv file with index
-#met2.to_csv('Met_2020_new.csv')
+met2.to_csv('Met_2020_new1.csv')
 
 # Save to a csv file without index
-met2.to_csv('Met_2020_new.csv', index=False)
+met2.to_csv('Met_2020_new2.csv', index=False)
 
 # Save to a xlsx file 
-met2.to_excel('Met_2020_new.xlsx', index=False)
+met2.to_excel('Met_2020_new3.xlsx', index=False)
 
 # Save to txt file, separated by tab
-met2.to_csv('Met_2020_new.txt', index=False, sep='\t')
+met2.to_csv('Met_2020_new4.txt', index=False, sep='\t')
 ```
 
 ### Group by
@@ -282,14 +288,15 @@ Let's first create some categorical data for wind direction and remove missing d
 # Make a new column
 met['WD_new'] = 'N'
 
-# Assign wind dirctions
-met.loc[ (met['WD'] <=135 ) & (met['WD'] > 45 ), ['WD_new'] ] = 'E'
-met.loc[ (met['WD'] <=225 ) & (met['WD'] > 135 ), ['WD_new'] ] = 'S'
-met.loc[ (met['WD'] <=315 ) & (met['WD'] > 225 ), ['WD_new'] ] = 'W'
+# Assign wind directions
+met.loc[ (met['WD'] <= 135 ) & (met['WD'] > 45 ), ['WD_new'] ] = 'E'
+met.loc[ (met['WD'] <= 225 ) & (met['WD'] > 135 ), ['WD_new'] ] = 'S'
+met.loc[ (met['WD'] <= 315 ) & (met['WD'] > 225 ), ['WD_new'] ] = 'W'
 
 # Remove missing data
 met = met.loc[ (met['WS']!=-999) & (met['WD']!=-999) & 
-               (met['T']!=-999) & (met['RH']!=-999) & (met['P']!=-999) & (met['Precip']!=-999) ]
+               (met['T']!=-999)  & (met['RH']!=-999) & 
+               (met['P']!=-999)  & (met['Precip']!=-999) ]
 met.head()
 ```
 
@@ -307,16 +314,18 @@ met.groupby(['WD_new']).mean().sort_values('T', ascending=True)
 We can also create a new column `Hour` to save observation hours:
 
 ```{python, eval=F}
+# Get the observation hour as a new column
 met['Hour'] = pd.to_datetime(met['Time']).dt.hour
 
-# Group by more groups
-met.groupby(['Hour', 'WD_new']).mean()
+met.head()
 
-# Plot
+# Group by the observation hour, get hourly means, then plot
 met.groupby(['Hour']).mean()['T'].plot()
 
-```
+# Group by the observation hour then by wind direction
+met.groupby(['Hour', 'WD_new']).mean()
 
+```
 
 ***
 
@@ -356,7 +365,7 @@ Use `read_excel()` to read [this file](https://zhu-group.github.io/ese5023/downl
 
 # Further reading
 
-+ [Pandas_Cheat_Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
-+ [Pandas documentation](https://pandas.pydata.org/pandas-docs/stable/index.html)
-+ [Chart Visualization](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
++ [Data Wrangling with pandas: a cheat sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
++ [Pandas official documentation](https://pandas.pydata.org/pandas-docs/stable/index.html)
++ [Chart Visualization with Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
 + [Working with missing data](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html)
