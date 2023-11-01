@@ -192,13 +192,13 @@ Check those one by one:
 ds.data_vars
 
 # Check data dimension names
-ds.data_dims
+ds.dims
 
 # Check data coordinates
-ds.data_coords
+ds.coords
 
 # Check data attributes (metadata)
-ds.data_attrs
+ds.attrs
 ```
 
 ## Checking `DataArray` properties
