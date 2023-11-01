@@ -14,7 +14,7 @@ output:
 
 # Prerequisites
 
-In `Anaconda Powershell`, install `netCDF4`, `xarray`, and `nc-time-axis`, one after another:
+In `Anaconda Powershell`, install `netCDF4`, `xarray`, and `nc-time-axis`, **one after another**:
 
 ```{python, eval=F}
 pip install netCDF4
@@ -39,7 +39,7 @@ However, not all Earth science datasets easily fit into the "tabular" model (i.e
 
 $$T(Lon, Lat, Time)  $$
 
-The point of `xarray` is to provide pandas-level convenience for working with this type of data. Specifically, `xarray` is for working with labeled, multi dimensional arrays.
+The point of `xarray` is to provide **pandas-level convenience** for working with this type of data. Specifically, `xarray` is for working with labeled, multi dimensional arrays.
 
 + Built on top of `numpy` and `pandas`
 
@@ -280,13 +280,13 @@ The `.sel()` method is the primary access method for **purely coordinate label b
 # Select data in 2013
 ds.tas.sel(time='2013')
 
-# Select data in 2013-01-15
+# Select data on 2013-01-15
 ds.tas.sel(time='2013-01-15')
 
-# Select data in a list
+# Select data from a list
 ds.tas.sel(lon=['100','356.25'])
 
-# Select data in a range
+# Select data within a range
 # Both the start and the stop are included
 ds.tas.sel(time=slice("2013-01-01", "2014-12-31"))
 ```
@@ -319,7 +319,7 @@ Another way to use the nearest neighbor lookup is via a objects. For example:
 ds.tas.sel(lat=slice(39, 39.5), lon=slice(106.1, 106.3))
 ```
 
-Operators can be chained, so multiple operations can be used sequentially. For example, to select an area of interest and the first time index, and plot teh data:
+Operators can be chained, so multiple operations can be used sequentially. For example, to select an area of interest and the first time index, and plot the data:
 
 ```{python, eval=F}
 ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
@@ -357,9 +357,9 @@ ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
 Lets say we want to compare plots of temperature at three different latitudes. We can use the `hue` keyword argument to do this.
 
 ```{python, eval=F}
-# Time series of the near surface temperature at 3 latitudes
-ds.tas.sel(lat=[-50, 0, 50], time="2013-03", method="nearest").plot(
-    x="lon", hue="lat", figsize=(8, 6)
+# Time series of the near surface temperature at 3 latitudes at time stamp 50
+ds.tas.isel(time=50).sel(lat=[-50, 0, 50], method="nearest").plot(
+    x="lon", hue="lat", figsize=(8, 6))
 )
 ```
 
