@@ -11,7 +11,7 @@
 
 
 
-<title>Lab 08 Plotting and interactive visualization</title>
+<title>Lab 08 Plotting (I)</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -469,8 +469,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab 08 Plotting and interactive
-visualization</h1>
+<h1 class="title toc-ignore">Lab 08 Plotting (I)</h1>
 
 </div>
 
@@ -577,57 +576,6 @@ lat range (<code>20S</code>-<code>20N</code>) and lon range
 rolling means at the desired frequencies. Use the tips we covered in the
 <a href="https://zhu-group.github.io/ese5023/Section_08.html">Section
 08</a>, modify the plot as much as you can.</p>
-<hr />
-</div>
-<div id="interactive-visualization-using-hvplot" class="section level1">
-<h1>2. Interactive visualization using <code>hvplot</code></h1>
-<p>Let’s switch gears and look at how we can produce <strong>interactive
-plots</strong> via <a
-href="https://hvplot.holoviz.org/index.html"><code>hvplot</code></a>,
-which allows easy visualization of <code>xarray</code> (and other)
-objects.</p>
-<p>In <code>Anaconda Powershell</code>, install <code>hvplot</code>:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>conda install hvplot</span></code></pre></div>
-<p>To enable the <code>.hvplot</code> interface on <code>xarray</code>
-object, let’s import the <code>hvplot.xarray</code> module:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> hvplot.xarray</span></code></pre></div>
-<p><strong>1.</strong> To use <code>hvplot</code> instead of
-<code>matplotlib</code>, we use the <code>.hvplot()</code> method:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>ds.sst.hvplot()</span></code></pre></div>
-<p>As you can see, calling <code>.hvplot()</code> behaves the same as
-<code>.plot()</code>, i.e. it uses the same heuristics as
-<code>.plot()</code>. In this case, it produces a histogram for data
-with more than <code>3</code> dimensions.</p>
-<p><strong>2.</strong> To plot a <code>pcolormesh</code>, let’s reduce
-the dimensionality of our data to 2D and call <code>.hvplot()</code>
-again:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>).hvplot(cmap<span class="op">=</span><span class="st">&quot;fire&quot;</span>)</span></code></pre></div>
-<p>Or:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>, lon<span class="op">=</span><span class="dv">100</span>).hvplot()</span></code></pre></div>
-<p>Or:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>ds.sst.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).hvplot()</span></code></pre></div>
-<p><strong>3.</strong> So far we have had to subset our data in order to
-produce plots. <code>Hvplot</code> provides convenient functionality for
-producing plots on-demand via interactive widgets. Let’s create a series
-of 2D for each time slice, We will use the groupby parameter to let
-<code>hvplot</code> know that we want to create a widget (a slider) for
-the time dimension:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
-<p>Or you can add more features to the time widget:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
-<p><strong>4.</strong> Feel free to use <code>hvplot</code> to create a
-few interactive plots.</p>
-<p>For more about <code>hvplot</code>, check its <a
-href="https://hvplot.holoviz.org/reference/index.html">Reference
-Gallery</a>.</p>
 </div>
 
 
