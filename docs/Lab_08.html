@@ -11,7 +11,7 @@
 
 
 
-<title>Lab 04 Python Basics (II)</title>
+<title>Lab 08 Plotting and interactive visualization</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -469,104 +469,165 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab 04 Python Basics (II)</h1>
+<h1 class="title toc-ignore">Lab 08 Plotting and interactive
+visualization</h1>
 
 </div>
 
 
 <hr />
-<div id="rock-paper-and-scissors" class="section level1">
-<h1>1. Rock, paper, and scissors</h1>
-<p>In this mini-project, we will build a rock, paper, scissors game in
-the following steps:</p>
-<ul>
-<li><p>Define a list <code>["rock", "paper", "scissors"]</code>, use
-<code>choice()</code> function from <code>random</code> module to
-randomly select an element from the list, name it
-<code>computer_choice</code>.</p></li>
-<li><p>Now ask for user input. The input value should be in the list.
-Name the input <code>your_choice</code>.</p></li>
-<li><p>Using <code>if</code>, <code>elif</code>, and <code>else</code>
-to determine who wins.</p></li>
-</ul>
-<hr />
-</div>
-<div id="using-jupyter-notebook" class="section level1">
-<h1>2. Using <code>Jupyter Notebook</code></h1>
-<p><img src="figs/jupyter.png" alt="drawing" width="200"/></p>
-<p>Jupyter is a loose acronym meaning <code>Julia</code>,
-<code>Python</code>, and <code>R</code>. The word “notebook” denotes
-documents that contain <strong>both code and rich text
-elements</strong>, such as figures, links, equations, etc. Because of
-the mix of code and text elements, these documents are the ideal place
-to bring together an analysis description, and its results, as well as,
-they can be executed perform the data analysis in real time.</p>
-<p><code>Jupyter</code> is a free, open-source, interactive web tool
-known as a computational notebook, which researchers can use to combine
-software code, computational output, explanatory text and multimedia
-resources in a single document. Jupyter is recommended by
-<em>Nature</em> as <a
-href="https://www.nature.com/articles/d41586-018-07196-1">data
-scientists’ computational notebook of choice</a>.</p>
-<ul>
-<li><p><code>Jupyter</code> is installed along with
-<code>Anaconda</code>. Open
-<code>Anaconda Powershell Prompt (anaconda3)</code>, change working
-directory using <code>cd</code>.</p></li>
-<li><p>Type and run <code>jupyter notebook</code>. This will open your
-default web browser, and Jupyter dashboard will show up.</p></li>
-<li><p>Create a new note by clicking <code>New</code> then
-<code>Python3 (ipykernel)</code>.</p></li>
-<li><p>Go over <code>User Interface Tour</code> under the
-<code>Help</code> tab to familiarize yourself with the layout.</p></li>
-<li><p>Copy the following lines to a cell, run the cell, see what
-happens. We will take a closer look at <code>matplotlib</code> in the
-future sections.</p></li>
-</ul>
+<div id="global-sea-surface-temperature" class="section level1">
+<h1>1. Global sea surface temperature</h1>
+<p>In this exercise, we will use the <a
+href="https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html">NOAA
+Extended Reconstructed Sea Surface Temperature (SST) v5 product</a>, a
+widely used and trusted gridded compilation of historical data going
+back to <code>1854</code>.</p>
+<p><strong>1.</strong> Download the <a
+href="http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek">sst.mnmean.nc</a>
+(~ <code>90 MB</code>). Read it with <code>xarray</code> as the data
+object <code>ds</code>.</p>
+<p><strong>2.</strong> Plot mean SST in the latest month. Show a 2-D
+figure.</p>
+<p><strong>3.</strong> Plot a time series of global monthly mean SST
+from <code>1900-01</code> to <code>2021-12</code>.</p>
+<p><strong>4.</strong> It turns out that the previous figure is not
+correct, since it didn’t account for the real area of the
+<code>2 degrees x 2 degrees</code> grids. For this exercise, let’s
+create a <code>weights</code> array proportional to the cosine of
+latitude, as the correct area-weighting factor for data on a regular
+lat-lon grid.</p>
+<p><strong>5.</strong> Now use <code>weights</code> array to compute and
+plot the correct global monthly SST <code>1854-01</code> to
+<code>2022-10</code>. You results show look like this:</p>
+<p><img src="figs/corrected_SST.png" alt="drawing" width="700"/></p>
+<p><strong>6.</strong> Plot the averaged global SST at
+<code>June</code>. Show a 2-D figure.</p>
+<p><strong>7.</strong> Plot the monthly climatology at a point
+(<code>114.55E, 19.15N</code>) in the South China Sea. Show a 1-D
+figure.</p>
+<p><strong>8.</strong> Plot a contour map of the zonal mean climatology.
+Show a 2-D figure. You results show look like this:</p>
+<p><img src="figs/zonal_mean.png" alt="drawing" width="700"/></p>
+<p>[Hint: use the <code>plot.contourf()</code> function]</p>
+<p><strong>9.</strong> Remove the seasonal cycle from <code>sst</code>,
+and plot a timeseries of the anomalies at the point
+(<code>114.55E, 19.15N</code>).</p>
+<p><strong>10.</strong> Run the following lines:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># import matplotlib</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>group_data <span class="op">=</span> ds.sst.groupby(<span class="st">&#39;time.month&#39;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Get some data</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>temperatrue <span class="op">=</span> [<span class="fl">15.4</span>, <span class="fl">16.3</span>, <span class="fl">19.0</span>, <span class="fl">22.7</span>, <span class="fl">26.0</span>, <span class="fl">28.0</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>               <span class="fl">28.9</span>, <span class="fl">28.7</span>, <span class="fl">27.7</span>, <span class="fl">25.3</span>, <span class="fl">21.2</span>, <span class="fl">17.0</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>month <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">13</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># Plot a line</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>plt.plot(month, temperatrue)</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Add x and y labels</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Month&quot;</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Temperature&quot;</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co"># Add figure title</span></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>plt.title(<span class="st">&quot;Monthly mean temperature in Shenzhen (degree)&quot;</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co"># Show plot</span></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>plt.show</span></code></pre></div>
-<ul>
-<li>Feel free to look around, refer to <a
-href="https://zhu-group.github.io/ese5023/download/python-cheatsheets_Jupyter.pdf">Python
-For Data Science Cheat Sheet Jupyter Notebook</a> if you have any
-questions.</li>
-</ul>
-<p>Here are some further readings for <code>Jupyter Notebook</code>:</p>
-<ul>
-<li><p><a
-href="https://www.dataquest.io/blog/jupyter-notebook-tutorial/">How to
-Use Jupyter Notebook in 2020: A Beginner’s Tutorial</a></p></li>
-<li><p><a
-href="https://test-jupyter.readthedocs.io/en/latest/content-quickstart.html">Jupyter
-Notebook Quickstart</a></p></li>
-<li><p><a
-href="https://jupyter.brynmawr.edu/services/public/dblank/Jupyter%20Notebook%20Users%20Manual.ipynb">Jupyter
-Notebook Users Manual</a> (more on Markdown)</p></li>
-<li><p><a href="https://jupyter-notebook.readthedocs.io/en/latest/">The
-Jupyter Notebook official documentation</a></p></li>
-<li><p><a
-href="https://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Index.ipynb">Jupyter
-IPython official documentation</a></p></li>
-</ul>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Apply mean to grouped data, and then compute the anomalies </span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>sst_anom <span class="op">=</span> group_data <span class="op">-</span> group_data.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>sst_anom</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># Use resample() function at a frequency of 3 years</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>resample_obj <span class="op">=</span> sst_anom.resample(time<span class="op">=</span><span class="st">&quot;3Y&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># Show the resample object</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>resample_obj</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># Apply mean() function to the resample object and get results</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>ds_anom_resample <span class="op">=</span> resample_obj.mean(dim<span class="op">=</span><span class="st">&quot;time&quot;</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>ds_anom_resample</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co"># Plot anomalies</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>sst_anom.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>             method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, </span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>                     method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span></code></pre></div>
+<p>Check <a
+href="http://xarray.pydata.org/en/stable/generated/xarray.Dataset.resample.html">xarray.Dataset.resample</a>
+to teach yourself how to use the <code>resample()</code> function. Now
+resample the anomalies at a frequency of <code>180</code> days, replot,
+and what do you observe?</p>
+<p><strong>11.</strong> Run the following lines:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Compute rolling means</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>ds_anom_rolling <span class="op">=</span> sst_anom.rolling(time<span class="op">=</span><span class="dv">12</span>, center<span class="op">=</span><span class="va">True</span>).mean()</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Show rolling means</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>ds_anom_rolling</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Plot anomalies</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>sst_anom.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    label<span class="op">=</span><span class="st">&quot;monthly anomalies&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># Plot 3-year averaged anomalies</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>ds_anom_resample.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    label<span class="op">=</span><span class="st">&quot;3-year resample&quot;</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co"># Plot 12-month rolling mean</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>ds_anom_rolling.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>    label<span class="op">=</span><span class="st">&quot;12-month rolling mean&quot;</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># Add the legend</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>plt.legend()</span></code></pre></div>
+<p>Check <a
+href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.rolling.html">xarray.DataArray.rolling</a>
+to teach yourself how to use the <code>rolling()</code> function. Now
+compute the rolling means a frequency of <code>3</code> years, replot,
+and what do you observe?</p>
+<p><strong>12.</strong> Make a timeseries of the anomalies within the
+lat range (<code>20S</code>-<code>20N</code>) and lon range
+(<code>170</code>E to <code>170 W</code>), show resample means and
+rolling means at the desired frequencies. Use the tips we covered in the
+<a href="https://zhu-group.github.io/ese5023/Section_08.html">Section
+08</a>, modify the plot as much as you can.</p>
+<hr />
+</div>
+<div id="interactive-visualization-using-hvplot" class="section level1">
+<h1>2. Interactive visualization using <code>hvplot</code></h1>
+<p>Let’s switch gears and look at how we can produce <strong>interactive
+plots</strong> via <a
+href="https://hvplot.holoviz.org/index.html"><code>hvplot</code></a>,
+which allows easy visualization of <code>xarray</code> (and other)
+objects.</p>
+<p>In <code>Anaconda Powershell</code>, install <code>hvplot</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>conda install hvplot</span></code></pre></div>
+<p>To enable the <code>.hvplot</code> interface on <code>xarray</code>
+object, let’s import the <code>hvplot.xarray</code> module:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> hvplot.xarray</span></code></pre></div>
+<p><strong>1.</strong> To use <code>hvplot</code> instead of
+<code>matplotlib</code>, we use the <code>.hvplot()</code> method:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>ds.sst.hvplot()</span></code></pre></div>
+<p>As you can see, calling <code>.hvplot()</code> behaves the same as
+<code>.plot()</code>, i.e. it uses the same heuristics as
+<code>.plot()</code>. In this case, it produces a histogram for data
+with more than <code>3</code> dimensions.</p>
+<p><strong>2.</strong> To plot a <code>pcolormesh</code>, let’s reduce
+the dimensionality of our data to 2D and call <code>.hvplot()</code>
+again:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>).hvplot(cmap<span class="op">=</span><span class="st">&quot;fire&quot;</span>)</span></code></pre></div>
+<p>Or:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>ds.sst.isel(time<span class="op">=-</span><span class="dv">1</span>, lon<span class="op">=</span><span class="dv">100</span>).hvplot()</span></code></pre></div>
+<p>Or:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>ds.sst.sel(lon<span class="op">=</span><span class="fl">114.55</span><span class="op">+</span><span class="dv">180</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).hvplot()</span></code></pre></div>
+<p><strong>3.</strong> So far we have had to subset our data in order to
+produce plots. <code>Hvplot</code> provides convenient functionality for
+producing plots on-demand via interactive widgets. Let’s create a series
+of 2D for each time slice, We will use the groupby parameter to let
+<code>hvplot</code> know that we want to create a widget (a slider) for
+the time dimension:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
+<p>Or you can add more features to the time widget:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
+<p><strong>4.</strong> Feel free to use <code>hvplot</code> to create a
+few interactive plots.</p>
+<p>For more about <code>hvplot</code>, check its <a
+href="https://hvplot.holoviz.org/reference/index.html">Reference
+Gallery</a>.</p>
 </div>
 
 
