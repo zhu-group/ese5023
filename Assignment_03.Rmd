@@ -41,7 +41,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 The *Niño 3.4 anomalies* may be thought of as representing the average equatorial sea surface temperatures (SSTs) across the Pacific from about the dateline to the South American coast (`5N-5S`, `170W-120W`). The Niño 3.4 index typically uses a 3-month running mean, and El Niño or La Niña events are defined when the Niño 3.4 SSTs exceed `+/- 0.5°C` for a period of `5` months or more. Check [Equatorial Pacific Sea Surface Temperatures](https://www.ncdc.noaa.gov/teleconnections/enso/indicators/sst/) for more about the Niño 3.4 index.
 
-In this problem set, you will use the sea surface temperature (SST) data from [NOAA](https://www.noaa.gov/). Download the `netCDF4` file (`NOAA_NCDC_ERSST_v3b_SST.nc`) [here](http://10.20.7.229/index.php/s/do68CdKJbscS6QD).
+In this problem set, you will use the sea surface temperature (SST) data from [NOAA](https://www.noaa.gov/). Download the `netCDF4` file (`NOAA_NCDC_ERSST_v3b_SST.nc`) [here](http://172.18.31.60/index.php/s/do68CdKJbscS6QD).
 
 **1.1 [10 points]** Compute monthly climatology for SST from Niño 3.4 region, and subtract climatology from SST time series to obtain anomalies.
 
@@ -57,7 +57,7 @@ In this problem set, you will analyze top-of-atmosphere (TOA) radiation data fro
 
 [Figure source](https://www.nasa.gov/feature/langley/what-is-earth-s-energy-budget-five-questions-with-a-guy-who-knows)
 
-Download the data (`CERES_EBAF-TOA_200003-201701.nc`) [here](http://10.20.7.229/index.php/s/CHH6wiN3xCJxQeS). The size of the data file is `702.5 MB`. It will take a minute or two to download. Start by importing `xarray`, `numpy`, and `matplotlib`.
+Download the data (`CERES_EBAF-TOA_200003-201701.nc`) [here](http://172.18.31.60/index.php/s/CHH6wiN3xCJxQeS). The size of the data file is `702.5 MB`. It will take a minute or two to download. Start by importing `xarray`, `numpy`, and `matplotlib`.
 
 **2.1 [5 points]** Make a 2D plot of the time-mean TOA longwave, shortwave, and solar radiation for all-sky conditions. Add up the three variables above and verify (visually) that they are equivalent to the TOA net flux.
 
