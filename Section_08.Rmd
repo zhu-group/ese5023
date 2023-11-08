@@ -591,13 +591,15 @@ plt.savefig("bubbleplot.png", transparent=False, dpi=100)
 plt.show() 
 ```
 
-Here, by varying the size and color of points, we create nice-looking bubble plots. Another convenience is you can directly use a `pandas` dataframe to set the `x` and `y` values, specifying the source dataframe in the data argument. You can also set the color `c` and size `s` of the points from one of the dataframe columns itself.
+Here, by varying the size and color of points, we create nice-looking bubble plots. Another convenience is you can directly use a `pandas` dataframe to set the `x` and `y` values, specifying the source dataframe in the data argument. You can also set the color `c` and size `s` of the points from one of the dataframe columns itself.  
+
+Remember, always use `help()` to teach yourself how to use a function.  
 
 ## Beyond `matplotlib`
 
 As the plots get more complex, the more the code you need to write. This is the time to consider using a higher level package like `seaborn`, and use one of its pre-built functions. We are not going in-depth into `seaborn`. A lot of `seaborn`’s plots are suitable for data analysis and the library works seamlessly with `pandas` dataframes. Like `matplotlib`, `seaborn` comes with its own set of pre-built styles and palettes. Feel free to go to the [official `seaborn` page](https://seaborn.pydata.org/) for good examples for you to start with.
 
-So fat, we have covered the **syntax** and **overall structure** of creating `matplotlib` plots, seen how to modify various components of a plot, customized subplots layout, plots styling, colors, palettes, etc. 
+So far, we have covered the **syntax** and **overall structure** of creating `matplotlib` plots, seen how to modify various components of a plot, customized subplots layout, plots styling, colors, palettes, etc. 
 
 A good way to learn plotting is to browse plots (and scripts!) in the graph galleries. **Find the plots you want to mimic, edit and customize the scripts based on your need.**
 
