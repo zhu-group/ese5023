@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 09 Making maps with cartopy</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Computing and Programming for Environmental Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="Assignment_02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="Assignment_03.html">Assignment 03</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 09 Making maps with
+<code>cartopy</code></h1>
+
+</div>
+
+
+<blockquote>
+<p>“Maps are like campfires – everyone gathers around them, because they
+allow people to understand complex issues at a glance, and find
+agreement about how to help the land.” - Sonoma Ecology Center</p>
+</blockquote>
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>In <code>Anaconda Powershell Prompt</code>, install
+<code>cartopy</code>:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install cartopy</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>conda install <span class="op">-</span>c conda<span class="op">-</span>forge cartopy </span></code></pre></div>
+<p>Once <code>cartopy</code> is installed, load the following
+modules:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Import modules</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> mticker</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
+<p>In this section, we will use the global monthly near surface
+temperature (<a
+href="http://172.18.31.60/index.php/s/2wZyWS6NK7x2kbr"><code>CESM2_200001-201412.nc</code></a>
+from the Community Earth System Model (CESM) again for demonstration. To
+read the data with <code>xarray</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Load the netCDF4 file</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Check the data</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>ds</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># Use the latest monthly data</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>surface_T <span class="op">=</span> ds.tas.isel(time<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>surface_T</span></code></pre></div>
+<hr />
+</div>
+<div id="making-maps-with-cartopy" class="section level1">
+<h1>Making maps with <code>cartopy</code></h1>
+<p>Making maps is a <strong>fundamental part of geoscience and
+environmental research</strong>. Maps differ from regular figures in the
+following principal ways:</p>
+<ul>
+<li><p>Maps require a <em>projection</em> of geographic coordinates on
+the 3D Earth to the 2D space of your figure.</p></li>
+<li><p>Maps often include extra decorations besides the data
+(e.g. continents, country borders, etc.)</p></li>
+</ul>
+<p>Making mapping is a hard and complicated problem, mostly due to the
+complexities of projection. In this lecture, we will learn about <a
+href="https://scitools.org.uk/cartopy/docs/latest/"><code>cartopy</code></a>,
+one of the most common packages for making maps within
+<code>python</code>. Another popular and powerful library is <a
+href="https://matplotlib.org/basemap/"><code>basemap</code></a>.
+However, <code>basemap</code> <a
+href="https://matplotlib.org/basemap/users/intro.html#cartopy-new-management-and-eol-announcement">is
+retiring</a> and being replaced by <code>cartopy</code>.</p>
+<div id="projections" class="section level2">
+<h2>Projections</h2>
+<p>A map projection (or more commonly referred to as just “projection”)
+is a systematic transformation of the latitudes and longitudes of
+locations from the surface of a sphere or an ellipsoid into locations on
+a plane (source: <a
+href="https://en.wikipedia.org/wiki/Map_projection">map projection
+wikipedia</a>).</p>
+<p>The major problems with map projection are:</p>
+<ul>
+<li><p>The surface of a sphere is topologically different from a 2D
+surface, therefore we have to cut the sphere somewhere.</p></li>
+<li><p>A sphere’s surface cannot be represented on a plane without
+distortion.</p></li>
+</ul>
+<p>There are many different ways to make a projection, and they are
+beyond the scope of this course. You are encouraged to read Phil Elson’s
+<a
+href="https://github.com/SciTools/cartopy-tutorial/blob/master/tutorial/projections_crs_and_terms.ipynb">projections
+tutorial</a> for a great overview. Instead, we will dive into the more
+practical sides of <code>caropy</code> usage.</p>
+</div>
+<div id="introduction-to-cartopy" class="section level2">
+<h2>Introduction to <code>cartopy</code></h2>
+<p><code>Cartopy</code> makes use of the powerful <a
+href="https://proj.org/"><code>PROJ</code></a>, <code>numpy</code>, and
+<a
+href="https://shapely.readthedocs.io/en/stable/manual.html"><code>shapely</code></a>
+modules and includes a programmatic interface built on top of
+<code>matplotlib</code> for the creation of publication-quality
+maps.</p>
+<p>Key features of <code>cartopy</code> are its object-oriented
+projection definitions, and its ability to transform points, lines,
+vectors, polygons, and images between those projections.</p>
+<p>Let’s start with the simple Plate Carrée (French, <em>for flat
+square</em>) projection (a special case of equirectangular projection)
+with <code>cartopy</code>’s <code>crs</code> (coordinate reference
+systems) module. This is typically imported as <code>ccrs</code>
+(<code>cartopy</code> crs).</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Plate Carree projection</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ccrs.PlateCarree()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Show more details of the Plate Carree projection</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="bu">print</span>(ccrs.PlateCarree())</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># Check the projection</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>ccrs.PlateCarree?</span></code></pre></div>
+<p>For other available <code>cartopy</code> projections, check
+<code>cartopy</code> <a
+href="https://scitools.org.uk/cartopy/docs/latest/reference/projections.html">coordinate
+reference systems</a>.</p>
+</div>
+<div id="drawing-a-simple-map" class="section level2">
+<h2>Drawing a simple map</h2>
+<p><code>Cartopy</code> depends upon <code>matplotlib</code>, and each
+projection knows how to create a <code>matplotlib</code> Axes that can
+represent itself. This Axes overrides some of <code>matplotlib</code>’s
+existing methods, and adds a number of extremely useful ones for drawing
+maps.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Create an axes with an basic PlateCarree projection style</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.PlateCarree()</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># Add LAND feature to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
+<p>As you can see, <code>ccrs.PlateCarree()</code> creates an axes with
+a certain projection. We then use <code>add_feature()</code> to add land
+(<code>LAND</code>) feature to the axes. Here the pre-defined features
+are all small-scale (<code>1:110 million</code>) <a
+href="https://www.naturalearthdata.com/">Natural Earth datasets</a>:</p>
+<ul>
+<li><p><code>BORDERS</code> Country boundaries</p></li>
+<li><p><code>COASTLINE</code> Coastline, including major
+islands</p></li>
+<li><p><code>LAKES</code> Natural and artificial lakes</p></li>
+<li><p><code>LAND</code> Land polygons, including major islands</p></li>
+<li><p><code>OCEAN</code> Ocean polygons</p></li>
+<li><p><code>RIVERS</code> Single-line drainages, including lake
+centerlines</p></li>
+<li><p><code>STATES</code> <em>Limited to the United
+States</em></p></li>
+</ul>
+<p>Now try:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Create an axes with an basic PlateCarree projection style</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.PlateCarree()</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>ax.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div>
+<p>You will soon figure out <code>zorder</code> means the order of each
+layer. Try to change those to different values, see what happens.</p>
+<p>In fact, Natural Earth dataset can easily be used by creating an
+instance of <code>NaturalEarthFeature()</code>. For example:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Create an axes with an basic PlateCarree projection style</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.PlateCarree()</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;physical&#39;</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;land&#39;</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;gray&#39;</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="dv">1</span>))</span></code></pre></div>
+<p>And add country border lines (<code>admin_0_countries</code>) to the
+previous map:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Create an axes with an basic PlateCarree projection style</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.PlateCarree()</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;physical&#39;</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;land&#39;</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;gray&#39;</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co"># Add border lines over countries </span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;cultural&#39;</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;admin_0_countries&#39;</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span></code></pre></div>
+<p>For more about <code>NaturalEarthFeature()</code>, use
+<code>help(cfeature.NaturalEarthFeature)</code> or check the <a
+href="https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature"><code>cartopy</code>
+feature interface</a>. For a list of available features in
+<code>NaturalEarthFeature()</code> visit <a
+href="https://www.naturalearthdata.com/features">Natural Earth
+Features</a>.</p>
+<p>Now let’s put all features together:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Create an axes with an basic PlateCarree projection style</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.PlateCarree()</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># Add natural features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>ax.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># Add border lines over countries </span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;cultural&#39;</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;admin_0_countries&#39;</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="co"># Add lat/lon gridlines, draw gridlines</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
+<p>Here we use <code>gridlines()</code> to add a graticule (and
+optionally labels) to the axes, and use <code>xlocator()</code> and
+<code>ylocator()</code> to manipulate latitude and longitude gridline
+numbers and spacing.</p>
+</div>
+<div id="using-different-global-projections" class="section level2">
+<h2>Using different global projections</h2>
+<p>Simply change <code>proj</code> from <code>ccrs.PlateCarree()</code>
+to <code>ccrs.Orthographic()</code>, you will have a map with an
+Orthographic projection.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.Orthographic()         </span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># Add natural features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>ax.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co"># Add border lines over countries </span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;cultural&#39;</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;admin_0_countries&#39;</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="co"># Add lat/lon gridlines, draw gridlines</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
+<p>Or play with different projections from a list:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Define plotting function</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="kw">def</span> plot_map(my_projection):</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    <span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>    </span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>    <span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>    ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>my_projection)</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>    <span class="co"># Add natural features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>    ax.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>    ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>    <span class="co"># Add border lines over countries </span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>    ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;cultural&#39;</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;admin_0_countries&#39;</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>    <span class="co"># Add lat/lon gridlines, draw gridlines</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>    gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>    <span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>    gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a>    gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a>    </span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a>    <span class="co"># Add title</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a>    ax.set_title(<span class="ss">f&#39;</span><span class="sc">{</span><span class="bu">type</span>(my_projection)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>    </span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co"># Set a list of projections</span></span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>projections <span class="op">=</span> [ccrs.PlateCarree(),</span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>               ccrs.Robinson(),</span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a>               ccrs.Mercator(),</span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a>               ccrs.Orthographic(),</span>
+<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a>               ccrs.InterruptedGoodeHomolosine(),</span>
+<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a>               ccrs.Gnomonic()</span>
+<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a>              ]</span>
+<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a><span class="co"># Loop the projections and call the plotting function</span></span>
+<span id="cb11-42"><a href="#cb11-42" tabindex="-1"></a><span class="cf">for</span> proj <span class="kw">in</span> projections:</span>
+<span id="cb11-43"><a href="#cb11-43" tabindex="-1"></a>    plot_map(proj)</span></code></pre></div>
+<p>Check <a
+href="https://scitools.org.uk/cartopy/docs/latest/reference/projections.html"><code>cartopy</code>
+projection list</a> for a list of available projections supported by
+<code>cartopy</code>.</p>
+</div>
+<div id="making-regional-maps" class="section level2">
+<h2>Making regional maps</h2>
+<p>To create a regional map, we use the <code>set_extent</code> method
+to limit the size of the region. Use <code>ax.set_extent?</code> or
+<code>help(ax.set_extent)</code> to learn how to use it.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Set Orthographic projection style</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>central_lon, central_lat <span class="op">=</span> <span class="fl">114.06</span>, <span class="fl">22.54</span> <span class="co"># Shenzhen</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>proj <span class="op">=</span> ccrs.Orthographic(central_lon, central_lat) </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co"># Set a region and plot</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>extent <span class="op">=</span> [central_lon<span class="op">-</span><span class="dv">10</span>, central_lon<span class="op">+</span><span class="dv">10</span>, central_lat<span class="op">-</span><span class="dv">10</span>, central_lat<span class="op">+</span><span class="dv">10</span>]</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>ax.set_extent(extent)</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>ax.add_feature(cfeature.RIVERS, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co"># Add features to axes using methods</span></span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">&#39;10m&#39;</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>ax.gridlines()</span></code></pre></div>
+<p>Here we create a regional map with Orthographic projection over
+Southern China. And we use the <code>coastlines()</code> (same as
+<code>add_feature()</code> as we previously used) method to add
+coastlines.</p>
+<p>For higher-resolution features, <code>cartopy</code> can
+automatically download and create them from the <a
+href="https://www.naturalearthdata.com/">Natural Earth Data</a> or the
+<a href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html">Global
+Self-consistent, Hierarchical, High-resolution Geography Database</a>
+database.</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Now use higher-resolution features</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>rivers_10m <span class="op">=</span> cfeature.NaturalEarthFeature(<span class="st">&#39;physical&#39;</span>, <span class="st">&#39;rivers_lake_centerlines&#39;</span>, <span class="st">&#39;10m&#39;</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Set Orthographic projection style</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>central_lon, central_lat <span class="op">=</span> <span class="fl">114.06</span>, <span class="fl">22.54</span> <span class="co"># Shenzhen</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>proj <span class="op">=</span> ccrs.Orthographic(central_lon, central_lat) </span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co"># Set a region and plot</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>extent <span class="op">=</span> [central_lon<span class="op">-</span><span class="dv">10</span>, central_lon<span class="op">+</span><span class="dv">10</span>, central_lat<span class="op">-</span><span class="dv">10</span>, central_lat<span class="op">+</span><span class="dv">10</span>]</span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>ax.set_extent(extent)</span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>ax.add_feature(rivers_10m, facecolor<span class="op">=</span><span class="st">&#39;None&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co"># Add features to axes using coastlines method</span></span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">&#39;10m&#39;</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a>ax.gridlines()</span></code></pre></div>
+</div>
+<div id="adding-data-to-the-map" class="section level2">
+<h2>Adding data to the map</h2>
+<p>Now that we know how to create a map, let’s add our data to it.</p>
+<p>Because our map is a <code>matplotlib</code> axes, we can use all the
+familiar <code>maptplotlib</code> commands to make plots. By default,
+the map extent will be adjusted to match the data.</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Create some test data</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>Shenzhen <span class="op">=</span> <span class="bu">dict</span>(lon<span class="op">=</span><span class="fl">114.06</span>, lat<span class="op">=</span><span class="fl">22.54</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>Guangzhou <span class="op">=</span> <span class="bu">dict</span>(lon<span class="op">=</span><span class="fl">113.25</span>, lat<span class="op">=</span><span class="fl">23.13</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>lons <span class="op">=</span> [Shenzhen[<span class="st">&#39;lon&#39;</span>], Guangzhou[<span class="st">&#39;lon&#39;</span>]]</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>lats <span class="op">=</span> [Shenzhen[<span class="st">&#39;lat&#39;</span>], Guangzhou[<span class="st">&#39;lat&#39;</span>]]</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># Now use higher-resolution features</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>rivers_10m <span class="op">=</span> cfeature.NaturalEarthFeature(<span class="st">&#39;physical&#39;</span>, <span class="st">&#39;rivers_lake_centerlines&#39;</span>, <span class="st">&#39;10m&#39;</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co"># Set Orthographic projection style</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>central_lon, central_lat <span class="op">=</span> <span class="fl">114.06</span>, <span class="fl">22.54</span> <span class="co"># Shenzhen</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>proj <span class="op">=</span> ccrs.Orthographic(central_lon, central_lat) </span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co"># Set a region and plot</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>extent <span class="op">=</span> [central_lon<span class="op">-</span><span class="dv">1</span>, central_lon<span class="op">+</span><span class="dv">1</span>, central_lat<span class="op">-</span><span class="dv">1</span>, central_lat<span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>ax.set_extent(extent)</span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a>ax.add_feature(rivers_10m, facecolor<span class="op">=</span><span class="st">&#39;None&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a><span class="co"># Add features to axes using coastlines method</span></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">&#39;10m&#39;</span>)</span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>ax.gridlines()</span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a><span class="co"># Add two points</span></span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>ax.plot(lons, lats, <span class="st">&#39;go-&#39;</span>, transform<span class="op">=</span>ccrs.PlateCarree())</span></code></pre></div>
+<p>Notice, the data also have to be transformed to the projection space.
+This is done via the <code>transform</code> keyword in the plotting
+method. The argument is another <code>cartopy.crs</code> object. If you
+don’t specify a transform, <code>cartopy</code> assumes that the data is
+using the same projection as the underlying axes.</p>
+<p>The core concept is that the projection of your axes is
+<strong>independent</strong> of the coordinate system your data is
+defined in. The projection argument is used when creating plots and
+determines the projection of the resulting plot (i.e. what the plot
+looks like). The <code>transform</code> argument to plotting functions
+tells <code>cartopy</code> what coordinate system your data are defined
+in. In our case, lat and lon are defined in degrees and in
+<code>PlateCarree</code> projection. For more, check <a
+href="https://scitools.org.uk/cartopy/docs/latest/tutorials/understanding_transform.html">understanding
+the transform and projection keywords</a>.</p>
+</div>
+<div id="xarray-integration" class="section level2">
+<h2><code>Xarray</code> integration</h2>
+<p><code>Cartopy</code> transforms can be passed to <code>xarray</code>,
+this creates a very quick path for creating professional-looking maps
+from <code>netCDF</code> data.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.Orthographic(central_lon, central_lat) </span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co"># Plot the surface temperature</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>surface_T.plot(ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>         vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, cbar_kwargs<span class="op">=</span>{<span class="st">&#39;shrink&#39;</span>: <span class="fl">0.4</span>})</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co"># Add border lines over countries </span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>ax.add_feature(cfeature.NaturalEarthFeature(category<span class="op">=</span><span class="st">&#39;cultural&#39;</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>                                           name<span class="op">=</span><span class="st">&#39;admin_0_countries&#39;</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="co"># Add lat/lon gridlines, draw gridlines</span></span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(crs<span class="op">=</span>ccrs.PlateCarree(), linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
+<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
+</div>
+<div id="masking-a-map-projection" class="section level2">
+<h2>Masking a map projection</h2>
+<p>One can also “mask” a <code>cartopy</code> map projection with data
+from the dataset. This allows us to, essentially, block out specific
+areas of data on the projection.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Create and define the size of a figure object </span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Create an axes with Orthographic projection style</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>proj <span class="op">=</span> ccrs.Orthographic(central_lon, central_lat) </span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co"># Plot first panel</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>ax1 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span>proj)</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>ax1.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co"># Mask land, lakes, and oceans</span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>ax1.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>,linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>ax1.add_feature(cfeature.OCEAN)</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>plt.title(<span class="st">&quot;Many features mask&quot;</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co"># Plot second plot</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>ax2 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, projection<span class="op">=</span>proj)</span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>ax2.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="co"># Contourf-plot data</span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax2, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a><span class="co"># Mask ocean data by adding ocean feature and changing its zorder</span></span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a>ax2.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>plt.title(<span class="st">&quot;Applying ocean mask&quot;</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" tabindex="-1"></a><span class="co"># Plot third plot</span></span>
+<span id="cb16-27"><a href="#cb16-27" tabindex="-1"></a>ax3 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, projection<span class="op">=</span>proj)</span>
+<span id="cb16-28"><a href="#cb16-28" tabindex="-1"></a>ax3.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" tabindex="-1"></a><span class="co"># Contourf-plot data</span></span>
+<span id="cb16-30"><a href="#cb16-30" tabindex="-1"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax3, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb16-31"><a href="#cb16-31" tabindex="-1"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" tabindex="-1"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" tabindex="-1"></a><span class="co"># Mask land data by adding land feature and changing its zorder</span></span>
+<span id="cb16-34"><a href="#cb16-34" tabindex="-1"></a>ax3.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>,</span>
+<span id="cb16-35"><a href="#cb16-35" tabindex="-1"></a>                linewidths<span class="op">=</span><span class="fl">0.5</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" tabindex="-1"></a>plt.title(<span class="st">&quot;Applying land mask&quot;</span>)</span>
+<span id="cb16-37"><a href="#cb16-37" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" tabindex="-1"></a><span class="co"># Plot fourth plot</span></span>
+<span id="cb16-39"><a href="#cb16-39" tabindex="-1"></a>ax4 <span class="op">=</span> plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, projection<span class="op">=</span>proj)</span>
+<span id="cb16-40"><a href="#cb16-40" tabindex="-1"></a>ax4.coastlines(linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-41"><a href="#cb16-41" tabindex="-1"></a><span class="co"># Contourf-plot data</span></span>
+<span id="cb16-42"><a href="#cb16-42" tabindex="-1"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax4, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb16-43"><a href="#cb16-43" tabindex="-1"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
+<span id="cb16-44"><a href="#cb16-44" tabindex="-1"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a>plt.title(<span class="st">&quot;No mask data only&quot;</span>)</span></code></pre></div>
+<hr />
+<p><em>The notes are modified from the excellent <a
+href="https://rabernat.github.io/research_computing_2018/maps-with-cartopy.html">Maps
+in Scientific Python</a> and <a
+href="https://github.com/michaelavs/cartopy_tutorial/blob/main/cartopy_tutorial_filledin.ipynb">Python
+Tutorial Seminar Series: <code>Cartopy</code></a>, both available freely
+online.</em></p>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Go through the notes, make sure you understand the scripts.</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>Applying the <a
+href="https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html#lambertconformal"><code>LambertConformal</code>
+projection</a>, plot the mean surface temperature in <code>June</code>
+from <code>2000</code> to <code>2010</code> near your hometown. Limit
+your figure to a <code>5 degrees</code> by <code>5 degrees</code>
+domain.</p>
+<hr />
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li><a
+href="https://scitools.org.uk/cartopy/docs/latest/index.html"><code>Cartopy</code>
+official guide</a></li>
+<li><a
+href="https://scitools.org.uk/cartopy/docs/latest/gallery/index.html"><code>Cartopy</code>
+gallery</a></li>
+<li><a
+href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html"><code>GeoCAT</code>
+gallery</a></li>
+<li><a href="https://geohackweek.github.io/visualization">Geospatial
+Data Visualization</a></li>
+<li><a href="https://github.com/SciTools/cartopy-tutorial">SciTools
+cartopy-tutorial</a></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
