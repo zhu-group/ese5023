@@ -1,0 +1,82 @@
+---
+title: "Lab 10 `SciPy` exercises"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. More about `SciPy`
+
+In this exercise, we will learn a few more functions in `SciPy` through examples.
+
+## 1.1 Solving a system of linear equations
+
+Using [`linalg.solve`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve.html) to solve the following simultaneous equations:
+
+$$\begin{align*}
+x + 3y + 5z = 10 \\
+2x + 4y + z = 8 \\
+2x + 3y + 8z = 3
+\end{align*}$$
+
+## 1.2 Eigenvalues and eigenvectors
+
+Using [`linalg.eig`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html) to compute the eigenvalues and eigenvectors of the following matrix:
+
+$$
+\left(\begin{array}{cc} 
+1 & 2 & 3\\
+3 & 4 & 5\\
+5 & 6 & 7\\
+\end{array}\right)
+$$ 
+
+## 1.3 Solving ODEs  
+
+Consider the ODE:
+
+$$ \frac{df(t)}{dt}=-k f(t)$$
+
+Let's `k=0.3` and the initial condition `f(0)=1`. Use [`integrate.odeint`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html) to approximate the solution over the interval `[0, 10]`. 
+
+## 1.4 Statistical descriptions
+
+Make up an array with a size of `20`, then use [`stats.describe`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.describe.html) to compute several descriptive statistics of this array.
+
+## 1.5 Normality test
+
+Generate a sample of `20` from a normal distribution, then use [`stats.normaltest`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.normaltest.html) to verify whether it differs from a normal distribution.
+
+## 1.6 Pearson correlation 
+
+At a given temperature, uptake of a certain pesticide by soil is usually linearly related to its concentration in soil. To study this process, a researcher made the following observations under a constant temperature of `298` K.
+
+Observation #| Uptaken amount | Pesticide concentration in soil |
+|:----------:|:---------------|--------------------|
+| # 1        |   `0.18`       |       `10`         |
+| # 2        |   `1.05`       |       `50`         |
+| # 3        |   `0.50`       |       `20`         |
+| # 4        |   `0.61`       |       `30`         |
+| # 5        |   `1.58`       |       `80`         |
+| # 6        |   `1.10`       |       `60`         |
+| # 7        |   `1.36`       |       `70`         |
+| # 8        |   `0.77`       |       `40`         |
+
+Find the Pearson correlation coefficient between the Uptaken amount and Pesticide concentration in soil with [`stats.pearsonr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html), is such a correlation significant?
+
+## 1.7 Linear regression  
+
+Using to [`stats.linregress`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html) to fit a regression line to the data points from 1.6. Is the slope significantly different from `0`?
+
+***
+
+# Further reading
+
++ [Python for Data Science](https://www.pythonfordatascience.org/home)
++ [Python Programming and Numerical Methods - A Guide for Engineers and Scientists](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter22.06-Python-ODE-Solvers.html)
++ [Statistics in Python](https://scipy-lectures.org/packages/statistics/index.html)

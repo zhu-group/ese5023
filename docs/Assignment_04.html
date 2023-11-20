@@ -11,7 +11,7 @@
 
 
 
-<title>Schedule</title>
+<title>Assignment 04</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
@@ -209,6 +212,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -216,6 +288,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -288,246 +370,81 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Schedule</h1>
+<h1 class="title toc-ignore">Assignment 04</h1>
 
 </div>
 
 
-<p><strong>Class Time:</strong><br />
-Wednesday 19:00-21:50</p>
-<p><strong>Location:</strong><br />
-304, Teaching Building #3</p>
-<p><strong>2023 Fall:</strong></p>
-<table>
-<colgroup>
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="32%" />
-<col width="30%" />
-<col width="25%" />
-<col width="6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Week</th>
-<th align="center">Date</th>
-<th align="center">Day</th>
-<th align="left">Topic</th>
-<th align="left">Lab</th>
-<th align="center">Assignment Out</th>
-<th align="center">Assignment Due</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">01</td>
-<td align="center">09/13</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_01.html">Introduction</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_01.html">Software
-setup</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">02</td>
-<td align="center">09/20</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_02.html">Version
-control with Git</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_02.html">Git
-branches</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">03</td>
-<td align="center">09/27</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_03.html">Python:
-Basics (I)</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_03.html">Python Basics
-(I)</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">04</td>
-<td align="center">10/11</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_04.html">Python:
-Basics (II)</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_04.html">Python Basics
-(II)</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_01.html">Assignment
-1</a></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">05</td>
-<td align="center">10/18</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_05.html">Intermediate
-Python: <code>numPy</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_05.html"><code>numPy</code>
-exercises</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">06</td>
-<td align="center">10/25</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_06.html">Intermediate
-Python: <code>pandas</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_06.html"><code>pandas</code>
-exercises</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_02.html">Assignment
-2</a></td>
-<td align="center">Assignment 1</td>
-</tr>
-<tr class="odd">
-<td align="center">07</td>
-<td align="center">11/01</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_07.html">Intermediate
-Python: <code>xarray</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_07.html">Basics of time
-series</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">08</td>
-<td align="center">11/08</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_08.html">Plotting with
-<code>matplotlib</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_08.html">Plotting
-(I)</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_03.html">Assignment
-3</a></td>
-<td align="center">Assignment 2</td>
-</tr>
-<tr class="odd">
-<td align="center">09</td>
-<td align="center">11/15</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_09.html">Making maps
-with <code>cartopy</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_09.html">Plotting
-(II)</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">10</td>
-<td align="center">11/22</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_10.html">Scientific
-computing with <code>SciPy</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_10.html"><code>SciPy</code>
-exercises</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_04.html">Assignment
-4</a></td>
-<td align="center">Assignment 3</td>
-</tr>
-<tr class="odd">
-<td align="center">11</td>
-<td align="center">11/29</td>
-<td align="center">W.</td>
-<td align="left">Python environments</td>
-<td align="left">Python environments</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">12</td>
-<td align="center">12/06</td>
-<td align="center">W.</td>
-<td align="left">Parallel computing with Python</td>
-<td align="left">Parallel computing</td>
-<td align="center">Assignment 5</td>
-<td align="center">Assignment 4</td>
-</tr>
-<tr class="odd">
-<td align="center">13</td>
-<td align="center">12/13</td>
-<td align="center">W.</td>
-<td align="left">Linux: Basics</td>
-<td align="left">Linux</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">14</td>
-<td align="center">12/20</td>
-<td align="center">W.</td>
-<td align="left">Linux: Shell scripts and Taiyi jobs</td>
-<td align="left">Using TaiYi</td>
-<td align="center"></td>
-<td align="center">Assignment 5</td>
-</tr>
-<tr class="odd">
-<td align="center">15</td>
-<td align="center">12/27</td>
-<td align="center">W.</td>
-<td align="left">Web scraping</td>
-<td align="left">Course wrap-up</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">16</td>
-<td align="center">01/03</td>
-<td align="center">W.</td>
-<td align="left">Final project presentation</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/download/Final_project_2023.pdf">Final
-project</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Supplements:</strong></p>
-<p>Supplement 01: <a
-href="https://zhu-group.github.io/ese5023/Sup_01.html">Fortran:
-Basics</a><br />
-Supplement 02: <a
-href="https://zhu-group.github.io/ese5023/Sup_02.html">Fortran:
-Intermediate</a><br />
-Supplement 03: <a
-href="https://zhu-group.github.io/ese5023/Sup_03.html">Lab: Fortran
-Intermediate</a></p>
+<p><strong>Out: 11/22 19:00 </strong><br />
+<strong>Due: 12/06 19:00 </strong></p>
+<hr />
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong><br />
+Collaboration on solving the assignment is allowed, after you have
+thought about the problem sets on your own. It is also OK to get
+clarification (but not solutions) from online resources, again after you
+have thought about the problem sets on your own. There are two
+requirements:</p>
+<ul>
+<li><p>Cite your collaborators <strong>fully and completely</strong>
+(<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”).
+Or cite online resources (<em>e.g.</em>, “I got inspired by reading
+XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> -
+the scripts and report must come from you only.</p></li>
+</ul>
+<p><strong>Submitting your assignment:</strong></p>
+<ul>
+<li><p>Please write a report <code>PS4.pdf</code>.</p></li>
+<li><p>Create a jupyter notebook named <code>PS4.ipynb</code>.</p></li>
+<li><p>Upload your jupyter notebook <strong>AND</strong> report to your
+Github <code>ESE5023_Assignments_XXX</code> repository (where
+<code>XXX</code> is your SUSTech ID) before the due time.</p></li>
+</ul>
+<p><strong>Late Submission:</strong><br />
+Late submissions will not receive any credit. The submission time will
+be determined based on your latest GitHub file records.</p>
+<hr />
+</div>
+<div id="global-earthquakes" class="section level1">
+<h1>1. Global Earthquakes</h1>
+<p>In this problem set, we will use <a
+href="https://zhu-group.github.io/ese5023/download/usgs_earthquakes.csv">this
+file</a> from the USGS Earthquakes Database. The dataset is similar to
+the one you use in <a
+href="https://zhu-group.github.io/ese5023/Assignment_02.html#1_Significant_earthquakes_since_2150_BC">Assignment
+02</a>. Use the file provided (<code>usgs_earthquakes.csv</code>) to
+recreate the following map. Use the <code>mag</code> column for
+magnitude. <strong>[10 points]</strong></p>
+<p><img src="figs/earthquakes.png" alt="drawing" width="800"/></p>
+<hr />
+</div>
+<div id="explore-a-netcdf-dataset" class="section level1">
+<h1>2. Explore a <code>netCDF</code> dataset</h1>
+<p>Browse the NASA’s Goddard Earth Sciences Data and Information
+Services Center (GES DISC) <a
+href="https://disc.gsfc.nasa.gov/">website</a>. Search and download a
+dataset you are interested in. You are also welcome to use data from
+your group in this problem set. But the dataset should be in
+<code>netCDF</code> format. For this problem set, you are welcome to use
+the same dataset you used in <a
+href="https://zhu-group.github.io/ese5023/Assignment_03.html#3_Explore_a_netCDF_dataset">Assignment
+03</a>.</p>
+<p><strong>2.1 [10 points]</strong> Make a global map of a certain
+variable. Your figure should contain: a project, x label and ticks, y
+label and ticks, title, gridlines, legend, colorbar, masks or features,
+annotations, and text box (<strong>1 point each</strong>).</p>
+<p><strong>2.2 [10 points]</strong> Make a regional map of the same
+variable. Your figure should contain: a different project, x label and
+ticks, y label and ticks, title, gridlines, legend, colorbar, masks or
+features, annotations, and text box (<strong>1 point each</strong>).</p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -560,6 +477,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

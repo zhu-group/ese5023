@@ -1,0 +1,376 @@
+---
+title: "Section 10 Scientific computing with `SciPy`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+> "Since its initial release in 2001, `SciPy` has become a de facto standard for leveraging scientific algorithms in `Python`." - Virtanen et al. (2020)
+
+*** 
+
+# Introduction to `SciPy`
+
+`SciPy` is a library of numerical routines for the `Python` programming language that provides fundamental building blocks for modeling and solving scientific problems. `SciPy` includes algorithms for optimization, integration, interpolation, eigenvalue problems, algebraic equations, differential equations and many other classes of problems; it also provides specialized data structures, such as sparse matrices and k-dimensional trees. The `SciPy` library depends on `NumPy`, which provides convenient and fast N-dimensional array manipulation. Check [SciPy 1.0: fundamental algorithms for scientific computing in Python](https://www.nature.com/articles/s41592-019-0686-2) for an overview of the capabilities and development practices of `SciPy`. 
+
+When you want to do scientific work in `Python`, the first library you can turn to is `SciPy`. As you’ll see in this Section, `SciPy` is not just a library, but a whole ecosystem of libraries that work together to help you accomplish complicated scientific tasks quickly and reliably.
+
+`SciPy` should be installed along with `Anaconda`. If not, in `Anaconda Powershell Prompt`, install it:
+
+```{python, eval=F}
+# Install SciPy
+conda install scipy
+```
+
+To make sure `SciPy` is installed:
+
+```{python, eval=F}
+# Import SciPy
+import scipy
+
+# Print the location of the file from where `SciPy` is loaded
+print(scipy.__file__)
+```
+
+Now you’ve imported `SciPy` and printed the location of the file from where `SciPy` is loaded. Your computer will probably show a different location. `SciPy` should be ready for use. 
+
+# Task-specific sub-modules in `SciPy`
+
+As non-professional programmers, scientists often tend to *re-invent the wheel*, which leads to buggy, non-optimal, difficult-to-share and unmaintainable code. By contrast, `SciPy`’s routines are optimized and tested, and should therefore be used when possible.
+
+`SciPy` is composed of task-specific sub-modules, including:
+
+|Sub-module                                                                                                  | Usage                                  |
+|:-----------------------------------------------------------------------------------------------------------|:---------------------------------------|
+|[`scipy.cluster`](https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster)             | Vector quantization / Kmeans           |
+|[`scipy.constants`](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants)       | Physical and mathematical constants    |
+|[`scipy.fftpack`](https://docs.scipy.org/doc/scipy/reference/fftpack.html#module-scipy.fftpack)             | Fourier transform                      |
+|[`scipy.integrate`](https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate)       | Integration routines                   |
+|[`scipy.interpolate`](https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate) | Interpolation                          | 
+|[`scipy.io`](https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io)                            | Data input and output                  |
+|[`scipy.linalg`](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg)                | Linear algebra routines                |
+|[`scipy.ndimage`](https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage)             | n-dimensional image package            |  
+|[`scipy.odr`](https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr)                         | Orthogonal distance regression         |
+|[`scipy.optimize`](https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize)          | Optimization                           |  
+|[`scipy.signal`](https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal)                | Signal processing                      |  
+|[`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse)                | Sparse matrices                        |
+|[`scipy.spatial`](https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial)             | Spatial data structures and algorithms |
+|[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special)             | Special mathematical functions         |
+|[`scipy.stats`](https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats)                   | Statistics                             |
+
+This section is far from an introduction to numerical computing. As enumerating the different sub-modules and functions in `SciPy` would be very boring, we concentrate instead on a few problems you may encounter to give a general idea of how to use `SciPy` for scientific computing.
+
+
+## Constants with `scipy.constants`
+
+`SciPy` constants package provides a wide range of constants, which are used in the general scientific area. We have to import the required constant and use them as per the requirement. 
+
+### Mathematical constants
+
+Import mathematical constant, for example:
+
+```{python, eval=F}
+
+from scipy import constants
+
+# Mathematical constants
+scipy.constants.pi
+```
+
+### Physical constants
+
+Import physical constant, for example:
+
+```{python, eval=F}
+# Physical constants
+scipy.constants.R
+scipy.constants.gas_constant
+```
+
+In addition to the above variables, `scipy.constants` also contains the [2018 CODATA recommended values (CODATA2018)](https://physics.nist.gov/cuu/Constants) database containing more physical constants. Call 
+`scipy.constants.physical_constants[NAME]` to return a dictionary of physical constants, of the format `(value, unit, uncertainty)`. For example:
+
+```{python, eval=F}
+# Physical constants
+scipy.constants.physical_constants['atomic unit of mass']
+```
+
+### Units
+
+`scipy.constants` also contains SI units, for example:
+
+```{python, eval=F}
+# SI prefixes
+scipy.constants.micro
+
+# Mass, in [kg]
+scipy.constants.long_ton
+
+# Speed, in [m/s]
+scipy.constants.mph
+
+# Pressure, in [Pa]
+scipy.constants.atmosphere
+```
+
+Remembering all of these are a bit tough. The easy way to get which key is for which function is looking up things in the [`SciPy` Constants page](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants).
+
+## Integrating with `scipy.integrate`
+
+When a function cannot be integrated analytically, or is very difficult to integrate analytically, one generally turns to numerical integration methods. `SciPy` has a number of routines for performing numerical integration. Most of them are found in the same `scipy.integrate` library. For example:
+
+```{python, eval=F}
+from numpy import exp
+from scipy import integrate
+
+# Define a function
+f = lambda x:exp(-x**2)
+
+# Single integral of f from 0 to 1
+res = integrate.quad(f, 0, 1)
+print(res)
+```
+
+Here we use a [lambda expression](https://realpython.com/python-lambda/) and then call the quadrature method (for single integrals) on that function. The `quad` function returns the two values, in which the first number is the value of integral and the second value is the estimate of the absolute error in the value of integral. For multiple integrals or solving initial value problems for ODE systems, check [Integration and ODEs](https://docs.scipy.org/doc/scipy/reference/integrate.html).
+
+## Interpolation with `scipy.interpolate`
+
+### Linear interpolation
+
+Interpolation is the process of finding a value between two points on a line or a curve. This tool, interpolation, is not only useful in statistics, but is also useful in science, business, or when there is a need to predict values that fall within two existing data points.
+
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(0, 4, 12)
+y = np.cos(x**2/3+4)
+
+# Plot data
+plt.plot(x, y,'ko')
+```
+
+Suppose we want to find the value of `y` when `x=3.12`, you can use `interp1d()` as:
+
+```{python, eval=F}
+from scipy.interpolate import interp1d
+
+# Using interp1d function
+f1 = interp1d(x, y, kind = 'linear')
+f2 = interp1d(x, y, kind = 'cubic')
+
+# Now make x finer
+xnew = np.linspace(0, 4, 30)
+
+# Plot interpolated values
+plt.plot(x, y, 'ko', xnew, f1(xnew), '-', xnew, f2(xnew), '--')
+
+# Add legend
+plt.legend(['data', 'linear', 'cubic'], loc = 'best')
+
+# Show data at a specific location
+print(f1(3.12), f2(3.12))
+```
+
+The `interp1d()` function in the `scipy.interpolate` is a convenient method to create a function based on fixed data points, which can be evaluated anywhere within the domain defined by the given data using linear interpolation. Using the `interp1d()` function, we created two functions `f1` and `f2`. These functions, for a given input `x` returns `y`. The third variable kind represents the type of the interpolation technique. `linear`, `nearest`, `zero`, `slinear`, `quadratic`, `cubic` are a few techniques of interpolation.
+
+### Spline interpolation
+
+One-dimensional smoothing spline fits a given set of data points. The `univariatespline` function in `scipy.interpolate` is a convenient method to create a function, based on fixed data points class.
+
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(-3, 3, 50)
+y = np.exp(-x**2) + 0.1 * np.random.randn(50)
+
+# Plot data
+plt.plot(x, y, 'ko')
+```
+
+Suppose we want to find the value of `y` when `x=1.23`, you can use `UnivariateSpline()` as:
+
+```{python, eval=F}
+from scipy.interpolate import UnivariateSpline
+
+# Using UnivariateSpline function
+spl = UnivariateSpline(x, y, k=3)
+spl.set_smoothing_factor(0.5)
+
+# Now make x finer
+xnew = np.linspace(-3, 3, 1000)
+
+# Plot interpolated values
+plt.plot(x, y, 'ko')
+plt.plot(xnew, spl(xnew), 'b', lw = 3)
+
+# Show data at a specific location
+spl(1.23)
+```
+
+## Optimization and fitting with `scipy.optimize`
+
+### Curve fitting
+
+Suppose we have data on a sine wave, with some noise:
+
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(-5, 5, num=50)
+y = 2.9 * np.sin(1.5 * x) + np.random.normal(size=50)
+
+# Plot data
+plt.plot(x, y, 'ko')
+```
+
+If we know that the data lies on a sine wave, but not the amplitudes or the period, we can find those by least squares curve fitting. First we have to define the test function to fit, here a sine with unknown amplitude and period:
+
+```{python, eval=F}
+# Define the function to fit
+def guess_func(x, a, b):
+    return a * np.sin(b * x)
+```
+
+We then use `scipy.optimize.curve_fit` to find `a` and `b`:
+
+```{python, eval=F}
+from scipy import optimize
+
+# Fit parameters
+params, _ = optimize.curve_fit(guess_func, x, y)
+print(params)
+
+# Plot fitted data
+plt.plot(x, y, 'ko', x, params[0]*np.sin(params[1] * x), 'r-')
+
+# Add legend
+plt.legend(['data', 'fitted value'], loc = 'best')
+```
+
+### Finding the minimums
+
+Let’s define the following function and plot it:
+
+```{python, eval=F}
+# Define a function
+def g(x):
+    return x**2 + 20*np.sin(x)
+
+# Set the range
+x = np.arange(-10, 10, 0.1)
+
+# Plot the function
+plt.plot(x, g(x)) 
+```
+
+This function has a global minimum around `-1.5` and local minimums around `-7.1` and `4.3`. Searching for minimum can be done with `scipy.optimize.minimize`, given a starting point `x0`, it returns the location of the minimum that it has found.
+
+```{python, eval=F}
+# Using minimize() to search for minimums
+result = optimize.minimize(g, x0=0)
+result
+```
+
+### Finding the roots
+
+To find a root, i.e. a point where `g(x) = 0`, of the function `g` above we can use `scipy.optimize.root`:
+
+```{python, eval=F}
+# Using root() to find the roots
+root = optimize.root(g, x0=1) 
+root
+```
+
+## Statistics with `scipy.stats`
+
+The module `scipy.stats` contains statistical tools and probabilistic descriptions of random processes.
+
+For example, we can fit a sample to a distribution:
+
+```{python, eval=F}
+# Generate a sample
+sample = np.random.normal(size=1000)
+
+from scipy import stats
+
+# Fit a normal distribution
+stats.norm.fit(sample)
+```
+
+A statistical test is a decision indicator. For instance, if we have two sets of observations, that we assume are generated from normal distributions, we can use a *t-test* to decide whether the means of two sets of observations are significantly different:
+
+```{python, eval=F}
+# Sample 1
+sample1 = np.random.normal(0, 1, size=20)
+
+# Sample 2
+sample2 = np.random.normal(1, 1, size=15)
+
+# Independent t-test
+stats.ttest_ind(sample1, sample2) 
+```
+
+[The chapter on statistics](https://scipy-lectures.org/index.html) introduces much more elaborate tools for statistical testing and statistical data loading and visualization outside of `SciPy`. You are also welcome to check [ESE335 Environmental Data Analysis](https://zhu-group.github.io/ese335/index.html) for conducting statistical tests with the `R` language. 
+
+## Clustering with `scipy.cluster`
+
+Clustering is a popular technique to categorize data by associating it into groups. The `SciPy` library includes an implementation of the *k-means clustering* algorithm as well as several *hierarchical clustering* algorithms. Here we will be using the k-means algorithm in `scipy.cluster.vq`, where `vq` stands for vector quantization.
+
+```{python, eval=F}
+from numpy import vstack,array
+from numpy.random import rand
+from scipy.cluster.vq import kmeans,vq
+
+# Data generation, 200 rows, 2 cols
+data = vstack((rand(100,2) + array([.8,.8]), rand(100,2)))
+
+# Show data
+plt.plot(data[:,0],data[:,1],'k+')
+
+# Computing K-Means with K = 2 (2 clusters)
+#centroids, mean_dist = kmeans(data,2)
+
+# Assign each sample to a cluster
+#clusters, dist = vq(data,centroids)
+
+# Plot clusters
+#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],'bo')
+#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],'rd')
+
+# Plot cluster centroids
+#plt.plot(centroids[:,0],centroids[:,1],'gX',markersize=10)
+
+# Plot raw data
+#plt.plot(data[:,0],data[:,1],'w+')
+```
+
+***
+
+# In-class exercises
+
+## Exercise #1
+
+Go through the notes, make sure you understand the scripts.
+
+## Exercise #2
+
+The temperature extremes in Shenzhen for each month, starting in January, are given by (in degrees Celcius):
+
+`max: 19.8, 20.2, 22.7, 26.3, 29.5, 31.1, 32.3, 32.3, 31.3, 29.2, 25.4, 21.5`
+`min: 12.5, 13.8, 16.5, 20.3, 23.6, 25.6, 26.3, 26.1, 25.0, 22.5, 18.2, 13.8` 
+
+**2.1** Plot these temperature extremes.  
+**2.2** Define a function that can describe min and max temperatures.   
+[Hint]: this function has to have a period of 1 year.   
+**2.3** Fit this function to the data with `scipy.optimize.curve_fit`.  
+**2.4** Plot the result. Is the fit reasonable? If not, why?  
+**2.5** Is the time offset for min and max temperatures the same within the fit accuracy?  
+
+***
+
+# Further reading
+
++ [SciPy User Guide](https://docs.scipy.org/doc/scipy/tutorial/index.html)  
++ [SciPy Tutorial](https://www.w3schools.com/python/scipy/index.php)
++ [Scientific Python: Using SciPy for Optimization](https://realpython.com/python-scipy-cluster-optimize/)
++ [SciPy - Quick Guide](https://www.tutorialspoint.com/scipy/scipy_quick_guide.htm)
