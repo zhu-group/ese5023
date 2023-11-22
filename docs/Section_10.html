@@ -492,18 +492,19 @@ building blocks for modeling and solving scientific problems.
 <code>SciPy</code> includes algorithms for optimization, integration,
 interpolation, eigenvalue problems, algebraic equations, differential
 equations and many other classes of problems; it also provides
-specialized data structures, such as sparse matrices and k-dimensional
-trees. The <code>SciPy</code> library depends on <code>NumPy</code>,
-which provides convenient and fast N-dimensional array manipulation.
-Check <a href="https://www.nature.com/articles/s41592-019-0686-2">SciPy
-1.0: fundamental algorithms for scientific computing in Python</a> for
-an overview of the capabilities and development practices of
+specialized data structures, such as sparse matrices and
+<em>k</em>-dimensional trees.</p>
+<p>The <code>SciPy</code> library depends on <code>NumPy</code>, which
+provides convenient and fast N-dimensional array manipulation. Check <a
+href="https://www.nature.com/articles/s41592-019-0686-2">SciPy 1.0:
+fundamental algorithms for scientific computing in Python</a> for an
+overview of the capabilities and development practices of
 <code>SciPy</code>.</p>
 <p>When you want to do scientific work in <code>Python</code>, the first
 library you can turn to is <code>SciPy</code>. As you’ll see in this
-Section, <code>SciPy</code> is not just a library, but a whole ecosystem
-of libraries that work together to help you accomplish complicated
-scientific tasks quickly and reliably.</p>
+Section, <code>SciPy</code> is not just a library, but a whole
+<strong>ecosystem of libraries</strong> that work together to help you
+accomplish complicated scientific tasks quickly and reliably.</p>
 <p><code>SciPy</code> should be installed along with
 <code>Anaconda</code>. If not, in
 <code>Anaconda Powershell Prompt</code>, install it:</p>
@@ -512,11 +513,17 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>conda install scipy</span></code></pre></div>
 <p>To make sure <code>SciPy</code> is installed:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Import SciPy</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> scipy</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Print the location of the file from where `SciPy` is loaded</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="bu">print</span>(scipy.<span class="va">__file__</span>)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Import modules</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Show plots in the notebook</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Import SciPy</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Print the location of the file from where `SciPy` is loaded</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="bu">print</span>(scipy.<span class="va">__file__</span>)</span></code></pre></div>
 <p>Now you’ve imported <code>SciPy</code> and printed the location of
 the file from where <code>SciPy</code> is loaded. Your computer will
 probably show a different location. <code>SciPy</code> should be ready
@@ -755,9 +762,10 @@ interpolation.</p>
 <div id="spline-interpolation" class="section level3">
 <h3>Spline interpolation</h3>
 <p>One-dimensional smoothing spline fits a given set of data points. The
-<code>univariatespline</code> function in <code>scipy.interpolate</code>
-is a convenient method to create a function, based on fixed data points
-class.</p>
+<a
+href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html"><code>univariatespline</code>
+function</a> in <code>scipy.interpolate</code> is a convenient method to
+create a function, based on fixed data points class.</p>
 <div class="sourceCode" id="cb10"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">50</span>)</span>

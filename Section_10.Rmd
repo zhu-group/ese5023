@@ -14,9 +14,11 @@ output:
 
 # Introduction to `SciPy`
 
-`SciPy` is a library of numerical routines for the `Python` programming language that provides fundamental building blocks for modeling and solving scientific problems. `SciPy` includes algorithms for optimization, integration, interpolation, eigenvalue problems, algebraic equations, differential equations and many other classes of problems; it also provides specialized data structures, such as sparse matrices and k-dimensional trees. The `SciPy` library depends on `NumPy`, which provides convenient and fast N-dimensional array manipulation. Check [SciPy 1.0: fundamental algorithms for scientific computing in Python](https://www.nature.com/articles/s41592-019-0686-2) for an overview of the capabilities and development practices of `SciPy`. 
+`SciPy` is a library of numerical routines for the `Python` programming language that provides fundamental building blocks for modeling and solving scientific problems. `SciPy` includes algorithms for optimization, integration, interpolation, eigenvalue problems, algebraic equations, differential equations and many other classes of problems; it also provides specialized data structures, such as sparse matrices and *k*-dimensional trees.  
 
-When you want to do scientific work in `Python`, the first library you can turn to is `SciPy`. As you’ll see in this Section, `SciPy` is not just a library, but a whole ecosystem of libraries that work together to help you accomplish complicated scientific tasks quickly and reliably.
+The `SciPy` library depends on `NumPy`, which provides convenient and fast N-dimensional array manipulation. Check [SciPy 1.0: fundamental algorithms for scientific computing in Python](https://www.nature.com/articles/s41592-019-0686-2) for an overview of the capabilities and development practices of `SciPy`. 
+
+When you want to do scientific work in `Python`, the first library you can turn to is `SciPy`. As you’ll see in this Section, `SciPy` is not just a library, but a whole **ecosystem of libraries** that work together to help you accomplish complicated scientific tasks quickly and reliably.
 
 `SciPy` should be installed along with `Anaconda`. If not, in `Anaconda Powershell Prompt`, install it:
 
@@ -28,6 +30,12 @@ conda install scipy
 To make sure `SciPy` is installed:
 
 ```{python, eval=F}
+# Import modules
+import numpy as np
+import matplotlib.pyplot as plt
+# Show plots in the notebook
+%matplotlib inline
+
 # Import SciPy
 import scipy
 
@@ -177,7 +185,7 @@ The `interp1d()` function in the `scipy.interpolate` is a convenient method to c
 
 ### Spline interpolation
 
-One-dimensional smoothing spline fits a given set of data points. The `univariatespline` function in `scipy.interpolate` is a convenient method to create a function, based on fixed data points class.
+One-dimensional smoothing spline fits a given set of data points. The [`univariatespline` function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html) in `scipy.interpolate` is a convenient method to create a function, based on fixed data points class.
 
 ```{python, eval=F}
 # Make up some data points
