@@ -1,5 +1,5 @@
 ---
-title: "Parallel computing with `dask`"
+title: "Web scraping with `Python`"
 output:
   html_document:
     toc: true
@@ -8,391 +8,397 @@ output:
       smooth_scroll: false
 ---
 
-> "Data is the new science. Big Data holds the answers." - Pat Gelsinger
+> "The goal is to turn data into information, and information into insight." - Carly Fiorina
 
 *** 
 
 # Prerequisites
 
-In this section, we will use daily data from the [AVISO](https://www.aviso.altimetry.fr/en/home.html) sea-surface height satellite altimetry dataset. Download the file (`aviso_2015.zip`, ~ `390 MB`) [from here](), unzip it, you will have a folder (`aviso_2015`) containing `365` netcdf (nc) files. Move the folder to your working directory.
++ We will use [Google Chrome](https://www.google.com/intl/en_us/chrome/) in this section.
 
-**Important:**  
++ Download the [chromedriver file](https://chromedriver.chromium.org/downloads), unzip it, and **move the folder to your working directory**. You need to use same version of Google Chrome, if you have installed it already.
 
-In this section, we will use the `cper` environment you created in [Section 11](https://zhu-group.github.io/ese5023/Section_11.html#Creating_a_Python_environment). Make sure you have it activated, and open `jupter notebook` under it, not the `base` environment.
++ Modules used in this section:
+
+```{python, eval=F}
+# Load modules
+import os
+import time
+import requests
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from datetime import datetime, timedelta
+```
+
++ The `Jupyter Notenook` for this section is available at [here](https://zhu-group.github.io/ese5023/download/Sup_02.ipynb).   
 
 ***
 
-# `Dask` for parallel computing
+# Web scraping
 
-In past lectures, we learned how to use `numpy`, `pandas`, and `xarray` to analyze various types of data. In this section, we address an increasingly common problem: what happens if the data we wish to analyze is "big data".
+Web scraping refers to the process of **extracting data** from a website. This can, of course, be done manually: you could go to a website, find the relevant data or information, and enter that information into some data file that you have stored locally. But imagine that you want to pull a very large dataset from hundreds or thousands of individual URLs. In this case, extracting the data manually sounds overwhelming and time-consuming.
 
-A good threshold for when data becomes difficult to deal with is when the volume of data exceeds your computer's RAM (Random-access memory). Most modern laptops have between `2 GB` and `16 GB` of RAM. High-end workstations and servers can have `1 TB` or RAM or more. If the dataset you are trying to analyze can't fit in your computer's memory, some special care is required to carry out the analysis. 
+In this article, we’ll see how to **automate** this process with `Python`, using the [`requests`](https://docs.python-requests.org/en/latest/), [`BeautifulSoup`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/), and [`Selenium`](https://selenium-python.readthedocs.io/) modules. `requests` is an elegant and simple HTTP library for `Python`, `BeautisulSoup` is a `Python` module for extracting and parsing data from HTML files, and `Selenium` is used to automate web browser interaction between `Python` and your browser.
 
-The next threshold of difficulty is when the data can't fit on your hard drive. Most modern laptops have between `100 GB` and `4 TB` of storage space on the hard drive. If you can't fit your dataset on your internal hard drive, you can buy an external hard drive. However, at that point you are better off using a high-end server, HPC system, or cloud-based storage for your dataset. Once you have many `TB` of data to analyze, you are definitely in the realm of "big data". 
+## Installing libraries 
 
-## Introduction to `dask`
+Activate the [`cper` environment](https://zhu-group.github.io/ese5023/Section_11.html#Using_the_environment_file), as we will install `requests`, `BeautifulSoup`, and `Selenium` under it. 
 
-`Dask` is a tool that helps us easily extend our familiar `Python` data analysis tools to medium and big data, *i.e.* dataset that can't fit in our computer's RAM. In many cases, `dask` also allows us to speed up our analysis by using multiple CPU cores. `Dask` can help us work more efficiently on our laptop, and it can also help us **scale up** our analysis on HPC and cloud platforms. Most importantly, `dask` is almost invisible to the user, meaning that you can focus on your science, rather than the details of parallel computing.
-
-`Dask` provides collections for big data and a scheduler for parallel computing. In this section, we will learn the basics of using `dask` through examples. For more about `dask`, check [The Dask Documentation](https://docs.dask.org/en/latest/) and [The Dask Github Site](https://github.com/dask/dask). For other modules enabling parallel computing, check [Parallel Processing and Multiprocessing in Python](https://wiki.python.org/moin/ParallelProcessing).
-
-## `Dask` arrays  
-
-A `dask` array looks and feels a lot like a `numpy` array. However, a `dask` array doesn't directly hold any data. Instead, it **symbolically** represents the computations needed to generate the data. Nothing is actually computed until the actual numerical values are needed. This mode of operation is called *lazy*; it allows one to build up complex, large calculations symbolically before turning them over the scheduler for execution.
-
-If we want to create a numpy array of all ones, we do it like this:  
-
-```{python, eval=F}
-# Create a numpy array
-shape = (1000, 4000)
-ones_np = np.ones(shape)
-ones_np
+```{bash, eval=F}
+conda activate cper
 ```
 
-This array contains exactly `32 MB` of data:  
+If you fail to find `cper`, follow [Creating a `Python` environment](https://zhu-group.github.io/ese5023/Section_11.html#Creating_a_Python_environment) to create one.
 
-```{python, eval=F}
-# Check the size of array in MB
-ones_np.nbytes / 1e6
+To install `requests`, `BeautifulSoup`, and `Selenium`:
+
+```{bash, eval=F}
+conda install requests
+conda install beautifulsoup4
+conda install selenium
 ```
 
-Now let's create the same array using `dask`'s array interface:  
+## Fetching and rendering a web page
+
+First, let’s try rendering a web page *without* using `Selenium` and other tools, and try to parse the HTML. For this demo, we’re going to try to scrape the information contained in the Daily Observations table from a Weather Underground page for weather observations taken at the Shenzhen Bo'an international airport (ZGSZ) on December 10, 2022. Here’s the [URL](https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2022-12-10). You may need a VPN to open the webpage.    
+
+Before we try rendering the web page, we want to inspect the HTML elements to determine what class we need to select. Go to the Daily Observations table, right-click and choose `Inspect`.  
+
+We can see that the entire Daily Observations table is contained under `lib-city-history-observation`. Let’s use that tag to grab just the Daily Observations table elements from the HTML. We’ll also use the `.prettify()` method to print out the selected HTML to make it just a little more readable.
 
 ```{python, eval=F}
-# Create a dask array
-ones_da = da.ones(shape)
-ones_da
+# URL
+data_url = 'https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10'
+
+# Use requests.get() method to load the page
+data_page = requests.get(data_url)
+
+# Use BeautifulSoup to parse the page
+data_soup = BeautifulSoup(data_page.text, 'html.parser')
+
+# Find information under lib-city-history-observation
+soup_container = data_soup.find('lib-city-history-observation')
+
+# Print out the selected HTML 
+# to make it just a little more readable
+print(soup_container.prettify())
 ```
 
-As you see, `dask` create the array in one *chunk*. In fact, a crucial advantage with `dask` is that we can specify the `chunks` argument. Here, `chunks` describes how the array is split up over many sub-arrays. There are [several ways](https://dask.pydata.org/en/latest/array-creation.html#chunks) to specify chunks. In this section, we will use a block shape:  
+Here is the output:
+
+```{bash, eval=F}
+<lib-city-history-observation _ngcontent-sc275="" _nghost-sc236="">
+ <div _ngcontent-sc236="">
+  <div _ngcontent-sc236="" class="observation-title">
+   Daily Observations
+  </div>
+  No Data Recorded
+  <!-- -->
+  <!-- -->
+ </div>
+</lib-city-history-observation>
+```
+
+The HTML returned by `BeautifulSoup` shows `No data recorded`, but when we go to the Daily Observations table on the web page, the table is obviously populated. What happened?
+
+In this case, the `requests.get()` method ran **faster** than the web page could load, so the Daily Observations table wasn’t available by the time `BeautifulSoup` parsed the web page text. Here’s where `Selenium` will come in and allow the page content to load completely before we try to parse it.
+
+## Using web drivers
+
+At this point, you also need to install [ChromeDriver](https://chromedriver.chromium.org/). 
+
+Download the [chromedriver_win32.zip file](https://chromedriver.chromium.org/downloads) (if you use Windows), unzip it, and **move the folder to your working directory**. You should have a single executable file called `chromedriver.exe` in a folder called `chromedriver_win32` (if you use Windows). 
+
+Next, we’re going to write a `my_rendering` function that will run the `ChromeDriver`. This will open a Chrome window, load the web page fully, return the page HTML, and quit the `ChromeDriver`, closing the Chrome window. Be sure to update the path in the `webdriver.Chrome` function to the path where you installed the `ChromeDriver`, in our case, it's `chromedriver_win32\\chromedriver.exe`.
 
 ```{python, eval=F}
-# Specify the chunk
-chunk_shape = (1000, 1000)
-ones_da = da.ones(shape, chunks=chunk_shape)
-ones_da
+# Define a rendering function that runs the ChromeDriver
+def my_rendering(url):
+    # The path to the ChromeDriver, change if necessary
+    driver = webdriver.Chrome('chromedriver_win32\\chromedriver.exe')
+    # Load the web page from the URL
+    driver.get(url)
+    # Wait for the web page to load
+    time.sleep(3)
+    # Get the page source HTML
+    render = driver.page_source
+    # Quit ChromeDriver
+    driver.quit()
+    # Return the page source HTML
+    return render
 ```
 
-Notice that we just see a symbolic representation of the array, including its `shape`, `dtype`, and `chunksize`. No data has been generated yet. When we call `.compute()` on a `dask` array, the computation is trigger and the `dask` array becomes a `numpy` array.  
+Now, using this function, let’s try again to get the Daily Observations table elements from the HTML. Following the code written above, where, instead of using `requests.get()`, we’ll use our new rendering function:
 
 ```{python, eval=F}
-# Run computation
-ones_da.compute()
+# URL
+data_url = 'https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10'
+
+# Use my_rendering function to load the page
+data_page = my_rendering(data_url)
+
+# Use BeautifulSoup to parse the page
+data_soup = BeautifulSoup(data_page, 'html.parser')
+
+# Find information under lib-city-history-observation
+soup_container = data_soup.find('lib-city-history-observation')
+
+# Print out the selected HTML 
+# to make it just a little more readable
+print(soup_container.prettify())
 ```
 
-In order to understand what happened when we called `.compute()`, you can visualize the `dask` *graph*, the symbolic operations that make up the array:
+## Parsing the HTML
+
+The returned HTML might look overwhelming, but you can do a quick search for specific keywords in the HTML. For example, we know the table contains parameters of interest Temperature, Dew Point, Humidity, etc. 
+
+Looking through the HTML for these keywords, we find that each row (e.g., `2:00 AM` row) is tagged under `tr`, and that each cell is tagged under `td` with each data point (e.g., Temperature) tagged as `span`. And we find different fields are associated with different tags.
 
 ```{python, eval=F}
-# Visualize the computation
-ones_da.visualize()
+# Get the full table
+soup_data = soup_container.find_all('tr', class_='mat-row cdk-row ng-star-inserted')
+
+# Tag of each element cell, in the following order:
+# Date, Time, Temperature [F], Dew point [F], Humidity [%],
+# Wind Direction, Wind Speed [mph], Wind Guest [mph],
+# Pressure [in], Precipitation [in], Condition
+cell_tag = ['mat-cell cdk-cell cdk-column-dateString mat-column-dateString ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-temperature mat-column-temperature ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-dewPoint mat-column-dewPoint ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-humidity mat-column-humidity ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-windcardinal mat-column-windcardinal ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-windSpeed mat-column-windSpeed ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-windGust mat-column-windGust ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-pressure mat-column-pressure ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-precipRate mat-column-precipRate ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-condition mat-column-condition ng-star-inserted']
+
+# Tag of each element value, in the follwoing order:
+# Date, Time, Temperature [F], Dew point [F], Humidity [%],
+# Wind Direction, Wind Speed [mph], Wind Guest [mph],
+# Pressure [in], Precipitation [in], Condition
+value_tag = ['ng-star-inserted'    , 'wu-value wu-value-to', 'wu-value wu-value-to',
+             'wu-value wu-value-to', 'ng-star-inserted'    , 'wu-value wu-value-to',
+             'wu-value wu-value-to', 'wu-value wu-value-to', 'wu-value wu-value-to',
+              'ng-star-inserted']
+
+# Loop through rows
+for i, dat in enumerate(soup_data):
+    # Create an empty list for saving values
+    row = []  
+    # Loop through different fields, i.e., 
+    # Date, Time, Temperature [F], Dew point [F], Humidity [%],
+    # Wind Direction, Wind Speed [mph], Wind Guest [mph],
+    # Pressure [in], Precipitation [in], Condition
+    for field in range(0,len(cell_tag)):
+        # Loop through cells
+        for j, cell in enumerate(dat.find_all('td', class_=cell_tag[field])): 
+            # Loop through element value
+            for k in cell.find_all('span', class_=value_tag[field]):
+                # Get text
+                tmp = k.text
+                # Remove any extra spaces
+                tmp = tmp.strip('  ')
+                # Append data
+                row.append(tmp)
+    # Print the row
+    print(i, row)
 ```
 
-As you find, the array has `4` chunks. To generate it, `dask` calls `np.ones` four times and then concatenates this together into one array.  
+## Saving HTML Data to CSV File
 
-Rather than immediately loading a `dask` array (which puts all the data into RAM), it is more common to want to reduce the data somehow. For example:
+Now let's modify the above chunk of code to save data to a local file (`Shenzhen_20221210.csv`).
 
 ```{python, eval=F}
-# Reduce the array with sum()
-sum_of_ones = ones_da.sum()
+# Get the full table
+soup_data = soup_container.find_all('tr', class_='mat-row cdk-row ng-star-inserted')
 
-# Visualize the computation
-sum_of_ones.visualize()
+# Tag of each element cell, in the following order:
+# Date, Time, Temperature [F], Dew point [F], Humidity [%],
+# Wind Direction, Wind Speed [mph], Wind Guest [mph],
+# Pressure [in], Precipitation [in], Condition
+cell_tag = ['mat-cell cdk-cell cdk-column-dateString mat-column-dateString ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-temperature mat-column-temperature ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-dewPoint mat-column-dewPoint ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-humidity mat-column-humidity ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-windcardinal mat-column-windcardinal ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-windSpeed mat-column-windSpeed ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-windGust mat-column-windGust ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-pressure mat-column-pressure ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-precipRate mat-column-precipRate ng-star-inserted',
+            'mat-cell cdk-cell cdk-column-condition mat-column-condition ng-star-inserted']
+
+# Tag of each element value, in the follwoing order:
+# Date, Time, Temperature [F], Dew point [F], Humidity [%],
+# Wind Direction, Wind Speed [mph], Wind Guest [mph],
+# Pressure [in], Precipitation [in], Condition
+value_tag = ['ng-star-inserted'    , 'wu-value wu-value-to', 'wu-value wu-value-to',
+             'wu-value wu-value-to', 'ng-star-inserted'    , 'wu-value wu-value-to',
+             'wu-value wu-value-to', 'wu-value wu-value-to', 'wu-value wu-value-to',
+              'ng-star-inserted']
+
+# Open a file to save data
+outfile = 'Shenzhen_20221210.csv'
+
+with open(outfile, 'w') as f:
+    # Write the header
+    f.write('Date, Time, Temperature [F], Dew point [F], Humidity [%],' 
+            'Wind Direction, Wind Speed [mph], Wind Guest [mph],' 
+            'Pressure [in], Precipitation [in], Condition\n')       
+    # Loop through rows
+    for i, dat in enumerate(soup_data):
+        # Create an empty list for saving values
+        row = []  
+        # Loop through different fields, i.e., 
+        # Date, Time, Temperature [F], Dew point [F], Humidity [%],
+        # Wind Direction, Wind Speed [mph], Wind Guest [mph],
+        # Pressure [in], Precipitation [in], Condition
+        for field in range(0,len(cell_tag)):
+            # Loop through cells
+            for j, cell in enumerate(dat.find_all('td', class_=cell_tag[field])): 
+                # Loop through element value
+                for k in cell.find_all('span', class_=value_tag[field]):
+                    # Get text
+                    tmp = k.text
+                    # Remove any extra spaces
+                    tmp = tmp.strip('  ')
+                    # Append data
+                    row.append(tmp)
+        # Print the row
+        print(i, row)
+        # Write the date of the recorded data into the file
+        f.write('2022-12-10,') 
+        # Write data into the file
+        f.write(','.join(row[:10])) 
+        # New line, to append more rows to the same file later on
+        f.write('\n')
 ```
 
-Here we see `dask`'s strategy for finding the `sum`. This simple example illustrates the beauty of `dask`: it **automatically** designs an algorithm appropriate for custom operations with big data.
+## Scraping multiple URLs
 
-## A bigger calculation
-
-The previous example are too simple - the data (`32 MB`) is nowhere nearly big enough to warrant the use of `dask`. Let's make it a lot bigger:  
+Let’s say we want to scrape the information contained in the Daily Observations table from Weather Underground pages for weather observations taken at *any date*. To do this, we need to convert the code above to its own function that can loop through multiple web pages for a range of input dates:
 
 ```{python, eval=F}
-# A much bigger array
-bigshape = (200000, 4000)
+# Define the scraper function that
+# gets data within a date range
+def scrape_shenzhen_weather(start_date, end_date):
+    
+    # Tag of each element cell, in the following order:
+    # Date, Time, Temperature [F], Dew point [F], Humidity [%],
+    # Wind Direction, Wind Speed [mph], Wind Guest [mph],
+    # Pressure [in], Precipitation [in], Condition
+    cell_tag = ['mat-cell cdk-cell cdk-column-dateString mat-column-dateString ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-temperature mat-column-temperature ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-dewPoint mat-column-dewPoint ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-humidity mat-column-humidity ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-windcardinal mat-column-windcardinal ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-windSpeed mat-column-windSpeed ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-windGust mat-column-windGust ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-pressure mat-column-pressure ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-precipRate mat-column-precipRate ng-star-inserted',
+                'mat-cell cdk-cell cdk-column-condition mat-column-condition ng-star-inserted']
+    
+    # Tag of each element value, in the follwoing order:
+    # Date, Time, Temperature [F], Dew point [F], Humidity [%],
+    # Wind Direction, Wind Speed [mph], Wind Guest [mph],
+    # Pressure [in], Precipitation [in], Condition
+    value_tag = ['ng-star-inserted'    , 'wu-value wu-value-to', 'wu-value wu-value-to',
+                 'wu-value wu-value-to', 'ng-star-inserted'    , 'wu-value wu-value-to',
+                 'wu-value wu-value-to', 'wu-value wu-value-to', 'wu-value wu-value-to',
+                 'ng-star-inserted']
 
-# Define the array (lazy method)
-big_ones = da.ones(bigshape, chunks=chunk_shape)
-
-# Run computation
-big_ones
-
-# Check the size of array in MB
-big_ones.nbytes / 1e6
+    # Data URL that can be formatted to find the webpage for any observation date     
+    data_url = 'http://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/{}-{}-{}' 
+    
+    # This csv file name that can be formatted for any year
+    outfile = 'Shenzhen_{}.csv'.format(start_date.year)
+    
+    # If the csv file does not exist, write, if it does exist, append
+    if not os.path.exists(outfile):
+        mode = 'w'
+    else:
+        mode = 'a'
+        
+    with open(outfile, mode) as f:
+        # Write the header
+        if mode == 'w':
+            f.write('Date, Time, Temperature [F], Dew point [F], Humidity [%],' 
+                    'Wind Direction, Wind Speed [mph], Wind Guest [mph],' 
+                    'Pressure [in], Precipitation [in], Condition\n')
+    
+        # while loop continues until it reaches the given end date
+        while start_date != end_date:     
+            # Format the search URL for the given observation date 
+            format_data_url = data_url.format(start_date.year,start_date.month,start_date.day)
+            # Use my_rendering function to load the page
+            data_page = my_rendering(format_data_url)
+            # Use BeautifulSoup to parse the page
+            data_soup = BeautifulSoup(data_page, 'html.parser')
+            # Find information under lib-city-history-observation
+            soup_container = data_soup.find('lib-city-history-observation')         
+            # Get the full table
+            soup_data = soup_container.find_all('tr',class_='mat-row cdk-row ng-star-inserted')
+            
+            # Loop through rows
+            for i, dat in enumerate(soup_data):
+                # Create an empty list for saving values
+                row = []         
+                # Loop through different fields, i.e., 
+                # Date, Time, Temperature [F], Dew point [F], Humidity [%],
+                # Wind Direction, Wind Speed [mph], Wind Guest [mph],
+                # Pressure [in], Precipitation [in], Condition      
+                for field in range(0,len(cell_tag)):
+                    # Loop through cells
+                    for j, d in enumerate(dat.find_all('td', class_= cell_tag[field])):
+                        # Loop through element value
+                        for k in d.find_all('span', class_= value_tag[field]):
+                            # Get text
+                            tmp = k.text
+                            # Remove any extra spaces
+                            tmp = tmp.strip('  ')
+                            # Append data
+                            row.append(tmp)
+                # Write the date of the recorded data into the file
+                f.write('{}-{}-{},'.format(start_date.year, start_date.month, start_date.day))
+                # Write data into the file
+                f.write(','.join(row[:10]))
+                # New line, to append more rows to the same file later on
+                f.write('\n') 
+                
+            # Go to next date, i.e., next URL
+            start_date += timedelta(days=1) 
 ```
 
-This dataset is `6.4 GB`! This is probably close to or greater than the amount of available RAM than you have in your computer. Nevertheless, `dask` has no problem working on it. When doing a big calculation, `dask` also has some tools to help us understand what is happening. 
+Now that we have our new `scrape_shenzhen_weather` function defined, let’s use it to scrape data for between `2022-01-01` and `2022-01-03`. To do this, we simply need to define the `start_date` and `end_date` parameters, and run the function.
 
 ```{python, eval=F}
-# Import ProgressBar
-from dask.diagnostics import ProgressBar
+# Set start and end dates
+start_date = datetime(year=2022, month=1, day=1)
+end_date = datetime(year=2022, month=1, day=5)
 
-# Define the computation (lazy method)
-calc = (np.cos(big_ones)**2).mean()
-
-# Show ProgressBar
-with ProgressBar():
-    # Run computation
-    result = calc.compute()
-
-# Show result
-result
+# Call the scraper function
+scrape_shenzhen_weather(start_date, end_date)
 ```
 
-In fact, all the usual `numpy` methods work on `dask` arrays. You can also apply `numpy` function directly to a `dask` array, and it will stay "lazy" until the computation starts.  
-
-```{python, eval=F}
-# Define the computation (lazy method)
-calc2 = (np.exp(big_ones)**10).mean(axis=0)
-calc2
-```
-
-Plotting also triggers computation, since we need the actual values.  
-
-```{python, eval=F}
-# Run computation and plot
-plt.plot(calc2)
-```
-
-## Making a local client
-
-`Dask` has several ways of executing code in parallel. We'll use the [distributed scheduler](http://distributed.dask.org/en/stable/) by creating a `dask.distributed.Client`. 
-
-For now, this will provide us with some nice diagnostics. Let's make a local client (`my_client`) with `4` workers (`1` thread per worker):
-
-```{python, eval=F}
-# Use the distributed scheduler to form a local client (cluster)
-# 4 workers, 1 thread (CPU) per worker
-my_client = Client(n_workers=4, threads_per_worker=1)
-
-# Show information of the local client
-my_client.cluster
-```
-
-Click the the Dashboard link, get yourself familiarized with it.
-
-If you no longer use a client, make sure to close your client or stop this kernel:
-
-```{python, eval=F}
-my_client.close()
-```
-
-## Parallelizing code with `dask.delayed()`
-
-In this sub-section we parallelize some simple code with `dask` and [`dask.delayed`](https://docs.dask.org/en/latest/delayed.html). Often, this is the only function that you will need to convert functions for use with `dask`. This is a simple way to use `dask` to parallelize existing codebases or build complex systems.
-
-First let's make some toy functions, `fun1` and `fun2`, that sleep for a while to simulate work. We'll then time running these functions normally.
-
-```{python, eval=F}
-# Define two functions
-def fun1(x):
-    sleep(1)
-    return x + 1
-
-def fun2(x, y):
-    sleep(1)
-    return x + y
-```
-
-We then time the execution of this normal code using the `%%time` magic, which is a special function of the `Jupyter Notebook`.
-
-```{python, eval=F}
-%%time
-
-# This takes three seconds to run because we call each
-# function sequentially, one after the other
-
-# Call fun1
-x = fun1(1)
-
-# Call fun1
-y = fun1(2)
-
-# Call fun2
-z = fun2(x, y)
-```
-
-Those two increment calls could be called in parallel, because they are totally **independent of one-another**.
-
-We'll transform the `fun1` and `fun2` functions using the `dask.delayed()` function. When we call the **delayed version** by passing the arguments, exactly as before, the original function isn't actually called yet - which is why the cell execution finishes very quickly. Instead, a delayed object is made, which keeps track of the function to call and the arguments to pass to it.    
-
-```{python, eval=F}
-%%time
-
-# This runs immediately, all it does is build a graph
-x = delayed(fun1)(1)
-y = delayed(fun1)(2)
-z = delayed(fun2)(x, y)
-```
-
-This ran immediately, since nothing has really happened yet. To get the result, call `compute`. Notice that this runs faster than the original code.
-
-```{python, eval=F}
-%%time
-
-# This actually runs our computation using a local cluster
-z.compute()
-```
-
-Here, the `z` object is a *lazy* `Delayed` object, which holds everything we need to compute the final result, including references to all of the functions that are required and their inputs and relationship to one-another. We can evaluate the result with `.compute()` as above or we can visualize the task graph for this value with `.visualize()`. As you can see, such a lazy execution allows building up complex, large calculations symbolically before turning them over to the scheduler for execution. For more, check [`dask` delayed execution](https://tutorial.dask.org/03_dask.delayed.html).
-
-```{python, eval=F}
-# Look at the task graph for z
-z.visualize()
-```
-
-Notice that this includes the names of the functions from before, and the logical flow of the outputs of the `fun1` functions to the inputs of `fun2`.
-
-## Parallelizing a `for` loop with `dask.delayed()`
-
-`for` loops are one of the most common things that we want to parallelize. Use `dask.delayed `on `fun1` and `sum` to parallelize the computation below:
-
-```{python, eval=F}
-# Make a simple list
-data = [1, 2, 3, 4]
-```
-
-```{python, eval=F}
-%%time
-
-# Sequential code
-results = []
-
-# Loop element one by one
-for i in data:
-    temp = fun1(i)
-    results.append(temp)
-
-# Compute
-total = sum(results)
-
-# After it's computed
-print("After computing :", total)  
-```
-
-A parallel version with `dask.delayed()` would be:
-
-```{python, eval=F}
-%%time
-
-# Parallel code 
-results = []
-
-for i in data:
-    temp = delayed(fun1)(i)
-    results.append(temp)
-
-# Define the method
-total = delayed(sum)(results)
-
-# Let's see what type of thing total is
-print("Before computing:", total)
-
-# Compute
-result = total.compute()
-
-# After it's computed
-print("After computing :", result) 
-```
-
-Visualize the task graph for this:
-
-```{python, eval=F}
-# Look at the task graph for total
-total.visualize()
-```
-
-Now enlarge `data` to a larger list, *e.g*, `[1, 2, 3, 4, 5, 6, 7, 8]`. Check what would happen to the running time of `total`? Can you figure out why?
-
-## Combing `dask` and `xarray`
-
-`Xarray` can automatically wrap its data in [`dask` arrays](https://tutorial.dask.org/02_array.html). This capability turns `xarray` into an extremely powerful tool for Big Data earth science. 
-
-To illustrate this in action, we will use a fairly large dataset to analyze. This file contains `1` year of daily data from the [AVISO](https://www.aviso.altimetry.fr/en/home.html) sea-surface height satellite altimetry dataset. 
-
-Let's load the first file as a regular `xarray` dataset:
-
-```{python, eval=F}
-# Load the first file with xarray
-ds_first = xr.open_dataset('aviso_2015/dt_global_allsat_madt_h_20150101_20150914.nc')
-
-# Check the data
-ds_first
-```
-
-This one file is about `8 MB`. So `365` of them will be nearly `3 GB`. If we had downloaded all `25` years of data, it would be `73 GB`!. This is a good example of "medium data".
-
-With [`open_mfdataset`](http://xarray.pydata.org/en/stable/generated/xarray.open_mfdataset.html), we can easily open all the netcdf files into one *Dataset* object. 
-
-```{python, eval=F}
-# Use open_mfdataset to load all the nc files
-ds = xr.open_mfdataset('aviso_2015/*.nc')
-
-# Check data object
-# Notice that the values are not displayed
-ds
-```
-
-Note that the values are not displayed, since that would trigger computation.
-
-```{python, eval=F}
-# Get sea surface height (adt)
-ssh = ds.adt
-
-# Check the data, this is a dask array
-ssh
-```
-
-Try the following code, see what happens:
-
-```{python, eval=F}
-# Compute annual mean ssh
-ssh_2015_mean = ssh.mean(dim='time')
-```
-
-To actually compute the data:
-
-```{python, eval=F}
-# Compute annual mean ssh
-ssh_2015_mean.load()
-
-# Plot annual mean
-ssh_2015_mean.plot()
-```
-
-Finally, close the client (local cluster):
-
-```{python, eval=F}
-# Close the client (local cluster)
-my_client.close()
-```
+You should end up with a `.csv` file (`Shenzhen_2022.csv`) containing dated rows. Check it.
 
 ***
 
-# `Python` next?
-
-So far we have covered the basics of `Python` and fundamental modules to make plots and analyze data. Looking forward, the learning curve is still steep, be patient as it takes time. Use Google and [stackoverflow](https://stackoverflow.com/) without hesitation, as you will find 9 out 10 times your questions/issues have been reported and solved (luckily) already.   
-
-Have fun!
+*The notes are modified from the excellent [Getting Started with Web Scraping in Python](https://data.library.virginia.edu/getting-started-with-web-scraping-in-python/), available freely online.*
 
 ***
 
-*The notes are modified from the excellent [Dask for Parallel Computing and Big Data](https://rabernat.github.io/research_computing_2018/dask-for-parallel-computing-and-big-data.html), available freely online.*
+# In-class exercise
 
-***
+Modify the `scrape_shenzhen_weather()` function so that it scrapes the information contained in the Daily Observations table from [Weather Underground pages](https://www.wunderground.com) for weather observations taken at ANY airport station within ANY date range.
 
-# In-class exercises
-
-## Exercise #1
-
-Go through the notes, make sure you understand the scripts.
-
-## Exercise #2
-
-Make a local client with `6` CPUs (only if your laptop allows!), then compute and plot the variance in daily `ssh` anomalies with `dask`.
+[**Hint:** Add another input parameter `station`]
 
 ***
 
 # Further reading
 
-+ [`Dask` tutorial](https://github.com/dask/dask-tutorial)
-+ [A Data Scientist’s Guide to Lazy Evaluation with `Dask`](https://saturncloud.io/blog/a-data-scientist-s-guide-to-lazy-evaluation-with-dask/)
-+ [Intermediate Python](https://book.pythontips.com/en/latest/)
++ [Requests: HTTP for Humans](https://docs.python-requests.org/en/latest/)
++ [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
++ [Selenium with Python](https://selenium-python.readthedocs.io/)
++ [Web Scraping Using Python](https://www.javatpoint.com/web-scraping-using-python)

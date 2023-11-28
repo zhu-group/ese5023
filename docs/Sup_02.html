@@ -11,7 +11,7 @@
 
 
 
-<title>Parallel computing with dask</title>
+<title>Web scraping with Python</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -472,456 +472,463 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Parallel computing with
-<code>dask</code></h1>
+<h1 class="title toc-ignore">Web scraping with <code>Python</code></h1>
 
 </div>
 
 
 <blockquote>
-<p>“Data is the new science. Big Data holds the answers.” - Pat
-Gelsinger</p>
+<p>“The goal is to turn data into information, and information into
+insight.” - Carly Fiorina</p>
 </blockquote>
 <hr />
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
-<p>In this section, we will use daily data from the <a
-href="https://www.aviso.altimetry.fr/en/home.html">AVISO</a> sea-surface
-height satellite altimetry dataset. Download the file
-(<code>aviso_2015.zip</code>, ~ <code>390 MB</code>) <a href="">from
-here</a>, unzip it, you will have a folder (<code>aviso_2015</code>)
-containing <code>365</code> netcdf (nc) files. Move the folder to your
-working directory.</p>
-<p><strong>Important:</strong></p>
-<p>In this section, we will use the <code>cper</code> environment you
-created in <a
-href="https://zhu-group.github.io/ese5023/Section_11.html#Creating_a_Python_environment">Section
-11</a>. Make sure you have it activated, and open
-<code>jupter notebook</code> under it, not the <code>base</code>
-environment.</p>
-<hr />
-</div>
-<div id="dask-for-parallel-computing" class="section level1">
-<h1><code>Dask</code> for parallel computing</h1>
-<p>In past lectures, we learned how to use <code>numpy</code>,
-<code>pandas</code>, and <code>xarray</code> to analyze various types of
-data. In this section, we address an increasingly common problem: what
-happens if the data we wish to analyze is “big data”.</p>
-<p>A good threshold for when data becomes difficult to deal with is when
-the volume of data exceeds your computer’s RAM (Random-access memory).
-Most modern laptops have between <code>2 GB</code> and
-<code>16 GB</code> of RAM. High-end workstations and servers can have
-<code>1 TB</code> or RAM or more. If the dataset you are trying to
-analyze can’t fit in your computer’s memory, some special care is
-required to carry out the analysis.</p>
-<p>The next threshold of difficulty is when the data can’t fit on your
-hard drive. Most modern laptops have between <code>100 GB</code> and
-<code>4 TB</code> of storage space on the hard drive. If you can’t fit
-your dataset on your internal hard drive, you can buy an external hard
-drive. However, at that point you are better off using a high-end
-server, HPC system, or cloud-based storage for your dataset. Once you
-have many <code>TB</code> of data to analyze, you are definitely in the
-realm of “big data”.</p>
-<div id="introduction-to-dask" class="section level2">
-<h2>Introduction to <code>dask</code></h2>
-<p><code>Dask</code> is a tool that helps us easily extend our familiar
-<code>Python</code> data analysis tools to medium and big data,
-<em>i.e.</em> dataset that can’t fit in our computer’s RAM. In many
-cases, <code>dask</code> also allows us to speed up our analysis by
-using multiple CPU cores. <code>Dask</code> can help us work more
-efficiently on our laptop, and it can also help us <strong>scale
-up</strong> our analysis on HPC and cloud platforms. Most importantly,
-<code>dask</code> is almost invisible to the user, meaning that you can
-focus on your science, rather than the details of parallel
-computing.</p>
-<p><code>Dask</code> provides collections for big data and a scheduler
-for parallel computing. In this section, we will learn the basics of
-using <code>dask</code> through examples. For more about
-<code>dask</code>, check <a href="https://docs.dask.org/en/latest/">The
-Dask Documentation</a> and <a href="https://github.com/dask/dask">The
-Dask Github Site</a>. For other modules enabling parallel computing,
-check <a href="https://wiki.python.org/moin/ParallelProcessing">Parallel
-Processing and Multiprocessing in Python</a>.</p>
-</div>
-<div id="dask-arrays" class="section level2">
-<h2><code>Dask</code> arrays</h2>
-<p>A <code>dask</code> array looks and feels a lot like a
-<code>numpy</code> array. However, a <code>dask</code> array doesn’t
-directly hold any data. Instead, it <strong>symbolically</strong>
-represents the computations needed to generate the data. Nothing is
-actually computed until the actual numerical values are needed. This
-mode of operation is called <em>lazy</em>; it allows one to build up
-complex, large calculations symbolically before turning them over the
-scheduler for execution.</p>
-<p>If we want to create a numpy array of all ones, we do it like
-this:</p>
+<ul>
+<li><p>We will use <a
+href="https://www.google.com/intl/en_us/chrome/">Google Chrome</a> in
+this section.</p></li>
+<li><p>Download the <a
+href="https://chromedriver.chromium.org/downloads">chromedriver
+file</a>, unzip it, and <strong>move the folder to your working
+directory</strong>. You need to use same version of Google Chrome, if
+you have installed it already.</p></li>
+<li><p>Modules used in this section:</p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Create a numpy array</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>shape <span class="op">=</span> (<span class="dv">1000</span>, <span class="dv">4000</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>ones_np <span class="op">=</span> np.ones(shape)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ones_np</span></code></pre></div>
-<p>This array contains exactly <code>32 MB</code> of data:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Check the size of array in MB</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>ones_np.nbytes <span class="op">/</span> <span class="fl">1e6</span></span></code></pre></div>
-<p>Now let’s create the same array using <code>dask</code>’s array
-interface:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Create a dask array</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ones_da <span class="op">=</span> da.ones(shape)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>ones_da</span></code></pre></div>
-<p>As you see, <code>dask</code> create the array in one <em>chunk</em>.
-In fact, a crucial advantage with <code>dask</code> is that we can
-specify the <code>chunks</code> argument. Here, <code>chunks</code>
-describes how the array is split up over many sub-arrays. There are <a
-href="https://dask.pydata.org/en/latest/array-creation.html#chunks">several
-ways</a> to specify chunks. In this section, we will use a block
-shape:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Specify the chunk</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>chunk_shape <span class="op">=</span> (<span class="dv">1000</span>, <span class="dv">1000</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>ones_da <span class="op">=</span> da.ones(shape, chunks<span class="op">=</span>chunk_shape)</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>ones_da</span></code></pre></div>
-<p>Notice that we just see a symbolic representation of the array,
-including its <code>shape</code>, <code>dtype</code>, and
-<code>chunksize</code>. No data has been generated yet. When we call
-<code>.compute()</code> on a <code>dask</code> array, the computation is
-trigger and the <code>dask</code> array becomes a <code>numpy</code>
-array.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Run computation</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>ones_da.compute()</span></code></pre></div>
-<p>In order to understand what happened when we called
-<code>.compute()</code>, you can visualize the <code>dask</code>
-<em>graph</em>, the symbolic operations that make up the array:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Visualize the computation</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>ones_da.visualize()</span></code></pre></div>
-<p>As you find, the array has <code>4</code> chunks. To generate it,
-<code>dask</code> calls <code>np.ones</code> four times and then
-concatenates this together into one array.</p>
-<p>Rather than immediately loading a <code>dask</code> array (which puts
-all the data into RAM), it is more common to want to reduce the data
-somehow. For example:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Reduce the array with sum()</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>sum_of_ones <span class="op">=</span> ones_da.<span class="bu">sum</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Visualize the computation</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>sum_of_ones.visualize()</span></code></pre></div>
-<p>Here we see <code>dask</code>’s strategy for finding the
-<code>sum</code>. This simple example illustrates the beauty of
-<code>dask</code>: it <strong>automatically</strong> designs an
-algorithm appropriate for custom operations with big data.</p>
-</div>
-<div id="a-bigger-calculation" class="section level2">
-<h2>A bigger calculation</h2>
-<p>The previous example are too simple - the data (<code>32 MB</code>)
-is nowhere nearly big enough to warrant the use of <code>dask</code>.
-Let’s make it a lot bigger:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># A much bigger array</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>bigshape <span class="op">=</span> (<span class="dv">200000</span>, <span class="dv">4000</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Define the array (lazy method)</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>big_ones <span class="op">=</span> da.ones(bigshape, chunks<span class="op">=</span>chunk_shape)</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># Run computation</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>big_ones</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># Check the size of array in MB</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>big_ones.nbytes <span class="op">/</span> <span class="fl">1e6</span></span></code></pre></div>
-<p>This dataset is <code>6.4 GB</code>! This is probably close to or
-greater than the amount of available RAM than you have in your computer.
-Nevertheless, <code>dask</code> has no problem working on it. When doing
-a big calculation, <code>dask</code> also has some tools to help us
-understand what is happening.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Import ProgressBar</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="im">from</span> dask.diagnostics <span class="im">import</span> ProgressBar</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Define the computation (lazy method)</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>calc <span class="op">=</span> (np.cos(big_ones)<span class="op">**</span><span class="dv">2</span>).mean()</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># Show ProgressBar</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="cf">with</span> ProgressBar():</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="co"># Run computation</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    result <span class="op">=</span> calc.compute()</span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># Show result</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>result</span></code></pre></div>
-<p>In fact, all the usual <code>numpy</code> methods work on
-<code>dask</code> arrays. You can also apply <code>numpy</code> function
-directly to a <code>dask</code> array, and it will stay “lazy” until the
-computation starts.</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Define the computation (lazy method)</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>calc2 <span class="op">=</span> (np.exp(big_ones)<span class="op">**</span><span class="dv">10</span>).mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>calc2</span></code></pre></div>
-<p>Plotting also triggers computation, since we need the actual
-values.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Run computation and plot</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>plt.plot(calc2)</span></code></pre></div>
-</div>
-<div id="making-a-local-client" class="section level2">
-<h2>Making a local client</h2>
-<p><code>Dask</code> has several ways of executing code in parallel.
-We’ll use the <a
-href="http://distributed.dask.org/en/stable/">distributed scheduler</a>
-by creating a <code>dask.distributed.Client</code>.</p>
-<p>For now, this will provide us with some nice diagnostics. Let’s make
-a local client (<code>my_client</code>) with <code>4</code> workers
-(<code>1</code> thread per worker):</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Use the distributed scheduler to form a local client (cluster)</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co"># 4 workers, 1 thread (CPU) per worker</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>my_client <span class="op">=</span> Client(n_workers<span class="op">=</span><span class="dv">4</span>, threads_per_worker<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Show information of the local client</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>my_client.cluster</span></code></pre></div>
-<p>Click the the Dashboard link, get yourself familiarized with it.</p>
-<p>If you no longer use a client, make sure to close your client or stop
-this kernel:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>my_client.close()</span></code></pre></div>
-</div>
-<div id="parallelizing-code-with-dask.delayed" class="section level2">
-<h2>Parallelizing code with <code>dask.delayed()</code></h2>
-<p>In this sub-section we parallelize some simple code with
-<code>dask</code> and <a
-href="https://docs.dask.org/en/latest/delayed.html"><code>dask.delayed</code></a>.
-Often, this is the only function that you will need to convert functions
-for use with <code>dask</code>. This is a simple way to use
-<code>dask</code> to parallelize existing codebases or build complex
-systems.</p>
-<p>First let’s make some toy functions, <code>fun1</code> and
-<code>fun2</code>, that sleep for a while to simulate work. We’ll then
-time running these functions normally.</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Define two functions</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="kw">def</span> fun1(x):</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    sleep(<span class="dv">1</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="kw">def</span> fun2(x, y):</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    sleep(<span class="dv">1</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span></code></pre></div>
-<p>We then time the execution of this normal code using the
-<code>%%time</code> magic, which is a special function of the
-<code>Jupyter Notebook</code>.</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># This takes three seconds to run because we call each</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># function sequentially, one after the other</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co"># Call fun1</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>x <span class="op">=</span> fun1(<span class="dv">1</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># Call fun1</span></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>y <span class="op">=</span> fun1(<span class="dv">2</span>)</span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co"># Call fun2</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>z <span class="op">=</span> fun2(x, y)</span></code></pre></div>
-<p>Those two increment calls could be called in parallel, because they
-are totally <strong>independent of one-another</strong>.</p>
-<p>We’ll transform the <code>fun1</code> and <code>fun2</code> functions
-using the <code>dask.delayed()</code> function. When we call the
-<strong>delayed version</strong> by passing the arguments, exactly as
-before, the original function isn’t actually called yet - which is why
-the cell execution finishes very quickly. Instead, a delayed object is
-made, which keeps track of the function to call and the arguments to
-pass to it.</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co"># This runs immediately, all it does is build a graph</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>x <span class="op">=</span> delayed(fun1)(<span class="dv">1</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>y <span class="op">=</span> delayed(fun1)(<span class="dv">2</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>z <span class="op">=</span> delayed(fun2)(x, y)</span></code></pre></div>
-<p>This ran immediately, since nothing has really happened yet. To get
-the result, call <code>compute</code>. Notice that this runs faster than
-the original code.</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># This actually runs our computation using a local cluster</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>z.compute()</span></code></pre></div>
-<p>Here, the <code>z</code> object is a <em>lazy</em>
-<code>Delayed</code> object, which holds everything we need to compute
-the final result, including references to all of the functions that are
-required and their inputs and relationship to one-another. We can
-evaluate the result with <code>.compute()</code> as above or we can
-visualize the task graph for this value with <code>.visualize()</code>.
-As you can see, such a lazy execution allows building up complex, large
-calculations symbolically before turning them over to the scheduler for
-execution. For more, check <a
-href="https://tutorial.dask.org/03_dask.delayed.html"><code>dask</code>
-delayed execution</a>.</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Look at the task graph for z</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>z.visualize()</span></code></pre></div>
-<p>Notice that this includes the names of the functions from before, and
-the logical flow of the outputs of the <code>fun1</code> functions to
-the inputs of <code>fun2</code>.</p>
-</div>
-<div id="parallelizing-a-for-loop-with-dask.delayed"
-class="section level2">
-<h2>Parallelizing a <code>for</code> loop with
-<code>dask.delayed()</code></h2>
-<p><code>for</code> loops are one of the most common things that we want
-to parallelize. Use <code>dask.delayed</code>on <code>fun1</code> and
-<code>sum</code> to parallelize the computation below:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Make a simple list</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># Sequential code</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>results <span class="op">=</span> []</span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co"># Loop element one by one</span></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data:</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>    temp <span class="op">=</span> fun1(i)</span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>    results.append(temp)</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co"># Compute</span></span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(results)</span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co"># After it&#39;s computed</span></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;After computing :&quot;</span>, total)  </span></code></pre></div>
-<p>A parallel version with <code>dask.delayed()</code> would be:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># Parallel code </span></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>results <span class="op">=</span> []</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data:</span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>    temp <span class="op">=</span> delayed(fun1)(i)</span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>    results.append(temp)</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co"># Define the method</span></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>total <span class="op">=</span> delayed(<span class="bu">sum</span>)(results)</span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a><span class="co"># Let&#39;s see what type of thing total is</span></span>
-<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Before computing:&quot;</span>, total)</span>
-<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a><span class="co"># Compute</span></span>
-<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a>result <span class="op">=</span> total.compute()</span>
-<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a></span>
-<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a><span class="co"># After it&#39;s computed</span></span>
-<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;After computing :&quot;</span>, result) </span></code></pre></div>
-<p>Visualize the task graph for this:</p>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Look at the task graph for total</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>total.visualize()</span></code></pre></div>
-<p>Now enlarge <code>data</code> to a larger list, <em>e.g</em>,
-<code>[1, 2, 3, 4, 5, 6, 7, 8]</code>. Check what would happen to the
-running time of <code>total</code>? Can you figure out why?</p>
-</div>
-<div id="combing-dask-and-xarray" class="section level2">
-<h2>Combing <code>dask</code> and <code>xarray</code></h2>
-<p><code>Xarray</code> can automatically wrap its data in <a
-href="https://tutorial.dask.org/02_array.html"><code>dask</code>
-arrays</a>. This capability turns <code>xarray</code> into an extremely
-powerful tool for Big Data earth science.</p>
-<p>To illustrate this in action, we will use a fairly large dataset to
-analyze. This file contains <code>1</code> year of daily data from the
-<a href="https://www.aviso.altimetry.fr/en/home.html">AVISO</a>
-sea-surface height satellite altimetry dataset.</p>
-<p>Let’s load the first file as a regular <code>xarray</code>
-dataset:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Load the first file with xarray</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>ds_first <span class="op">=</span> xr.open_dataset(<span class="st">&#39;aviso_2015/dt_global_allsat_madt_h_20150101_20150914.nc&#39;</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># Check the data</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>ds_first</span></code></pre></div>
-<p>This one file is about <code>8 MB</code>. So <code>365</code> of them
-will be nearly <code>3 GB</code>. If we had downloaded all
-<code>25</code> years of data, it would be <code>73 GB</code>!. This is
-a good example of “medium data”.</p>
-<p>With <a
-href="http://xarray.pydata.org/en/stable/generated/xarray.open_mfdataset.html"><code>open_mfdataset</code></a>,
-we can easily open all the netcdf files into one <em>Dataset</em>
-object.</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Use open_mfdataset to load all the nc files</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_mfdataset(<span class="st">&#39;aviso_2015/*.nc&#39;</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># Check data object</span></span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co"># Notice that the values are not displayed</span></span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>ds</span></code></pre></div>
-<p>Note that the values are not displayed, since that would trigger
-computation.</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Get sea surface height (adt)</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>ssh <span class="op">=</span> ds.adt</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Check the data, this is a dask array</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>ssh</span></code></pre></div>
-<p>Try the following code, see what happens:</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Compute annual mean ssh</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>ssh_2015_mean <span class="op">=</span> ssh.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span></code></pre></div>
-<p>To actually compute the data:</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Compute annual mean ssh</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>ssh_2015_mean.load()</span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Plot annual mean</span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>ssh_2015_mean.plot()</span></code></pre></div>
-<p>Finally, close the client (local cluster):</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Close the client (local cluster)</span></span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>my_client.close()</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Load modules</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">from</span> selenium <span class="im">import</span> webdriver</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span></code></pre></div>
+<ul>
+<li>The <code>Jupyter Notenook</code> for this section is available at
+<a
+href="https://zhu-group.github.io/ese5023/download/Sup_02.ipynb">here</a>.</li>
+</ul>
 <hr />
 </div>
+<div id="web-scraping" class="section level1">
+<h1>Web scraping</h1>
+<p>Web scraping refers to the process of <strong>extracting
+data</strong> from a website. This can, of course, be done manually: you
+could go to a website, find the relevant data or information, and enter
+that information into some data file that you have stored locally. But
+imagine that you want to pull a very large dataset from hundreds or
+thousands of individual URLs. In this case, extracting the data manually
+sounds overwhelming and time-consuming.</p>
+<p>In this article, we’ll see how to <strong>automate</strong> this
+process with <code>Python</code>, using the <a
+href="https://docs.python-requests.org/en/latest/"><code>requests</code></a>,
+<a
+href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"><code>BeautifulSoup</code></a>,
+and <a
+href="https://selenium-python.readthedocs.io/"><code>Selenium</code></a>
+modules. <code>requests</code> is an elegant and simple HTTP library for
+<code>Python</code>, <code>BeautisulSoup</code> is a <code>Python</code>
+module for extracting and parsing data from HTML files, and
+<code>Selenium</code> is used to automate web browser interaction
+between <code>Python</code> and your browser.</p>
+<div id="installing-libraries" class="section level2">
+<h2>Installing libraries</h2>
+<p>Activate the <a
+href="https://zhu-group.github.io/ese5023/Section_11.html#Using_the_environment_file"><code>cper</code>
+environment</a>, as we will install <code>requests</code>,
+<code>BeautifulSoup</code>, and <code>Selenium</code> under it.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">conda</span> activate cper</span></code></pre></div>
+<p>If you fail to find <code>cper</code>, follow <a
+href="https://zhu-group.github.io/ese5023/Section_11.html#Creating_a_Python_environment">Creating
+a <code>Python</code> environment</a> to create one.</p>
+<p>To install <code>requests</code>, <code>BeautifulSoup</code>, and
+<code>Selenium</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">conda</span> install requests</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">conda</span> install beautifulsoup4</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">conda</span> install selenium</span></code></pre></div>
 </div>
-<div id="python-next" class="section level1">
-<h1><code>Python</code> next?</h1>
-<p>So far we have covered the basics of <code>Python</code> and
-fundamental modules to make plots and analyze data. Looking forward, the
-learning curve is still steep, be patient as it takes time. Use Google
-and <a href="https://stackoverflow.com/">stackoverflow</a> without
-hesitation, as you will find 9 out 10 times your questions/issues have
-been reported and solved (luckily) already.</p>
-<p>Have fun!</p>
+<div id="fetching-and-rendering-a-web-page" class="section level2">
+<h2>Fetching and rendering a web page</h2>
+<p>First, let’s try rendering a web page <em>without</em> using
+<code>Selenium</code> and other tools, and try to parse the HTML. For
+this demo, we’re going to try to scrape the information contained in the
+Daily Observations table from a Weather Underground page for weather
+observations taken at the Shenzhen Bo’an international airport (ZGSZ) on
+December 10, 2022. Here’s the <a
+href="https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2022-12-10">URL</a>.
+You may need a VPN to open the webpage.</p>
+<p>Before we try rendering the web page, we want to inspect the HTML
+elements to determine what class we need to select. Go to the Daily
+Observations table, right-click and choose <code>Inspect</code>.</p>
+<p>We can see that the entire Daily Observations table is contained
+under <code>lib-city-history-observation</code>. Let’s use that tag to
+grab just the Daily Observations table elements from the HTML. We’ll
+also use the <code>.prettify()</code> method to print out the selected
+HTML to make it just a little more readable.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># URL</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>data_url <span class="op">=</span> <span class="st">&#39;https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10&#39;</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Use requests.get() method to load the page</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>data_page <span class="op">=</span> requests.get(data_url)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># Use BeautifulSoup to parse the page</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>data_soup <span class="op">=</span> BeautifulSoup(data_page.text, <span class="st">&#39;html.parser&#39;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co"># Find information under lib-city-history-observation</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>soup_container <span class="op">=</span> data_soup.find(<span class="st">&#39;lib-city-history-observation&#39;</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># Print out the selected HTML </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co"># to make it just a little more readable</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="bu">print</span>(soup_container.prettify())</span></code></pre></div>
+<p>Here is the output:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="op">&lt;</span>lib-city-history-observation <span class="ex">_ngcontent-sc275=</span><span class="st">&quot;&quot;</span> _nghost-sc236=<span class="st">&quot;&quot;</span><span class="op">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a> <span class="op">&lt;</span>div <span class="ex">_ngcontent-sc236=</span><span class="st">&quot;&quot;</span><span class="op">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="op">&lt;</span>div <span class="ex">_ngcontent-sc236=</span><span class="st">&quot;&quot;</span> class=<span class="st">&quot;observation-title&quot;</span><span class="op">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>   <span class="ex">Daily</span> Observations</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="op">&lt;</span>/div<span class="op">&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="ex">No</span> Data Recorded</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="op">&lt;</span>!-- <span class="ex">--</span><span class="op">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="op">&lt;</span>!-- <span class="ex">--</span><span class="op">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a> <span class="op">&lt;</span>/div<span class="op">&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="op">&lt;</span>/lib-city-history-observation<span class="op">&gt;</span></span></code></pre></div>
+<p>The HTML returned by <code>BeautifulSoup</code> shows
+<code>No data recorded</code>, but when we go to the Daily Observations
+table on the web page, the table is obviously populated. What
+happened?</p>
+<p>In this case, the <code>requests.get()</code> method ran
+<strong>faster</strong> than the web page could load, so the Daily
+Observations table wasn’t available by the time
+<code>BeautifulSoup</code> parsed the web page text. Here’s where
+<code>Selenium</code> will come in and allow the page content to load
+completely before we try to parse it.</p>
+</div>
+<div id="using-web-drivers" class="section level2">
+<h2>Using web drivers</h2>
+<p>At this point, you also need to install <a
+href="https://chromedriver.chromium.org/">ChromeDriver</a>.</p>
+<p>Download the <a
+href="https://chromedriver.chromium.org/downloads">chromedriver_win32.zip
+file</a> (if you use Windows), unzip it, and <strong>move the folder to
+your working directory</strong>. You should have a single executable
+file called <code>chromedriver.exe</code> in a folder called
+<code>chromedriver_win32</code> (if you use Windows).</p>
+<p>Next, we’re going to write a <code>my_rendering</code> function that
+will run the <code>ChromeDriver</code>. This will open a Chrome window,
+load the web page fully, return the page HTML, and quit the
+<code>ChromeDriver</code>, closing the Chrome window. Be sure to update
+the path in the <code>webdriver.Chrome</code> function to the path where
+you installed the <code>ChromeDriver</code>, in our case, it’s
+<code>chromedriver_win32\\chromedriver.exe</code>.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Define a rendering function that runs the ChromeDriver</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="kw">def</span> my_rendering(url):</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="co"># The path to the ChromeDriver, change if necessary</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    driver <span class="op">=</span> webdriver.Chrome(<span class="st">&#39;chromedriver_win32</span><span class="ch">\\</span><span class="st">chromedriver.exe&#39;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    <span class="co"># Load the web page from the URL</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    driver.get(url)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>    <span class="co"># Wait for the web page to load</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    time.sleep(<span class="dv">3</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    <span class="co"># Get the page source HTML</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    render <span class="op">=</span> driver.page_source</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    <span class="co"># Quit ChromeDriver</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>    driver.quit()</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>    <span class="co"># Return the page source HTML</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    <span class="cf">return</span> render</span></code></pre></div>
+<p>Now, using this function, let’s try again to get the Daily
+Observations table elements from the HTML. Following the code written
+above, where, instead of using <code>requests.get()</code>, we’ll use
+our new rendering function:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># URL</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>data_url <span class="op">=</span> <span class="st">&#39;https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/2021-12-10&#39;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Use my_rendering function to load the page</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>data_page <span class="op">=</span> my_rendering(data_url)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># Use BeautifulSoup to parse the page</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>data_soup <span class="op">=</span> BeautifulSoup(data_page, <span class="st">&#39;html.parser&#39;</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co"># Find information under lib-city-history-observation</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>soup_container <span class="op">=</span> data_soup.find(<span class="st">&#39;lib-city-history-observation&#39;</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co"># Print out the selected HTML </span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co"># to make it just a little more readable</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="bu">print</span>(soup_container.prettify())</span></code></pre></div>
+</div>
+<div id="parsing-the-html" class="section level2">
+<h2>Parsing the HTML</h2>
+<p>The returned HTML might look overwhelming, but you can do a quick
+search for specific keywords in the HTML. For example, we know the table
+contains parameters of interest Temperature, Dew Point, Humidity,
+etc.</p>
+<p>Looking through the HTML for these keywords, we find that each row
+(e.g., <code>2:00 AM</code> row) is tagged under <code>tr</code>, and
+that each cell is tagged under <code>td</code> with each data point
+(e.g., Temperature) tagged as <code>span</code>. And we find different
+fields are associated with different tags.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Get the full table</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>soup_data <span class="op">=</span> soup_container.find_all(<span class="st">&#39;tr&#39;</span>, class_<span class="op">=</span><span class="st">&#39;mat-row cdk-row ng-star-inserted&#39;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Tag of each element cell, in the following order:</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>cell_tag <span class="op">=</span> [<span class="st">&#39;mat-cell cdk-cell cdk-column-dateString mat-column-dateString ng-star-inserted&#39;</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-temperature mat-column-temperature ng-star-inserted&#39;</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-dewPoint mat-column-dewPoint ng-star-inserted&#39;</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-humidity mat-column-humidity ng-star-inserted&#39;</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-windcardinal mat-column-windcardinal ng-star-inserted&#39;</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-windSpeed mat-column-windSpeed ng-star-inserted&#39;</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-windGust mat-column-windGust ng-star-inserted&#39;</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-pressure mat-column-pressure ng-star-inserted&#39;</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-precipRate mat-column-precipRate ng-star-inserted&#39;</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-condition mat-column-condition ng-star-inserted&#39;</span>]</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co"># Tag of each element value, in the follwoing order:</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>value_tag <span class="op">=</span> [<span class="st">&#39;ng-star-inserted&#39;</span>    , <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>             <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;ng-star-inserted&#39;</span>    , <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>             <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>              <span class="st">&#39;ng-star-inserted&#39;</span>]</span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co"># Loop through rows</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="cf">for</span> i, dat <span class="kw">in</span> <span class="bu">enumerate</span>(soup_data):</span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>    <span class="co"># Create an empty list for saving values</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>    row <span class="op">=</span> []  </span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a>    <span class="co"># Loop through different fields, i.e., </span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a>    <span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a>    <span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a>    <span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a>    <span class="cf">for</span> field <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(cell_tag)):</span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a>        <span class="co"># Loop through cells</span></span>
+<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a>        <span class="cf">for</span> j, cell <span class="kw">in</span> <span class="bu">enumerate</span>(dat.find_all(<span class="st">&#39;td&#39;</span>, class_<span class="op">=</span>cell_tag[field])): </span>
+<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a>            <span class="co"># Loop through element value</span></span>
+<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> cell.find_all(<span class="st">&#39;span&#39;</span>, class_<span class="op">=</span>value_tag[field]):</span>
+<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a>                <span class="co"># Get text</span></span>
+<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a>                tmp <span class="op">=</span> k.text</span>
+<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a>                <span class="co"># Remove any extra spaces</span></span>
+<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a>                tmp <span class="op">=</span> tmp.strip(<span class="st">&#39;  &#39;</span>)</span>
+<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a>                <span class="co"># Append data</span></span>
+<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a>                row.append(tmp)</span>
+<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a>    <span class="co"># Print the row</span></span>
+<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a>    <span class="bu">print</span>(i, row)</span></code></pre></div>
+</div>
+<div id="saving-html-data-to-csv-file" class="section level2">
+<h2>Saving HTML Data to CSV File</h2>
+<p>Now let’s modify the above chunk of code to save data to a local file
+(<code>Shenzhen_20221210.csv</code>).</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Get the full table</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>soup_data <span class="op">=</span> soup_container.find_all(<span class="st">&#39;tr&#39;</span>, class_<span class="op">=</span><span class="st">&#39;mat-row cdk-row ng-star-inserted&#39;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Tag of each element cell, in the following order:</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>cell_tag <span class="op">=</span> [<span class="st">&#39;mat-cell cdk-cell cdk-column-dateString mat-column-dateString ng-star-inserted&#39;</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-temperature mat-column-temperature ng-star-inserted&#39;</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-dewPoint mat-column-dewPoint ng-star-inserted&#39;</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-humidity mat-column-humidity ng-star-inserted&#39;</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-windcardinal mat-column-windcardinal ng-star-inserted&#39;</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-windSpeed mat-column-windSpeed ng-star-inserted&#39;</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-windGust mat-column-windGust ng-star-inserted&#39;</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-pressure mat-column-pressure ng-star-inserted&#39;</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-precipRate mat-column-precipRate ng-star-inserted&#39;</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>            <span class="st">&#39;mat-cell cdk-cell cdk-column-condition mat-column-condition ng-star-inserted&#39;</span>]</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co"># Tag of each element value, in the follwoing order:</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>value_tag <span class="op">=</span> [<span class="st">&#39;ng-star-inserted&#39;</span>    , <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>             <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;ng-star-inserted&#39;</span>    , <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>             <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>              <span class="st">&#39;ng-star-inserted&#39;</span>]</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="co"># Open a file to save data</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>outfile <span class="op">=</span> <span class="st">&#39;Shenzhen_20221210.csv&#39;</span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(outfile, <span class="st">&#39;w&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>    <span class="co"># Write the header</span></span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>    f.write(<span class="st">&#39;Date, Time, Temperature [F], Dew point [F], Humidity [%],&#39;</span> </span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a>            <span class="st">&#39;Wind Direction, Wind Speed [mph], Wind Guest [mph],&#39;</span> </span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>            <span class="st">&#39;Pressure [in], Precipitation [in], Condition</span><span class="ch">\n</span><span class="st">&#39;</span>)       </span>
+<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a>    <span class="co"># Loop through rows</span></span>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>    <span class="cf">for</span> i, dat <span class="kw">in</span> <span class="bu">enumerate</span>(soup_data):</span>
+<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a>        <span class="co"># Create an empty list for saving values</span></span>
+<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a>        row <span class="op">=</span> []  </span>
+<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a>        <span class="co"># Loop through different fields, i.e., </span></span>
+<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a>        <span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb9-42"><a href="#cb9-42" tabindex="-1"></a>        <span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb9-43"><a href="#cb9-43" tabindex="-1"></a>        <span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb9-44"><a href="#cb9-44" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(cell_tag)):</span>
+<span id="cb9-45"><a href="#cb9-45" tabindex="-1"></a>            <span class="co"># Loop through cells</span></span>
+<span id="cb9-46"><a href="#cb9-46" tabindex="-1"></a>            <span class="cf">for</span> j, cell <span class="kw">in</span> <span class="bu">enumerate</span>(dat.find_all(<span class="st">&#39;td&#39;</span>, class_<span class="op">=</span>cell_tag[field])): </span>
+<span id="cb9-47"><a href="#cb9-47" tabindex="-1"></a>                <span class="co"># Loop through element value</span></span>
+<span id="cb9-48"><a href="#cb9-48" tabindex="-1"></a>                <span class="cf">for</span> k <span class="kw">in</span> cell.find_all(<span class="st">&#39;span&#39;</span>, class_<span class="op">=</span>value_tag[field]):</span>
+<span id="cb9-49"><a href="#cb9-49" tabindex="-1"></a>                    <span class="co"># Get text</span></span>
+<span id="cb9-50"><a href="#cb9-50" tabindex="-1"></a>                    tmp <span class="op">=</span> k.text</span>
+<span id="cb9-51"><a href="#cb9-51" tabindex="-1"></a>                    <span class="co"># Remove any extra spaces</span></span>
+<span id="cb9-52"><a href="#cb9-52" tabindex="-1"></a>                    tmp <span class="op">=</span> tmp.strip(<span class="st">&#39;  &#39;</span>)</span>
+<span id="cb9-53"><a href="#cb9-53" tabindex="-1"></a>                    <span class="co"># Append data</span></span>
+<span id="cb9-54"><a href="#cb9-54" tabindex="-1"></a>                    row.append(tmp)</span>
+<span id="cb9-55"><a href="#cb9-55" tabindex="-1"></a>        <span class="co"># Print the row</span></span>
+<span id="cb9-56"><a href="#cb9-56" tabindex="-1"></a>        <span class="bu">print</span>(i, row)</span>
+<span id="cb9-57"><a href="#cb9-57" tabindex="-1"></a>        <span class="co"># Write the date of the recorded data into the file</span></span>
+<span id="cb9-58"><a href="#cb9-58" tabindex="-1"></a>        f.write(<span class="st">&#39;2022-12-10,&#39;</span>) </span>
+<span id="cb9-59"><a href="#cb9-59" tabindex="-1"></a>        <span class="co"># Write data into the file</span></span>
+<span id="cb9-60"><a href="#cb9-60" tabindex="-1"></a>        f.write(<span class="st">&#39;,&#39;</span>.join(row[:<span class="dv">10</span>])) </span>
+<span id="cb9-61"><a href="#cb9-61" tabindex="-1"></a>        <span class="co"># New line, to append more rows to the same file later on</span></span>
+<span id="cb9-62"><a href="#cb9-62" tabindex="-1"></a>        f.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+</div>
+<div id="scraping-multiple-urls" class="section level2">
+<h2>Scraping multiple URLs</h2>
+<p>Let’s say we want to scrape the information contained in the Daily
+Observations table from Weather Underground pages for weather
+observations taken at <em>any date</em>. To do this, we need to convert
+the code above to its own function that can loop through multiple web
+pages for a range of input dates:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Define the scraper function that</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co"># gets data within a date range</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="kw">def</span> scrape_shenzhen_weather(start_date, end_date):</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>    </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    <span class="co"># Tag of each element cell, in the following order:</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    <span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    <span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    <span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    cell_tag <span class="op">=</span> [<span class="st">&#39;mat-cell cdk-cell cdk-column-dateString mat-column-dateString ng-star-inserted&#39;</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-temperature mat-column-temperature ng-star-inserted&#39;</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-dewPoint mat-column-dewPoint ng-star-inserted&#39;</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-humidity mat-column-humidity ng-star-inserted&#39;</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-windcardinal mat-column-windcardinal ng-star-inserted&#39;</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-windSpeed mat-column-windSpeed ng-star-inserted&#39;</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-windGust mat-column-windGust ng-star-inserted&#39;</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-pressure mat-column-pressure ng-star-inserted&#39;</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-precipRate mat-column-precipRate ng-star-inserted&#39;</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>                <span class="st">&#39;mat-cell cdk-cell cdk-column-condition mat-column-condition ng-star-inserted&#39;</span>]</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>    </span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>    <span class="co"># Tag of each element value, in the follwoing order:</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>    <span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>    <span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>    <span class="co"># Pressure [in], Precipitation [in], Condition</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>    value_tag <span class="op">=</span> [<span class="st">&#39;ng-star-inserted&#39;</span>    , <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>                 <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;ng-star-inserted&#39;</span>    , <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>                 <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>, <span class="st">&#39;wu-value wu-value-to&#39;</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>                 <span class="st">&#39;ng-star-inserted&#39;</span>]</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>    <span class="co"># Data URL that can be formatted to find the webpage for any observation date     </span></span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>    data_url <span class="op">=</span> <span class="st">&#39;http://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ/date/</span><span class="sc">{}</span><span class="st">-</span><span class="sc">{}</span><span class="st">-</span><span class="sc">{}</span><span class="st">&#39;</span> </span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>    </span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a>    <span class="co"># This csv file name that can be formatted for any year</span></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>    outfile <span class="op">=</span> <span class="st">&#39;Shenzhen_</span><span class="sc">{}</span><span class="st">.csv&#39;</span>.<span class="bu">format</span>(start_date.year)</span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>    </span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>    <span class="co"># If the csv file does not exist, write, if it does exist, append</span></span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(outfile):</span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a>        mode <span class="op">=</span> <span class="st">&#39;w&#39;</span></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>        mode <span class="op">=</span> <span class="st">&#39;a&#39;</span></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a>        </span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(outfile, mode) <span class="im">as</span> f:</span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a>        <span class="co"># Write the header</span></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a>        <span class="cf">if</span> mode <span class="op">==</span> <span class="st">&#39;w&#39;</span>:</span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>            f.write(<span class="st">&#39;Date, Time, Temperature [F], Dew point [F], Humidity [%],&#39;</span> </span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>                    <span class="st">&#39;Wind Direction, Wind Speed [mph], Wind Guest [mph],&#39;</span> </span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a>                    <span class="st">&#39;Pressure [in], Precipitation [in], Condition</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a>    </span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a>        <span class="co"># while loop continues until it reaches the given end date</span></span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a>        <span class="cf">while</span> start_date <span class="op">!=</span> end_date:     </span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>            <span class="co"># Format the search URL for the given observation date </span></span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a>            format_data_url <span class="op">=</span> data_url.<span class="bu">format</span>(start_date.year,start_date.month,start_date.day)</span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a>            <span class="co"># Use my_rendering function to load the page</span></span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a>            data_page <span class="op">=</span> my_rendering(format_data_url)</span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a>            <span class="co"># Use BeautifulSoup to parse the page</span></span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a>            data_soup <span class="op">=</span> BeautifulSoup(data_page, <span class="st">&#39;html.parser&#39;</span>)</span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a>            <span class="co"># Find information under lib-city-history-observation</span></span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a>            soup_container <span class="op">=</span> data_soup.find(<span class="st">&#39;lib-city-history-observation&#39;</span>)         </span>
+<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a>            <span class="co"># Get the full table</span></span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a>            soup_data <span class="op">=</span> soup_container.find_all(<span class="st">&#39;tr&#39;</span>,class_<span class="op">=</span><span class="st">&#39;mat-row cdk-row ng-star-inserted&#39;</span>)</span>
+<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a>            </span>
+<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a>            <span class="co"># Loop through rows</span></span>
+<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a>            <span class="cf">for</span> i, dat <span class="kw">in</span> <span class="bu">enumerate</span>(soup_data):</span>
+<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a>                <span class="co"># Create an empty list for saving values</span></span>
+<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a>                row <span class="op">=</span> []         </span>
+<span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a>                <span class="co"># Loop through different fields, i.e., </span></span>
+<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a>                <span class="co"># Date, Time, Temperature [F], Dew point [F], Humidity [%],</span></span>
+<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a>                <span class="co"># Wind Direction, Wind Speed [mph], Wind Guest [mph],</span></span>
+<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a>                <span class="co"># Pressure [in], Precipitation [in], Condition      </span></span>
+<span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a>                <span class="cf">for</span> field <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(cell_tag)):</span>
+<span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a>                    <span class="co"># Loop through cells</span></span>
+<span id="cb10-71"><a href="#cb10-71" tabindex="-1"></a>                    <span class="cf">for</span> j, d <span class="kw">in</span> <span class="bu">enumerate</span>(dat.find_all(<span class="st">&#39;td&#39;</span>, class_<span class="op">=</span> cell_tag[field])):</span>
+<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a>                        <span class="co"># Loop through element value</span></span>
+<span id="cb10-73"><a href="#cb10-73" tabindex="-1"></a>                        <span class="cf">for</span> k <span class="kw">in</span> d.find_all(<span class="st">&#39;span&#39;</span>, class_<span class="op">=</span> value_tag[field]):</span>
+<span id="cb10-74"><a href="#cb10-74" tabindex="-1"></a>                            <span class="co"># Get text</span></span>
+<span id="cb10-75"><a href="#cb10-75" tabindex="-1"></a>                            tmp <span class="op">=</span> k.text</span>
+<span id="cb10-76"><a href="#cb10-76" tabindex="-1"></a>                            <span class="co"># Remove any extra spaces</span></span>
+<span id="cb10-77"><a href="#cb10-77" tabindex="-1"></a>                            tmp <span class="op">=</span> tmp.strip(<span class="st">&#39;  &#39;</span>)</span>
+<span id="cb10-78"><a href="#cb10-78" tabindex="-1"></a>                            <span class="co"># Append data</span></span>
+<span id="cb10-79"><a href="#cb10-79" tabindex="-1"></a>                            row.append(tmp)</span>
+<span id="cb10-80"><a href="#cb10-80" tabindex="-1"></a>                <span class="co"># Write the date of the recorded data into the file</span></span>
+<span id="cb10-81"><a href="#cb10-81" tabindex="-1"></a>                f.write(<span class="st">&#39;</span><span class="sc">{}</span><span class="st">-</span><span class="sc">{}</span><span class="st">-</span><span class="sc">{}</span><span class="st">,&#39;</span>.<span class="bu">format</span>(start_date.year, start_date.month, start_date.day))</span>
+<span id="cb10-82"><a href="#cb10-82" tabindex="-1"></a>                <span class="co"># Write data into the file</span></span>
+<span id="cb10-83"><a href="#cb10-83" tabindex="-1"></a>                f.write(<span class="st">&#39;,&#39;</span>.join(row[:<span class="dv">10</span>]))</span>
+<span id="cb10-84"><a href="#cb10-84" tabindex="-1"></a>                <span class="co"># New line, to append more rows to the same file later on</span></span>
+<span id="cb10-85"><a href="#cb10-85" tabindex="-1"></a>                f.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>) </span>
+<span id="cb10-86"><a href="#cb10-86" tabindex="-1"></a>                </span>
+<span id="cb10-87"><a href="#cb10-87" tabindex="-1"></a>            <span class="co"># Go to next date, i.e., next URL</span></span>
+<span id="cb10-88"><a href="#cb10-88" tabindex="-1"></a>            start_date <span class="op">+=</span> timedelta(days<span class="op">=</span><span class="dv">1</span>) </span></code></pre></div>
+<p>Now that we have our new <code>scrape_shenzhen_weather</code>
+function defined, let’s use it to scrape data for between
+<code>2022-01-01</code> and <code>2022-01-03</code>. To do this, we
+simply need to define the <code>start_date</code> and
+<code>end_date</code> parameters, and run the function.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Set start and end dates</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>start_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2022</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>end_date <span class="op">=</span> datetime(year<span class="op">=</span><span class="dv">2022</span>, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co"># Call the scraper function</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>scrape_shenzhen_weather(start_date, end_date)</span></code></pre></div>
+<p>You should end up with a <code>.csv</code> file
+(<code>Shenzhen_2022.csv</code>) containing dated rows. Check it.</p>
 <hr />
 <p><em>The notes are modified from the excellent <a
-href="https://rabernat.github.io/research_computing_2018/dask-for-parallel-computing-and-big-data.html">Dask
-for Parallel Computing and Big Data</a>, available freely
+href="https://data.library.virginia.edu/getting-started-with-web-scraping-in-python/">Getting
+Started with Web Scraping in Python</a>, available freely
 online.</em></p>
 <hr />
 </div>
-<div id="in-class-exercises" class="section level1">
-<h1>In-class exercises</h1>
-<div id="exercise-1" class="section level2">
-<h2>Exercise #1</h2>
-<p>Go through the notes, make sure you understand the scripts.</p>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise #2</h2>
-<p>Make a local client with <code>6</code> CPUs (only if your laptop
-allows!), then compute and plot the variance in daily <code>ssh</code>
-anomalies with <code>dask</code>.</p>
+<div id="in-class-exercise" class="section level1">
+<h1>In-class exercise</h1>
+<p>Modify the <code>scrape_shenzhen_weather()</code> function so that it
+scrapes the information contained in the Daily Observations table from
+<a href="https://www.wunderground.com">Weather Underground pages</a> for
+weather observations taken at ANY airport station within ANY date
+range.</p>
+<p>[<strong>Hint:</strong> Add another input parameter
+<code>station</code>]</p>
 <hr />
-</div>
 </div>
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
 <ul>
-<li><a href="https://github.com/dask/dask-tutorial"><code>Dask</code>
-tutorial</a></li>
+<li><a href="https://docs.python-requests.org/en/latest/">Requests: HTTP
+for Humans</a></li>
 <li><a
-href="https://saturncloud.io/blog/a-data-scientist-s-guide-to-lazy-evaluation-with-dask/">A
-Data Scientist’s Guide to Lazy Evaluation with
-<code>Dask</code></a></li>
-<li><a href="https://book.pythontips.com/en/latest/">Intermediate
+href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful
+Soup Documentation</a></li>
+<li><a href="https://selenium-python.readthedocs.io/">Selenium with
 Python</a></li>
+<li><a href="https://www.javatpoint.com/web-scraping-using-python">Web
+Scraping Using Python</a></li>
 </ul>
 </div>
 
