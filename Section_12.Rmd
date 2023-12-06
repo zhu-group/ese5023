@@ -188,7 +188,7 @@ cd ~/data_demo
 In our `thesis` directory, we have a file `draft.txt` which isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for "move":
 
 ```{bash, eval=F}
-mv /thesis/draft.txt /thesis/my_paper.txt
+mv draft.txt my_paper.txt
 ```
 
 The first argument tells `mv` what we’re "moving", while the second is where it’s to go. In this case, we’re moving `thesis/draft.txt` to `thesis/my_paper.txt`, which has the same effect as renaming the file. Use `ls` to show that `thesis` now contains one file called `my_paper.txt`:
