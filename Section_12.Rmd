@@ -50,7 +50,7 @@ These lessons will start you on a path towards using Linux and Shell on the TaiY
 
 ## Home directory
 
-Once log in to Taiyi, you see a header like `[ese-xxx@login03 ~]$`. Here `ese-xxx` is your username, `login03` is the login in node, and the dollar sign `$` is a *prompt*, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.
+Once log in to Taiyi, you see a header like `[ese-xxx@login03 ~]$`. Here `ese-xxx` is your username, `login03` is the login node, and the dollar sign `$` is a *prompt*, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.
 
 Next, let's find out where we are by running a command called `pwd` (which stands for "print working directory"). At any moment, our *current working directory* is our current default directory, *i.e.*, the directory that the computer assumes we want to run commands in unless we explicitly specify something else.
 
@@ -185,7 +185,7 @@ Returning to the `data_demo` directory:
 cd ~/data_demo
 ```
 
-In our `thesis` directory, we have a file `draft.txt` which isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for ‘move’:
+In our `thesis` directory, we have a file `draft.txt` which isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for "move":
 
 ```{bash, eval=F}
 mv /thesis/draft.txt /thesis/my_paper.txt

@@ -675,11 +675,16 @@ copy and paste somewhere, and it just works.</p>
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">conda</span> pack</span></code></pre></div>
 <p>It can take some minutes depending on the size of the environment and
 the number of libraries installed. Move the compressed file to the
-destination, Uncompress the environment in the folder, then Run:</p>
+destination, uncompress folder. Then use the standard Command Prompt
+(cmd.exe) on Windows, not Anaconda Prompt or PowerShell, go to the
+folder:</p>
 <div class="sourceCode" id="cb19"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">conda-unpack</span> </span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="bu">.</span><span class="dt">\S</span>cripts<span class="dt">\a</span>ctivate.bat</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="bu">.</span><span class="dt">\S</span>cripts<span class="dt">\c</span>onda-unpack.exe</span></code></pre></div>
 <p>to re-create symlinks and set everything up. Check <a
 href="https://www.anaconda.com/blog/moving-conda-environments">Moving
+Conda Environments</a> and <a
+href="https://gist.github.com/pmbaumgartner/2626ce24adb7f4030c0075d2b35dda32">Packing
 Conda Environments</a> for more.</p>
 </div>
 <div id="removing-a-conda-environment" class="section level2">

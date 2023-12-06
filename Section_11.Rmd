@@ -173,13 +173,15 @@ Pack your environment:
 conda pack
 ```
 
-It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, Uncompress the environment in the folder, then Run:
+It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, uncompress folder. Then use the standard Command Prompt (cmd.exe) on Windows, not Anaconda Prompt or PowerShell, go to the folder:
+
 
 ```{bash, eval=F}
-conda-unpack 
+.\Scripts\activate.bat
+.\Scripts\conda-unpack.exe
 ```
 
-to re-create symlinks and set everything up. Check [Moving Conda Environments](https://www.anaconda.com/blog/moving-conda-environments) for more.
+to re-create symlinks and set everything up. Check [Moving Conda Environments](https://www.anaconda.com/blog/moving-conda-environments) and [Packing Conda Environments](https://gist.github.com/pmbaumgartner/2626ce24adb7f4030c0075d2b35dda32) for more.
 
 ## Removing a conda environment 
 
