@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 14 Fortran: Basics</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Computing and Programming for Environmental Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="Assignment_02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="Assignment_03.html">Assignment 03</a>
+    </li>
+    <li>
+      <a href="Assignment_04.html">Assignment 04</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 14 <code>Fortran</code>:
+Basics</h1>
+
+</div>
+
+
+<blockquote>
+<p>“FORTRAN programmers just DO it.” - Unknown</p>
+</blockquote>
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Log in to Taiyi (<code>172.18.6.175</code>), then in your home
+directory, type:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /work/ese-ouycc/fortran_demo1 .</span></code></pre></div>
+<hr />
+</div>
+<div id="introduction-to-fortran" class="section level1">
+<h1>Introduction to <code>Fortran</code></h1>
+<p><a href="https://fortran-lang.org/"><code>Fortran</code></a> was
+originally developed by a team at IBM in 1957 for scientific
+calculations. <code>Fortran</code> stands for <em>Formula
+Translation</em>. It is a powerful language for creating fast and
+memory-efficient codes for heavy numerical computations.</p>
+<p><code>Fortran</code> is not very user-friendly, compared with
+<code>Python</code>, <code>R</code>, and <code>MATLAB</code>:</p>
+<ul>
+<li><p><code>Fortran</code> is a more verbose language than
+<code>Python</code>, <code>R</code>, and <code>MATLAB</code>, so it
+generally will take you much longer to write <code>Fortran</code> codes
+compared to an equivalent code in <code>Python</code>.</p></li>
+<li><p>Unlike <code>Python</code>, which can easily be run
+interactively, <code>Fortran</code> codes must be <em>compiled</em>
+before you can run them in a terminal shell. That makes debugging and
+testing a bit slower too.</p></li>
+<li><p><code>Fortran</code> doesn’t have a built-in graphics library, so
+you can’t interactively plot results like you can with
+<code>Python</code>.</p></li>
+</ul>
+<p>So, with those points in mind, we recommend you stick to
+<code>Python</code>, <code>R</code>, or <code>MATLAB</code> for you
+day-to-day scientific computing tasks.</p>
+<p>However, <code>Fortran</code> is good when you have some
+computational problem where you need it to run as fast as possible, for
+example when it would take days to run on <code>Python</code>,
+<code>R</code>, or <code>MATLAB</code>. Learning the basics of
+<code>Fortran</code> will also be useful for when you come across
+<code>Fortran</code> codes that do some computational task you need and
+you want to interface those codes with your own codes or you might want
+to modify them for your own research needs.</p>
+<div id="programs" class="section level2">
+<h2>Programs</h2>
+<p><code>Fortran</code> is a procedural language where you define a
+<strong>sequence</strong> of commands to execute in a program file. The
+program file is then compiled using a <code>Fortran</code>
+<em>compiler</em>. The compiler turns the program commands in the text
+file into machine language instructions that will execute on the
+computer’s CPU. You run the compiled code from a terminal shell.</p>
+<p>Let’s begin by looking at a simple example showing the basic workflow
+for using <code>Fortran</code>. Start by making a plain text file named
+<code>HelloWorld.f90</code> that has the following content:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
+<p>Compile the code using the command:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 <span class="at">-o</span> HelloWorld.x</span></code></pre></div>
+<p>Run the code in the terminal using:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">./HelloWorld.x</span></span></code></pre></div>
+<p>A <code>Fortran</code> program has to have a single program file
+(usually <code>.f</code> or <code>.f90</code> files) that lists the
+sequence of commands to execute.</p>
+<p>The program file has to start with the first command being the word
+<code>program</code> and it must end with the last command being the
+keyword <code>end</code>. The words <code>program HelloWorld</code>
+after the final <code>end</code> statement aren’t necessary, but they
+are a useful organization construct for pointing out what exactly is
+ending, especially when your program file is very long and also contains
+subroutine and function code beneath the program section.</p>
+</div>
+<div id="compiling" class="section level2">
+<h2>Compiling</h2>
+<p>In the example above, we compiled the code by calling our
+<em>compiler</em>, here the <a
+href="https://gcc.gnu.org/wiki/GFortran"><code>gfortran</code>
+compiler</a> which is open source and freely available. Intel’s <a
+href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.isiyag"><code>ifort</code>
+compiler</a> is a commercial compiler that is fairly ubiquitous,
+especially on cluster systems. For some codes, <code>ifort</code> can
+produce an executable that runs <code>10-20x</code> faster than what
+<code>gfortran</code> produces.</p>
+<p>To compile our <code>HelloWorld.f90</code> code, we used the output
+<em>flag</em> <code>-o</code> and then listed the name we wanted to use
+for the compiled program that was output. Here we used
+<code>HelloWorld</code> for the name, but if for some (not recommended!)
+reason we wanted to name it <code>MyProgram.x</code> instead, we could
+compile it using:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 <span class="at">-o</span> MyProgram.x</span></code></pre></div>
+<p>If you don’t specify <code>-o</code> and the output program name,
+then the compiler will by default name the program
+<code>a.out</code>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 </span></code></pre></div>
+<p>If there are any errors with your code, the compiler should let you
+know what the problem is. For example, try compiling the code below,
+which has an errant <code>a</code> character:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  a</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
+<p>The compiler returns an error message. Check this.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>HelloWorld.f90:<span class="fl">3.2</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  a</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Error: Unclassifiable statement at (<span class="dv">1</span>)</span></code></pre></div>
+<p>The statement <code>HelloWorld.f90:3:2:</code> specifies that the
+<code>Unclassifiable statement</code> is in file
+<code>HelloWorld.f90</code> on line <code>3</code>, column
+<code>2</code>. It then prints out what is on that line (here the errant
+letter <code>a</code>).</p>
+<p>When there are errors in long and complicated <code>Fortran</code>
+codes, the first error the compiler finds can lead it to other errors,
+which stem from it not being able to interpret the code that had the
+first error. So if you get more than one error message when compiling a
+piece of code, <strong>go fix the first listed error</strong> and try
+recompiling the code to see if the other errors are now gone.</p>
+</div>
+<div id="comments" class="section level2">
+<h2>Comments</h2>
+<p>Anything to the right of an exclamation point <code>!</code> in a
+<code>Fortran</code> code is considered a comment. For example a
+commented version of our <code>HelloWorld.f90</code> program is</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">! This program writes &#39;Hello world&#39; to the shell.</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">! Version 0.1, Dec. 08, 2021</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">! Send a message to the world:</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">! All done, goodbye</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
+<p>Comments are an essential part of good coding practice. You can use
+them to document what each section of a code does; this can be very
+helpful for when you return to a code you wrote a long time ago and are
+trying to remember what it does, or when you get someone else’s code and
+are trying to understand what it does.</p>
+<p>You can also use code comments as an outline when first starting to
+write a long and complicated code. The comments can outline the sequence
+of steps you intend the code to do. Once your outline is complete, you
+can start coding by filling in the necessary commands below each section
+of comments.</p>
+<p>At a minimum, your code should have at least a few comments at the
+start of the text file that indicates what the codes does. This is also
+a place where you can add a date stamp and possibly a version number.
+You can also list the authorship of the code, which can be useful if it
+will be shared with other or is part of a collaborative effort .</p>
+<hr />
+</div>
+</div>
+<div id="variables" class="section level1">
+<h1>Variables</h1>
+<div id="variable-types" class="section level2">
+<h2>Variable types</h2>
+<p>Unlike <code>Python</code>, <code>Fortran</code> requires you to
+<strong>declare the type of each variable</strong>. For example, you
+need to declare whether a variable is an <code>integer</code>,
+<code>real</code>, <code>complex</code>, <code>logical</code>, or
+<code>character</code>. Here is an example program declaring several
+different variable types:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">program</span> VariableShowcase</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">! Declare variables:</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="dt">integer</span>         <span class="dt">::</span> i</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="dt">real(8)</span>         <span class="dt">::</span> x</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">complex(8)      :: z</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="dt">logical</span>         <span class="dt">::</span> <span class="bu">bTest</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">character(32)   :: sFileName</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>i <span class="kw">=</span> <span class="dv">1</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>z <span class="kw">=</span> <span class="bu">cmplx</span>(<span class="fl">0.5</span>,<span class="fl">2.0</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">! logical types are .true. or .false.</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="bu">bTest</span> <span class="kw">=</span> <span class="cn">.false.</span>    </span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>sFileName <span class="kw">=</span> <span class="st">&#39;data.txt&#39;</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;i: &#39;</span>, i</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x: &#39;</span>, x</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;z: &#39;</span>, z</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;bTest: &#39;</span>, <span class="bu">bTest</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;sFileName: &#39;</span>, sFileName</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="kw">end program</span> VariableShowcase</span></code></pre></div>
+<p>Compile and run this demo:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">gfortran</span> VariableShowcase.f90 <span class="at">-o</span> VariableShowcase.x </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">./VariableShowcase.x</span></span></code></pre></div>
+<p>Note that the variable declarations in <code>Fortran</code> have to
+be made <strong>at the start of the program</strong> (or subroutine or
+function), <strong>before any commands are made</strong>. Unlike
+<code>Python</code>, you can’t declare a new variable in the middle of a
+sequence of commands. If you try to, the compiler will throw an error
+message.</p>
+<p>Pay attention that, <code>Fortran</code> is <strong>case
+insensitive</strong>, meaning that it will treat variables
+<code>x</code> and <code>X</code> as the same quantity.</p>
+</div>
+<div id="variable-precision" class="section level2">
+<h2>Variable precision</h2>
+<p><code>real(8)</code> declared above means a real variable that has
+<code>8</code> bytes (<code>64</code> bits) of precision. This is what
+is known as <em>double precision</em>, which is the default precision in
+<code>Python</code> and <code>MATLAB</code>. You can also declare a
+lower or higher order precision (e.g. <code>real(4)</code> and
+<code>real(16)</code>) but you should only do this if you have a very
+good reason to do so. 99.99% of the time you should just use
+<code>real(8)</code> rather than <code>(4)</code> or
+<code>(16)</code>.</p>
+<p>The <code>complex(8)</code> declaration means a complex number with
+<code>8</code> bytes of precision for each of the real and imaginary
+parts of the number.</p>
+<p>For integers, you typically don’t need to specify the precision and
+most of the time you can just use integer and then let the compiler
+assign the precision (usually either <code>4</code> or <code>8</code>
+bytes).</p>
+<p>You can use the <code>huge()</code> intrinsic function to show the
+largest numbers that can be represented by each precision. For example,
+compile and run this code to see the largest possible values that can be
+represented by each numerical variable type:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">program</span> PrecisionTest</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">! Declare variables:</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="dt">integer</span>         <span class="dt">::</span> i</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="dt">integer(4)</span>      <span class="dt">::</span> i4</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="dt">integer(8)</span>      <span class="dt">::</span> i8</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="dt">real(4)</span>         <span class="dt">::</span> x4</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="dt">real(8)</span>         <span class="dt">::</span> x8</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer:    &#39;</span>, <span class="fu">huge</span>(i)</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer:    &#39;</span>, <span class="fu">huge</span>(i)</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer(4): &#39;</span>, <span class="fu">huge</span>(i4)</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer(8): &#39;</span>, <span class="fu">huge</span>(i8)</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;real(4):    &#39;</span>, <span class="fu">huge</span>(x4)</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;real(8):    &#39;</span>, <span class="fu">huge</span>(x8)</span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="kw">end program</span> PrecisionTest</span></code></pre></div>
+<p>Here we are using modern <code>Fortran</code> syntax to define the
+variables. However, there are older ways of defining variables that you
+should be aware of since you may come across them. The older syntax does
+not use the <code>::</code> separator between the declaration and the
+list of variable names and has slightly different type names. Most
+<code>Fortran</code> compilers support the older and modern syntax:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">! Old style Fortran variable types:</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="dt">double precision</span>      <span class="co">! same as real(8)</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="dt">real*8</span>                <span class="co">! same as real(8)</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="dt">real*4</span>                <span class="co">! same as real(4)</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>double <span class="dt">complex</span>        <span class="co">! same as complex(8)</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">complex*16            ! same as complex(8)</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="dt">integer*4</span>             <span class="co">! same as integer(4)</span></span></code></pre></div>
+</div>
+<div id="integer-division" class="section level2">
+<h2>Integer division</h2>
+<p>Be careful when dividing integers in <code>Fortran</code>. For
+example, the expression <code>fraction = (N-1)/N</code> where
+<code>N</code> is an integer and fraction has been declared as
+<code>real(8)</code> will result in fraction being assigned the value
+<code>0</code>. Why is this?</p>
+<p>Because all the terms in <code>(N-1)/N</code> are integers so the
+compiler uses integer division. You can easily fix this by making at
+least one of the terms in the expression a floating point number. Either
+of the following expressions will force the compiler to use floating
+point arithmetic and fraction will then be assigned the intended
+value:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="bu">fraction</span> <span class="kw">=</span> (N<span class="kw">-</span><span class="fl">1.</span>)<span class="kw">/</span>N</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="bu">fraction</span> <span class="kw">=</span> (<span class="bu">dble</span>(N)<span class="kw">-</span><span class="dv">1</span>)<span class="kw">/</span>N</span></code></pre></div>
+<p>where the <code>dble()</code> function turns integer <code>N</code>
+into a double precision value.</p>
+</div>
+<div id="implicit-none" class="section level2">
+<h2>Implicit none</h2>
+<p>You should <strong>always include the statement</strong>
+<code>implicit none</code> at the start of your <code>Fortran</code>
+codes (programs, subroutines, and functions).</p>
+<p>By default, <code>Fortran</code> has a rather insidious implicit
+typing for variables that have certain first letters in their names.
+Unless specified otherwise, all variables starting with letters
+<code>I</code>, <code>J</code>, <code>K</code>, <code>L</code>,
+<code>M</code>, and <code>N</code> are default integers, and all others
+are default real. This can lead to nasty programming errors if you
+aren’t careful. For example, consider the following code:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">program</span> ImplicitTypeTest</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>ireal <span class="kw">=</span> <span class="fl">1.5</span>   <span class="co">! we want this to be a real number, but since the variable</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>              <span class="co">! name starts with an i Fortran thinks its an integer.</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ireal is: &#39;</span>, ireal</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="kw">end program</span> ImplicitTypeTest</span></code></pre></div>
+<p>Try running this program and you will see that it prints out
+<code>ireal</code> as the integer <code>1</code>. If instead, you use
+<code>implicit none</code> at the start of this code, the compiler will
+issue an error because <code>ireal</code> was not yet declared.</p>
+<p>Here’s another example where <code>implicit none</code> would help
+avoid getting the wrong result. Can you spot the error?</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">program</span> TestUndeclared</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="dt">real(8)</span>  <span class="dt">::</span> distance, velocity, time</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>time     <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>velocity <span class="kw">=</span> <span class="fl">5.0</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>distance <span class="kw">=</span> velocity<span class="kw">*</span>times</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;distance: &#39;</span>, distance</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="kw">end program</span> TestUndeclared</span></code></pre></div>
+<p>Now put <code>implicit none</code> at the start of the code,
+re-compile, see what happens.</p>
+<hr />
+</div>
+</div>
+<div id="relational-operators" class="section level1">
+<h1>Relational operators</h1>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="9%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Older <code>Fortran</code></th>
+<th align="center">Newer <code>Fortran</code></th>
+<th align="center"><code>Python</code></th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>.eq.</code></td>
+<td align="center"><code>==</code></td>
+<td align="center"><code>==</code></td>
+<td align="left">equality</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.ne.</code></td>
+<td align="center"><code>/=</code></td>
+<td align="center"><code>!=</code></td>
+<td align="left">not equality</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.lt.</code></td>
+<td align="center"><code>&lt;</code></td>
+<td align="center"><code>&lt;</code></td>
+<td align="left">less than</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.le.</code></td>
+<td align="center"><code>&lt;=</code></td>
+<td align="center"><code>&lt;=</code></td>
+<td align="left">less than or equal to</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.gt.</code></td>
+<td align="center"><code>&gt;</code></td>
+<td align="center"><code>&gt;</code></td>
+<td align="left">greater than</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.ge.</code></td>
+<td align="center"><code>&gt;=</code></td>
+<td align="center"><code>&gt;=</code></td>
+<td align="left">greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.and.</code></td>
+<td align="center"><code>.and.</code></td>
+<td align="center"><code>&amp;</code></td>
+<td align="left">logical and</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.or.</code></td>
+<td align="center"><code>.or.</code></td>
+<td align="center"><code>|</code></td>
+<td align="left">logical or</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.not.</code></td>
+<td align="center"><code>.not.</code></td>
+<td align="center"><code>~</code></td>
+<td align="left">logical not</td>
+</tr>
+</tbody>
+</table>
+<p>Try the following <code>TestRelationalOps.f90</code>:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">program</span> TestRelationalOps</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="dt">real(8)</span> <span class="dt">::</span> x, y, z</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="dt">logical</span> <span class="dt">::</span> ltest1, ltest2, ltest3</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>y <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>z <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>ltest1 <span class="kw">=</span> x <span class="op">&lt;</span> y</span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>ltest2 <span class="kw">=</span> x <span class="op">==</span> z</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>ltest3 <span class="kw">=</span> (ltest1 <span class="op">.and.</span> ltest2)</span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest1: &#39;</span>, ltest1</span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest2: &#39;</span>, ltest2</span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest3: &#39;</span>, ltest3</span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="kw">end program</span> TestRelationalOps</span></code></pre></div>
+<hr />
+</div>
+<div id="if-statements" class="section level1">
+<h1>If statements</h1>
+<p>These are similar to <code>Python</code>, except that you need to
+include the keyword <code>then</code> after the logical statement. The
+<code>if</code> statement also ends with the keyword
+<code>endif</code>.</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">program</span> IfElseTest</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="dt">real(8)</span> <span class="dt">::</span> x, y</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.5</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>y <span class="kw">=</span> <span class="fl">3.0</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="kw">if</span> (x <span class="op">&lt;</span> y) <span class="kw">then</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x is less than y&#39;</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="kw">elseif</span> (x <span class="op">&gt;</span> y ) <span class="kw">then</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x is greater than y&#39;</span></span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="kw">elseif</span> (x <span class="op">==</span> y ) <span class="kw">then</span></span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x equals y&#39;</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="kw">else</span></span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;this case should never be found&#39;</span>      </span>
+<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="kw">endif</span></span>
+<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a><span class="kw">end program</span> IfElseTest</span></code></pre></div>
+<hr />
+</div>
+<div id="do-loops" class="section level1">
+<h1>Do loops</h1>
+<p>Loops in <code>Fortran</code> are done using the <code>do</code> and
+<code>enddo</code> construct:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">program</span> DoLoopTest</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="dt">integer</span> <span class="dt">::</span> i, n</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>n <span class="kw">=</span> <span class="dv">10</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;i is &#39;</span>, i</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="kw">end program</span> DoLoopTest</span></code></pre></div>
+<p>Note that unlike <code>Python</code>, you don’t need to indent the
+commands inside the <code>do</code> and <code>enddo</code> construct
+with <code>Fortran</code>.</p>
+<p>However, it helps to make your code much more readable if you do
+indent the commands. Indenting is helpful if you loop has spaned a page
+or more of code, since the indentation is a visual guide to the scope of
+the loop. Indenting is also very helpful when you have nested loops. For
+example, both of these loops below are valid <code>Fortran</code>, but
+which one is easier to read?</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="kw">do</span> k <span class="kw">=</span> <span class="dv">1</span>, n</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> i, j, k</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="kw">enddo</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    <span class="kw">do</span> k <span class="kw">=</span> <span class="dv">1</span>, n</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>      <span class="fu">write(*</span>,<span class="fu">*)</span> i, j, k</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>    <span class="kw">enddo</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>  <span class="kw">enddo</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="kw">enddo</span></span></code></pre></div>
+<hr />
+</div>
+<div id="do-while-loops" class="section level1">
+<h1>Do while loops</h1>
+<p>The <code>do</code> <code>while</code> loop is similar but instead of
+using a counter, it uses a logical variable to exit the loop.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="kw">program</span> DoWhileTest</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="dt">integer</span> <span class="dt">::</span> i, iCounter</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="dt">logical</span> <span class="dt">::</span> lKeepGoing</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>lKeepGoing <span class="kw">=</span> <span class="cn">.true.</span></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>iCounter   <span class="kw">=</span> <span class="dv">0</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="kw">do</span> <span class="kw">while</span> (lKeepGoing)</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>  iCounter <span class="kw">=</span> iCounter <span class="kw">+</span> <span class="dv">1</span></span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;iCounter: &#39;</span>,iCounter</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>  <span class="kw">if</span> (iCounter <span class="op">==</span> <span class="dv">10</span>) lKeepGoing <span class="kw">=</span> <span class="cn">.false.</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;All done&#39;</span></span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="kw">end program</span> DoWhileTest</span></code></pre></div>
+<p>Can you figure out why the code ends at <code>10</code> not
+<code>11</code>?</p>
+<hr />
+</div>
+<div id="arrays" class="section level1">
+<h1>Arrays</h1>
+<div id="define-arrays" class="section level2">
+<h2>Define arrays</h2>
+<p>The modern way of declaring a fixed size array in
+<code>Fortran</code> is to use the <code>dimension()</code> keyword. For
+example:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="kw">program</span> TestArray</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10)</span> <span class="dt">::</span> xArray</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="dt">integer</span>                <span class="dt">::</span> i</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,<span class="fu">size</span>(xArray)</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  xArray(i) <span class="kw">=</span> <span class="fl">5.0</span><span class="kw">*</span>i</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;xArray: &#39;</span>, xArray</span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a><span class="kw">end program</span> TestArray</span></code></pre></div>
+<p>Arrays can have multiple dimensions, otherwise referred to as the
+<em>rank</em> of the array. The <em>Fortran 2008</em> standard allows up
+to rank <code>15</code>, whereas the previous standard only allowed a
+maximum rank of <code>7</code>. Here are some examples:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10)</span>          <span class="dt">::</span> xArray1D</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10,20)</span>       <span class="dt">::</span> xArray2D</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10,20,10)</span>    <span class="dt">::</span> xArray3D</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="dt">integer</span>, <span class="dt">dimension(10,5,30,50)</span>  <span class="dt">::</span> xArray4D</span></code></pre></div>
+</div>
+<div id="allocatable-arrays" class="section level2">
+<h2>Allocatable arrays</h2>
+<p>The arrays above are fixed dimensional, meaning that we declared
+their sizes in the declaration statements. A more flexible construct is
+the <em>allocatable array</em>. In <code>Fortran</code> you need to
+explicitly declare them using the <code>allocatable</code> keyword.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:)</span>,   <span class="dt">allocatable</span> <span class="dt">::</span> xArray1D</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>, <span class="dt">allocatable</span> <span class="dt">::</span> xArray2D</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>m <span class="kw">=</span> <span class="dv">5</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>n <span class="kw">=</span> <span class="dv">10</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="kw">allocate</span>(xArray1D(m))</span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="kw">allocate</span>(xArray2D(m,n))</span></code></pre></div>
+<p>You can then assign values to the elements of the arrays.</p>
+<p>If you need to <strong>free up memory later on in your
+program</strong>, use <code>deallocate</code>:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="kw">deallocate</span>(xArray1D, xArray2D)</span></code></pre></div>
+<hr />
+<p><em>The notes above are modified from the excellent <a
+href="https://rabernat.github.io/research_computing/intro-to-fortran.html">online
+tutorial</a> freely available on GitHub.</em></p>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Go over the scripts, make sure you understand them and be able to run
+those scripts.</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>Write a <code>Fortran</code> script <code>TestLeapYear.f90</code> to
+determine whether the year of <code>2022</code> is a leap year.</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
+<p>Load Intel <code>Fortran</code> compiler <code>ifort</code> on
+TaiYi:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">module</span> load intel/2018.4</span></code></pre></div>
+<p>Then compile <code>TestLeapYear.f90</code> with <code>ifort</code>
+and run it.</p>
+</div>
+<div id="exercise-4" class="section level2">
+<h2>Exercise #4</h2>
+<p>Declare an array <code>MyArray</code> with a size of
+<code>100</code>, fill <code>MyArray</code> with <code>100</code>
+numbers, and print it.</p>
+<hr />
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<ul>
+<li><a
+href="http://www.fortran.gantep.edu.tr/compiling-g95-basic-guide.html">Compiling
+and Running Fortran Programs - a basic guide</a></li>
+<li><a
+href="https://ourcodingclub.github.io/tutorials/fortran-intro/">Introduction
+to Fortran</a></li>
+<li><a
+href="https://github.com/StanislavRadkov/Fortran-Cheat-Sheet">Fortran
+Cheat Sheet</a></li>
+<li><a
+href="https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html">Fortran
+90 Tutorial</a></li>
+<li><a href="https://www.tutorialspoint.com/fortran/index.htm">Fortran
+Tutorial</a></li>
+<li><a
+href="https://modern-fortran-in-science-and-technology.readthedocs.io/en/latest/index.html">Modern
+Fortran in Science and Technology</a></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

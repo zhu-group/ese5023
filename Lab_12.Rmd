@@ -1,0 +1,36 @@
+---
+title: "Lab 12 Linux: Basics"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+
+# 1. More Linux Commands
+
+In this exercise, we will learn a few more Linux commands. For each command, please use `man` to learn what it does and how to use it correctly. First, change your directory to `~`.
+
+**1.1** Make a link called `data_demo_link` to `data_demo` folder using `ln`.
+
+**1.2** Print your home directory using `echo`.
+
+**1.3** Go to `data_demo/molecules/`, make an empty file `test.pdb` with `touch`.
+
+**1.4** Find how many files in `data_demo/data/elements/` using `find`.
+
+**1.5** Compare `data_demo/data/pdb/ethane.pdb` and `data_demo/data/pdb/ethanol.pdb` with `diff`.
+
+**1.6** Count how many `But she` string appears in `data_demo/writing/data/LittleWomen.txt` with `grep`.
+
+**1.7** Check the total file size of the `data_demo/data/` folder using `du`.
+
+**1.8** Copy the `data_demo/writing/` folder to `data_demo/writing_new/`, compress `data_demo/writing_new/` using `zip`, and decompress the `.zip` file with `unzip`.
+
+**1.9** Change the file permissions flags on `writing_new` to `drwxr-x---` using `chmod`.
+
+**1.10** Print the last `10` commands you made using `history`.

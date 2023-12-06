@@ -1,5 +1,5 @@
 ---
-title: "Section 12 `Fortran`: Basics"
+title: "Section 12 Linux: Basics"
 output:
   html_document:
     toc: true
@@ -8,483 +8,303 @@ output:
       smooth_scroll: false
 ---
 
-> “FORTRAN programmers just DO it.” - Unknown
+> “In real open source, you have the right to control your own destiny.” - Linus Torvalds
+
+<img src="figs/linux-vs-mac-vs-windows.jpg" alt="drawing" width="600"/>  
+
+[Figure source](https://www.linuxadictos.com/wp-content/uploads/linux-vs-mac-vs-windows1.jpg.webp)
 
 ***
 
 # Prerequisites  
 
-Log in to Taiyi (`172.18.6.175`), then in your home directory, type:
+* Install [MobaXterm (Home Edition)](https://zhu-group.github.io/ese5023/Resource.html#SSH_Client_Tools) 
+
+* Log in to Taiyi (`172.18.6.175`), then in your home directory, type:
 
 ```{bash, eval=F}
-cp -r /work/ese-ouycc/fortran_demo1 .
+cp -r /work/ese-ouycc/data_demo .
 ```
+
+We will explain the meaning of this code shortly.
 
 ***
 
-# Introduction to `Fortran`
+# Background
 
-[`Fortran`](https://fortran-lang.org/) was originally developed by a team at IBM in 1957 for scientific calculations. `Fortran` stands for *Formula Translation*. It is a powerful language for creating fast and memory-efficient codes for heavy numerical computations. 
+## GUI vs CLI
 
-`Fortran` is not very user-friendly, compared with `Python`, `R`, and `MATLAB`:
+The most widely used way to interact with personal computers is the **graphical user interface** (GUI). With a GUI, we give instructions by clicking a mouse and using menu-driven interactions. GUI makes it intuitive to learn how to use a computer, however, it's not efficient in handling a large amount of jobs. This is where we take advantage of the **Linux**. The Linux shell is both a **command-line interface** (CLI) and a scripting language, allowing repetitive tasks to be done automatically and fast. 
 
-+ `Fortran` is a more verbose language than `Python`, `R`, and `MATLAB`, so it generally will take you much longer to write `Fortran` codes compared to an equivalent code in `Python`. 
+## Linux 
 
-+ Unlike `Python`, which can easily be run interactively, `Fortran` codes must be *compiled* before you can run them in a terminal shell. That makes debugging and testing a bit slower too. 
+Linux is an operating system (OS) built by Linus Torvalds at the University of Helsinki in 1991. The name "Linux" comes from the Linux kernel.   
 
-+ `Fortran` doesn't have a built-in graphics library, so you can't interactively plot results like you can with `Python`. 
+Linux has survived so long because it’s **a powerful tool that allows people to do complex things with just a few keystrokes**. More importantly, it helps them **combine existing programs in new ways and automate repetitive tasks**, so they aren’t typing the same things over and over again. The use of Linux **shell** is fundamental to using a wide range of other powerful tools and computing resources, including high-performance computing (HPC) supercomputers.   
 
-So, with those points in mind, we recommend you stick to `Python`, `R`, or `MATLAB` for you day-to-day scientific computing tasks. 
+These lessons will start you on a path towards using Linux and Shell on the TaiYi HPC supercomputer.
 
-However, `Fortran` is good when you have some computational problem where you need it to run as fast as possible, for example when it would take days to run on `Python`, `R`, or `MATLAB`. Learning the basics of `Fortran` will also be useful for when you come across `Fortran` codes that do some computational task you need and you want to interface those codes with your own codes or you might want to modify them for your own research needs.
+***
 
-## Programs
+# Navigating Files and Directories
 
-`Fortran` is a procedural language where you define a **sequence** of commands to execute in a program file. The program file is then compiled using a `Fortran` *compiler*. The compiler turns the program commands in the text file into machine language instructions that will execute on the computer's CPU. You run the compiled code from a terminal shell.
+## Home directory
 
-Let's begin by looking at a simple example showing the basic workflow for using `Fortran`. Start by making a plain text file named `HelloWorld.f90` that has the following content:
+Once log in to Taiyi, you see a header like `[ese-xxx@login03 ~]$`. Here `ese-xxx` is your username, `login03` is the login in node, and the dollar sign `$` is a *prompt*, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt.
 
-```{fortran, eval=F}
-program HelloWorld
-  print*, 'Hello world'
-end program HelloWorld
-```
-
-Compile the code using the command:
+Next, let's find out where we are by running a command called `pwd` (which stands for "print working directory"). At any moment, our *current working directory* is our current default directory, *i.e.*, the directory that the computer assumes we want to run commands in unless we explicitly specify something else.
 
 ```{bash, eval=F}
-gfortran HelloWorld.f90 -o HelloWorld.x
+pwd
 ```
 
-Run the code in the terminal using:
+In your case, it should be something like `/work/ese-xxx`, which is your *home directory*. 
+
+## Taiyi file system
+
+To understand what a "home directory" is, let’s have a look at how the file system as a whole is organized. On Taiyi, the filesystem looks like this:
+
+<img src="figs/Taiyi_folder.png" alt="drawing" width="800"/>  
+
+At the top is the *root directory* that holds everything else. We refer to it using a slash character, `/`, on its own; this is the leading slash in `/work/ese-ouycc`.
+
+Inside the `root` directory are several other directories: `bin` (which is where some built-in programs are stored), `data` (for miscellaneous data files), `work` (where users’ personal directories are located), `tmp` (for temporary files that don’t need to be stored long-term), and so on.
+
+We know that our current working directory `/work/ese-ouycc` is stored inside `/work` because `/work` is the first part of its name. Similarly, we know that `/work` is stored inside the `root` directory `/` because its name begins with `/`.
+
+## Navigating with `ls` and `cd`
+
+Now let's learn the command that will let us see the contents of our own filesystem. We can see what's in my home directory by running `ls`, which stands for "listing":
 
 ```{bash, eval=F}
-./HelloWorld.x
+ls
 ```
 
-A `Fortran` program has to have a single program file (usually `.f` or `.f90` files) that lists the sequence of commands to execute. 
-
-The program file has to start with the first command being the word `program` and it must end with the last command being the keyword `end`. The words `program HelloWorld` after the final `end` statement aren't necessary, but they are a useful organization construct for pointing out what exactly is ending, especially when your program file is very long and also contains subroutine and function code beneath the program section.
-
-## Compiling
-
-In the example above, we compiled the code by calling our *compiler*, here the [`gfortran` compiler](https://gcc.gnu.org/wiki/GFortran) which is open source and freely available. Intel's [`ifort` compiler](https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.isiyag) is a commercial compiler that is fairly ubiquitous, especially on cluster systems. For some codes, `ifort` can produce an executable that runs `10-20x` faster than what `gfortran` produces.
-
-To compile our `HelloWorld.f90` code, we used the output *flag* `-o` and then listed the name we wanted to use for the compiled program that was output. Here we used `HelloWorld` for the name, but if for some (not recommended!) reason we wanted to name it `MyProgram.x` instead, we could compile it using:
+`ls` prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We can make its output more comprehensible by using the *flag* `-F`, which tells `ls` to add a trailing `/` to the names of directories:
 
 ```{bash, eval=F}
-gfortran HelloWorld.f90 -o MyProgram.x
+ls -F
 ```
 
-If you don't specify `-o` and the output program name, then the compiler will by default name the program `a.out`:
+`ls` has lots of other options. To find out what they are, we can type: `man ls`.
+
+`man` is the Unix "manual" command: it prints a description of a command and its options, and (if you're lucky) provides a few examples of how to use it. To navigate through the `man` pages, you may use the up and down arrow keys to move line-by-line, or try the `b` and spacebar keys to skip up and down by full page. Quit the `man` pages by typing `q`.
+
+Here, we can see that my working directory contains a few *sub-directories*. Any names in the output that don't have trailing slashes, are plain *files*.
+
+We can also use `ls` to see the contents of a different directory. Let's take a look at the `data_demo` directory by running `ls -F data_demo`, *i.e.*, the command `ls` with the *arguments* `-F` and `data_demo`. The second argument, the one without a leading dash, tells `ls` that we want a listing of something other than our current working directory:  
 
 ```{bash, eval=F}
-gfortran HelloWorld.f90 
+ls -F data_demo
 ```
 
-If there are any errors with your code, the compiler should let you know what the problem is. For example, try compiling the code below, which has an errant `a` character:
+Your output should be a list of all the files and sub-directories in the `data_demo` directory. 
 
-```{fortran, eval=F}
-program HelloWorld
-  print*, 'Hello world'
-  a
-end program HelloWorld
-```
+The command to change locations is `cd` followed by a directory name to change our working directory. `cd` stands for "change directory".
 
-The compiler returns an error message. Check this.
-
-```{fortran, eval=F}
-HelloWorld.f90:3.2:
-
-  a
-  1
-Error: Unclassifiable statement at (1)
-```
-
-The statement `HelloWorld.f90:3:2:` specifies that the `Unclassifiable statement` is in file `HelloWorld.f90` on line `3`, column `2`. It then prints out what is on that line (here the errant letter `a`). 
-
-When there are errors in long and complicated `Fortran` codes, the first error the compiler finds can lead it to other errors, which stem from it not being able to interpret the code that had the first error. So if you get more than one error message when compiling a piece of code, **go fix the first listed error** and try recompiling the code to see if the other errors are now gone.
-
-## Comments
-
-Anything to the right of an exclamation point `!` in a `Fortran` code is considered a comment. For example a commented version of our `HelloWorld.f90` program is
-
-```{fortran, eval=F}
-! This program writes 'Hello world' to the shell.
-! Version 0.1, Dec. 08, 2021
-!
-program HelloWorld
-
-!
-! Send a message to the world:
-!
-  print*, 'Hello world'
-
-!
-! All done, goodbye
-!
-end program HelloWorld
-```
-
-Comments are an essential part of good coding practice. You can use them to document what each section of a code does; this can be very helpful for when you return to a code you wrote a long time ago and are trying to remember what it does, or when you get someone else's code and are trying to understand what it does. 
-
-You can also use code comments as an outline when first starting to write a long and complicated code. The comments can outline the sequence of steps you intend the code to do. Once your outline is complete, you can start coding by filling in the necessary commands below each section of comments.
-
-At a minimum, your code should have at least a few comments at the start of the text file that indicates what the codes does. This is also a place where you can add a date stamp and possibly a version number. You can also list the authorship of the code, which can be useful if it will be shared with other or is part of a collaborative effort .
-
-***
-
-# Variables
-
-## Variable types
-
-Unlike `Python`, `Fortran` requires you to **declare the type of each variable**. For example, you need to declare whether a variable is an `integer`, `real`, `complex`, `logical`, or `character`. Here is an example program declaring several different variable types:
-
-```{fortran, eval=F}
-program VariableShowcase
-
-implicit none
-
-! Declare variables:
-integer         :: i
-real(8)         :: x
-complex(8)      :: z
-logical         :: bTest
-character(32)   :: sFileName
-
-i = 1
-x = 1.0
-z = cmplx(0.5,2.0)
-! logical types are .true. or .false.
-bTest = .false.    
-sFileName = 'data.txt'
-
-write(*,*) 'i: ', i
-write(*,*) 'x: ', x
-write(*,*) 'z: ', z
-write(*,*) 'bTest: ', bTest
-write(*,*) 'sFileName: ', sFileName
-
-end program VariableShowcase
-```
-
-Compile and run this demo:
+Let's say we want to move to the `data` directory we saw above. We can use the following series of commands to get there:
 
 ```{bash, eval=F}
-gfortran VariableShowcase.f90 -o VariableShowcase.x 
-./VariableShowcase.x
+cd data_demo
+cd data
 ```
 
-Note that the variable declarations in `Fortran` have to be made **at the start of the program** (or subroutine or function), **before any commands are made**. Unlike `Python`, you can't declare a new variable in the middle of a sequence of commands. If you try to, the compiler will throw an error message.
+These commands will move us from our home directory into the `data_demo` directory, then into the `data` directory. `cd` doesn't print anything, but if we run `pwd` after it, we can see that we are now in `/work/ese-ouycc/data_demo/data`. If we run `ls` without arguments now, it lists the contents of `/work/ese-ouycc/data_demo/data`.
 
-Pay attention that, `Fortran` is **case insensitive**, meaning that it will treat variables `x` and `X` as the same quantity.
+## Shortcuts
 
-## Variable precision
+The shell interprets the character `~`, `.`, and `..` as shortcuts, which has different meanings:
 
-`real(8)` declared above means a real variable that has `8` bytes (`64` bits) of precision. This is what is known as *double precision*, which is the default precision in `Python` and `MATLAB`. You can also declare a lower or higher order precision (e.g. `real(4)` and `real(16)`) but you should only do this if you have a very good reason to do so. 99.99% of the time you should just use `real(8)` rather than `(4)` or `(16)`. 
+* `~` (tilde) means "the current user’s home directory"
 
-The `complex(8)` declaration means a complex number with `8` bytes of precision for each of the real and imaginary parts of the number. 
+* `.` means "current directory"
 
-For integers, you typically don't need to specify the precision and most of the time you can just use integer and then let the compiler assign the precision (usually either `4` or `8` bytes).
+* `..` means "the directory containing this one", or more succinctly, the "parent of the current directory"
 
-You can use the `huge()` intrinsic function to show the largest numbers that can be represented by each precision. For example, compile and run this code to see the largest possible values that can be represented by each numerical variable type:
-
-```{fortran, eval=F}
-program PrecisionTest
-
-implicit none
-
-! Declare variables:
-integer         :: i
-integer(4)      :: i4
-integer(8)      :: i8
-real(4)         :: x4
-real(8)         :: x8
-
-write(*,*) 'integer:    ', huge(i)
-write(*,*) 'integer:    ', huge(i)
-write(*,*) 'integer(4): ', huge(i4)
-write(*,*) 'integer(8): ', huge(i8)
-write(*,*) 'real(4):    ', huge(x4)
-write(*,*) 'real(8):    ', huge(x8)
-
-end program PrecisionTest
-```
-
-Here we are using modern `Fortran` syntax to define the variables. However, there are older ways of defining variables that you should be aware of since you may come across them. The older syntax does not use the `::` separator between the declaration and the list of variable names and has slightly different type names. Most `Fortran` compilers support the older and modern syntax:
-
-```{fortran, eval=F}
-! Old style Fortran variable types:
-double precision      ! same as real(8)
-real*8                ! same as real(8)
-real*4                ! same as real(4)
-double complex        ! same as complex(8)
-complex*16            ! same as complex(8)
-integer*4             ! same as integer(4)
-```
-
-## Integer division
-
-Be careful when dividing integers in `Fortran`. For example, the expression `fraction = (N-1)/N` where `N` is an integer and fraction has been declared as `real(8)` will result in fraction being assigned the value `0`. Why is this?
-
-Because all the terms in `(N-1)/N` are integers so the compiler uses integer division. You can easily fix this by making at least one of the terms in the expression a floating point number. Either of the following expressions will force the compiler to use floating point arithmetic and fraction will then be assigned the intended value:
-
-```{fortran, eval=F}
-fraction = (N-1.)/N
-```
-
-```{fortran, eval=F}
-fraction = (dble(N)-1)/N
-```
-
-where the `dble()` function turns integer `N` into a double precision value.
-
-## Implicit none
-
-You should **always include the statement** `implicit none` at the start of your `Fortran` codes (programs, subroutines, and functions).
-
-By default, `Fortran` has a rather insidious implicit typing for variables that have certain first letters in their names. Unless specified otherwise, all variables starting with letters `I`, `J`, `K`, `L`, `M`, and `N` are default integers, and all others are default real. This can lead to nasty programming errors if you aren't careful. For example, consider the following code: 
-
-```{fortran, eval=F}
-program ImplicitTypeTest
-
-ireal = 1.5   ! we want this to be a real number, but since the variable
-              ! name starts with an i Fortran thinks its an integer.
-
-write(*,*) 'ireal is: ', ireal
-
-end program ImplicitTypeTest
-```
-
-Try running this program and you will see that it prints out `ireal` as the integer `1`. If instead, you use `implicit none` at the start of this code, the compiler will issue an error because `ireal` was not yet declared. 
-
-Here's another example where `implicit none` would help avoid getting the wrong result. Can you spot the error?
-
-```{fortran, eval=F}
-program TestUndeclared
-
-real(8)  :: distance, velocity, time
-
-time     = 2.0
-velocity = 5.0
-
-distance = velocity*times
-
-write(*,*) 'distance: ', distance
-
-end program TestUndeclared
-```
-
-Now put `implicit none` at the start of the code, re-compile, see what happens.
+Try `cd ..` and `cd ~`, followed with `pwd`, see what happens.
 
 ***
 
-# Relational operators
+# General syntax of a shell command
 
-| Older `Fortran` | Newer `Fortran` | `Python`    | Description              |
-|:-------------:|:-------------:|:----:|:-------------------------|
-|`.eq.`         |`==`           |`==`  | equality                 |
-|`.ne.`         |`/=`           |`!=`  | not equality             |
-|`.lt.`         |`<`            |`<`   | less than                |
-|`.le.`         |`<=`           |`<=`  | less than or equal to    |
-|`.gt.`         |`>`            |`>`   | greater than             |
-|`.ge.`         |`>=`           |`>=`  | greater than or equal to |
-|`.and.`        |`.and.`        |`&`   | logical and              |
-|`.or.`         |`.or.`         |`|`   | logical or               |
-|`.not.`        |`.not.`        |`~`   | logical not              |
+Consider the command below as a general example of a command, which we will dissect into its component parts:
 
-Try the following `TestRelationalOps.f90`:
-
-```{fortran, eval=F}
-program TestRelationalOps
-
-implicit none
-
-real(8) :: x, y, z
-logical :: ltest1, ltest2, ltest3
-
-x = 1.0
-y = 2.0
-z = 1.0
-
-ltest1 = x < y
-ltest2 = x == z
-ltest3 = (ltest1 .and. ltest2)
-
-write(*,*) 'ltest1: ', ltest1
-write(*,*) 'ltest2: ', ltest2
-write(*,*) 'ltest3: ', ltest3
-
-end program TestRelationalOps
+```{bash, eval=F}
+ls -F /
 ```
+
+`ls` is the *command*, with an *option* `-F` and an *argument* `/`. 
+
+We’ve already encountered options (also called switches or flags) which either start with a single dash (`-`) or two dashes (`--`), and they change the behavior of a command. Arguments tell the command what to operate on (*e.g.* files and directories). Sometimes options and arguments are referred to as *parameters*. A command can be called with more than one option and more than one argument: but a command doesn’t always require an argument or an option.
+
+Each part is **separated by spaces**: if you omit the space between `ls` and `-F` the shell will look for a command called `ls-F`, which doesn’t exist. Also, capitalization can be important. For example, `ls -s` will display the size of files and directories alongside the names, while `ls -S` will sort the files and directories by size.
+
+Putting all that together, our command above gives us a listing of files and directories in the root directory `/`. Try this.
 
 ***
 
-# If statements
+# Working With Files and Directories
 
-These are similar to `Python`, except that you need to include the keyword `then` after the logical statement. The `if` statement also ends with the keyword `endif`.
+## Creating directories
 
-```{fortran, eval=F}
-program IfElseTest
+Let’s create a new directory called `thesis` using the command `mkdir`:
 
-implicit none
-
-real(8) :: x, y
-
-x = 1.5
-y = 3.0
-
-if (x < y) then
-    write(*,*) 'x is less than y'
-elseif (x > y ) then
-    write(*,*) 'x is greater than y'
-elseif (x == y ) then
-    write(*,*) 'x equals y'
-else
-    write(*,*) 'this case should never be found'      
-endif
-
-end program IfElseTest
+```{bash, eval=F}
+cd ~/data_demo
+mkdir thesis
 ```
+
+As you might guess from its name, `mkdir` means "make directory". Since `thesis` is a *relative path* (i.e., does not have a leading slash), the new directory is created in the current working directory.
+
+Note that `mkdir` is not limited to creating single directories one at a time. The `-p` option allows `mkdir` to create a directory with any number of nested subdirectories in a single operation:
+
+```{bash, eval=F}
+mkdir -p thesis/chapter_1/section_1/subsection_1
+```
+
+## Creating a text file
+
+Let’s change our working directory to `thesis` using `cd`, then run a text editor called `nano` to create a file called `draft.txt`:
+
+```{bash, eval=F}
+cd thesis
+nano draft.txt
+```
+
+Let’s type in a few lines of text. Once we’re happy with our text, we can press `Ctrl+O` (press the `Ctrl` or `Control` key and, while holding it down, press the `O` key) to write our data to disk. You’ll be asked what file we want to save this to: press `Return` to accept the suggested default of `draft.txt`. 
+
+Once our file is saved, we can use `Ctrl`+`X` to quit the editor and return to the shell.
+
+On Linux, many programmers use [Emacs](http://www.gnu.org/software/emacs/) or [Vim](https://www.vim.org/) (both of which require more time to learn), or a graphical editor such as [Gedit](https://wiki.gnome.org/Apps/Gedit). On Windows, you may wish to use [Notepad++](https://notepad-plus-plus.org/). Windows also has a built-in editor called `notepad` that can be run from the command line in the same way as `nano` for the purposes of this section.
+
+## Moving files and directories
+
+Returning to the `data_demo` directory:
+
+```{bash, eval=F}
+cd ~/data_demo
+```
+
+In our `thesis` directory, we have a file `draft.txt` which isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for ‘move’:
+
+```{bash, eval=F}
+mv /thesis/draft.txt /thesis/my_paper.txt
+```
+
+The first argument tells `mv` what we’re "moving", while the second is where it’s to go. In this case, we’re moving `thesis/draft.txt` to `thesis/my_paper.txt`, which has the same effect as renaming the file. Use `ls` to show that `thesis` now contains one file called `my_paper.txt`:
+
+```{bash, eval=F}
+ls thesis
+```
+
+Note that `mv` also works on directories. Let’s move `my_paper.txt` into the current working directory. 
+
+```{bash, eval=F}
+mv thesis/my_paper.txt .
+```
+
+We use `mv` once again, but this time we’ll use just the name of a directory as the second argument to tell `mv` that we want to keep the filename, but put the file somewhere new. In this case, the directory name we use is the special directory name `.` that we mentioned earlier.
+
+The effect is to move the file from the directory it was in to the current working directory. `ls` now shows us that `thesis` is empty:
+
+```{bash, eval=F}
+ls thesis
+```
+
+## Copying files and directories
+
+The `cp` command works very much like `mv`, except it copies a file instead of moving it. 
+
+```{bash, eval=F}
+cp my_paper.txt thesis/my_paper.txt
+```
+
+We can also copy a directory and all its contents by using the *recursive* option `-r`, *e.g.* to back up a directory:
+
+```{bash, eval=F}
+cp -r thesis thesis_backup
+```
+
+Now check the result by listing the contents of both the `thesis` and `thesis_backup` directory:
+
+```{bash, eval=F}
+ls thesis thesis_backup
+```
+
+## Removing files and directories
+
+Returning to the `data_demo` directory, let’s tidy up this directory by removing the `my_paper.txt` file we created. The Linux command we’ll use for this is `rm` (short for "remove"):
+
+```{bash, eval=F}
+rm my_paper.txt
+```
+
+**NOTE: Deleting Is FOREVER**
+
+The Linux shell doesn’t have a trash bin that we can recover deleted files from. Instead, when we delete files, they are unlinked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
+
+So **think twice (then third time) before you type**!!!
+
+`rm` can remove a directory and all its contents if we use the recursive option `-r`, and it will do so **without** any confirmation prompts.
+
+```{bash, eval=F}
+rm -r thesis_backup
+```
+
+## Using wildcards
+
+`*` is a *wildcard*, which matches **zero or more characters**. For example, `*.txt` matches all files ending in `.txt`. Let’s consider the `data_demo/molecules` directory: `*.pdb` matches `ethane.pdb`, `propane.pdb`, and every file that ends with `.pdb`. On the other hand, `p*.pdb` only matches `pentane.pdb` and `propane.pdb`, because the `p` at the front only matches filenames that begin with the letter `p`.
+
+`?` is also a wildcard, but it matches exactly **one character**. For example, `?.txt` matches `a.txt` but not `any.txt`. So `?ethane.pdb` would match `methane.pdb` whereas `*ethane.pdb` matches both `ethane.pdb`, `and methane.pdb`.
+
+Wildcards can be used in combination with each other *e.g.* `???ane.pdb` matches three characters followed by `ane.pdb`, giving `cubane.pdb`, `ethane.pdb`, and `octane.pdb`.
 
 ***
 
-# Do loops
+# Pipes and Filters
 
-Loops in `Fortran` are done using the `do` and `enddo` construct:
+Now that we know a few basic commands, we can finally look at the shell’s most powerful feature: the ease with which it lets us combine existing programs in new ways. We’ll start with the directory called `data_demo/molecules` that contains six files describing some simple organic molecules.
 
-```{fortran, eval=F}
-program DoLoopTest
+Let’s go into that directory with `cd` and run the command `wc cubane.pdb`:
 
-implicit none
-
-integer :: i, n
-
-n = 10
-
-do i = 1,n
-  write(*,*) 'i is ', i
-enddo
-
-end program DoLoopTest
+```{bash, eval=F}
+cd molecules
+wc cubane.pdb 
 ```
 
-Note that unlike `Python`, you don't need to indent the commands inside the `do` and `enddo` construct with `Fortran`. 
+`wc` is the ‘word count’ command: it counts the number of lines, words, and characters in files (from left to right, in that order).
 
-However, it helps to make your code much more readable if you do indent the commands. Indenting is helpful if you loop has spaned a page or more of code, since the indentation is a visual guide to the scope of the loop. Indenting is also very helpful when you have nested loops. For example, both of these loops below are valid `Fortran`, but which one is easier to read?
+If we run the command `wc *.pdb`, the `*` in `*.pdb` matches zero or more characters, so the shell turns `*.pdb` into a list of all `.pdb` files in the current directory:
 
-```{fortran, eval=F}
-do i = 1, l
-do j = 1, m
-do k = 1, n
-write(*,*) i, j, k
-enddo
-enddo
-enddo
+```{bash, eval=F}
+wc *.pdb 
 ```
 
+Note that `wc *.pdb` also shows the total number of all lines in the last line of the output.
 
-```{fortran, eval=F}
-do i = 1, l
-  do j = 1, m
-    do k = 1, n
-      write(*,*) i, j, k
-    enddo
-  enddo
-enddo
+If we run `wc -l` instead of just `wc`, the output shows only the number of lines per file:
+
+```{bash, eval=F}
+wc -l *.pdb 
+```
+
+The vertical bar, `|`, between the two commands, is called a *pipe*. It tells the shell that we want to use the output of the command on the left as the input to the command on the right.
+
+We can, for example, send the output of `wc` directly to `sort`,:
+
+```{bash, eval=F}
+wc -l *.pdb | sort -n
+```
+
+And now we send the output of this pipe, through another pipe, to `head` to show the first `3` lines only, so that the full pipeline becomes:
+
+```{bash, eval=F}
+wc -l *.pdb | sort -n | head -n 3
 ```
 
 ***
 
-# Do while loops
-
-The `do` `while` loop is similar but instead of using a counter, it uses a logical variable to exit the loop.
-
-```{fortran, eval=F}
-program DoWhileTest
-
-implicit none
-
-integer :: i, iCounter
-logical :: lKeepGoing
-
-lKeepGoing = .true.
-iCounter   = 0
-
-do while (lKeepGoing)
-
-  iCounter = iCounter + 1
-  write(*,*) 'iCounter: ',iCounter
-
-  if (iCounter == 10) lKeepGoing = .false.
-
-enddo
-
-write(*,*) 'All done'
-
-end program DoWhileTest
-```
-
-Can you figure out why the code ends at `10` not `11`?
-
-***
-
-# Arrays
-
-## Define arrays
-
-The modern way of declaring a fixed size array in `Fortran` is to use the `dimension()` keyword. For example:
-
-```{fortran, eval=F}
-program TestArray
-
-real(8), dimension(10) :: xArray
-integer                :: i
-
-do i = 1,size(xArray)
-  xArray(i) = 5.0*i
-enddo
-
-write(*,*) 'xArray: ', xArray
-
-end program TestArray
-```
-
-Arrays can have multiple dimensions, otherwise referred to as the *rank* of the array. The *Fortran 2008* standard allows up to rank `15`, whereas the previous standard only allowed a maximum rank of `7`. Here are some examples:
-
-```{fortran, eval=F}
-real(8), dimension(10)          :: xArray1D
-real(8), dimension(10,20)       :: xArray2D
-real(8), dimension(10,20,10)    :: xArray3D
-integer, dimension(10,5,30,50)  :: xArray4D
-```
-
-## Allocatable arrays
-
-The arrays above are fixed dimensional, meaning that we declared their sizes in the declaration statements. A more flexible construct is the *allocatable array*. In `Fortran` you need to explicitly declare them using the `allocatable` keyword.
-
-```{fortran, eval=F}
-real(8),dimension(:),   allocatable :: xArray1D
-real(8),dimension(:,:), allocatable :: xArray2D
-
-m = 5
-n = 10
-
-allocate(xArray1D(m))
-allocate(xArray2D(m,n))
-```
-
-You can then assign values to the elements of the arrays.
-
-If you need to **free up memory later on in your program**, use `deallocate`:
-
-```{fortran, eval=F}
-deallocate(xArray1D, xArray2D)
-```
-
-***
-
-*The notes above are modified from the excellent [online tutorial](https://rabernat.github.io/research_computing/intro-to-fortran.html) freely available on GitHub.*
+*The notes are modified from the excellent [online tutorial](http://swcarpentry.github.io/shell-novice/) freely available on the Software Carpentry website.*
 
 ***
 
@@ -492,33 +312,50 @@ deallocate(xArray1D, xArray2D)
 
 ## Exercise #1
 
-Go over the scripts, make sure you understand them and be able to run those scripts.
+1.1 In your home directory, create a folder `TEST`, and three subfolders `t1`, `t2`, and `t3` inside `TEST`. 
+
+1.2 Change your directory to `t1`, create a text file `my.dat`, write your name and student ID in it, and save the file.
+
+1.3 Copy `my.dat` in `t1` to `TEST`, and rename it to ``my_new.dat`.
+
+1.4 Delete `t1`, `t2`, and `t3`.
+
+1.5 In `TEST`, type `cat my_new.dat`. What do you see? Use `man cat` to learn more about `cat`, and quit the help document by typing `q`.
+
+1.6 Delete `TEST`.
 
 ## Exercise #2
 
-Write a `Fortran` script `TestLeapYear.f90` to determine whether the year of `2022` is a leap year.
+Change your directory to `data_demo/molecules`, type the following lines:
+
+* `ls *t*ane.pdb`
+
+* `ls *t?ne.*`
+
+* `ls *t??ne.pdb`
+
+* `ls ethane.*`
+
+What do you get? Can you explain why?
 
 ## Exercise #3
 
-Load Intel `Fortran` compiler `ifort` on TaiYi:
+Change your directory to `data_demo/molecules`, type the following line:
 
 ```{bash, eval=F}
-module load intel/2018.4
+wc -l *.pdb | sort -n | tail -n 5 | head -n 1
 ```
 
-Then compile `TestLeapYear.f90` with `ifort` and run it.
+What do you get? Can you explain why? Use `man tail` to learn more about `tail`.
 
 ## Exercise #4
 
-Declare an array `MyArray` with a size of `100`, fill `MyArray` with `100` numbers, and print it.
+The `data_demo/north-pacific-gyre/2012-07-03` folder stores some observations from a cruise campaign. Each `txt` file should contain `300` lines of data points. But there is one file that contains fewer lines than the rest of the files. Can you figure out which one?
 
 ***
 
 # Further reading
 
-+ [Compiling and Running Fortran Programs - a basic guide](http://www.fortran.gantep.edu.tr/compiling-g95-basic-guide.html)
-+ [Introduction to Fortran](https://ourcodingclub.github.io/tutorials/fortran-intro/)
-+ [Fortran Cheat Sheet](https://github.com/StanislavRadkov/Fortran-Cheat-Sheet)
-+ [Fortran 90 Tutorial](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html)
-+ [Fortran Tutorial](https://www.tutorialspoint.com/fortran/index.htm)
-+ [Modern Fortran in Science and Technology](https://modern-fortran-in-science-and-technology.readthedocs.io/en/latest/index.html)
++ [Linux Command Line Cheat Sheet](https://cheatography.com/davechild/cheat-sheets/linux-command-line/) (basic command lines)
++ [Linux Commands Cheat Sheet 2021](https://linuxguidehq.com/linux-commands-cheat-sheet/) (advanced command lines)
++ [The Unix Shell lessons](https://swcarpentry.github.io/shell-novice/)

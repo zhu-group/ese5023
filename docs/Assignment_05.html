@@ -11,7 +11,7 @@
 
 
 
-<title>Schedule</title>
+<title>Assignment 05</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
@@ -209,6 +212,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -216,6 +288,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -288,253 +370,81 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Schedule</h1>
+<h1 class="title toc-ignore">Assignment 05</h1>
 
 </div>
 
 
-<p><strong>Class Time:</strong><br />
-Wednesday 19:00-21:50</p>
-<p><strong>Location:</strong><br />
-304, Teaching Building #3</p>
-<p><strong>2023 Fall:</strong></p>
-<table>
-<colgroup>
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="32%" />
-<col width="30%" />
-<col width="25%" />
-<col width="6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Week</th>
-<th align="center">Date</th>
-<th align="center">Day</th>
-<th align="left">Topic</th>
-<th align="left">Lab</th>
-<th align="center">Assignment Out</th>
-<th align="center">Assignment Due</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">01</td>
-<td align="center">09/13</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_01.html">Introduction</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_01.html">Software
-setup</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">02</td>
-<td align="center">09/20</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_02.html">Version
-control with Git</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_02.html">Git
-branches</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">03</td>
-<td align="center">09/27</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_03.html">Python:
-Basics (I)</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_03.html">Python Basics
-(I)</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">04</td>
-<td align="center">10/11</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_04.html">Python:
-Basics (II)</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_04.html">Python Basics
-(II)</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_01.html">Assignment
-1</a></td>
-<td align="center"></td>
-</tr>
-<tr class="odd">
-<td align="center">05</td>
-<td align="center">10/18</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_05.html">Intermediate
-Python: <code>numPy</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_05.html"><code>numPy</code>
-exercises</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">06</td>
-<td align="center">10/25</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_06.html">Intermediate
-Python: <code>pandas</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_06.html"><code>pandas</code>
-exercises</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_02.html">Assignment
-2</a></td>
-<td align="center">Assignment 1</td>
-</tr>
-<tr class="odd">
-<td align="center">07</td>
-<td align="center">11/01</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_07.html">Intermediate
-Python: <code>xarray</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_07.html">Basics of time
-series</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">08</td>
-<td align="center">11/08</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_08.html">Plotting with
-<code>matplotlib</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_08.html">Plotting
-(I)</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_03.html">Assignment
-3</a></td>
-<td align="center">Assignment 2</td>
-</tr>
-<tr class="odd">
-<td align="center">09</td>
-<td align="center">11/15</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_09.html">Making maps
-with <code>cartopy</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_09.html">Plotting
-(II)</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">10</td>
-<td align="center">11/22</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_10.html">Scientific
-computing with <code>SciPy</code></a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_10.html"><code>SciPy</code>
-exercises</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_04.html">Assignment
-4</a></td>
-<td align="center">Assignment 3</td>
-</tr>
-<tr class="odd">
-<td align="center">11</td>
-<td align="center">11/29</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_11.html">Python
-environments</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_11.html">Python
-environments</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">12</td>
-<td align="center">12/06</td>
-<td align="center">W.</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Section_12.html">Linux:
-Basics</a></td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/Lab_12.html">Linux:
-Basics</a></td>
-<td align="center"><a
-href="https://zhu-group.github.io/ese5023/Assignment_05.html">Assignment
-5</a></td>
-<td align="center">Assignment 4</td>
-</tr>
-<tr class="odd">
-<td align="center">13</td>
-<td align="center">12/13</td>
-<td align="center">W.</td>
-<td align="left">Linux: Shell scripts and Taiyi jobs</td>
-<td align="left">Shell scripts and Taiyi jobs</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">14</td>
-<td align="center">12/20</td>
-<td align="center">W.</td>
-<td align="left">Fortran: Basics</td>
-<td align="left">Fortran: Basics</td>
-<td align="center"></td>
-<td align="center">Assignment 5</td>
-</tr>
-<tr class="odd">
-<td align="center">15</td>
-<td align="center">12/27</td>
-<td align="center">W.</td>
-<td align="left">Fortran: Intermediate</td>
-<td align="left">Course wrap-up</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">16</td>
-<td align="center">01/03</td>
-<td align="center">W.</td>
-<td align="left">Final project presentation</td>
-<td align="left"><a
-href="https://zhu-group.github.io/ese5023/download/Final_project_2023.pdf">Final
-project</a></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Supplements:</strong></p>
-<p>Supplement 01: <a
-href="https://zhu-group.github.io/ese5023/Sup_01.html">Parallel
-computing with Python</a><br />
-Supplement 02: <a
-href="https://zhu-group.github.io/ese5023/Sup_02.html">Web
-scraping</a></p>
+<p><strong>Out: 12/06 19:00 </strong><br />
+<strong>Due: 12/20 19:00 </strong></p>
+<hr />
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<p><strong>Collaboration:</strong></p>
+<p>Collaboration on solving the assignment is allowed, after you have
+thought about the problem sets on your own. It is also OK to get
+clarification (but not solutions) from online resources, again after you
+have thought about the problem sets on your own. There are two
+requirements:</p>
+<ul>
+<li><p>Cite your collaborators <strong>fully and completely</strong>
+(<em>e.g.</em>, “XXX explained to me what is asked in problem set 3”).
+Or cite online resources (<em>e.g.</em>, “I got inspired by reading
+XXX”) that helped you.</p></li>
+<li><p>Write your scripts and report <strong>independently</strong> -
+the scripts and report must come from you only.</p></li>
+</ul>
+<p><strong>Submitting your assignment:</strong></p>
+<ul>
+<li><p>Please write a report <code>PS5.pdf</code>.</p></li>
+<li><p>Create a jupyter notebook named <code>PS5.ipynb</code>.</p></li>
+<li><p>Upload your jupyter notebook <strong>AND</strong> report to your
+Github <code>ESE5023_Assignments_XXX</code> repository (where
+<code>XXX</code> is your SUSTech ID) before the due time.</p></li>
+</ul>
+<p><strong>Late Submission:</strong></p>
+<p>Late submissions will not receive any credit. The submission time
+will be determined based on your latest GitHub file records.</p>
+<hr />
+</div>
+<div id="modeling-of-carbon-cycle" class="section level1">
+<h1>1. Modeling of carbon cycle</h1>
+<p>In this problem, we will build a box model to understand the Earth’s
+carbon cycle based on the framework in <a
+href="https://mathcs.holycross.edu/~little/Montserrat1112/envmodbackup/1%252E3013196-1.pdf">Tomizuka
+2009</a>.</p>
+<p><strong>1.1 [15 points]</strong> Following equation 1-2 (without the
+buffer effect), build a two-box model to compute the atmospheric
+CO<sub>2</sub> level in ppm (parts per million) from 1987 to 2004.</p>
+<p><strong>1.2 [20 points]</strong> Following equation 3-4 (with the
+buffer effect), build a two-box model to compute the atmospheric
+CO<sub>2</sub> level in ppm from 1987 to 2004.</p>
+<p><strong>1.3 [5 points]</strong> Based on your results from
+<strong>1.1</strong> and <strong>1.2</strong>, reproduce Figure 2 in
+Tomizuka (2009) as much as you can.</p>
+<p><strong>[Bonus] [15 points]</strong> Following equation 5-13, compute
+the atmospheric CO<sub>2</sub> level in ppm and reproduce Figure 4 in
+Tomizuka (2009).</p>
+<p>Useful data sets:</p>
+<ul>
+<li><a
+href="https://data.ess-dive.lbl.gov/portals/CDIAC/FossilFuel-Emissions">Global
+Fossil-Fuel CO<sub>2</sub> Emissions</a></li>
+<li><a href="https://gml.noaa.gov/ccgg/trends/data.html">Mauna Loa
+CO<sub>2</sub> annual mean data</a></li>
+<li><a
+href="https://www.osti.gov/dataexplorer/biblio/dataset/1394156">Historical
+CO2 Records from the Law Dome DE08, DE08-2, and DSS Ice Cores</a></li>
+</ul>
+<p>Source: Tomizuka (2009), Is a box model effective for understanding
+the carbon cycle?, <em>American Journal of Physics</em>, 77, 156, doi:
+10.1119/1.3013196.</p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -567,6 +477,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

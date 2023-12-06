@@ -1,0 +1,58 @@
+---
+title: "Assignment 05"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 12/06 19:00 **  
+**Due: 12/20 19:00 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. There are two requirements: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 3"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Submitting your assignment:**  
+
+* Please write a report `PS5.pdf`. 
+
+* Create a jupyter notebook named `PS5.ipynb`. 
+
+* Upload your jupyter notebook **AND** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**   
+
+Late submissions will not receive any credit. The submission time will be determined based on your latest GitHub file records.
+
+***
+
+# 1. Modeling of carbon cycle
+
+In this problem, we will build a box model to understand the Earth's carbon cycle based on the framework in [Tomizuka 2009](https://mathcs.holycross.edu/~little/Montserrat1112/envmodbackup/1%252E3013196-1.pdf).  
+
+**1.1 [15 points]** Following equation 1-2 (without the buffer effect), build a two-box model to compute the atmospheric CO~2~ level in ppm (parts per million) from 1987 to 2004.  
+
+**1.2 [20 points]** Following equation 3-4 (with the buffer effect), build a two-box model to compute the atmospheric CO~2~ level in ppm from 1987 to 2004.  
+
+**1.3 [5 points]** Based on your results from **1.1** and **1.2**, reproduce Figure 2 in Tomizuka (2009) as much as you can.  
+
+**[Bonus] [15 points]** Following equation 5-13, compute the atmospheric CO~2~ level in ppm and reproduce Figure 4 in Tomizuka (2009). 
+
+Useful data sets:  
+
+* [Global Fossil-Fuel CO~2~ Emissions](https://data.ess-dive.lbl.gov/portals/CDIAC/FossilFuel-Emissions)
+* [Mauna Loa CO~2~ annual mean data](https://gml.noaa.gov/ccgg/trends/data.html)
+* [Historical CO2 Records from the Law Dome DE08, DE08-2, and DSS Ice Cores](https://www.osti.gov/dataexplorer/biblio/dataset/1394156)
+
+Source: Tomizuka (2009), Is a box model effective for understanding the carbon cycle?, *American Journal of Physics*, 77, 156, doi: 10.1119/1.3013196.  
