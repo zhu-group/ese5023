@@ -24,10 +24,9 @@ Wednesday 19:00-21:50
 |11  |11/29|W.  |[Python environments](https://zhu-group.github.io/ese5023/Section_11.html)                 | [Python environments](https://zhu-group.github.io/ese5023/Lab_11.html)               |                                                                        |                 |
 |12  |12/06|W.  |[Linux: Basics](https://zhu-group.github.io/ese5023/Section_12.html)                       | [Linux: Basics](https://zhu-group.github.io/ese5023/Lab_12.html)                     | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4    |
 |13  |12/13|W.  |[Linux: Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Section_13.html) | [Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Lab_13.html)      |                                                                        |                 |
-|14  |12/20|W.  |Fortran: Basics                                                                            | Fortran: Basics                                                                      |                                                                        | Assignment 5    |
-|15  |12/27|W.  |Fortran: Intermediate                                                                      | Course wrap-up                                                                       |                                                                        |                 |
+|14  |12/20|W.  |[Fortran: Basics](https://zhu-group.github.io/ese5023/Section_14.html)                     | [Fortran: Basics](https://zhu-group.github.io/ese5023/Lab_14.html)                   |                                                                        | Assignment 5    |
+|15  |12/27|W.  |[Fortran: Intermediate](https://zhu-group.github.io/ese5023/Section_15.html)               | Course wrap-up                                                                       |                                                                        |                 |
 |16  |01/03|W.  |Final project presentation                                                                 | [Final project](https://zhu-group.github.io/ese5023/download/Final_project_2023.pdf) |                                                                        |                 |
-
 
 **Supplements:**  
 

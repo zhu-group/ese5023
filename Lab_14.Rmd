@@ -1,0 +1,58 @@
+---
+title: "Lab 14 Fortran: Basics"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. Reading inputs from the terminal
+
+In `Fortran`, you can also use the asterisk `*` to take inputs from the terminal shell. For example, to ask a question and read the answer, we can use:
+
+```{fortran, eval=F}
+program AskQuestions
+
+INTEGER       :: ID
+CHARACTER(16) :: Hometown
+
+write(*,*) 'What is your Student ID?'
+read(*,*) ID
+write(*,*) 'You entered ', ID
+
+write(*,*) 'Where is your hometown?'
+read(*,*) Hometown
+write(*,*) 'You entered ', Hometown
+
+end program AskQuestions
+```
+
+Compile and run the above program.
+
+***
+
+# 2. Find the largest real value
+
+Write a `Fortran` program to find approximately the largest value that can be stored in a `real(4)` variable. 
+
+**[Hint:]** You might, for example, repeatedly multiply a variable the power of `2` within a loop, printing the new value on the terminal, until the computer gives up.
+
+Change the real variable form `real(4)` to `real(8)`, check what happens.
+
+***
+
+# 3. Set a password
+
+Write a `Fortran` program `SetPassWord.f90`:
+
+**3.1.** First, the program asks you to enter a 4-digit code as the password.
+
+**3.2.** Second, the program asks you to re-type the password again. 
+
+**3.3.** If you type the same password in **3.1** and **3.2**, the program will end and print some success messages. 
+
+**3.4.** Otherwise, it will print some error messages and ask you to retype again. If you have failed three times, the program will be terminated with error messages.

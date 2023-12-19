@@ -496,7 +496,7 @@ Go over the scripts, make sure you understand them and be able to run those scri
 
 ## Exercise #2
 
-Write a `Fortran` script `TestLeapYear.f90` to determine whether the year of `2022` is a leap year.
+Write a `Fortran` script `TestLeapYear.f90` to determine whether the year of `2023` is a leap year.
 
 ## Exercise #3
 
