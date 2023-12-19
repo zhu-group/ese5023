@@ -474,11 +474,11 @@ Write a `Fortran` program to write some numbers to a file that has `20` lines an
 
 ## Exercise #2
 
-Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from the main program (`my.f90`) to check whether `2022` is a leap year. 
+Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from the main program (`my.f90`) to check whether `2023` is a leap year. 
 
 ## Exercise #3
 
-Write a module `GetDays.f90` to print the total number of days in a given year. Then `use` this module in `my.f90` to print the total number of days for `2022`.
+Write a module `GetDays.f90` to print the total number of days in a given year. Then `use` this module in `my.f90` to print the total number of days for `2023`.
 
 ## Exercise #4
 
