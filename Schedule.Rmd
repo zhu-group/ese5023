@@ -29,7 +29,7 @@ Wednesday 19:00-21:50
 
 **Supplements:**  
 
-Supplement 01: Parallel computing with Python
-Supplement 02: Web scraping
-Supplement 03: Fortran: Basics
-Supplement 04: Fortran: Intermediate
+Supplement 01: Parallel computing with Python  
+Supplement 02: Web scraping  
+Supplement 03: Fortran: Basics  
+Supplement 04: Fortran: Intermediate  
