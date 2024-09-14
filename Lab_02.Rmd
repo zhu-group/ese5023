@@ -1,0 +1,71 @@
+---
+title: "Lab 02 Git branches"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. Merge branches with GitKraken
+
+In this exercise, we will learn how to create a branch, modify it, and merge it to the `main` with GitKraken.
+
+**1.** Create a local repository named `Lab2_Exercise` with GitKraken.
+
+**2.** Modify the `README` file by adding one sentence, stage and then commit the change.
+
+**3.** Add one text file named `temperature.txt`, stage and then commit the change.
+
+**4.** Modify `temperature.txt` by adding the following line: `The air temperature is 29 degrees today`. Stage and then commit the change.
+
+**5.** Right-click the graph node of the latest commit (green circle on the middle panel), select `Create branch here`, then enter the branch name `branch1`.
+
+**6.** When you create a new branch, GitKraken will automatically switch to the branch. You can always check which branch you are at by looking at the `branch` drop-down menu at the top left corner—something like `main` or `branch1` (you just create it!). You can switch between different branches simply by selecting the one you want to work on. Such an action is called `checkout` in Git. For now, let's stay on `branch1`.
+
+**7.** Add one text file named `aqi.txt`, stage and then commit the change.
+
+**8.** Modify `aqi.txt` by adding the following line: `The air quality index is 53 today`. Stage and then commit the change.
+
+**9.** Modify the `README` file by adding the following line: `I made this change on branch1`, stage and then commit the change.
+
+**10.** By far, we have added one file (`aqi.txt`) and modified one file (`README`), we think it's good enough to go and we want to incorporate those changes in the `main` branch. This step is called `merge` in Git. Now switch to `main` by selecting it from the `branch` drop-down menu at the top left corner. You will see `branch1` is `3` commits ahead of `main`, this is because we only worked on `branch1` but not `main`. Right-click `branch1` tab on the middle panel, select `Merge branch1 into main`. At this time, we have successfully merged the changes made on `branch1` into `main`. 
+
+**11.** Modify the `README` file again by adding the following line: `I made this change on main`, stage and then commit the change. 
+
+**12.** Right-click the graph node of the latest commit (green circle on the middle panel), select `Create branch here`, then enter the branch name `branch2`. You may find that GitKraken automatically switches to the `branch2`.
+
+**13.** Modify `temperature.txt`, change the line to: `The air temperature is 32 degrees today`. Stage and then commit the change.
+
+**14.** Now switch back to `main` by selecting it from the `branch` drop-down menu at the top left corner. Open the `temperature.txt` file in your local repo, what is the temperature read from your file? `32` or `29`? Can you explain why?
+
+**15.** Modify `temperature.txt`, change the line to: `The air temperature is 35 degrees today`. Stage and then commit the change.
+
+**16.** So far, we modified the same line in `temperature.txt` differently on two branches (`35` on `main` while `32` on `branch2`). As you can imagine, when we merge two differently modified files, a conflict will arise. Right-click `branch2` tab on the middle panel, select `Merge branch2 into main`, GitKraken will pop out an error message `A file conflict was found when attempting to merge into main`. 
+
+**17.** Click `temperature.txt` on the `Conflicted Files`, choose `The air temperature is 32 degree today` as the output, then save, and click `Commit and Merge`. By doing so, we have successfully resolved the conflicts.
+
+***
+
+# 2. Merge branches with Github
+
+In this exercise, we will learn how to create a branch, modify it, and merge it to the `main` on GitHub.
+
+**1.** Go through [Understanding the GitHub flow](https://guides.github.com/introduction/flow/).
+
+**2.** Open GitKraken, push `Lab2_Exercise` to GitHub. Click `1 branche` next to the `main` drop-down menu for a quick overview of the branche.
+
+**3.** Now follow [GitHub guide](https://guides.github.com/activities/hello-world/) step `2` to create a new branch `branch3`.
+
+**4.** Follow step `3` to modify `README`  by adding the following line: `I made this change on branch3 via GitHub`, commit the change.
+
+**5.** Follow step `4` to open a Pull Request.
+
+**6.** Follow step `5` to merge your Pull Request.
+
+**7.** Open GitKraken and pull `Lab2_Exercise` from GitHub. Check the flow. 
+
+**8.** Finally, go back to `Lab2_Exercise` on GitHub, click `Settings`, then scroll down to the bottom, click `Delete this repository`.
