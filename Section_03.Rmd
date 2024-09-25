@@ -18,9 +18,9 @@ output:
 
 `Python` is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis. `Python` is a **general-purpose language**, meaning it can be used to create a variety of different programs and isn’t specialized for any specific problems. This versatility, along with its beginner-friendliness, has made it one of the most-used programming languages today. A survey found that it was the most popular programming language among developers in 2020.
 
-<img src="figs/lan_trend.png" alt="drawing" width="800"/>
+<img src="figs/stackoverflow-trends-chart.svg" alt="drawing" width="900"/>
 
-[Figure source](https://www.reddit.com/r/ColorBlind/comments/ftir2q/a_graph_i_found_on_stack_overflow/)
+[Figure source](https://trends.stackoverflow.co/)
 
 ***
 
@@ -78,9 +78,9 @@ We can write a few lines with meaningful information:
 ```{python, eval=F}
 # Print a few lines with meaningful information
 print("Once there is a guy Lei, ")
-print("he is 36 years old.")
+print("he is 18 years old.")
 print("He likes the name Lei,")
-print("but does not like being 36.")
+print("but does not like being 18.")
 ```
 
 The output in your Console will be in the same order.
