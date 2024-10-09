@@ -47,7 +47,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 ***
 
-# 2. Continuous celing function
+# 2. Continuous ceiling function
 
 **[10 points]** Given a list with `N` positive integers. For every element `x` of the list, find the value of continuous ceiling function defined as `F(x) = F(ceil(x/3)) + 2x`, where `F(1) = 1`. 
 
@@ -67,7 +67,7 @@ Late submissions will **not** receive any credit. The submission time will be de
 
 **4.2 [15 points]** Write a function `Sum_averages` to compute the sum of the average of all subsets of the array. For example, given an array of `[1, 2, 3]`, you `Sum_averages` function should compute the sum of: average of `[1]`, average of `[2]`, average of `[3]`,  average of `[1, 2]`, average of `[1, 3]`, average of `[2, 3]`, and average of `[1, 2, 3]`.  
 
-**4.3 [5 points]** Call `Sum_averages` with `N` increasing from `1` to `100`, assign the output to a list called `Total_sum_averages`. Plot `Total_sum_averages`, describe what do you see.
+**4.3 [5 points]** Call `Sum_averages` with `N` increasing from `1` to `100`, assign the output to a list called `Total_sum_averages`. Plot `Total_sum_averages`, describe what you see.
 
 ***
 
