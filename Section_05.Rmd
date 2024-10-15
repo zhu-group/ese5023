@@ -22,7 +22,7 @@ output:
 
 ```{python, eval=F}
 # import numpy 
-import numpy as np
+import numpy as np  
 ```
 
 Here we use `np` as an alias (a.k.a., a nickname) of `numPy`, and later use it heavily. You can check functions and variables in a module (I will use the term "module", some people prefer "package" or "library") with the `dir()` function.
@@ -37,6 +37,7 @@ dir(np)
 `NumPy` is used to work with *arrays*. The array object in `NumPy` is called `ndarray`. We can create a `ndarray` object by using the `array()` function:
 
 ```{python, eval=F}
+
 # Create an array from a list
 arr = np.array([1, 2, 3, 4, 5, 6])
 
