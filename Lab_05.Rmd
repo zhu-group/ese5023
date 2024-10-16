@@ -42,7 +42,7 @@ arr/1/1
 arr < arr > arr
 ```
 
-**1.6** How to get all the dates corresponding to the month of Oct. 2023?  
+**1.6** How to get all the dates corresponding to the month of Oct. 2024?  
 
 [Hint: Try the `datetime64()` function].
 
