@@ -360,7 +360,6 @@ Lets say we want to compare plots of temperature at three different latitudes. W
 # Time series of the near surface temperature at 3 latitudes at time stamp 50
 ds.tas.isel(time=50).sel(lat=[-50, 0, 50], method="nearest").plot(
     x="lon", hue="lat", figsize=(8, 6))
-)
 ```
 
 ### 2D plots
