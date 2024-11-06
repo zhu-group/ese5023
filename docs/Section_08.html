@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 08 Plotting with matplotlib</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Computing and Programming for Environmental Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 08 Plotting with
+<code>matplotlib</code></h1>
+
+</div>
+
+
+<blockquote>
+<p>“The simple graph has brought more information to the data analyst’s
+mind than any other device.” - John Tukey</p>
+</blockquote>
+<hr />
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Load modules</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> matplotlib.gridspec <span class="im">as</span> gridspec</span></code></pre></div>
+<p>In this section, we will use the <a
+href="https://zhu-group.github.io/ese5023/download/ozone_data.csv">daily
+ozone data file</a> used for <a
+href="https://zhu-group.github.io/ese5023/Section_06.html#Exercise_4">Exercise
+#4 in Section 06</a>. To read the data with <code>pandas</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Read ozone data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>ozone_data <span class="op">=</span>  pd.read_csv(<span class="st">&#39;ozone_data.csv&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Check the data</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>ozone_data.head()</span></code></pre></div>
+<hr />
+</div>
+<div id="plotting-with-matplotlib" class="section level1">
+<h1>Plotting with <code>matplotlib</code></h1>
+<p><code>Matplotlib</code> is the most popular plotting library in
+<code>python.</code> Using <code>matplotlib</code>, you can create
+pretty much <strong>any</strong> type of plot. However, as your plots
+get more complex, the learning curve can get steeper. The goal of this
+section is to make you understand <em>how plotting with
+<code>matplotlib</code> works</em> and make you comfortable to build
+full-featured plots with <code>matplotlib</code>.</p>
+<div id="a-basic-scatterplot" class="section level2">
+<h2>A basic scatterplot</h2>
+<p>The following piece of code is found in pretty much any python code
+that has <code>matplotlib</code> plots.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Show plots in the notebook</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
+<p><code>matplotlib.pyplot</code> is usually imported as
+<code>plt</code>. It is the core object that contains the methods to
+create all sorts of charts and features in a plot. The
+<code>%matplotlib inline</code> is a jupyter notebook specific command
+that let’s you see the plots in the notebook itself.</p>
+<p>Suppose you want to draw a specific type of plot, say a scatterplot,
+the first thing you want to check out are the methods under
+<code>plt</code> (type <code>dir(plt)</code>). Let’s begin by making a
+simple but full-featured scatterplot and take it from there. Let’s see
+what <code>plt.plot()</code> creates if you an arbitrary sequence of
+numbers.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># This will return the plot object itself (0x253619a4910) </span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># besides drawing the plot.</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>])</span></code></pre></div>
+<p>This draws a line automatically, assuming the values of the X-axis to
+start from zero going up to as many items in the data. Notice the line
+<code>matplotlib.lines.Line2D</code> in code output, this is because
+<code>matplotlib</code> returns the plot object itself besides drawing
+the plot. If you only want to see the plot, add one line:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Only want to see the plot</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Here <code>plt.plot</code> draws a line plot by default. To make a
+scatterplot, you need to understand a bit more about what arguments
+<code>plt.plot()</code> takes. The <code>plt.plot</code> accepts
+<code>3</code> basic arguments in the following order: <strong>(x, y,
+format)</strong>. And the <code>format</code> is a shorthand combination
+of <code>{color}{marker}{line}</code>. For example, the format
+<code>ko-</code> has <code>3</code> characters standing for: black
+(<code>k</code>) colored dots (<code>o</code>) with a solid line
+(<code>-</code>). By omitting the line part (<code>-</code>) in the end,
+we will be left with only black dots (<code>ko</code>), which makes it
+draw a scatterplot.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Draw a scatterplot</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>],<span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>For a complete list of colors, markers, and linestyles, check out the
+<code>help(plt.plot)</code> command.</p>
+</div>
+<div id="a-slightly-complex-scatterplot" class="section level2">
+<h2>A slightly complex scatterplot</h2>
+<p>Now add more details to the figure:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Set the figure size</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># 8 is width, 5 is height</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># Plot with a label</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;ko&#39;</span>, label<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>) </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Title, x and y labels, y lim, and legend</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>plt.title(<span class="st">&#39;Daily Ozone&#39;</span>)  </span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Index&#39;</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Ozone [ppb]&#39;</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">200</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;best&#39;</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Here we use <code>plt.figure</code> to make a <em>figure</em>. Every
+plot that <code>matplotlib</code> makes is drawn on something called
+<em>figure</em>. You can think of the figure object as a canvas that
+holds all the subplots and other plot elements inside it. And a figure
+can have one or more subplots inside it called <em>axes</em>, arranged
+in rows and columns. Every figure has at least one axes. Don’t confuse
+axes with X- and Y-axis.</p>
+<p>The following figure summaries well about different parts of a
+figure. We will go over those one by one.</p>
+<p><img src="figs/anatomy.png" alt="drawing" width="700"/></p>
+<p><a
+href="https://matplotlib.org/2.0.2/faq/usage_faq.html#parts-of-a-figure">Figure
+source</a></p>
+</div>
+<div id="drawing-scatterplots-in-different-panels"
+class="section level2">
+<h2>Drawing scatterplots in different panels</h2>
+<p>Suppose we want to draw <code>Ozone</code> and
+<code>Temperature</code> in two separate plots side-by-side. You can do
+that by creating two separate <em>subplots</em>, aka, <em>axes</em>
+using <code>plt.subplots(1, 2)</code>. This creates and returns two
+objects:</p>
+<ul>
+<li><p>The figure</p></li>
+<li><p>The axes (subplots) inside the figure</p></li>
+</ul>
+<p>Previously, we called <code>plt.plot()</code> to draw the points.
+Since there was only <strong>one axes</strong> by default, it drew the
+points on that axes itself. But now, since we want the points to be
+drawn on different subplots (axes), we have to call the
+<code>plot</code> function in the respective axes (<code>ax1</code> and
+<code>ax2</code> in below code) instead of <code>plt</code>.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Create Figure and Subplots</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), sharey<span class="op">=</span><span class="va">False</span>, dpi<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>ax1.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)  <span class="co"># green dots</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>ax2.plot(ozone_data[<span class="st">&#39;Temperature&#39;</span>], <span class="st">&#39;k*&#39;</span>)  <span class="co"># black starts</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># Title, X and Y labels, and Y lim</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>ax1.set_title(<span class="st">&#39;Ozone&#39;</span>)<span class="op">;</span> ax2.set_title(<span class="st">&#39;Temperature&#39;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>ax1.set_xlabel(<span class="st">&#39;Index&#39;</span>)<span class="op">;</span>  ax2.set_xlabel(<span class="st">&#39;Index&#39;</span>)  <span class="co"># x label</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>ax1.set_ylabel(<span class="st">&#39;Ozone [ppb]&#39;</span>)<span class="op">;</span>  ax2.set_ylabel(<span class="st">&#39;Temperature [F]&#39;</span>)  <span class="co"># y label</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>ax1.set_ylim(<span class="dv">0</span>, <span class="dv">200</span>)<span class="op">;</span>  ax2.set_ylim(<span class="dv">50</span>, <span class="dv">100</span>)  <span class="co"># y axis limits</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co"># Using a tight layout</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Setting <code>sharey=False</code> in <code>plt.subplots()</code>
+means not sharing the Y-axis between the two subplots. And
+<code>dpi=120</code> increased the number of dots per inch of the plot
+to make it look more sharp and clear. You will notice a distinct
+improvement in clarity on increasing the dpi, especially in jupyter
+notebooks.</p>
+<p>The <code>ax1</code> and <code>ax2</code> objects, like
+<code>plt</code>, has equivalent <code>set_title</code>,
+<code>set_xlabel</code> and <code>set_ylabel</code> functions. In fact,
+the <code>plt.title()</code> actually calls the current axes
+<code>set_title()</code> to do the job.</p>
+<p>Alternately, to save keystrokes, you can set multiple things in one
+go using the <code>ax.set()</code>.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Create Figure and Subplots</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), sharey<span class="op">=</span><span class="va">False</span>, dpi<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>ax1.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)  <span class="co"># green dots</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>ax2.plot(ozone_data[<span class="st">&#39;Temperature&#39;</span>], <span class="st">&#39;k*&#39;</span>)  <span class="co"># black starts</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># Title, X and Y labels, and Y lim</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>ax1.<span class="bu">set</span>(title<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>, xlabel<span class="op">=</span><span class="st">&#39;Index&#39;</span>, ylabel<span class="op">=</span><span class="st">&#39;Ozone [ppb]&#39;</span>, ylim<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">200</span>))</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>ax2.<span class="bu">set</span>(title<span class="op">=</span><span class="st">&#39;Temperature&#39;</span>, xlabel<span class="op">=</span><span class="st">&#39;Index&#39;</span>, ylabel<span class="op">=</span><span class="st">&#39;Temperature [F]&#39;</span>, ylim<span class="op">=</span>(<span class="dv">50</span>,<span class="dv">100</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># Using a tight layout</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="matlab-like-syntax" class="section level2">
+<h2><code>Matlab</code> like syntax</h2>
+<p>The syntax we’ve seen is the <em>Object-oriented syntax</em>, which
+plot <code>axes</code> one after another. Since the original purpose of
+<code>matplotlib</code> was to recreate the plotting facilities of
+<code>Matlab</code> in python, the <em>matlab-like-syntax</em> relies on
+a global state and a flat name space. For example, the above figure can
+be made by:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Create Figure and Subplots</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">120</span>) </span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Left hand side plot</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>)  <span class="co"># (nRows, nColumns, axes number to plot)</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)  <span class="co"># green dots</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>plt.title(<span class="st">&#39;Ozone&#39;</span>)  </span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Index&#39;</span>)<span class="op">;</span> plt.ylabel(<span class="st">&#39;Ozone [ppb]&#39;</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">200</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co"># Right hand side plot</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Temperature&#39;</span>], <span class="st">&#39;k*&#39;</span>)  <span class="co"># black starts</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>plt.title(<span class="st">&#39;Temperature&#39;</span>)  </span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Index&#39;</span>)<span class="op">;</span> plt.ylabel(<span class="st">&#39;Temperature [F]&#39;</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>plt.ylim(<span class="dv">50</span>, <span class="dv">100</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>The <code>plt.plot()</code> or <code>plt.{anything}</code> will
+always act on the plot in the <strong>current axes</strong>, whereas,
+<code>ax.{anything}</code> (object-oriented) will modify the plot inside
+that specific <code>ax</code>. Even though the object-oriented version
+might look a little confusing because it has a mix of both
+<code>ax1</code> and <code>plt</code> commands, you can avoid writing
+repetitive code by looping through the axes. For example, the following
+will plot <code>4</code> panels:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Draw multiple plots using for-loops using object oriented syntax</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co"># Create Figure and Subplots</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">False</span>, dpi<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co"># Define the colors, markers, and fields (columns) to use</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>colors <span class="op">=</span> {<span class="dv">0</span>:<span class="st">&#39;g&#39;</span>, <span class="dv">1</span>:<span class="st">&#39;b&#39;</span>, <span class="dv">2</span>:<span class="st">&#39;r&#39;</span>, <span class="dv">3</span>:<span class="st">&#39;y&#39;</span>}</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>markers <span class="op">=</span> {<span class="dv">0</span>:<span class="st">&#39;o&#39;</span>, <span class="dv">1</span>:<span class="st">&#39;x&#39;</span>, <span class="dv">2</span>:<span class="st">&#39;*&#39;</span>, <span class="dv">3</span>:<span class="st">&#39;p&#39;</span>}</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>fields <span class="op">=</span> {<span class="dv">0</span>:<span class="st">&#39;Ozone&#39;</span>, <span class="dv">1</span>:<span class="st">&#39;Temperature&#39;</span>, <span class="dv">2</span>:<span class="st">&#39;Pressure&#39;</span>, <span class="dv">3</span>:<span class="st">&#39;Wind.Speed&#39;</span>}</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Plot each axes</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.ravel()):</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    ax.plot( ozone_data[fields[i]] , marker<span class="op">=</span>markers[i], color<span class="op">=</span>colors[i])  </span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    ax.set_title(fields[i])</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co"># Plot super title</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>plt.suptitle(<span class="st">&#39;Ozone and meterological data&#39;</span>, verticalalignment<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">16</span>)   </span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>As you can see, the code is much neat now as we use the
+object-oriented syntax. Here, the <code>plt.suptitle()</code> adds a
+main title at figure level title, and the
+<code>verticalalignment='bottom'</code> parameter denotes the
+hinge-point should be at the bottom of the title text, so that the main
+title is pushed slightly upwards.</p>
+</div>
+<div id="modifying-axis-ticks-and-labels" class="section level2">
+<h2>Modifying axis ticks and labels</h2>
+<p>There are <code>3</code> basic things you will probably need in
+<code>matplotlib</code> when it comes to manipulating axis ticks:</p>
+<ul>
+<li><p>Control the position and tick labels (using
+<code>plt.xticks()</code> or <code>ax.setxticks()</code> and
+<code>ax.setxticklabels()</code>)</p></li>
+<li><p>Control which axis’s ticks (top/bottom/left/right) should be
+displayed (using <code>plt.tick_params()</code>)</p></li>
+<li><p>Functional formatting of tick labels</p></li>
+</ul>
+<p>If you are using <code>ax</code> syntax, you can use
+<code>ax.set_xticks()</code> and <code>ax.set_xticklabels()</code> to
+set the positions and label texts respectively. If you are using the
+<code>plt</code> syntax, you can set both the positions as well as the
+label text in one call using the <code>plt.xticks()</code>.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Set the figure</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Plot dots</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)  <span class="co"># green dots</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># Adjust xy axis ticks</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>plt.xticks(ticks<span class="op">=</span>np.arange(<span class="dv">0</span>, <span class="dv">120</span>, <span class="dv">10</span>), fontsize<span class="op">=</span><span class="dv">12</span>, rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;top&#39;</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>plt.yticks(ticks<span class="op">=</span>np.arange(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">50</span>), fontsize<span class="op">=</span><span class="dv">12</span>, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">&#39;right&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co"># Tick parameters</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>plt.tick_params(axis<span class="op">=</span><span class="st">&#39;both&#39;</span>, bottom<span class="op">=</span><span class="va">True</span>, top<span class="op">=</span><span class="va">True</span>, left<span class="op">=</span><span class="va">True</span>, right<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>                direction<span class="op">=</span><span class="st">&#39;in&#39;</span>, which<span class="op">=</span><span class="st">&#39;major&#39;</span>, grid_color<span class="op">=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co"># Plot grid lines</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>plt.grid(linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co"># Add title, \n makes a new line</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>plt.title(<span class="st">&#39;Ozone</span><span class="ch">\n</span><span class="st">(ppb)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Here we have adjusted the label’s <code>fontsize</code>,
+<code>rotation</code>, horizontal alignment (<code>ha</code>) and
+vertical alignment (<code>va</code>) of the hinge points on the labels,
+and <code>plt.tick_params()</code> is used to determine which axis of
+the plot (<code>top</code>, <code>bottom</code>, <code>left</code>, or
+<code>right</code>) you want to draw the ticks and which direction
+(<code>in</code> and <code>out</code>) the tick should point to.</p>
+</div>
+<div id="plotting-with-a-style" class="section level2">
+<h2>Plotting with a style</h2>
+<p><code>Matplotlib</code> comes with pre-built styles which you can
+look by typing:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Check available styles</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>plt.style.available</span></code></pre></div>
+<p>For example, we can use <code>classic</code>, <code>seaborn</code>,
+or <code>dark_background</code> for the above plot:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Use style</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>plt.style.use(<span class="st">&#39;classic&#39;</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>plt.show()</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Reset to defaults</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>mpl.rcParams.update(mpl.rcParamsDefault) </span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># Use style</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>plt.style.use(<span class="st">&#39;seaborn&#39;</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.show()</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># Reset to defaults</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>mpl.rcParams.update(mpl.rcParamsDefault)</span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co"># Use style</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>plt.style.use(<span class="st">&#39;dark_background&#39;</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>plt.show()</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co"># Reset to defaults</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>mpl.rcParams.update(mpl.rcParamsDefault)</span></code></pre></div>
+<p>Besides those pre-built styles, the look of various components of a
+<code>matplotlib</code> plot can be set globally using
+<code>rcParams</code>. The complete list of <code>rcParams</code> can be
+viewed by typing:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Check rcParam</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>mpl.rc_params()</span></code></pre></div>
+<p>You can adjust the params you’d like to change by updating it. For
+example, the below snippet adjusts the font by setting it to
+<code>stix</code>, which looks great on plots by the way.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Plot without changing rcParam</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># Update rcParam and plot</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>mpl.rcParams.update({<span class="st">&#39;font.size&#39;</span>: <span class="dv">18</span>, <span class="st">&#39;font.family&#39;</span>: <span class="st">&#39;STIXGeneral&#39;</span>, <span class="st">&#39;mathtext.fontset&#39;</span>: <span class="st">&#39;stix&#39;</span>})</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>After modifying a plot, you can rollback the <code>rcParams</code> to
+default setting using:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Reset to defaults</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>mpl.rcParams.update(mpl.rcParamsDefault)</span></code></pre></div>
+</div>
+<div id="using-colors" class="section level2">
+<h2>Using colors</h2>
+<p><code>Matplotlib</code> also comes with pre-built colors and
+palettes. Type the following to check out the available colors.</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># View Colors</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>mpl.colors.BASE_COLORS  <span class="co"># 8 colors</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#mpl.colors.TABLEAU_COLORS # 10 colors</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#mpl.colors.CSS4_COLORS  # 148 colors</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#mpl.colors.XKCD_COLORS  # 949 colors</span></span></code></pre></div>
+<p>And use those colors:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Plot using color: blue from BASE_COLORS</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], color<span class="op">=</span><span class="st">&#39;b&#39;</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>plt.show()</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># Plot using color: teal from CSS4_COLORS</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], color<span class="op">=</span><span class="st">&#39;teal&#39;</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>plt.show()</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co"># Plot using color: light mint green from XKCD_COLORS</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], color<span class="op">=</span><span class="st">&#39;xkcd:light mint green&#39;</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Check <a
+href="https://matplotlib.org/stable/gallery/color/named_colors.html">List
+of named colors</a> and <a href="https://xkcd.com/color/rgb/">xkcd
+color</a> for more.</p>
+</div>
+<div id="plotting-with-two-y-axis" class="section level2">
+<h2>Plotting with two Y-axis</h2>
+<p>You can activate the right hand side Y-axis using
+<code>ax.twinx()</code> to create a second axes. This second axes will
+have the Y-axis on the right activated and shares the same x-axis as the
+original <code>ax</code>. Then, whatever you draw using this second axes
+will be referenced to the secondary Y-axis. The remaining job is to just
+color the axis and tick labels to match the color of the lines.</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Plot Line1 (Left Y Axis)</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>,figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>ax1.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], color<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Plot Line2 (Right Y Axis)</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co"># Instantiate a second axes that shares the same x-axis</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx() </span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>ax2.plot(ozone_data[<span class="st">&#39;Temperature&#39;</span>], color<span class="op">=</span><span class="st">&#39;b&#39;</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co"># Set axis</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co"># ax1 (left y axis)</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>ax1.set_ylabel(<span class="st">&#39;Ozone [ppb]&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>, fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">&#39;y&#39;</span>, rotation<span class="op">=</span><span class="dv">0</span>, labelcolor<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="co"># ax2 (right Y axis)</span></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>ax2.set_ylabel(<span class="st">&#39;Temperature [F]&#39;</span>, color<span class="op">=</span><span class="st">&#39;b&#39;</span>, fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">&#39;y&#39;</span>, labelcolor<span class="op">=</span><span class="st">&#39;b&#39;</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="co"># Set title</span></span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a>ax2.set_title(<span class="st">&quot;Daily ozone and temperature&quot;</span>, fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="customising-the-legend" class="section level2">
+<h2>Customising the legend</h2>
+<p>The most common way to make a legend is to define the label parameter
+for each of the plots and finally call <code>plt.legend()</code>.
+However, sometimes you might want to construct the legend on your own.
+In that case, you need to pass the <em>plot items</em> you want to draw
+the legend for and the legend text as parameters to
+<code>plt.legend()</code> in the following format:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>plt.legend((line1, line2, line3), (<span class="st">&#39;label1&#39;</span>, <span class="st">&#39;label2&#39;</span>, <span class="st">&#39;label3&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Plot with default legend</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>],<span class="st">&#39;go&#39;</span>, label<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>) </span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Temperature&#39;</span>], <span class="st">&#39;k*&#39;</span>, label<span class="op">=</span><span class="st">&#39;Temperature&#39;</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;best&#39;</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>plt.title(<span class="st">&#39;Default legend example&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>plt.show()</span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co"># Plot with custom legend example</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>myplot1 <span class="op">=</span> plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>], <span class="st">&#39;go&#39;</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>myplot2 <span class="op">=</span> plt.plot(ozone_data[<span class="st">&#39;Temperature&#39;</span>], <span class="st">&#39;k*&#39;</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>plt.title(<span class="st">&#39;Custom legend example&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co"># Modify legend</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>plt.legend([myplot1[<span class="dv">0</span>], myplot2[<span class="dv">0</span>]],       <span class="co"># plot items</span></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>           [<span class="st">&#39;Ozone&#39;</span>, <span class="st">&#39;Temperature&#39;</span>],       <span class="co"># legends</span></span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>           frameon<span class="op">=</span><span class="va">True</span>,                   <span class="co"># legend border</span></span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>           framealpha<span class="op">=</span><span class="dv">1</span>,                   <span class="co"># transparency of border</span></span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>           ncol<span class="op">=</span><span class="dv">2</span>,                         <span class="co"># num of columns</span></span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>           shadow<span class="op">=</span><span class="va">False</span>,                   <span class="co"># shadow on</span></span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>           borderpad<span class="op">=</span><span class="dv">1</span>,                    <span class="co"># thickness of border</span></span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a>           title<span class="op">=</span><span class="st">&#39;Ozone and temperature &#39;</span>) <span class="co"># title</span></span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="adding-texts-arrows-and-annotations" class="section level2">
+<h2>Adding texts, arrows, and annotations</h2>
+<p><code>plt.text</code> and <code>plt.annotate</code> adds the texts
+and annotations respectively. If you have to plot multiple texts you
+need to call <code>plt.text()</code> as many times, typically in a
+<code>for</code> loop. Let’s annotate the peaks and troughs adding
+<code>arrowprops</code> and a <code>bbox</code> for the text.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Texts, Arrows and Annotations Example</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>],<span class="st">&#39;go&#39;</span>, label<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>) </span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co"># Annotate with Arrow Props and bbox</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>plt.annotate(<span class="st">&#39;Peaks&#39;</span>, xy<span class="op">=</span>(<span class="dv">77</span>, <span class="dv">165</span>), xytext<span class="op">=</span>(<span class="dv">90</span>, <span class="dv">150</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>             bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;square&#39;</span>, fc<span class="op">=</span><span class="st">&#39;green&#39;</span>, linewidth<span class="op">=</span><span class="fl">0.1</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, shrink<span class="op">=</span><span class="fl">0.01</span>, width<span class="op">=</span><span class="fl">0.1</span>), </span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="dv">12</span>, color<span class="op">=</span><span class="st">&#39;white&#39;</span>, horizontalalignment<span class="op">=</span><span class="st">&#39;center&#39;</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co"># Texts at Peaks and Troughs</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> [<span class="dv">10</span>, <span class="dv">60</span>, <span class="dv">110</span>]:</span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>    plt.text(index, <span class="op">-</span><span class="dv">25</span>, <span class="bu">str</span>(index) <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st"> days&quot;</span>, </span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>             transform<span class="op">=</span>plt.gca().transData, horizontalalignment<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> [<span class="dv">20</span>, <span class="dv">70</span>, <span class="dv">120</span>]:</span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>    plt.text(index, <span class="dv">0</span>, <span class="bu">str</span>(index) <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st"> days&quot;</span>, </span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>             transform<span class="op">=</span>plt.gca().transData, horizontalalignment<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)    </span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a><span class="co"># Set xy limit</span></span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">180</span>), xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">120</span>))</span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a><span class="co"># Add titile</span></span>
+<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a>plt.title(<span class="st">&#39;Daily Ozone&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb23-27"><a href="#cb23-27" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Notice, all the text we plotted above was in relation to the data.
+That is, the <code>x</code> and <code>y</code> position in the
+<code>plt.text()</code> corresponds to the values along the
+<code>x</code> and <code>y</code> axes.</p>
+<p>However, sometimes you might work with data of different scales on
+different subplots, and you want to write the texts in the same position
+on all the subplots. In such case, instead of manually computing the
+<code>x</code> and <code>y</code> positions for each axes, you can
+specify the <code>x</code> and <code>y</code> values <em>in relation to
+the axes</em> (instead of <code>X</code> and <code>Y</code> axis
+values). You can do this by setting <code>transform=ax.transData</code>.
+The lower-left corner of the axes has <code>(x,y) = (0,0)</code> and the
+top-right corner will correspond to <code>(x,y) = (1,1)</code>.</p>
+<p>The below plot shows the position of texts for the same values of
+<code>(x,y) = (0.5, 0.05)</code> with respect to the
+Data(<code>transData</code>), Axes(<code>transAxes</code>), and
+Figure(<code>transFigure</code>), respectively.</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Texts, Arrows and Annotations Example</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>plt.plot(ozone_data[<span class="st">&#39;Ozone&#39;</span>],<span class="st">&#39;go&#39;</span>, label<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>) </span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co"># Text Relative to DATA</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>plt.text(<span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">&quot;Text1 &quot;</span>, transform<span class="op">=</span>plt.gca().transData, </span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>         fontsize<span class="op">=</span><span class="dv">14</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a><span class="co"># Text Relative to AXES</span></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>plt.text(<span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">&quot;Text2&quot;</span>, transform<span class="op">=</span>plt.gca().transAxes, </span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>         fontsize<span class="op">=</span><span class="dv">14</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a><span class="co"># Text Relative to FIGURE</span></span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>plt.text(<span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">&quot;Text3&quot;</span>, transform<span class="op">=</span>plt.gcf().transFigure, </span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>         fontsize<span class="op">=</span><span class="dv">14</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a> </span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a><span class="co"># Set xy limit</span></span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">180</span>), xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">120</span>))</span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a><span class="co"># Add titile</span></span>
+<span id="cb24-21"><a href="#cb24-21" tabindex="-1"></a>plt.title(<span class="st">&#39;Daily Ozone&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a></span>
+<span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb24-24"><a href="#cb24-24" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="setting-subplots-layout" class="section level2">
+<h2>Setting subplots layout</h2>
+<p><code>Matplotlib</code> provides two convenient ways to create
+customized multi-subplots layout: <code>plt.subplot2grid()</code> and
+<code>plt.GridSpec()</code>. Both let you draw complex layouts. For
+example:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Supplot2grid approach</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># Object-oriented syntax</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Set the subgrids</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>),dpi<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>ax1 <span class="op">=</span> plt.subplot2grid((<span class="dv">3</span>,<span class="dv">3</span>), (<span class="dv">0</span>,<span class="dv">0</span>), colspan<span class="op">=</span><span class="dv">2</span>, rowspan<span class="op">=</span><span class="dv">2</span>) <span class="co"># topleft</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>ax2 <span class="op">=</span> plt.subplot2grid((<span class="dv">3</span>,<span class="dv">3</span>), (<span class="dv">0</span>,<span class="dv">2</span>), rowspan<span class="op">=</span><span class="dv">3</span>)            <span class="co"># right</span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>ax3 <span class="op">=</span> plt.subplot2grid((<span class="dv">3</span>,<span class="dv">3</span>), (<span class="dv">2</span>,<span class="dv">0</span>))                       <span class="co"># bottom left</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>ax4 <span class="op">=</span> plt.subplot2grid((<span class="dv">3</span>,<span class="dv">3</span>), (<span class="dv">2</span>,<span class="dv">1</span>))                       <span class="co"># bottom right</span></span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co"># Define the colors, markers, and fields (columns) to use</span></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a>colors <span class="op">=</span> {<span class="dv">0</span>:<span class="st">&#39;g&#39;</span>, <span class="dv">1</span>:<span class="st">&#39;b&#39;</span>, <span class="dv">2</span>:<span class="st">&#39;r&#39;</span>, <span class="dv">3</span>:<span class="st">&#39;y&#39;</span>}</span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a>markers <span class="op">=</span> {<span class="dv">0</span>:<span class="st">&#39;o&#39;</span>, <span class="dv">1</span>:<span class="st">&#39;x&#39;</span>, <span class="dv">2</span>:<span class="st">&#39;*&#39;</span>, <span class="dv">3</span>:<span class="st">&#39;p&#39;</span>}</span>
+<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a>fields <span class="op">=</span> {<span class="dv">0</span>:<span class="st">&#39;Ozone&#39;</span>, <span class="dv">1</span>:<span class="st">&#39;Temperature&#39;</span>, <span class="dv">2</span>:<span class="st">&#39;Pressure&#39;</span>, <span class="dv">3</span>:<span class="st">&#39;Wind.Speed&#39;</span>}</span>
+<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co"># Plot each axes</span></span>
+<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a>ax1.plot(ozone_data[fields[<span class="dv">0</span>]] , marker<span class="op">=</span>markers[<span class="dv">0</span>], color<span class="op">=</span>colors[<span class="dv">0</span>])  </span>
+<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a>ax1.set_title(fields[<span class="dv">0</span>])</span>
+<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a>ax2.plot(ozone_data[fields[<span class="dv">1</span>]] , marker<span class="op">=</span>markers[<span class="dv">1</span>], color<span class="op">=</span>colors[<span class="dv">1</span>])  </span>
+<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a>ax2.set_title(fields[<span class="dv">1</span>])</span>
+<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a>ax3.plot(ozone_data[fields[<span class="dv">2</span>]] , marker<span class="op">=</span>markers[<span class="dv">2</span>], color<span class="op">=</span>colors[<span class="dv">2</span>])  </span>
+<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a>ax3.set_title(fields[<span class="dv">2</span>])</span>
+<span id="cb25-25"><a href="#cb25-25" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" tabindex="-1"></a>ax4.plot(ozone_data[fields[<span class="dv">3</span>]] , marker<span class="op">=</span>markers[<span class="dv">3</span>], color<span class="op">=</span>colors[<span class="dv">3</span>])  </span>
+<span id="cb25-27"><a href="#cb25-27" tabindex="-1"></a>ax4.set_title(fields[<span class="dv">3</span>])</span>
+<span id="cb25-28"><a href="#cb25-28" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" tabindex="-1"></a><span class="co"># Plot super title</span></span>
+<span id="cb25-30"><a href="#cb25-30" tabindex="-1"></a>plt.suptitle(<span class="st">&#39;Ozone and meterological data&#39;</span>, verticalalignment<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">16</span>)   </span>
+<span id="cb25-31"><a href="#cb25-31" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb25-32"><a href="#cb25-32" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb25-34"><a href="#cb25-34" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Using <code>plt.GridSpec</code>, you can use either a
+<code>plt.subplot()</code> interface which takes part of the grid
+specified by <code>plt.GridSpec(nrow, ncol)</code>:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># GridSpec Approach </span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co"># Matlab-like syntax</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co"># Set the subgrids</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">120</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>grid <span class="op">=</span> plt.GridSpec(<span class="dv">3</span>, <span class="dv">3</span>)  <span class="co"># 3 rows 3 cols</span></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="co"># Plot each axes</span></span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>plt.subplot(grid[<span class="dv">0</span>:<span class="dv">2</span>, <span class="dv">0</span>:<span class="dv">2</span>])  <span class="co"># top left</span></span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a>plt.plot(ozone_data[fields[<span class="dv">0</span>]] , marker<span class="op">=</span>markers[<span class="dv">0</span>], color<span class="op">=</span>colors[<span class="dv">0</span>])  </span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>plt.title(fields[<span class="dv">0</span>])</span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a><span class="co"># Plot each axes</span></span>
+<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>plt.subplot(grid[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">2</span>])   <span class="co"># top right</span></span>
+<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>plt.plot(ozone_data[fields[<span class="dv">1</span>]] , marker<span class="op">=</span>markers[<span class="dv">1</span>], color<span class="op">=</span>colors[<span class="dv">1</span>])  </span>
+<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>plt.title(fields[<span class="dv">1</span>])</span>
+<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a><span class="co"># Plot each axes</span></span>
+<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a>plt.subplot(grid[<span class="dv">2</span>, <span class="dv">0</span>])  <span class="co"># bottom left</span></span>
+<span id="cb26-20"><a href="#cb26-20" tabindex="-1"></a>plt.plot(ozone_data[fields[<span class="dv">2</span>]] , marker<span class="op">=</span>markers[<span class="dv">2</span>], color<span class="op">=</span>colors[<span class="dv">2</span>])  </span>
+<span id="cb26-21"><a href="#cb26-21" tabindex="-1"></a>plt.title(fields[<span class="dv">2</span>])</span>
+<span id="cb26-22"><a href="#cb26-22" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" tabindex="-1"></a><span class="co"># Plot each axes</span></span>
+<span id="cb26-24"><a href="#cb26-24" tabindex="-1"></a>plt.subplot(grid[<span class="dv">2</span>, <span class="dv">1</span>])  <span class="co"># bottom right</span></span>
+<span id="cb26-25"><a href="#cb26-25" tabindex="-1"></a>plt.plot(ozone_data[fields[<span class="dv">3</span>]] , marker<span class="op">=</span>markers[<span class="dv">3</span>], color<span class="op">=</span>colors[<span class="dv">3</span>])  </span>
+<span id="cb26-26"><a href="#cb26-26" tabindex="-1"></a>plt.title(fields[<span class="dv">3</span>])</span>
+<span id="cb26-27"><a href="#cb26-27" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="#cb26-28" tabindex="-1"></a><span class="co"># Plot super title</span></span>
+<span id="cb26-29"><a href="#cb26-29" tabindex="-1"></a>plt.suptitle(<span class="st">&#39;Ozone and meterological data&#39;</span>, verticalalignment<span class="op">=</span><span class="st">&#39;bottom&#39;</span>, fontsize<span class="op">=</span><span class="dv">16</span>)   </span>
+<span id="cb26-30"><a href="#cb26-30" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb26-31"><a href="#cb26-31" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb26-33"><a href="#cb26-33" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="using-plt.scatter" class="section level2">
+<h2>Using <code>plt.scatter</code></h2>
+<p><code>Matplotlib</code> provides many <a
+href="https://matplotlib.org/stable/plot_types/index.html">built-in
+functions</a>. Here we use <code>plt.scatter()</code> as an example to
+get a sense of what inputs a certain function may expect.</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>plt.scatter(<span class="st">&#39;Temperature&#39;</span>, <span class="st">&#39;Wind.Speed&#39;</span>, data<span class="op">=</span>ozone_data, </span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>            s<span class="op">=</span><span class="st">&#39;Ozone&#39;</span>, c<span class="op">=</span><span class="st">&#39;Pressure&#39;</span>, cmap<span class="op">=</span><span class="st">&#39;Reds&#39;</span>, </span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>            edgecolors<span class="op">=</span><span class="st">&#39;black&#39;</span>, linewidths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="co"># Title</span></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a>plt.title(<span class="st">&quot;Bubble Plot of Wind speed vs Temperature</span><span class="ch">\n</span><span class="st">(color: &#39;Pressure&#39;, size: &#39;Ozone&#39;)&quot;</span>, </span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a><span class="co"># xy lables</span></span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Temperature [F]&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Wind speed [m/s]&#39;</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a><span class="co"># Show colorbar</span></span>
+<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" tabindex="-1"></a><span class="co"># Save the figure</span></span>
+<span id="cb27-21"><a href="#cb27-21" tabindex="-1"></a><span class="co"># Make sure this line goes before plt.show()</span></span>
+<span id="cb27-22"><a href="#cb27-22" tabindex="-1"></a>plt.savefig(<span class="st">&quot;bubbleplot.png&quot;</span>, transparent<span class="op">=</span><span class="va">False</span>, dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" tabindex="-1"></a></span>
+<span id="cb27-24"><a href="#cb27-24" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb27-25"><a href="#cb27-25" tabindex="-1"></a>plt.show() </span></code></pre></div>
+<p>Here, by varying the size and color of points, we create nice-looking
+bubble plots. Another convenience is you can directly use a
+<code>pandas</code> dataframe to set the <code>x</code> and
+<code>y</code> values, specifying the source dataframe in the data
+argument. You can also set the color <code>c</code> and size
+<code>s</code> of the points from one of the dataframe columns
+itself.</p>
+<p>Remember, always use <code>help()</code> to teach yourself how to use
+a function.</p>
+</div>
+<div id="beyond-matplotlib" class="section level2">
+<h2>Beyond <code>matplotlib</code></h2>
+<p>As the plots get more complex, the more the code you need to write.
+This is the time to consider using a higher level package like
+<code>seaborn</code>, and use one of its pre-built functions. We are not
+going in-depth into <code>seaborn</code>. A lot of
+<code>seaborn</code>’s plots are suitable for data analysis and the
+library works seamlessly with <code>pandas</code> dataframes. Like
+<code>matplotlib</code>, <code>seaborn</code> comes with its own set of
+pre-built styles and palettes. Feel free to go to the <a
+href="https://seaborn.pydata.org/">official <code>seaborn</code>
+page</a> for good examples for you to start with.</p>
+<p>So far, we have covered the <strong>syntax</strong> and
+<strong>overall structure</strong> of creating <code>matplotlib</code>
+plots, seen how to modify various components of a plot, customized
+subplots layout, plots styling, colors, palettes, etc.</p>
+<p>A good way to learn plotting is to browse plots (and scripts!) in the
+graph galleries. <strong>Find the plots you want to mimic, edit and
+customize the scripts based on your need.</strong></p>
+<hr />
+<p><em>The notes are modified from the excellent <a
+href="https://www.machinelearningplus.com/plots/matplotlib-tutorial-complete-guide-python-plot-examples/">Matplotlib
+Tutorial – A Complete Guide to Python Plot with Examples</a>.</em></p>
+<hr />
+</div>
+</div>
+<div id="in-class-exercises" class="section level1">
+<h1>In-class exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise #1</h2>
+<p>Make a plot with <code>6</code> subplots (panels), and create the
+following figures in those subplots one by one:</p>
+<ul>
+<li><p>a scatter plot between <code>Ozone</code> and
+<code>Pressure</code> (try <code>plt.scatter()</code>)</p></li>
+<li><p>step chart of <code>Ozone</code> (try
+<code>plt.step()</code>)</p></li>
+<li><p>bar chart of <code>Ozone</code> (try
+<code>plt.bar()</code>)</p></li>
+<li><p>box plot of <code>Ozone</code> (try
+<code>plt.boxplot()</code>)</p></li>
+<li><p>histogram of <code>Ozone</code> (try
+<code>plt.hist()</code>)</p></li>
+<li><p>time series of <code>Ozone</code></p></li>
+</ul>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise #2</h2>
+<p>Plot a <em>violin plot</em> to show <code>Ozone</code> in different
+months. Check <a
+href="https://matplotlib.org/2.0.2/examples/statistics/boxplot_vs_violin_demo.html">statistics
+example code: boxplot_vs_violin_demo.py</a> for demos.</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise #3</h2>
+<p>Plot a <a
+href="https://datavizproject.com/data-type/hexagonal-binning/">Hexbin
+plot</a> with marginal distributions between <code>Ozone</code> and
+<code>Temperature</code>. Check <a
+href="https://seaborn.pydata.org/examples/hexbin_marginals.html">Hexbin
+plot with marginal distributions</a> for demos.</p>
+<hr />
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<div id="guide-and-notes" class="section level2">
+<h2>Guide and notes</h2>
+<ul>
+<li><a
+href="https://matplotlib.org/stable/index.html"><code>Matplotlib</code>:
+visualization with Python</a> (official guide)</li>
+<li><a
+href="https://github.com/matplotlib/cheatsheets"><code>Matplotlib</code>
+cheatsheet</a> (complex version from <code>Matplotlib</code> official
+Github)</li>
+<li><a
+href="https://zhu-group.github.io/ese5023/download/python-cheatsheets_Matplotlib.pdf"><code>Matplotlib</code>
+cheatsheet</a> (simple version from Data Camp)</li>
+<li><a
+href="https://scipy-lectures.org/intro/matplotlib/index.html"><code>Matplotlib</code>:
+plotting</a> (from <code>scipy</code> lecture notes)</li>
+<li><a
+href="https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html">Visualization
+with <code>matplotlib</code></a> (from <em><code>Python</code> Data
+Science Handbook</em>)</li>
+<li><a
+href="https://matplotlib.org/stable/resources/index.html"><code>Matplotlib</code>
+external resources</a></li>
+</ul>
+</div>
+<div id="gallery" class="section level2">
+<h2>Gallery</h2>
+<ul>
+<li><a
+href="https://matplotlib.org/2.0.2/gallery.html"><code>Matplotlib</code>
+gallery</a></li>
+<li><a
+href="https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/">Top
+50 <code>matplotlib</code> visualizations</a></li>
+<li><a href="https://www.python-graph-gallery.com/">The
+<code>python</code> graph gallery</a> (using <code>matplotlib</code>,
+<code>seaborn</code>, and <code>plotly</code>)</li>
+<li><a
+href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html">GeoCAT-examples
+gallery</a></li>
+<li><a
+href="https://seaborn.pydata.org/examples/index.html"><code>Seaborn</code>
+example gallery</a></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
