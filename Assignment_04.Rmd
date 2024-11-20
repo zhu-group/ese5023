@@ -1,0 +1,56 @@
+---
+title: "Assignment 04"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+**Out: 11/20 19:00 **  
+**Due: 12/04 19:00 **  
+
+***
+
+# Instructions  
+
+**Collaboration:**  
+
+Collaboration on solving the assignment is allowed, after you have thought about the problem sets on your own. It is also OK to get clarification (but not solutions) from online resources, again after you have thought about the problem sets on your own. 
+
+There are two requirements for collaboration: 
+
+* Cite your collaborators **fully and completely** (*e.g.*, "XXX explained to me what is asked in problem set 3"). Or cite online resources (*e.g.*, "I got inspired by reading XXX") that helped you.
+
+* Write your scripts and report **independently** - the scripts and report must come from you only.
+
+**Submitting your assignment:**  
+
+* Please write a report `PS4.pdf`. 
+
+* Create a jupyter notebook named `PS4.ipynb`. 
+
+* Upload your jupyter notebook **and** report to your Github `ESE5023_Assignments_XXX` repository (where `XXX` is your SUSTech ID) before the due time.
+
+**Late Submission:**  
+
+Late submissions will **not** receive any credit. The submission time will be determined based on your latest GitHub file records.
+
+***
+
+# 1. Global Earthquakes
+
+In this problem set, we will use [this file](https://zhu-group.github.io/ese5023/download/usgs_earthquakes.csv) from the USGS Earthquakes Database. The dataset is similar to the one you use in [Assignment 02](https://zhu-group.github.io/ese5023/Assignment_02.html#1_Significant_earthquakes_since_2150_BC). Use the file provided (`usgs_earthquakes.csv`) to recreate the following map. Use the `mag` column for magnitude. **[10 points]** 
+
+<img src="figs/earthquakes.png" alt="drawing" width="800"/>  
+
+***
+
+# 2. Explore a `netCDF` dataset
+
+Browse the NASA's Goddard Earth Sciences Data and Information Services Center (GES DISC) [website](https://disc.gsfc.nasa.gov/). Search and download a dataset you are interested in. You are also welcome to use data from your group in this problem set. But the dataset should be in `netCDF` format. For this problem set, you are welcome to use the same dataset you used in [Assignment 03](https://zhu-group.github.io/ese5023/Assignment_03.html#3_Explore_a_netCDF_dataset).
+
+**2.1 [10 points]** Make a global map of a certain variable. Your figure should contain: a project, x label and ticks, y label and ticks, title, gridlines, legend, colorbar, masks or features, annotations, and text box (**1 point each**).
+
+**2.2 [10 points]** Make a regional map of the same variable. Your figure should contain: a different project, x label and ticks, y label and ticks, title, gridlines, legend, colorbar, masks or features, annotations, and text box (**1 point each**).
