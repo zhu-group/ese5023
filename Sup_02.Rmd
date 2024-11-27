@@ -1,5 +1,5 @@
 ---
-title: "Section 15 `Fortran`: Intermediate"
+title: "Section 14 `Fortran`: Basics"
 output:
   html_document:
     toc: true
@@ -8,7 +8,7 @@ output:
       smooth_scroll: false
 ---
 
-> “In the good old days physicists repeated each other's experiments, just to be sure. Today they stick to FORTRAN, so that they can share each other's programs, bugs included.” - Edsger W. Dijkstra
+> “FORTRAN programmers just DO it.” - Unknown
 
 ***
 
@@ -17,448 +17,470 @@ output:
 Log in to Taiyi (`172.18.6.175`), then in your home directory, type:
 
 ```{bash, eval=F}
-cp -r /work/ese-ouycc/fortran_demo2 .
+cp -r /work/ese-ouycc/fortran_demo1 .
 ```
 
 ***
 
-# Reading and writing data
+# Introduction to `Fortran`
 
-## Reading data from a file
+[`Fortran`](https://fortran-lang.org/) was originally developed by a team at IBM in 1957 for scientific calculations. `Fortran` stands for *Formula Translation*. It is a powerful language for creating fast and memory-efficient codes for heavy numerical computations. 
 
-To read or write data from a file, you need to first open the file using the `open()` command. When you are done, you use the `close()` command. For example, to read data from an existing file (`test.dat`):
+`Fortran` is not very user-friendly, compared with `Python`, `R`, and `MATLAB`:
 
-```{fortran, eval=F}
-Program FileReadTest
++ `Fortran` is a more verbose language than `Python`, `R`, and `MATLAB`, so it generally will take you much longer to write `Fortran` codes compared to an equivalent code in `Python`. 
 
-Implicit none
++ Unlike `Python`, which can easily be run interactively, `Fortran` codes must be *compiled* before you can run them in a terminal shell. That makes debugging and testing a bit slower too. 
 
-integer                            :: u, n, i
-real(4), dimension(:), allocatable :: a, b
++ `Fortran` doesn't have a built-in graphics library, so you can't interactively plot results like you can with `Python`. 
 
-! File unit
-u = 50
+So, with those points in mind, we recommend you stick to `Python`, `R`, or `MATLAB` for you day-to-day scientific computing tasks. 
 
-! Open the file
-open(unit=u, file='test.dat', status='old')
+However, `Fortran` is good when you have some computational problem where you need it to run as fast as possible, for example when it would take days to run on `Python`, `R`, or `MATLAB`. Learning the basics of `Fortran` will also be useful for when you come across `Fortran` codes that do some computational task you need and you want to interface those codes with your own codes or you might want to modify them for your own research needs.
 
-! The first line of the file has the number of values for arrays a and b
-read(u,*) n
+## Programs
 
-! Allocate the arrays
-allocate( a(n), b(n) )
+`Fortran` is a procedural language where you define a **sequence** of commands to execute in a program file. The program file is then compiled using a `Fortran` *compiler*. The compiler turns the program commands in the text file into machine language instructions that will execute on the computer's CPU. You run the compiled code from a terminal shell.
 
-! Read data line by line
-do i = 1,n
-  read(u, *) a(i), b(i)
-enddo
-
-! Close the file
-close(u)
-
-! Display the values
-do i = 1,n
-  write(*,*) "Line ", i, " : ", a(i), b(i)
-enddo
-
-! Deallocate the arrays
-deallocate( a, b )
-
-End Program FileReadTest
-```
-
-The `unit` is an integer that tells `Fortran` where to read or write the data from. Here, you pick a number (`50`) and assign that as the file unit (`u`). `status = 'old'` tells `Fortran` that the file exists already. This is optional, but can be helpful since if the file doesn't exist, `Fortran` will issue a helpful error message. For the `read` commands, here we are using the asterisk `*` to denote a *free-format* read, which means that `Fortran` will decide what the format is.
-
-## Writing data to a file
-
-Suppose we have modified `a` and `b`, and want to save those values to a new file (`new1.dat`). This can be done using:
+Let's begin by looking at a simple example showing the basic workflow for using `Fortran`. Start by making a plain text file named `HelloWorld.f90` that has the following content:
 
 ```{fortran, eval=F}
-Program FileWriteTest
-
-implicit none
-
-integer                            :: u, n, i
-real(4), dimension(:), allocatable :: a, b
-
-! File unit
-u = 50
-
-! Open the file
-open(unit=u, file='test.dat', status='old')
-
-! The first line of the file has the number of values for arrays a and b
-read(u,*) n
-
-! Allocate the arrays
-allocate( a(n), b(n) )
-
-! Read data line by line
-do i = 1,n
-  read(u, *) a(i), b(i)
-enddo
-
-! Close the file
-close(u)
-
-! Change the values
-a = a * 2.0
-b = b + 1
-
-! Write the values to a new file
-open(unit=u, file='new1.dat', status='replace')
-write(u, *) a, b
-close(u)
-
-! Deallocate the arrays
-deallocate( a, b )
-
-End Program FileWriteTest
+program HelloWorld
+  print*, 'Hello world'
+end program HelloWorld
 ```
 
-As you may notice, the output file `new1.dat` has only one line. This is because `write()` is called once to write two vectors. Try the following code chuck to save the values, see what will happen:
+Compile the code using the command:
+
+```{bash, eval=F}
+gfortran HelloWorld.f90 -o HelloWorld.x
+```
+
+Run the code in the terminal using:
+
+```{bash, eval=F}
+./HelloWorld.x
+```
+
+A `Fortran` program has to have a single program file (usually `.f` or `.f90` files) that lists the sequence of commands to execute. 
+
+The program file has to start with the first command being the word `program` and it must end with the last command being the keyword `end`. The words `program HelloWorld` after the final `end` statement aren't necessary, but they are a useful organization construct for pointing out what exactly is ending, especially when your program file is very long and also contains subroutine and function code beneath the program section.
+
+## Compiling
+
+In the example above, we compiled the code by calling our *compiler*, here the [`gfortran` compiler](https://gcc.gnu.org/wiki/GFortran) which is open source and freely available. Intel's [`ifort` compiler](https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.isiyag) is a commercial compiler that is fairly ubiquitous, especially on cluster systems. For some codes, `ifort` can produce an executable that runs `10-20x` faster than what `gfortran` produces.
+
+To compile our `HelloWorld.f90` code, we used the output *flag* `-o` and then listed the name we wanted to use for the compiled program that was output. Here we used `HelloWorld` for the name, but if for some (not recommended!) reason we wanted to name it `MyProgram.x` instead, we could compile it using:
+
+```{bash, eval=F}
+gfortran HelloWorld.f90 -o MyProgram.x
+```
+
+If you don't specify `-o` and the output program name, then the compiler will by default name the program `a.out`:
+
+```{bash, eval=F}
+gfortran HelloWorld.f90 
+```
+
+If there are any errors with your code, the compiler should let you know what the problem is. For example, try compiling the code below, which has an errant `a` character:
 
 ```{fortran, eval=F}
-! Write the values to a new file, line by line
-open(unit=u, file='new2.dat')
-do i = 1,n
-  write(u, *) a(i), b(i)
-enddo
-close(u)
+program HelloWorld
+  print*, 'Hello world'
+  a
+end program HelloWorld
 ```
 
-## Format specifiers
-
-In all of our `read` and `write` examples above, we used the generic `*` for the *format specifier*. When writing, Fortran will write out the **full precision** of each floating-point number. For example, `18.9779778`. You can use the format specifier to specify another format. In `Fortran`, they are often referred to as **edit descriptors**. Change the writing chuck to the following:
+The compiler returns an error message. Check this.
 
 ```{fortran, eval=F}
-! Write the values to a new file, in a certain format
-open(unit=u, file='new3.dat')
-do i = 1,n
-  write(u, '(f5.1,E10.3)') a(i), b(i)
-enddo
-close(u)
+HelloWorld.f90:3.2:
+
+  a
+  1
+Error: Unclassifiable statement at (1)
 ```
 
-Here `f` is for a floating-point format, `E` is for scientific notation. For a `w.d` format, `w `is the width (number of characters) and `d` is the number of decimal places. See [this note](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html) for more about `Fortran` format. 
+The statement `HelloWorld.f90:3:2:` specifies that the `Unclassifiable statement` is in file `HelloWorld.f90` on line `3`, column `2`. It then prints out what is on that line (here the errant letter `a`). 
+
+When there are errors in long and complicated `Fortran` codes, the first error the compiler finds can lead it to other errors, which stem from it not being able to interpret the code that had the first error. So if you get more than one error message when compiling a piece of code, **go fix the first listed error** and try recompiling the code to see if the other errors are now gone.
+
+## Comments
+
+Anything to the right of an exclamation point `!` in a `Fortran` code is considered a comment. For example a commented version of our `HelloWorld.f90` program is
+
+```{fortran, eval=F}
+! This program writes 'Hello world' to the shell.
+! Version 0.1, Dec. 08, 2021
+!
+program HelloWorld
+
+!
+! Send a message to the world:
+!
+  print*, 'Hello world'
+
+!
+! All done, goodbye
+!
+end program HelloWorld
+```
+
+Comments are an essential part of good coding practice. You can use them to document what each section of a code does; this can be very helpful for when you return to a code you wrote a long time ago and are trying to remember what it does, or when you get someone else's code and are trying to understand what it does. 
+
+You can also use code comments as an outline when first starting to write a long and complicated code. The comments can outline the sequence of steps you intend the code to do. Once your outline is complete, you can start coding by filling in the necessary commands below each section of comments.
+
+At a minimum, your code should have at least a few comments at the start of the text file that indicates what the codes does. This is also a place where you can add a date stamp and possibly a version number. You can also list the authorship of the code, which can be useful if it will be shared with other or is part of a collaborative effort .
 
 ***
 
-# Function
+# Variables
 
-Like `Python`, we can define *functions* in `Fortran`. This is done with the `function` keyword. Functions are useful when you need to do a complicated calculation that has only one result. Functions need to be either in a separate `.f90` file or have to be listed **outside** the main program. For example: 
+## Variable types
+
+Unlike `Python`, `Fortran` requires you to **declare the type of each variable**. For example, you need to declare whether a variable is an `integer`, `real`, `complex`, `logical`, or `character`. Here is an example program declaring several different variable types:
 
 ```{fortran, eval=F}
-program FunctionTest
+program VariableShowcase
 
 implicit none
 
-real(4) :: a, b, c, Get_the_larger
+! Declare variables:
+integer         :: i
+real(8)         :: x
+complex(8)      :: z
+logical         :: bTest
+character(32)   :: sFileName
 
-a = 2.0
-b = 5.0
+i = 1
+x = 1.0
+z = cmplx(0.5,2.0)
+! logical types are .true. or .false.
+bTest = .false.    
+sFileName = 'data.txt'
 
-c = Get_the_larger(a,b)
+write(*,*) 'i: ', i
+write(*,*) 'x: ', x
+write(*,*) 'z: ', z
+write(*,*) 'bTest: ', bTest
+write(*,*) 'sFileName: ', sFileName
 
-write(*,*) 'c is: ', c
+end program VariableShowcase
+```
 
-end program FunctionTest
+Compile and run this demo:
 
-!-----------------------------------
-! This is the external function
-!-----------------------------------
-real(4) function Get_the_larger(x,y)
+```{bash, eval=F}
+gfortran VariableShowcase.f90 -o VariableShowcase.x 
+./VariableShowcase.x
+```
 
-real(4) :: x, y
-if(x > y) then
-  Get_the_larger = x
+Note that the variable declarations in `Fortran` have to be made **at the start of the program** (or subroutine or function), **before any commands are made**. Unlike `Python`, you can't declare a new variable in the middle of a sequence of commands. If you try to, the compiler will throw an error message.
+
+Pay attention that, `Fortran` is **case insensitive**, meaning that it will treat variables `x` and `X` as the same quantity.
+
+## Variable precision
+
+`real(8)` declared above means a real variable that has `8` bytes (`64` bits) of precision. This is what is known as *double precision*, which is the default precision in `Python` and `MATLAB`. You can also declare a lower or higher order precision (e.g. `real(4)` and `real(16)`) but you should only do this if you have a very good reason to do so. 99.99% of the time you should just use `real(8)` rather than `(4)` or `(16)`. 
+
+The `complex(8)` declaration means a complex number with `8` bytes of precision for each of the real and imaginary parts of the number. 
+
+For integers, you typically don't need to specify the precision and most of the time you can just use integer and then let the compiler assign the precision (usually either `4` or `8` bytes).
+
+You can use the `huge()` intrinsic function to show the largest numbers that can be represented by each precision. For example, compile and run this code to see the largest possible values that can be represented by each numerical variable type:
+
+```{fortran, eval=F}
+program PrecisionTest
+
+implicit none
+
+! Declare variables:
+integer         :: i
+integer(4)      :: i4
+integer(8)      :: i8
+real(4)         :: x4
+real(8)         :: x8
+
+write(*,*) 'integer:    ', huge(i)
+write(*,*) 'integer:    ', huge(i)
+write(*,*) 'integer(4): ', huge(i4)
+write(*,*) 'integer(8): ', huge(i8)
+write(*,*) 'real(4):    ', huge(x4)
+write(*,*) 'real(8):    ', huge(x8)
+
+end program PrecisionTest
+```
+
+Here we are using modern `Fortran` syntax to define the variables. However, there are older ways of defining variables that you should be aware of since you may come across them. The older syntax does not use the `::` separator between the declaration and the list of variable names and has slightly different type names. Most `Fortran` compilers support the older and modern syntax:
+
+```{fortran, eval=F}
+! Old style Fortran variable types:
+double precision      ! same as real(8)
+real*8                ! same as real(8)
+real*4                ! same as real(4)
+double complex        ! same as complex(8)
+complex*16            ! same as complex(8)
+integer*4             ! same as integer(4)
+```
+
+## Integer division
+
+Be careful when dividing integers in `Fortran`. For example, the expression `fraction = (N-1)/N` where `N` is an integer and fraction has been declared as `real(8)` will result in fraction being assigned the value `0`. Why is this?
+
+Because all the terms in `(N-1)/N` are integers so the compiler uses integer division. You can easily fix this by making at least one of the terms in the expression a floating point number. Either of the following expressions will force the compiler to use floating point arithmetic and fraction will then be assigned the intended value:
+
+```{fortran, eval=F}
+fraction = (N-1.)/N
+```
+
+```{fortran, eval=F}
+fraction = (dble(N)-1)/N
+```
+
+where the `dble()` function turns integer `N` into a double precision value.
+
+## Implicit none
+
+You should **always include the statement** `implicit none` at the start of your `Fortran` codes (programs, subroutines, and functions).
+
+By default, `Fortran` has a rather insidious implicit typing for variables that have certain first letters in their names. Unless specified otherwise, all variables starting with letters `I`, `J`, `K`, `L`, `M`, and `N` are default integers, and all others are default real. This can lead to nasty programming errors if you aren't careful. For example, consider the following code: 
+
+```{fortran, eval=F}
+program ImplicitTypeTest
+
+ireal = 1.5   ! we want this to be a real number, but since the variable
+              ! name starts with an i Fortran thinks its an integer.
+
+write(*,*) 'ireal is: ', ireal
+
+end program ImplicitTypeTest
+```
+
+Try running this program and you will see that it prints out `ireal` as the integer `1`. If instead, you use `implicit none` at the start of this code, the compiler will issue an error because `ireal` was not yet declared. 
+
+Here's another example where `implicit none` would help avoid getting the wrong result. Can you spot the error?
+
+```{fortran, eval=F}
+program TestUndeclared
+
+real(8)  :: distance, velocity, time
+
+time     = 2.0
+velocity = 5.0
+
+distance = velocity*times
+
+write(*,*) 'distance: ', distance
+
+end program TestUndeclared
+```
+
+Now put `implicit none` at the start of the code, re-compile, see what happens.
+
+***
+
+# Relational operators
+
+| Older `Fortran` | Newer `Fortran` | `Python`    | Description              |
+|:-------------:|:-------------:|:----:|:-------------------------|
+|`.eq.`         |`==`           |`==`  | equality                 |
+|`.ne.`         |`/=`           |`!=`  | not equality             |
+|`.lt.`         |`<`            |`<`   | less than                |
+|`.le.`         |`<=`           |`<=`  | less than or equal to    |
+|`.gt.`         |`>`            |`>`   | greater than             |
+|`.ge.`         |`>=`           |`>=`  | greater than or equal to |
+|`.and.`        |`.and.`        |`&`   | logical and              |
+|`.or.`         |`.or.`         |`|`   | logical or               |
+|`.not.`        |`.not.`        |`~`   | logical not              |
+
+Try the following `TestRelationalOps.f90`:
+
+```{fortran, eval=F}
+program TestRelationalOps
+
+implicit none
+
+real(8) :: x, y, z
+logical :: ltest1, ltest2, ltest3
+
+x = 1.0
+y = 2.0
+z = 1.0
+
+ltest1 = x < y
+ltest2 = x == z
+ltest3 = (ltest1 .and. ltest2)
+
+write(*,*) 'ltest1: ', ltest1
+write(*,*) 'ltest2: ', ltest2
+write(*,*) 'ltest3: ', ltest3
+
+end program TestRelationalOps
+```
+
+***
+
+# If statements
+
+These are similar to `Python`, except that you need to include the keyword `then` after the logical statement. The `if` statement also ends with the keyword `endif`.
+
+```{fortran, eval=F}
+program IfElseTest
+
+implicit none
+
+real(8) :: x, y
+
+x = 1.5
+y = 3.0
+
+if (x < y) then
+    write(*,*) 'x is less than y'
+elseif (x > y ) then
+    write(*,*) 'x is greater than y'
+elseif (x == y ) then
+    write(*,*) 'x equals y'
 else
-  Get_the_larger = y
+    write(*,*) 'this case should never be found'      
 endif
 
-end function Get_the_larger
+end program IfElseTest
 ```
 
 ***
 
-# Subroutine
+# Do loops
 
-Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name. You will also have to use `call` before a subroutine.
+Loops in `Fortran` are done using the `do` and `enddo` construct:
 
 ```{fortran, eval=F}
-program SubRoutineTest
+program DoLoopTest
 
 implicit none
 
-real(4) :: a,b,c,d
+integer :: i, n
 
-a = 2.0
-b = 5.0
+n = 10
 
-! Call subroutineA
-call subroutineA(a,b,c)  ! a and b are input, c is returned
+do i = 1,n
+  write(*,*) 'i is ', i
+enddo
 
-! Call subroutineB
-call subroutineB(a,b,c,d)  ! a,b and c are input, d is returned
+end program DoLoopTest
+```
 
-write(*,*) 'c is: ', c
-write(*,*) 'd is: ', d
+Note that unlike `Python`, you don't need to indent the commands inside the `do` and `enddo` construct with `Fortran`. 
 
-end program SubRoutineTest
+However, it helps to make your code much more readable if you do indent the commands. Indenting is helpful if you loop has spaned a page or more of code, since the indentation is a visual guide to the scope of the loop. Indenting is also very helpful when you have nested loops. For example, both of these loops below are valid `Fortran`, but which one is easier to read?
 
-!-----------------------------------
-! This is a subroutine
-!-----------------------------------
+```{fortran, eval=F}
+do i = 1, l
+do j = 1, m
+do k = 1, n
+write(*,*) i, j, k
+enddo
+enddo
+enddo
+```
 
-subroutine subroutineA(a,b,c)
 
-implicit none
-
-real(4), intent(in)  :: a,b
-real(4), intent(out) :: c
-
-c = a*b
-
-end subroutine subroutineA
-
-!-----------------------------------
-! This is another subroutine
-!-----------------------------------
-   
-subroutine subroutineB(a,b,c,d)
-
-implicit none
-
-real(4), intent(in)  :: a,b,c
-real(4), intent(out) :: d
-
-real(4)              :: x
-
-x = 10.0
-
-d = a + b + x*c
-
-end subroutine subroutineB
+```{fortran, eval=F}
+do i = 1, l
+  do j = 1, m
+    do k = 1, n
+      write(*,*) i, j, k
+    enddo
+  enddo
+enddo
 ```
 
 ***
 
-# Module
+# Do while loops
 
-Modern `Fortran` best practices are to put all subroutines and functions into one or more module files. 
-
-In a module, you can define variables and all the actions that work on them. You can have *public* and *private* variables, subroutines, and functions. Your main program can then `use` the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available). 
-
-First, let's define a module `Constants.f90`:
+The `do` `while` loop is similar but instead of using a counter, it uses a logical variable to exit the loop.
 
 ```{fortran, eval=F}
-module Constants  
-
-implicit none 
-
-  real, parameter :: pi = 3.1415926536  
-  real, parameter :: e = 2.7182818285 
-   
-contains      
-
-  subroutine show_consts()          
-    print*, "Pi = ", pi          
-    print*,  "e = ", e     
-    write(*,*) "This is from module Constants"
-  end subroutine show_consts 
-   
-end module Constants
-```
-
-Then we can use this module in the main program (`ModuleTest.f90`) with `use`:
-
-```{fortran, eval=F}
-program ModuleTest   
-
-use Constants      
-
-implicit none     
-
-real :: x, ePowerx, area, radius 
-
-x = 2.0
-radius = 7.0
-ePowerx = e ** x
-area = pi * radius**2     
-
-! Call the subroutine from the constants module
-call show_consts() 
-   
-print*, "e raised to the power of 2.0 = ", ePowerx
-print*, "Area of a circle with radius 7.0 = ", area  
-   
-end program ModuleTest
-```
-
-To compile the module and program:
-
-```{bash, eval=F}
-gfortran Constants.f90 ModuleTest.f90 -o ModuleTest.x
-```
-
-Note that in this command, the module appears before the main program (`ModuleTest.f90`) so that the functions are defined before they are referenced in the main program.
-
-***
-
-# Using library files
-
-When working on large projects, especially projects that are shared between a number of users, it is useful to create *object files* or *libraries of object files* that can be shared between programmers and users. 
-
-Suppose we have multiple source files, for example:
-
-`Sub1.f90`:
-
-```{fortran, eval=F}
-subroutine func1(x)
-  real(4)    :: x
-  print *, "This is from sub1, x:", x
-end
-```
-
-`Sub2.f90`:
-
-```{fortran, eval=F}
-subroutine func2(x)
-  real(4)    :: x
-  print *, "This is from sub2, x^2:", x**2
-end
-```
-
-`Constants.f90`:
-
-```{fortran, eval=F}
-module Constants  
-
-implicit none 
-
-  real, parameter :: pi = 3.1415926536  
-  real, parameter :: e = 2.7182818285 
-   
-contains      
-
-  subroutine show_consts()          
-    print*, "Pi = ", pi          
-    print*,  "e = ", e     
-    write(*,*) "This is from module Constants"
-  end subroutine show_consts 
-   
-end module Constants
-```
-
-We want to call/use the above programs in the `Main.f90` program:
-
-```{fortran, eval=F}
-program Main
-
-use Constants
+program DoWhileTest
 
 implicit none
 
-real :: a
+integer :: i, iCounter
+logical :: lKeepGoing
 
-a=2.0
+lKeepGoing = .true.
+iCounter   = 0
 
-! Call func1 from the Sub1 subroutine
-call func1(a)
+do while (lKeepGoing)
 
-! Call func2 from the Sub2 subroutine
-call func2(a)
+  iCounter = iCounter + 1
+  write(*,*) 'iCounter: ',iCounter
 
-! Call show_consts from the Constants module
-call show_consts()
+  if (iCounter == 10) lKeepGoing = .false.
 
-end program Main
+enddo
+
+write(*,*) 'All done'
+
+end program DoWhileTest
 ```
 
-Completed subprograms can be compiled into object files that can be linked during the compilation of the whole program:
+Can you figure out why the code ends at `10` not `11`?
 
-```{bash, eval=F}
-gfortran -c Sub1.f90
-gfortran -c Sub2.f90
-gfortran -c Constants.f90
-gfortran Main.f90 Sub1.o Sub2.o Constants.o -o Main.x
+***
+
+# Arrays
+
+## Define arrays
+
+The modern way of declaring a fixed size array in `Fortran` is to use the `dimension()` keyword. For example:
+
+```{fortran, eval=F}
+program TestArray
+
+real(8), dimension(10) :: xArray
+integer                :: i
+
+do i = 1,size(xArray)
+  xArray(i) = 5.0*i
+enddo
+
+write(*,*) 'xArray: ', xArray
+
+end program TestArray
 ```
 
-Note that the `-c` option is lowercase, which means: compile to object (`.o`) only, do not link. 
+Arrays can have multiple dimensions, otherwise referred to as the *rank* of the array. The *Fortran 2008* standard allows up to rank `15`, whereas the previous standard only allowed a maximum rank of `7`. Here are some examples:
 
-However, if many object files are to be linked, then it is convenient to place them in a *library*. Libraries can be created using the `ar` command (see `man ar` ). Object files can be placed in a library, for example, as follows:
-
-```{bash, eval=F}
-ar rcvf libsubs.a Sub1.o Sub2.o
-ar rcvf libconst.a Constants.o
+```{fortran, eval=F}
+real(8), dimension(10)          :: xArray1D
+real(8), dimension(10,20)       :: xArray2D
+real(8), dimension(10,20,10)    :: xArray3D
+integer, dimension(10,5,30,50)  :: xArray4D
 ```
 
-Here we have created two libraries (`libsubs.a` and `libconst.a`):
+## Allocatable arrays
 
-+ `libsubs.a` contains two objects `Sub1.o` and `Sub2.o`
+The arrays above are fixed dimensional, meaning that we declared their sizes in the declaration statements. A more flexible construct is the *allocatable array*. In `Fortran` you need to explicitly declare them using the `allocatable` keyword.
 
-+ `libconst.a` contains `Constants.o`. 
+```{fortran, eval=F}
+real(8),dimension(:),   allocatable :: xArray1D
+real(8),dimension(:,:), allocatable :: xArray2D
 
-Note that the name of the library **must** begin with `lib` and end with `.a`.
+m = 5
+n = 10
 
-More objects (say `ANOTHER.o`) can be added to the library with:
-
-```{bash, eval=F}
-ar rcvf libsubs.a ANOTHER.o
+allocate(xArray1D(m))
+allocate(xArray2D(m,n))
 ```
 
-The contents of a library can be listed with:
+You can then assign values to the elements of the arrays.
 
-```{bash, eval=F}
-ar tv libsubs.a
+If you need to **free up memory later on in your program**, use `deallocate`:
+
+```{fortran, eval=F}
+deallocate(xArray1D, xArray2D)
 ```
-
-Subroutines and functions in the library can be listed with:
-
-```{bash, eval=F}
-nm libsubs.a
-```
-
-Objects (say `NON_USEFUL.o`) can be deleted from the library with:
-
-```{bash, eval=F}
-ar dv libsubs.a NON_USEFUL.o
-```
-
-Once libraries have been created, it can be linked in a compilation as follows:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -L. -lsubs -lconst
-```
-
-The `-L.` option tells the linker that the libraries can be found in the **current** directory (indicated by `.`). `lsubs` is short for `libsubs.a`, and `lconst` is short for `libconst.a`.
-
-If the libraries are not in the current directory, then you should give the path, for example:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -Llib/ -lsubs -lconst
-```
-
-Here we have copied `libsubs.a` and `libconst.a` to `lib/` folder before the compilation.
-
-Now copy `libsubs.a` in `lib_sub/` and `libconst.a` in `lib_const/`, the main program can be compiled as:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -Llib_sub/ -lsubs -Llib_const/ -lconst
-```
-
-or:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -Llib_sub/ -Llib_const/ -lsubs -lconst
-```
-
-You can also use absolute path of the libraries:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -L/work/ese-ouycc/fortran_demo2/lib_sub/ -lsubs -L/work/ese-ouycc/fortran_demo2/lib_const/ -lconst
-```
-
 
 ***
 
@@ -470,23 +492,25 @@ gfortran Main.f90 -o Main.x -L/work/ese-ouycc/fortran_demo2/lib_sub/ -lsubs -L/w
 
 ## Exercise #1
 
-Write a `Fortran` program to write some numbers to a file that has `20` lines and `2` columns. The first column is in a format of `f10.3`, and the second column is in a format of `f15.5`. 
+Go over the scripts, make sure you understand them and be able to run those scripts.
 
 ## Exercise #2
 
-Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from the main program (`my.f90`) to check whether `2023` is a leap year. 
+Write a `Fortran` script `TestLeapYear.f90` to determine whether the year of `2023` is a leap year.
 
 ## Exercise #3
 
-Write a module `GetDays.f90` to print the total number of days in a given year. Then `use` this module in `my.f90` to print the total number of days for `2023`.
+Load Intel `Fortran` compiler `ifort` on TaiYi:
+
+```{bash, eval=F}
+module load intel/2018.4
+```
+
+Then compile `TestLeapYear.f90` with `ifort` and run it.
 
 ## Exercise #4
 
-**4.1.** Build a library `libleap.a` which contains the `TestLeapYear.o`. Move it to a new folder. 
-
-**4.2.** Build another library `libdays.a` which contains the `GetDays.o`. Move it to a different folder as you did in **4.1**. 
-
-**4.3.** Compile and run `my.f90` using the two libraries.
+Declare an array `MyArray` with a size of `100`, fill `MyArray` with `100` numbers, and print it.
 
 ***
 

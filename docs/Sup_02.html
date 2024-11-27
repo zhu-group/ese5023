@@ -11,7 +11,7 @@
 
 
 
-<title>Section 15 Fortran: Intermediate</title>
+<title>Section 14 Fortran: Basics</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -463,16 +463,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Section 15 <code>Fortran</code>:
-Intermediate</h1>
+<h1 class="title toc-ignore">Section 14 <code>Fortran</code>:
+Basics</h1>
 
 </div>
 
 
 <blockquote>
-<p>“In the good old days physicists repeated each other’s experiments,
-just to be sure. Today they stick to FORTRAN, so that they can share
-each other’s programs, bugs included.” - Edsger W. Dijkstra</p>
+<p>“FORTRAN programmers just DO it.” - Unknown</p>
 </blockquote>
 <hr />
 <div id="prerequisites" class="section level1">
@@ -480,472 +478,621 @@ each other’s programs, bugs included.” - Edsger W. Dijkstra</p>
 <p>Log in to Taiyi (<code>172.18.6.175</code>), then in your home
 directory, type:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /work/ese-ouycc/fortran_demo2 .</span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /work/ese-ouycc/fortran_demo1 .</span></code></pre></div>
 <hr />
 </div>
-<div id="reading-and-writing-data" class="section level1">
-<h1>Reading and writing data</h1>
-<div id="reading-data-from-a-file" class="section level2">
-<h2>Reading data from a file</h2>
-<p>To read or write data from a file, you need to first open the file
-using the <code>open()</code> command. When you are done, you use the
-<code>close()</code> command. For example, to read data from an existing
-file (<code>test.dat</code>):</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">Program</span> FileReadTest</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">Implicit</span> <span class="kw">none</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dt">integer</span>                            <span class="dt">::</span> u, n, i</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="dt">real(4)</span>, <span class="dt">dimension(:)</span>, <span class="dt">allocatable</span> <span class="dt">::</span> a, b</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">! File unit</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>u <span class="kw">=</span> <span class="dv">50</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">! Open the file</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;test.dat&#39;</span>, <span class="fu">status</span><span class="kw">=</span><span class="st">&#39;old&#39;</span><span class="fu">)</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">! The first line of the file has the number of values for arrays a and b</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="fu">read(</span>u,<span class="fu">*)</span> n</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">! Allocate the arrays</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="kw">allocate</span>( a(n), b(n) )</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">! Read data line by line</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="fu">read(</span>u, <span class="fu">*)</span> a(i), b(i)</span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">! Close the file</span></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">close(u)</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="co">! Display the values</span></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;Line &quot;</span>, i, <span class="st">&quot; : &quot;</span>, a(i), b(i)</span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co">! Deallocate the arrays</span></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="kw">deallocate</span>( a, b )</span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="kw">End Program</span> FileReadTest</span></code></pre></div>
-<p>The <code>unit</code> is an integer that tells <code>Fortran</code>
-where to read or write the data from. Here, you pick a number
-(<code>50</code>) and assign that as the file unit (<code>u</code>).
-<code>status = 'old'</code> tells <code>Fortran</code> that the file
-exists already. This is optional, but can be helpful since if the file
-doesn’t exist, <code>Fortran</code> will issue a helpful error message.
-For the <code>read</code> commands, here we are using the asterisk
-<code>*</code> to denote a <em>free-format</em> read, which means that
-<code>Fortran</code> will decide what the format is.</p>
-</div>
-<div id="writing-data-to-a-file" class="section level2">
-<h2>Writing data to a file</h2>
-<p>Suppose we have modified <code>a</code> and <code>b</code>, and want
-to save those values to a new file (<code>new1.dat</code>). This can be
-done using:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">Program</span> FileWriteTest</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dt">integer</span>                            <span class="dt">::</span> u, n, i</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dt">real(4)</span>, <span class="dt">dimension(:)</span>, <span class="dt">allocatable</span> <span class="dt">::</span> a, b</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">! File unit</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>u <span class="kw">=</span> <span class="dv">50</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">! Open the file</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;test.dat&#39;</span>, <span class="fu">status</span><span class="kw">=</span><span class="st">&#39;old&#39;</span><span class="fu">)</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">! The first line of the file has the number of values for arrays a and b</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="fu">read(</span>u,<span class="fu">*)</span> n</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">! Allocate the arrays</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="kw">allocate</span>( a(n), b(n) )</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co">! Read data line by line</span></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  <span class="fu">read(</span>u, <span class="fu">*)</span> a(i), b(i)</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">! Close the file</span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">close(u)</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="co">! Change the values</span></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>a <span class="kw">=</span> a <span class="kw">*</span> <span class="fl">2.0</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>b <span class="kw">=</span> b <span class="kw">+</span> <span class="dv">1</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="co">! Write the values to a new file</span></span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new1.dat&#39;</span>, <span class="fu">status</span><span class="kw">=</span><span class="st">&#39;replace&#39;</span><span class="fu">)</span></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="fu">write(</span>u, <span class="fu">*)</span> a, b</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="co">close(u)</span></span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="co">! Deallocate the arrays</span></span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a><span class="kw">deallocate</span>( a, b )</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a><span class="kw">End Program</span> FileWriteTest</span></code></pre></div>
-<p>As you may notice, the output file <code>new1.dat</code> has only one
-line. This is because <code>write()</code> is called once to write two
-vectors. Try the following code chuck to save the values, see what will
-happen:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">! Write the values to a new file, line by line</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new2.dat&#39;</span><span class="fu">)</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">write(</span>u, <span class="fu">*)</span> a(i), b(i)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">close(u)</span></span></code></pre></div>
-</div>
-<div id="format-specifiers" class="section level2">
-<h2>Format specifiers</h2>
-<p>In all of our <code>read</code> and <code>write</code> examples
-above, we used the generic <code>*</code> for the <em>format
-specifier</em>. When writing, Fortran will write out the <strong>full
-precision</strong> of each floating-point number. For example,
-<code>18.9779778</code>. You can use the format specifier to specify
-another format. In <code>Fortran</code>, they are often referred to as
-<strong>edit descriptors</strong>. Change the writing chuck to the
-following:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">! Write the values to a new file, in a certain format</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">open(unit</span><span class="kw">=</span>u, <span class="fu">file</span><span class="kw">=</span><span class="st">&#39;new3.dat&#39;</span><span class="fu">)</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">write(</span>u, <span class="st">&#39;(f5.1,E10.3)&#39;</span><span class="fu">)</span> a(i), b(i)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">close(u)</span></span></code></pre></div>
-<p>Here <code>f</code> is for a floating-point format, <code>E</code> is
-for scientific notation. For a <code>w.d</code> format, <code>w</code>is
-the width (number of characters) and <code>d</code> is the number of
-decimal places. See <a
-href="https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html">this
-note</a> for more about <code>Fortran</code> format.</p>
-<hr />
-</div>
-</div>
-<div id="function" class="section level1">
-<h1>Function</h1>
-<p>Like <code>Python</code>, we can define <em>functions</em> in
-<code>Fortran</code>. This is done with the <code>function</code>
-keyword. Functions are useful when you need to do a complicated
-calculation that has only one result. Functions need to be either in a
-separate <code>.f90</code> file or have to be listed
-<strong>outside</strong> the main program. For example:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="kw">program</span> FunctionTest</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="dt">real(4)</span> <span class="dt">::</span> a, b, c, Get_the_larger</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">c = Get_the_larger(a,b)</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="kw">end program</span> FunctionTest</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">! This is the external function</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="dt">real(4)</span> <span class="kw">function</span> Get_the_larger(x,y)</span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="dt">real(4)</span> <span class="dt">::</span> x, y</span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="kw">if</span>(x <span class="op">&gt;</span> y) <span class="kw">then</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>  Get_the_larger <span class="kw">=</span> x</span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="kw">else</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>  Get_the_larger <span class="kw">=</span> y</span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="kw">endif</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="kw">end function</span> Get_the_larger</span></code></pre></div>
-<hr />
-</div>
-<div id="subroutine" class="section level1">
-<h1>Subroutine</h1>
-<p>Use a subroutine to break your code up into various sections that are
-easier to read. Subroutines are like functions, but the I/O is all done
-as arguments after the subroutine name. You will also have to use
-<code>call</code> before a subroutine.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">program</span> SubRoutineTest</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="dt">real(4)</span> <span class="dt">::</span> a,b,c,d</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>a <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>b <span class="kw">=</span> <span class="fl">5.0</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">! Call subroutineA</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">call subroutineA(a,b,c)  ! a and b are input, c is returned</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">! Call subroutineB</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">call subroutineB(a,b,c,d)  ! a,b and c are input, d is returned</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;c is: &#39;</span>, c</span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;d is: &#39;</span>, d</span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="kw">end program</span> SubRoutineTest</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">! This is a subroutine</span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="kw">subroutine</span> subroutineA(a,b,c)</span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b</span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> c</span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">c = a*b</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="kw">end subroutine</span> subroutineA</span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">! This is another subroutine</span></span>
-<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">!-----------------------------------</span></span>
-<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>   </span>
-<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="kw">subroutine</span> subroutineB(a,b,c,d)</span>
-<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a></span>
-<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="dt">real(4)</span>, <span class="dt">intent(in)</span>  <span class="dt">::</span> a,b,c</span>
-<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="dt">real(4)</span>, <span class="dt">intent(out)</span> <span class="dt">::</span> d</span>
-<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a></span>
-<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="dt">real(4)</span>              <span class="dt">::</span> x</span>
-<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">10.0</span></span>
-<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a></span>
-<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a>d <span class="kw">=</span> a <span class="kw">+</span> b <span class="kw">+</span> x<span class="kw">*</span>c</span>
-<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a></span>
-<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a><span class="kw">end subroutine</span> subroutineB</span></code></pre></div>
-<hr />
-</div>
-<div id="module" class="section level1">
-<h1>Module</h1>
-<p>Modern <code>Fortran</code> best practices are to put all subroutines
-and functions into one or more module files.</p>
-<p>In a module, you can define variables and all the actions that work
-on them. You can have <em>public</em> and <em>private</em> variables,
-subroutines, and functions. Your main program can then <code>use</code>
-the modules. Variables defined at the top of a module are available to
-be used in any of the contained subroutines (so they are globally
-available).</p>
-<p>First, let’s define a module <code>Constants.f90</code>:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="kw">module</span> Constants  </span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span> </span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="dt">real</span>, <span class="dt">parameter</span> <span class="dt">::</span> pi <span class="kw">=</span> <span class="fl">3.1415926536</span>  </span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="dt">real</span>, <span class="dt">parameter</span> <span class="dt">::</span> e <span class="kw">=</span> <span class="fl">2.7182818285</span> </span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>   </span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">contains      </span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  <span class="kw">subroutine</span> show_consts()          </span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>    <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>    <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;This is from module Constants&quot;</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>  <span class="kw">end subroutine</span> show_consts </span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>   </span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="kw">end module</span> Constants</span></code></pre></div>
-<p>Then we can use this module in the main program
-(<code>ModuleTest.f90</code>) with <code>use</code>:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">program</span> ModuleTest   </span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="kw">use</span> Constants      </span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span>     </span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="dt">real</span> <span class="dt">::</span> x, ePowerx, area, radius </span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>radius <span class="kw">=</span> <span class="fl">7.0</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>ePowerx <span class="kw">=</span> e <span class="kw">**</span> x</span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>area <span class="kw">=</span> pi <span class="kw">*</span> radius<span class="kw">**</span><span class="dv">2</span>     </span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">! Call the subroutine from the constants module</span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">call show_consts() </span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>   </span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;e raised to the power of 2.0 = &quot;</span>, ePowerx</span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Area of a circle with radius 7.0 = &quot;</span>, area  </span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>   </span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="kw">end program</span> ModuleTest</span></code></pre></div>
-<p>To compile the module and program:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">gfortran</span> Constants.f90 ModuleTest.f90 <span class="at">-o</span> ModuleTest.x</span></code></pre></div>
-<p>Note that in this command, the module appears before the main program
-(<code>ModuleTest.f90</code>) so that the functions are defined before
-they are referenced in the main program.</p>
-<hr />
-</div>
-<div id="using-library-files" class="section level1">
-<h1>Using library files</h1>
-<p>When working on large projects, especially projects that are shared
-between a number of users, it is useful to create <em>object files</em>
-or <em>libraries of object files</em> that can be shared between
-programmers and users.</p>
-<p>Suppose we have multiple source files, for example:</p>
-<p><code>Sub1.f90</code>:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">subroutine</span> func1(x)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="dt">real(4)</span>    <span class="dt">::</span> x</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">print</span> <span class="kw">*</span>, <span class="st">&quot;This is from sub1, x:&quot;</span>, x</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
-<p><code>Sub2.f90</code>:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">subroutine</span> func2(x)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="dt">real(4)</span>    <span class="dt">::</span> x</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="fu">print</span> <span class="kw">*</span>, <span class="st">&quot;This is from sub2, x^2:&quot;</span>, x<span class="kw">**</span><span class="dv">2</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
-<p><code>Constants.f90</code>:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="kw">module</span> Constants  </span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span> </span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="dt">real</span>, <span class="dt">parameter</span> <span class="dt">::</span> pi <span class="kw">=</span> <span class="fl">3.1415926536</span>  </span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="dt">real</span>, <span class="dt">parameter</span> <span class="dt">::</span> e <span class="kw">=</span> <span class="fl">2.7182818285</span> </span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>   </span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">contains      </span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="kw">subroutine</span> show_consts()          </span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>    <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Pi = &quot;</span>, pi          </span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>    <span class="fu">print</span><span class="kw">*</span>,  <span class="st">&quot;e = &quot;</span>, e     </span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&quot;This is from module Constants&quot;</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>  <span class="kw">end subroutine</span> show_consts </span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>   </span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="kw">end module</span> Constants</span></code></pre></div>
-<p>We want to call/use the above programs in the <code>Main.f90</code>
-program:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="kw">program</span> Main</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="kw">use</span> Constants</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="dt">real</span> <span class="dt">::</span> a</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>a<span class="kw">=</span><span class="fl">2.0</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">! Call func1 from the Sub1 subroutine</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">call func1(a)</span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">! Call func2 from the Sub2 subroutine</span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">call func2(a)</span></span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co">! Call show_consts from the Constants module</span></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">call show_consts()</span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="kw">end program</span> Main</span></code></pre></div>
-<p>Completed subprograms can be compiled into object files that can be
-linked during the compilation of the whole program:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-c</span> Sub1.f90</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-c</span> Sub2.f90</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-c</span> Constants.f90</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="ex">gfortran</span> Main.f90 Sub1.o Sub2.o Constants.o <span class="at">-o</span> Main.x</span></code></pre></div>
-<p>Note that the <code>-c</code> option is lowercase, which means:
-compile to object (<code>.o</code>) only, do not link.</p>
-<p>However, if many object files are to be linked, then it is convenient
-to place them in a <em>library</em>. Libraries can be created using the
-<code>ar</code> command (see <code>man ar</code> ). Object files can be
-placed in a library, for example, as follows:</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">ar</span> rcvf libsubs.a Sub1.o Sub2.o</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">ar</span> rcvf libconst.a Constants.o</span></code></pre></div>
-<p>Here we have created two libraries (<code>libsubs.a</code> and
-<code>libconst.a</code>):</p>
+<div id="introduction-to-fortran" class="section level1">
+<h1>Introduction to <code>Fortran</code></h1>
+<p><a href="https://fortran-lang.org/"><code>Fortran</code></a> was
+originally developed by a team at IBM in 1957 for scientific
+calculations. <code>Fortran</code> stands for <em>Formula
+Translation</em>. It is a powerful language for creating fast and
+memory-efficient codes for heavy numerical computations.</p>
+<p><code>Fortran</code> is not very user-friendly, compared with
+<code>Python</code>, <code>R</code>, and <code>MATLAB</code>:</p>
 <ul>
-<li><p><code>libsubs.a</code> contains two objects <code>Sub1.o</code>
-and <code>Sub2.o</code></p></li>
-<li><p><code>libconst.a</code> contains
-<code>Constants.o</code>.</p></li>
+<li><p><code>Fortran</code> is a more verbose language than
+<code>Python</code>, <code>R</code>, and <code>MATLAB</code>, so it
+generally will take you much longer to write <code>Fortran</code> codes
+compared to an equivalent code in <code>Python</code>.</p></li>
+<li><p>Unlike <code>Python</code>, which can easily be run
+interactively, <code>Fortran</code> codes must be <em>compiled</em>
+before you can run them in a terminal shell. That makes debugging and
+testing a bit slower too.</p></li>
+<li><p><code>Fortran</code> doesn’t have a built-in graphics library, so
+you can’t interactively plot results like you can with
+<code>Python</code>.</p></li>
 </ul>
-<p>Note that the name of the library <strong>must</strong> begin with
-<code>lib</code> and end with <code>.a</code>.</p>
-<p>More objects (say <code>ANOTHER.o</code>) can be added to the library
-with:</p>
+<p>So, with those points in mind, we recommend you stick to
+<code>Python</code>, <code>R</code>, or <code>MATLAB</code> for you
+day-to-day scientific computing tasks.</p>
+<p>However, <code>Fortran</code> is good when you have some
+computational problem where you need it to run as fast as possible, for
+example when it would take days to run on <code>Python</code>,
+<code>R</code>, or <code>MATLAB</code>. Learning the basics of
+<code>Fortran</code> will also be useful for when you come across
+<code>Fortran</code> codes that do some computational task you need and
+you want to interface those codes with your own codes or you might want
+to modify them for your own research needs.</p>
+<div id="programs" class="section level2">
+<h2>Programs</h2>
+<p><code>Fortran</code> is a procedural language where you define a
+<strong>sequence</strong> of commands to execute in a program file. The
+program file is then compiled using a <code>Fortran</code>
+<em>compiler</em>. The compiler turns the program commands in the text
+file into machine language instructions that will execute on the
+computer’s CPU. You run the compiled code from a terminal shell.</p>
+<p>Let’s begin by looking at a simple example showing the basic workflow
+for using <code>Fortran</code>. Start by making a plain text file named
+<code>HelloWorld.f90</code> that has the following content:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
+<p>Compile the code using the command:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 <span class="at">-o</span> HelloWorld.x</span></code></pre></div>
+<p>Run the code in the terminal using:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">./HelloWorld.x</span></span></code></pre></div>
+<p>A <code>Fortran</code> program has to have a single program file
+(usually <code>.f</code> or <code>.f90</code> files) that lists the
+sequence of commands to execute.</p>
+<p>The program file has to start with the first command being the word
+<code>program</code> and it must end with the last command being the
+keyword <code>end</code>. The words <code>program HelloWorld</code>
+after the final <code>end</code> statement aren’t necessary, but they
+are a useful organization construct for pointing out what exactly is
+ending, especially when your program file is very long and also contains
+subroutine and function code beneath the program section.</p>
+</div>
+<div id="compiling" class="section level2">
+<h2>Compiling</h2>
+<p>In the example above, we compiled the code by calling our
+<em>compiler</em>, here the <a
+href="https://gcc.gnu.org/wiki/GFortran"><code>gfortran</code>
+compiler</a> which is open source and freely available. Intel’s <a
+href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.isiyag"><code>ifort</code>
+compiler</a> is a commercial compiler that is fairly ubiquitous,
+especially on cluster systems. For some codes, <code>ifort</code> can
+produce an executable that runs <code>10-20x</code> faster than what
+<code>gfortran</code> produces.</p>
+<p>To compile our <code>HelloWorld.f90</code> code, we used the output
+<em>flag</em> <code>-o</code> and then listed the name we wanted to use
+for the compiled program that was output. Here we used
+<code>HelloWorld</code> for the name, but if for some (not recommended!)
+reason we wanted to name it <code>MyProgram.x</code> instead, we could
+compile it using:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 <span class="at">-o</span> MyProgram.x</span></code></pre></div>
+<p>If you don’t specify <code>-o</code> and the output program name,
+then the compiler will by default name the program
+<code>a.out</code>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 </span></code></pre></div>
+<p>If there are any errors with your code, the compiler should let you
+know what the problem is. For example, try compiling the code below,
+which has an errant <code>a</code> character:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  a</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
+<p>The compiler returns an error message. Check this.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>HelloWorld.f90:<span class="fl">3.2</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  a</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Error: Unclassifiable statement at (<span class="dv">1</span>)</span></code></pre></div>
+<p>The statement <code>HelloWorld.f90:3:2:</code> specifies that the
+<code>Unclassifiable statement</code> is in file
+<code>HelloWorld.f90</code> on line <code>3</code>, column
+<code>2</code>. It then prints out what is on that line (here the errant
+letter <code>a</code>).</p>
+<p>When there are errors in long and complicated <code>Fortran</code>
+codes, the first error the compiler finds can lead it to other errors,
+which stem from it not being able to interpret the code that had the
+first error. So if you get more than one error message when compiling a
+piece of code, <strong>go fix the first listed error</strong> and try
+recompiling the code to see if the other errors are now gone.</p>
+</div>
+<div id="comments" class="section level2">
+<h2>Comments</h2>
+<p>Anything to the right of an exclamation point <code>!</code> in a
+<code>Fortran</code> code is considered a comment. For example a
+commented version of our <code>HelloWorld.f90</code> program is</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">! This program writes &#39;Hello world&#39; to the shell.</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">! Version 0.1, Dec. 08, 2021</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">! Send a message to the world:</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">! All done, goodbye</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">!</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
+<p>Comments are an essential part of good coding practice. You can use
+them to document what each section of a code does; this can be very
+helpful for when you return to a code you wrote a long time ago and are
+trying to remember what it does, or when you get someone else’s code and
+are trying to understand what it does.</p>
+<p>You can also use code comments as an outline when first starting to
+write a long and complicated code. The comments can outline the sequence
+of steps you intend the code to do. Once your outline is complete, you
+can start coding by filling in the necessary commands below each section
+of comments.</p>
+<p>At a minimum, your code should have at least a few comments at the
+start of the text file that indicates what the codes does. This is also
+a place where you can add a date stamp and possibly a version number.
+You can also list the authorship of the code, which can be useful if it
+will be shared with other or is part of a collaborative effort .</p>
+<hr />
+</div>
+</div>
+<div id="variables" class="section level1">
+<h1>Variables</h1>
+<div id="variable-types" class="section level2">
+<h2>Variable types</h2>
+<p>Unlike <code>Python</code>, <code>Fortran</code> requires you to
+<strong>declare the type of each variable</strong>. For example, you
+need to declare whether a variable is an <code>integer</code>,
+<code>real</code>, <code>complex</code>, <code>logical</code>, or
+<code>character</code>. Here is an example program declaring several
+different variable types:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">program</span> VariableShowcase</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">! Declare variables:</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="dt">integer</span>         <span class="dt">::</span> i</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="dt">real(8)</span>         <span class="dt">::</span> x</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">complex(8)      :: z</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="dt">logical</span>         <span class="dt">::</span> <span class="bu">bTest</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">character(32)   :: sFileName</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>i <span class="kw">=</span> <span class="dv">1</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>z <span class="kw">=</span> <span class="bu">cmplx</span>(<span class="fl">0.5</span>,<span class="fl">2.0</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">! logical types are .true. or .false.</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="bu">bTest</span> <span class="kw">=</span> <span class="cn">.false.</span>    </span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>sFileName <span class="kw">=</span> <span class="st">&#39;data.txt&#39;</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;i: &#39;</span>, i</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x: &#39;</span>, x</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;z: &#39;</span>, z</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;bTest: &#39;</span>, <span class="bu">bTest</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;sFileName: &#39;</span>, sFileName</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="kw">end program</span> VariableShowcase</span></code></pre></div>
+<p>Compile and run this demo:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">gfortran</span> VariableShowcase.f90 <span class="at">-o</span> VariableShowcase.x </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">./VariableShowcase.x</span></span></code></pre></div>
+<p>Note that the variable declarations in <code>Fortran</code> have to
+be made <strong>at the start of the program</strong> (or subroutine or
+function), <strong>before any commands are made</strong>. Unlike
+<code>Python</code>, you can’t declare a new variable in the middle of a
+sequence of commands. If you try to, the compiler will throw an error
+message.</p>
+<p>Pay attention that, <code>Fortran</code> is <strong>case
+insensitive</strong>, meaning that it will treat variables
+<code>x</code> and <code>X</code> as the same quantity.</p>
+</div>
+<div id="variable-precision" class="section level2">
+<h2>Variable precision</h2>
+<p><code>real(8)</code> declared above means a real variable that has
+<code>8</code> bytes (<code>64</code> bits) of precision. This is what
+is known as <em>double precision</em>, which is the default precision in
+<code>Python</code> and <code>MATLAB</code>. You can also declare a
+lower or higher order precision (e.g. <code>real(4)</code> and
+<code>real(16)</code>) but you should only do this if you have a very
+good reason to do so. 99.99% of the time you should just use
+<code>real(8)</code> rather than <code>(4)</code> or
+<code>(16)</code>.</p>
+<p>The <code>complex(8)</code> declaration means a complex number with
+<code>8</code> bytes of precision for each of the real and imaginary
+parts of the number.</p>
+<p>For integers, you typically don’t need to specify the precision and
+most of the time you can just use integer and then let the compiler
+assign the precision (usually either <code>4</code> or <code>8</code>
+bytes).</p>
+<p>You can use the <code>huge()</code> intrinsic function to show the
+largest numbers that can be represented by each precision. For example,
+compile and run this code to see the largest possible values that can be
+represented by each numerical variable type:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">program</span> PrecisionTest</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">! Declare variables:</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="dt">integer</span>         <span class="dt">::</span> i</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="dt">integer(4)</span>      <span class="dt">::</span> i4</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="dt">integer(8)</span>      <span class="dt">::</span> i8</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="dt">real(4)</span>         <span class="dt">::</span> x4</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="dt">real(8)</span>         <span class="dt">::</span> x8</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer:    &#39;</span>, <span class="fu">huge</span>(i)</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer:    &#39;</span>, <span class="fu">huge</span>(i)</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer(4): &#39;</span>, <span class="fu">huge</span>(i4)</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer(8): &#39;</span>, <span class="fu">huge</span>(i8)</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;real(4):    &#39;</span>, <span class="fu">huge</span>(x4)</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;real(8):    &#39;</span>, <span class="fu">huge</span>(x8)</span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="kw">end program</span> PrecisionTest</span></code></pre></div>
+<p>Here we are using modern <code>Fortran</code> syntax to define the
+variables. However, there are older ways of defining variables that you
+should be aware of since you may come across them. The older syntax does
+not use the <code>::</code> separator between the declaration and the
+list of variable names and has slightly different type names. Most
+<code>Fortran</code> compilers support the older and modern syntax:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">! Old style Fortran variable types:</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="dt">double precision</span>      <span class="co">! same as real(8)</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="dt">real*8</span>                <span class="co">! same as real(8)</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="dt">real*4</span>                <span class="co">! same as real(4)</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>double <span class="dt">complex</span>        <span class="co">! same as complex(8)</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">complex*16            ! same as complex(8)</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="dt">integer*4</span>             <span class="co">! same as integer(4)</span></span></code></pre></div>
+</div>
+<div id="integer-division" class="section level2">
+<h2>Integer division</h2>
+<p>Be careful when dividing integers in <code>Fortran</code>. For
+example, the expression <code>fraction = (N-1)/N</code> where
+<code>N</code> is an integer and fraction has been declared as
+<code>real(8)</code> will result in fraction being assigned the value
+<code>0</code>. Why is this?</p>
+<p>Because all the terms in <code>(N-1)/N</code> are integers so the
+compiler uses integer division. You can easily fix this by making at
+least one of the terms in the expression a floating point number. Either
+of the following expressions will force the compiler to use floating
+point arithmetic and fraction will then be assigned the intended
+value:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="bu">fraction</span> <span class="kw">=</span> (N<span class="kw">-</span><span class="fl">1.</span>)<span class="kw">/</span>N</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="bu">fraction</span> <span class="kw">=</span> (<span class="bu">dble</span>(N)<span class="kw">-</span><span class="dv">1</span>)<span class="kw">/</span>N</span></code></pre></div>
+<p>where the <code>dble()</code> function turns integer <code>N</code>
+into a double precision value.</p>
+</div>
+<div id="implicit-none" class="section level2">
+<h2>Implicit none</h2>
+<p>You should <strong>always include the statement</strong>
+<code>implicit none</code> at the start of your <code>Fortran</code>
+codes (programs, subroutines, and functions).</p>
+<p>By default, <code>Fortran</code> has a rather insidious implicit
+typing for variables that have certain first letters in their names.
+Unless specified otherwise, all variables starting with letters
+<code>I</code>, <code>J</code>, <code>K</code>, <code>L</code>,
+<code>M</code>, and <code>N</code> are default integers, and all others
+are default real. This can lead to nasty programming errors if you
+aren’t careful. For example, consider the following code:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">program</span> ImplicitTypeTest</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>ireal <span class="kw">=</span> <span class="fl">1.5</span>   <span class="co">! we want this to be a real number, but since the variable</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>              <span class="co">! name starts with an i Fortran thinks its an integer.</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ireal is: &#39;</span>, ireal</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="kw">end program</span> ImplicitTypeTest</span></code></pre></div>
+<p>Try running this program and you will see that it prints out
+<code>ireal</code> as the integer <code>1</code>. If instead, you use
+<code>implicit none</code> at the start of this code, the compiler will
+issue an error because <code>ireal</code> was not yet declared.</p>
+<p>Here’s another example where <code>implicit none</code> would help
+avoid getting the wrong result. Can you spot the error?</p>
 <div class="sourceCode" id="cb17"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">ar</span> rcvf libsubs.a ANOTHER.o</span></code></pre></div>
-<p>The contents of a library can be listed with:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">program</span> TestUndeclared</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="dt">real(8)</span>  <span class="dt">::</span> distance, velocity, time</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>time     <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>velocity <span class="kw">=</span> <span class="fl">5.0</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>distance <span class="kw">=</span> velocity<span class="kw">*</span>times</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;distance: &#39;</span>, distance</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="kw">end program</span> TestUndeclared</span></code></pre></div>
+<p>Now put <code>implicit none</code> at the start of the code,
+re-compile, see what happens.</p>
+<hr />
+</div>
+</div>
+<div id="relational-operators" class="section level1">
+<h1>Relational operators</h1>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="9%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Older <code>Fortran</code></th>
+<th align="center">Newer <code>Fortran</code></th>
+<th align="center"><code>Python</code></th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>.eq.</code></td>
+<td align="center"><code>==</code></td>
+<td align="center"><code>==</code></td>
+<td align="left">equality</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.ne.</code></td>
+<td align="center"><code>/=</code></td>
+<td align="center"><code>!=</code></td>
+<td align="left">not equality</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.lt.</code></td>
+<td align="center"><code>&lt;</code></td>
+<td align="center"><code>&lt;</code></td>
+<td align="left">less than</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.le.</code></td>
+<td align="center"><code>&lt;=</code></td>
+<td align="center"><code>&lt;=</code></td>
+<td align="left">less than or equal to</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.gt.</code></td>
+<td align="center"><code>&gt;</code></td>
+<td align="center"><code>&gt;</code></td>
+<td align="left">greater than</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.ge.</code></td>
+<td align="center"><code>&gt;=</code></td>
+<td align="center"><code>&gt;=</code></td>
+<td align="left">greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.and.</code></td>
+<td align="center"><code>.and.</code></td>
+<td align="center"><code>&amp;</code></td>
+<td align="left">logical and</td>
+</tr>
+<tr class="even">
+<td align="center"><code>.or.</code></td>
+<td align="center"><code>.or.</code></td>
+<td align="center"><code>|</code></td>
+<td align="left">logical or</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.not.</code></td>
+<td align="center"><code>.not.</code></td>
+<td align="center"><code>~</code></td>
+<td align="left">logical not</td>
+</tr>
+</tbody>
+</table>
+<p>Try the following <code>TestRelationalOps.f90</code>:</p>
 <div class="sourceCode" id="cb18"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">ar</span> tv libsubs.a</span></code></pre></div>
-<p>Subroutines and functions in the library can be listed with:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">program</span> TestRelationalOps</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="dt">real(8)</span> <span class="dt">::</span> x, y, z</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="dt">logical</span> <span class="dt">::</span> ltest1, ltest2, ltest3</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>y <span class="kw">=</span> <span class="fl">2.0</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>z <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>ltest1 <span class="kw">=</span> x <span class="op">&lt;</span> y</span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>ltest2 <span class="kw">=</span> x <span class="op">==</span> z</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>ltest3 <span class="kw">=</span> (ltest1 <span class="op">.and.</span> ltest2)</span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest1: &#39;</span>, ltest1</span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest2: &#39;</span>, ltest2</span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest3: &#39;</span>, ltest3</span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="kw">end program</span> TestRelationalOps</span></code></pre></div>
+<hr />
+</div>
+<div id="if-statements" class="section level1">
+<h1>If statements</h1>
+<p>These are similar to <code>Python</code>, except that you need to
+include the keyword <code>then</code> after the logical statement. The
+<code>if</code> statement also ends with the keyword
+<code>endif</code>.</p>
 <div class="sourceCode" id="cb19"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">nm</span> libsubs.a</span></code></pre></div>
-<p>Objects (say <code>NON_USEFUL.o</code>) can be deleted from the
-library with:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">program</span> IfElseTest</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="dt">real(8)</span> <span class="dt">::</span> x, y</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.5</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>y <span class="kw">=</span> <span class="fl">3.0</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="kw">if</span> (x <span class="op">&lt;</span> y) <span class="kw">then</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x is less than y&#39;</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="kw">elseif</span> (x <span class="op">&gt;</span> y ) <span class="kw">then</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x is greater than y&#39;</span></span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="kw">elseif</span> (x <span class="op">==</span> y ) <span class="kw">then</span></span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x equals y&#39;</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="kw">else</span></span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;this case should never be found&#39;</span>      </span>
+<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="kw">endif</span></span>
+<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a><span class="kw">end program</span> IfElseTest</span></code></pre></div>
+<hr />
+</div>
+<div id="do-loops" class="section level1">
+<h1>Do loops</h1>
+<p>Loops in <code>Fortran</code> are done using the <code>do</code> and
+<code>enddo</code> construct:</p>
 <div class="sourceCode" id="cb20"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">ar</span> dv libsubs.a NON_USEFUL.o</span></code></pre></div>
-<p>Once libraries have been created, it can be linked in a compilation
-as follows:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">program</span> DoLoopTest</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="dt">integer</span> <span class="dt">::</span> i, n</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>n <span class="kw">=</span> <span class="dv">10</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;i is &#39;</span>, i</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="kw">end program</span> DoLoopTest</span></code></pre></div>
+<p>Note that unlike <code>Python</code>, you don’t need to indent the
+commands inside the <code>do</code> and <code>enddo</code> construct
+with <code>Fortran</code>.</p>
+<p>However, it helps to make your code much more readable if you do
+indent the commands. Indenting is helpful if you loop has spaned a page
+or more of code, since the indentation is a visual guide to the scope of
+the loop. Indenting is also very helpful when you have nested loops. For
+example, both of these loops below are valid <code>Fortran</code>, but
+which one is easier to read?</p>
 <div class="sourceCode" id="cb21"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">gfortran</span> Main.f90 <span class="at">-o</span> Main.x <span class="at">-L.</span> <span class="at">-lsubs</span> <span class="at">-lconst</span></span></code></pre></div>
-<p>The <code>-L.</code> option tells the linker that the libraries can
-be found in the <strong>current</strong> directory (indicated by
-<code>.</code>). <code>lsubs</code> is short for <code>libsubs.a</code>,
-and <code>lconst</code> is short for <code>libconst.a</code>.</p>
-<p>If the libraries are not in the current directory, then you should
-give the path, for example:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="kw">do</span> k <span class="kw">=</span> <span class="dv">1</span>, n</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> i, j, k</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="kw">enddo</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">gfortran</span> Main.f90 <span class="at">-o</span> Main.x <span class="at">-Llib</span>/ <span class="at">-lsubs</span> <span class="at">-lconst</span></span></code></pre></div>
-<p>Here we have copied <code>libsubs.a</code> and
-<code>libconst.a</code> to <code>lib/</code> folder before the
-compilation.</p>
-<p>Now copy <code>libsubs.a</code> in <code>lib_sub/</code> and
-<code>libconst.a</code> in <code>lib_const/</code>, the main program can
-be compiled as:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    <span class="kw">do</span> k <span class="kw">=</span> <span class="dv">1</span>, n</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>      <span class="fu">write(*</span>,<span class="fu">*)</span> i, j, k</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>    <span class="kw">enddo</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>  <span class="kw">enddo</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="kw">enddo</span></span></code></pre></div>
+<hr />
+</div>
+<div id="do-while-loops" class="section level1">
+<h1>Do while loops</h1>
+<p>The <code>do</code> <code>while</code> loop is similar but instead of
+using a counter, it uses a logical variable to exit the loop.</p>
 <div class="sourceCode" id="cb23"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">gfortran</span> Main.f90 <span class="at">-o</span> Main.x <span class="at">-Llib_sub</span>/ <span class="at">-lsubs</span> <span class="at">-Llib_const</span>/ <span class="at">-lconst</span></span></code></pre></div>
-<p>or:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="kw">program</span> DoWhileTest</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="dt">integer</span> <span class="dt">::</span> i, iCounter</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="dt">logical</span> <span class="dt">::</span> lKeepGoing</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>lKeepGoing <span class="kw">=</span> <span class="cn">.true.</span></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>iCounter   <span class="kw">=</span> <span class="dv">0</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="kw">do</span> <span class="kw">while</span> (lKeepGoing)</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>  iCounter <span class="kw">=</span> iCounter <span class="kw">+</span> <span class="dv">1</span></span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;iCounter: &#39;</span>,iCounter</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>  <span class="kw">if</span> (iCounter <span class="op">==</span> <span class="dv">10</span>) lKeepGoing <span class="kw">=</span> <span class="cn">.false.</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;All done&#39;</span></span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="kw">end program</span> DoWhileTest</span></code></pre></div>
+<p>Can you figure out why the code ends at <code>10</code> not
+<code>11</code>?</p>
+<hr />
+</div>
+<div id="arrays" class="section level1">
+<h1>Arrays</h1>
+<div id="define-arrays" class="section level2">
+<h2>Define arrays</h2>
+<p>The modern way of declaring a fixed size array in
+<code>Fortran</code> is to use the <code>dimension()</code> keyword. For
+example:</p>
 <div class="sourceCode" id="cb24"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">gfortran</span> Main.f90 <span class="at">-o</span> Main.x <span class="at">-Llib_sub</span>/ <span class="at">-Llib_const</span>/ <span class="at">-lsubs</span> <span class="at">-lconst</span></span></code></pre></div>
-<p>You can also use absolute path of the libraries:</p>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="kw">program</span> TestArray</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10)</span> <span class="dt">::</span> xArray</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="dt">integer</span>                <span class="dt">::</span> i</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,<span class="fu">size</span>(xArray)</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  xArray(i) <span class="kw">=</span> <span class="fl">5.0</span><span class="kw">*</span>i</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="kw">enddo</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;xArray: &#39;</span>, xArray</span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a><span class="kw">end program</span> TestArray</span></code></pre></div>
+<p>Arrays can have multiple dimensions, otherwise referred to as the
+<em>rank</em> of the array. The <em>Fortran 2008</em> standard allows up
+to rank <code>15</code>, whereas the previous standard only allowed a
+maximum rank of <code>7</code>. Here are some examples:</p>
 <div class="sourceCode" id="cb25"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">gfortran</span> Main.f90 <span class="at">-o</span> Main.x <span class="at">-L</span>/work/ese-ouycc/fortran_demo2/lib_sub/ <span class="at">-lsubs</span> <span class="at">-L</span>/work/ese-ouycc/fortran_demo2/lib_const/ <span class="at">-lconst</span></span></code></pre></div>
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10)</span>          <span class="dt">::</span> xArray1D</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10,20)</span>       <span class="dt">::</span> xArray2D</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10,20,10)</span>    <span class="dt">::</span> xArray3D</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="dt">integer</span>, <span class="dt">dimension(10,5,30,50)</span>  <span class="dt">::</span> xArray4D</span></code></pre></div>
+</div>
+<div id="allocatable-arrays" class="section level2">
+<h2>Allocatable arrays</h2>
+<p>The arrays above are fixed dimensional, meaning that we declared
+their sizes in the declaration statements. A more flexible construct is
+the <em>allocatable array</em>. In <code>Fortran</code> you need to
+explicitly declare them using the <code>allocatable</code> keyword.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:)</span>,   <span class="dt">allocatable</span> <span class="dt">::</span> xArray1D</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>, <span class="dt">allocatable</span> <span class="dt">::</span> xArray2D</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>m <span class="kw">=</span> <span class="dv">5</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>n <span class="kw">=</span> <span class="dv">10</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="kw">allocate</span>(xArray1D(m))</span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="kw">allocate</span>(xArray2D(m,n))</span></code></pre></div>
+<p>You can then assign values to the elements of the arrays.</p>
+<p>If you need to <strong>free up memory later on in your
+program</strong>, use <code>deallocate</code>:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="kw">deallocate</span>(xArray1D, xArray2D)</span></code></pre></div>
 <hr />
 <p><em>The notes above are modified from the excellent <a
 href="https://rabernat.github.io/research_computing/intro-to-fortran.html">online
 tutorial</a> freely available on GitHub.</em></p>
 <hr />
 </div>
+</div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>Write a <code>Fortran</code> program to write some numbers to a file
-that has <code>20</code> lines and <code>2</code> columns. The first
-column is in a format of <code>f10.3</code>, and the second column is in
-a format of <code>f15.5</code>.</p>
+<p>Go over the scripts, make sure you understand them and be able to run
+those scripts.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>Write a subroutine <code>TestLeapYear.f90</code> to determine whether
-a year is a leap year. Then <code>call</code> this subroutine from the
-main program (<code>my.f90</code>) to check whether <code>2023</code> is
-a leap year.</p>
+<p>Write a <code>Fortran</code> script <code>TestLeapYear.f90</code> to
+determine whether the year of <code>2023</code> is a leap year.</p>
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise #3</h2>
-<p>Write a module <code>GetDays.f90</code> to print the total number of
-days in a given year. Then <code>use</code> this module in
-<code>my.f90</code> to print the total number of days for
-<code>2023</code>.</p>
+<p>Load Intel <code>Fortran</code> compiler <code>ifort</code> on
+TaiYi:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">module</span> load intel/2018.4</span></code></pre></div>
+<p>Then compile <code>TestLeapYear.f90</code> with <code>ifort</code>
+and run it.</p>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
-<p><strong>4.1.</strong> Build a library <code>libleap.a</code> which
-contains the <code>TestLeapYear.o</code>. Move it to a new folder.</p>
-<p><strong>4.2.</strong> Build another library <code>libdays.a</code>
-which contains the <code>GetDays.o</code>. Move it to a different folder
-as you did in <strong>4.1</strong>.</p>
-<p><strong>4.3.</strong> Compile and run <code>my.f90</code> using the
-two libraries.</p>
+<p>Declare an array <code>MyArray</code> with a size of
+<code>100</code>, fill <code>MyArray</code> with <code>100</code>
+numbers, and print it.</p>
 <hr />
 </div>
 </div>
