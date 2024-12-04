@@ -357,5 +357,4 @@ The `data_demo/north-pacific-gyre/2012-07-03` folder stores some observations fr
 # Further reading
 
 + [Linux Command Line Cheat Sheet](https://cheatography.com/davechild/cheat-sheets/linux-command-line/) (basic command lines)
-+ [Linux Commands Cheat Sheet 2021](https://linuxguidehq.com/linux-commands-cheat-sheet/) (advanced command lines)
 + [The Unix Shell lessons](https://swcarpentry.github.io/shell-novice/)
