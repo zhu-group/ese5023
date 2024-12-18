@@ -1,5 +1,5 @@
 ---
-title: "Section 16 Course wrap-up"
+title: "Course wrap-up"
 output:
   html_document:
     toc: true
