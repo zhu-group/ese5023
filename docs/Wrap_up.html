@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Section 16 Course wrap-up</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Computing and Programming for Environmental Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Syllabus.html">
+    <span class="fa fa-bell-o"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="Schedule.html">
+    <span class="fa fa-calendar"></span>
+     
+    Schedule
+  </a>
+</li>
+<li>
+  <a href="Resource.html">
+    <span class="fa fa-wrench"></span>
+     
+    Resource
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-laptop"></span>
+     
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignment_01.html">Assignment 01</a>
+    </li>
+    <li>
+      <a href="Assignment_02.html">Assignment 02</a>
+    </li>
+    <li>
+      <a href="Assignment_03.html">Assignment 03</a>
+    </li>
+    <li>
+      <a href="Assignment_04.html">Assignment 04</a>
+    </li>
+    <li>
+      <a href="Assignment_05.html">Assignment 05</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Section 16 Course wrap-up</h1>
+
+</div>
+
+
+<blockquote>
+<p>““I have the students learn Python in our undergraduate and graduate
+Semantic Web courses. Why? Because basically there’s nothing else with
+the flexibility and as many web libraries” - Prof. James A. Hendler at
+the University of Maryland</p>
+</blockquote>
+<hr />
+<div id="course-wrap-up-and-feedback" class="section level1">
+<h1>Course wrap-up and feedback</h1>
+<hr />
+</div>
+<div id="python-libraries-for-data-visualization"
+class="section level1">
+<h1><code>Python</code> libraries for data visualization</h1>
+<p>Here we go over some popular libraries for data visualization that
+are commonly used these days. They allow us to create visual data models
+easily according to their specifications by conveniently providing an
+interface, data visualization tools all in one place.</p>
+<div id="matplotlib" class="section level2">
+<h2><code>Matplotlib</code></h2>
+<p>By any measure, <a
+href="https://matplotlib.org/2.0.2/index.html"><code>Matplotlib</code></a>
+is the most popular and widely-used plotting library in the Python
+community. It’s most useful in making 2-D plots. We have a <a
+href="https://zhu-group.github.io/ese5023/Section_08.html">section</a>
+about this library.</p>
+</div>
+<div id="seaborn" class="section level2">
+<h2><code>Seaborn</code></h2>
+<p><a href="https://seaborn.pydata.org/"><code>Seaborn</code></a> is
+based on <code>Matplotlib</code> and closely integrated with the
+<code>NumPy</code> and <code>pandas</code> data structures.
+<code>Seaborn</code> has various dataset-oriented plotting functions
+that operate on data frames and arrays that have whole datasets within
+them. Then it internally performs the necessary statistical aggregation
+and mapping functions to create informative plots that the user desires.
+It is a high-level interface for creating beautiful and informative
+<strong>statistical graphics</strong> that are integral to exploring and
+understanding data. The <code>Seaborn</code> data graphics can include
+bar charts, pie charts, histograms, scatterplots, error charts, etc.
+<code>Seaborn</code> also has various tools for choosing color palettes
+that can reveal patterns in the data.</p>
+<p>Browse <a
+href="https://seaborn.pydata.org/examples/index.html"><code>Seaborn</code>
+gallery</a>.</p>
+</div>
+<div id="altair" class="section level2">
+<h2><code>Altair</code></h2>
+<p><a href="https://altair-viz.github.io/"><code>Altair</code></a> is
+also a statistical data visualization library in Python. It is based on
+<a href="https://vega.github.io/vega/">Vega and Vega-Lite</a> which are
+a sort of declarative language for creating, saving, and sharing data
+visualization designs that are also interactive. <code>Altair</code> can
+be used to create beautiful data visualizations of plots such as bar
+charts, pie charts, histograms, scatterplots, error charts, power
+spectra, stemplots, etc. using a minimal amount of coding. You can open
+<code>Jupyter Notebook</code> or <code>JupyterLab</code> and execute any
+of the code to obtain that data visualizations in
+<code>Altair</code>.</p>
+<p>Browse <a
+href="https://altair-viz.github.io/gallery/index.html"><code>Altair</code>
+gallery</a>.</p>
+</div>
+<div id="bokeh" class="section level2">
+<h2><code>Bokeh</code></h2>
+<p><a href="https://bokeh.org/"><code>Bokeh</code></a> is a data
+visualization library that provides detailed graphics with a high level
+of <strong>interactivity</strong> across various datasets, whether they
+are large or small. <code>Bokeh</code> is based on The Grammar of
+Graphics like <code>ggplot</code> but it is native to
+<code>Python</code> while <code>ggplot</code> is based on
+<code>ggplot2</code> from <code>R</code>. Data visualization experts can
+create various interactive plots for modern web browsers using
+<code>bokeh</code> which can be used in interactive web applications,
+HTML documents, or JSON objects.</p>
+<p><code>Bokeh</code> has 3 levels that can be used for creating
+visualizations. The first level focuses only on creating the data plots
+quickly, the second level controls the basic building blocks of the plot
+while the third level provides full autonomy for creating the charts
+with no pre-set defaults. This level is suited to the data analysts and
+professionals that are well versed in the technical side of creating
+data visualizations.</p>
+<p>Browse <a href="https://demo.bokeh.org/"><code>Bokeh</code>
+demos</a>.</p>
+</div>
+<div id="plotly" class="section level2">
+<h2><code>Plotly</code></h2>
+<p><a href="https://plotly.com/"><code>Plotly</code></a> is a free
+open-source graphing library that can be used to form data
+visualizations. It’s built on top of the <code>Plotly</code> JavaScript
+library and can be used to create <strong>web-based data
+visualizations</strong> that can be displayed in Jupyter notebooks or
+web applications using Dash or saved as individual HTML files.</p>
+<p><code>Plotly</code> provides more than 40 unique chart types like
+scatter plots, histograms, line charts, bar charts, pie charts, error
+bars, box plots, multiple axes, sparklines, dendrograms, 3-D charts,
+contour plots, etc. It can be used offline with no internet
+connection.</p>
+<p>Browse <a href="https://dash.gallery/Portal/"><code>Plotly</code>
+gallery</a> to discover things you would be interested in.</p>
+</div>
+<div id="pygal" class="section level2">
+<h2><code>Pygal</code></h2>
+<p><a href="https://www.pygal.org/en/stable/"><code>Pygal</code></a> is
+a <code>Python</code> data visualization library that is made for
+creating great charts! While <code>Pygal</code> is similar to
+<code>Plotly</code> or <code>Bokeh</code> in that it creates data
+visualization charts that can be embedded into web pages and accessed
+using a web browser, a primary difference is that it can output charts
+in the form of <strong>SVG’s or Scalable Vector Graphics</strong>. These
+SVG’s ensure that you can observe your charts clearly without losing any
+of the quality even if you scale them.</p>
+</div>
+<div id="cartopy" class="section level2">
+<h2><code>Cartopy</code></h2>
+<p><a
+href="https://scitools.org.uk/cartopy/docs/latest/"><code>Cartopy</code></a>
+makes use of the powerful <code>PROJ</code>, <code>numpy</code>, and
+<code>shapely</code> modules and includes a programmatic interface built
+on top of <code>matplotlib</code> for the creation of
+publication-quality maps. We have a <a
+href="https://zhu-group.github.io/ese5023/Section_09.html">section</a>
+about this library.</p>
+<p>Browse <a
+href="https://scitools.org.uk/cartopy/docs/latest/gallery/index.html"><code>Cartopy</code>
+gallery</a>.</p>
+</div>
+<div id="geoplotlib" class="section level2">
+<h2><code>Geoplotlib</code></h2>
+<p><a
+href="https://github.com/andrea-cuttone/geoplotlib"><code>Geoplotlib</code></a>
+supports the creation of geographical maps in particular with many
+different types of maps available such as dot-density maps, choropleths,
+symbol maps, etc. One thing to keep in mind is that requires
+<code>NumPy</code> and <code>pyglet</code> as prerequisites before
+installation.</p>
+<p>In conclusion, all these <code>Python</code> Libraries for Data
+Visualization are great options for creating beautiful and informative
+data visualizations. Each of these has its strong points and advantages
+so you can select the one that is perfect for your data visualization or
+project. For example, <code>Matplotlib</code> is extremely popular and
+well suited to general 2-D plots while <code>cartopy</code> and
+<code>Geoplotlib</code> are uniquely suite to geographical
+visualizations. So go on and choose your library to create a stunning
+visualization in Python!</p>
+</div>
+<div id="folium" class="section level2">
+<h2><code>Folium</code></h2>
+<p><a
+href="https://python-visualization.github.io/folium/"><code>Folium</code></a>
+makes it easy to visualize data on an interactive leaflet map. The
+library has a number of built-in tilesets from OpenStreetMap, Mapbox,
+and Stamen. Even though Plotly, Altair, and Bokeh also enable us to
+create maps, Folium uses an open street map to give you a closer feeling
+to a Google Map with minimum code.</p>
+<p>In conclusion, all these <code>Python</code> Libraries for Data
+Visualization are great options for creating beautiful and informative
+data visualizations. Each of these has its strong points and advantages
+so you can select the one that is perfect for your data visualization or
+project. For example, <code>Matplotlib</code> is extremely popular and
+well suited to general 2-D plots while <code>Cartopy</code> and
+<code>Geoplotlib</code> are uniquely suite to geographical
+visualizations. So go on and choose your library to create a stunning
+visualization in Python!</p>
+</div>
+<div id="open-source-python-librarlies-for-earth-data-science"
+class="section level2">
+<h2>Open source <code>Python</code> librarlies for Earth Data
+Science</h2>
+<p>The list below contains the core packages that you will use in the
+upcoming chapters of this textbook to work with scientific data.</p>
+<ul>
+<li><a
+href="https://docs.python.org/3/library/os.html"><code>os</code></a>:
+handle files and directories.<br />
+</li>
+<li><a
+href="https://docs.python.org/3/library/glob.html"><code>glob</code></a>:
+create lists of files and directories for batch processing.<br />
+</li>
+<li><a
+href="https://pypi.org/project/rasterio/"><code>rasterio</code></a>:
+work with raster (image and arrays) data.<br />
+</li>
+<li><a
+href="https://geopandas.org/en/stable/"><code>geopandas</code></a>: work
+with vector format (shapefiles, geojson - points, lines and polygons)
+using a geodataframe format.<br />
+</li>
+<li><a
+href="https://earthpy.readthedocs.io/en/latest/"><code>earthpy</code></a>:
+plot and manipulate spatial data (raster and vector).</li>
+</ul>
+</div>
+<div id="other-useful-resources" class="section level2">
+<h2>Other useful resources</h2>
+<ul>
+<li><a href="https://www.earthdatascience.org/">Earth Data Science
+Lessons</a></li>
+<li><a
+href="https://www.javedali.net/post/python-resources-for-earth-sciences/">Python
+Resources for Earth Sciences</a>
+<ul>
+<li><a
+href="https://www.javedali.net/post/python-resources-for-earth-sciences/#geospatial-analysis-and-mapping">Geospatial
+Analysis and Mapping</a></li>
+<li><a
+href="https://www.javedali.net/post/python-resources-for-earth-sciences/#hydrology">Hydrology</a></li>
+<li><a
+href="https://www.javedali.net/post/python-resources-for-earth-sciences/#meteorology">Meteorology</a><br />
+</li>
+<li><a
+href="https://www.javedali.net/post/python-resources-for-earth-sciences/#climatology">Climatology</a></li>
+<li><a
+href="https://www.javedali.net/post/python-resources-for-earth-sciences/#seismology">Seismology</a></li>
+</ul></li>
+<li><a href="https://earthml.holoviz.org/">Machine learning and
+visualization in Python for Earth science</a></li>
+<li><a href="https://ecosystem.pythongis.org">Python OS Ecosystem for
+GIS and Earth Observation</a></li>
+<li><a
+href="https://geo-python-site.readthedocs.io/en/latest/">Geo-Python
+2022</a></li>
+<li><a
+href="https://github.com/raoulcollenteur/Python-Hydrology-Tools">Open
+Source Python Packages in Hydrology</a></li>
+<li><a
+href="https://greenteapress.com/pythonhydro/pythonhydro.html">Python in
+Hydrology</a></li>
+<li><a href="http://python.hydrology-amsterdam.nl/">Python programming
+for Hydrology students</a></li>
+<li><a
+href="https://agu-h3s.org/2021/03/29/resources-for-programming-in-hydrology/">Resources
+for Programming in Hydrology</a></li>
+<li><a
+href="https://www.geeksforgeeks.org/machine-learning-with-python/">Machine
+Learning with Python</a></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="python-next" class="section level1">
+<h1><code>Python</code> next?</h1>
+<p>So far we have covered the basics of <code>Python</code> and
+fundamental modules to make plots and analyze data. Looking forward, the
+learning curve is still steep, be patient as it takes time. Use Google
+and <a href="https://stackoverflow.com/">stackoverflow</a> without
+hesitation, as you will find 9 out 10 times your questions/issues have
+been reported and solved (luckily) already.</p>
+<p>Have fun!</p>
+<hr />
+<p><img src="figs/curve_fitting.png" alt="drawing" width="500"/></p>
+<p><a href="https://imgs.xkcd.com/comics/curve_fitting.png">Figure
+source</a></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
