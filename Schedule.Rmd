@@ -24,11 +24,11 @@ Wednesday 19:00-21:50
 |12  |11/27|W.  |[Python environments](https://zhu-group.github.io/ese5023/Section_11.html)                 | [Python environments](https://zhu-group.github.io/ese5023/Lab_11.html)               |                                                                        |                 |
 |13  |12/04|W.  |[Linux: Basics](https://zhu-group.github.io/ese5023/Section_12.html)                       | [Linux: Basics](https://zhu-group.github.io/ese5023/Lab_12.html)                     | [Assignment 5](https://zhu-group.github.io/ese5023/Assignment_05.html) | Assignment 4    |
 |14  |12/11|W.  |[Linux: Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Section_13.html) | [Shell scripts and Taiyi jobs](https://zhu-group.github.io/ese5023/Lab_13.html)      |                                                                        |                 |
-|15  |12/18|W.  |Parallel computing with Python                                                             | Course wrap-up                                                                       |                                                                        | Assignment 5    |
+|15  |12/18|W.  |[Web scraping](https://zhu-group.github.io/ese5023/Section_14.html)                        | Course wrap-up                                                                       |                                                                        | Assignment 5    |
 |16  |12/25|W.  |Final project presentation                                                                 | [Final project](https://zhu-group.github.io/ese5023/download/Final_project_2024.pdf) |                                                                        |                 |
 
 **Supplements:**  
 
-[Supplement 01: Web scraping](https://zhu-group.github.io/ese5023/Sup_01.html)  
+[Supplement 01: Parallel computing with Python](https://zhu-group.github.io/ese5023/Sup_01.html)  
 [Supplement 02: Fortran: Basics](https://zhu-group.github.io/ese5023/Sup_02.html)  
 [Supplement 03: Fortran: Intermediate](https://zhu-group.github.io/ese5023/Sup_03.html)  
