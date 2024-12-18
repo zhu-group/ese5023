@@ -99,7 +99,6 @@ The list below contains the core packages that you will use in the upcoming chap
 * [Open Source Python Packages in Hydrology](https://github.com/raoulcollenteur/Python-Hydrology-Tools)
 * [Python in Hydrology](https://greenteapress.com/pythonhydro/pythonhydro.html)
 * [Python programming for Hydrology students](http://python.hydrology-amsterdam.nl/)
-* [Resources for Programming in Hydrology](https://agu-h3s.org/2021/03/29/resources-for-programming-in-hydrology/)
 * [Machine Learning with Python](https://www.geeksforgeeks.org/machine-learning-with-python/)
 
 ***
