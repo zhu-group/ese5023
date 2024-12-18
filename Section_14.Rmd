@@ -16,7 +16,7 @@ output:
 
 + We will use [Google Chrome](https://www.google.com/intl/en_us/chrome/) in this section.
 
-+ Download the [chromedriver file](https://chromedriver.chromium.org/downloads), unzip it, and **move the folder to your working directory**. You need to use **same version** of your Google Chrome, if you have installed it already. If you are using the latest Chrome, use version '131.0.6778.108' from the [Stable Releast](https://googlechromelabs.github.io/chrome-for-testing/#stable). Either '64' or '32'  version works.
++ Download the [chromedriver file](https://chromedriver.chromium.org/downloads), unzip it, and **move the folder to your working directory**. You need to use **same version** of your Google Chrome, if you have installed it already. If you are using the latest Chrome, use version `131.0.6778.108` from the [Stable Releast](https://googlechromelabs.github.io/chrome-for-testing/#stable). Either `64` or `32`  version works.
 
 + Modules used in this section:
 
