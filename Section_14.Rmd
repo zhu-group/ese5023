@@ -109,7 +109,7 @@ At this point, you also need to install [ChromeDriver](https://chromedriver.chro
 
 Download the [chromedriver-win64.zip file](https://chromedriver.chromium.org/downloads) (if you use Windows), unzip it, and **move the folder to your working directory**. You should have a single executable file called `chromedriver.exe` in a folder called `chromedriver-win64` (if you use Windows). 
 
-Next, we’re going to write a `my_rendering` function that will run the `ChromeDriver`. This will open a Chrome window, load the web page fully, return the page HTML, and quit the `ChromeDriver`, closing the Chrome window. Be sure to update the path in the `webdriver.Chrome` function to the path where you installed the `ChromeDriver`, in our case, it's `chromedriver_win32\\chromedriver.exe`.
+Next, we’re going to write a `my_rendering` function that will run the `ChromeDriver`. This will open a Chrome window, load the web page fully, return the page HTML, and quit the `ChromeDriver`, closing the Chrome window. Be sure to update the path in the `webdriver.Chrome` function to the path where you installed the `ChromeDriver`, in our case, it's `chromedriver-win64\\chromedriver.exe`.
 
 ```{python, eval=F}
 # Define a rendering function that runs the ChromeDriver
