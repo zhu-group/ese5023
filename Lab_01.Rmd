@@ -14,7 +14,7 @@ output:
 
 We will use a distribution of Python called `Anaconda`, which includes a range of useful packages for scientific coding, such as `matplotlib`, `numpy`, and `pandas.` It all comes with the `conda` package manager - a tool for easily installing other Python add-on packages that you may want to use. It also comes with a few useful programs which can be used to write Python code.
 
-Download [`Anaconda`](https://www.anaconda.com/products/individual)(~ `900` MB). Make sure to install a **Python 3.x** version specific to your operating system.
+Download [`Anaconda`](https://www.anaconda.com/products/individual)(~ `920` MB). Make sure to install a **Python 3.x** version specific to your operating system.
 
 ***
 
@@ -52,7 +52,7 @@ What is your result? Can you explain why?
 
 # 3. Install `GitKraken`
 
-We use [GitKraken](https://www.gitkraken.com/git-client) (~ `290` MB) as the Git client. There are also many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc. Make sure to install `GitKraken` software specific to your operating system.
+We use [GitKraken](https://www.gitkraken.com/git-client) (~ `370` MB) as the Git client. There are also many other third-party GUI tools, such as [GitHub Desktop](https://desktop.github.com/), [SourceTree](https://www.sourcetreeapp.com/), etc. Make sure to install `GitKraken` software specific to your operating system.
 
 ***
 

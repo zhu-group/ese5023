@@ -109,6 +109,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
     - gfortran, intel-fortran, functions, modules, etc.    
   + [Optional] Build and launch a website
     - Rmarkdown (In fact, this website is built with Rmarkdown)
+  + [Optional] AI coding  
 
 <img src="figs/Python.png" alt="drawing" width="200"/>
 <img src="figs/Git.jpeg" alt="drawing" width="200"/>
