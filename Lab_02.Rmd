@@ -56,7 +56,7 @@ In this exercise, we will learn how to create a branch, modify it, and merge it 
 
 **1.** Go through [Understanding the GitHub flow](https://guides.github.com/introduction/flow/).
 
-**2.** Open GitKraken, push `Lab2_Exercise` to GitHub. Click `1 branche` next to the `main` drop-down menu for a quick overview of the branche.
+**2.** Open GitKraken, push `Lab2_Exercise` to GitHub. Click `3 Branches` next to the `main` drop-down menu for a quick overview of the branches.
 
 **3.** Now follow [GitHub guide](https://guides.github.com/activities/hello-world/) step `2` to create a new branch `branch3`.
 
