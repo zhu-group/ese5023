@@ -87,7 +87,7 @@ The output in your Console will be in the same order.
 
 ## Variables
 
-Suppose you want to change the name `Lei` and age `36` in the previous chunk of code, something like:
+Suppose you want to change the name `Lei` and age `18` in the previous chunk of code, something like:
 
 ```{python, eval=F}
 # Print a few lines with meaningful information
@@ -111,7 +111,9 @@ print("He likes the name " + name + ", ")
 print("but does not like being " + age + ".")
 ```
 
-Here you see we use `=` to assign the variables. A *string* is defined with the `""`, and we use `+` to combine two strings.
+Here you see we use `=` to assign the variables.   
+
+A *string* is defined with the `""`, and we use `+` to combine two strings.
 
 Now change the `name` and `age` to feel the power of variables:
 
@@ -180,7 +182,9 @@ Here we use `.` to call a function, and then apply the function to `school`. You
 print(school.upper().isupper())
 ```
 
-If you want to get a specific character, use *index*. **Remember, index in `Python` starts from `0`**.
+If you want to get a specific character, use *index*.  
+
+**Remember, index in `Python` starts from `0`**.
 
 ```{python, eval=F}
 # Print the 1st character
