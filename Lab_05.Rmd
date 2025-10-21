@@ -1,0 +1,59 @@
+---
+title: "Lab 05 `numPy` exercises"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. `numpy` exercises
+
+**1.1**  Convert a float (32 bits) array into an integer (32 bits).
+
+[Hint: Try the `astype()` function].
+
+**1.2**  Find the most frequent value in a `numpy` array.
+
+[Hint: Try the `bincount()` function].
+
+**1.3**  Find the `n` largest values of a `numpy` array.
+
+[Hint: Try the `argsort()` function].
+
+**1.4**  Normalize a `5x5` random matrix.
+
+**1.5**  Consider an integer vector `arr`, which of these expressions are legal?  
+
+```
+arr**arr
+
+2 << arr >> 2
+
+arr <- arr
+
+1j*arr
+
+arr/1/1
+
+arr < arr > arr
+```
+
+**1.6** How to get all the dates corresponding to the month of Oct. 2024?  
+
+[Hint: Try the `datetime64()` function].
+
+
+**1.7** Extract the integer part of a random array using `4` different methods.  
+
+**1.8** Find the nearest value from a given value in an array.  
+
+**1.9** How to sort an array by the n^th^ column?   
+
+**1.10** Generate a generic 2D Gaussian-like array.  
+
+
+
