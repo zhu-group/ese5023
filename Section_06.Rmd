@@ -74,12 +74,12 @@ A *series* represents a **one-dimensional array** of data. The main difference b
 
 There are many ways to [create a Series](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html). We will just show a few.
 
-Let's create a `pandas` series to store AQI (`2023-10-25 10:00`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
+Let's create a `pandas` series to store AQI (`2025-10-29 15:30`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
 
 ```{python, eval=F}
-# AQI of 4 cities on 10/25/2023
+# AQI of 4 cities on 10/29/2025
 city = ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen']
-aqi  = [172, 151, 157, 97]
+aqi  = [198, 40, 63, 102]
 
 # Create a pandas series
 my_data = pd.Series(aqi, index=city)
@@ -93,6 +93,7 @@ You can show the series or even plot it:
 ```{python, eval=F}
 # Plot the series as bars
 my_data.plot(kind='bar')
+plt.show()
 ```
 
 Here we use `pandas` [built-in functions `plot`](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html) to plow the series as vertical bars (`kind='bar'`). Feel free to try other kinds (e.g., `barh`, `hist`, `box`, `area`, `pie`, etc.)
@@ -297,7 +298,13 @@ met.loc[ (met['WD'] <= 315 ) & (met['WD'] > 225 ), ['WD_new'] ] = 'W'
 met = met.loc[ (met['WS']!=-999) & (met['WD']!=-999) & 
                (met['T']!=-999)  & (met['RH']!=-999) & 
                (met['P']!=-999)  & (met['Precip']!=-999) ]
-met.head()
+
+# Get the observation hour as a new column
+met['Hour'] = pd.to_datetime(met['Time']).dt.hour
+
+# Discard Time
+met3 = met[['T', 'P', 'WS', 'WD', 'RH', 'Precip', 'WD_new', 'Hour']]
+met3.head()
 ```
 
 Now let's group data by `WD_new`:
@@ -305,26 +312,25 @@ Now let's group data by `WD_new`:
 ```{python, eval=F}
 
 # Group by WD_new
-met.groupby(['WD_new']).mean()
+met3.groupby(['WD_new']).mean()
 
 # Group by followed by sorting
-met.groupby(['WD_new']).mean().sort_values('T', ascending=True)
+met3.groupby(['WD_new']).mean().sort_values('T', ascending=True)
 ```
 
-We can also create a new column `Hour` to save observation hours:
+We can also plot data from `groupby`:
 
 ```{python, eval=F}
-# Get the observation hour as a new column
-met['Hour'] = pd.to_datetime(met['Time']).dt.hour
-
-met.head()
-
 # Group by the observation hour, get hourly means, then plot
-met.groupby(['Hour']).mean()['T'].plot()
+met3[['T', 'Hour']].groupby(['Hour']).mean()['T'].plot()
+plt.show()
+```
 
+Or try to group data by two factors:
+
+```{python, eval=F}
 # Group by the observation hour then by wind direction
-met.groupby(['Hour', 'WD_new']).mean()
-
+met3.groupby(['Hour', 'WD_new']).mean()
 ```
 
 ***
