@@ -429,7 +429,7 @@ ds.tas - 273.15
 Or even square all values in `tas` (makes no sense, just for demonstration):
 
 ```{python, eval=F}
-# Convert the air temperature from degree Kelvin to Celsius
+# Take sqaure of the data (even though this makes no sense)
 ds.tas ** 2
 ```
 
