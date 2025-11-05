@@ -18,7 +18,6 @@ In `Anaconda Powershell`, install `netCDF4`, `xarray`, and `nc-time-axis`, **one
 
 ```{python, eval=F}
 pip install netCDF4
-pip install xarray
 pip install nc-time-axis
 ```
 
@@ -120,6 +119,7 @@ You can use `xarray` built-in plotting:
 ```{python, eval=F}
 # Simple plot with xr built-in plot function
 da.plot(marker='o')
+plt.show()
 ```
 
 ## `Datasets`
@@ -143,7 +143,7 @@ Constructing Datasets manually is a bit more involved in terms of syntax. The `D
 
 + `attrs` should be a dictionary
 
-For the rest of Section, we will use [an output file](http://172.18.31.60/index.php/s/2wZyWS6NK7x2kbr) (`CESM2_200001-201412.nc`) from the [Community Earth System Model (CESM)](https://www.cesm.ucar.edu/models/cesm2/) to show basics of `xarray` and how to handle `Dataset` files. The file contains global monthly near surface temperature from `2000` to `2014`. Please download the file, and move it to your working directory.
+For the rest of Section, we will use an output file (`CESM2_200001-201412.nc`) from the [Community Earth System Model (CESM)](https://www.cesm.ucar.edu/models/cesm2/) to show basics of `xarray` and how to handle `Dataset` files. The file contains global monthly near surface temperature from `2000` to `2014`. Please download the file, and move it to your working directory.
 
 
 ## Loading data from a netCDF file
@@ -323,6 +323,7 @@ Operators can be chained, so multiple operations can be used sequentially. For e
 
 ```{python, eval=F}
 ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
+plt.show()
 ```
 
 ## Basic plotting with `.plot()`
@@ -340,9 +341,11 @@ ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
 ```{python, eval=F}
 # Histogram for all data
 ds.tas.plot()
+plt.show()
 
 # Histogram for a subset of data
 ds.tas.sel(time=slice("2010", "2011")).plot()
+plt.show()
 ```
 
 ### 1D line plots
@@ -352,6 +355,7 @@ Let's select one spatial location and plot a time series of the near surface tem
 ```{python, eval=F}
 # Time series of the near surface temperature at Shenzhen
 ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
+plt.show()
 ```
 
 Lets say we want to compare plots of temperature at three different latitudes. We can use the `hue` keyword argument to do this.
@@ -360,6 +364,7 @@ Lets say we want to compare plots of temperature at three different latitudes. W
 # Time series of the near surface temperature at 3 latitudes at time stamp 50
 ds.tas.isel(time=50).sel(lat=[-50, 0, 50], method="nearest").plot(
     x="lon", hue="lat", figsize=(8, 6))
+plt.show()
 ```
 
 ### 2D plots
@@ -370,6 +375,7 @@ Operator chaining means it is possible to have multiple selection operators and 
 # 2D map over lat (-80,25) and lon (20,160) at timestamp -10
 ds.tas.isel(time=-10).sel(lon=slice(20, 160), 
                           lat=slice(-80, 25)).plot(robust=True, figsize=(8, 6))
+plt.show()
 ```
 
 The x- and y-axes are labeled with full names — "Latitude", "Longitude" — along with units. The colorbar has a nice label, again with units. And the title tells us the timestamp of the data presented.
@@ -392,6 +398,7 @@ ds.tas.sel(lon=294.1, method='nearest').plot(
     robust=True,  
     cbar_kwargs=colorbar_kwargs,
 )
+plt.show()
 ```
 
 ### Faceting
@@ -401,6 +408,7 @@ Faceting is an effective way of visualizing variations of 3D data where 2D slice
 ```{python, eval=F}
 # Plot monthly mean near surface temperature in 2010 and 2011, one at a panel
 ds.tas.sel(time=slice("2010", "2011")).plot(col="time", col_wrap=6, robust=True)
+plt.show()
 ```
 
 See the [`xarray` documentation](https://xarray.pydata.org/en/stable/user-guide/plotting.html) for more on "faceted" plots or subplots.
@@ -438,7 +446,8 @@ Because we specified no `dim` argument the function was applied over all dimensi
 
 ```{python, eval=F}
 # Calculate the mean in time for all locations
-ds.tas.mean(dim='time').plot(size=7, robust=True);
+ds.tas.mean(dim='time').plot(size=7, robust=True)
+plt.show()
 ```
 
 Now try:
@@ -450,6 +459,7 @@ ds.tas.min(dim=['time'])
 ds.tas.sum(dim=['lat', 'lon'])
 # compute temporal median
 ds.tas.median(dim='time').plot(size=7, robust=True)
+plt.show()
 ```
 
 For more, check [`xarray` computation](https://xarray.pydata.org/en/stable/user-guide/computation.html).
@@ -475,6 +485,7 @@ We are going to use `groupby` to remove the seasonal cycle ("climatology") from 
 ```{python, eval=F}
 # Near surface temperature at Shenzhen
 ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
+plt.show()
 ```
 
 First, let's group data by `month`, i.e. all `Januaries` in one group, all `Februaries` in one group, etc...
@@ -510,9 +521,11 @@ tas_clim
 
 # Plot climatology at a specific point (Shenzhen)
 tas_clim.sel(lon=294.1, lat=22.5, method='nearest').plot()
+plt.show()
 
 # Plot zonal mean climatology
 tas_clim.mean(dim='lon').transpose().plot.contourf(levels=12, robust=True, cmap='turbo')
+plt.show()
 ```
 
 Now let's combine the previous steps to compute climatology and use `xarray`'s groupby arithmetic to remove this climatology from our original data:
@@ -527,9 +540,11 @@ tas_anom
 
 # Plot anomalies at a specific point (Shenzhen)
 tas_anom.sel(lon=294.1, lat=22.5, method='nearest').plot()
+plt.show()
 
 # Plot global mean anomalies
 tas_anom.mean(dim=['lat', 'lon']).plot()
+plt.show()
 ```
 
 For more, see [GroupBy: split-apply-combine](https://xarray.pydata.org/en/stable/user-guide/groupby.html).
@@ -551,17 +566,20 @@ masked_sample
 fig, axes = plt.subplots(ncols=2, figsize=(19, 6))
 sample.plot(ax=axes[0], robust=True)
 masked_sample.plot(ax=axes[1], robust=True)
+plt.show()
 ```
 
 `.where()` also allows providing multiple conditions. To do this, we need to make sure each conditional expression is enclosed in `()`. To combine conditions, we use the `&` operator and/or `|`. let's use where to mask locations with temperature values less than `250` and greater than `300`:
 
 ```{python, eval=F}
 # More than one condition
-sample.where((sample > 250) & (sample < 300)).plot(size=6, robust=True);
+sample.where((sample > 250) & (sample < 300)).plot(size=6, robust=True)
+plt.show()
 
 # More than one condition
 sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) & 
              (sample.lon < 240)).plot(size=6, robust=True)
+plt.show()             
 ```
 
 For more, see [Masking with where](https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where).
@@ -601,8 +619,7 @@ Plot monthly climatology in temperature in `12` panels.
 
 + [`xarray` offical guide](https://xarray.pydata.org/en/stable/index.html)
 + [NetCDF offical guide](https://www.unidata.ucar.edu/software/netcdf/docs/index.html)
-+ [`xarray` Tutorials and Videos](https://xarray.pydata.org/en/stable/tutorials-and-videos.html)
 + [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
 + [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
-+ [Pythia Resource Gallery](https://projectpythia.org/resource-gallery.html) (very comprehensive, contains many courses and tutorials)
++ [Pythia Cookbooks Gallery](https://cookbooks.projectpythia.org/) (very comprehensive, contains many courses and tutorials)
 + [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files, requires `java runtime environment 9`)

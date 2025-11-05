@@ -509,7 +509,8 @@ for more about <code>Timestamp</code>.</p>
 take a further look at how to analyze time series in the future. For
 now, simply type:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ozone[<span class="st">&#39;Ozone&#39;</span>].plot()</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ozone[<span class="st">&#39;Ozone&#39;</span>].plot()</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>You will get a ozone time series. For a plot with several panels,
 run:</p>
 <div class="sourceCode" id="cb3"><pre
@@ -522,7 +523,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a hr
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>axes <span class="op">=</span> ozone[cols_plot].plot(marker<span class="op">=</span><span class="st">&#39;.&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;None&#39;</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">9</span>), subplots<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">&#39;Ozone (ppb)&#39;</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">&#39;Temperature (F)&#39;</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>axes[<span class="dv">2</span>].set_ylabel(<span class="st">&#39;Wind Speed (m/s)&#39;</span>)</span></code></pre></div>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>axes[<span class="dv">2</span>].set_ylabel(<span class="st">&#39;Wind Speed (m/s)&#39;</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
 
 

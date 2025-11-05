@@ -32,6 +32,7 @@ pip install seaborn
 
 ```{python, eval=F}
 ozone['Ozone'].plot()
+plt.show()
 ```
 
 You will get a ozone time series. For a plot with several panels, run:
@@ -47,4 +48,5 @@ axes = ozone[cols_plot].plot(marker='.', linestyle='None', figsize=(11, 9), subp
 axes[0].set_ylabel('Ozone (ppb)')
 axes[1].set_ylabel('Temperature (F)')
 axes[2].set_ylabel('Wind Speed (m/s)')
+plt.show()
 ```
