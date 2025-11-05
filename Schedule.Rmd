@@ -24,7 +24,7 @@ Wednesday 19:00-21:50
 |13  |12/03|W.  |Python environments                                                                        | Python environments                                                                  |                                                                        |                 |
 |14  |12/10|W.  |Linux: Basics                                                                              | Linux: Basics                                                                        | Assignment 5                                                           | Assignment 4    |
 |15  |12/17|W.  |Linux: Shell scripts and Taiyi jobs                                                        | Shell scripts and Taiyi jobs; Course wrap-up                                         |                                                                        |                 |
-|16  |12/24|W.  |Final project presentation                                                                 | Final project                                                                        |                                                                        |                 |
+|16  |12/24|W.  |Final project presentation                                                                 | [Final project](https://zhu-group.github.io/ese5023/download/Final_project_2025.pdf) |                                                                        |                 |
 
 **Supplements:**  
 
