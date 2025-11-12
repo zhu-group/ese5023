@@ -1,0 +1,67 @@
+---
+title: "Lab 09 Plotting (II)"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. Interactive visualization using `hvplot`
+
+In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product](https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html), a widely used and trusted gridded compilation of historical data going back to `1854`.
+
+Download the [sst.mnmean.nc](http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek) (~ `90 MB`). Read it with `xarray` as the data object `ds`. 
+
+Let's switch gears and look at how we can produce **interactive plots** via [`hvplot`](https://hvplot.holoviz.org/index.html), which allows easy visualization of `xarray` (and other) objects. 
+
+In `Anaconda Powershell Prompt`, install `hvplot`:
+
+```{python, eval=F}
+conda install hvplot
+```
+
+To enable the `.hvplot` interface on `xarray` object, let's import the `hvplot.xarray` module:
+
+```{python, eval=F}
+import hvplot.xarray
+```
+
+**1.** To use `hvplot` instead of `matplotlib`, we use the `.hvplot()` method:
+
+```{python, eval=F}
+ds.sst.hvplot()
+```
+
+As you can see, calling `.hvplot()` behaves the same as `.plot()`, *i.e.* it uses the same heuristics as `.plot()`. In this case, it produces a histogram for data with more than `3` dimensions. 
+
+**2.**  To plot a `pcolormesh`, let's reduce the dimensionality of our data to 2D and call `.hvplot()` again:
+
+```{python, eval=F}
+ds.sst.isel(time=-1).hvplot(cmap="fire")
+```
+
+Or:
+
+```{python, eval=F}
+ds.sst.isel(time=-1, lon=100).hvplot()
+```
+
+Or:
+
+```{python, eval=F}
+ds.sst.sel(lon=114.55, lat=22.5, method='nearest').hvplot()
+```
+
+**3.** So far we have had to subset our data in order to produce plots. `Hvplot` provides convenient functionality for producing plots on-demand via interactive widgets. Let's create a series of 2D for each time slice, We will use the groupby parameter to let `hvplot` know that we want to create a widget (a slider) for the time dimension:
+
+```{python, eval=F}
+ds.sst.hvplot(groupby="time", clim=(ds.sst.min(), ds.sst.max()), cmap='turbo')
+```
+
+**4.** Feel free to use `hvplot` to create a few interactive plots.
+
+For more about `hvplot`, check its [Reference Gallery](https://hvplot.holoviz.org/reference/index.html).
