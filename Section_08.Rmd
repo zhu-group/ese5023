@@ -30,6 +30,7 @@ In this section, we will use the [daily ozone data file](https://zhu-group.githu
 # Read ozone data
 import pandas as pd
 ozone_data =  pd.read_csv('ozone_data.csv')
+
 # Check the data
 ozone_data.head()
 ```
@@ -54,16 +55,17 @@ The following piece of code is found in pretty much any python code that has `ma
 Suppose you want to draw a specific type of plot, say a scatterplot, the first thing you want to check out are the methods under `plt` (type `dir(plt)`). Let’s begin by making a simple but full-featured scatterplot and take it from there. Let’s see what `plt.plot()` creates if you an arbitrary sequence of numbers.
 
 ```{python, eval=F}
-# This will return the plot object itself (0x253619a4910) 
+# This will return the plot object itself (0x22172dfec10) 
 # besides drawing the plot.
 plt.plot(ozone_data['Ozone'])
 ```
 
-This draws a line automatically, assuming the values of the X-axis to start from zero going up to as many items in the data. Notice the line `matplotlib.lines.Line2D` in code output, this is because `matplotlib` returns the plot object itself besides drawing the plot. If you only want to see the plot, add one line:
+This draws a line automatically, assuming the values of the X-axis to start from zero going up to as many items in the data. Notice the line `matplotlib.lines.Line2D` in code output, this is because `matplotlib` returns the plot object itself besides drawing the plot. If you only want to see the plot, add one more line:
 
 ```{python, eval=F}
 # Only want to see the plot
 plt.plot(ozone_data['Ozone'])
+
 plt.show()
 ```
 
@@ -129,9 +131,9 @@ ax2.plot(ozone_data['Temperature'], 'k*')  # black starts
 
 # Title, X and Y labels, and Y lim
 ax1.set_title('Ozone'); ax2.set_title('Temperature')
-ax1.set_xlabel('Index');  ax2.set_xlabel('Index')  # x label
-ax1.set_ylabel('Ozone [ppb]');  ax2.set_ylabel('Temperature [F]')  # y label
-ax1.set_ylim(0, 200);  ax2.set_ylim(50, 100)  # y axis limits
+ax1.set_xlabel('Index'); ax2.set_xlabel('Index')  # x label
+ax1.set_ylabel('Ozone [ppb]'); ax2.set_ylabel('Temperature [F]')  # y label
+ax1.set_ylim(0, 200); ax2.set_ylim(50, 100)  # y axis limits
 
 # Using a tight layout
 plt.tight_layout()
@@ -152,7 +154,7 @@ fig, (ax1, ax2) = plt.subplots(1,2, figsize=(8,5), sharey=False, dpi=120)
 ax1.plot(ozone_data['Ozone'], 'go')  # green dots
 ax2.plot(ozone_data['Temperature'], 'k*')  # black starts
 
-# Title, X and Y labels, and Y lim
+# Title, X and Y labels, and Y limits
 ax1.set(title='Ozone', xlabel='Index', ylabel='Ozone [ppb]', ylim=(0,200))
 ax2.set(title='Temperature', xlabel='Index', ylabel='Temperature [F]', ylim=(50,100))
 
@@ -191,14 +193,16 @@ plt.show()
 The `plt.plot()` or `plt.{anything}` will always act on the plot in the **current axes**, whereas, `ax.{anything}` (object-oriented) will modify the plot inside that specific `ax`. Even though the object-oriented version might look a little confusing because it has a mix of both `ax1` and `plt` commands, you can avoid writing repetitive code by looping through the axes. For example, the following will plot `4` panels:
 
 ```{python, eval=F}
-# Draw multiple plots using for-loops using object oriented syntax
+# Draw multiple plots using for-loops 
+# using object oriented syntax
+
 # Create Figure and Subplots
 fig, axes = plt.subplots(2,2, figsize=(10,6), sharex=True, sharey=False, dpi=120)
 
 # Define the colors, markers, and fields (columns) to use
-colors = {0:'g', 1:'b', 2:'r', 3:'y'}
+colors  = {0:'g', 1:'b', 2:'r', 3:'y'}
 markers = {0:'o', 1:'x', 2:'*', 3:'p'}
-fields = {0:'Ozone', 1:'Temperature', 2:'Pressure', 3:'Wind.Speed'}
+fields  = {0:'Ozone', 1:'Temperature', 2:'Pressure', 3:'Wind.Speed'}
 
 # Plot each axes
 for i, ax in enumerate(axes.ravel()):
@@ -223,7 +227,7 @@ There are `3` basic things you will probably need in `matplotlib` when it comes 
 
 + Functional formatting of tick labels
 
-If you are using `ax` syntax, you can use `ax.set_xticks()` and `ax.set_xticklabels()` to set the positions and label texts respectively. If you are using the `plt` syntax, you can set both the positions as well as the label text in one call using the `plt.xticks()`.
+If you are using `ax` syntax (Object-oriented), you can use `ax.set_xticks()` and `ax.set_xticklabels()` to set the positions and label texts respectively. If you are using the `plt` syntax (Matlab-like), you can set both the positions as well as the label text in one call using the `plt.xticks()`.
 
 ```{python, eval=F}
 # Set the figure
@@ -233,18 +237,18 @@ plt.figure(figsize=(8,5), dpi=100)
 plt.plot(ozone_data['Ozone'], 'go')  # green dots
 
 # Adjust xy axis ticks
-plt.xticks(ticks=np.arange(0, 120, 10), fontsize=12, rotation=45, ha='center', va='top')
+plt.xticks(ticks=np.arange(0, 120, 10), fontsize=20, rotation=90, ha='left', va='center')
 plt.yticks(ticks=np.arange(0, 200, 50), fontsize=12, rotation=0, ha='right', va='center')
 
 # Tick parameters
 plt.tick_params(axis='both', bottom=True, top=True, left=True, right=True, 
-                direction='in', which='major', grid_color='blue')
+                direction='out', which='major', grid_color='blue')
 
 # Plot grid lines
-plt.grid(linestyle='--', linewidth=0.5, alpha=0.2)
+plt.grid(linestyle='--', linewidth=0.5, alpha=0.1)
 
 # Add title, \n makes a new line
-plt.title('Ozone\n(ppb)', fontsize=14)
+plt.title('Ozone \n(ppb)', fontsize=14)
 
 # Show plot
 plt.show()
@@ -264,22 +268,22 @@ plt.style.available
 For example, we can use `classic`, `seaborn`, or `dark_background` for the above plot:
 
 ```{python, eval=F}
-# Use style
+# Use style classic
 plt.style.use('classic')
 plt.plot(ozone_data['Ozone'], 'go')
 plt.show()
 # Reset to defaults
 mpl.rcParams.update(mpl.rcParamsDefault) 
 
-# Use style
-plt.style.use('seaborn')
+# Use style seaborn-v0_8
+plt.style.use('seaborn-v0_8')
 plt.plot(ozone_data['Ozone'], 'go')
 plt.show()
 # Reset to defaults
 mpl.rcParams.update(mpl.rcParamsDefault)
 
-# Use style
-plt.style.use('dark_background')
+# Use style seaborn-v0_8-paper
+plt.style.use('seaborn-v0_8-paper')
 plt.plot(ozone_data['Ozone'], 'go')
 plt.show()
 # Reset to defaults
