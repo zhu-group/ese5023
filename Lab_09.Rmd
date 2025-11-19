@@ -64,4 +64,4 @@ ds.sst.hvplot(groupby="time", clim=(ds.sst.min(), ds.sst.max()), cmap='turbo')
 
 **4.** Feel free to use `hvplot` to create a few interactive plots.
 
-For more about `hvplot`, check its [Reference Gallery](https://hvplot.holoviz.org/reference/index.html).
+For more about `hvplot`, check its [Reference Gallery](https://hvplot.holoviz.org/en/docs/latest/gallery/index.html).
