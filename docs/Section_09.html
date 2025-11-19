@@ -507,10 +507,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a hr
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
 <p>In this section, we will use the global monthly near surface
-temperature (<a
-href="http://172.18.31.60/index.php/s/2wZyWS6NK7x2kbr"><code>CESM2_200001-201412.nc</code></a>
-from the Community Earth System Model (CESM) again for demonstration. To
-read the data with <code>xarray</code>:</p>
+temperature (<code>CESM2_200001-201412.nc</code>) from the Community
+Earth System Model (CESM) again for demonstration. To read the data with
+<code>xarray</code>:</p>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Load the netCDF4 file</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span>
@@ -609,7 +608,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>proj)</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># Add LAND feature to axes using cartopy.feature (cfeature)</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>As you can see, <code>ccrs.PlateCarree()</code> creates an axes with
 a certain projection. We then use <code>add_feature()</code> to add land
 (<code>LAND</code>) feature to the axes. Here the pre-defined features
@@ -639,7 +639,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a hr
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># Add features to axes using cartopy.feature (cfeature)</span></span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>ax.add_feature(cfeature.OCEAN, zorder<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>ax.add_feature(cfeature.LAND, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;grey&#39;</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>ax.add_feature(cfeature.LAKES, edgecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>You will soon figure out <code>zorder</code> means the order of each
 layer. Try to change those to different values, see what happens.</p>
 <p>In fact, Natural Earth dataset can easily be used by creating an
@@ -658,7 +659,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a hr
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
 <span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;gray&#39;</span>,</span>
 <span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="dv">1</span>))</span></code></pre></div>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>And add country border lines (<code>admin_0_countries</code>) to the
 previous map:</p>
 <div class="sourceCode" id="cb8"><pre
@@ -683,7 +685,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a hr
 <span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>                                           scale<span class="op">=</span><span class="st">&#39;110m&#39;</span>,</span>
 <span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>                                           facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>,</span>
 <span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>                                           edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>,</span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span></code></pre></div>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>                                           linewidth<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>For more about <code>NaturalEarthFeature()</code>, use
 <code>help(cfeature.NaturalEarthFeature)</code> or check the <a
 href="https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature"><code>cartopy</code>
@@ -718,7 +721,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a hr
 <span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a></span>
 <span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
 <span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
-<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>Here we use <code>gridlines()</code> to add a graticule (and
 optionally labels) to the axes, and use <code>xlocator()</code> and
 <code>ylocator()</code> to manipulate latitude and longitude gridline
@@ -755,7 +760,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a h
 <span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a></span>
 <span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
 <span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
-<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>Or play with different projections from a list:</p>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Define plotting function</span></span>
@@ -789,20 +796,22 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a h
 <span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a>    <span class="co"># Add title</span></span>
 <span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a>    ax.set_title(<span class="ss">f&#39;</span><span class="sc">{</span><span class="bu">type</span>(my_projection)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
 <span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>    </span>
-<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co"># Set a list of projections</span></span>
-<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>projections <span class="op">=</span> [ccrs.PlateCarree(),</span>
-<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>               ccrs.Robinson(),</span>
-<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a>               ccrs.Mercator(),</span>
-<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a>               ccrs.Orthographic(),</span>
-<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a>               ccrs.InterruptedGoodeHomolosine(),</span>
-<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a>               ccrs.Gnomonic()</span>
-<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a>              ]</span>
-<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a></span>
-<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a><span class="co"># Loop the projections and call the plotting function</span></span>
-<span id="cb11-42"><a href="#cb11-42" tabindex="-1"></a><span class="cf">for</span> proj <span class="kw">in</span> projections:</span>
-<span id="cb11-43"><a href="#cb11-43" tabindex="-1"></a>    plot_map(proj)</span></code></pre></div>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a>    plt.show()</span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>    </span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a><span class="co"># Set a list of projections</span></span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a>projections <span class="op">=</span> [ccrs.PlateCarree(),</span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a>               ccrs.Robinson(),</span>
+<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a>               ccrs.Mercator(),</span>
+<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a>               ccrs.Orthographic(),</span>
+<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a>               ccrs.InterruptedGoodeHomolosine(),</span>
+<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a>               ccrs.Gnomonic()</span>
+<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a>              ]</span>
+<span id="cb11-42"><a href="#cb11-42" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" tabindex="-1"></a><span class="co"># Loop the projections and call the plotting function</span></span>
+<span id="cb11-44"><a href="#cb11-44" tabindex="-1"></a><span class="cf">for</span> proj <span class="kw">in</span> projections:</span>
+<span id="cb11-45"><a href="#cb11-45" tabindex="-1"></a>    plot_map(proj)</span></code></pre></div>
 <p>Check <a
-href="https://scitools.org.uk/cartopy/docs/latest/reference/projections.html"><code>cartopy</code>
+href="https://cartopy.readthedocs.io/stable/reference/projections.html"><code>cartopy</code>
 projection list</a> for a list of available projections supported by
 <code>cartopy</code>.</p>
 </div>
@@ -832,7 +841,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a h
 <span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a></span>
 <span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co"># Add features to axes using methods</span></span>
 <span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">&#39;10m&#39;</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>ax.gridlines()</span></code></pre></div>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>ax.gridlines()</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>Here we create a regional map with Orthographic projection over
 Southern China. And we use the <code>coastlines()</code> (same as
 <code>add_feature()</code> as we previously used) method to add
@@ -840,7 +851,7 @@ coastlines.</p>
 <p>For higher-resolution features, <code>cartopy</code> can
 automatically download and create them from the <a
 href="https://www.naturalearthdata.com/">Natural Earth Data</a> or the
-<a href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html">Global
+<a href="https://www.soest.hawaii.edu/pwessel/gshhg/">Global
 Self-consistent, Hierarchical, High-resolution Geography Database</a>
 database.</p>
 <div class="sourceCode" id="cb13"><pre
@@ -867,7 +878,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a h
 <span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a></span>
 <span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co"># Add features to axes using coastlines method</span></span>
 <span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">&#39;10m&#39;</span>)</span>
-<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a>ax.gridlines()</span></code></pre></div>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a>ax.gridlines()</span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
 <div id="adding-data-to-the-map" class="section level2">
 <h2>Adding data to the map</h2>
@@ -922,7 +935,7 @@ looks like). The <code>transform</code> argument to plotting functions
 tells <code>cartopy</code> what coordinate system your data are defined
 in. In our case, lat and lon are defined in degrees and in
 <code>PlateCarree</code> projection. For more, check <a
-href="https://scitools.org.uk/cartopy/docs/latest/tutorials/understanding_transform.html">understanding
+href="https://scitools.org.uk/cartopy/docs/v0.16/tutorials/understanding_transform.html">understanding
 the transform and projection keywords</a>.</p>
 </div>
 <div id="xarray-integration" class="section level2">
@@ -955,7 +968,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a h
 <span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a></span>
 <span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="co"># Manipulate latitude and longitude gridline numbers and spacing</span></span>
 <span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a>gl.ylocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">90</span>,<span class="dv">91</span>,<span class="dv">30</span>))</span>
-<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span></code></pre></div>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a>gl.xlocator <span class="op">=</span> mticker.FixedLocator(np.arange(<span class="op">-</span><span class="dv">180</span>, <span class="dv">181</span>, <span class="dv">30</span>))</span>
+<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
 <div id="masking-a-map-projection" class="section level2">
 <h2>Masking a map projection</h2>
@@ -1007,7 +1022,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a h
 <span id="cb16-42"><a href="#cb16-42" tabindex="-1"></a>surface_T.plot.contourf(ax<span class="op">=</span>ax4, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
 <span id="cb16-43"><a href="#cb16-43" tabindex="-1"></a>               vmin<span class="op">=</span><span class="dv">250</span>, vmax<span class="op">=</span><span class="dv">300</span>, levels<span class="op">=</span><span class="dv">11</span>, cmap<span class="op">=</span><span class="st">&#39;magma&#39;</span>,</span>
 <span id="cb16-44"><a href="#cb16-44" tabindex="-1"></a>               add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a>plt.title(<span class="st">&quot;No mask data only&quot;</span>)</span></code></pre></div>
+<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a>plt.title(<span class="st">&quot;No mask data only&quot;</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <hr />
 <p><em>The notes are modified from the excellent <a
 href="https://rabernat.github.io/research_computing_2018/maps-with-cartopy.html">Maps
@@ -1042,7 +1059,7 @@ domain.</p>
 href="https://scitools.org.uk/cartopy/docs/latest/index.html"><code>Cartopy</code>
 official guide</a></li>
 <li><a
-href="https://scitools.org.uk/cartopy/docs/latest/gallery/index.html"><code>Cartopy</code>
+href="https://cartopy.readthedocs.io/stable/gallery/index.html"><code>Cartopy</code>
 gallery</a></li>
 <li><a
 href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html"><code>GeoCAT</code>

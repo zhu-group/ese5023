@@ -14,7 +14,7 @@ output:
 
 In this exercise, we will use the [NOAA Extended Reconstructed Sea Surface Temperature (SST) v5 product](https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html), a widely used and trusted gridded compilation of historical data going back to `1854`.
 
-Download the [sst.mnmean.nc](http://172.18.31.60/index.php/s/Cyz3bJb3DTDbLek) (~ `90 MB`). Read it with `xarray` as the data object `ds`. 
+Download the `sst.mnmean.nc` (~ `90 MB`). Read it with `xarray` as the data object `ds`. 
 
 Let's switch gears and look at how we can produce **interactive plots** via [`hvplot`](https://hvplot.holoviz.org/index.html), which allows easy visualization of `xarray` (and other) objects. 
 
