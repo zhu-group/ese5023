@@ -729,7 +729,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a hr
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>y <span class="op">=</span> np.cos(x<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span><span class="op">+</span><span class="dv">4</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.plot(x, y,<span class="st">&#39;ko&#39;</span>)</span></code></pre></div>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.plot(x, y,<span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>Suppose we want to find the value of <code>y</code> when
 <code>x=3.12</code>, you can use <code>interp1d()</code> as:</p>
 <div class="sourceCode" id="cb9"><pre
@@ -748,8 +749,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a hr
 <span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># Add legend</span></span>
 <span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;linear&#39;</span>, <span class="st">&#39;cubic&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span>
 <span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="bu">print</span>(f1(<span class="fl">3.12</span>), f2(<span class="fl">3.12</span>))</span></code></pre></div>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="bu">print</span>(f1(<span class="fl">3.12</span>), f2(<span class="fl">3.12</span>))</span></code></pre></div>
 <p>The <code>interp1d()</code> function in the
 <code>scipy.interpolate</code> is a convenient method to create a
 function based on fixed data points, which can be evaluated anywhere
@@ -775,7 +778,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a h
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>y <span class="op">=</span> np.exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="dv">50</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span></code></pre></div>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>Suppose we want to find the value of <code>y</code> when
 <code>x=1.23</code>, you can use <code>UnivariateSpline()</code> as:</p>
 <div class="sourceCode" id="cb11"><pre
@@ -792,8 +797,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a h
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>plt.plot(xnew, spl(xnew), <span class="st">&#39;b&#39;</span>, lw <span class="op">=</span> <span class="dv">3</span>)</span>
 <span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>spl(<span class="fl">1.23</span>)</span></code></pre></div>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>plt.show()</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>spl(<span class="fl">1.23</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="optimization-and-fitting-with-scipy.optimize"
@@ -808,7 +815,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a h
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.9</span> <span class="op">*</span> np.sin(<span class="fl">1.5</span> <span class="op">*</span> x) <span class="op">+</span> np.random.normal(size<span class="op">=</span><span class="dv">50</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span></code></pre></div>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>If we know that the data lies on a sine wave, but not the amplitudes
 or the period, we can find those by least squares curve fitting. First
 we have to define the test function to fit, here a sine with unknown
@@ -830,7 +839,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a h
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>, x, params[<span class="dv">0</span>]<span class="op">*</span>np.sin(params[<span class="dv">1</span>] <span class="op">*</span> x), <span class="st">&#39;r-&#39;</span>)</span>
 <span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Add legend</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;fitted value&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span></code></pre></div>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;fitted value&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
 <div id="finding-the-minimums" class="section level3">
 <h3>Finding the minimums</h3>
@@ -844,7 +855,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a h
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co"># Plot the function</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>plt.plot(x, g(x)) </span></code></pre></div>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>plt.plot(x, g(x)) </span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>This function has a global minimum around <code>-1.5</code> and local
 minimums around <code>-7.1</code> and <code>4.3</code>. Searching for
 minimum can be done with <code>scipy.optimize.minimize</code>, given a
@@ -857,8 +870,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a h
 </div>
 <div id="finding-the-roots" class="section level3">
 <h3>Finding the roots</h3>
-<p>To find a root, i.e. a point where <code>g(x) = 0</code>, of the
-function <code>g</code> above we can use
+<p>To find a root, <em>i.e.</em>, a point where <code>g(x) = 0</code>,
+of the function <code>g</code> above we can use
 <code>scipy.optimize.root</code>:</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Using root() to find the roots</span></span>
@@ -919,21 +932,23 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a h
 <span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co"># Show data</span></span>
 <span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>plt.plot(data[:,<span class="dv">0</span>],data[:,<span class="dv">1</span>],<span class="st">&#39;k+&#39;</span>)</span>
 <span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co"># Computing K-Means with K = 2 (2 clusters)</span></span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="co">#centroids, mean_dist = kmeans(data,2)</span></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co"># Assign each sample to a cluster</span></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="co">#clusters, dist = vq(data,centroids)</span></span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="co"># Plot clusters</span></span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],&#39;bo&#39;)</span></span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],&#39;rd&#39;)</span></span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a></span>
-<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="co"># Plot cluster centroids</span></span>
-<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a><span class="co">#plt.plot(centroids[:,0],centroids[:,1],&#39;gX&#39;,markersize=10)</span></span>
-<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a></span>
-<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a><span class="co"># Plot raw data</span></span>
-<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a><span class="co">#plt.plot(data[:,0],data[:,1],&#39;w+&#39;)</span></span></code></pre></div>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co"># Computing K-Means with K = 2 (2 clusters)</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#centroids, mean_dist = kmeans(data,2)</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="co"># Assign each sample to a cluster</span></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="co">#clusters, dist = vq(data,centroids)</span></span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="co"># Plot clusters</span></span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],&#39;bo&#39;)</span></span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],&#39;rd&#39;)</span></span>
+<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a><span class="co"># Plot cluster centroids</span></span>
+<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a><span class="co">#plt.plot(centroids[:,0],centroids[:,1],&#39;gX&#39;,markersize=10)</span></span>
+<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a><span class="co"># Plot raw data</span></span>
+<span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a><span class="co">#plt.plot(data[:,0],data[:,1],&#39;w+&#39;)</span></span></code></pre></div>
 <hr />
 </div>
 </div>

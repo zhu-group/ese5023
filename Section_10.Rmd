@@ -157,6 +157,7 @@ y = np.cos(x**2/3+4)
 
 # Plot data
 plt.plot(x, y,'ko')
+plt.show()
 ```
 
 Suppose we want to find the value of `y` when `x=3.12`, you can use `interp1d()` as:
@@ -177,6 +178,8 @@ plt.plot(x, y, 'ko', xnew, f1(xnew), '-', xnew, f2(xnew), '--')
 # Add legend
 plt.legend(['data', 'linear', 'cubic'], loc = 'best')
 
+plt.show()
+
 # Show data at a specific location
 print(f1(3.12), f2(3.12))
 ```
@@ -194,6 +197,8 @@ y = np.exp(-x**2) + 0.1 * np.random.randn(50)
 
 # Plot data
 plt.plot(x, y, 'ko')
+
+plt.show()
 ```
 
 Suppose we want to find the value of `y` when `x=1.23`, you can use `UnivariateSpline()` as:
@@ -212,6 +217,8 @@ xnew = np.linspace(-3, 3, 1000)
 plt.plot(x, y, 'ko')
 plt.plot(xnew, spl(xnew), 'b', lw = 3)
 
+plt.show()
+
 # Show data at a specific location
 spl(1.23)
 ```
@@ -229,6 +236,8 @@ y = 2.9 * np.sin(1.5 * x) + np.random.normal(size=50)
 
 # Plot data
 plt.plot(x, y, 'ko')
+
+plt.show()
 ```
 
 If we know that the data lies on a sine wave, but not the amplitudes or the period, we can find those by least squares curve fitting. First we have to define the test function to fit, here a sine with unknown amplitude and period:
@@ -253,6 +262,8 @@ plt.plot(x, y, 'ko', x, params[0]*np.sin(params[1] * x), 'r-')
 
 # Add legend
 plt.legend(['data', 'fitted value'], loc = 'best')
+
+plt.show()
 ```
 
 ### Finding the minimums
@@ -269,6 +280,8 @@ x = np.arange(-10, 10, 0.1)
 
 # Plot the function
 plt.plot(x, g(x)) 
+
+plt.show()
 ```
 
 This function has a global minimum around `-1.5` and local minimums around `-7.1` and `4.3`. Searching for minimum can be done with `scipy.optimize.minimize`, given a starting point `x0`, it returns the location of the minimum that it has found.
@@ -281,7 +294,7 @@ result
 
 ### Finding the roots
 
-To find a root, i.e. a point where `g(x) = 0`, of the function `g` above we can use `scipy.optimize.root`:
+To find a root, *i.e.*, a point where `g(x) = 0`, of the function `g` above we can use `scipy.optimize.root`:
 
 ```{python, eval=F}
 # Using root() to find the roots
@@ -334,6 +347,8 @@ data = vstack((rand(100,2) + array([.8,.8]), rand(100,2)))
 
 # Show data
 plt.plot(data[:,0],data[:,1],'k+')
+
+plt.show()
 
 # Computing K-Means with K = 2 (2 clusters)
 #centroids, mean_dist = kmeans(data,2)
