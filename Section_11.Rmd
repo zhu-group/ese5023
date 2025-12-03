@@ -132,7 +132,7 @@ Now let's install some modules under the `cper` environment. Make sure you have 
 First, we will install modules via `conda`:
 
 ```{bash, eval=F}
-conda install numpy pandas matplotlib netCDF4 xarray notebook cartopy dask python-graphviz
+conda install numpy pandas matplotlib netCDF4 xarray notebook cartopy python-graphviz
 ```
 
 Later, we use `pip` to install a module via a different channel:
@@ -181,7 +181,7 @@ It can take some minutes depending on the size of the environment and the number
 .\Scripts\conda-unpack.exe
 ```
 
-to re-create symlinks and set everything up. Check [Moving Conda Environments](https://www.anaconda.com/blog/moving-conda-environments) and [Packing Conda Environments](https://gist.github.com/pmbaumgartner/2626ce24adb7f4030c0075d2b35dda32) for more.
+to re-create symlinks and set everything up. Check [Moving Conda Environments](https://www.anaconda.com/blog/moving-conda-environments) and [Packing Conda Environments](https://gist.github.com/pmbaumgartner/2626ce24adb7f4030c0075d2b35dda32) (need VPN) for more.
 
 ## Removing a conda environment 
 
