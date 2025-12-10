@@ -28,7 +28,7 @@ In this exercise, we will learn a few more Linux commands. For each command, ple
 
 **1.7** Check the total file size of the `data_demo/data/` folder using `du`.
 
-**1.8** Copy the `data_demo/writing/` folder to `data_demo/writing_new/`, compress `data_demo/writing_new/` using `zip`, and decompress the `.zip` file with `unzip`.
+**1.8** Copy the `data_demo/writing/` folder to `data_demo/writing_new/`, compress `data_demo/writing_new/` using `tar -cvzf`, and decompress the `.gz` file with `tar -xvzf`.
 
 **1.9** Change the file permissions flags on `writing_new` to `drwxr-x---` using `chmod`.
 
