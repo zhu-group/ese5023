@@ -15,39 +15,33 @@ Email: zhul3@sustech.edu.cn
 Office Hours: By appointment*  
 
 **Teaching Assistants (TAs):**   
-Yuchen Huang  
+Yali Li  
 *School of Environmental Science and Engineering  
 Office: 903B, CoE North  
-Email:  12532725@mail.sustech.edu.cn   
-Office Hours: 09:00-10:00, W.*   
+Email:  12631506@mail.sustech.edu.cn   
+Office Hours: TBD*   
 
-Beihui Hu  
+Jianghai Li  
 *School of Environmental Science and Engineering  
-Office: 750A，CoE North    
-Email:  beihuihu@163.com   
-Office Hours: 19:00-20:00, M.*   
-
-Rongguang Ye  
-*Department of Computer Science and Engineering  
-Office: 646A, CoE South    
-Email:  yerg2023@mail.sustech.edu.cn   
-Office Hours: 16:00-17:00, Th.*  
+Office: 903B, CoE North     
+Email:  12632725@mail.sustech.edu.cn   
+Office Hours: TBD*   
 
 **Class Time:**   
 Wednesday 19:00-21:50 
 
 **Location:**   
-503, Teaching Building #1 
+524, Teaching Building #1 
 
 **Credit:**   
 The course has a credit of 3.0, with a total class hour of 48.
 
 **Overview:**   
-Computing is an indispensable tool for Environmental scientists. Being able to analyze and visualize data sets through programming efforts has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech.   
+Computing is an indispensable tool for environmental scientists. Being able to analyze and visualize data sets through programming efforts has become one of the most critical skills for carrying out studies in Environmental Science. However, incoming ESE graduate students often find their opportunities to get access to such courses limited at SUSTech.
 
-This course will introduce students to modern computing software, programming tools, and practices that are broadly applicable in their later research. This course will include an introduction to Linux, version control and data backup with Git, programming in two commonly used languages (Python and FORTRAN), data analysis and visualization tools, and high-performance computing exercises on cluster computers. This course will boost students’ programming and computing skills, which are in high demand in the era of Big Data. 
+This course will introduce students to modern computing software, programming tools, and practices that are broadly applicable in their later research. The curriculum encompasses version control and data backup with Git, programming in commonly used languages (Python and FORTRAN), data analysis and visualization tools, Linux environments, and high-performance computing on cluster computers. To address the paradigm shift in modern scientific research, this course now integrates a comprehensive module on AI-assisted programming. Students will master the underlying logic of Large Language Models (LLMs), context engineering, rigorous scientific code verification (automated testing), and agentic workflows. This comprehensive approach will boost students’ programming and computing skills, which are in high demand in the era of Big Data and Artificial Intelligence.
 
-This course is a **hands-on and project-oriented** course that facilitates student learning through lectures, in-class exercises, labs, assignments, final project, and one-on-one interactions. Class topics will be taught through example data sets, demos, and research problems from Environmental Science.  
+This course is a **hands-on and project-oriented** course that facilitates student learning through lectures, in-class exercises, labs, assignments, a final project, and one-on-one interactions. Class topics will be taught through example data sets, demos, and research problems from Environmental and Earth Science, empowering students to confidently and rigorously harness both traditional algorithms and modern AI tools to solve real-world research challenges.
 
 **Structure:**   
 The course will meet on Wednesday weekly. During class 09-10, new material will be demonstrated by the instructor, followed by in-class exercises. For class 11, the class will turn into a lab, when class time will be devoted to working on in-class exercises and assignments, discussing the final project, and one-on-one interactions between students and the instructor/TAs. Students are also welcome to Office Hours held by the instructor and TAs for specific questions.
@@ -65,7 +59,7 @@ Students are **required** to bring laptops to the class to learn the material, p
 Students will be evaluated at the end of the semester based on their assignments (50%), final project (40%), and class participation (10%).
 
 **Schedule:**  
-[Schedule for 2025 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
+[Schedule for 2026 Fall](https://zhu-group.github.io/ese5023/Schedule.html) 
 
 ***
 

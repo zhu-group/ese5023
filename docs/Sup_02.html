@@ -11,9 +11,9 @@
 
 
 
-<title>Fortran: Basics</title>
+<title>Intermediate Python: xarray</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -56,8 +56,9 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -68,7 +69,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -475,606 +476,664 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><code>Fortran</code>: Basics</h1>
+<h1 class="title toc-ignore">Intermediate <code>Python</code>:
+<code>xarray</code></h1>
 
 </div>
 
 
 <blockquote>
-<p>“FORTRAN programmers just DO it.” - Unknown</p>
+<p>“<code>Xarray</code> (formerly xray) is an open source project and
+Python package that makes working with labelled multi-dimensional arrays
+simple, efficient, and fun!” - <code>Xarray</code> document.</p>
 </blockquote>
 <hr />
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
-<p>Log in to Taiyi (<code>172.18.6.175</code>), then in your home
-directory, type:</p>
+<p>In <code>Anaconda Powershell</code>, install <code>netCDF4</code>,
+<code>xarray</code>, and <code>nc-time-axis</code>, <strong>one after
+another</strong>:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /work/ese-ouycc/fortran_demo1 .</span></code></pre></div>
-<hr />
-</div>
-<div id="introduction-to-fortran" class="section level1">
-<h1>Introduction to <code>Fortran</code></h1>
-<p><a href="https://fortran-lang.org/"><code>Fortran</code></a> was
-originally developed by a team at IBM in 1957 for scientific
-calculations. <code>Fortran</code> stands for <em>Formula
-Translation</em>. It is a powerful language for creating fast and
-memory-efficient codes for heavy numerical computations.</p>
-<p><code>Fortran</code> is not very user-friendly, compared with
-<code>Python</code>, <code>R</code>, and <code>MATLAB</code>:</p>
-<ul>
-<li><p><code>Fortran</code> is a more verbose language than
-<code>Python</code>, <code>R</code>, and <code>MATLAB</code>, so it
-generally will take you much longer to write <code>Fortran</code> codes
-compared to an equivalent code in <code>Python</code>.</p></li>
-<li><p>Unlike <code>Python</code>, which can easily be run
-interactively, <code>Fortran</code> codes must be <em>compiled</em>
-before you can run them in a terminal shell. That makes debugging and
-testing a bit slower too.</p></li>
-<li><p><code>Fortran</code> doesn’t have a built-in graphics library, so
-you can’t interactively plot results like you can with
-<code>Python</code>.</p></li>
-</ul>
-<p>So, with those points in mind, we recommend you stick to
-<code>Python</code>, <code>R</code>, or <code>MATLAB</code> for you
-day-to-day scientific computing tasks.</p>
-<p>However, <code>Fortran</code> is good when you have some
-computational problem where you need it to run as fast as possible, for
-example when it would take days to run on <code>Python</code>,
-<code>R</code>, or <code>MATLAB</code>. Learning the basics of
-<code>Fortran</code> will also be useful for when you come across
-<code>Fortran</code> codes that do some computational task you need and
-you want to interface those codes with your own codes or you might want
-to modify them for your own research needs.</p>
-<div id="programs" class="section level2">
-<h2>Programs</h2>
-<p><code>Fortran</code> is a procedural language where you define a
-<strong>sequence</strong> of commands to execute in a program file. The
-program file is then compiled using a <code>Fortran</code>
-<em>compiler</em>. The compiler turns the program commands in the text
-file into machine language instructions that will execute on the
-computer’s CPU. You run the compiled code from a terminal shell.</p>
-<p>Let’s begin by looking at a simple example showing the basic workflow
-for using <code>Fortran</code>. Start by making a plain text file named
-<code>HelloWorld.f90</code> that has the following content:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>pip install netCDF4</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>pip install nc<span class="op">-</span>time<span class="op">-</span>axis</span></code></pre></div>
+<p>To test whether your environment is set up properly, try the
+following imports:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
-<p>Compile the code using the command:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span></code></pre></div>
+<hr />
+</div>
+<div id="introduction-to-xarray" class="section level1">
+<h1>Introduction to <code>xarray</code></h1>
+<p>In <a
+href="https://zhu-group.github.io/ese5023/Section_06.html">Section
+06</a>, we saw how <code>pandas</code> handled <em>tabular</em>
+datasets, by using “indexes” for each row and labels for each column.
+These features, together with <code>pandas</code>’ many useful routines
+for all kinds of data wrangling and analysis, have made
+<code>pandas</code> one of the most popular python packages in the
+world.</p>
+<p>However, not all Earth science datasets easily fit into the “tabular”
+model (i.e. rows and columns) imposed by <code>pandas</code>. In
+particular, we often deal with <em>multidimensional</em> data. By
+multidimensional data (also often called N-dimensional), it means data
+with many independent dimensions or axes. For example, we might
+represent Earth’s surface temperature <em>T</em> as a three dimensional
+variable:</p>
+<p><span class="math display">\[T(Lon, Lat, Time)  \]</span></p>
+<p>The point of <code>xarray</code> is to provide <strong>pandas-level
+convenience</strong> for working with this type of data. Specifically,
+<code>xarray</code> is for working with labeled, multi dimensional
+arrays.</p>
+<ul>
+<li><p>Built on top of <code>numpy</code> and
+<code>pandas</code></p></li>
+<li><p>Brings the power of <code>pandas</code> to multidimensional
+arrays</p></li>
+<li><p>Supports data of any dimensionality</p></li>
+</ul>
+<p><img src="figs/xarray2.png" alt="drawing" width="800"/></p>
+<p><a
+href="https://gdfa.ugr.es/python/climate_data/data_science_climate_data.html">Figure
+source</a></p>
+<hr />
+</div>
+<div id="xarray-basics" class="section level1">
+<h1><code>Xarray</code> basics</h1>
+<p>Like we did for <code>pandas</code> in <a
+href="https://zhu-group.github.io/ese5023/Section_06.html">Section
+06</a>, here we will go over the <strong>basic capabilities</strong> of
+<code>xarray</code>. Please dig into the <a
+href="https://xarray.pydata.org/en/stable/index.html"><code>xarray</code>
+documentation</a> for more advanced usage.</p>
+<div id="xarray-data-structures" class="section level2">
+<h2><code>xarray</code> data structures</h2>
+<p><code>Xarray</code> has two fundamental data structures:</p>
+<ul>
+<li><p>a <em>DataArray</em>, which holds a <strong>single</strong>
+multi-dimensional variable and its coordinates</p></li>
+<li><p>a <em>Dataset</em>, which holds <strong>multiple</strong>
+variables that potentially share the same coordinates</p></li>
+</ul>
+<p>Check <a
+href="http://xarray.pydata.org/en/latest/user-guide/data-structures.html">Data
+Structures</a> for more.</p>
+</div>
+<div id="dataarray" class="section level2">
+<h2><code>DataArray</code></h2>
+<p>A <em>DataArray</em> has four essential attributes:</p>
+<ul>
+<li><p><code>values</code>: a <code>numpy.ndarray</code> holding the
+array’s values</p></li>
+<li><p><code>dims</code>: dimension names for each axis (e.g., (‘x’,
+‘y’, ‘z’), (‘lon’, ‘lat’, ‘time’))</p></li>
+<li><p><code>coords</code>: a dict-like container of arrays
+(coordinates) that label each point (e.g., 1-dimensional arrays of
+numbers, datetime objects or strings)</p></li>
+<li><p><code>attrs</code>: an <code>OrderedDict</code> to hold arbitrary
+metadata (attributes)</p></li>
+</ul>
+<p>Let’s start by constructing some DataArrays manually:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 <span class="at">-o</span> HelloWorld.x</span></code></pre></div>
-<p>Run the code in the terminal using:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
+<p>A simple <code>DataArray</code> without dimensions or coordinates
+isn’t much use:</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">./HelloWorld.x</span></span></code></pre></div>
-<p>A <code>Fortran</code> program has to have a single program file
-(usually <code>.f</code> or <code>.f90</code> files) that lists the
-sequence of commands to execute.</p>
-<p>The program file has to start with the first command being the word
-<code>program</code> and it must end with the last command being the
-keyword <code>end</code>. The words <code>program HelloWorld</code>
-after the final <code>end</code> statement aren’t necessary, but they
-are a useful organization construct for pointing out what exactly is
-ending, especially when your program file is very long and also contains
-subroutine and function code beneath the program section.</p>
-</div>
-<div id="compiling" class="section level2">
-<h2>Compiling</h2>
-<p>In the example above, we compiled the code by calling our
-<em>compiler</em>, here the <a
-href="https://gcc.gnu.org/wiki/GFortran"><code>gfortran</code>
-compiler</a> which is open source and freely available. Intel’s <a
-href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.isiyag"><code>ifort</code>
-compiler</a> is a commercial compiler that is fairly ubiquitous,
-especially on cluster systems. For some codes, <code>ifort</code> can
-produce an executable that runs <code>10-20x</code> faster than what
-<code>gfortran</code> produces.</p>
-<p>To compile our <code>HelloWorld.f90</code> code, we used the output
-<em>flag</em> <code>-o</code> and then listed the name we wanted to use
-for the compiled program that was output. Here we used
-<code>HelloWorld</code> for the name, but if for some (not recommended!)
-reason we wanted to name it <code>MyProgram.x</code> instead, we could
-compile it using:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Create a xr dataarray</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>da</span></code></pre></div>
+<p>You can add a dimension name to the <code>DataArray</code>:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 <span class="at">-o</span> MyProgram.x</span></code></pre></div>
-<p>If you don’t specify <code>-o</code> and the output program name,
-then the compiler will by default name the program
-<code>a.out</code>:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Add a dimension name</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>], dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>da</span></code></pre></div>
+<p>But things get most interesting when you add a coordinate:</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">gfortran</span> HelloWorld.f90 </span></code></pre></div>
-<p>If there are any errors with your code, the compiler should let you
-know what the problem is. For example, try compiling the code below,
-which has an errant <code>a</code> character:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Add a coordinate</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                  dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                  coords<span class="op">=</span>{<span class="st">&#39;x&#39;</span>: [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]})</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>da</span></code></pre></div>
+<p>You can use <code>xarray</code> built-in plotting:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  a</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
-<p>The compiler returns an error message. Check this.</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Simple plot with xr built-in plot function</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>da.plot(marker<span class="op">=</span><span class="st">&#39;o&#39;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="datasets" class="section level2">
+<h2><code>Datasets</code></h2>
+<p>A <code>Dataset</code> holds many <code>DataArrays</code> which
+potentially can share coordinates. In analogy to
+<code>pandas</code>:</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>HelloWorld.f90:<span class="fl">3.2</span>:</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  a</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="dv">1</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Error: Unclassifiable statement at (<span class="dv">1</span>)</span></code></pre></div>
-<p>The statement <code>HelloWorld.f90:3:2:</code> specifies that the
-<code>Unclassifiable statement</code> is in file
-<code>HelloWorld.f90</code> on line <code>3</code>, column
-<code>2</code>. It then prints out what is on that line (here the errant
-letter <code>a</code>).</p>
-<p>When there are errors in long and complicated <code>Fortran</code>
-codes, the first error the compiler finds can lead it to other errors,
-which stem from it not being able to interpret the code that had the
-first error. So if you get more than one error message when compiling a
-piece of code, <strong>go fix the first listed error</strong> and try
-recompiling the code to see if the other errors are now gone.</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>pandas.Series : pandas.Dataframe :: xarray.DataArray : xarray.Dataset</span></code></pre></div>
+<p>Constructing Datasets manually is a bit more involved in terms of
+syntax. The <code>Dataset</code> takes three arguments:</p>
+<ul>
+<li><p><code>data_vars</code> should be a dictionary with each key as
+the name of the variable and each value as one of:</p>
+<ul>
+<li>A <code>DataArray</code> or Variable</li>
+<li>A tuple of the form <code>(dims, data[, attrs])</code>, which is
+converted into arguments for Variable</li>
+<li>A <code>pandas</code> object, which is converted into a
+<code>DataArray</code></li>
+<li>A 1D array or list, which is interpreted as values for a one
+dimensional coordinate variable along the same dimension as it’s
+name</li>
+</ul></li>
+<li><p><code>coords</code> should be a dictionary of the same form as
+<code>data_vars</code></p></li>
+<li><p><code>attrs</code> should be a dictionary</p></li>
+</ul>
+<p>For the rest of Section, we will use an output file
+(<code>CESM2_200001-201412.nc</code>) from the <a
+href="https://www.cesm.ucar.edu/models/cesm2/">Community Earth System
+Model (CESM)</a> to show basics of <code>xarray</code> and how to handle
+<code>Dataset</code> files. The file contains global monthly near
+surface temperature from <code>2000</code> to <code>2014</code>. Please
+download the file, and move it to your working directory.</p>
 </div>
-<div id="comments" class="section level2">
-<h2>Comments</h2>
-<p>Anything to the right of an exclamation point <code>!</code> in a
-<code>Fortran</code> code is considered a comment. For example a
-commented version of our <code>HelloWorld.f90</code> program is</p>
+<div id="loading-data-from-a-netcdf-file" class="section level2">
+<h2>Loading data from a netCDF file</h2>
+<p>In fact, <code>Xarray</code>’s interface is heavily inspired by the
+<code>netCDF</code> data model. And <code>xarray</code>’s
+<code>Dataset</code> is designed as an in-memory representation of a
+netCDF dataset.</p>
+<p>First, let’s open the CESM netCDF file
+(<code>CESM2_200001-201412.nc</code>) using the
+<code>xarray.open_dataset()</code> function:</p>
 <div class="sourceCode" id="cb9"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">! This program writes &#39;Hello world&#39; to the shell.</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">! Version 0.1, Dec. 08, 2021</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">!</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="kw">program</span> HelloWorld</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">!</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">! Send a message to the world:</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">!</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="fu">print</span><span class="kw">*</span>, <span class="st">&#39;Hello world&#39;</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">!</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">! All done, goodbye</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">!</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="kw">end program</span> HelloWorld</span></code></pre></div>
-<p>Comments are an essential part of good coding practice. You can use
-them to document what each section of a code does; this can be very
-helpful for when you return to a code you wrote a long time ago and are
-trying to remember what it does, or when you get someone else’s code and
-are trying to understand what it does.</p>
-<p>You can also use code comments as an outline when first starting to
-write a long and complicated code. The comments can outline the sequence
-of steps you intend the code to do. Once your outline is complete, you
-can start coding by filling in the necessary commands below each section
-of comments.</p>
-<p>At a minimum, your code should have at least a few comments at the
-start of the text file that indicates what the codes does. This is also
-a place where you can add a date stamp and possibly a version number.
-You can also list the authorship of the code, which can be useful if it
-will be shared with other or is part of a collaborative effort .</p>
-<hr />
-</div>
-</div>
-<div id="variables" class="section level1">
-<h1>Variables</h1>
-<div id="variable-types" class="section level2">
-<h2>Variable types</h2>
-<p>Unlike <code>Python</code>, <code>Fortran</code> requires you to
-<strong>declare the type of each variable</strong>. For example, you
-need to declare whether a variable is an <code>integer</code>,
-<code>real</code>, <code>complex</code>, <code>logical</code>, or
-<code>character</code>. Here is an example program declaring several
-different variable types:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Open a netCDF4 file</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span></code></pre></div>
+<p>By default, <code>xarray.open_dataset()</code> function uses lazy
+loading, i.e. it just loads in the <em>coordinate</em> and
+<em>attribute</em> metadata and not the data that correspond to data
+variables themselves. The data variables are loaded only on actual
+values access (e.g. when performing some calculation, slicing, …) or
+with <code>.load()</code> method. The <code>xarray.open_dataset()</code>
+is also able to load files in other formats (e.g., <code>grib</code>,
+<code>tiff</code>, or <code>zarr</code>), check <a
+href="https://xarray.pydata.org/en/stable/user-guide/io.html">Reading
+and writing files</a> for more.</p>
+<p>Now take a look at the loaded dataset:</p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">program</span> VariableShowcase</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">! Declare variables:</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="dt">integer</span>         <span class="dt">::</span> i</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="dt">real(8)</span>         <span class="dt">::</span> x</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">complex(8)      :: z</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="dt">logical</span>         <span class="dt">::</span> <span class="bu">bTest</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">character(32)   :: sFileName</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>i <span class="kw">=</span> <span class="dv">1</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.0</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>z <span class="kw">=</span> <span class="bu">cmplx</span>(<span class="fl">0.5</span>,<span class="fl">2.0</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">! logical types are .true. or .false.</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="bu">bTest</span> <span class="kw">=</span> <span class="cn">.false.</span>    </span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>sFileName <span class="kw">=</span> <span class="st">&#39;data.txt&#39;</span></span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;i: &#39;</span>, i</span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x: &#39;</span>, x</span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;z: &#39;</span>, z</span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;bTest: &#39;</span>, <span class="bu">bTest</span></span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;sFileName: &#39;</span>, sFileName</span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="kw">end program</span> VariableShowcase</span></code></pre></div>
-<p>Compile and run this demo:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Show dataset</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>ds</span></code></pre></div>
+<p>To check the corresponding netCDF representation, we can use the
+<code>.info()</code> method:</p>
 <div class="sourceCode" id="cb11"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">gfortran</span> VariableShowcase.f90 <span class="at">-o</span> VariableShowcase.x </span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">./VariableShowcase.x</span></span></code></pre></div>
-<p>Note that the variable declarations in <code>Fortran</code> have to
-be made <strong>at the start of the program</strong> (or subroutine or
-function), <strong>before any commands are made</strong>. Unlike
-<code>Python</code>, you can’t declare a new variable in the middle of a
-sequence of commands. If you try to, the compiler will throw an error
-message.</p>
-<p>Pay attention that, <code>Fortran</code> is <strong>case
-insensitive</strong>, meaning that it will treat variables
-<code>x</code> and <code>X</code> as the same quantity.</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Show dataset info</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>ds.info()</span></code></pre></div>
 </div>
-<div id="variable-precision" class="section level2">
-<h2>Variable precision</h2>
-<p><code>real(8)</code> declared above means a real variable that has
-<code>8</code> bytes (<code>64</code> bits) of precision. This is what
-is known as <em>double precision</em>, which is the default precision in
-<code>Python</code> and <code>MATLAB</code>. You can also declare a
-lower or higher order precision (e.g. <code>real(4)</code> and
-<code>real(16)</code>) but you should only do this if you have a very
-good reason to do so. 99.99% of the time you should just use
-<code>real(8)</code> rather than <code>(4)</code> or
-<code>(16)</code>.</p>
-<p>The <code>complex(8)</code> declaration means a complex number with
-<code>8</code> bytes of precision for each of the real and imaginary
-parts of the number.</p>
-<p>For integers, you typically don’t need to specify the precision and
-most of the time you can just use integer and then let the compiler
-assign the precision (usually either <code>4</code> or <code>8</code>
-bytes).</p>
-<p>You can use the <code>huge()</code> intrinsic function to show the
-largest numbers that can be represented by each precision. For example,
-compile and run this code to see the largest possible values that can be
-represented by each numerical variable type:</p>
+<div id="checking-datasets-properties" class="section level2">
+<h2>Checking <code>Datasets</code> properties</h2>
+<p>The <code>Datasets</code> (<code>ds</code>) have the following key
+properties:</p>
+<ul>
+<li><p><code>data_vars</code>: an dictionary of <code>DataArrays</code>
+corresponding to data variables</p></li>
+<li><p><code>dims</code>: a dictionary mapping from dimension names to
+the fixed length of each dimension (e.g. {‘time’: <code>180</code>,
+‘lat’: <code>192</code>, ‘lon’: <code>288</code>, ‘nbnd’:
+<code>2</code>} )</p></li>
+<li><p><code>coords</code>: a dictionary-like container of arrays
+(coordinates) that label each point (tick label) along our
+dimensions</p></li>
+<li><p><code>attrs</code>: a dictionary holding arbitrary metadata
+pertaining to the dataset</p></li>
+</ul>
+<p>Check those one by one:</p>
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">program</span> PrecisionTest</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">! Declare variables:</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="dt">integer</span>         <span class="dt">::</span> i</span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="dt">integer(4)</span>      <span class="dt">::</span> i4</span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="dt">integer(8)</span>      <span class="dt">::</span> i8</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="dt">real(4)</span>         <span class="dt">::</span> x4</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="dt">real(8)</span>         <span class="dt">::</span> x8</span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer:    &#39;</span>, <span class="fu">huge</span>(i)</span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer:    &#39;</span>, <span class="fu">huge</span>(i)</span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer(4): &#39;</span>, <span class="fu">huge</span>(i4)</span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;integer(8): &#39;</span>, <span class="fu">huge</span>(i8)</span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;real(4):    &#39;</span>, <span class="fu">huge</span>(x4)</span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;real(8):    &#39;</span>, <span class="fu">huge</span>(x8)</span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="kw">end program</span> PrecisionTest</span></code></pre></div>
-<p>Here we are using modern <code>Fortran</code> syntax to define the
-variables. However, there are older ways of defining variables that you
-should be aware of since you may come across them. The older syntax does
-not use the <code>::</code> separator between the declaration and the
-list of variable names and has slightly different type names. Most
-<code>Fortran</code> compilers support the older and modern syntax:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Check data variables</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>ds.data_vars</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Check data dimension names</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>ds.dims</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># Check data coordinates</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>ds.coords</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># Check data attributes (metadata)</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>ds.attrs</span></code></pre></div>
+</div>
+<div id="checking-dataarray-properties" class="section level2">
+<h2>Checking <code>DataArray</code> properties</h2>
+<p>As we just covered, the <code>DataArray</code> is
+<code>xarray</code>’s implementation of a labeled, multi-dimensional
+array. It has several key properties:</p>
+<ul>
+<li><code>data</code>: an array (<code>numpy.ndarray</code>,
+<code>dask.array</code>, or <code>sparse</code> or
+<code>cupy.array</code> holding the array’s values).</li>
+<li><code>dims</code>: dimension names for each axis e.g. (lat, lon,
+time)</li>
+<li><code>coords</code>: a dictionary-like container of arrays
+(coordinates) that label each point (tick label) along our
+dimensions</li>
+<li><code>attrs</code>: a dictionary that holds arbitrary
+attributes/metadata (such as units).</li>
+<li><code>name</code>: an arbitrary name of the array</li>
+</ul>
+<p>For example, you can use <code>ds['tas']</code> to extract the
+<code>tas</code> (near surface temperature) variable
+(<code>DataArray</code>), and later check its properties one by one:</p>
 <div class="sourceCode" id="cb13"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">! Old style Fortran variable types:</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="dt">double precision</span>      <span class="co">! same as real(8)</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="dt">real*8</span>                <span class="co">! same as real(8)</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="dt">real*4</span>                <span class="co">! same as real(4)</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>double <span class="dt">complex</span>        <span class="co">! same as complex(8)</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">complex*16            ! same as complex(8)</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="dt">integer*4</span>             <span class="co">! same as integer(4)</span></span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Extract the tas variable (DataArray)</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># The actual array data</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].data</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Datarray coordinates</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].coords</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># Dataarray attributes</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].attrs</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co"># Dataarray name</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].name</span></code></pre></div>
 </div>
-<div id="integer-division" class="section level2">
-<h2>Integer division</h2>
-<p>Be careful when dividing integers in <code>Fortran</code>. For
-example, the expression <code>fraction = (N-1)/N</code> where
-<code>N</code> is an integer and fraction has been declared as
-<code>real(8)</code> will result in fraction being assigned the value
-<code>0</code>. Why is this?</p>
-<p>Because all the terms in <code>(N-1)/N</code> are integers so the
-compiler uses integer division. You can easily fix this by making at
-least one of the terms in the expression a floating point number. Either
-of the following expressions will force the compiler to use floating
-point arithmetic and fraction will then be assigned the intended
-value:</p>
+<div id="indexing-and-selecting-data" class="section level2">
+<h2>Indexing and selecting data</h2>
+<p><code>Xarray</code> supports two kinds of indexing:</p>
+<ul>
+<li><p>Positional indexing via <code>.isel()</code>: provides primarily
+integer position based index (from <code>0</code> to
+<code>length-1</code> of the axis/dimension)</p></li>
+<li><p>Label indexing via <code>.sel()</code>: provides primarily label
+based index.</p></li>
+</ul>
+<p>The good part of <code>xarray</code> is that, its indexing methods
+preserves the coordinate labels and associated metadata.</p>
+<p>Check <a
+href="https://xarray.pydata.org/en/stable/user-guide/indexing.html">Indexing
+and selecting data</a> for more.</p>
+<div id="selection-by-position" class="section level3">
+<h3>Selection by position</h3>
+<p>The <code>.isel()</code> method is the primary access method for
+<strong>purely integer based indexing</strong>. The following are valid
+inputs:</p>
+<ul>
+<li><p>An integer, e.g. <code>lat=10</code></p></li>
+<li><p>A list or array of integers, e.g,
+<code>lon=[10, 20, 39]</code></p></li>
+<li><p>A slice object (range) with integers,
+e.g. <code>time=slice(2, 20)</code></p></li>
+</ul>
 <div class="sourceCode" id="cb14"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="bu">fraction</span> <span class="kw">=</span> (N<span class="kw">-</span><span class="fl">1.</span>)<span class="kw">/</span>N</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># The original object, i.e. no selection</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>ds.tas.isel()</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># Data at lat=100</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>ds.tas.isel(lat<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># Data at lat=100 and the last two time steps </span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>ds.tas.isel(lat<span class="op">=</span><span class="dv">100</span>, time<span class="op">=</span>[<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Data lat=100 and time ranging from index 10 and 20 </span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>ds.tas.isel(lon<span class="op">=</span><span class="dv">100</span>, time<span class="op">=</span><span class="bu">slice</span>(<span class="dv">10</span>, <span class="dv">20</span>))</span></code></pre></div>
+</div>
+<div id="selection-by-label" class="section level3">
+<h3>Selection by label</h3>
+<p>The <code>.sel()</code> method is the primary access method for
+<strong>purely coordinate label based indexing</strong>. The following
+are valid inputs:</p>
+<ul>
+<li><p>A single coordinate label, e.g. <code>time='2013-01-15'</code> or
+<code>time='2013'</code></p></li>
+<li><p>A list or array of coordinate labels,
+e.g. <code>lon=['100','356.25']</code></p></li>
+<li><p>A slice object with coordinate labels,
+e.g. <code>time=slice("2021-01-01", "2021-03-01")</code></p></li>
+</ul>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="bu">fraction</span> <span class="kw">=</span> (<span class="bu">dble</span>(N)<span class="kw">-</span><span class="dv">1</span>)<span class="kw">/</span>N</span></code></pre></div>
-<p>where the <code>dble()</code> function turns integer <code>N</code>
-into a double precision value.</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Select data in 2013</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="st">&#39;2013&#39;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Select data on 2013-01-15</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="st">&#39;2013-01-15&#39;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co"># Select data from a list</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span>[<span class="st">&#39;100&#39;</span>,<span class="st">&#39;356.25&#39;</span>])</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co"># Select data within a range</span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co"># Both the start and the stop are included</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2013-01-01&quot;</span>, <span class="st">&quot;2014-12-31&quot;</span>))</span></code></pre></div>
 </div>
-<div id="implicit-none" class="section level2">
-<h2>Implicit none</h2>
-<p>You should <strong>always include the statement</strong>
-<code>implicit none</code> at the start of your <code>Fortran</code>
-codes (programs, subroutines, and functions).</p>
-<p>By default, <code>Fortran</code> has a rather insidious implicit
-typing for variables that have certain first letters in their names.
-Unless specified otherwise, all variables starting with letters
-<code>I</code>, <code>J</code>, <code>K</code>, <code>L</code>,
-<code>M</code>, and <code>N</code> are default integers, and all others
-are default real. This can lead to nasty programming errors if you
-aren’t careful. For example, consider the following code:</p>
+<div id="nearest-neighbor-lookups" class="section level3">
+<h3>Nearest-neighbor lookups</h3>
+<p>Now try:</p>
 <div class="sourceCode" id="cb16"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">program</span> ImplicitTypeTest</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>ireal <span class="kw">=</span> <span class="fl">1.5</span>   <span class="co">! we want this to be a real number, but since the variable</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>              <span class="co">! name starts with an i Fortran thinks its an integer.</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ireal is: &#39;</span>, ireal</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="kw">end program</span> ImplicitTypeTest</span></code></pre></div>
-<p>Try running this program and you will see that it prints out
-<code>ireal</code> as the integer <code>1</code>. If instead, you use
-<code>implicit none</code> at the start of this code, the compiler will
-issue an error because <code>ireal</code> was not yet declared.</p>
-<p>Here’s another example where <code>implicit none</code> would help
-avoid getting the wrong result. Can you spot the error?</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>ds.tas.sel(lat<span class="op">=</span><span class="fl">39.5</span>, lon<span class="op">=</span><span class="fl">105.7</span>)</span></code></pre></div>
+<p>Can you figure out why this did not work?</p>
+<p>Be careful when working with floating coordinate labels. When we have
+integer, string, datetime-like values for coordinate labels,
+<code>sel()</code> works flawlessly. When we try to work with floating
+coordinate labels, things get a little tricky. As shown above, when our
+coordinate labels are not integers or strings or datetime-like but
+floating point numbers, <code>.sel()</code> may throw a KeyError:
+<code>ds.tas.sel(lat=39.5, lon=105.7)</code> fails because we are trying
+to use a conditional for an <strong>approximate</strong> value, i.e
+floating numbers are represented approximately inside the computer, and
+<code>xarray</code> is unable to locate this exact value. To address
+this issue, <code>xarray</code> supports method and tolerance keyword
+argument. The method parameter allows for enabling nearest neighbor
+(inexact) lookups by use of the methods <code>pad</code>,
+<code>backfill</code>, or <code>nearest</code>:</p>
 <div class="sourceCode" id="cb17"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">program</span> TestUndeclared</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="dt">real(8)</span>  <span class="dt">::</span> distance, velocity, time</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>time     <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>velocity <span class="kw">=</span> <span class="fl">5.0</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>distance <span class="kw">=</span> velocity<span class="kw">*</span>times</span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;distance: &#39;</span>, distance</span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="kw">end program</span> TestUndeclared</span></code></pre></div>
-<p>Now put <code>implicit none</code> at the start of the code,
-re-compile, see what happens.</p>
-<hr />
-</div>
-</div>
-<div id="relational-operators" class="section level1">
-<h1>Relational operators</h1>
-<table>
-<colgroup>
-<col width="24%" />
-<col width="24%" />
-<col width="9%" />
-<col width="41%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Older <code>Fortran</code></th>
-<th align="center">Newer <code>Fortran</code></th>
-<th align="center"><code>Python</code></th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><code>.eq.</code></td>
-<td align="center"><code>==</code></td>
-<td align="center"><code>==</code></td>
-<td align="left">equality</td>
-</tr>
-<tr class="even">
-<td align="center"><code>.ne.</code></td>
-<td align="center"><code>/=</code></td>
-<td align="center"><code>!=</code></td>
-<td align="left">not equality</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>.lt.</code></td>
-<td align="center"><code>&lt;</code></td>
-<td align="center"><code>&lt;</code></td>
-<td align="left">less than</td>
-</tr>
-<tr class="even">
-<td align="center"><code>.le.</code></td>
-<td align="center"><code>&lt;=</code></td>
-<td align="center"><code>&lt;=</code></td>
-<td align="left">less than or equal to</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>.gt.</code></td>
-<td align="center"><code>&gt;</code></td>
-<td align="center"><code>&gt;</code></td>
-<td align="left">greater than</td>
-</tr>
-<tr class="even">
-<td align="center"><code>.ge.</code></td>
-<td align="center"><code>&gt;=</code></td>
-<td align="center"><code>&gt;=</code></td>
-<td align="left">greater than or equal to</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>.and.</code></td>
-<td align="center"><code>.and.</code></td>
-<td align="center"><code>&amp;</code></td>
-<td align="left">logical and</td>
-</tr>
-<tr class="even">
-<td align="center"><code>.or.</code></td>
-<td align="center"><code>.or.</code></td>
-<td align="center"><code>|</code></td>
-<td align="left">logical or</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>.not.</code></td>
-<td align="center"><code>.not.</code></td>
-<td align="center"><code>~</code></td>
-<td align="left">logical not</td>
-</tr>
-</tbody>
-</table>
-<p>Try the following <code>TestRelationalOps.f90</code>:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">program</span> TestRelationalOps</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="dt">real(8)</span> <span class="dt">::</span> x, y, z</span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="dt">logical</span> <span class="dt">::</span> ltest1, ltest2, ltest3</span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.0</span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>y <span class="kw">=</span> <span class="fl">2.0</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>z <span class="kw">=</span> <span class="fl">1.0</span></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>ltest1 <span class="kw">=</span> x <span class="op">&lt;</span> y</span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>ltest2 <span class="kw">=</span> x <span class="op">==</span> z</span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>ltest3 <span class="kw">=</span> (ltest1 <span class="op">.and.</span> ltest2)</span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest1: &#39;</span>, ltest1</span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest2: &#39;</span>, ltest2</span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;ltest3: &#39;</span>, ltest3</span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="kw">end program</span> TestRelationalOps</span></code></pre></div>
-<hr />
-</div>
-<div id="if-statements" class="section level1">
-<h1>If statements</h1>
-<p>These are similar to <code>Python</code>, except that you need to
-include the keyword <code>then</code> after the logical statement. The
-<code>if</code> statement also ends with the keyword
-<code>endif</code>.</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">program</span> IfElseTest</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="dt">real(8)</span> <span class="dt">::</span> x, y</span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>x <span class="kw">=</span> <span class="fl">1.5</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>y <span class="kw">=</span> <span class="fl">3.0</span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="kw">if</span> (x <span class="op">&lt;</span> y) <span class="kw">then</span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x is less than y&#39;</span></span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="kw">elseif</span> (x <span class="op">&gt;</span> y ) <span class="kw">then</span></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x is greater than y&#39;</span></span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="kw">elseif</span> (x <span class="op">==</span> y ) <span class="kw">then</span></span>
-<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;x equals y&#39;</span></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="kw">else</span></span>
-<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>    <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;this case should never be found&#39;</span>      </span>
-<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="kw">endif</span></span>
-<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a></span>
-<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a><span class="kw">end program</span> IfElseTest</span></code></pre></div>
-<hr />
-</div>
-<div id="do-loops" class="section level1">
-<h1>Do loops</h1>
-<p>Loops in <code>Fortran</code> are done using the <code>do</code> and
-<code>enddo</code> construct:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">program</span> DoLoopTest</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="dt">integer</span> <span class="dt">::</span> i, n</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>n <span class="kw">=</span> <span class="dv">10</span></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,n</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;i is &#39;</span>, i</span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="kw">end program</span> DoLoopTest</span></code></pre></div>
-<p>Note that unlike <code>Python</code>, you don’t need to indent the
-commands inside the <code>do</code> and <code>enddo</code> construct
-with <code>Fortran</code>.</p>
-<p>However, it helps to make your code much more readable if you do
-indent the commands. Indenting is helpful if you loop has spaned a page
-or more of code, since the indentation is a visual guide to the scope of
-the loop. Indenting is also very helpful when you have nested loops. For
-example, both of these loops below are valid <code>Fortran</code>, but
-which one is easier to read?</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="kw">do</span> k <span class="kw">=</span> <span class="dv">1</span>, n</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> i, j, k</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="kw">enddo</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, l</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, m</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    <span class="kw">do</span> k <span class="kw">=</span> <span class="dv">1</span>, n</span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>      <span class="fu">write(*</span>,<span class="fu">*)</span> i, j, k</span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>    <span class="kw">enddo</span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>  <span class="kw">enddo</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="kw">enddo</span></span></code></pre></div>
-<hr />
-</div>
-<div id="do-while-loops" class="section level1">
-<h1>Do while loops</h1>
-<p>The <code>do</code> <code>while</code> loop is similar but instead of
-using a counter, it uses a logical variable to exit the loop.</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="kw">program</span> DoWhileTest</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="kw">implicit</span> <span class="kw">none</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="dt">integer</span> <span class="dt">::</span> i, iCounter</span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="dt">logical</span> <span class="dt">::</span> lKeepGoing</span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>lKeepGoing <span class="kw">=</span> <span class="cn">.true.</span></span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>iCounter   <span class="kw">=</span> <span class="dv">0</span></span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="kw">do</span> <span class="kw">while</span> (lKeepGoing)</span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>  iCounter <span class="kw">=</span> iCounter <span class="kw">+</span> <span class="dv">1</span></span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>  <span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;iCounter: &#39;</span>,iCounter</span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>  <span class="kw">if</span> (iCounter <span class="op">==</span> <span class="dv">10</span>) lKeepGoing <span class="kw">=</span> <span class="cn">.false.</span></span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a></span>
-<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;All done&#39;</span></span>
-<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="kw">end program</span> DoWhileTest</span></code></pre></div>
-<p>Can you figure out why the code ends at <code>10</code> not
-<code>11</code>?</p>
-<hr />
-</div>
-<div id="arrays" class="section level1">
-<h1>Arrays</h1>
-<div id="define-arrays" class="section level2">
-<h2>Define arrays</h2>
-<p>The modern way of declaring a fixed size array in
-<code>Fortran</code> is to use the <code>dimension()</code> keyword. For
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Using the nearest method to find a nearby value</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>ds.tas.sel(lat<span class="op">=</span><span class="fl">39.5</span>, lon<span class="op">=</span><span class="fl">105.7</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>)</span></code></pre></div>
+<p>So the closest location in the data was at
+<code>lat=39.11, lon=106.2</code>.</p>
+<p>See the <a
+href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.sel.html"><code>xarray</code>
+documentation</a> for more on usage of method and tolerance parameters
+in <code>.sel()</code>.</p>
+<p>Another way to use the nearest neighbor lookup is via a objects. For
 example:</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="kw">program</span> TestArray</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10)</span> <span class="dt">::</span> xArray</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="dt">integer</span>                <span class="dt">::</span> i</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>,<span class="fu">size</span>(xArray)</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  xArray(i) <span class="kw">=</span> <span class="fl">5.0</span><span class="kw">*</span>i</span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="kw">enddo</span></span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="fu">write(*</span>,<span class="fu">*)</span> <span class="st">&#39;xArray: &#39;</span>, xArray</span>
-<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a><span class="kw">end program</span> TestArray</span></code></pre></div>
-<p>Arrays can have multiple dimensions, otherwise referred to as the
-<em>rank</em> of the array. The <em>Fortran 2008</em> standard allows up
-to rank <code>15</code>, whereas the previous standard only allowed a
-maximum rank of <code>7</code>. Here are some examples:</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10)</span>          <span class="dt">::</span> xArray1D</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10,20)</span>       <span class="dt">::</span> xArray2D</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="dt">real(8)</span>, <span class="dt">dimension(10,20,10)</span>    <span class="dt">::</span> xArray3D</span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="dt">integer</span>, <span class="dt">dimension(10,5,30,50)</span>  <span class="dt">::</span> xArray4D</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Using the slice method to find a nearby value</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>ds.tas.sel(lat<span class="op">=</span><span class="bu">slice</span>(<span class="dv">39</span>, <span class="fl">39.5</span>), lon<span class="op">=</span><span class="bu">slice</span>(<span class="fl">106.1</span>, <span class="fl">106.3</span>))</span></code></pre></div>
+<p>Operators can be chained, so multiple operations can be used
+sequentially. For example, to select an area of interest and the first
+time index, and plot the data:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>ds.tas.isel(time<span class="op">=</span><span class="dv">0</span>).sel(lon<span class="op">=</span><span class="bu">slice</span>(<span class="dv">20</span>, <span class="dv">160</span>), lat<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">80</span>, <span class="dv">25</span>)).plot()</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
-<div id="allocatable-arrays" class="section level2">
-<h2>Allocatable arrays</h2>
-<p>The arrays above are fixed dimensional, meaning that we declared
-their sizes in the declaration statements. A more flexible construct is
-the <em>allocatable array</em>. In <code>Fortran</code> you need to
-explicitly declare them using the <code>allocatable</code> keyword.</p>
+</div>
+<div id="basic-plotting-with-.plot" class="section level2">
+<h2>Basic plotting with <code>.plot()</code></h2>
+<p><code>Xarray</code> provides a <code>.plot()</code> method on
+<code>DataArray</code> and <code>Dataset.</code> This method is a
+wrapper around <code>Matplotlib</code>’s
+<code>matplotlib.pyplot.plot()</code>. <code>xarray</code> will
+automatically guess the type of plot based on the dimensionality of the
+data. By default <code>.plot()</code> creates:</p>
+<ul>
+<li><p>a <strong>line</strong> plot for 1-D arrays using
+<code>matplotlib.pyplot.plot()</code></p></li>
+<li><p>a <strong>pcolormesh</strong> plot for 2-D arrays using
+<code>matplotlib.pyplot.pcolormesh()</code></p></li>
+<li><p>a <strong>histogram</strong> for everything else (more than 2
+dimensions) using <code>matplotlib.pyplot.hist()</code></p></li>
+</ul>
+<div id="histograms" class="section level3">
+<h3>Histograms</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Histogram for all data</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>ds.tas.plot()</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Histogram for a subset of data</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot()</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="d-line-plots" class="section level3">
+<h3>1D line plots</h3>
+<p>Let’s select one spatial location and plot a time series of the near
+surface temperature:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Time series of the near surface temperature at Shenzhen</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Lets say we want to compare plots of temperature at three different
+latitudes. We can use the <code>hue</code> keyword argument to do
+this.</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Time series of the near surface temperature at 3 latitudes at time stamp 50</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>ds.tas.isel(time<span class="op">=</span><span class="dv">50</span>).sel(lat<span class="op">=</span>[<span class="op">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>], method<span class="op">=</span><span class="st">&quot;nearest&quot;</span>).plot(</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    x<span class="op">=</span><span class="st">&quot;lon&quot;</span>, hue<span class="op">=</span><span class="st">&quot;lat&quot;</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="d-plots" class="section level3">
+<h3>2D plots</h3>
+<p>Operator chaining means it is possible to have multiple selection
+operators and add <code>.plot()</code> to the end to visualize the
+result.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># 2D map over lat (-80,25) and lon (20,160) at timestamp -10</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>ds.tas.isel(time<span class="op">=-</span><span class="dv">10</span>).sel(lon<span class="op">=</span><span class="bu">slice</span>(<span class="dv">20</span>, <span class="dv">160</span>), </span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>                          lat<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">80</span>, <span class="dv">25</span>)).plot(robust<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>The x- and y-axes are labeled with full names — “Latitude”,
+“Longitude” — along with units. The colorbar has a nice label, again
+with units. And the title tells us the timestamp of the data
+presented.</p>
+<p>You can, of course, modify the color bar:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Define keyword arguments that are passed to matptolib.pyplot.colorbar</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>colorbar_kwargs <span class="op">=</span> {</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>    <span class="st">&quot;orientation&quot;</span>: <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>    <span class="st">&quot;label&quot;</span>: <span class="st">&quot;my clustom label&quot;</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>    <span class="st">&quot;pad&quot;</span>: <span class="fl">0.1</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>}</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>    <span class="co"># coordinate to plot on the x-axis of the plot</span></span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>    x<span class="op">=</span><span class="st">&quot;time&quot;</span>, </span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>    <span class="co"># set colorbar limits to 2nd and 98th percentile of data</span></span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>    robust<span class="op">=</span><span class="va">True</span>,  </span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>    cbar_kwargs<span class="op">=</span>colorbar_kwargs,</span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>)</span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>plt.show()</span></code></pre></div>
+</div>
+<div id="faceting" class="section level3">
+<h3>Faceting</h3>
+<p>Faceting is an effective way of visualizing variations of 3D data
+where 2D slices are visualized in a panel (subplot) and the third
+dimensions is varied between panels (subplots).</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Plot monthly mean near surface temperature in 2010 and 2011, one at a panel</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot(col<span class="op">=</span><span class="st">&quot;time&quot;</span>, col_wrap<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>See the <a
+href="https://xarray.pydata.org/en/stable/user-guide/plotting.html"><code>xarray</code>
+documentation</a> for more on “faceted” plots or subplots.</p>
+</div>
+</div>
+<div id="computation" class="section level2">
+<h2>Computation</h2>
+<p>Here we will some basic computation enabled by
+<code>xarray.</code></p>
+<div id="arithmetic-operations" class="section level3">
+<h3>Arithmetic Operations</h3>
+<p>Arithmetic operations with a single <code>DataArray</code>
+automatically vectorize (like <code>numpy</code>) over all array values.
+Let’s convert the air temperature from degree Kelvin to Celsius:</p>
 <div class="sourceCode" id="cb26"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:)</span>,   <span class="dt">allocatable</span> <span class="dt">::</span> xArray1D</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>, <span class="dt">allocatable</span> <span class="dt">::</span> xArray2D</span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>m <span class="kw">=</span> <span class="dv">5</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>n <span class="kw">=</span> <span class="dv">10</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="kw">allocate</span>(xArray1D(m))</span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="kw">allocate</span>(xArray2D(m,n))</span></code></pre></div>
-<p>You can then assign values to the elements of the arrays.</p>
-<p>If you need to <strong>free up memory later on in your
-program</strong>, use <code>deallocate</code>:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Convert the air temperature from degree Kelvin to Celsius</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>ds.tas <span class="op">-</span> <span class="fl">273.15</span></span></code></pre></div>
+<p>Or even square all values in <code>tas</code> (makes no sense, just
+for demonstration):</p>
 <div class="sourceCode" id="cb27"><pre
-class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="kw">deallocate</span>(xArray1D, xArray2D)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Take sqaure of the data (even though this makes no sense)</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>ds.tas <span class="op">**</span> <span class="dv">2</span></span></code></pre></div>
+</div>
+<div id="aggregation-methods" class="section level3">
+<h3>Aggregation Methods</h3>
+<p>A very common step during data analysis is to summarize the data in
+question by computing aggregations like <code>sum()</code>,
+<code>mean()</code>, <code>median()</code>, <code>min()</code>,
+<code>max()</code>, in which reduced data provide insight into the
+nature of large dataset. Let’s explore some of these aggregation
+methods:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Compute the mean of all locations and timesteps</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>ds.tas.mean()</span></code></pre></div>
+<p>Because we specified no <code>dim</code> argument the function was
+applied over all dimensions. It is possible to specify a dimension along
+which to compute an aggregation. For example, to calculate the mean in
+time for all locations specify the time dimension as the dimension along
+which the mean should be calculated:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Calculate the mean in time for all locations</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>ds.tas.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>).plot(size<span class="op">=</span><span class="dv">7</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Now try:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Compute temporal min</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>ds.tas.<span class="bu">min</span>(dim<span class="op">=</span>[<span class="st">&#39;time&#39;</span>])</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co"># Compute spatial sum</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>ds.tas.<span class="bu">sum</span>(dim<span class="op">=</span>[<span class="st">&#39;lat&#39;</span>, <span class="st">&#39;lon&#39;</span>])</span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a><span class="co"># compute temporal median</span></span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>ds.tas.median(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>).plot(size<span class="op">=</span><span class="dv">7</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>For more, check <a
+href="https://xarray.pydata.org/en/stable/user-guide/computation.html"><code>xarray</code>
+computation</a>.</p>
+</div>
+<div id="groupby-split-apply-combine" class="section level3">
+<h3>GroupBy: split, apply, combine</h3>
+<p>Simple aggregations can give useful summary of our dataset, but often
+we would prefer to aggregate <strong>conditionally</strong> on some
+coordinate labels or groups. <code>Xarray</code> provides the so-called
+<code>groupby</code> operation which enables the
+<code>split-apply-combine</code> workflow on <code>xarray</code>
+<code>DataArrays</code> and <code>Datasets.</code> The
+<code>split-apply-combine</code> operation is illustrated in this
+figure.</p>
+<p><img src="figs/xarray-split-apply-combine.png" alt="drawing" width="700"/></p>
+<p><a
+href="https://raw.githubusercontent.com/andersy005/xarray-tutorial/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0/images/xarray-split-apply-combine.png">Figure
+source</a></p>
+<p>This makes clear what the <code>groupby</code> accomplishes:</p>
+<ul>
+<li><p>The <code>split</code> step involves breaking up and grouping an
+<code>xarray</code> <code>Dataset</code> or <code>DataArray</code>
+depending on the value of the specified <strong>group
+key</strong></p></li>
+<li><p>The <code>apply</code> step involves computing some function,
+usually an aggregate, transformation, or filtering, within the
+individual groups</p></li>
+<li><p>The <code>combine</code> step merges the results of these
+operations into an output <code>xarray</code> <code>Dataset</code> or
+<code>DataArray</code></p></li>
+</ul>
+<p>We are going to use <code>groupby</code> to remove the seasonal cycle
+(“climatology”) from our dataset:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Near surface temperature at Shenzhen</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>First, let’s group data by <code>month</code>, i.e. all
+<code>Januaries</code> in one group, all <code>Februaries</code> in one
+group, etc…</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>ds.tas.groupby(ds.time.dt.month)</span></code></pre></div>
+<p>Here we are using the <code>.dt</code> <a
+href="https://xarray.pydata.org/en/stable/generated/xarray.core.accessor_dt.DatetimeAccessor.html"><code>DatetimeAccessor</code></a>
+to extract specific components of dates/times in our time coordinate
+dimension. You can also try <code>ds.time.dt.year</code> and
+<code>ds.time.dt.month</code>, see what happens.</p>
+<p><code>Xarray</code> also offers a more concise syntax when the
+variable you’re grouping on is already present in the dataset. This is
+identical to <code>ds.tas.groupby (ds.time.dt.month)</code>:</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>ds.tas.groupby(<span class="st">&#39;time.month&#39;</span>)</span></code></pre></div>
+<p>Now that we have groups defined, it’s time to “apply” a calculation
+to the group. These calculations can either be:</p>
+<ul>
+<li><p>aggregation: reduces the size of the group</p></li>
+<li><p>transformation: preserves the group’s full size</p></li>
+</ul>
+<p>At then end of the apply step, <code>xarray</code> will automatically
+combine the aggregated/transformed groups back into a single object.</p>
+<p>Let’s calculate the climatology at every point in the dataset and
+plot the results:</p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># Calculate the climatology </span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>tas_clim <span class="op">=</span> ds.tas.groupby(<span class="st">&#39;time.month&#39;</span>).mean()</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>tas_clim</span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="co"># Plot climatology at a specific point (Shenzhen)</span></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a>tas_clim.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>plt.show()</span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a><span class="co"># Plot zonal mean climatology</span></span>
+<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>tas_clim.mean(dim<span class="op">=</span><span class="st">&#39;lon&#39;</span>).transpose().plot.contourf(levels<span class="op">=</span><span class="dv">12</span>, robust<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Now let’s combine the previous steps to compute climatology and use
+<code>xarray</code>’s groupby arithmetic to remove this climatology from
+our original data:</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>group_data <span class="op">=</span> ds.tas.groupby(<span class="st">&#39;time.month&#39;</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="co"># Apply mean to grouped data, and then compute the anomaly </span></span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>tas_anom <span class="op">=</span> group_data <span class="op">-</span> group_data.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>tas_anom</span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="co"># Plot anomalies at a specific point (Shenzhen)</span></span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>tas_anom.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>plt.show()</span>
+<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="co"># Plot global mean anomalies</span></span>
+<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a>tas_anom.mean(dim<span class="op">=</span>[<span class="st">&#39;lat&#39;</span>, <span class="st">&#39;lon&#39;</span>]).plot()</span>
+<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>For more, see <a
+href="https://xarray.pydata.org/en/stable/user-guide/groupby.html">GroupBy:
+split-apply-combine</a>.</p>
+</div>
+</div>
+<div id="masking-data" class="section level2">
+<h2>Masking Data</h2>
+<p>Using <code>.where()</code> method, elements of an
+<code>xarray</code> <code>Dataset</code> or <code>xarray</code>
+<code>DataArray</code> that satisfy a given condition or multiple
+conditions can be replaced/masked. Unlike <code>.isel()</code> and
+<code>sel()</code> that change the shape of the returned results,
+<code>.where()</code> preserves the shape of the original data. It does
+accomplishes this by returning values from the original
+<code>DataArray</code> or <code>Dataset</code> if the condition is
+<code>True</code>, and fills in <code>missing values</code> wherever the
+condition is <code>False</code>.</p>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Select data</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>sample <span class="op">=</span> ds.tas.isel(time<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>sample</span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co"># Sample data where temperature is less than 270</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>masked_sample <span class="op">=</span> sample.where(sample <span class="op">&lt;</span> <span class="fl">270.0</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a>masked_sample</span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="co"># Plot 2 panels</span></span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">19</span>, <span class="dv">6</span>))</span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>sample.plot(ax<span class="op">=</span>axes[<span class="dv">0</span>], robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a>masked_sample.plot(ax<span class="op">=</span>axes[<span class="dv">1</span>], robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><code>.where()</code> also allows providing multiple conditions. To
+do this, we need to make sure each conditional expression is enclosed in
+<code>()</code>. To combine conditions, we use the <code>&amp;</code>
+operator and/or <code>|</code>. let’s use where to mask locations with
+temperature values less than <code>250</code> and greater than
+<code>300</code>:</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="co"># More than one condition</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>sample.where((sample <span class="op">&gt;</span> <span class="dv">250</span>) <span class="op">&amp;</span> (sample <span class="op">&lt;</span> <span class="dv">300</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>plt.show()</span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a><span class="co"># More than one condition</span></span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>sample.where((sample.lat <span class="op">&lt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (sample.lat <span class="op">&gt;</span> <span class="op">-</span><span class="dv">5</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&gt;</span> <span class="dv">190</span>) <span class="op">&amp;</span> </span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>             (sample.lon <span class="op">&lt;</span> <span class="dv">240</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a>plt.show()             </span></code></pre></div>
+<p>For more, see <a
+href="https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where">Masking
+with where</a>.</p>
 <hr />
-<p><em>The notes above are modified from the excellent <a
-href="https://rabernat.github.io/research_computing/intro-to-fortran.html">online
-tutorial</a> freely available on GitHub.</em></p>
+<p><em>The notes are modified from the excellent <a
+href="https://rabernat.github.io/research_computing/">Research Computing
+in Earth Sciences</a> and <a
+href="https://github.com/andersy005/xarray-tutorial/tree/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0">xarray-tutorial</a>
+freely available on the GitHub.</em></p>
 <hr />
 </div>
 </div>
@@ -1082,28 +1141,26 @@ tutorial</a> freely available on GitHub.</em></p>
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>Go over the scripts, make sure you understand them and be able to run
-those scripts.</p>
+<p>Go over the notes, make sure you understand the scripts.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>Write a <code>Fortran</code> script <code>TestLeapYear.f90</code> to
-determine whether the year of <code>2023</code> is a leap year.</p>
+<p>Compute the global mean temperature between <code>2005-01</code> and
+<code>2010-12</code>.</p>
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise #3</h2>
-<p>Load Intel <code>Fortran</code> compiler <code>ifort</code> on
-TaiYi:</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">module</span> load intel/2018.4</span></code></pre></div>
-<p>Then compile <code>TestLeapYear.f90</code> with <code>ifort</code>
-and run it.</p>
+<p>Plot the the seasonal cycle (“climatology”) in temperature near your
+hometown.</p>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise #4</h2>
-<p>Declare an array <code>MyArray</code> with a size of
-<code>100</code>, fill <code>MyArray</code> with <code>100</code>
-numbers, and print it.</p>
+<p>Plot anomalies at your hometown, do you observe a trend?</p>
+</div>
+<div id="exercise-5" class="section level2">
+<h2>Exercise #5</h2>
+<p>Plot monthly climatology in temperature in <code>12</code>
+panels.</p>
 <hr />
 </div>
 </div>
@@ -1111,22 +1168,23 @@ numbers, and print it.</p>
 <h1>Further reading</h1>
 <ul>
 <li><a
-href="http://www.fortran.gantep.edu.tr/compiling-g95-basic-guide.html">Compiling
-and Running Fortran Programs - a basic guide</a></li>
+href="https://xarray.pydata.org/en/stable/index.html"><code>xarray</code>
+offical guide</a></li>
 <li><a
-href="https://ourcodingclub.github.io/tutorials/fortran-intro/">Introduction
-to Fortran</a></li>
+href="https://www.unidata.ucar.edu/software/netcdf/docs/index.html">NetCDF
+offical guide</a></li>
 <li><a
-href="https://github.com/StanislavRadkov/Fortran-Cheat-Sheet">Fortran
-Cheat Sheet</a></li>
+href="https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f"><code>xarray</code>
+Example Cheatsheet</a></li>
 <li><a
-href="https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html">Fortran
-90 Tutorial</a></li>
-<li><a href="https://www.tutorialspoint.com/fortran/index.htm">Fortran
-Tutorial</a></li>
-<li><a
-href="https://modern-fortran-in-science-and-technology.readthedocs.io/en/latest/index.html">Modern
-Fortran in Science and Technology</a></li>
+href="http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf"><code>Python</code>:
+a tutorial introduction to <code>xarray</code></a></li>
+<li><a href="https://cookbooks.projectpythia.org/">Pythia Cookbooks
+Gallery</a> (very comprehensive, contains many courses and
+tutorials)</li>
+<li><a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a>
+(great tool to visualize and check netCDF files, requires
+<code>java runtime environment 9</code>)</li>
 </ul>
 </div>
 

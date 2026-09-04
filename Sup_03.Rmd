@@ -1,5 +1,5 @@
 ---
-title: "`Fortran`: Intermediate"
+title: "Scientific computing with `SciPy`"
 output:
   html_document:
     toc: true
@@ -8,461 +8,364 @@ output:
       smooth_scroll: false
 ---
 
-> “In the good old days physicists repeated each other's experiments, just to be sure. Today they stick to FORTRAN, so that they can share each other's programs, bugs included.” - Edsger W. Dijkstra
+> "Since its initial release in 2001, `SciPy` has become a de facto standard for leveraging scientific algorithms in `Python`." - Virtanen et al. (2020)
 
-***
+*** 
 
-# Prerequisites  
+# Introduction to `SciPy`
 
-Log in to Taiyi (`172.18.6.175`), then in your home directory, type:
+`SciPy` is a library of numerical routines for the `Python` programming language that provides fundamental building blocks for modeling and solving scientific problems. `SciPy` includes algorithms for optimization, integration, interpolation, eigenvalue problems, algebraic equations, differential equations and many other classes of problems; it also provides specialized data structures, such as sparse matrices and *k*-dimensional trees.  
 
-```{bash, eval=F}
-cp -r /work/ese-ouycc/fortran_demo2 .
+The `SciPy` library depends on `NumPy`, which provides convenient and fast N-dimensional array manipulation. Check [SciPy 1.0: fundamental algorithms for scientific computing in Python](https://www.nature.com/articles/s41592-019-0686-2) for an overview of the capabilities and development practices of `SciPy`. 
+
+When you want to do scientific work in `Python`, the first library you can turn to is `SciPy`. As you’ll see in this Section, `SciPy` is not just a library, but a whole **ecosystem of libraries** that work together to help you accomplish complicated scientific tasks quickly and reliably.
+
+`SciPy` should be installed along with `Anaconda`. If not, in `Anaconda Powershell Prompt`, install it:
+
+```{python, eval=F}
+# Install SciPy
+conda install scipy
 ```
 
-***
+To make sure `SciPy` is installed:
 
-# Reading and writing data
+```{python, eval=F}
+# Import modules
+import numpy as np
+import matplotlib.pyplot as plt
+# Show plots in the notebook
+%matplotlib inline
 
-## Reading data from a file
+# Import SciPy
+import scipy
 
-To read or write data from a file, you need to first open the file using the `open()` command. When you are done, you use the `close()` command. For example, to read data from an existing file (`test.dat`):
-
-```{fortran, eval=F}
-Program FileReadTest
-
-Implicit none
-
-integer                            :: u, n, i
-real(4), dimension(:), allocatable :: a, b
-
-! File unit
-u = 50
-
-! Open the file
-open(unit=u, file='test.dat', status='old')
-
-! The first line of the file has the number of values for arrays a and b
-read(u,*) n
-
-! Allocate the arrays
-allocate( a(n), b(n) )
-
-! Read data line by line
-do i = 1,n
-  read(u, *) a(i), b(i)
-enddo
-
-! Close the file
-close(u)
-
-! Display the values
-do i = 1,n
-  write(*,*) "Line ", i, " : ", a(i), b(i)
-enddo
-
-! Deallocate the arrays
-deallocate( a, b )
-
-End Program FileReadTest
+# Print the location of the file from where `SciPy` is loaded
+print(scipy.__file__)
 ```
 
-The `unit` is an integer that tells `Fortran` where to read or write the data from. Here, you pick a number (`50`) and assign that as the file unit (`u`). `status = 'old'` tells `Fortran` that the file exists already. This is optional, but can be helpful since if the file doesn't exist, `Fortran` will issue a helpful error message. For the `read` commands, here we are using the asterisk `*` to denote a *free-format* read, which means that `Fortran` will decide what the format is.
+Now you’ve imported `SciPy` and printed the location of the file from where `SciPy` is loaded. Your computer will probably show a different location. `SciPy` should be ready for use. 
 
-## Writing data to a file
+# Task-specific sub-modules in `SciPy`
 
-Suppose we have modified `a` and `b`, and want to save those values to a new file (`new1.dat`). This can be done using:
+As non-professional programmers, scientists often tend to *re-invent the wheel*, which leads to buggy, non-optimal, difficult-to-share and unmaintainable code. By contrast, `SciPy`’s routines are optimized and tested, and should therefore be used when possible.
 
-```{fortran, eval=F}
-Program FileWriteTest
+`SciPy` is composed of task-specific sub-modules, including:
 
-implicit none
+|Sub-module                                                                                                  | Usage                                  |
+|:-----------------------------------------------------------------------------------------------------------|:---------------------------------------|
+|[`scipy.cluster`](https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster)             | Vector quantization / Kmeans           |
+|[`scipy.constants`](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants)       | Physical and mathematical constants    |
+|[`scipy.fftpack`](https://docs.scipy.org/doc/scipy/reference/fftpack.html#module-scipy.fftpack)             | Fourier transform                      |
+|[`scipy.integrate`](https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate)       | Integration routines                   |
+|[`scipy.interpolate`](https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate) | Interpolation                          | 
+|[`scipy.io`](https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io)                            | Data input and output                  |
+|[`scipy.linalg`](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg)                | Linear algebra routines                |
+|[`scipy.ndimage`](https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage)             | n-dimensional image package            |  
+|[`scipy.odr`](https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr)                         | Orthogonal distance regression         |
+|[`scipy.optimize`](https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize)          | Optimization                           |  
+|[`scipy.signal`](https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal)                | Signal processing                      |  
+|[`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse)                | Sparse matrices                        |
+|[`scipy.spatial`](https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial)             | Spatial data structures and algorithms |
+|[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special)             | Special mathematical functions         |
+|[`scipy.stats`](https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats)                   | Statistics                             |
 
-integer                            :: u, n, i
-real(4), dimension(:), allocatable :: a, b
+This section is far from an introduction to numerical computing. As enumerating the different sub-modules and functions in `SciPy` would be very boring, we concentrate instead on a few problems you may encounter to give a general idea of how to use `SciPy` for scientific computing.
 
-! File unit
-u = 50
 
-! Open the file
-open(unit=u, file='test.dat', status='old')
+## Constants with `scipy.constants`
 
-! The first line of the file has the number of values for arrays a and b
-read(u,*) n
+`SciPy` constants package provides a wide range of constants, which are used in the general scientific area. We have to import the required constant and use them as per the requirement. 
 
-! Allocate the arrays
-allocate( a(n), b(n) )
+### Mathematical constants
 
-! Read data line by line
-do i = 1,n
-  read(u, *) a(i), b(i)
-enddo
+Import mathematical constant, for example:
 
-! Close the file
-close(u)
+```{python, eval=F}
 
-! Change the values
-a = a * 2.0
-b = b + 1
+from scipy import constants
 
-! Write the values to a new file
-open(unit=u, file='new1.dat', status='replace')
-write(u, *) a, b
-close(u)
-
-! Deallocate the arrays
-deallocate( a, b )
-
-End Program FileWriteTest
+# Mathematical constants
+scipy.constants.pi
 ```
 
-As you may notice, the output file `new1.dat` has only one line. This is because `write()` is called once to write two vectors. Try the following code chuck to save the values, see what will happen:
+### Physical constants
 
-```{fortran, eval=F}
-! Write the values to a new file, line by line
-open(unit=u, file='new2.dat')
-do i = 1,n
-  write(u, *) a(i), b(i)
-enddo
-close(u)
+Import physical constant, for example:
+
+```{python, eval=F}
+# Physical constants
+scipy.constants.R
+scipy.constants.gas_constant
 ```
 
-## Format specifiers
+In addition to the above variables, `scipy.constants` also contains the [2018 CODATA recommended values (CODATA2018)](https://physics.nist.gov/cuu/Constants) database containing more physical constants. Call 
+`scipy.constants.physical_constants[NAME]` to return a dictionary of physical constants, of the format `(value, unit, uncertainty)`. For example:
 
-In all of our `read` and `write` examples above, we used the generic `*` for the *format specifier*. When writing, Fortran will write out the **full precision** of each floating-point number. For example, `18.9779778`. You can use the format specifier to specify another format. In `Fortran`, they are often referred to as **edit descriptors**. Change the writing chuck to the following:
-
-```{fortran, eval=F}
-! Write the values to a new file, in a certain format
-open(unit=u, file='new3.dat')
-do i = 1,n
-  write(u, '(f5.1,E10.3)') a(i), b(i)
-enddo
-close(u)
+```{python, eval=F}
+# Physical constants
+scipy.constants.physical_constants['atomic unit of mass']
 ```
 
-Here `f` is for a floating-point format, `E` is for scientific notation. For a `w.d` format, `w `is the width (number of characters) and `d` is the number of decimal places. See [this note](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html) for more about `Fortran` format. 
+### Units
 
-***
+`scipy.constants` also contains SI units, for example:
 
-# Function
+```{python, eval=F}
+# SI prefixes
+scipy.constants.micro
 
-Like `Python`, we can define *functions* in `Fortran`. This is done with the `function` keyword. Functions are useful when you need to do a complicated calculation that has only one result. Functions need to be either in a separate `.f90` file or have to be listed **outside** the main program. For example: 
+# Mass, in [kg]
+scipy.constants.long_ton
 
-```{fortran, eval=F}
-program FunctionTest
+# Speed, in [m/s]
+scipy.constants.mph
 
-implicit none
-
-real(4) :: a, b, c, Get_the_larger
-
-a = 2.0
-b = 5.0
-
-c = Get_the_larger(a,b)
-
-write(*,*) 'c is: ', c
-
-end program FunctionTest
-
-!-----------------------------------
-! This is the external function
-!-----------------------------------
-real(4) function Get_the_larger(x,y)
-
-real(4) :: x, y
-if(x > y) then
-  Get_the_larger = x
-else
-  Get_the_larger = y
-endif
-
-end function Get_the_larger
+# Pressure, in [Pa]
+scipy.constants.atmosphere
 ```
 
-***
+Remembering all of these are a bit tough. The easy way to get which key is for which function is looking up things in the [`SciPy` Constants page](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants).
 
-# Subroutine
+## Integrating with `scipy.integrate`
 
-Use a subroutine to break your code up into various sections that are easier to read. Subroutines are like functions, but the I/O is all done as arguments after the subroutine name. You will also have to use `call` before a subroutine.
+When a function cannot be integrated analytically, or is very difficult to integrate analytically, one generally turns to numerical integration methods. `SciPy` has a number of routines for performing numerical integration. Most of them are found in the same `scipy.integrate` library. For example:
 
-```{fortran, eval=F}
-program SubRoutineTest
+```{python, eval=F}
+from numpy import exp
+from scipy import integrate
 
-implicit none
+# Define a function
+f = lambda x:exp(-x**2)
 
-real(4) :: a,b,c,d
-
-a = 2.0
-b = 5.0
-
-! Call subroutineA
-call subroutineA(a,b,c)  ! a and b are input, c is returned
-
-! Call subroutineB
-call subroutineB(a,b,c,d)  ! a,b and c are input, d is returned
-
-write(*,*) 'c is: ', c
-write(*,*) 'd is: ', d
-
-end program SubRoutineTest
-
-!-----------------------------------
-! This is a subroutine
-!-----------------------------------
-
-subroutine subroutineA(a,b,c)
-
-implicit none
-
-real(4), intent(in)  :: a,b
-real(4), intent(out) :: c
-
-c = a*b
-
-end subroutine subroutineA
-
-!-----------------------------------
-! This is another subroutine
-!-----------------------------------
-   
-subroutine subroutineB(a,b,c,d)
-
-implicit none
-
-real(4), intent(in)  :: a,b,c
-real(4), intent(out) :: d
-
-real(4)              :: x
-
-x = 10.0
-
-d = a + b + x*c
-
-end subroutine subroutineB
+# Single integral of f from 0 to 1
+res = integrate.quad(f, 0, 1)
+print(res)
 ```
 
-***
+Here we use a [lambda expression](https://realpython.com/python-lambda/) and then call the quadrature method (for single integrals) on that function. The `quad` function returns the two values, in which the first number is the value of integral and the second value is the estimate of the absolute error in the value of integral. For multiple integrals or solving initial value problems for ODE systems, check [Integration and ODEs](https://docs.scipy.org/doc/scipy/reference/integrate.html).
 
-# Module
+## Interpolation with `scipy.interpolate`
 
-Modern `Fortran` best practices are to put all subroutines and functions into one or more module files. 
+### Linear interpolation
 
-In a module, you can define variables and all the actions that work on them. You can have *public* and *private* variables, subroutines, and functions. Your main program can then `use` the modules. Variables defined at the top of a module are available to be used in any of the contained subroutines (so they are globally available). 
+Interpolation is the process of finding a value between two points on a line or a curve. This tool, interpolation, is not only useful in statistics, but is also useful in science, business, or when there is a need to predict values that fall within two existing data points.
 
-First, let's define a module `Constants.f90`:
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(0, 4, 12)
+y = np.cos(x**2/3+4)
 
-```{fortran, eval=F}
-module Constants  
-
-implicit none 
-
-  real, parameter :: pi = 3.1415926536  
-  real, parameter :: e = 2.7182818285 
-   
-contains      
-
-  subroutine show_consts()          
-    print*, "Pi = ", pi          
-    print*,  "e = ", e     
-    write(*,*) "This is from module Constants"
-  end subroutine show_consts 
-   
-end module Constants
+# Plot data
+plt.plot(x, y,'ko')
+plt.show()
 ```
 
-Then we can use this module in the main program (`ModuleTest.f90`) with `use`:
+Suppose we want to find the value of `y` when `x=3.12`, you can use `interp1d()` as:
 
-```{fortran, eval=F}
-program ModuleTest   
+```{python, eval=F}
+from scipy.interpolate import interp1d
 
-use Constants      
+# Using interp1d function
+f1 = interp1d(x, y, kind = 'linear')
+f2 = interp1d(x, y, kind = 'cubic')
 
-implicit none     
+# Now make x finer
+xnew = np.linspace(0, 4, 30)
 
-real :: x, ePowerx, area, radius 
+# Plot interpolated values
+plt.plot(x, y, 'ko', xnew, f1(xnew), '-', xnew, f2(xnew), '--')
 
-x = 2.0
-radius = 7.0
-ePowerx = e ** x
-area = pi * radius**2     
+# Add legend
+plt.legend(['data', 'linear', 'cubic'], loc = 'best')
 
-! Call the subroutine from the constants module
-call show_consts() 
-   
-print*, "e raised to the power of 2.0 = ", ePowerx
-print*, "Area of a circle with radius 7.0 = ", area  
-   
-end program ModuleTest
+plt.show()
+
+# Show data at a specific location
+print(f1(3.12), f2(3.12))
 ```
 
-To compile the module and program:
+The `interp1d()` function in the `scipy.interpolate` is a convenient method to create a function based on fixed data points, which can be evaluated anywhere within the domain defined by the given data using linear interpolation. Using the `interp1d()` function, we created two functions `f1` and `f2`. These functions, for a given input `x` returns `y`. The third variable kind represents the type of the interpolation technique. `linear`, `nearest`, `zero`, `slinear`, `quadratic`, `cubic` are a few techniques of interpolation.
 
-```{bash, eval=F}
-gfortran Constants.f90 ModuleTest.f90 -o ModuleTest.x
+### Spline interpolation
+
+One-dimensional smoothing spline fits a given set of data points. The [`univariatespline` function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html) in `scipy.interpolate` is a convenient method to create a function, based on fixed data points class.
+
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(-3, 3, 50)
+y = np.exp(-x**2) + 0.1 * np.random.randn(50)
+
+# Plot data
+plt.plot(x, y, 'ko')
+
+plt.show()
 ```
 
-Note that in this command, the module appears before the main program (`ModuleTest.f90`) so that the functions are defined before they are referenced in the main program.
+Suppose we want to find the value of `y` when `x=1.23`, you can use `UnivariateSpline()` as:
 
-***
+```{python, eval=F}
+from scipy.interpolate import UnivariateSpline
 
-# Using library files
+# Using UnivariateSpline function
+spl = UnivariateSpline(x, y, k=3)
+spl.set_smoothing_factor(0.5)
 
-When working on large projects, especially projects that are shared between a number of users, it is useful to create *object files* or *libraries of object files* that can be shared between programmers and users. 
+# Now make x finer
+xnew = np.linspace(-3, 3, 1000)
 
-Suppose we have multiple source files, for example:
+# Plot interpolated values
+plt.plot(x, y, 'ko')
+plt.plot(xnew, spl(xnew), 'b', lw = 3)
 
-`Sub1.f90`:
+plt.show()
 
-```{fortran, eval=F}
-subroutine func1(x)
-  real(4)    :: x
-  print *, "This is from sub1, x:", x
-end
+# Show data at a specific location
+spl(1.23)
 ```
 
-`Sub2.f90`:
+## Optimization and fitting with `scipy.optimize`
 
-```{fortran, eval=F}
-subroutine func2(x)
-  real(4)    :: x
-  print *, "This is from sub2, x^2:", x**2
-end
+### Curve fitting
+
+Suppose we have data on a sine wave, with some noise:
+
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(-5, 5, num=50)
+y = 2.9 * np.sin(1.5 * x) + np.random.normal(size=50)
+
+# Plot data
+plt.plot(x, y, 'ko')
+
+plt.show()
 ```
 
-`Constants.f90`:
+If we know that the data lies on a sine wave, but not the amplitudes or the period, we can find those by least squares curve fitting. First we have to define the test function to fit, here a sine with unknown amplitude and period:
 
-```{fortran, eval=F}
-module Constants  
-
-implicit none 
-
-  real, parameter :: pi = 3.1415926536  
-  real, parameter :: e = 2.7182818285 
-   
-contains      
-
-  subroutine show_consts()          
-    print*, "Pi = ", pi          
-    print*,  "e = ", e     
-    write(*,*) "This is from module Constants"
-  end subroutine show_consts 
-   
-end module Constants
+```{python, eval=F}
+# Define the function to fit
+def guess_func(x, a, b):
+    return a * np.sin(b * x)
 ```
 
-We want to call/use the above programs in the `Main.f90` program:
+We then use `scipy.optimize.curve_fit` to find `a` and `b`:
 
-```{fortran, eval=F}
-program Main
+```{python, eval=F}
+from scipy import optimize
 
-use Constants
+# Fit parameters
+params, _ = optimize.curve_fit(guess_func, x, y)
+print(params)
 
-implicit none
+# Plot fitted data
+plt.plot(x, y, 'ko', x, params[0]*np.sin(params[1] * x), 'r-')
 
-real :: a
+# Add legend
+plt.legend(['data', 'fitted value'], loc = 'best')
 
-a=2.0
-
-! Call func1 from the Sub1 subroutine
-call func1(a)
-
-! Call func2 from the Sub2 subroutine
-call func2(a)
-
-! Call show_consts from the Constants module
-call show_consts()
-
-end program Main
+plt.show()
 ```
 
-Completed subprograms can be compiled into object files that can be linked during the compilation of the whole program:
+### Finding the minimums
 
-```{bash, eval=F}
-gfortran -c Sub1.f90
-gfortran -c Sub2.f90
-gfortran -c Constants.f90
-gfortran Main.f90 Sub1.o Sub2.o Constants.o -o Main.x
+Let’s define the following function and plot it:
+
+```{python, eval=F}
+# Define a function
+def g(x):
+    return x**2 + 20*np.sin(x)
+
+# Set the range
+x = np.arange(-10, 10, 0.1)
+
+# Plot the function
+plt.plot(x, g(x)) 
+
+plt.show()
 ```
 
-Note that the `-c` option is lowercase, which means: compile to object (`.o`) only, do not link. 
+This function has a global minimum around `-1.5` and local minimums around `-7.1` and `4.3`. Searching for minimum can be done with `scipy.optimize.minimize`, given a starting point `x0`, it returns the location of the minimum that it has found.
 
-However, if many object files are to be linked, then it is convenient to place them in a *library*. Libraries can be created using the `ar` command (see `man ar` ). Object files can be placed in a library, for example, as follows:
-
-```{bash, eval=F}
-ar rcvf libsubs.a Sub1.o Sub2.o
-ar rcvf libconst.a Constants.o
+```{python, eval=F}
+# Using minimize() to search for minimums
+result = optimize.minimize(g, x0=0)
+result
 ```
 
-Here we have created two libraries (`libsubs.a` and `libconst.a`):
+### Finding the roots
 
-+ `libsubs.a` contains two objects `Sub1.o` and `Sub2.o`
+To find a root, *i.e.*, a point where `g(x) = 0`, of the function `g` above we can use `scipy.optimize.root`:
 
-+ `libconst.a` contains `Constants.o`. 
-
-Note that the name of the library **must** begin with `lib` and end with `.a`.
-
-More objects (say `ANOTHER.o`) can be added to the library with:
-
-```{bash, eval=F}
-ar rcvf libsubs.a ANOTHER.o
+```{python, eval=F}
+# Using root() to find the roots
+root = optimize.root(g, x0=1) 
+root
 ```
 
-The contents of a library can be listed with:
+## Statistics with `scipy.stats`
 
-```{bash, eval=F}
-ar tv libsubs.a
+The module `scipy.stats` contains statistical tools and probabilistic descriptions of random processes.
+
+For example, we can fit a sample to a distribution:
+
+```{python, eval=F}
+# Generate a sample
+sample = np.random.normal(size=1000)
+
+from scipy import stats
+
+# Fit a normal distribution
+stats.norm.fit(sample)
 ```
 
-Subroutines and functions in the library can be listed with:
+A statistical test is a decision indicator. For instance, if we have two sets of observations, that we assume are generated from normal distributions, we can use a *t-test* to decide whether the means of two sets of observations are significantly different:
 
-```{bash, eval=F}
-nm libsubs.a
+```{python, eval=F}
+# Sample 1
+sample1 = np.random.normal(0, 1, size=20)
+
+# Sample 2
+sample2 = np.random.normal(1, 1, size=15)
+
+# Independent t-test
+stats.ttest_ind(sample1, sample2) 
 ```
 
-Objects (say `NON_USEFUL.o`) can be deleted from the library with:
+[The chapter on statistics](https://scipy-lectures.org/index.html) introduces much more elaborate tools for statistical testing and statistical data loading and visualization outside of `SciPy`. You are also welcome to check [ESE335 Environmental Data Analysis](https://zhu-group.github.io/ese335/index.html) for conducting statistical tests with the `R` language. 
 
-```{bash, eval=F}
-ar dv libsubs.a NON_USEFUL.o
+## Clustering with `scipy.cluster`
+
+Clustering is a popular technique to categorize data by associating it into groups. The `SciPy` library includes an implementation of the *k-means clustering* algorithm as well as several *hierarchical clustering* algorithms. Here we will be using the k-means algorithm in `scipy.cluster.vq`, where `vq` stands for vector quantization.
+
+```{python, eval=F}
+from numpy import vstack,array
+from numpy.random import rand
+from scipy.cluster.vq import kmeans,vq
+
+# Data generation, 200 rows, 2 cols
+data = vstack((rand(100,2) + array([.8,.8]), rand(100,2)))
+
+# Show data
+plt.plot(data[:,0],data[:,1],'k+')
+
+plt.show()
+
+# Computing K-Means with K = 2 (2 clusters)
+#centroids, mean_dist = kmeans(data,2)
+
+# Assign each sample to a cluster
+#clusters, dist = vq(data,centroids)
+
+# Plot clusters
+#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],'bo')
+#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],'rd')
+
+# Plot cluster centroids
+#plt.plot(centroids[:,0],centroids[:,1],'gX',markersize=10)
+
+# Plot raw data
+#plt.plot(data[:,0],data[:,1],'w+')
 ```
-
-Once libraries have been created, it can be linked in a compilation as follows:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -L. -lsubs -lconst
-```
-
-The `-L.` option tells the linker that the libraries can be found in the **current** directory (indicated by `.`). `lsubs` is short for `libsubs.a`, and `lconst` is short for `libconst.a`.
-
-If the libraries are not in the current directory, then you should give the path, for example:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -Llib/ -lsubs -lconst
-```
-
-Here we have copied `libsubs.a` and `libconst.a` to `lib/` folder before the compilation.
-
-Now copy `libsubs.a` in `lib_sub/` and `libconst.a` in `lib_const/`, the main program can be compiled as:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -Llib_sub/ -lsubs -Llib_const/ -lconst
-```
-
-or:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -Llib_sub/ -Llib_const/ -lsubs -lconst
-```
-
-You can also use absolute path of the libraries:
-
-```{bash, eval=F}
-gfortran Main.f90 -o Main.x -L/work/ese-ouycc/fortran_demo2/lib_sub/ -lsubs -L/work/ese-ouycc/fortran_demo2/lib_const/ -lconst
-```
-
-
-***
-
-*The notes above are modified from the excellent [online tutorial](https://rabernat.github.io/research_computing/intro-to-fortran.html) freely available on GitHub.*
 
 ***
 
@@ -470,31 +373,27 @@ gfortran Main.f90 -o Main.x -L/work/ese-ouycc/fortran_demo2/lib_sub/ -lsubs -L/w
 
 ## Exercise #1
 
-Write a `Fortran` program to write some numbers to a file that has `20` lines and `2` columns. The first column is in a format of `f10.3`, and the second column is in a format of `f15.5`. 
+Go through the notes, make sure you understand the scripts.
 
 ## Exercise #2
 
-Write a subroutine `TestLeapYear.f90` to determine whether a year is a leap year. Then `call` this subroutine from the main program (`my.f90`) to check whether `2023` is a leap year. 
+The temperature extremes in Shenzhen for each month, starting in January, are given by (in degrees Celcius):
 
-## Exercise #3
+`max: 19.8, 20.2, 22.7, 26.3, 29.5, 31.1, 32.3, 32.3, 31.3, 29.2, 25.4, 21.5`
+`min: 12.5, 13.8, 16.5, 20.3, 23.6, 25.6, 26.3, 26.1, 25.0, 22.5, 18.2, 13.8` 
 
-Write a module `GetDays.f90` to print the total number of days in a given year. Then `use` this module in `my.f90` to print the total number of days for `2023`.
-
-## Exercise #4
-
-**4.1.** Build a library `libleap.a` which contains the `TestLeapYear.o`. Move it to a new folder. 
-
-**4.2.** Build another library `libdays.a` which contains the `GetDays.o`. Move it to a different folder as you did in **4.1**. 
-
-**4.3.** Compile and run `my.f90` using the two libraries.
+**2.1** Plot these temperature extremes.  
+**2.2** Define a function that can describe min and max temperatures.   
+[Hint]: this function has to have a period of 1 year.   
+**2.3** Fit this function to the data with `scipy.optimize.curve_fit`.  
+**2.4** Plot the result. Is the fit reasonable? If not, why?  
+**2.5** Is the time offset for min and max temperatures the same within the fit accuracy?  
 
 ***
 
 # Further reading
 
-+ [Compiling and Running Fortran Programs - a basic guide](http://www.fortran.gantep.edu.tr/compiling-g95-basic-guide.html)
-+ [Introduction to Fortran](https://ourcodingclub.github.io/tutorials/fortran-intro/)
-+ [Fortran Cheat Sheet](https://github.com/StanislavRadkov/Fortran-Cheat-Sheet)
-+ [Fortran 90 Tutorial](https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html)
-+ [Fortran Tutorial](https://www.tutorialspoint.com/fortran/index.htm)
-+ [Modern Fortran in Science and Technology](https://modern-fortran-in-science-and-technology.readthedocs.io/en/latest/index.html)
++ [SciPy User Guide](https://docs.scipy.org/doc/scipy/tutorial/index.html)  
++ [SciPy Tutorial](https://www.w3schools.com/python/scipy/index.php)
++ [Scientific Python: Using SciPy for Optimization](https://realpython.com/python-scipy-cluster-optimize/)
++ [SciPy - Quick Guide](https://www.tutorialspoint.com/scipy/scipy_quick_guide.htm)
