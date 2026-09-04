@@ -11,7 +11,7 @@
 
 
 
-<title>Intermediate Python: xarray</title>
+<title>Scientific computing with SciPy</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -476,664 +476,480 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Intermediate <code>Python</code>:
-<code>xarray</code></h1>
+<h1 class="title toc-ignore">Scientific computing with
+<code>SciPy</code></h1>
 
 </div>
 
 
 <blockquote>
-<p>“<code>Xarray</code> (formerly xray) is an open source project and
-Python package that makes working with labelled multi-dimensional arrays
-simple, efficient, and fun!” - <code>Xarray</code> document.</p>
+<p>“Since its initial release in 2001, <code>SciPy</code> has become a
+de facto standard for leveraging scientific algorithms in
+<code>Python</code>.” - Virtanen et al. (2020)</p>
 </blockquote>
 <hr />
-<div id="prerequisites" class="section level1">
-<h1>Prerequisites</h1>
-<p>In <code>Anaconda Powershell</code>, install <code>netCDF4</code>,
-<code>xarray</code>, and <code>nc-time-axis</code>, <strong>one after
-another</strong>:</p>
+<div id="introduction-to-scipy" class="section level1">
+<h1>Introduction to <code>SciPy</code></h1>
+<p><code>SciPy</code> is a library of numerical routines for the
+<code>Python</code> programming language that provides fundamental
+building blocks for modeling and solving scientific problems.
+<code>SciPy</code> includes algorithms for optimization, integration,
+interpolation, eigenvalue problems, algebraic equations, differential
+equations and many other classes of problems; it also provides
+specialized data structures, such as sparse matrices and
+<em>k</em>-dimensional trees.</p>
+<p>The <code>SciPy</code> library depends on <code>NumPy</code>, which
+provides convenient and fast N-dimensional array manipulation. Check <a
+href="https://www.nature.com/articles/s41592-019-0686-2">SciPy 1.0:
+fundamental algorithms for scientific computing in Python</a> for an
+overview of the capabilities and development practices of
+<code>SciPy</code>.</p>
+<p>When you want to do scientific work in <code>Python</code>, the first
+library you can turn to is <code>SciPy</code>. As you’ll see in this
+Section, <code>SciPy</code> is not just a library, but a whole
+<strong>ecosystem of libraries</strong> that work together to help you
+accomplish complicated scientific tasks quickly and reliably.</p>
+<p><code>SciPy</code> should be installed along with
+<code>Anaconda</code>. If not, in
+<code>Anaconda Powershell Prompt</code>, install it:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>pip install netCDF4</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>pip install nc<span class="op">-</span>time<span class="op">-</span>axis</span></code></pre></div>
-<p>To test whether your environment is set up properly, try the
-following imports:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install SciPy</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>conda install scipy</span></code></pre></div>
+<p>To make sure <code>SciPy</code> is installed:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span></code></pre></div>
-<hr />
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Import modules</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Show plots in the notebook</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Import SciPy</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Print the location of the file from where `SciPy` is loaded</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="bu">print</span>(scipy.<span class="va">__file__</span>)</span></code></pre></div>
+<p>Now you’ve imported <code>SciPy</code> and printed the location of
+the file from where <code>SciPy</code> is loaded. Your computer will
+probably show a different location. <code>SciPy</code> should be ready
+for use.</p>
 </div>
-<div id="introduction-to-xarray" class="section level1">
-<h1>Introduction to <code>xarray</code></h1>
-<p>In <a
-href="https://zhu-group.github.io/ese5023/Section_06.html">Section
-06</a>, we saw how <code>pandas</code> handled <em>tabular</em>
-datasets, by using “indexes” for each row and labels for each column.
-These features, together with <code>pandas</code>’ many useful routines
-for all kinds of data wrangling and analysis, have made
-<code>pandas</code> one of the most popular python packages in the
-world.</p>
-<p>However, not all Earth science datasets easily fit into the “tabular”
-model (i.e. rows and columns) imposed by <code>pandas</code>. In
-particular, we often deal with <em>multidimensional</em> data. By
-multidimensional data (also often called N-dimensional), it means data
-with many independent dimensions or axes. For example, we might
-represent Earth’s surface temperature <em>T</em> as a three dimensional
-variable:</p>
-<p><span class="math display">\[T(Lon, Lat, Time)  \]</span></p>
-<p>The point of <code>xarray</code> is to provide <strong>pandas-level
-convenience</strong> for working with this type of data. Specifically,
-<code>xarray</code> is for working with labeled, multi dimensional
-arrays.</p>
-<ul>
-<li><p>Built on top of <code>numpy</code> and
-<code>pandas</code></p></li>
-<li><p>Brings the power of <code>pandas</code> to multidimensional
-arrays</p></li>
-<li><p>Supports data of any dimensionality</p></li>
-</ul>
-<p><img src="figs/xarray2.png" alt="drawing" width="800"/></p>
-<p><a
-href="https://gdfa.ugr.es/python/climate_data/data_science_climate_data.html">Figure
-source</a></p>
-<hr />
-</div>
-<div id="xarray-basics" class="section level1">
-<h1><code>Xarray</code> basics</h1>
-<p>Like we did for <code>pandas</code> in <a
-href="https://zhu-group.github.io/ese5023/Section_06.html">Section
-06</a>, here we will go over the <strong>basic capabilities</strong> of
-<code>xarray</code>. Please dig into the <a
-href="https://xarray.pydata.org/en/stable/index.html"><code>xarray</code>
-documentation</a> for more advanced usage.</p>
-<div id="xarray-data-structures" class="section level2">
-<h2><code>xarray</code> data structures</h2>
-<p><code>Xarray</code> has two fundamental data structures:</p>
-<ul>
-<li><p>a <em>DataArray</em>, which holds a <strong>single</strong>
-multi-dimensional variable and its coordinates</p></li>
-<li><p>a <em>Dataset</em>, which holds <strong>multiple</strong>
-variables that potentially share the same coordinates</p></li>
-</ul>
-<p>Check <a
-href="http://xarray.pydata.org/en/latest/user-guide/data-structures.html">Data
-Structures</a> for more.</p>
-</div>
-<div id="dataarray" class="section level2">
-<h2><code>DataArray</code></h2>
-<p>A <em>DataArray</em> has four essential attributes:</p>
-<ul>
-<li><p><code>values</code>: a <code>numpy.ndarray</code> holding the
-array’s values</p></li>
-<li><p><code>dims</code>: dimension names for each axis (e.g., (‘x’,
-‘y’, ‘z’), (‘lon’, ‘lat’, ‘time’))</p></li>
-<li><p><code>coords</code>: a dict-like container of arrays
-(coordinates) that label each point (e.g., 1-dimensional arrays of
-numbers, datetime objects or strings)</p></li>
-<li><p><code>attrs</code>: an <code>OrderedDict</code> to hold arbitrary
-metadata (attributes)</p></li>
-</ul>
-<p>Let’s start by constructing some DataArrays manually:</p>
+<div id="task-specific-sub-modules-in-scipy" class="section level1">
+<h1>Task-specific sub-modules in <code>SciPy</code></h1>
+<p>As non-professional programmers, scientists often tend to
+<em>re-invent the wheel</em>, which leads to buggy, non-optimal,
+difficult-to-share and unmaintainable code. By contrast,
+<code>SciPy</code>’s routines are optimized and tested, and should
+therefore be used when possible.</p>
+<p><code>SciPy</code> is composed of task-specific sub-modules,
+including:</p>
+<table>
+<colgroup>
+<col width="72%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Sub-module</th>
+<th align="left">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster"><code>scipy.cluster</code></a></td>
+<td align="left">Vector quantization / Kmeans</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants"><code>scipy.constants</code></a></td>
+<td align="left">Physical and mathematical constants</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/fftpack.html#module-scipy.fftpack"><code>scipy.fftpack</code></a></td>
+<td align="left">Fourier transform</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate"><code>scipy.integrate</code></a></td>
+<td align="left">Integration routines</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate"><code>scipy.interpolate</code></a></td>
+<td align="left">Interpolation</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io"><code>scipy.io</code></a></td>
+<td align="left">Data input and output</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg"><code>scipy.linalg</code></a></td>
+<td align="left">Linear algebra routines</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage"><code>scipy.ndimage</code></a></td>
+<td align="left">n-dimensional image package</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr"><code>scipy.odr</code></a></td>
+<td align="left">Orthogonal distance regression</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize"><code>scipy.optimize</code></a></td>
+<td align="left">Optimization</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal"><code>scipy.signal</code></a></td>
+<td align="left">Signal processing</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse"><code>scipy.sparse</code></a></td>
+<td align="left">Sparse matrices</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial"><code>scipy.spatial</code></a></td>
+<td align="left">Spatial data structures and algorithms</td>
+</tr>
+<tr class="even">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special"><code>scipy.special</code></a></td>
+<td align="left">Special mathematical functions</td>
+</tr>
+<tr class="odd">
+<td align="left"><a
+href="https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats"><code>scipy.stats</code></a></td>
+<td align="left">Statistics</td>
+</tr>
+</tbody>
+</table>
+<p>This section is far from an introduction to numerical computing. As
+enumerating the different sub-modules and functions in
+<code>SciPy</code> would be very boring, we concentrate instead on a few
+problems you may encounter to give a general idea of how to use
+<code>SciPy</code> for scientific computing.</p>
+<div id="constants-with-scipy.constants" class="section level2">
+<h2>Constants with <code>scipy.constants</code></h2>
+<p><code>SciPy</code> constants package provides a wide range of
+constants, which are used in the general scientific area. We have to
+import the required constant and use them as per the requirement.</p>
+<div id="mathematical-constants" class="section level3">
+<h3>Mathematical constants</h3>
+<p>Import mathematical constant, for example:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
-<p>A simple <code>DataArray</code> without dimensions or coordinates
-isn’t much use:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> constants</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Mathematical constants</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>scipy.constants.pi</span></code></pre></div>
+</div>
+<div id="physical-constants" class="section level3">
+<h3>Physical constants</h3>
+<p>Import physical constant, for example:</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Create a xr dataarray</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>])</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>da</span></code></pre></div>
-<p>You can add a dimension name to the <code>DataArray</code>:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Physical constants</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>scipy.constants.R</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>scipy.constants.gas_constant</span></code></pre></div>
+<p>In addition to the above variables, <code>scipy.constants</code> also
+contains the <a href="https://physics.nist.gov/cuu/Constants">2018
+CODATA recommended values (CODATA2018)</a> database containing more
+physical constants. Call
+<code>scipy.constants.physical_constants[NAME]</code> to return a
+dictionary of physical constants, of the format
+<code>(value, unit, uncertainty)</code>. For example:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Add a dimension name</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>], dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>])</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>da</span></code></pre></div>
-<p>But things get most interesting when you add a coordinate:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Physical constants</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>scipy.constants.physical_constants[<span class="st">&#39;atomic unit of mass&#39;</span>]</span></code></pre></div>
+</div>
+<div id="units" class="section level3">
+<h3>Units</h3>
+<p><code>scipy.constants</code> also contains SI units, for example:</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Add a coordinate</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>da <span class="op">=</span> xr.DataArray([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                  dims<span class="op">=</span>[<span class="st">&#39;x&#39;</span>],</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                  coords<span class="op">=</span>{<span class="st">&#39;x&#39;</span>: [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]})</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>da</span></code></pre></div>
-<p>You can use <code>xarray</code> built-in plotting:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># SI prefixes</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>scipy.constants.micro</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Mass, in [kg]</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>scipy.constants.long_ton</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Speed, in [m/s]</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>scipy.constants.mph</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Pressure, in [Pa]</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>scipy.constants.atmosphere</span></code></pre></div>
+<p>Remembering all of these are a bit tough. The easy way to get which
+key is for which function is looking up things in the <a
+href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants"><code>SciPy</code>
+Constants page</a>.</p>
+</div>
+</div>
+<div id="integrating-with-scipy.integrate" class="section level2">
+<h2>Integrating with <code>scipy.integrate</code></h2>
+<p>When a function cannot be integrated analytically, or is very
+difficult to integrate analytically, one generally turns to numerical
+integration methods. <code>SciPy</code> has a number of routines for
+performing numerical integration. Most of them are found in the same
+<code>scipy.integrate</code> library. For example:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Simple plot with xr built-in plot function</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>da.plot(marker<span class="op">=</span><span class="st">&#39;o&#39;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> exp</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> integrate</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Define a function</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># Single integral of f from 0 to 1</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>res <span class="op">=</span> integrate.quad(f, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="bu">print</span>(res)</span></code></pre></div>
+<p>Here we use a <a href="https://realpython.com/python-lambda/">lambda
+expression</a> and then call the quadrature method (for single
+integrals) on that function. The <code>quad</code> function returns the
+two values, in which the first number is the value of integral and the
+second value is the estimate of the absolute error in the value of
+integral. For multiple integrals or solving initial value problems for
+ODE systems, check <a
+href="https://docs.scipy.org/doc/scipy/reference/integrate.html">Integration
+and ODEs</a>.</p>
 </div>
-<div id="datasets" class="section level2">
-<h2><code>Datasets</code></h2>
-<p>A <code>Dataset</code> holds many <code>DataArrays</code> which
-potentially can share coordinates. In analogy to
-<code>pandas</code>:</p>
+<div id="interpolation-with-scipy.interpolate" class="section level2">
+<h2>Interpolation with <code>scipy.interpolate</code></h2>
+<div id="linear-interpolation" class="section level3">
+<h3>Linear interpolation</h3>
+<p>Interpolation is the process of finding a value between two points on
+a line or a curve. This tool, interpolation, is not only useful in
+statistics, but is also useful in science, business, or when there is a
+need to predict values that fall within two existing data points.</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>pandas.Series : pandas.Dataframe :: xarray.DataArray : xarray.Dataset</span></code></pre></div>
-<p>Constructing Datasets manually is a bit more involved in terms of
-syntax. The <code>Dataset</code> takes three arguments:</p>
-<ul>
-<li><p><code>data_vars</code> should be a dictionary with each key as
-the name of the variable and each value as one of:</p>
-<ul>
-<li>A <code>DataArray</code> or Variable</li>
-<li>A tuple of the form <code>(dims, data[, attrs])</code>, which is
-converted into arguments for Variable</li>
-<li>A <code>pandas</code> object, which is converted into a
-<code>DataArray</code></li>
-<li>A 1D array or list, which is interpreted as values for a one
-dimensional coordinate variable along the same dimension as it’s
-name</li>
-</ul></li>
-<li><p><code>coords</code> should be a dictionary of the same form as
-<code>data_vars</code></p></li>
-<li><p><code>attrs</code> should be a dictionary</p></li>
-</ul>
-<p>For the rest of Section, we will use an output file
-(<code>CESM2_200001-201412.nc</code>) from the <a
-href="https://www.cesm.ucar.edu/models/cesm2/">Community Earth System
-Model (CESM)</a> to show basics of <code>xarray</code> and how to handle
-<code>Dataset</code> files. The file contains global monthly near
-surface temperature from <code>2000</code> to <code>2014</code>. Please
-download the file, and move it to your working directory.</p>
-</div>
-<div id="loading-data-from-a-netcdf-file" class="section level2">
-<h2>Loading data from a netCDF file</h2>
-<p>In fact, <code>Xarray</code>’s interface is heavily inspired by the
-<code>netCDF</code> data model. And <code>xarray</code>’s
-<code>Dataset</code> is designed as an in-memory representation of a
-netCDF dataset.</p>
-<p>First, let’s open the CESM netCDF file
-(<code>CESM2_200001-201412.nc</code>) using the
-<code>xarray.open_dataset()</code> function:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">12</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>y <span class="op">=</span> np.cos(x<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span><span class="op">+</span><span class="dv">4</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.plot(x, y,<span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Suppose we want to find the value of <code>y</code> when
+<code>x=3.12</code>, you can use <code>interp1d()</code> as:</p>
 <div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Open a netCDF4 file</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span></code></pre></div>
-<p>By default, <code>xarray.open_dataset()</code> function uses lazy
-loading, i.e. it just loads in the <em>coordinate</em> and
-<em>attribute</em> metadata and not the data that correspond to data
-variables themselves. The data variables are loaded only on actual
-values access (e.g. when performing some calculation, slicing, …) or
-with <code>.load()</code> method. The <code>xarray.open_dataset()</code>
-is also able to load files in other formats (e.g., <code>grib</code>,
-<code>tiff</code>, or <code>zarr</code>), check <a
-href="https://xarray.pydata.org/en/stable/user-guide/io.html">Reading
-and writing files</a> for more.</p>
-<p>Now take a look at the loaded dataset:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> interp1d</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># Using interp1d function</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>f1 <span class="op">=</span> interp1d(x, y, kind <span class="op">=</span> <span class="st">&#39;linear&#39;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>f2 <span class="op">=</span> interp1d(x, y, kind <span class="op">=</span> <span class="st">&#39;cubic&#39;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># Now make x finer</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>xnew <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">30</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># Plot interpolated values</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>, xnew, f1(xnew), <span class="st">&#39;-&#39;</span>, xnew, f2(xnew), <span class="st">&#39;--&#39;</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># Add legend</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;linear&#39;</span>, <span class="st">&#39;cubic&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="bu">print</span>(f1(<span class="fl">3.12</span>), f2(<span class="fl">3.12</span>))</span></code></pre></div>
+<p>The <code>interp1d()</code> function in the
+<code>scipy.interpolate</code> is a convenient method to create a
+function based on fixed data points, which can be evaluated anywhere
+within the domain defined by the given data using linear interpolation.
+Using the <code>interp1d()</code> function, we created two functions
+<code>f1</code> and <code>f2</code>. These functions, for a given input
+<code>x</code> returns <code>y</code>. The third variable kind
+represents the type of the interpolation technique. <code>linear</code>,
+<code>nearest</code>, <code>zero</code>, <code>slinear</code>,
+<code>quadratic</code>, <code>cubic</code> are a few techniques of
+interpolation.</p>
+</div>
+<div id="spline-interpolation" class="section level3">
+<h3>Spline interpolation</h3>
+<p>One-dimensional smoothing spline fits a given set of data points. The
+<a
+href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html"><code>univariatespline</code>
+function</a> in <code>scipy.interpolate</code> is a convenient method to
+create a function, based on fixed data points class.</p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Show dataset</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>ds</span></code></pre></div>
-<p>To check the corresponding netCDF representation, we can use the
-<code>.info()</code> method:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">50</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>y <span class="op">=</span> np.exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="dv">50</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Suppose we want to find the value of <code>y</code> when
+<code>x=1.23</code>, you can use <code>UnivariateSpline()</code> as:</p>
 <div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Show dataset info</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>ds.info()</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> UnivariateSpline</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># Using UnivariateSpline function</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>spl <span class="op">=</span> UnivariateSpline(x, y, k<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>spl.set_smoothing_factor(<span class="fl">0.5</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># Now make x finer</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>xnew <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1000</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Plot interpolated values</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>plt.plot(xnew, spl(xnew), <span class="st">&#39;b&#39;</span>, lw <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>plt.show()</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>spl(<span class="fl">1.23</span>)</span></code></pre></div>
 </div>
-<div id="checking-datasets-properties" class="section level2">
-<h2>Checking <code>Datasets</code> properties</h2>
-<p>The <code>Datasets</code> (<code>ds</code>) have the following key
-properties:</p>
-<ul>
-<li><p><code>data_vars</code>: an dictionary of <code>DataArrays</code>
-corresponding to data variables</p></li>
-<li><p><code>dims</code>: a dictionary mapping from dimension names to
-the fixed length of each dimension (e.g. {‘time’: <code>180</code>,
-‘lat’: <code>192</code>, ‘lon’: <code>288</code>, ‘nbnd’:
-<code>2</code>} )</p></li>
-<li><p><code>coords</code>: a dictionary-like container of arrays
-(coordinates) that label each point (tick label) along our
-dimensions</p></li>
-<li><p><code>attrs</code>: a dictionary holding arbitrary metadata
-pertaining to the dataset</p></li>
-</ul>
-<p>Check those one by one:</p>
+</div>
+<div id="optimization-and-fitting-with-scipy.optimize"
+class="section level2">
+<h2>Optimization and fitting with <code>scipy.optimize</code></h2>
+<div id="curve-fitting" class="section level3">
+<h3>Curve fitting</h3>
+<p>Suppose we have data on a sine wave, with some noise:</p>
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Check data variables</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>ds.data_vars</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Check data dimension names</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>ds.dims</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># Check data coordinates</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>ds.coords</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># Check data attributes (metadata)</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>ds.attrs</span></code></pre></div>
-</div>
-<div id="checking-dataarray-properties" class="section level2">
-<h2>Checking <code>DataArray</code> properties</h2>
-<p>As we just covered, the <code>DataArray</code> is
-<code>xarray</code>’s implementation of a labeled, multi-dimensional
-array. It has several key properties:</p>
-<ul>
-<li><code>data</code>: an array (<code>numpy.ndarray</code>,
-<code>dask.array</code>, or <code>sparse</code> or
-<code>cupy.array</code> holding the array’s values).</li>
-<li><code>dims</code>: dimension names for each axis e.g. (lat, lon,
-time)</li>
-<li><code>coords</code>: a dictionary-like container of arrays
-(coordinates) that label each point (tick label) along our
-dimensions</li>
-<li><code>attrs</code>: a dictionary that holds arbitrary
-attributes/metadata (such as units).</li>
-<li><code>name</code>: an arbitrary name of the array</li>
-</ul>
-<p>For example, you can use <code>ds['tas']</code> to extract the
-<code>tas</code> (near surface temperature) variable
-(<code>DataArray</code>), and later check its properties one by one:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, num<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.9</span> <span class="op">*</span> np.sin(<span class="fl">1.5</span> <span class="op">*</span> x) <span class="op">+</span> np.random.normal(size<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>If we know that the data lies on a sine wave, but not the amplitudes
+or the period, we can find those by least squares curve fitting. First
+we have to define the test function to fit, here a sine with unknown
+amplitude and period:</p>
 <div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Extract the tas variable (DataArray)</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>]</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># The actual array data</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].data</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Datarray coordinates</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].coords</span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># Dataarray attributes</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].attrs</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co"># Dataarray name</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>ds[<span class="st">&#39;tas&#39;</span>].name</span></code></pre></div>
-</div>
-<div id="indexing-and-selecting-data" class="section level2">
-<h2>Indexing and selecting data</h2>
-<p><code>Xarray</code> supports two kinds of indexing:</p>
-<ul>
-<li><p>Positional indexing via <code>.isel()</code>: provides primarily
-integer position based index (from <code>0</code> to
-<code>length-1</code> of the axis/dimension)</p></li>
-<li><p>Label indexing via <code>.sel()</code>: provides primarily label
-based index.</p></li>
-</ul>
-<p>The good part of <code>xarray</code> is that, its indexing methods
-preserves the coordinate labels and associated metadata.</p>
-<p>Check <a
-href="https://xarray.pydata.org/en/stable/user-guide/indexing.html">Indexing
-and selecting data</a> for more.</p>
-<div id="selection-by-position" class="section level3">
-<h3>Selection by position</h3>
-<p>The <code>.isel()</code> method is the primary access method for
-<strong>purely integer based indexing</strong>. The following are valid
-inputs:</p>
-<ul>
-<li><p>An integer, e.g. <code>lat=10</code></p></li>
-<li><p>A list or array of integers, e.g,
-<code>lon=[10, 20, 39]</code></p></li>
-<li><p>A slice object (range) with integers,
-e.g. <code>time=slice(2, 20)</code></p></li>
-</ul>
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Define the function to fit</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="kw">def</span> guess_func(x, a, b):</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> np.sin(b <span class="op">*</span> x)</span></code></pre></div>
+<p>We then use <code>scipy.optimize.curve_fit</code> to find
+<code>a</code> and <code>b</code>:</p>
 <div class="sourceCode" id="cb14"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># The original object, i.e. no selection</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>ds.tas.isel()</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># Data at lat=100</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>ds.tas.isel(lat<span class="op">=</span><span class="dv">100</span>)</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> optimize</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># Fit parameters</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>params, _ <span class="op">=</span> optimize.curve_fit(guess_func, x, y)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="bu">print</span>(params)</span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># Data at lat=100 and the last two time steps </span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>ds.tas.isel(lat<span class="op">=</span><span class="dv">100</span>, time<span class="op">=</span>[<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># Plot fitted data</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>, x, params[<span class="dv">0</span>]<span class="op">*</span>np.sin(params[<span class="dv">1</span>] <span class="op">*</span> x), <span class="st">&#39;r-&#39;</span>)</span>
 <span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Data lat=100 and time ranging from index 10 and 20 </span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>ds.tas.isel(lon<span class="op">=</span><span class="dv">100</span>, time<span class="op">=</span><span class="bu">slice</span>(<span class="dv">10</span>, <span class="dv">20</span>))</span></code></pre></div>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Add legend</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;fitted value&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
-<div id="selection-by-label" class="section level3">
-<h3>Selection by label</h3>
-<p>The <code>.sel()</code> method is the primary access method for
-<strong>purely coordinate label based indexing</strong>. The following
-are valid inputs:</p>
-<ul>
-<li><p>A single coordinate label, e.g. <code>time='2013-01-15'</code> or
-<code>time='2013'</code></p></li>
-<li><p>A list or array of coordinate labels,
-e.g. <code>lon=['100','356.25']</code></p></li>
-<li><p>A slice object with coordinate labels,
-e.g. <code>time=slice("2021-01-01", "2021-03-01")</code></p></li>
-</ul>
+<div id="finding-the-minimums" class="section level3">
+<h3>Finding the minimums</h3>
+<p>Let’s define the following function and plot it:</p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Select data in 2013</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="st">&#39;2013&#39;</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Select data on 2013-01-15</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="st">&#39;2013-01-15&#39;</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co"># Select data from a list</span></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span>[<span class="st">&#39;100&#39;</span>,<span class="st">&#39;356.25&#39;</span>])</span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co"># Select data within a range</span></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co"># Both the start and the stop are included</span></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2013-01-01&quot;</span>, <span class="st">&quot;2014-12-31&quot;</span>))</span></code></pre></div>
-</div>
-<div id="nearest-neighbor-lookups" class="section level3">
-<h3>Nearest-neighbor lookups</h3>
-<p>Now try:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Define a function</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="kw">def</span> g(x):</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span><span class="op">*</span>np.sin(x)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Set the range</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co"># Plot the function</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>plt.plot(x, g(x)) </span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>This function has a global minimum around <code>-1.5</code> and local
+minimums around <code>-7.1</code> and <code>4.3</code>. Searching for
+minimum can be done with <code>scipy.optimize.minimize</code>, given a
+starting point <code>x0</code>, it returns the location of the minimum
+that it has found.</p>
 <div class="sourceCode" id="cb16"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>ds.tas.sel(lat<span class="op">=</span><span class="fl">39.5</span>, lon<span class="op">=</span><span class="fl">105.7</span>)</span></code></pre></div>
-<p>Can you figure out why this did not work?</p>
-<p>Be careful when working with floating coordinate labels. When we have
-integer, string, datetime-like values for coordinate labels,
-<code>sel()</code> works flawlessly. When we try to work with floating
-coordinate labels, things get a little tricky. As shown above, when our
-coordinate labels are not integers or strings or datetime-like but
-floating point numbers, <code>.sel()</code> may throw a KeyError:
-<code>ds.tas.sel(lat=39.5, lon=105.7)</code> fails because we are trying
-to use a conditional for an <strong>approximate</strong> value, i.e
-floating numbers are represented approximately inside the computer, and
-<code>xarray</code> is unable to locate this exact value. To address
-this issue, <code>xarray</code> supports method and tolerance keyword
-argument. The method parameter allows for enabling nearest neighbor
-(inexact) lookups by use of the methods <code>pad</code>,
-<code>backfill</code>, or <code>nearest</code>:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Using minimize() to search for minimums</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>result <span class="op">=</span> optimize.minimize(g, x0<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>result</span></code></pre></div>
+</div>
+<div id="finding-the-roots" class="section level3">
+<h3>Finding the roots</h3>
+<p>To find a root, <em>i.e.</em>, a point where <code>g(x) = 0</code>,
+of the function <code>g</code> above we can use
+<code>scipy.optimize.root</code>:</p>
 <div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Using the nearest method to find a nearby value</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>ds.tas.sel(lat<span class="op">=</span><span class="fl">39.5</span>, lon<span class="op">=</span><span class="fl">105.7</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>)</span></code></pre></div>
-<p>So the closest location in the data was at
-<code>lat=39.11, lon=106.2</code>.</p>
-<p>See the <a
-href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.sel.html"><code>xarray</code>
-documentation</a> for more on usage of method and tolerance parameters
-in <code>.sel()</code>.</p>
-<p>Another way to use the nearest neighbor lookup is via a objects. For
-example:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Using root() to find the roots</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>root <span class="op">=</span> optimize.root(g, x0<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>root</span></code></pre></div>
+</div>
+</div>
+<div id="statistics-with-scipy.stats" class="section level2">
+<h2>Statistics with <code>scipy.stats</code></h2>
+<p>The module <code>scipy.stats</code> contains statistical tools and
+probabilistic descriptions of random processes.</p>
+<p>For example, we can fit a sample to a distribution:</p>
 <div class="sourceCode" id="cb18"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Using the slice method to find a nearby value</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>ds.tas.sel(lat<span class="op">=</span><span class="bu">slice</span>(<span class="dv">39</span>, <span class="fl">39.5</span>), lon<span class="op">=</span><span class="bu">slice</span>(<span class="fl">106.1</span>, <span class="fl">106.3</span>))</span></code></pre></div>
-<p>Operators can be chained, so multiple operations can be used
-sequentially. For example, to select an area of interest and the first
-time index, and plot the data:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Generate a sample</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>sample <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co"># Fit a normal distribution</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>stats.norm.fit(sample)</span></code></pre></div>
+<p>A statistical test is a decision indicator. For instance, if we have
+two sets of observations, that we assume are generated from normal
+distributions, we can use a <em>t-test</em> to decide whether the means
+of two sets of observations are significantly different:</p>
 <div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>ds.tas.isel(time<span class="op">=</span><span class="dv">0</span>).sel(lon<span class="op">=</span><span class="bu">slice</span>(<span class="dv">20</span>, <span class="dv">160</span>), lat<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">80</span>, <span class="dv">25</span>)).plot()</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>plt.show()</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Sample 1</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>sample1 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># Sample 2</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>sample2 <span class="op">=</span> np.random.normal(<span class="dv">1</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Independent t-test</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>stats.ttest_ind(sample1, sample2) </span></code></pre></div>
+<p><a href="https://scipy-lectures.org/index.html">The chapter on
+statistics</a> introduces much more elaborate tools for statistical
+testing and statistical data loading and visualization outside of
+<code>SciPy</code>. You are also welcome to check <a
+href="https://zhu-group.github.io/ese335/index.html">ESE335
+Environmental Data Analysis</a> for conducting statistical tests with
+the <code>R</code> language.</p>
 </div>
-</div>
-<div id="basic-plotting-with-.plot" class="section level2">
-<h2>Basic plotting with <code>.plot()</code></h2>
-<p><code>Xarray</code> provides a <code>.plot()</code> method on
-<code>DataArray</code> and <code>Dataset.</code> This method is a
-wrapper around <code>Matplotlib</code>’s
-<code>matplotlib.pyplot.plot()</code>. <code>xarray</code> will
-automatically guess the type of plot based on the dimensionality of the
-data. By default <code>.plot()</code> creates:</p>
-<ul>
-<li><p>a <strong>line</strong> plot for 1-D arrays using
-<code>matplotlib.pyplot.plot()</code></p></li>
-<li><p>a <strong>pcolormesh</strong> plot for 2-D arrays using
-<code>matplotlib.pyplot.pcolormesh()</code></p></li>
-<li><p>a <strong>histogram</strong> for everything else (more than 2
-dimensions) using <code>matplotlib.pyplot.hist()</code></p></li>
-</ul>
-<div id="histograms" class="section level3">
-<h3>Histograms</h3>
+<div id="clustering-with-scipy.cluster" class="section level2">
+<h2>Clustering with <code>scipy.cluster</code></h2>
+<p>Clustering is a popular technique to categorize data by associating
+it into groups. The <code>SciPy</code> library includes an
+implementation of the <em>k-means clustering</em> algorithm as well as
+several <em>hierarchical clustering</em> algorithms. Here we will be
+using the k-means algorithm in <code>scipy.cluster.vq</code>, where
+<code>vq</code> stands for vector quantization.</p>
 <div class="sourceCode" id="cb20"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Histogram for all data</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>ds.tas.plot()</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>plt.show()</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> vstack,array</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> rand</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="im">from</span> scipy.cluster.vq <span class="im">import</span> kmeans,vq</span>
 <span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Histogram for a subset of data</span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot()</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
-</div>
-<div id="d-line-plots" class="section level3">
-<h3>1D line plots</h3>
-<p>Let’s select one spatial location and plot a time series of the near
-surface temperature:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Time series of the near surface temperature at Shenzhen</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>Lets say we want to compare plots of temperature at three different
-latitudes. We can use the <code>hue</code> keyword argument to do
-this.</p>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Time series of the near surface temperature at 3 latitudes at time stamp 50</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>ds.tas.isel(time<span class="op">=</span><span class="dv">50</span>).sel(lat<span class="op">=</span>[<span class="op">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>], method<span class="op">=</span><span class="st">&quot;nearest&quot;</span>).plot(</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    x<span class="op">=</span><span class="st">&quot;lon&quot;</span>, hue<span class="op">=</span><span class="st">&quot;lat&quot;</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>plt.show()</span></code></pre></div>
-</div>
-<div id="d-plots" class="section level3">
-<h3>2D plots</h3>
-<p>Operator chaining means it is possible to have multiple selection
-operators and add <code>.plot()</code> to the end to visualize the
-result.</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># 2D map over lat (-80,25) and lon (20,160) at timestamp -10</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>ds.tas.isel(time<span class="op">=-</span><span class="dv">10</span>).sel(lon<span class="op">=</span><span class="bu">slice</span>(<span class="dv">20</span>, <span class="dv">160</span>), </span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>                          lat<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">80</span>, <span class="dv">25</span>)).plot(robust<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>The x- and y-axes are labeled with full names — “Latitude”,
-“Longitude” — along with units. The colorbar has a nice label, again
-with units. And the title tells us the timestamp of the data
-presented.</p>
-<p>You can, of course, modify the color bar:</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Define keyword arguments that are passed to matptolib.pyplot.colorbar</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>colorbar_kwargs <span class="op">=</span> {</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>    <span class="st">&quot;orientation&quot;</span>: <span class="st">&quot;horizontal&quot;</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>    <span class="st">&quot;label&quot;</span>: <span class="st">&quot;my clustom label&quot;</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>    <span class="st">&quot;pad&quot;</span>: <span class="fl">0.1</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>}</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(</span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>    <span class="co"># coordinate to plot on the x-axis of the plot</span></span>
-<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>    x<span class="op">=</span><span class="st">&quot;time&quot;</span>, </span>
-<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>    <span class="co"># set colorbar limits to 2nd and 98th percentile of data</span></span>
-<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>    robust<span class="op">=</span><span class="va">True</span>,  </span>
-<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>    cbar_kwargs<span class="op">=</span>colorbar_kwargs,</span>
-<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>)</span>
-<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>plt.show()</span></code></pre></div>
-</div>
-<div id="faceting" class="section level3">
-<h3>Faceting</h3>
-<p>Faceting is an effective way of visualizing variations of 3D data
-where 2D slices are visualized in a panel (subplot) and the third
-dimensions is varied between panels (subplots).</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Plot monthly mean near surface temperature in 2010 and 2011, one at a panel</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>ds.tas.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">&quot;2010&quot;</span>, <span class="st">&quot;2011&quot;</span>)).plot(col<span class="op">=</span><span class="st">&quot;time&quot;</span>, col_wrap<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>See the <a
-href="https://xarray.pydata.org/en/stable/user-guide/plotting.html"><code>xarray</code>
-documentation</a> for more on “faceted” plots or subplots.</p>
-</div>
-</div>
-<div id="computation" class="section level2">
-<h2>Computation</h2>
-<p>Here we will some basic computation enabled by
-<code>xarray.</code></p>
-<div id="arithmetic-operations" class="section level3">
-<h3>Arithmetic Operations</h3>
-<p>Arithmetic operations with a single <code>DataArray</code>
-automatically vectorize (like <code>numpy</code>) over all array values.
-Let’s convert the air temperature from degree Kelvin to Celsius:</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Convert the air temperature from degree Kelvin to Celsius</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>ds.tas <span class="op">-</span> <span class="fl">273.15</span></span></code></pre></div>
-<p>Or even square all values in <code>tas</code> (makes no sense, just
-for demonstration):</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Take sqaure of the data (even though this makes no sense)</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>ds.tas <span class="op">**</span> <span class="dv">2</span></span></code></pre></div>
-</div>
-<div id="aggregation-methods" class="section level3">
-<h3>Aggregation Methods</h3>
-<p>A very common step during data analysis is to summarize the data in
-question by computing aggregations like <code>sum()</code>,
-<code>mean()</code>, <code>median()</code>, <code>min()</code>,
-<code>max()</code>, in which reduced data provide insight into the
-nature of large dataset. Let’s explore some of these aggregation
-methods:</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Compute the mean of all locations and timesteps</span></span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>ds.tas.mean()</span></code></pre></div>
-<p>Because we specified no <code>dim</code> argument the function was
-applied over all dimensions. It is possible to specify a dimension along
-which to compute an aggregation. For example, to calculate the mean in
-time for all locations specify the time dimension as the dimension along
-which the mean should be calculated:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Calculate the mean in time for all locations</span></span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>ds.tas.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>).plot(size<span class="op">=</span><span class="dv">7</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>Now try:</p>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Compute temporal min</span></span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>ds.tas.<span class="bu">min</span>(dim<span class="op">=</span>[<span class="st">&#39;time&#39;</span>])</span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co"># Compute spatial sum</span></span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>ds.tas.<span class="bu">sum</span>(dim<span class="op">=</span>[<span class="st">&#39;lat&#39;</span>, <span class="st">&#39;lon&#39;</span>])</span>
-<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a><span class="co"># compute temporal median</span></span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>ds.tas.median(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>).plot(size<span class="op">=</span><span class="dv">7</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>For more, check <a
-href="https://xarray.pydata.org/en/stable/user-guide/computation.html"><code>xarray</code>
-computation</a>.</p>
-</div>
-<div id="groupby-split-apply-combine" class="section level3">
-<h3>GroupBy: split, apply, combine</h3>
-<p>Simple aggregations can give useful summary of our dataset, but often
-we would prefer to aggregate <strong>conditionally</strong> on some
-coordinate labels or groups. <code>Xarray</code> provides the so-called
-<code>groupby</code> operation which enables the
-<code>split-apply-combine</code> workflow on <code>xarray</code>
-<code>DataArrays</code> and <code>Datasets.</code> The
-<code>split-apply-combine</code> operation is illustrated in this
-figure.</p>
-<p><img src="figs/xarray-split-apply-combine.png" alt="drawing" width="700"/></p>
-<p><a
-href="https://raw.githubusercontent.com/andersy005/xarray-tutorial/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0/images/xarray-split-apply-combine.png">Figure
-source</a></p>
-<p>This makes clear what the <code>groupby</code> accomplishes:</p>
-<ul>
-<li><p>The <code>split</code> step involves breaking up and grouping an
-<code>xarray</code> <code>Dataset</code> or <code>DataArray</code>
-depending on the value of the specified <strong>group
-key</strong></p></li>
-<li><p>The <code>apply</code> step involves computing some function,
-usually an aggregate, transformation, or filtering, within the
-individual groups</p></li>
-<li><p>The <code>combine</code> step merges the results of these
-operations into an output <code>xarray</code> <code>Dataset</code> or
-<code>DataArray</code></p></li>
-</ul>
-<p>We are going to use <code>groupby</code> to remove the seasonal cycle
-(“climatology”) from our dataset:</p>
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Near surface temperature at Shenzhen</span></span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>First, let’s group data by <code>month</code>, i.e. all
-<code>Januaries</code> in one group, all <code>Februaries</code> in one
-group, etc…</p>
-<div class="sourceCode" id="cb32"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>ds.tas.groupby(ds.time.dt.month)</span></code></pre></div>
-<p>Here we are using the <code>.dt</code> <a
-href="https://xarray.pydata.org/en/stable/generated/xarray.core.accessor_dt.DatetimeAccessor.html"><code>DatetimeAccessor</code></a>
-to extract specific components of dates/times in our time coordinate
-dimension. You can also try <code>ds.time.dt.year</code> and
-<code>ds.time.dt.month</code>, see what happens.</p>
-<p><code>Xarray</code> also offers a more concise syntax when the
-variable you’re grouping on is already present in the dataset. This is
-identical to <code>ds.tas.groupby (ds.time.dt.month)</code>:</p>
-<div class="sourceCode" id="cb33"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>ds.tas.groupby(<span class="st">&#39;time.month&#39;</span>)</span></code></pre></div>
-<p>Now that we have groups defined, it’s time to “apply” a calculation
-to the group. These calculations can either be:</p>
-<ul>
-<li><p>aggregation: reduces the size of the group</p></li>
-<li><p>transformation: preserves the group’s full size</p></li>
-</ul>
-<p>At then end of the apply step, <code>xarray</code> will automatically
-combine the aggregated/transformed groups back into a single object.</p>
-<p>Let’s calculate the climatology at every point in the dataset and
-plot the results:</p>
-<div class="sourceCode" id="cb34"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># Calculate the climatology </span></span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>tas_clim <span class="op">=</span> ds.tas.groupby(<span class="st">&#39;time.month&#39;</span>).mean()</span>
-<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>tas_clim</span>
-<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="co"># Plot climatology at a specific point (Shenzhen)</span></span>
-<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a>tas_clim.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
-<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>plt.show()</span>
-<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a></span>
-<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a><span class="co"># Plot zonal mean climatology</span></span>
-<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>tas_clim.mean(dim<span class="op">=</span><span class="st">&#39;lon&#39;</span>).transpose().plot.contourf(levels<span class="op">=</span><span class="dv">12</span>, robust<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span>
-<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>Now let’s combine the previous steps to compute climatology and use
-<code>xarray</code>’s groupby arithmetic to remove this climatology from
-our original data:</p>
-<div class="sourceCode" id="cb35"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co"># Group data by month</span></span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>group_data <span class="op">=</span> ds.tas.groupby(<span class="st">&#39;time.month&#39;</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="co"># Apply mean to grouped data, and then compute the anomaly </span></span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>tas_anom <span class="op">=</span> group_data <span class="op">-</span> group_data.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>tas_anom</span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="co"># Plot anomalies at a specific point (Shenzhen)</span></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>tas_anom.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot()</span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>plt.show()</span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="co"># Plot global mean anomalies</span></span>
-<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a>tas_anom.mean(dim<span class="op">=</span>[<span class="st">&#39;lat&#39;</span>, <span class="st">&#39;lon&#39;</span>]).plot()</span>
-<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>For more, see <a
-href="https://xarray.pydata.org/en/stable/user-guide/groupby.html">GroupBy:
-split-apply-combine</a>.</p>
-</div>
-</div>
-<div id="masking-data" class="section level2">
-<h2>Masking Data</h2>
-<p>Using <code>.where()</code> method, elements of an
-<code>xarray</code> <code>Dataset</code> or <code>xarray</code>
-<code>DataArray</code> that satisfy a given condition or multiple
-conditions can be replaced/masked. Unlike <code>.isel()</code> and
-<code>sel()</code> that change the shape of the returned results,
-<code>.where()</code> preserves the shape of the original data. It does
-accomplishes this by returning values from the original
-<code>DataArray</code> or <code>Dataset</code> if the condition is
-<code>True</code>, and fills in <code>missing values</code> wherever the
-condition is <code>False</code>.</p>
-<div class="sourceCode" id="cb36"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Select data</span></span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>sample <span class="op">=</span> ds.tas.isel(time<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>sample</span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co"># Sample data where temperature is less than 270</span></span>
-<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>masked_sample <span class="op">=</span> sample.where(sample <span class="op">&lt;</span> <span class="fl">270.0</span>)</span>
-<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a>masked_sample</span>
-<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a></span>
-<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="co"># Plot 2 panels</span></span>
-<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">19</span>, <span class="dv">6</span>))</span>
-<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>sample.plot(ax<span class="op">=</span>axes[<span class="dv">0</span>], robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a>masked_sample.plot(ax<span class="op">=</span>axes[<span class="dv">1</span>], robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><code>.where()</code> also allows providing multiple conditions. To
-do this, we need to make sure each conditional expression is enclosed in
-<code>()</code>. To combine conditions, we use the <code>&amp;</code>
-operator and/or <code>|</code>. let’s use where to mask locations with
-temperature values less than <code>250</code> and greater than
-<code>300</code>:</p>
-<div class="sourceCode" id="cb37"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="co"># More than one condition</span></span>
-<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>sample.where((sample <span class="op">&gt;</span> <span class="dv">250</span>) <span class="op">&amp;</span> (sample <span class="op">&lt;</span> <span class="dv">300</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>plt.show()</span>
-<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a><span class="co"># More than one condition</span></span>
-<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>sample.where((sample.lat <span class="op">&lt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (sample.lat <span class="op">&gt;</span> <span class="op">-</span><span class="dv">5</span>) <span class="op">&amp;</span> (sample.lon <span class="op">&gt;</span> <span class="dv">190</span>) <span class="op">&amp;</span> </span>
-<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>             (sample.lon <span class="op">&lt;</span> <span class="dv">240</span>)).plot(size<span class="op">=</span><span class="dv">6</span>, robust<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a>plt.show()             </span></code></pre></div>
-<p>For more, see <a
-href="https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where">Masking
-with where</a>.</p>
-<hr />
-<p><em>The notes are modified from the excellent <a
-href="https://rabernat.github.io/research_computing/">Research Computing
-in Earth Sciences</a> and <a
-href="https://github.com/andersy005/xarray-tutorial/tree/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0">xarray-tutorial</a>
-freely available on the GitHub.</em></p>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Data generation, 200 rows, 2 cols</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>data <span class="op">=</span> vstack((rand(<span class="dv">100</span>,<span class="dv">2</span>) <span class="op">+</span> array([<span class="fl">.8</span>,<span class="fl">.8</span>]), rand(<span class="dv">100</span>,<span class="dv">2</span>)))</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co"># Show data</span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>plt.plot(data[:,<span class="dv">0</span>],data[:,<span class="dv">1</span>],<span class="st">&#39;k+&#39;</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co"># Computing K-Means with K = 2 (2 clusters)</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#centroids, mean_dist = kmeans(data,2)</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="co"># Assign each sample to a cluster</span></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="co">#clusters, dist = vq(data,centroids)</span></span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="co"># Plot clusters</span></span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],&#39;bo&#39;)</span></span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],&#39;rd&#39;)</span></span>
+<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a><span class="co"># Plot cluster centroids</span></span>
+<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a><span class="co">#plt.plot(centroids[:,0],centroids[:,1],&#39;gX&#39;,markersize=10)</span></span>
+<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a><span class="co"># Plot raw data</span></span>
+<span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a><span class="co">#plt.plot(data[:,0],data[:,1],&#39;w+&#39;)</span></span></code></pre></div>
 <hr />
 </div>
 </div>
@@ -1141,50 +957,41 @@ freely available on the GitHub.</em></p>
 <h1>In-class exercises</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise #1</h2>
-<p>Go over the notes, make sure you understand the scripts.</p>
+<p>Go through the notes, make sure you understand the scripts.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>Compute the global mean temperature between <code>2005-01</code> and
-<code>2010-12</code>.</p>
-</div>
-<div id="exercise-3" class="section level2">
-<h2>Exercise #3</h2>
-<p>Plot the the seasonal cycle (“climatology”) in temperature near your
-hometown.</p>
-</div>
-<div id="exercise-4" class="section level2">
-<h2>Exercise #4</h2>
-<p>Plot anomalies at your hometown, do you observe a trend?</p>
-</div>
-<div id="exercise-5" class="section level2">
-<h2>Exercise #5</h2>
-<p>Plot monthly climatology in temperature in <code>12</code>
-panels.</p>
+<p>The temperature extremes in Shenzhen for each month, starting in
+January, are given by (in degrees Celcius):</p>
+<p><code>max: 19.8, 20.2, 22.7, 26.3, 29.5, 31.1, 32.3, 32.3, 31.3, 29.2, 25.4, 21.5</code>
+<code>min: 12.5, 13.8, 16.5, 20.3, 23.6, 25.6, 26.3, 26.1, 25.0, 22.5, 18.2, 13.8</code></p>
+<p><strong>2.1</strong> Plot these temperature extremes.<br />
+<strong>2.2</strong> Define a function that can describe min and max
+temperatures.<br />
+[Hint]: this function has to have a period of 1 year.<br />
+<strong>2.3</strong> Fit this function to the data with
+<code>scipy.optimize.curve_fit</code>.<br />
+<strong>2.4</strong> Plot the result. Is the fit reasonable? If not,
+why?<br />
+<strong>2.5</strong> Is the time offset for min and max temperatures the
+same within the fit accuracy?</p>
 <hr />
 </div>
 </div>
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
 <ul>
+<li><a href="https://docs.scipy.org/doc/scipy/tutorial/index.html">SciPy
+User Guide</a><br />
+</li>
+<li><a href="https://www.w3schools.com/python/scipy/index.php">SciPy
+Tutorial</a></li>
 <li><a
-href="https://xarray.pydata.org/en/stable/index.html"><code>xarray</code>
-offical guide</a></li>
+href="https://realpython.com/python-scipy-cluster-optimize/">Scientific
+Python: Using SciPy for Optimization</a></li>
 <li><a
-href="https://www.unidata.ucar.edu/software/netcdf/docs/index.html">NetCDF
-offical guide</a></li>
-<li><a
-href="https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f"><code>xarray</code>
-Example Cheatsheet</a></li>
-<li><a
-href="http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf"><code>Python</code>:
-a tutorial introduction to <code>xarray</code></a></li>
-<li><a href="https://cookbooks.projectpythia.org/">Pythia Cookbooks
-Gallery</a> (very comprehensive, contains many courses and
-tutorials)</li>
-<li><a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a>
-(great tool to visualize and check netCDF files, requires
-<code>java runtime environment 9</code>)</li>
+href="https://www.tutorialspoint.com/scipy/scipy_quick_guide.htm">SciPy
+- Quick Guide</a></li>
 </ul>
 </div>
 

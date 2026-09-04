@@ -30,8 +30,8 @@ Wednesday 19:00-21:50
 
 **Supplements:**  
 
-[Supplement 01: Parallel computing with Python](https://zhu-group.github.io/ese5023/Sup_01.html)  
-[Supplement 02: Intermediate Python: `xarray`](https://zhu-group.github.io/ese5023/Sup_02.html)  
-[Supplement 03: Scientific computing with `SciPy`](https://zhu-group.github.io/ese5023/Sup_03.html)  
+[Supplement 01: Intermediate Python: `xarray`](https://zhu-group.github.io/ese5023/Sup_01.html)  
+[Supplement 02: Scientific computing with `SciPy`](https://zhu-group.github.io/ese5023/Sup_02.html)  
+[Supplement 03: Parallel computing with Python](https://zhu-group.github.io/ese5023/Sup_03.html)  
 [Supplement 04: Fortran: Basics](https://zhu-group.github.io/ese5023/Sup_04.html)  
 [Supplement 05: Fortran: Intermediate](https://zhu-group.github.io/ese5023/Sup_05.html)  

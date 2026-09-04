@@ -11,7 +11,7 @@
 
 
 
-<title>Scientific computing with SciPy</title>
+<title>Parallel computing with dask</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -476,482 +476,433 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Scientific computing with
-<code>SciPy</code></h1>
+<h1 class="title toc-ignore">Parallel computing with
+<code>dask</code></h1>
 
 </div>
 
 
 <blockquote>
-<p>“Since its initial release in 2001, <code>SciPy</code> has become a
-de facto standard for leveraging scientific algorithms in
-<code>Python</code>.” - Virtanen et al. (2020)</p>
+<p>“Data is the new science. Big Data holds the answers.” - Pat
+Gelsinger</p>
 </blockquote>
 <hr />
-<div id="introduction-to-scipy" class="section level1">
-<h1>Introduction to <code>SciPy</code></h1>
-<p><code>SciPy</code> is a library of numerical routines for the
-<code>Python</code> programming language that provides fundamental
-building blocks for modeling and solving scientific problems.
-<code>SciPy</code> includes algorithms for optimization, integration,
-interpolation, eigenvalue problems, algebraic equations, differential
-equations and many other classes of problems; it also provides
-specialized data structures, such as sparse matrices and
-<em>k</em>-dimensional trees.</p>
-<p>The <code>SciPy</code> library depends on <code>NumPy</code>, which
-provides convenient and fast N-dimensional array manipulation. Check <a
-href="https://www.nature.com/articles/s41592-019-0686-2">SciPy 1.0:
-fundamental algorithms for scientific computing in Python</a> for an
-overview of the capabilities and development practices of
-<code>SciPy</code>.</p>
-<p>When you want to do scientific work in <code>Python</code>, the first
-library you can turn to is <code>SciPy</code>. As you’ll see in this
-Section, <code>SciPy</code> is not just a library, but a whole
-<strong>ecosystem of libraries</strong> that work together to help you
-accomplish complicated scientific tasks quickly and reliably.</p>
-<p><code>SciPy</code> should be installed along with
-<code>Anaconda</code>. If not, in
-<code>Anaconda Powershell Prompt</code>, install it:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install SciPy</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>conda install scipy</span></code></pre></div>
-<p>To make sure <code>SciPy</code> is installed:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Import modules</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Show plots in the notebook</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Import SciPy</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="im">import</span> scipy</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Print the location of the file from where `SciPy` is loaded</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="bu">print</span>(scipy.<span class="va">__file__</span>)</span></code></pre></div>
-<p>Now you’ve imported <code>SciPy</code> and printed the location of
-the file from where <code>SciPy</code> is loaded. Your computer will
-probably show a different location. <code>SciPy</code> should be ready
-for use.</p>
-</div>
-<div id="task-specific-sub-modules-in-scipy" class="section level1">
-<h1>Task-specific sub-modules in <code>SciPy</code></h1>
-<p>As non-professional programmers, scientists often tend to
-<em>re-invent the wheel</em>, which leads to buggy, non-optimal,
-difficult-to-share and unmaintainable code. By contrast,
-<code>SciPy</code>’s routines are optimized and tested, and should
-therefore be used when possible.</p>
-<p><code>SciPy</code> is composed of task-specific sub-modules,
-including:</p>
-<table>
-<colgroup>
-<col width="72%" />
-<col width="27%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Sub-module</th>
-<th align="left">Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster"><code>scipy.cluster</code></a></td>
-<td align="left">Vector quantization / Kmeans</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants"><code>scipy.constants</code></a></td>
-<td align="left">Physical and mathematical constants</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/fftpack.html#module-scipy.fftpack"><code>scipy.fftpack</code></a></td>
-<td align="left">Fourier transform</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate"><code>scipy.integrate</code></a></td>
-<td align="left">Integration routines</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate"><code>scipy.interpolate</code></a></td>
-<td align="left">Interpolation</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io"><code>scipy.io</code></a></td>
-<td align="left">Data input and output</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg"><code>scipy.linalg</code></a></td>
-<td align="left">Linear algebra routines</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage"><code>scipy.ndimage</code></a></td>
-<td align="left">n-dimensional image package</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr"><code>scipy.odr</code></a></td>
-<td align="left">Orthogonal distance regression</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize"><code>scipy.optimize</code></a></td>
-<td align="left">Optimization</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal"><code>scipy.signal</code></a></td>
-<td align="left">Signal processing</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse"><code>scipy.sparse</code></a></td>
-<td align="left">Sparse matrices</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial"><code>scipy.spatial</code></a></td>
-<td align="left">Spatial data structures and algorithms</td>
-</tr>
-<tr class="even">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special"><code>scipy.special</code></a></td>
-<td align="left">Special mathematical functions</td>
-</tr>
-<tr class="odd">
-<td align="left"><a
-href="https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats"><code>scipy.stats</code></a></td>
-<td align="left">Statistics</td>
-</tr>
-</tbody>
-</table>
-<p>This section is far from an introduction to numerical computing. As
-enumerating the different sub-modules and functions in
-<code>SciPy</code> would be very boring, we concentrate instead on a few
-problems you may encounter to give a general idea of how to use
-<code>SciPy</code> for scientific computing.</p>
-<div id="constants-with-scipy.constants" class="section level2">
-<h2>Constants with <code>scipy.constants</code></h2>
-<p><code>SciPy</code> constants package provides a wide range of
-constants, which are used in the general scientific area. We have to
-import the required constant and use them as per the requirement.</p>
-<div id="mathematical-constants" class="section level3">
-<h3>Mathematical constants</h3>
-<p>Import mathematical constant, for example:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> constants</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Mathematical constants</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>scipy.constants.pi</span></code></pre></div>
-</div>
-<div id="physical-constants" class="section level3">
-<h3>Physical constants</h3>
-<p>Import physical constant, for example:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Physical constants</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>scipy.constants.R</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>scipy.constants.gas_constant</span></code></pre></div>
-<p>In addition to the above variables, <code>scipy.constants</code> also
-contains the <a href="https://physics.nist.gov/cuu/Constants">2018
-CODATA recommended values (CODATA2018)</a> database containing more
-physical constants. Call
-<code>scipy.constants.physical_constants[NAME]</code> to return a
-dictionary of physical constants, of the format
-<code>(value, unit, uncertainty)</code>. For example:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Physical constants</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>scipy.constants.physical_constants[<span class="st">&#39;atomic unit of mass&#39;</span>]</span></code></pre></div>
-</div>
-<div id="units" class="section level3">
-<h3>Units</h3>
-<p><code>scipy.constants</code> also contains SI units, for example:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># SI prefixes</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>scipy.constants.micro</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Mass, in [kg]</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>scipy.constants.long_ton</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Speed, in [m/s]</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>scipy.constants.mph</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Pressure, in [Pa]</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>scipy.constants.atmosphere</span></code></pre></div>
-<p>Remembering all of these are a bit tough. The easy way to get which
-key is for which function is looking up things in the <a
-href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants"><code>SciPy</code>
-Constants page</a>.</p>
-</div>
-</div>
-<div id="integrating-with-scipy.integrate" class="section level2">
-<h2>Integrating with <code>scipy.integrate</code></h2>
-<p>When a function cannot be integrated analytically, or is very
-difficult to integrate analytically, one generally turns to numerical
-integration methods. <code>SciPy</code> has a number of routines for
-performing numerical integration. Most of them are found in the same
-<code>scipy.integrate</code> library. For example:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> exp</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> integrate</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Define a function</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># Single integral of f from 0 to 1</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>res <span class="op">=</span> integrate.quad(f, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="bu">print</span>(res)</span></code></pre></div>
-<p>Here we use a <a href="https://realpython.com/python-lambda/">lambda
-expression</a> and then call the quadrature method (for single
-integrals) on that function. The <code>quad</code> function returns the
-two values, in which the first number is the value of integral and the
-second value is the estimate of the absolute error in the value of
-integral. For multiple integrals or solving initial value problems for
-ODE systems, check <a
-href="https://docs.scipy.org/doc/scipy/reference/integrate.html">Integration
-and ODEs</a>.</p>
-</div>
-<div id="interpolation-with-scipy.interpolate" class="section level2">
-<h2>Interpolation with <code>scipy.interpolate</code></h2>
-<div id="linear-interpolation" class="section level3">
-<h3>Linear interpolation</h3>
-<p>Interpolation is the process of finding a value between two points on
-a line or a curve. This tool, interpolation, is not only useful in
-statistics, but is also useful in science, business, or when there is a
-need to predict values that fall within two existing data points.</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">12</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>y <span class="op">=</span> np.cos(x<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span><span class="op">+</span><span class="dv">4</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.plot(x, y,<span class="st">&#39;ko&#39;</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>Suppose we want to find the value of <code>y</code> when
-<code>x=3.12</code>, you can use <code>interp1d()</code> as:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> interp1d</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># Using interp1d function</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>f1 <span class="op">=</span> interp1d(x, y, kind <span class="op">=</span> <span class="st">&#39;linear&#39;</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>f2 <span class="op">=</span> interp1d(x, y, kind <span class="op">=</span> <span class="st">&#39;cubic&#39;</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># Now make x finer</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>xnew <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">30</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># Plot interpolated values</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>, xnew, f1(xnew), <span class="st">&#39;-&#39;</span>, xnew, f2(xnew), <span class="st">&#39;--&#39;</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># Add legend</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;linear&#39;</span>, <span class="st">&#39;cubic&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>plt.show()</span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="bu">print</span>(f1(<span class="fl">3.12</span>), f2(<span class="fl">3.12</span>))</span></code></pre></div>
-<p>The <code>interp1d()</code> function in the
-<code>scipy.interpolate</code> is a convenient method to create a
-function based on fixed data points, which can be evaluated anywhere
-within the domain defined by the given data using linear interpolation.
-Using the <code>interp1d()</code> function, we created two functions
-<code>f1</code> and <code>f2</code>. These functions, for a given input
-<code>x</code> returns <code>y</code>. The third variable kind
-represents the type of the interpolation technique. <code>linear</code>,
-<code>nearest</code>, <code>zero</code>, <code>slinear</code>,
-<code>quadratic</code>, <code>cubic</code> are a few techniques of
-interpolation.</p>
-</div>
-<div id="spline-interpolation" class="section level3">
-<h3>Spline interpolation</h3>
-<p>One-dimensional smoothing spline fits a given set of data points. The
-<a
-href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html"><code>univariatespline</code>
-function</a> in <code>scipy.interpolate</code> is a convenient method to
-create a function, based on fixed data points class.</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">50</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>y <span class="op">=</span> np.exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="dv">50</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>Suppose we want to find the value of <code>y</code> when
-<code>x=1.23</code>, you can use <code>UnivariateSpline()</code> as:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> UnivariateSpline</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># Using UnivariateSpline function</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>spl <span class="op">=</span> UnivariateSpline(x, y, k<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>spl.set_smoothing_factor(<span class="fl">0.5</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># Now make x finer</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>xnew <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1000</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Plot interpolated values</span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>plt.plot(xnew, spl(xnew), <span class="st">&#39;b&#39;</span>, lw <span class="op">=</span> <span class="dv">3</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>plt.show()</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co"># Show data at a specific location</span></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>spl(<span class="fl">1.23</span>)</span></code></pre></div>
-</div>
-</div>
-<div id="optimization-and-fitting-with-scipy.optimize"
-class="section level2">
-<h2>Optimization and fitting with <code>scipy.optimize</code></h2>
-<div id="curve-fitting" class="section level3">
-<h3>Curve fitting</h3>
-<p>Suppose we have data on a sine wave, with some noise:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Make up some data points</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, num<span class="op">=</span><span class="dv">50</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.9</span> <span class="op">*</span> np.sin(<span class="fl">1.5</span> <span class="op">*</span> x) <span class="op">+</span> np.random.normal(size<span class="op">=</span><span class="dv">50</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Plot data</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>If we know that the data lies on a sine wave, but not the amplitudes
-or the period, we can find those by least squares curve fitting. First
-we have to define the test function to fit, here a sine with unknown
-amplitude and period:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Define the function to fit</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="kw">def</span> guess_func(x, a, b):</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> np.sin(b <span class="op">*</span> x)</span></code></pre></div>
-<p>We then use <code>scipy.optimize.curve_fit</code> to find
-<code>a</code> and <code>b</code>:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> optimize</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># Fit parameters</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>params, _ <span class="op">=</span> optimize.curve_fit(guess_func, x, y)</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="bu">print</span>(params)</span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># Plot fitted data</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;ko&#39;</span>, x, params[<span class="dv">0</span>]<span class="op">*</span>np.sin(params[<span class="dv">1</span>] <span class="op">*</span> x), <span class="st">&#39;r-&#39;</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Add legend</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>plt.legend([<span class="st">&#39;data&#39;</span>, <span class="st">&#39;fitted value&#39;</span>], loc <span class="op">=</span> <span class="st">&#39;best&#39;</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>plt.show()</span></code></pre></div>
-</div>
-<div id="finding-the-minimums" class="section level3">
-<h3>Finding the minimums</h3>
-<p>Let’s define the following function and plot it:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Define a function</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="kw">def</span> g(x):</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span><span class="op">*</span>np.sin(x)</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Set the range</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co"># Plot the function</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>plt.plot(x, g(x)) </span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>This function has a global minimum around <code>-1.5</code> and local
-minimums around <code>-7.1</code> and <code>4.3</code>. Searching for
-minimum can be done with <code>scipy.optimize.minimize</code>, given a
-starting point <code>x0</code>, it returns the location of the minimum
-that it has found.</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Using minimize() to search for minimums</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>result <span class="op">=</span> optimize.minimize(g, x0<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>result</span></code></pre></div>
-</div>
-<div id="finding-the-roots" class="section level3">
-<h3>Finding the roots</h3>
-<p>To find a root, <em>i.e.</em>, a point where <code>g(x) = 0</code>,
-of the function <code>g</code> above we can use
-<code>scipy.optimize.root</code>:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Using root() to find the roots</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>root <span class="op">=</span> optimize.root(g, x0<span class="op">=</span><span class="dv">1</span>) </span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>root</span></code></pre></div>
-</div>
-</div>
-<div id="statistics-with-scipy.stats" class="section level2">
-<h2>Statistics with <code>scipy.stats</code></h2>
-<p>The module <code>scipy.stats</code> contains statistical tools and
-probabilistic descriptions of random processes.</p>
-<p>For example, we can fit a sample to a distribution:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Generate a sample</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>sample <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co"># Fit a normal distribution</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>stats.norm.fit(sample)</span></code></pre></div>
-<p>A statistical test is a decision indicator. For instance, if we have
-two sets of observations, that we assume are generated from normal
-distributions, we can use a <em>t-test</em> to decide whether the means
-of two sets of observations are significantly different:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Sample 1</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>sample1 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># Sample 2</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>sample2 <span class="op">=</span> np.random.normal(<span class="dv">1</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Independent t-test</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>stats.ttest_ind(sample1, sample2) </span></code></pre></div>
-<p><a href="https://scipy-lectures.org/index.html">The chapter on
-statistics</a> introduces much more elaborate tools for statistical
-testing and statistical data loading and visualization outside of
-<code>SciPy</code>. You are also welcome to check <a
-href="https://zhu-group.github.io/ese335/index.html">ESE335
-Environmental Data Analysis</a> for conducting statistical tests with
-the <code>R</code> language.</p>
-</div>
-<div id="clustering-with-scipy.cluster" class="section level2">
-<h2>Clustering with <code>scipy.cluster</code></h2>
-<p>Clustering is a popular technique to categorize data by associating
-it into groups. The <code>SciPy</code> library includes an
-implementation of the <em>k-means clustering</em> algorithm as well as
-several <em>hierarchical clustering</em> algorithms. Here we will be
-using the k-means algorithm in <code>scipy.cluster.vq</code>, where
-<code>vq</code> stands for vector quantization.</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> vstack,array</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> rand</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="im">from</span> scipy.cluster.vq <span class="im">import</span> kmeans,vq</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Data generation, 200 rows, 2 cols</span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>data <span class="op">=</span> vstack((rand(<span class="dv">100</span>,<span class="dv">2</span>) <span class="op">+</span> array([<span class="fl">.8</span>,<span class="fl">.8</span>]), rand(<span class="dv">100</span>,<span class="dv">2</span>)))</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co"># Show data</span></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>plt.plot(data[:,<span class="dv">0</span>],data[:,<span class="dv">1</span>],<span class="st">&#39;k+&#39;</span>)</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>plt.show()</span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co"># Computing K-Means with K = 2 (2 clusters)</span></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#centroids, mean_dist = kmeans(data,2)</span></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="co"># Assign each sample to a cluster</span></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="co">#clusters, dist = vq(data,centroids)</span></span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="co"># Plot clusters</span></span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],&#39;bo&#39;)</span></span>
-<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="co">#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],&#39;rd&#39;)</span></span>
-<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a></span>
-<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a><span class="co"># Plot cluster centroids</span></span>
-<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a><span class="co">#plt.plot(centroids[:,0],centroids[:,1],&#39;gX&#39;,markersize=10)</span></span>
-<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a></span>
-<span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a><span class="co"># Plot raw data</span></span>
-<span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a><span class="co">#plt.plot(data[:,0],data[:,1],&#39;w+&#39;)</span></span></code></pre></div>
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>In this section, we will use daily data from the <a
+href="https://www.aviso.altimetry.fr/en/home.html">AVISO</a> sea-surface
+height satellite altimetry dataset. Download the file
+(<code>aviso_2015.zip</code>, ~ <code>390 MB</code>) <a
+href="http://172.18.31.60/index.php/s/XjqZRXoafd9aQig">from here</a>,
+unzip it, you will have a folder (<code>aviso_2015</code>) containing
+<code>365</code> netcdf (nc) files. Move the folder to your working
+directory.</p>
+<p>The <code>Jupyter Notenook</code> for this section is available at <a
+href="https://zhu-group.github.io/ese5023/download/Sup_01.ipynb">here</a>.</p>
+<p><strong>Important:</strong></p>
+<p>In this section, we will use the <code>cper</code> environment you
+created in <a
+href="https://zhu-group.github.io/ese5023/Section_11.html#Creating_a_Python_environment">Section
+11</a>. Make sure you have it activated, and open
+<code>jupter notebook</code> under it, not the <code>base</code>
+environment.</p>
 <hr />
 </div>
+<div id="dask-for-parallel-computing" class="section level1">
+<h1><code>Dask</code> for parallel computing</h1>
+<p>In past lectures, we learned how to use <code>numpy</code>,
+<code>pandas</code>, and <code>xarray</code> to analyze various types of
+data. In this section, we address an increasingly common problem: what
+happens if the data we wish to analyze is “big data”.</p>
+<p>A good threshold for when data becomes difficult to deal with is when
+the volume of data exceeds your computer’s RAM (Random-access memory).
+Most modern laptops have between <code>2 GB</code> and
+<code>16 GB</code> of RAM. High-end workstations and servers can have
+<code>1 TB</code> or RAM or more. If the dataset you are trying to
+analyze can’t fit in your computer’s memory, some special care is
+required to carry out the analysis.</p>
+<p>The next threshold of difficulty is when the data can’t fit on your
+hard drive. Most modern laptops have between <code>100 GB</code> and
+<code>4 TB</code> of storage space on the hard drive. If you can’t fit
+your dataset on your internal hard drive, you can buy an external hard
+drive. However, at that point you are better off using a high-end
+server, HPC system, or cloud-based storage for your dataset. Once you
+have many <code>TB</code> of data to analyze, you are definitely in the
+realm of “big data”.</p>
+<div id="introduction-to-dask" class="section level2">
+<h2>Introduction to <code>dask</code></h2>
+<p><code>Dask</code> is a tool that helps us easily extend our familiar
+<code>Python</code> data analysis tools to medium and big data,
+<em>i.e.</em> dataset that can’t fit in our computer’s RAM. In many
+cases, <code>dask</code> also allows us to speed up our analysis by
+using multiple CPU cores. <code>Dask</code> can help us work more
+efficiently on our laptop, and it can also help us <strong>scale
+up</strong> our analysis on HPC and cloud platforms. Most importantly,
+<code>dask</code> is almost invisible to the user, meaning that you can
+focus on your science, rather than the details of parallel
+computing.</p>
+<p><code>Dask</code> provides collections for big data and a scheduler
+for parallel computing. In this section, we will learn the basics of
+using <code>dask</code> through examples. For more about
+<code>dask</code>, check <a href="https://docs.dask.org/en/latest/">The
+Dask Documentation</a> and <a href="https://github.com/dask/dask">The
+Dask Github Site</a>. For other modules enabling parallel computing,
+check <a href="https://wiki.python.org/moin/ParallelProcessing">Parallel
+Processing and Multiprocessing in Python</a>.</p>
+</div>
+<div id="dask-arrays" class="section level2">
+<h2><code>Dask</code> arrays</h2>
+<p>A <code>dask</code> array looks and feels a lot like a
+<code>numpy</code> array. However, a <code>dask</code> array doesn’t
+directly hold any data. Instead, it <strong>symbolically</strong>
+represents the computations needed to generate the data. Nothing is
+actually computed until the actual numerical values are needed. This
+mode of operation is called <em>lazy</em>; it allows one to build up
+complex, large calculations symbolically before turning them over the
+scheduler for execution.</p>
+<p>If we want to create a numpy array of all ones, we do it like
+this:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Create a numpy array</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>shape <span class="op">=</span> (<span class="dv">1000</span>, <span class="dv">4000</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>ones_np <span class="op">=</span> np.ones(shape)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ones_np</span></code></pre></div>
+<p>This array contains exactly <code>32 MB</code> of data:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Check the size of array in MB</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>ones_np.nbytes <span class="op">/</span> <span class="fl">1e6</span></span></code></pre></div>
+<p>Now let’s create the same array using <code>dask</code>’s array
+interface:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Create a dask array</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ones_da <span class="op">=</span> da.ones(shape)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>ones_da</span></code></pre></div>
+<p>As you see, <code>dask</code> create the array in one <em>chunk</em>.
+In fact, a crucial advantage with <code>dask</code> is that we can
+specify the <code>chunks</code> argument. Here, <code>chunks</code>
+describes how the array is split up over many sub-arrays. There are <a
+href="https://dask.pydata.org/en/latest/array-creation.html#chunks">several
+ways</a> to specify chunks. In this section, we will use a block
+shape:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Specify the chunk</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>chunk_shape <span class="op">=</span> (<span class="dv">1000</span>, <span class="dv">1000</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>ones_da <span class="op">=</span> da.ones(shape, chunks<span class="op">=</span>chunk_shape)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>ones_da</span></code></pre></div>
+<p>Notice that we just see a symbolic representation of the array,
+including its <code>shape</code>, <code>dtype</code>, and
+<code>chunksize</code>. No data has been generated yet. When we call
+<code>.compute()</code> on a <code>dask</code> array, the computation is
+trigger and the <code>dask</code> array becomes a <code>numpy</code>
+array.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Run computation</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>ones_da.compute()</span></code></pre></div>
+<p>In order to understand what happened when we called
+<code>.compute()</code>, you can visualize the <code>dask</code>
+<em>graph</em>, the symbolic operations that make up the array:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Visualize the computation</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>ones_da.visualize()</span></code></pre></div>
+<p>As you find, the array has <code>4</code> chunks. To generate it,
+<code>dask</code> calls <code>np.ones</code> four times and then
+concatenates this together into one array.</p>
+<p>Rather than immediately loading a <code>dask</code> array (which puts
+all the data into RAM), it is more common to want to reduce the data
+somehow. For example:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Reduce the array with sum()</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>sum_of_ones <span class="op">=</span> ones_da.<span class="bu">sum</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Visualize the computation</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>sum_of_ones.visualize()</span></code></pre></div>
+<p>Here we see <code>dask</code>’s strategy for finding the
+<code>sum</code>. This simple example illustrates the beauty of
+<code>dask</code>: it <strong>automatically</strong> designs an
+algorithm appropriate for custom operations with big data.</p>
+</div>
+<div id="a-bigger-calculation" class="section level2">
+<h2>A bigger calculation</h2>
+<p>The previous example are too simple - the data (<code>32 MB</code>)
+is nowhere nearly big enough to warrant the use of <code>dask</code>.
+Let’s make it a lot bigger:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># A much bigger array</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>bigshape <span class="op">=</span> (<span class="dv">200000</span>, <span class="dv">4000</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Define the array (lazy method)</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>big_ones <span class="op">=</span> da.ones(bigshape, chunks<span class="op">=</span>chunk_shape)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># Run computation</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>big_ones</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># Check the size of array in MB</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>big_ones.nbytes <span class="op">/</span> <span class="fl">1e6</span></span></code></pre></div>
+<p>This dataset is <code>6.4 GB</code>! This is probably close to or
+greater than the amount of available RAM than you have in your computer.
+Nevertheless, <code>dask</code> has no problem working on it. When doing
+a big calculation, <code>dask</code> also has some tools to help us
+understand what is happening.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Import ProgressBar</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="im">from</span> dask.diagnostics <span class="im">import</span> ProgressBar</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Define the computation (lazy method)</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>calc <span class="op">=</span> (np.cos(big_ones)<span class="op">**</span><span class="dv">2</span>).mean()</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># Show ProgressBar</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="cf">with</span> ProgressBar():</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="co"># Run computation</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    result <span class="op">=</span> calc.compute()</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># Show result</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>result</span></code></pre></div>
+<p>In fact, all the usual <code>numpy</code> methods work on
+<code>dask</code> arrays. You can also apply <code>numpy</code> function
+directly to a <code>dask</code> array, and it will stay “lazy” until the
+computation starts.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Define the computation (lazy method)</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>calc2 <span class="op">=</span> (np.exp(big_ones)<span class="op">**</span><span class="dv">10</span>).mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>calc2</span></code></pre></div>
+<p>Plotting also triggers computation, since we need the actual
+values.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Run computation and plot</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>plt.plot(calc2)</span></code></pre></div>
+</div>
+<div id="making-a-local-client" class="section level2">
+<h2>Making a local client</h2>
+<p><code>Dask</code> has several ways of executing code in parallel.
+We’ll use the <a
+href="http://distributed.dask.org/en/stable/">distributed scheduler</a>
+by creating a <code>dask.distributed.Client</code>.</p>
+<p>For now, this will provide us with some nice diagnostics. Let’s make
+a local client (<code>my_client</code>) with <code>4</code> workers
+(<code>1</code> thread per worker):</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Use the distributed scheduler to form a local client (cluster)</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co"># 4 workers, 1 thread (CPU) per worker</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>my_client <span class="op">=</span> Client(n_workers<span class="op">=</span><span class="dv">4</span>, threads_per_worker<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Show information of the local client</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>my_client.cluster</span></code></pre></div>
+<p>Click the the Dashboard link, get yourself familiarized with it.</p>
+<p>If you no longer use a client, make sure to close your client or stop
+this kernel:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>my_client.close()</span></code></pre></div>
+</div>
+<div id="parallelizing-code-with-dask.delayed" class="section level2">
+<h2>Parallelizing code with <code>dask.delayed()</code></h2>
+<p>In this sub-section we parallelize some simple code with
+<code>dask</code> and <a
+href="https://docs.dask.org/en/latest/delayed.html"><code>dask.delayed</code></a>.
+Often, this is the only function that you will need to convert functions
+for use with <code>dask</code>. This is a simple way to use
+<code>dask</code> to parallelize existing codebases or build complex
+systems.</p>
+<p>First let’s make some toy functions, <code>fun1</code> and
+<code>fun2</code>, that sleep for a while to simulate work. We’ll then
+time running these functions normally.</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Define two functions</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="kw">def</span> fun1(x):</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    sleep(<span class="dv">1</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="kw">def</span> fun2(x, y):</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    sleep(<span class="dv">1</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span></code></pre></div>
+<p>We then time the execution of this normal code using the
+<code>%%time</code> magic, which is a special function of the
+<code>Jupyter Notebook</code>.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># This takes three seconds to run because we call each</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># function sequentially, one after the other</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co"># Call fun1</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>x <span class="op">=</span> fun1(<span class="dv">1</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># Call fun1</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>y <span class="op">=</span> fun1(<span class="dv">2</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co"># Call fun2</span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>z <span class="op">=</span> fun2(x, y)</span></code></pre></div>
+<p>Those two increment calls could be called in parallel, because they
+are totally <strong>independent of one-another</strong>.</p>
+<p>We’ll transform the <code>fun1</code> and <code>fun2</code> functions
+using the <code>dask.delayed()</code> function. When we call the
+<strong>delayed version</strong> by passing the arguments, exactly as
+before, the original function isn’t actually called yet - which is why
+the cell execution finishes very quickly. Instead, a delayed object is
+made, which keeps track of the function to call and the arguments to
+pass to it.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co"># This runs immediately, all it does is build a graph</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>x <span class="op">=</span> delayed(fun1)(<span class="dv">1</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>y <span class="op">=</span> delayed(fun1)(<span class="dv">2</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>z <span class="op">=</span> delayed(fun2)(x, y)</span></code></pre></div>
+<p>This ran immediately, since nothing has really happened yet. To get
+the result, call <code>compute</code>. Notice that this runs faster than
+the original code.</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># This actually runs our computation using a local cluster</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>z.compute()</span></code></pre></div>
+<p>Here, the <code>z</code> object is a <em>lazy</em>
+<code>Delayed</code> object, which holds everything we need to compute
+the final result, including references to all of the functions that are
+required and their inputs and relationship to one-another. We can
+evaluate the result with <code>.compute()</code> as above or we can
+visualize the task graph for this value with <code>.visualize()</code>.
+As you can see, such a lazy execution allows building up complex, large
+calculations symbolically before turning them over to the scheduler for
+execution. For more, check <a
+href="https://tutorial.dask.org/03_dask.delayed.html"><code>dask</code>
+delayed execution</a>.</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Look at the task graph for z</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>z.visualize()</span></code></pre></div>
+<p>Notice that this includes the names of the functions from before, and
+the logical flow of the outputs of the <code>fun1</code> functions to
+the inputs of <code>fun2</code>.</p>
+</div>
+<div id="parallelizing-a-for-loop-with-dask.delayed"
+class="section level2">
+<h2>Parallelizing a <code>for</code> loop with
+<code>dask.delayed()</code></h2>
+<p><code>for</code> loops are one of the most common things that we want
+to parallelize. Use <code>dask.delayed</code>on <code>fun1</code> and
+<code>sum</code> to parallelize the computation below:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Make a simple list</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># Sequential code</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co"># Loop element one by one</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data:</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>    temp <span class="op">=</span> fun1(i)</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>    results.append(temp)</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co"># Compute</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(results)</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co"># After it&#39;s computed</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;After computing :&quot;</span>, total)  </span></code></pre></div>
+<p>A parallel version with <code>dask.delayed()</code> would be:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># Parallel code </span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data:</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>    temp <span class="op">=</span> delayed(fun1)(i)</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>    results.append(temp)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co"># Define the method</span></span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>total <span class="op">=</span> delayed(<span class="bu">sum</span>)(results)</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a><span class="co"># Let&#39;s see what type of thing total is</span></span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Before computing:&quot;</span>, total)</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a><span class="co"># Compute</span></span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a>result <span class="op">=</span> total.compute()</span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a></span>
+<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a><span class="co"># After it&#39;s computed</span></span>
+<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;After computing :&quot;</span>, result) </span></code></pre></div>
+<p>Visualize the task graph for this:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Look at the task graph for total</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>total.visualize()</span></code></pre></div>
+<p>Now enlarge <code>data</code> to a larger list, <em>e.g</em>,
+<code>[1, 2, 3, 4, 5, 6, 7, 8]</code>. Check what would happen to the
+running time of <code>total</code>? Can you figure out why?</p>
+</div>
+<div id="combing-dask-and-xarray" class="section level2">
+<h2>Combing <code>dask</code> and <code>xarray</code></h2>
+<p><code>Xarray</code> can automatically wrap its data in <a
+href="https://tutorial.dask.org/02_array.html"><code>dask</code>
+arrays</a>. This capability turns <code>xarray</code> into an extremely
+powerful tool for Big Data earth science.</p>
+<p>To illustrate this in action, we will use a fairly large dataset to
+analyze. This file contains <code>1</code> year of daily data from the
+<a href="https://www.aviso.altimetry.fr/en/home.html">AVISO</a>
+sea-surface height satellite altimetry dataset.</p>
+<p>Let’s load the first file as a regular <code>xarray</code>
+dataset:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Load the first file with xarray</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>ds_first <span class="op">=</span> xr.open_dataset(<span class="st">&#39;aviso_2015/dt_global_allsat_madt_h_20150101_20150914.nc&#39;</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># Check the data</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>ds_first</span></code></pre></div>
+<p>This one file is about <code>8 MB</code>. So <code>365</code> of them
+will be nearly <code>3 GB</code>. If we had downloaded all
+<code>25</code> years of data, it would be <code>73 GB</code>!. This is
+a good example of “medium data”.</p>
+<p>With <a
+href="http://xarray.pydata.org/en/stable/generated/xarray.open_mfdataset.html"><code>open_mfdataset</code></a>,
+we can easily open all the netcdf files into one <em>Dataset</em>
+object.</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Use open_mfdataset to load all the nc files</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_mfdataset(<span class="st">&#39;aviso_2015/*.nc&#39;</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># Check data object</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co"># Notice that the values are not displayed</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>ds</span></code></pre></div>
+<p>Note that the values are not displayed, since that would trigger
+computation.</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Get sea surface height (adt)</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>ssh <span class="op">=</span> ds.adt</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Check the data, this is a dask array</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>ssh</span></code></pre></div>
+<p>Try the following code, see what happens:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Compute annual mean ssh</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>ssh_2015_mean <span class="op">=</span> ssh.mean(dim<span class="op">=</span><span class="st">&#39;time&#39;</span>)</span></code></pre></div>
+<p>To actually compute the data:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Compute annual mean ssh</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>ssh_2015_mean.load()</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Plot annual mean</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>ssh_2015_mean.plot()</span></code></pre></div>
+<p>Finally, close the client (local cluster):</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Close the client (local cluster)</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>my_client.close()</span></code></pre></div>
+<hr />
+</div>
+</div>
+<div id="python-next" class="section level1">
+<h1><code>Python</code> next?</h1>
+<p>So far we have covered the basics of <code>Python</code> and
+fundamental modules to make plots and analyze data. Looking forward, the
+learning curve is still steep, be patient as it takes time. Use Google
+and <a href="https://stackoverflow.com/">stackoverflow</a> without
+hesitation, as you will find 9 out 10 times your questions/issues have
+been reported and solved (luckily) already.</p>
+<p>Have fun!</p>
+<hr />
+<p><em>The notes are modified from the excellent <a
+href="https://rabernat.github.io/research_computing_2018/dask-for-parallel-computing-and-big-data.html">Dask
+for Parallel Computing and Big Data</a>, available freely
+online.</em></p>
+<hr />
 </div>
 <div id="in-class-exercises" class="section level1">
 <h1>In-class exercises</h1>
@@ -961,37 +912,23 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a h
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise #2</h2>
-<p>The temperature extremes in Shenzhen for each month, starting in
-January, are given by (in degrees Celcius):</p>
-<p><code>max: 19.8, 20.2, 22.7, 26.3, 29.5, 31.1, 32.3, 32.3, 31.3, 29.2, 25.4, 21.5</code>
-<code>min: 12.5, 13.8, 16.5, 20.3, 23.6, 25.6, 26.3, 26.1, 25.0, 22.5, 18.2, 13.8</code></p>
-<p><strong>2.1</strong> Plot these temperature extremes.<br />
-<strong>2.2</strong> Define a function that can describe min and max
-temperatures.<br />
-[Hint]: this function has to have a period of 1 year.<br />
-<strong>2.3</strong> Fit this function to the data with
-<code>scipy.optimize.curve_fit</code>.<br />
-<strong>2.4</strong> Plot the result. Is the fit reasonable? If not,
-why?<br />
-<strong>2.5</strong> Is the time offset for min and max temperatures the
-same within the fit accuracy?</p>
+<p>Make a local client with <code>6</code> CPUs (only if your laptop
+allows!), then compute and plot the variance in daily <code>ssh</code>
+anomalies with <code>dask</code>.</p>
 <hr />
 </div>
 </div>
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
 <ul>
-<li><a href="https://docs.scipy.org/doc/scipy/tutorial/index.html">SciPy
-User Guide</a><br />
-</li>
-<li><a href="https://www.w3schools.com/python/scipy/index.php">SciPy
-Tutorial</a></li>
+<li><a href="https://github.com/dask/dask-tutorial"><code>Dask</code>
+tutorial</a></li>
 <li><a
-href="https://realpython.com/python-scipy-cluster-optimize/">Scientific
-Python: Using SciPy for Optimization</a></li>
-<li><a
-href="https://www.tutorialspoint.com/scipy/scipy_quick_guide.htm">SciPy
-- Quick Guide</a></li>
+href="https://saturncloud.io/blog/a-data-scientist-s-guide-to-lazy-evaluation-with-dask/">A
+Data Scientist’s Guide to Lazy Evaluation with
+<code>Dask</code></a></li>
+<li><a href="https://book.pythontips.com/en/latest/">Intermediate
+Python</a></li>
 </ul>
 </div>
 

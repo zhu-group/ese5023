@@ -1,5 +1,5 @@
 ---
-title: "Parallel computing with `dask`"
+title: "Intermediate `Python`: `xarray`"
 output:
   html_document:
     toc: true
@@ -8,376 +8,586 @@ output:
       smooth_scroll: false
 ---
 
-> "Data is the new science. Big Data holds the answers." - Pat Gelsinger
+> "`Xarray` (formerly xray) is an open source project and Python package that makes working with labelled multi-dimensional arrays simple, efficient, and fun!" - `Xarray` document.
 
-*** 
+***
 
 # Prerequisites
 
-In this section, we will use daily data from the [AVISO](https://www.aviso.altimetry.fr/en/home.html) sea-surface height satellite altimetry dataset. Download the file (`aviso_2015.zip`, ~ `390 MB`) [from here](http://172.18.31.60/index.php/s/XjqZRXoafd9aQig), unzip it, you will have a folder (`aviso_2015`) containing `365` netcdf (nc) files. Move the folder to your working directory.
+In `Anaconda Powershell`, install `netCDF4`, `xarray`, and `nc-time-axis`, **one after another**:
 
-The `Jupyter Notenook` for this section is available at [here](https://zhu-group.github.io/ese5023/download/Sup_01.ipynb).   
+```{python, eval=F}
+pip install netCDF4
+pip install nc-time-axis
+```
 
-**Important:**  
+To test whether your environment is set up properly, try the following imports:
 
-In this section, we will use the `cper` environment you created in [Section 11](https://zhu-group.github.io/ese5023/Section_11.html#Creating_a_Python_environment). Make sure you have it activated, and open `jupter notebook` under it, not the `base` environment.
+```{python, eval=F}
+import netCDF4
+import xarray as xr
+```
 
 ***
 
-# `Dask` for parallel computing
+# Introduction to `xarray`
 
-In past lectures, we learned how to use `numpy`, `pandas`, and `xarray` to analyze various types of data. In this section, we address an increasingly common problem: what happens if the data we wish to analyze is "big data".
+In [Section 06](https://zhu-group.github.io/ese5023/Section_06.html), we saw how `pandas` handled *tabular* datasets, by using "indexes" for each row and labels for each column. These features, together with `pandas`' many useful routines for all kinds of data wrangling and analysis, have made `pandas` one of the most popular python packages in the world.
 
-A good threshold for when data becomes difficult to deal with is when the volume of data exceeds your computer's RAM (Random-access memory). Most modern laptops have between `2 GB` and `16 GB` of RAM. High-end workstations and servers can have `1 TB` or RAM or more. If the dataset you are trying to analyze can't fit in your computer's memory, some special care is required to carry out the analysis. 
+However, not all Earth science datasets easily fit into the "tabular" model (i.e. rows and columns) imposed by `pandas`. In particular, we often deal with *multidimensional* data. By multidimensional data (also often called N-dimensional), it means data with many independent dimensions or axes. For example, we might represent Earth's surface temperature *T* as a three dimensional variable:
 
-The next threshold of difficulty is when the data can't fit on your hard drive. Most modern laptops have between `100 GB` and `4 TB` of storage space on the hard drive. If you can't fit your dataset on your internal hard drive, you can buy an external hard drive. However, at that point you are better off using a high-end server, HPC system, or cloud-based storage for your dataset. Once you have many `TB` of data to analyze, you are definitely in the realm of "big data". 
+$$T(Lon, Lat, Time)  $$
 
-## Introduction to `dask`
+The point of `xarray` is to provide **pandas-level convenience** for working with this type of data. Specifically, `xarray` is for working with labeled, multi dimensional arrays.
 
-`Dask` is a tool that helps us easily extend our familiar `Python` data analysis tools to medium and big data, *i.e.* dataset that can't fit in our computer's RAM. In many cases, `dask` also allows us to speed up our analysis by using multiple CPU cores. `Dask` can help us work more efficiently on our laptop, and it can also help us **scale up** our analysis on HPC and cloud platforms. Most importantly, `dask` is almost invisible to the user, meaning that you can focus on your science, rather than the details of parallel computing.
++ Built on top of `numpy` and `pandas`
 
-`Dask` provides collections for big data and a scheduler for parallel computing. In this section, we will learn the basics of using `dask` through examples. For more about `dask`, check [The Dask Documentation](https://docs.dask.org/en/latest/) and [The Dask Github Site](https://github.com/dask/dask). For other modules enabling parallel computing, check [Parallel Processing and Multiprocessing in Python](https://wiki.python.org/moin/ParallelProcessing).
++ Brings the power of `pandas` to multidimensional arrays
 
-## `Dask` arrays  
++ Supports data of any dimensionality
 
-A `dask` array looks and feels a lot like a `numpy` array. However, a `dask` array doesn't directly hold any data. Instead, it **symbolically** represents the computations needed to generate the data. Nothing is actually computed until the actual numerical values are needed. This mode of operation is called *lazy*; it allows one to build up complex, large calculations symbolically before turning them over the scheduler for execution.
+<img src="figs/xarray2.png" alt="drawing" width="800"/>  
 
-If we want to create a numpy array of all ones, we do it like this:  
+[Figure source](https://gdfa.ugr.es/python/climate_data/data_science_climate_data.html)
+
+***
+
+# `Xarray` basics
+
+Like we did for `pandas` in [Section 06](https://zhu-group.github.io/ese5023/Section_06.html), here we will go over the **basic capabilities** of `xarray`. Please dig into the [`xarray` documentation](https://xarray.pydata.org/en/stable/index.html) for more advanced usage.
+
+## `xarray` data structures
+
+`Xarray` has two fundamental data structures:
+
++ a *DataArray*, which holds a **single** multi-dimensional variable and its coordinates
+
++ a *Dataset*, which holds **multiple** variables that potentially share the same coordinates
+
+Check [Data Structures](http://xarray.pydata.org/en/latest/user-guide/data-structures.html) for more.
+
+## `DataArray`
+
+A *DataArray* has four essential attributes:
+
++ `values`: a `numpy.ndarray` holding the array’s values
+
++ `dims`: dimension names for each axis (e.g., ('x', 'y', 'z'), ('lon', 'lat', 'time'))
+
++ `coords`: a dict-like container of arrays (coordinates) that label each point (e.g., 1-dimensional arrays of numbers, datetime objects or strings)
+
++ `attrs`: an `OrderedDict` to hold arbitrary metadata (attributes)
+
+Let's start by constructing some DataArrays manually:
 
 ```{python, eval=F}
-# Create a numpy array
-shape = (1000, 4000)
-ones_np = np.ones(shape)
-ones_np
+import numpy as np
+import pandas as pd
+import xarray as xr
+from matplotlib import pyplot as plt
+%matplotlib inline
 ```
 
-This array contains exactly `32 MB` of data:  
+A simple `DataArray` without dimensions or coordinates isn't much use:
 
 ```{python, eval=F}
-# Check the size of array in MB
-ones_np.nbytes / 1e6
+# Create a xr dataarray
+da = xr.DataArray([1, 2, 3, -1, 2])
+da
 ```
 
-Now let's create the same array using `dask`'s array interface:  
+You can add a dimension name to the `DataArray`:
 
 ```{python, eval=F}
-# Create a dask array
-ones_da = da.ones(shape)
-ones_da
+# Add a dimension name
+da = xr.DataArray([1, 2, 3, -1, 2], dims=['x'])
+da
 ```
 
-As you see, `dask` create the array in one *chunk*. In fact, a crucial advantage with `dask` is that we can specify the `chunks` argument. Here, `chunks` describes how the array is split up over many sub-arrays. There are [several ways](https://dask.pydata.org/en/latest/array-creation.html#chunks) to specify chunks. In this section, we will use a block shape:  
+But things get most interesting when you add a coordinate:
 
 ```{python, eval=F}
-# Specify the chunk
-chunk_shape = (1000, 1000)
-ones_da = da.ones(shape, chunks=chunk_shape)
-ones_da
+# Add a coordinate
+da = xr.DataArray([1, 2, 3, -1, 2],
+                  dims=['x'],
+                  coords={'x': [10, 20, 30, 40, 50]})
+da
 ```
 
-Notice that we just see a symbolic representation of the array, including its `shape`, `dtype`, and `chunksize`. No data has been generated yet. When we call `.compute()` on a `dask` array, the computation is trigger and the `dask` array becomes a `numpy` array.  
+You can use `xarray` built-in plotting:
 
 ```{python, eval=F}
-# Run computation
-ones_da.compute()
+# Simple plot with xr built-in plot function
+da.plot(marker='o')
+plt.show()
 ```
 
-In order to understand what happened when we called `.compute()`, you can visualize the `dask` *graph*, the symbolic operations that make up the array:
+## `Datasets`
+
+A `Dataset` holds many `DataArrays` which potentially can share coordinates. In analogy to `pandas`:
 
 ```{python, eval=F}
-# Visualize the computation
-ones_da.visualize()
+pandas.Series : pandas.Dataframe :: xarray.DataArray : xarray.Dataset
 ```
 
-As you find, the array has `4` chunks. To generate it, `dask` calls `np.ones` four times and then concatenates this together into one array.  
+Constructing Datasets manually is a bit more involved in terms of syntax. The `Dataset` takes three arguments:
 
-Rather than immediately loading a `dask` array (which puts all the data into RAM), it is more common to want to reduce the data somehow. For example:
++ `data_vars` should be a dictionary with each key as the name of the variable and each value as one of:
+
+  * A `DataArray` or Variable
+  * A tuple of the form `(dims, data[, attrs])`, which is converted into arguments for Variable
+  * A `pandas` object, which is converted into a `DataArray`
+  * A 1D array or list, which is interpreted as values for a one dimensional coordinate variable along the same dimension as it’s name
+
++ `coords` should be a dictionary of the same form as `data_vars`
+
++ `attrs` should be a dictionary
+
+For the rest of Section, we will use an output file (`CESM2_200001-201412.nc`) from the [Community Earth System Model (CESM)](https://www.cesm.ucar.edu/models/cesm2/) to show basics of `xarray` and how to handle `Dataset` files. The file contains global monthly near surface temperature from `2000` to `2014`. Please download the file, and move it to your working directory.
+
+
+## Loading data from a netCDF file
+
+In fact, `Xarray`'s interface is heavily inspired by the `netCDF` data model. And `xarray`'s `Dataset` is designed as an in-memory representation of a netCDF dataset.
+
+First, let's open the CESM netCDF file (`CESM2_200001-201412.nc`) using the `xarray.open_dataset()` function:
 
 ```{python, eval=F}
-# Reduce the array with sum()
-sum_of_ones = ones_da.sum()
-
-# Visualize the computation
-sum_of_ones.visualize()
+# Open a netCDF4 file
+ds = xr.open_dataset("CESM2_200001-201412.nc", engine="netcdf4")
 ```
 
-Here we see `dask`'s strategy for finding the `sum`. This simple example illustrates the beauty of `dask`: it **automatically** designs an algorithm appropriate for custom operations with big data.
+By default, `xarray.open_dataset()` function uses lazy loading, i.e. it just loads in the *coordinate* and *attribute* metadata and not the data that correspond to data variables themselves. The data variables are loaded only on actual values access (e.g. when performing some calculation, slicing, ...) or with `.load()` method. The `xarray.open_dataset()` is also able to load files in other formats (e.g., `grib `, `tiff`, or `zarr`), check [Reading and writing files](https://xarray.pydata.org/en/stable/user-guide/io.html) for more.
 
-## A bigger calculation
-
-The previous example are too simple - the data (`32 MB`) is nowhere nearly big enough to warrant the use of `dask`. Let's make it a lot bigger:  
+Now take a look at the loaded dataset:
 
 ```{python, eval=F}
-# A much bigger array
-bigshape = (200000, 4000)
-
-# Define the array (lazy method)
-big_ones = da.ones(bigshape, chunks=chunk_shape)
-
-# Run computation
-big_ones
-
-# Check the size of array in MB
-big_ones.nbytes / 1e6
-```
-
-This dataset is `6.4 GB`! This is probably close to or greater than the amount of available RAM than you have in your computer. Nevertheless, `dask` has no problem working on it. When doing a big calculation, `dask` also has some tools to help us understand what is happening. 
-
-```{python, eval=F}
-# Import ProgressBar
-from dask.diagnostics import ProgressBar
-
-# Define the computation (lazy method)
-calc = (np.cos(big_ones)**2).mean()
-
-# Show ProgressBar
-with ProgressBar():
-    # Run computation
-    result = calc.compute()
-
-# Show result
-result
-```
-
-In fact, all the usual `numpy` methods work on `dask` arrays. You can also apply `numpy` function directly to a `dask` array, and it will stay "lazy" until the computation starts.  
-
-```{python, eval=F}
-# Define the computation (lazy method)
-calc2 = (np.exp(big_ones)**10).mean(axis=0)
-calc2
-```
-
-Plotting also triggers computation, since we need the actual values.  
-
-```{python, eval=F}
-# Run computation and plot
-plt.plot(calc2)
-```
-
-## Making a local client
-
-`Dask` has several ways of executing code in parallel. We'll use the [distributed scheduler](http://distributed.dask.org/en/stable/) by creating a `dask.distributed.Client`. 
-
-For now, this will provide us with some nice diagnostics. Let's make a local client (`my_client`) with `4` workers (`1` thread per worker):
-
-```{python, eval=F}
-# Use the distributed scheduler to form a local client (cluster)
-# 4 workers, 1 thread (CPU) per worker
-my_client = Client(n_workers=4, threads_per_worker=1)
-
-# Show information of the local client
-my_client.cluster
-```
-
-Click the the Dashboard link, get yourself familiarized with it.
-
-If you no longer use a client, make sure to close your client or stop this kernel:
-
-```{python, eval=F}
-my_client.close()
-```
-
-## Parallelizing code with `dask.delayed()`
-
-In this sub-section we parallelize some simple code with `dask` and [`dask.delayed`](https://docs.dask.org/en/latest/delayed.html). Often, this is the only function that you will need to convert functions for use with `dask`. This is a simple way to use `dask` to parallelize existing codebases or build complex systems.
-
-First let's make some toy functions, `fun1` and `fun2`, that sleep for a while to simulate work. We'll then time running these functions normally.
-
-```{python, eval=F}
-# Define two functions
-def fun1(x):
-    sleep(1)
-    return x + 1
-
-def fun2(x, y):
-    sleep(1)
-    return x + y
-```
-
-We then time the execution of this normal code using the `%%time` magic, which is a special function of the `Jupyter Notebook`.
-
-```{python, eval=F}
-%%time
-
-# This takes three seconds to run because we call each
-# function sequentially, one after the other
-
-# Call fun1
-x = fun1(1)
-
-# Call fun1
-y = fun1(2)
-
-# Call fun2
-z = fun2(x, y)
-```
-
-Those two increment calls could be called in parallel, because they are totally **independent of one-another**.
-
-We'll transform the `fun1` and `fun2` functions using the `dask.delayed()` function. When we call the **delayed version** by passing the arguments, exactly as before, the original function isn't actually called yet - which is why the cell execution finishes very quickly. Instead, a delayed object is made, which keeps track of the function to call and the arguments to pass to it.    
-
-```{python, eval=F}
-%%time
-
-# This runs immediately, all it does is build a graph
-x = delayed(fun1)(1)
-y = delayed(fun1)(2)
-z = delayed(fun2)(x, y)
-```
-
-This ran immediately, since nothing has really happened yet. To get the result, call `compute`. Notice that this runs faster than the original code.
-
-```{python, eval=F}
-%%time
-
-# This actually runs our computation using a local cluster
-z.compute()
-```
-
-Here, the `z` object is a *lazy* `Delayed` object, which holds everything we need to compute the final result, including references to all of the functions that are required and their inputs and relationship to one-another. We can evaluate the result with `.compute()` as above or we can visualize the task graph for this value with `.visualize()`. As you can see, such a lazy execution allows building up complex, large calculations symbolically before turning them over to the scheduler for execution. For more, check [`dask` delayed execution](https://tutorial.dask.org/03_dask.delayed.html).
-
-```{python, eval=F}
-# Look at the task graph for z
-z.visualize()
-```
-
-Notice that this includes the names of the functions from before, and the logical flow of the outputs of the `fun1` functions to the inputs of `fun2`.
-
-## Parallelizing a `for` loop with `dask.delayed()`
-
-`for` loops are one of the most common things that we want to parallelize. Use `dask.delayed `on `fun1` and `sum` to parallelize the computation below:
-
-```{python, eval=F}
-# Make a simple list
-data = [1, 2, 3, 4]
-```
-
-```{python, eval=F}
-%%time
-
-# Sequential code
-results = []
-
-# Loop element one by one
-for i in data:
-    temp = fun1(i)
-    results.append(temp)
-
-# Compute
-total = sum(results)
-
-# After it's computed
-print("After computing :", total)  
-```
-
-A parallel version with `dask.delayed()` would be:
-
-```{python, eval=F}
-%%time
-
-# Parallel code 
-results = []
-
-for i in data:
-    temp = delayed(fun1)(i)
-    results.append(temp)
-
-# Define the method
-total = delayed(sum)(results)
-
-# Let's see what type of thing total is
-print("Before computing:", total)
-
-# Compute
-result = total.compute()
-
-# After it's computed
-print("After computing :", result) 
-```
-
-Visualize the task graph for this:
-
-```{python, eval=F}
-# Look at the task graph for total
-total.visualize()
-```
-
-Now enlarge `data` to a larger list, *e.g*, `[1, 2, 3, 4, 5, 6, 7, 8]`. Check what would happen to the running time of `total`? Can you figure out why?
-
-## Combing `dask` and `xarray`
-
-`Xarray` can automatically wrap its data in [`dask` arrays](https://tutorial.dask.org/02_array.html). This capability turns `xarray` into an extremely powerful tool for Big Data earth science. 
-
-To illustrate this in action, we will use a fairly large dataset to analyze. This file contains `1` year of daily data from the [AVISO](https://www.aviso.altimetry.fr/en/home.html) sea-surface height satellite altimetry dataset. 
-
-Let's load the first file as a regular `xarray` dataset:
-
-```{python, eval=F}
-# Load the first file with xarray
-ds_first = xr.open_dataset('aviso_2015/dt_global_allsat_madt_h_20150101_20150914.nc')
-
-# Check the data
-ds_first
-```
-
-This one file is about `8 MB`. So `365` of them will be nearly `3 GB`. If we had downloaded all `25` years of data, it would be `73 GB`!. This is a good example of "medium data".
-
-With [`open_mfdataset`](http://xarray.pydata.org/en/stable/generated/xarray.open_mfdataset.html), we can easily open all the netcdf files into one *Dataset* object. 
-
-```{python, eval=F}
-# Use open_mfdataset to load all the nc files
-ds = xr.open_mfdataset('aviso_2015/*.nc')
-
-# Check data object
-# Notice that the values are not displayed
+# Show dataset
 ds
 ```
 
-Note that the values are not displayed, since that would trigger computation.
+To check the corresponding netCDF representation, we can use the `.info()` method:
 
 ```{python, eval=F}
-# Get sea surface height (adt)
-ssh = ds.adt
-
-# Check the data, this is a dask array
-ssh
+# Show dataset info
+ds.info()
 ```
 
-Try the following code, see what happens:
+## Checking `Datasets` properties
+
+The `Datasets` (`ds`) have the following key properties:
+
++ `data_vars`: an dictionary of `DataArrays` corresponding to data variables
+
++ `dims`: a dictionary mapping from dimension names to the fixed length of each dimension (e.g. {'time': `180`, 'lat': `192`, 'lon': `288`, 'nbnd': `2`} )
+
++ `coords`: a dictionary-like container of arrays (coordinates) that label each point (tick label) along our dimensions
+
++ `attrs`: a dictionary holding arbitrary metadata pertaining to the dataset
+
+Check those one by one:
 
 ```{python, eval=F}
-# Compute annual mean ssh
-ssh_2015_mean = ssh.mean(dim='time')
+# Check data variables
+ds.data_vars
+
+# Check data dimension names
+ds.dims
+
+# Check data coordinates
+ds.coords
+
+# Check data attributes (metadata)
+ds.attrs
 ```
 
-To actually compute the data:
+## Checking `DataArray` properties
+
+As we just covered, the `DataArray` is `xarray`'s implementation of a labeled, multi-dimensional array. It has several key properties:
+
++ `data`: an  array (`numpy.ndarray`, `dask.array`, or `sparse` or `cupy.array` holding the array's values).
++ `dims`: dimension names for each axis e.g. (lat, lon, time)
++ `coords`: a dictionary-like container of arrays (coordinates) that label each point (tick label) along our dimensions
++ `attrs`: a dictionary that holds arbitrary attributes/metadata (such as units).
++ `name`: an arbitrary name of the array
+
+For example, you can use `ds['tas']` to extract the `tas` (near surface temperature) variable (`DataArray`), and later check its properties one by one:
 
 ```{python, eval=F}
-# Compute annual mean ssh
-ssh_2015_mean.load()
+# Extract the tas variable (DataArray)
+ds['tas']
 
-# Plot annual mean
-ssh_2015_mean.plot()
+# The actual array data
+ds['tas'].data
+
+# Datarray coordinates
+ds['tas'].coords
+
+# Dataarray attributes
+ds['tas'].attrs
+
+# Dataarray name
+ds['tas'].name
 ```
 
-Finally, close the client (local cluster):
+## Indexing and selecting data
+
+`Xarray` supports two kinds of indexing:
+
++ Positional indexing via `.isel()`: provides primarily integer position based index (from `0` to `length-1` of the axis/dimension)
+
++ Label indexing via `.sel()`: provides primarily label based index.
+
+The good part of `xarray` is that, its indexing methods preserves the coordinate labels and associated metadata.
+
+Check [Indexing and selecting data](https://xarray.pydata.org/en/stable/user-guide/indexing.html) for more.
+
+### Selection by position
+
+The `.isel()` method is the primary access method for **purely integer based indexing**. The following are valid inputs:
+
++ An integer, e.g. `lat=10`
+
++ A list or array of integers, e.g, `lon=[10, 20, 39]`
+
++ A slice object (range) with integers, e.g. `time=slice(2, 20)`
 
 ```{python, eval=F}
-# Close the client (local cluster)
-my_client.close()
+# The original object, i.e. no selection
+ds.tas.isel()
+
+# Data at lat=100
+ds.tas.isel(lat=100)
+
+# Data at lat=100 and the last two time steps 
+ds.tas.isel(lat=100, time=[-2, -1])
+
+# Data lat=100 and time ranging from index 10 and 20 
+ds.tas.isel(lon=100, time=slice(10, 20))
 ```
+
+### Selection by label
+
+The `.sel()` method is the primary access method for **purely coordinate label based indexing**. The following are valid inputs:
+
++ A single coordinate label, e.g. `time='2013-01-15'` or `time='2013'`
+
++ A list or array of coordinate labels, e.g. `lon=['100','356.25']`
+
++ A slice object with coordinate labels, e.g. `time=slice("2021-01-01", "2021-03-01")`
+
+```{python, eval=F}
+# Select data in 2013
+ds.tas.sel(time='2013')
+
+# Select data on 2013-01-15
+ds.tas.sel(time='2013-01-15')
+
+# Select data from a list
+ds.tas.sel(lon=['100','356.25'])
+
+# Select data within a range
+# Both the start and the stop are included
+ds.tas.sel(time=slice("2013-01-01", "2014-12-31"))
+```
+
+### Nearest-neighbor lookups
+
+Now try:
+
+```{python, eval=F}
+ds.tas.sel(lat=39.5, lon=105.7)
+```
+
+Can you figure out why this did not work? 
+
+Be careful when working with floating coordinate labels. When we have integer, string, datetime-like values for coordinate labels, `sel()` works flawlessly. When we try to work with floating coordinate labels, things get a little tricky. As shown above, when our coordinate labels are not integers or strings or datetime-like but floating point numbers, `.sel()` may throw a KeyError: `ds.tas.sel(lat=39.5, lon=105.7)` fails because we are trying to use a conditional for an **approximate** value, i.e floating numbers are represented approximately inside the computer, and `xarray` is unable to locate this exact value. To address this issue, `xarray` supports method and tolerance keyword argument. The method parameter allows for enabling nearest neighbor (inexact) lookups by use of the methods `pad`, `backfill`, or `nearest`:
+
+```{python, eval=F}
+# Using the nearest method to find a nearby value
+ds.tas.sel(lat=39.5, lon=105.7, method='nearest')
+```
+
+So the closest location in the data was at `lat=39.11, lon=106.2`.
+
+See the [`xarray` documentation](https://xarray.pydata.org/en/stable/generated/xarray.DataArray.sel.html) for more on usage of method and tolerance parameters in `.sel()`.
+
+Another way to use the nearest neighbor lookup is via a objects. For example:
+
+```{python, eval=F}
+# Using the slice method to find a nearby value
+ds.tas.sel(lat=slice(39, 39.5), lon=slice(106.1, 106.3))
+```
+
+Operators can be chained, so multiple operations can be used sequentially. For example, to select an area of interest and the first time index, and plot the data:
+
+```{python, eval=F}
+ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
+plt.show()
+```
+
+## Basic plotting with `.plot()`
+
+`Xarray` provides a `.plot()` method on `DataArray` and `Dataset.` This method is a wrapper around `Matplotlib`'s `matplotlib.pyplot.plot()`. `xarray` will automatically guess the type of plot based on the dimensionality of the data. By default `.plot()` creates:
+
++ a **line** plot for 1-D arrays using `matplotlib.pyplot.plot()`
+
++ a **pcolormesh** plot for 2-D arrays using `matplotlib.pyplot.pcolormesh()`
+
++ a **histogram** for everything else (more than 2 dimensions) using `matplotlib.pyplot.hist()`
+
+### Histograms
+
+```{python, eval=F}
+# Histogram for all data
+ds.tas.plot()
+plt.show()
+
+# Histogram for a subset of data
+ds.tas.sel(time=slice("2010", "2011")).plot()
+plt.show()
+```
+
+### 1D line plots
+
+Let's select one spatial location and plot a time series of the near surface temperature:
+
+```{python, eval=F}
+# Time series of the near surface temperature at Shenzhen
+ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
+plt.show()
+```
+
+Lets say we want to compare plots of temperature at three different latitudes. We can use the `hue` keyword argument to do this.
+
+```{python, eval=F}
+# Time series of the near surface temperature at 3 latitudes at time stamp 50
+ds.tas.isel(time=50).sel(lat=[-50, 0, 50], method="nearest").plot(
+    x="lon", hue="lat", figsize=(8, 6))
+plt.show()
+```
+
+### 2D plots
+
+Operator chaining means it is possible to have multiple selection operators and add `.plot()` to the end to visualize the result.
+
+```{python, eval=F}
+# 2D map over lat (-80,25) and lon (20,160) at timestamp -10
+ds.tas.isel(time=-10).sel(lon=slice(20, 160), 
+                          lat=slice(-80, 25)).plot(robust=True, figsize=(8, 6))
+plt.show()
+```
+
+The x- and y-axes are labeled with full names — "Latitude", "Longitude" — along with units. The colorbar has a nice label, again with units. And the title tells us the timestamp of the data presented.
+
+You can, of course, modify the color bar:
+
+```{python, eval=F}
+# Define keyword arguments that are passed to matptolib.pyplot.colorbar
+colorbar_kwargs = {
+    "orientation": "horizontal",
+    "label": "my clustom label",
+    "pad": 0.1,
+}
+
+# Plot
+ds.tas.sel(lon=294.1, method='nearest').plot(
+    # coordinate to plot on the x-axis of the plot
+    x="time", 
+    # set colorbar limits to 2nd and 98th percentile of data
+    robust=True,  
+    cbar_kwargs=colorbar_kwargs,
+)
+plt.show()
+```
+
+### Faceting
+
+Faceting is an effective way of visualizing variations of 3D data where 2D slices are visualized in a panel (subplot) and the third dimensions is varied between panels (subplots).
+
+```{python, eval=F}
+# Plot monthly mean near surface temperature in 2010 and 2011, one at a panel
+ds.tas.sel(time=slice("2010", "2011")).plot(col="time", col_wrap=6, robust=True)
+plt.show()
+```
+
+See the [`xarray` documentation](https://xarray.pydata.org/en/stable/user-guide/plotting.html) for more on "faceted" plots or subplots.
+
+## Computation
+
+Here we will some basic computation enabled by `xarray.`
+
+### Arithmetic Operations
+
+Arithmetic operations with a single `DataArray` automatically vectorize (like `numpy`) over all array values. Let's convert the air temperature from degree Kelvin to Celsius:
+
+```{python, eval=F}
+# Convert the air temperature from degree Kelvin to Celsius
+ds.tas - 273.15
+```
+
+Or even square all values in `tas` (makes no sense, just for demonstration):
+
+```{python, eval=F}
+# Take sqaure of the data (even though this makes no sense)
+ds.tas ** 2
+```
+
+### Aggregation Methods
+
+A very common step during data analysis is to summarize the data in question by computing aggregations like `sum()`, `mean()`, `median()`, `min()`, `max()`, in which reduced data provide insight into the nature of large dataset. Let's explore some of these aggregation methods:
+
+```{python, eval=F}
+# Compute the mean of all locations and timesteps
+ds.tas.mean()
+```
+
+Because we specified no `dim` argument the function was applied over all dimensions. It is possible to specify a dimension along which to compute an aggregation. For example, to calculate the mean in time for all locations specify the time dimension as the dimension along which the mean should be calculated:
+
+```{python, eval=F}
+# Calculate the mean in time for all locations
+ds.tas.mean(dim='time').plot(size=7, robust=True)
+plt.show()
+```
+
+Now try:
+
+```{python, eval=F}
+# Compute temporal min
+ds.tas.min(dim=['time'])
+# Compute spatial sum
+ds.tas.sum(dim=['lat', 'lon'])
+# compute temporal median
+ds.tas.median(dim='time').plot(size=7, robust=True)
+plt.show()
+```
+
+For more, check [`xarray` computation](https://xarray.pydata.org/en/stable/user-guide/computation.html).
+
+### GroupBy: split, apply, combine
+
+Simple aggregations can give useful summary of our dataset, but often we would prefer to aggregate **conditionally** on some coordinate labels or groups. `Xarray` provides the so-called `groupby` operation which enables the `split-apply-combine` workflow on `xarray` `DataArrays` and `Datasets.` The `split-apply-combine` operation is illustrated in this figure.
+
+<img src="figs/xarray-split-apply-combine.png" alt="drawing" width="700"/>  
+
+[Figure source](https://raw.githubusercontent.com/andersy005/xarray-tutorial/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0/images/xarray-split-apply-combine.png)
+
+This makes clear what the `groupby` accomplishes:
+
++ The `split` step involves breaking up and grouping an `xarray` `Dataset` or `DataArray` depending on the value of the specified **group key**
+
++ The `apply` step involves computing some function, usually an aggregate, transformation, or filtering, within the individual groups
+
++ The `combine` step merges the results of these operations into an output `xarray` `Dataset` or `DataArray`
+
+We are going to use `groupby` to remove the seasonal cycle ("climatology") from our dataset:
+
+```{python, eval=F}
+# Near surface temperature at Shenzhen
+ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
+plt.show()
+```
+
+First, let's group data by `month`, i.e. all `Januaries` in one group, all `Februaries` in one group, etc...
+
+```{python, eval=F}
+# Group data by month
+ds.tas.groupby(ds.time.dt.month)
+```
+
+Here we are using the `.dt` [`DatetimeAccessor`](https://xarray.pydata.org/en/stable/generated/xarray.core.accessor_dt.DatetimeAccessor.html) to extract specific components of dates/times in our time coordinate dimension. You can also try `ds.time.dt.year` and `ds.time.dt.month`, see what happens.
+
+`Xarray` also offers a more concise syntax when the variable you’re grouping on is already present in the dataset. This is identical to `ds.tas.groupby (ds.time.dt.month)`:
+
+```{python, eval=F}
+# Group data by month
+ds.tas.groupby('time.month')
+```
+
+Now that we have groups defined, it’s time to “apply” a calculation to the group. These calculations can either be:
+
++ aggregation: reduces the size of the group
+    
++ transformation: preserves the group’s full size
+
+At then end of the apply step, `xarray` will automatically combine the aggregated/transformed groups back into a single object.
+
+Let's calculate the climatology at every point in the dataset and plot the results:
+
+```{python, eval=F}
+# Calculate the climatology 
+tas_clim = ds.tas.groupby('time.month').mean()
+tas_clim
+
+# Plot climatology at a specific point (Shenzhen)
+tas_clim.sel(lon=294.1, lat=22.5, method='nearest').plot()
+plt.show()
+
+# Plot zonal mean climatology
+tas_clim.mean(dim='lon').transpose().plot.contourf(levels=12, robust=True, cmap='turbo')
+plt.show()
+```
+
+Now let's combine the previous steps to compute climatology and use `xarray`'s groupby arithmetic to remove this climatology from our original data:
+
+```{python, eval=F}
+# Group data by month
+group_data = ds.tas.groupby('time.month')
+
+# Apply mean to grouped data, and then compute the anomaly 
+tas_anom = group_data - group_data.mean(dim='time')
+tas_anom
+
+# Plot anomalies at a specific point (Shenzhen)
+tas_anom.sel(lon=294.1, lat=22.5, method='nearest').plot()
+plt.show()
+
+# Plot global mean anomalies
+tas_anom.mean(dim=['lat', 'lon']).plot()
+plt.show()
+```
+
+For more, see [GroupBy: split-apply-combine](https://xarray.pydata.org/en/stable/user-guide/groupby.html).
+
+## Masking Data
+
+Using `.where()` method, elements of an `xarray` `Dataset` or `xarray` `DataArray` that satisfy a given condition or multiple conditions can be replaced/masked. Unlike `.isel()` and `sel()` that change the shape of the returned results, `.where()` preserves the shape of the original data. It does accomplishes this by returning values from the original `DataArray` or `Dataset` if the condition is `True`, and fills in `missing values` wherever the condition is `False`.
+
+```{python, eval=F}
+# Select data
+sample = ds.tas.isel(time=-1)
+sample
+
+# Sample data where temperature is less than 270
+masked_sample = sample.where(sample < 270.0)
+masked_sample
+
+# Plot 2 panels
+fig, axes = plt.subplots(ncols=2, figsize=(19, 6))
+sample.plot(ax=axes[0], robust=True)
+masked_sample.plot(ax=axes[1], robust=True)
+plt.show()
+```
+
+`.where()` also allows providing multiple conditions. To do this, we need to make sure each conditional expression is enclosed in `()`. To combine conditions, we use the `&` operator and/or `|`. let's use where to mask locations with temperature values less than `250` and greater than `300`:
+
+```{python, eval=F}
+# More than one condition
+sample.where((sample > 250) & (sample < 300)).plot(size=6, robust=True)
+plt.show()
+
+# More than one condition
+sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) & 
+             (sample.lon < 240)).plot(size=6, robust=True)
+plt.show()             
+```
+
+For more, see [Masking with where](https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where).
 
 ***
 
-# `Python` next?
+*The notes are modified from the excellent [Research Computing in Earth Sciences](https://rabernat.github.io/research_computing/) and [xarray-tutorial](https://github.com/andersy005/xarray-tutorial/tree/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0) freely available on the GitHub.*
 
-So far we have covered the basics of `Python` and fundamental modules to make plots and analyze data. Looking forward, the learning curve is still steep, be patient as it takes time. Use Google and [stackoverflow](https://stackoverflow.com/) without hesitation, as you will find 9 out 10 times your questions/issues have been reported and solved (luckily) already.   
-
-Have fun!
-
-***
-
-*The notes are modified from the excellent [Dask for Parallel Computing and Big Data](https://rabernat.github.io/research_computing_2018/dask-for-parallel-computing-and-big-data.html), available freely online.*
 
 ***
 
@@ -385,16 +595,31 @@ Have fun!
 
 ## Exercise #1
 
-Go through the notes, make sure you understand the scripts.
+Go over the notes, make sure you understand the scripts.
 
 ## Exercise #2
 
-Make a local client with `6` CPUs (only if your laptop allows!), then compute and plot the variance in daily `ssh` anomalies with `dask`.
+Compute the global mean temperature between `2005-01` and `2010-12`.
+
+## Exercise #3
+
+Plot the the seasonal cycle ("climatology") in temperature near your hometown.
+
+## Exercise #4
+
+Plot anomalies at your hometown, do you observe a trend?
+
+## Exercise #5
+
+Plot monthly climatology in temperature in `12` panels.
 
 ***
 
 # Further reading
 
-+ [`Dask` tutorial](https://github.com/dask/dask-tutorial)
-+ [A Data Scientist’s Guide to Lazy Evaluation with `Dask`](https://saturncloud.io/blog/a-data-scientist-s-guide-to-lazy-evaluation-with-dask/)
-+ [Intermediate Python](https://book.pythontips.com/en/latest/)
++ [`xarray` offical guide](https://xarray.pydata.org/en/stable/index.html)
++ [NetCDF offical guide](https://www.unidata.ucar.edu/software/netcdf/docs/index.html)
++ [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
++ [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
++ [Pythia Cookbooks Gallery](https://cookbooks.projectpythia.org/) (very comprehensive, contains many courses and tutorials)
++ [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files, requires `java runtime environment 9`)
