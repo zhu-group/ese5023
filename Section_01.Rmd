@@ -98,7 +98,7 @@ Hopefully, this course will make your life easier when it comes to interpret and
 
 **Course topics:**
 
-* Three languages: Python, Shell (BASH), and FORTRAN  
+* Three languages: Python, Shell (BASH), and FORTRAN (Supplement)  
 * One operation system: Linux  
 * At the end of the semester, you should be able to:
   + Use Git for version control
@@ -108,9 +108,9 @@ Hopefully, this course will make your life easier when it comes to interpret and
   + Handle common file formats with Python
     - plain text, .csv, .nc, .hdf, etc.
   + Work with data neatly using core packages like `numpy` and `pandas`
-  +  Create publication-quality figures and maps
+  + Create publication-quality figures and maps
     - `matplotlib` and `cartopy`
-  +  Harness AI for scientific coding
+  + Harness AI for scientific coding
     - LLM foundations, context engineering, automated code verification, and agentic workflows
   + Use the Linux environment
     - basics, BASH scripts, installing software, loading modules, etc.
