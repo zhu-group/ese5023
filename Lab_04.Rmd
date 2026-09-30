@@ -36,7 +36,7 @@ Jupyter is a loose acronym meaning `Julia`, `Python`, and `R`. The word "noteboo
 
 + Create a new note by clicking `New` then `Python3 (ipykernel)`.
 
-+ Go over `User Interface Tour` under the `Help` tab to familiarize yourself with the layout.
++ Go over `Help` tab to familiarize yourself with the layout.
 
 + Copy the following lines to a cell, run the cell, see what happens. We will take a closer look at `matplotlib` in the future sections.
 
