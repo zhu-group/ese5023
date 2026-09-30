@@ -370,59 +370,59 @@ Some common functions to handel lists:
 
 ```{python, eval=F}
 # Make a list
-firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan", "Xiaoguang", "Xiaoping"]
+friends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan", "Xiaoguang", "Xiaoping"]
 
 # Make another list
 ages    = [20, 31, 18, 29, 45, 15]
 
 # Extend the list by appending all the items from the iterable
-firends.extend(ages)
-print(firends)
+friends.extend(ages)
+print(friends)
 
 # Add an item to the end of the list
-firends.append("99")
-print(firends)
+friends.append("99")
+print(friends)
 
 # Return index in the list of the first item whose value is equal to x
-print(firends.index("Xiaoli"))
-print(firends.index("Xiaoniu"))
+print(friends.index("Xiaoli"))
+print(friends.index("Xiaoniu"))
 
 # Insert an item at a given position
-firends.insert(0,"Xiaoyong")
-print(firends)
+friends.insert(0,"Xiaoyong")
+print(friends)
 
 # Remove the first item from the list whose value is equal to x
-firends.remove("Xiaoli")
-print(firends)
+friends.remove("Xiaoli")
+print(friends)
 
 # Remove all items from the list
-firends.clear()
-print(firends)
+friends.clear()
+print(friends)
 
 #------------------------------
 # Make a new list
-firends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan", "Xiaoguang", "Xiaoping", "Xiaoming"]
+friends = ["Xiaohua", "Xiaoming", "Xiaoli", "Xiaoyan", "Xiaoguang", "Xiaoping", "Xiaoming"]
 
 # Return the number of times x appears in the list
-firends.count("Xiaoming")
+friends.count("Xiaoming")
 
 # Sort the items of the list
-firends.sort()
-print(firends)
+friends.sort()
+print(friends)
 
 ages.sort()
 print(ages)
 
 # Reverse the elements of the list 
-firends.reverse()
-print(firends)
+friends.reverse()
+print(friends)
 
 ages.reverse()
 print(ages)
 
 # Return a shallow copy of the list
-firends2 = firends.copy()
-print(firends2)
+friends2 = friends.copy()
+print(friends2)
 
 ```
 

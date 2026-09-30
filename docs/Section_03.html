@@ -56,9 +56,8 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -69,7 +68,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -825,59 +824,59 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a h
 <p>Some common functions to handel lists:</p>
 <div class="sourceCode" id="cb22"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Make a list</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>firends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>, <span class="st">&quot;Xiaoguang&quot;</span>, <span class="st">&quot;Xiaoping&quot;</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>friends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>, <span class="st">&quot;Xiaoguang&quot;</span>, <span class="st">&quot;Xiaoping&quot;</span>]</span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># Make another list</span></span>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>ages    <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">31</span>, <span class="dv">18</span>, <span class="dv">29</span>, <span class="dv">45</span>, <span class="dv">15</span>]</span>
 <span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
 <span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># Extend the list by appending all the items from the iterable</span></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>firends.extend(ages)</span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>friends.extend(ages)</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a></span>
 <span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="co"># Add an item to the end of the list</span></span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>firends.append(<span class="st">&quot;99&quot;</span>)</span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>friends.append(<span class="st">&quot;99&quot;</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a></span>
 <span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co"># Return index in the list of the first item whose value is equal to x</span></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a><span class="bu">print</span>(firends.index(<span class="st">&quot;Xiaoli&quot;</span>))</span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a><span class="bu">print</span>(firends.index(<span class="st">&quot;Xiaoniu&quot;</span>))</span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a><span class="bu">print</span>(friends.index(<span class="st">&quot;Xiaoli&quot;</span>))</span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a><span class="bu">print</span>(friends.index(<span class="st">&quot;Xiaoniu&quot;</span>))</span>
 <span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a></span>
 <span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a><span class="co"># Insert an item at a given position</span></span>
-<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>firends.insert(<span class="dv">0</span>,<span class="st">&quot;Xiaoyong&quot;</span>)</span>
-<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>friends.insert(<span class="dv">0</span>,<span class="st">&quot;Xiaoyong&quot;</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a></span>
 <span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a><span class="co"># Remove the first item from the list whose value is equal to x</span></span>
-<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a>firends.remove(<span class="st">&quot;Xiaoli&quot;</span>)</span>
-<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a>friends.remove(<span class="st">&quot;Xiaoli&quot;</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a></span>
 <span id="cb22-27"><a href="#cb22-27" tabindex="-1"></a><span class="co"># Remove all items from the list</span></span>
-<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a>firends.clear()</span>
-<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a>friends.clear()</span>
+<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a></span>
 <span id="cb22-31"><a href="#cb22-31" tabindex="-1"></a><span class="co">#------------------------------</span></span>
 <span id="cb22-32"><a href="#cb22-32" tabindex="-1"></a><span class="co"># Make a new list</span></span>
-<span id="cb22-33"><a href="#cb22-33" tabindex="-1"></a>firends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>, <span class="st">&quot;Xiaoguang&quot;</span>, <span class="st">&quot;Xiaoping&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>]</span>
+<span id="cb22-33"><a href="#cb22-33" tabindex="-1"></a>friends <span class="op">=</span> [<span class="st">&quot;Xiaohua&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>, <span class="st">&quot;Xiaoli&quot;</span>, <span class="st">&quot;Xiaoyan&quot;</span>, <span class="st">&quot;Xiaoguang&quot;</span>, <span class="st">&quot;Xiaoping&quot;</span>, <span class="st">&quot;Xiaoming&quot;</span>]</span>
 <span id="cb22-34"><a href="#cb22-34" tabindex="-1"></a></span>
 <span id="cb22-35"><a href="#cb22-35" tabindex="-1"></a><span class="co"># Return the number of times x appears in the list</span></span>
-<span id="cb22-36"><a href="#cb22-36" tabindex="-1"></a>firends.count(<span class="st">&quot;Xiaoming&quot;</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" tabindex="-1"></a>friends.count(<span class="st">&quot;Xiaoming&quot;</span>)</span>
 <span id="cb22-37"><a href="#cb22-37" tabindex="-1"></a></span>
 <span id="cb22-38"><a href="#cb22-38" tabindex="-1"></a><span class="co"># Sort the items of the list</span></span>
-<span id="cb22-39"><a href="#cb22-39" tabindex="-1"></a>firends.sort()</span>
-<span id="cb22-40"><a href="#cb22-40" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-39"><a href="#cb22-39" tabindex="-1"></a>friends.sort()</span>
+<span id="cb22-40"><a href="#cb22-40" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-41"><a href="#cb22-41" tabindex="-1"></a></span>
 <span id="cb22-42"><a href="#cb22-42" tabindex="-1"></a>ages.sort()</span>
 <span id="cb22-43"><a href="#cb22-43" tabindex="-1"></a><span class="bu">print</span>(ages)</span>
 <span id="cb22-44"><a href="#cb22-44" tabindex="-1"></a></span>
 <span id="cb22-45"><a href="#cb22-45" tabindex="-1"></a><span class="co"># Reverse the elements of the list </span></span>
-<span id="cb22-46"><a href="#cb22-46" tabindex="-1"></a>firends.reverse()</span>
-<span id="cb22-47"><a href="#cb22-47" tabindex="-1"></a><span class="bu">print</span>(firends)</span>
+<span id="cb22-46"><a href="#cb22-46" tabindex="-1"></a>friends.reverse()</span>
+<span id="cb22-47"><a href="#cb22-47" tabindex="-1"></a><span class="bu">print</span>(friends)</span>
 <span id="cb22-48"><a href="#cb22-48" tabindex="-1"></a></span>
 <span id="cb22-49"><a href="#cb22-49" tabindex="-1"></a>ages.reverse()</span>
 <span id="cb22-50"><a href="#cb22-50" tabindex="-1"></a><span class="bu">print</span>(ages)</span>
 <span id="cb22-51"><a href="#cb22-51" tabindex="-1"></a></span>
 <span id="cb22-52"><a href="#cb22-52" tabindex="-1"></a><span class="co"># Return a shallow copy of the list</span></span>
-<span id="cb22-53"><a href="#cb22-53" tabindex="-1"></a>firends2 <span class="op">=</span> firends.copy()</span>
-<span id="cb22-54"><a href="#cb22-54" tabindex="-1"></a><span class="bu">print</span>(firends2)</span></code></pre></div>
+<span id="cb22-53"><a href="#cb22-53" tabindex="-1"></a>friends2 <span class="op">=</span> friends.copy()</span>
+<span id="cb22-54"><a href="#cb22-54" tabindex="-1"></a><span class="bu">print</span>(friends2)</span></code></pre></div>
 <p>For more functions, please refer to <a
 href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python
 Data Structures - More on List</a>.</p>
