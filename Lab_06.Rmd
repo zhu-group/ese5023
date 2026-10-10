@@ -1,0 +1,67 @@
+---
+title: "Lab 06 `pandas` exercises"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+***
+
+# 1. `pandas` basics
+
+In this assignment, we will practice some of the concepts and skills covered [Section 06](https://zhu-group.github.io/ese5023/Section_06.html). 
+
+**1.1** Download the [demo file](https://zhu-group.github.io/ese5023/download/countries.csv) contains basic information of world countries, read it as dataframe `countries_df`.
+
+**1.2** How many countries does the dataframe contain? 
+
+[Hint: Use the `.shape` method]
+
+**1.3** Retrieve a list of continents from the dataframe?
+
+[Hint: Use the `.unique` method of a series]
+
+**1.4** What is the total population of all the countries listed in this dataset?
+
+**1.5** What is the overall life expectancy across the world?
+
+[Hint: You'll need to take a weighted average of life expectancy using populations as weights]
+
+**1.6** Create a dataframe containing `10` countries with the highest population.
+
+**1.7** Add a new column in `countries_df` to record the overall GDP per country.
+
+**1.8** Create a dataframe containing `10` countries with the lowest GDP per capita, among the counties with a population greater than `100` million.
+
+**1.9** Create a dataframe that counts the number of countries in each continent?
+
+**1.10** Create a dataframe showing the total population of each continent.
+
+***
+
+# 2. COVID-19 stats
+
+**2.1** Let's download [another CSV file](https://zhu-group.github.io/ese5023/download/covid-countries-data.csv) containing overall COVID-19 stats for various countries, and read the data into another `pandas` dataframe `covid_data_df`.
+
+**2.2** Count the number of countries for which the `total_tests` data is missing.
+
+[Hint: Use the `.isna` method]
+
+**2.3** Let's merge the two dataframes (`countries_df` and `covid_data_df`) on the `location` column, and name the merged dataframe `combined_df`
+
+[Hint: Use the `.merge` method on `countries_df`. Search how to use `.merge` by yourself]
+
+**2.4** Add columns `tests_per_million`, `cases_per_million` and `deaths_per_million` into `combined_df`.
+
+**2.5** Create a dataframe with `10` counties that have the highest number of tests per million people.
+
+**2.6** Create a dataframe with `10` counties that have the highest number of cases per million people.
+
+**2.7** Count number of countries that feature in both the lists of "highest number of tests per million" (from **2.5**) and "highest number of cases per million" (from **2.6**).
+
+[Hint: Use the `.merge` method again]
+
+**2.8** Count number of countries that feature in both the lists "`20` countries with the lowest GDP per capita" and "`20` countries with the lowest number of hospital beds per thousand population". Only consider countries with a population higher than `10` million while creating the list.  

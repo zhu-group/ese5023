@@ -1,5 +1,5 @@
 ---
-title: "Intermediate `Python`: `xarray`"
+title: "Scientific computing with `SciPy`"
 output:
   html_document:
     toc: true
@@ -8,586 +8,364 @@ output:
       smooth_scroll: false
 ---
 
-> "`Xarray` (formerly xray) is an open source project and Python package that makes working with labelled multi-dimensional arrays simple, efficient, and fun!" - `Xarray` document.
+> "Since its initial release in 2001, `SciPy` has become a de facto standard for leveraging scientific algorithms in `Python`." - Virtanen et al. (2020)
 
-***
+*** 
 
-# Prerequisites
+# Introduction to `SciPy`
 
-In `Anaconda Powershell`, install `netCDF4`, `xarray`, and `nc-time-axis`, **one after another**:
+`SciPy` is a library of numerical routines for the `Python` programming language that provides fundamental building blocks for modeling and solving scientific problems. `SciPy` includes algorithms for optimization, integration, interpolation, eigenvalue problems, algebraic equations, differential equations and many other classes of problems; it also provides specialized data structures, such as sparse matrices and *k*-dimensional trees.  
+
+The `SciPy` library depends on `NumPy`, which provides convenient and fast N-dimensional array manipulation. Check [SciPy 1.0: fundamental algorithms for scientific computing in Python](https://www.nature.com/articles/s41592-019-0686-2) for an overview of the capabilities and development practices of `SciPy`. 
+
+When you want to do scientific work in `Python`, the first library you can turn to is `SciPy`. As you’ll see in this Section, `SciPy` is not just a library, but a whole **ecosystem of libraries** that work together to help you accomplish complicated scientific tasks quickly and reliably.
+
+`SciPy` should be installed along with `Anaconda`. If not, in `Anaconda Powershell Prompt`, install it:
 
 ```{python, eval=F}
-pip install netCDF4
-pip install nc-time-axis
+# Install SciPy
+conda install scipy
 ```
 
-To test whether your environment is set up properly, try the following imports:
+To make sure `SciPy` is installed:
 
 ```{python, eval=F}
-import netCDF4
-import xarray as xr
-```
-
-***
-
-# Introduction to `xarray`
-
-In [Section 06](https://zhu-group.github.io/ese5023/Section_06.html), we saw how `pandas` handled *tabular* datasets, by using "indexes" for each row and labels for each column. These features, together with `pandas`' many useful routines for all kinds of data wrangling and analysis, have made `pandas` one of the most popular python packages in the world.
-
-However, not all Earth science datasets easily fit into the "tabular" model (i.e. rows and columns) imposed by `pandas`. In particular, we often deal with *multidimensional* data. By multidimensional data (also often called N-dimensional), it means data with many independent dimensions or axes. For example, we might represent Earth's surface temperature *T* as a three dimensional variable:
-
-$$T(Lon, Lat, Time)  $$
-
-The point of `xarray` is to provide **pandas-level convenience** for working with this type of data. Specifically, `xarray` is for working with labeled, multi dimensional arrays.
-
-+ Built on top of `numpy` and `pandas`
-
-+ Brings the power of `pandas` to multidimensional arrays
-
-+ Supports data of any dimensionality
-
-<img src="figs/xarray2.png" alt="drawing" width="800"/>  
-
-[Figure source](https://gdfa.ugr.es/python/climate_data/data_science_climate_data.html)
-
-***
-
-# `Xarray` basics
-
-Like we did for `pandas` in [Section 06](https://zhu-group.github.io/ese5023/Section_06.html), here we will go over the **basic capabilities** of `xarray`. Please dig into the [`xarray` documentation](https://xarray.pydata.org/en/stable/index.html) for more advanced usage.
-
-## `xarray` data structures
-
-`Xarray` has two fundamental data structures:
-
-+ a *DataArray*, which holds a **single** multi-dimensional variable and its coordinates
-
-+ a *Dataset*, which holds **multiple** variables that potentially share the same coordinates
-
-Check [Data Structures](http://xarray.pydata.org/en/latest/user-guide/data-structures.html) for more.
-
-## `DataArray`
-
-A *DataArray* has four essential attributes:
-
-+ `values`: a `numpy.ndarray` holding the array’s values
-
-+ `dims`: dimension names for each axis (e.g., ('x', 'y', 'z'), ('lon', 'lat', 'time'))
-
-+ `coords`: a dict-like container of arrays (coordinates) that label each point (e.g., 1-dimensional arrays of numbers, datetime objects or strings)
-
-+ `attrs`: an `OrderedDict` to hold arbitrary metadata (attributes)
-
-Let's start by constructing some DataArrays manually:
-
-```{python, eval=F}
+# Import modules
 import numpy as np
-import pandas as pd
-import xarray as xr
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
+# Show plots in the notebook
 %matplotlib inline
+
+# Import SciPy
+import scipy
+
+# Print the location of the file from where `SciPy` is loaded
+print(scipy.__file__)
 ```
 
-A simple `DataArray` without dimensions or coordinates isn't much use:
+Now you’ve imported `SciPy` and printed the location of the file from where `SciPy` is loaded. Your computer will probably show a different location. `SciPy` should be ready for use. 
+
+# Task-specific sub-modules in `SciPy`
+
+As non-professional programmers, scientists often tend to *re-invent the wheel*, which leads to buggy, non-optimal, difficult-to-share and unmaintainable code. By contrast, `SciPy`’s routines are optimized and tested, and should therefore be used when possible.
+
+`SciPy` is composed of task-specific sub-modules, including:
+
+|Sub-module                                                                                                  | Usage                                  |
+|:-----------------------------------------------------------------------------------------------------------|:---------------------------------------|
+|[`scipy.cluster`](https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster)             | Vector quantization / Kmeans           |
+|[`scipy.constants`](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants)       | Physical and mathematical constants    |
+|[`scipy.fftpack`](https://docs.scipy.org/doc/scipy/reference/fftpack.html#module-scipy.fftpack)             | Fourier transform                      |
+|[`scipy.integrate`](https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate)       | Integration routines                   |
+|[`scipy.interpolate`](https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate) | Interpolation                          | 
+|[`scipy.io`](https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io)                            | Data input and output                  |
+|[`scipy.linalg`](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg)                | Linear algebra routines                |
+|[`scipy.ndimage`](https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage)             | n-dimensional image package            |  
+|[`scipy.odr`](https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr)                         | Orthogonal distance regression         |
+|[`scipy.optimize`](https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize)          | Optimization                           |  
+|[`scipy.signal`](https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal)                | Signal processing                      |  
+|[`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse)                | Sparse matrices                        |
+|[`scipy.spatial`](https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial)             | Spatial data structures and algorithms |
+|[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special)             | Special mathematical functions         |
+|[`scipy.stats`](https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats)                   | Statistics                             |
+
+This section is far from an introduction to numerical computing. As enumerating the different sub-modules and functions in `SciPy` would be very boring, we concentrate instead on a few problems you may encounter to give a general idea of how to use `SciPy` for scientific computing.
+
+
+## Constants with `scipy.constants`
+
+`SciPy` constants package provides a wide range of constants, which are used in the general scientific area. We have to import the required constant and use them as per the requirement. 
+
+### Mathematical constants
+
+Import mathematical constant, for example:
 
 ```{python, eval=F}
-# Create a xr dataarray
-da = xr.DataArray([1, 2, 3, -1, 2])
-da
+
+from scipy import constants
+
+# Mathematical constants
+scipy.constants.pi
 ```
 
-You can add a dimension name to the `DataArray`:
+### Physical constants
+
+Import physical constant, for example:
 
 ```{python, eval=F}
-# Add a dimension name
-da = xr.DataArray([1, 2, 3, -1, 2], dims=['x'])
-da
+# Physical constants
+scipy.constants.R
+scipy.constants.gas_constant
 ```
 
-But things get most interesting when you add a coordinate:
+In addition to the above variables, `scipy.constants` also contains the [2018 CODATA recommended values (CODATA2018)](https://physics.nist.gov/cuu/Constants) database containing more physical constants. Call 
+`scipy.constants.physical_constants[NAME]` to return a dictionary of physical constants, of the format `(value, unit, uncertainty)`. For example:
 
 ```{python, eval=F}
-# Add a coordinate
-da = xr.DataArray([1, 2, 3, -1, 2],
-                  dims=['x'],
-                  coords={'x': [10, 20, 30, 40, 50]})
-da
+# Physical constants
+scipy.constants.physical_constants['atomic unit of mass']
 ```
 
-You can use `xarray` built-in plotting:
+### Units
+
+`scipy.constants` also contains SI units, for example:
 
 ```{python, eval=F}
-# Simple plot with xr built-in plot function
-da.plot(marker='o')
+# SI prefixes
+scipy.constants.micro
+
+# Mass, in [kg]
+scipy.constants.long_ton
+
+# Speed, in [m/s]
+scipy.constants.mph
+
+# Pressure, in [Pa]
+scipy.constants.atmosphere
+```
+
+Remembering all of these are a bit tough. The easy way to get which key is for which function is looking up things in the [`SciPy` Constants page](https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants).
+
+## Integrating with `scipy.integrate`
+
+When a function cannot be integrated analytically, or is very difficult to integrate analytically, one generally turns to numerical integration methods. `SciPy` has a number of routines for performing numerical integration. Most of them are found in the same `scipy.integrate` library. For example:
+
+```{python, eval=F}
+from numpy import exp
+from scipy import integrate
+
+# Define a function
+f = lambda x:exp(-x**2)
+
+# Single integral of f from 0 to 1
+res = integrate.quad(f, 0, 1)
+print(res)
+```
+
+Here we use a [lambda expression](https://realpython.com/python-lambda/) and then call the quadrature method (for single integrals) on that function. The `quad` function returns the two values, in which the first number is the value of integral and the second value is the estimate of the absolute error in the value of integral. For multiple integrals or solving initial value problems for ODE systems, check [Integration and ODEs](https://docs.scipy.org/doc/scipy/reference/integrate.html).
+
+## Interpolation with `scipy.interpolate`
+
+### Linear interpolation
+
+Interpolation is the process of finding a value between two points on a line or a curve. This tool, interpolation, is not only useful in statistics, but is also useful in science, business, or when there is a need to predict values that fall within two existing data points.
+
+```{python, eval=F}
+# Make up some data points
+x = np.linspace(0, 4, 12)
+y = np.cos(x**2/3+4)
+
+# Plot data
+plt.plot(x, y,'ko')
 plt.show()
 ```
 
-## `Datasets`
-
-A `Dataset` holds many `DataArrays` which potentially can share coordinates. In analogy to `pandas`:
+Suppose we want to find the value of `y` when `x=3.12`, you can use `interp1d()` as:
 
 ```{python, eval=F}
-pandas.Series : pandas.Dataframe :: xarray.DataArray : xarray.Dataset
+from scipy.interpolate import interp1d
+
+# Using interp1d function
+f1 = interp1d(x, y, kind = 'linear')
+f2 = interp1d(x, y, kind = 'cubic')
+
+# Now make x finer
+xnew = np.linspace(0, 4, 30)
+
+# Plot interpolated values
+plt.plot(x, y, 'ko', xnew, f1(xnew), '-', xnew, f2(xnew), '--')
+
+# Add legend
+plt.legend(['data', 'linear', 'cubic'], loc = 'best')
+
+plt.show()
+
+# Show data at a specific location
+print(f1(3.12), f2(3.12))
 ```
 
-Constructing Datasets manually is a bit more involved in terms of syntax. The `Dataset` takes three arguments:
+The `interp1d()` function in the `scipy.interpolate` is a convenient method to create a function based on fixed data points, which can be evaluated anywhere within the domain defined by the given data using linear interpolation. Using the `interp1d()` function, we created two functions `f1` and `f2`. These functions, for a given input `x` returns `y`. The third variable kind represents the type of the interpolation technique. `linear`, `nearest`, `zero`, `slinear`, `quadratic`, `cubic` are a few techniques of interpolation.
 
-+ `data_vars` should be a dictionary with each key as the name of the variable and each value as one of:
+### Spline interpolation
 
-  * A `DataArray` or Variable
-  * A tuple of the form `(dims, data[, attrs])`, which is converted into arguments for Variable
-  * A `pandas` object, which is converted into a `DataArray`
-  * A 1D array or list, which is interpreted as values for a one dimensional coordinate variable along the same dimension as it’s name
-
-+ `coords` should be a dictionary of the same form as `data_vars`
-
-+ `attrs` should be a dictionary
-
-For the rest of Section, we will use an output file (`CESM2_200001-201412.nc`) from the [Community Earth System Model (CESM)](https://www.cesm.ucar.edu/models/cesm2/) to show basics of `xarray` and how to handle `Dataset` files. The file contains global monthly near surface temperature from `2000` to `2014`. Please download the file, and move it to your working directory.
-
-
-## Loading data from a netCDF file
-
-In fact, `Xarray`'s interface is heavily inspired by the `netCDF` data model. And `xarray`'s `Dataset` is designed as an in-memory representation of a netCDF dataset.
-
-First, let's open the CESM netCDF file (`CESM2_200001-201412.nc`) using the `xarray.open_dataset()` function:
+One-dimensional smoothing spline fits a given set of data points. The [`univariatespline` function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html) in `scipy.interpolate` is a convenient method to create a function, based on fixed data points class.
 
 ```{python, eval=F}
-# Open a netCDF4 file
-ds = xr.open_dataset("CESM2_200001-201412.nc", engine="netcdf4")
-```
+# Make up some data points
+x = np.linspace(-3, 3, 50)
+y = np.exp(-x**2) + 0.1 * np.random.randn(50)
 
-By default, `xarray.open_dataset()` function uses lazy loading, i.e. it just loads in the *coordinate* and *attribute* metadata and not the data that correspond to data variables themselves. The data variables are loaded only on actual values access (e.g. when performing some calculation, slicing, ...) or with `.load()` method. The `xarray.open_dataset()` is also able to load files in other formats (e.g., `grib `, `tiff`, or `zarr`), check [Reading and writing files](https://xarray.pydata.org/en/stable/user-guide/io.html) for more.
+# Plot data
+plt.plot(x, y, 'ko')
 
-Now take a look at the loaded dataset:
-
-```{python, eval=F}
-# Show dataset
-ds
-```
-
-To check the corresponding netCDF representation, we can use the `.info()` method:
-
-```{python, eval=F}
-# Show dataset info
-ds.info()
-```
-
-## Checking `Datasets` properties
-
-The `Datasets` (`ds`) have the following key properties:
-
-+ `data_vars`: an dictionary of `DataArrays` corresponding to data variables
-
-+ `dims`: a dictionary mapping from dimension names to the fixed length of each dimension (e.g. {'time': `180`, 'lat': `192`, 'lon': `288`, 'nbnd': `2`} )
-
-+ `coords`: a dictionary-like container of arrays (coordinates) that label each point (tick label) along our dimensions
-
-+ `attrs`: a dictionary holding arbitrary metadata pertaining to the dataset
-
-Check those one by one:
-
-```{python, eval=F}
-# Check data variables
-ds.data_vars
-
-# Check data dimension names
-ds.dims
-
-# Check data coordinates
-ds.coords
-
-# Check data attributes (metadata)
-ds.attrs
-```
-
-## Checking `DataArray` properties
-
-As we just covered, the `DataArray` is `xarray`'s implementation of a labeled, multi-dimensional array. It has several key properties:
-
-+ `data`: an  array (`numpy.ndarray`, `dask.array`, or `sparse` or `cupy.array` holding the array's values).
-+ `dims`: dimension names for each axis e.g. (lat, lon, time)
-+ `coords`: a dictionary-like container of arrays (coordinates) that label each point (tick label) along our dimensions
-+ `attrs`: a dictionary that holds arbitrary attributes/metadata (such as units).
-+ `name`: an arbitrary name of the array
-
-For example, you can use `ds['tas']` to extract the `tas` (near surface temperature) variable (`DataArray`), and later check its properties one by one:
-
-```{python, eval=F}
-# Extract the tas variable (DataArray)
-ds['tas']
-
-# The actual array data
-ds['tas'].data
-
-# Datarray coordinates
-ds['tas'].coords
-
-# Dataarray attributes
-ds['tas'].attrs
-
-# Dataarray name
-ds['tas'].name
-```
-
-## Indexing and selecting data
-
-`Xarray` supports two kinds of indexing:
-
-+ Positional indexing via `.isel()`: provides primarily integer position based index (from `0` to `length-1` of the axis/dimension)
-
-+ Label indexing via `.sel()`: provides primarily label based index.
-
-The good part of `xarray` is that, its indexing methods preserves the coordinate labels and associated metadata.
-
-Check [Indexing and selecting data](https://xarray.pydata.org/en/stable/user-guide/indexing.html) for more.
-
-### Selection by position
-
-The `.isel()` method is the primary access method for **purely integer based indexing**. The following are valid inputs:
-
-+ An integer, e.g. `lat=10`
-
-+ A list or array of integers, e.g, `lon=[10, 20, 39]`
-
-+ A slice object (range) with integers, e.g. `time=slice(2, 20)`
-
-```{python, eval=F}
-# The original object, i.e. no selection
-ds.tas.isel()
-
-# Data at lat=100
-ds.tas.isel(lat=100)
-
-# Data at lat=100 and the last two time steps 
-ds.tas.isel(lat=100, time=[-2, -1])
-
-# Data lat=100 and time ranging from index 10 and 20 
-ds.tas.isel(lon=100, time=slice(10, 20))
-```
-
-### Selection by label
-
-The `.sel()` method is the primary access method for **purely coordinate label based indexing**. The following are valid inputs:
-
-+ A single coordinate label, e.g. `time='2013-01-15'` or `time='2013'`
-
-+ A list or array of coordinate labels, e.g. `lon=['100','356.25']`
-
-+ A slice object with coordinate labels, e.g. `time=slice("2021-01-01", "2021-03-01")`
-
-```{python, eval=F}
-# Select data in 2013
-ds.tas.sel(time='2013')
-
-# Select data on 2013-01-15
-ds.tas.sel(time='2013-01-15')
-
-# Select data from a list
-ds.tas.sel(lon=['100','356.25'])
-
-# Select data within a range
-# Both the start and the stop are included
-ds.tas.sel(time=slice("2013-01-01", "2014-12-31"))
-```
-
-### Nearest-neighbor lookups
-
-Now try:
-
-```{python, eval=F}
-ds.tas.sel(lat=39.5, lon=105.7)
-```
-
-Can you figure out why this did not work? 
-
-Be careful when working with floating coordinate labels. When we have integer, string, datetime-like values for coordinate labels, `sel()` works flawlessly. When we try to work with floating coordinate labels, things get a little tricky. As shown above, when our coordinate labels are not integers or strings or datetime-like but floating point numbers, `.sel()` may throw a KeyError: `ds.tas.sel(lat=39.5, lon=105.7)` fails because we are trying to use a conditional for an **approximate** value, i.e floating numbers are represented approximately inside the computer, and `xarray` is unable to locate this exact value. To address this issue, `xarray` supports method and tolerance keyword argument. The method parameter allows for enabling nearest neighbor (inexact) lookups by use of the methods `pad`, `backfill`, or `nearest`:
-
-```{python, eval=F}
-# Using the nearest method to find a nearby value
-ds.tas.sel(lat=39.5, lon=105.7, method='nearest')
-```
-
-So the closest location in the data was at `lat=39.11, lon=106.2`.
-
-See the [`xarray` documentation](https://xarray.pydata.org/en/stable/generated/xarray.DataArray.sel.html) for more on usage of method and tolerance parameters in `.sel()`.
-
-Another way to use the nearest neighbor lookup is via a objects. For example:
-
-```{python, eval=F}
-# Using the slice method to find a nearby value
-ds.tas.sel(lat=slice(39, 39.5), lon=slice(106.1, 106.3))
-```
-
-Operators can be chained, so multiple operations can be used sequentially. For example, to select an area of interest and the first time index, and plot the data:
-
-```{python, eval=F}
-ds.tas.isel(time=0).sel(lon=slice(20, 160), lat=slice(-80, 25)).plot()
 plt.show()
 ```
 
-## Basic plotting with `.plot()`
-
-`Xarray` provides a `.plot()` method on `DataArray` and `Dataset.` This method is a wrapper around `Matplotlib`'s `matplotlib.pyplot.plot()`. `xarray` will automatically guess the type of plot based on the dimensionality of the data. By default `.plot()` creates:
-
-+ a **line** plot for 1-D arrays using `matplotlib.pyplot.plot()`
-
-+ a **pcolormesh** plot for 2-D arrays using `matplotlib.pyplot.pcolormesh()`
-
-+ a **histogram** for everything else (more than 2 dimensions) using `matplotlib.pyplot.hist()`
-
-### Histograms
+Suppose we want to find the value of `y` when `x=1.23`, you can use `UnivariateSpline()` as:
 
 ```{python, eval=F}
-# Histogram for all data
-ds.tas.plot()
+from scipy.interpolate import UnivariateSpline
+
+# Using UnivariateSpline function
+spl = UnivariateSpline(x, y, k=3)
+spl.set_smoothing_factor(0.5)
+
+# Now make x finer
+xnew = np.linspace(-3, 3, 1000)
+
+# Plot interpolated values
+plt.plot(x, y, 'ko')
+plt.plot(xnew, spl(xnew), 'b', lw = 3)
+
 plt.show()
 
-# Histogram for a subset of data
-ds.tas.sel(time=slice("2010", "2011")).plot()
-plt.show()
+# Show data at a specific location
+spl(1.23)
 ```
 
-### 1D line plots
+## Optimization and fitting with `scipy.optimize`
 
-Let's select one spatial location and plot a time series of the near surface temperature:
+### Curve fitting
 
-```{python, eval=F}
-# Time series of the near surface temperature at Shenzhen
-ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
-plt.show()
-```
-
-Lets say we want to compare plots of temperature at three different latitudes. We can use the `hue` keyword argument to do this.
+Suppose we have data on a sine wave, with some noise:
 
 ```{python, eval=F}
-# Time series of the near surface temperature at 3 latitudes at time stamp 50
-ds.tas.isel(time=50).sel(lat=[-50, 0, 50], method="nearest").plot(
-    x="lon", hue="lat", figsize=(8, 6))
+# Make up some data points
+x = np.linspace(-5, 5, num=50)
+y = 2.9 * np.sin(1.5 * x) + np.random.normal(size=50)
+
+# Plot data
+plt.plot(x, y, 'ko')
+
 plt.show()
 ```
 
-### 2D plots
-
-Operator chaining means it is possible to have multiple selection operators and add `.plot()` to the end to visualize the result.
+If we know that the data lies on a sine wave, but not the amplitudes or the period, we can find those by least squares curve fitting. First we have to define the test function to fit, here a sine with unknown amplitude and period:
 
 ```{python, eval=F}
-# 2D map over lat (-80,25) and lon (20,160) at timestamp -10
-ds.tas.isel(time=-10).sel(lon=slice(20, 160), 
-                          lat=slice(-80, 25)).plot(robust=True, figsize=(8, 6))
+# Define the function to fit
+def guess_func(x, a, b):
+    return a * np.sin(b * x)
+```
+
+We then use `scipy.optimize.curve_fit` to find `a` and `b`:
+
+```{python, eval=F}
+from scipy import optimize
+
+# Fit parameters
+params, _ = optimize.curve_fit(guess_func, x, y)
+print(params)
+
+# Plot fitted data
+plt.plot(x, y, 'ko', x, params[0]*np.sin(params[1] * x), 'r-')
+
+# Add legend
+plt.legend(['data', 'fitted value'], loc = 'best')
+
 plt.show()
 ```
 
-The x- and y-axes are labeled with full names — "Latitude", "Longitude" — along with units. The colorbar has a nice label, again with units. And the title tells us the timestamp of the data presented.
+### Finding the minimums
 
-You can, of course, modify the color bar:
+Let’s define the following function and plot it:
 
 ```{python, eval=F}
-# Define keyword arguments that are passed to matptolib.pyplot.colorbar
-colorbar_kwargs = {
-    "orientation": "horizontal",
-    "label": "my clustom label",
-    "pad": 0.1,
-}
+# Define a function
+def g(x):
+    return x**2 + 20*np.sin(x)
 
-# Plot
-ds.tas.sel(lon=294.1, method='nearest').plot(
-    # coordinate to plot on the x-axis of the plot
-    x="time", 
-    # set colorbar limits to 2nd and 98th percentile of data
-    robust=True,  
-    cbar_kwargs=colorbar_kwargs,
-)
+# Set the range
+x = np.arange(-10, 10, 0.1)
+
+# Plot the function
+plt.plot(x, g(x)) 
+
 plt.show()
 ```
 
-### Faceting
-
-Faceting is an effective way of visualizing variations of 3D data where 2D slices are visualized in a panel (subplot) and the third dimensions is varied between panels (subplots).
+This function has a global minimum around `-1.5` and local minimums around `-7.1` and `4.3`. Searching for minimum can be done with `scipy.optimize.minimize`, given a starting point `x0`, it returns the location of the minimum that it has found.
 
 ```{python, eval=F}
-# Plot monthly mean near surface temperature in 2010 and 2011, one at a panel
-ds.tas.sel(time=slice("2010", "2011")).plot(col="time", col_wrap=6, robust=True)
-plt.show()
+# Using minimize() to search for minimums
+result = optimize.minimize(g, x0=0)
+result
 ```
 
-See the [`xarray` documentation](https://xarray.pydata.org/en/stable/user-guide/plotting.html) for more on "faceted" plots or subplots.
+### Finding the roots
 
-## Computation
-
-Here we will some basic computation enabled by `xarray.`
-
-### Arithmetic Operations
-
-Arithmetic operations with a single `DataArray` automatically vectorize (like `numpy`) over all array values. Let's convert the air temperature from degree Kelvin to Celsius:
+To find a root, *i.e.*, a point where `g(x) = 0`, of the function `g` above we can use `scipy.optimize.root`:
 
 ```{python, eval=F}
-# Convert the air temperature from degree Kelvin to Celsius
-ds.tas - 273.15
+# Using root() to find the roots
+root = optimize.root(g, x0=1) 
+root
 ```
 
-Or even square all values in `tas` (makes no sense, just for demonstration):
+## Statistics with `scipy.stats`
+
+The module `scipy.stats` contains statistical tools and probabilistic descriptions of random processes.
+
+For example, we can fit a sample to a distribution:
 
 ```{python, eval=F}
-# Take sqaure of the data (even though this makes no sense)
-ds.tas ** 2
+# Generate a sample
+sample = np.random.normal(size=1000)
+
+from scipy import stats
+
+# Fit a normal distribution
+stats.norm.fit(sample)
 ```
 
-### Aggregation Methods
-
-A very common step during data analysis is to summarize the data in question by computing aggregations like `sum()`, `mean()`, `median()`, `min()`, `max()`, in which reduced data provide insight into the nature of large dataset. Let's explore some of these aggregation methods:
+A statistical test is a decision indicator. For instance, if we have two sets of observations, that we assume are generated from normal distributions, we can use a *t-test* to decide whether the means of two sets of observations are significantly different:
 
 ```{python, eval=F}
-# Compute the mean of all locations and timesteps
-ds.tas.mean()
+# Sample 1
+sample1 = np.random.normal(0, 1, size=20)
+
+# Sample 2
+sample2 = np.random.normal(1, 1, size=15)
+
+# Independent t-test
+stats.ttest_ind(sample1, sample2) 
 ```
 
-Because we specified no `dim` argument the function was applied over all dimensions. It is possible to specify a dimension along which to compute an aggregation. For example, to calculate the mean in time for all locations specify the time dimension as the dimension along which the mean should be calculated:
+[The chapter on statistics](https://scipy-lectures.org/index.html) introduces much more elaborate tools for statistical testing and statistical data loading and visualization outside of `SciPy`. You are also welcome to check [ESE335 Environmental Data Analysis](https://zhu-group.github.io/ese335/index.html) for conducting statistical tests with the `R` language. 
+
+## Clustering with `scipy.cluster`
+
+Clustering is a popular technique to categorize data by associating it into groups. The `SciPy` library includes an implementation of the *k-means clustering* algorithm as well as several *hierarchical clustering* algorithms. Here we will be using the k-means algorithm in `scipy.cluster.vq`, where `vq` stands for vector quantization.
 
 ```{python, eval=F}
-# Calculate the mean in time for all locations
-ds.tas.mean(dim='time').plot(size=7, robust=True)
-plt.show()
-```
+from numpy import vstack,array
+from numpy.random import rand
+from scipy.cluster.vq import kmeans,vq
 
-Now try:
+# Data generation, 200 rows, 2 cols
+data = vstack((rand(100,2) + array([.8,.8]), rand(100,2)))
 
-```{python, eval=F}
-# Compute temporal min
-ds.tas.min(dim=['time'])
-# Compute spatial sum
-ds.tas.sum(dim=['lat', 'lon'])
-# compute temporal median
-ds.tas.median(dim='time').plot(size=7, robust=True)
-plt.show()
-```
+# Show data
+plt.plot(data[:,0],data[:,1],'k+')
 
-For more, check [`xarray` computation](https://xarray.pydata.org/en/stable/user-guide/computation.html).
-
-### GroupBy: split, apply, combine
-
-Simple aggregations can give useful summary of our dataset, but often we would prefer to aggregate **conditionally** on some coordinate labels or groups. `Xarray` provides the so-called `groupby` operation which enables the `split-apply-combine` workflow on `xarray` `DataArrays` and `Datasets.` The `split-apply-combine` operation is illustrated in this figure.
-
-<img src="figs/xarray-split-apply-combine.png" alt="drawing" width="700"/>  
-
-[Figure source](https://raw.githubusercontent.com/andersy005/xarray-tutorial/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0/images/xarray-split-apply-combine.png)
-
-This makes clear what the `groupby` accomplishes:
-
-+ The `split` step involves breaking up and grouping an `xarray` `Dataset` or `DataArray` depending on the value of the specified **group key**
-
-+ The `apply` step involves computing some function, usually an aggregate, transformation, or filtering, within the individual groups
-
-+ The `combine` step merges the results of these operations into an output `xarray` `Dataset` or `DataArray`
-
-We are going to use `groupby` to remove the seasonal cycle ("climatology") from our dataset:
-
-```{python, eval=F}
-# Near surface temperature at Shenzhen
-ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
-plt.show()
-```
-
-First, let's group data by `month`, i.e. all `Januaries` in one group, all `Februaries` in one group, etc...
-
-```{python, eval=F}
-# Group data by month
-ds.tas.groupby(ds.time.dt.month)
-```
-
-Here we are using the `.dt` [`DatetimeAccessor`](https://xarray.pydata.org/en/stable/generated/xarray.core.accessor_dt.DatetimeAccessor.html) to extract specific components of dates/times in our time coordinate dimension. You can also try `ds.time.dt.year` and `ds.time.dt.month`, see what happens.
-
-`Xarray` also offers a more concise syntax when the variable you’re grouping on is already present in the dataset. This is identical to `ds.tas.groupby (ds.time.dt.month)`:
-
-```{python, eval=F}
-# Group data by month
-ds.tas.groupby('time.month')
-```
-
-Now that we have groups defined, it’s time to “apply” a calculation to the group. These calculations can either be:
-
-+ aggregation: reduces the size of the group
-    
-+ transformation: preserves the group’s full size
-
-At then end of the apply step, `xarray` will automatically combine the aggregated/transformed groups back into a single object.
-
-Let's calculate the climatology at every point in the dataset and plot the results:
-
-```{python, eval=F}
-# Calculate the climatology 
-tas_clim = ds.tas.groupby('time.month').mean()
-tas_clim
-
-# Plot climatology at a specific point (Shenzhen)
-tas_clim.sel(lon=294.1, lat=22.5, method='nearest').plot()
 plt.show()
 
-# Plot zonal mean climatology
-tas_clim.mean(dim='lon').transpose().plot.contourf(levels=12, robust=True, cmap='turbo')
-plt.show()
+# Computing K-Means with K = 2 (2 clusters)
+#centroids, mean_dist = kmeans(data,2)
+
+# Assign each sample to a cluster
+#clusters, dist = vq(data,centroids)
+
+# Plot clusters
+#plt.plot(data[clusters==0][:,0], data[clusters==0][:,1],'bo')
+#plt.plot(data[clusters==1][:,0], data[clusters==1][:,1],'rd')
+
+# Plot cluster centroids
+#plt.plot(centroids[:,0],centroids[:,1],'gX',markersize=10)
+
+# Plot raw data
+#plt.plot(data[:,0],data[:,1],'w+')
 ```
-
-Now let's combine the previous steps to compute climatology and use `xarray`'s groupby arithmetic to remove this climatology from our original data:
-
-```{python, eval=F}
-# Group data by month
-group_data = ds.tas.groupby('time.month')
-
-# Apply mean to grouped data, and then compute the anomaly 
-tas_anom = group_data - group_data.mean(dim='time')
-tas_anom
-
-# Plot anomalies at a specific point (Shenzhen)
-tas_anom.sel(lon=294.1, lat=22.5, method='nearest').plot()
-plt.show()
-
-# Plot global mean anomalies
-tas_anom.mean(dim=['lat', 'lon']).plot()
-plt.show()
-```
-
-For more, see [GroupBy: split-apply-combine](https://xarray.pydata.org/en/stable/user-guide/groupby.html).
-
-## Masking Data
-
-Using `.where()` method, elements of an `xarray` `Dataset` or `xarray` `DataArray` that satisfy a given condition or multiple conditions can be replaced/masked. Unlike `.isel()` and `sel()` that change the shape of the returned results, `.where()` preserves the shape of the original data. It does accomplishes this by returning values from the original `DataArray` or `Dataset` if the condition is `True`, and fills in `missing values` wherever the condition is `False`.
-
-```{python, eval=F}
-# Select data
-sample = ds.tas.isel(time=-1)
-sample
-
-# Sample data where temperature is less than 270
-masked_sample = sample.where(sample < 270.0)
-masked_sample
-
-# Plot 2 panels
-fig, axes = plt.subplots(ncols=2, figsize=(19, 6))
-sample.plot(ax=axes[0], robust=True)
-masked_sample.plot(ax=axes[1], robust=True)
-plt.show()
-```
-
-`.where()` also allows providing multiple conditions. To do this, we need to make sure each conditional expression is enclosed in `()`. To combine conditions, we use the `&` operator and/or `|`. let's use where to mask locations with temperature values less than `250` and greater than `300`:
-
-```{python, eval=F}
-# More than one condition
-sample.where((sample > 250) & (sample < 300)).plot(size=6, robust=True)
-plt.show()
-
-# More than one condition
-sample.where((sample.lat < 5) & (sample.lat > -5) & (sample.lon > 190) & 
-             (sample.lon < 240)).plot(size=6, robust=True)
-plt.show()             
-```
-
-For more, see [Masking with where](https://xarray.pydata.org/en/stable/user-guide/indexing.html#masking-with-where).
-
-***
-
-*The notes are modified from the excellent [Research Computing in Earth Sciences](https://rabernat.github.io/research_computing/) and [xarray-tutorial](https://github.com/andersy005/xarray-tutorial/tree/6e50dba4ac1c6716755db77e1f1c4bae2625a0d0) freely available on the GitHub.*
-
 
 ***
 
@@ -595,31 +373,27 @@ For more, see [Masking with where](https://xarray.pydata.org/en/stable/user-guid
 
 ## Exercise #1
 
-Go over the notes, make sure you understand the scripts.
+Go through the notes, make sure you understand the scripts.
 
 ## Exercise #2
 
-Compute the global mean temperature between `2005-01` and `2010-12`.
+The temperature extremes in Shenzhen for each month, starting in January, are given by (in degrees Celcius):
 
-## Exercise #3
+`max: 19.8, 20.2, 22.7, 26.3, 29.5, 31.1, 32.3, 32.3, 31.3, 29.2, 25.4, 21.5`
+`min: 12.5, 13.8, 16.5, 20.3, 23.6, 25.6, 26.3, 26.1, 25.0, 22.5, 18.2, 13.8` 
 
-Plot the the seasonal cycle ("climatology") in temperature near your hometown.
-
-## Exercise #4
-
-Plot anomalies at your hometown, do you observe a trend?
-
-## Exercise #5
-
-Plot monthly climatology in temperature in `12` panels.
+**2.1** Plot these temperature extremes.  
+**2.2** Define a function that can describe min and max temperatures.   
+[Hint]: this function has to have a period of 1 year.   
+**2.3** Fit this function to the data with `scipy.optimize.curve_fit`.  
+**2.4** Plot the result. Is the fit reasonable? If not, why?  
+**2.5** Is the time offset for min and max temperatures the same within the fit accuracy?  
 
 ***
 
 # Further reading
 
-+ [`xarray` offical guide](https://xarray.pydata.org/en/stable/index.html)
-+ [NetCDF offical guide](https://www.unidata.ucar.edu/software/netcdf/docs/index.html)
-+ [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
-+ [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
-+ [Pythia Cookbooks Gallery](https://cookbooks.projectpythia.org/) (very comprehensive, contains many courses and tutorials)
-+ [Panoply](https://www.giss.nasa.gov/tools/panoply/) (great tool to visualize and check netCDF files, requires `java runtime environment 9`)
++ [SciPy User Guide](https://docs.scipy.org/doc/scipy/tutorial/index.html)  
++ [SciPy Tutorial](https://www.w3schools.com/python/scipy/index.php)
++ [Scientific Python: Using SciPy for Optimization](https://realpython.com/python-scipy-cluster-optimize/)
++ [SciPy - Quick Guide](https://www.tutorialspoint.com/scipy/scipy_quick_guide.htm)
