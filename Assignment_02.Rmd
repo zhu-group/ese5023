@@ -53,11 +53,11 @@ The [Significant Earthquake Database](https://www.ngdc.noaa.gov/hazel/view/hazar
 
 # 2. Air temperature in Shenzhen 1998-2022
 
-In this problem set, we will examine how air temperature changes in Shenzhen during `1998` and `2022` using the hourly weather data measured at the Baoan International Airport. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Download the zipped file [Baoan_Weather_1998_2022.csv](https://zhu-group.github.io/ese5023/download/Baoan_Weather_1998_2022.zip), unzip it, and move the `.csv` file to your `working directory`. 
+In this problem set, we will examine how air temperature changes in Shenzhen from 1998 to 2022 using the hourly weather data measured at the Baoan International Airport. The data set is from [NOAA Integrated Surface Dataset](https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc%3AC00532/html). Download the zipped file [Baoan_Weather_1998_2022.zip](https://zhu-group.github.io/ese5023/download/Baoan_Weather_1998_2022.zip), unzip it, and move the `Baoan_Weather_1998_2022.csv` file to your `working directory`. 
 
-Read page `10`-`11` (`POS 88-92` and `POS 93-93`) of the comprehensive [user guide](https://zhu-group.github.io/ese5023/isd-format-document.pdf) for the detailed format of the air temperature data (use column `TMP`). Explain how you filter the data in your report. 
+Read page `10`-`11` (`POS 88-92` and `POS 93-93`) of the comprehensive [user guide](https://zhu-group.github.io/ese5023/download/isd-format-document.pdf) for the detailed format of the air temperature data (use column `TMP`). Explain how you filter the data in your report. 
 
-**[10 points]** Plot monthly averaged air temperature against the observation time. Is there a trend in monthly averaged air temperature during `1998` and `2022`? 
+**[10 points]** Plot monthly averaged air temperature against the observation time. Is there a trend in monthly averaged air temperature from 1998 to 2022? 
 
 ***
 
@@ -65,7 +65,7 @@ Read page `10`-`11` (`POS 88-92` and `POS 93-93`) of the comprehensive [user gui
 
 The [International Best Track Archive for Climate Stewardship (IBTrACS) project](https://www.ncei.noaa.gov/products/international-best-track-archive?name=ibtracs-data) is the most complete global collection of tropical cyclones available. It merges recent and historical tropical cyclone data from multiple agencies to create a unified, publicly available, best-track dataset that improves inter-agency comparisons. IBTrACS was developed collaboratively with all the World Meteorological Organization (WMO) Regional Specialized Meteorological Centers, as well as other organizations and individuals from around the world.  
 
-In this problem set, we will use all storms available in the IBTrACS record since 1842. Download the file [ibtracs.ALL.list.v04r00.csv](https://zhu-group.github.io/ese5023/download/ibtracs.ALL.list.v04r00.zip), move the `.csv` file to your `working directory`. Read [Column Variable Descriptions](https://www.ncei.noaa.gov/sites/default/files/2021-07/IBTrACS_v04_column_documentation.pdf) for variables in the file. Examine the first few lines of the file. 
+In this problem set, we will use all storms available in the IBTrACS record since 1842. Download the zipped file [ibtracs.ALL.list.v04r00.zip](https://zhu-group.github.io/ese5023/download/ibtracs.ALL.list.v04r00.zip), unzip it, and move the `ibtracs.ALL.list.v04r00.csv` file to your `working directory`. Read [Column Variable Descriptions](https://www.ncei.noaa.gov/sites/default/files/2021-07/IBTrACS_v04_column_documentation.pdf) for variables in the file. Examine the first few lines of the file. 
 
 Below we provide an example to load the file as a `pandas` dataframe. Think about the options being used and why, and modify when necessary.
 
@@ -80,15 +80,15 @@ df.head()
 
 **3.1 [5 points]** Group the data on Storm Identifie (`SID`), report names (`NAME`) of the `10` largest hurricanes according to wind speed (`WMO_WIND`).
 
-**3.2 [5 points]** Make a bar chart of the wind speed (`WMO_WIND`) of the `20` strongest-wind hurricanes.
+**3.2 [5 points]** List the wind speed (`WMO_WIND`) of the `20` strongest-wind hurricanes.
 
-**3.3 [5 points]** Plot the count of all datapoints by Basin as a bar chart.
+**3.3 [5 points]** Count all datapoints by Basin.
 
 **3.4 [5 points]** Make a [hexbin plot](https://www.geeksforgeeks.org/matplotlib-pyplot-hexbin-function-in-python/) of the location of datapoints in Latitude and Longitude. 
 
-**3.5 [5 points]** Find Typhoon Mangkhut (from 2018) and plot its track as a scatter plot.
+**3.5 [5 points]** Find Typhoon Mangkhut (from 2018) and plot its track.
 
-**3.6 [5 points]** Create a filtered dataframe that contains only data since `1970` from the Western North Pacific ("WP") and Eastern North Pacific ("EP") Basin. Use this for the rest of the problem set.
+**3.6 [5 points]** Create a filtered dataframe that contains only data since 1970 from the Western North Pacific ("WP") and Eastern North Pacific ("EP") Basin. Use this for the rest of the problem set.
 
 **3.7 [5 points]** Plot the number of datapoints per day.
 
