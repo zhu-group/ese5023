@@ -74,12 +74,12 @@ A *series* represents a **one-dimensional array** of data. The main difference b
 
 There are many ways to [create a Series](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html). We will just show a few.
 
-Let's create a `pandas` series to store AQI (`2025-10-29 15:30`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
+Let's create a `pandas` series to store AQI (`2026-10-14 15:00`) at Beijing, Shanghai, Guangzhou, and Shenzhen with `city` as the index :
 
 ```{python, eval=F}
-# AQI of 4 cities on 10/29/2025
+# AQI of 4 cities on 10/14/2026
 city = ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen']
-aqi  = [198, 40, 63, 102]
+aqi  = [153, 47, 60, 74]
 
 # Create a pandas series
 my_data = pd.Series(aqi, index=city)
