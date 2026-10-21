@@ -475,10 +475,6 @@ div.tocify {
 <hr />
 <div id="basics-of-time-series" class="section level1">
 <h1>1. Basics of time series</h1>
-<p>In <code>Anaconda Powershell</code>, install
-<code>seaborn</code>:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>pip install seaborn</span></code></pre></div>
 <p><strong>1.</strong> Read the <a
 href="https://zhu-group.github.io/ese5023/download/ozone_data.csv">daily
 ozone data file</a> we used in <a
@@ -500,23 +496,23 @@ for more about <code>Timestamp</code>.</p>
 <p><strong>5.</strong> By far, we have created a time series. We will
 take a further look at how to analyze time series in the future. For
 now, simply type:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ozone[<span class="st">&#39;Ozone&#39;</span>].plot()</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ozone[<span class="st">&#39;Ozone&#39;</span>].plot()</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>You will get a ozone time series. For a plot with several panels,
 run:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Import modules</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># Columns to plot</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>cols_plot <span class="op">=</span> [<span class="st">&#39;Ozone&#39;</span>, <span class="st">&#39;Temperature&#39;</span>, <span class="st">&#39;Wind.Speed&#39;</span>]</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>axes <span class="op">=</span> ozone[cols_plot].plot(marker<span class="op">=</span><span class="st">&#39;.&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;None&#39;</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">9</span>), subplots<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">&#39;Ozone (ppb)&#39;</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">&#39;Temperature (F)&#39;</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>axes[<span class="dv">2</span>].set_ylabel(<span class="st">&#39;Wind Speed (m/s)&#39;</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Import modules</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Columns to plot</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>cols_plot <span class="op">=</span> [<span class="st">&#39;Ozone&#39;</span>, <span class="st">&#39;Temperature&#39;</span>, <span class="st">&#39;Wind.Speed&#39;</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>axes <span class="op">=</span> ozone[cols_plot].plot(marker<span class="op">=</span><span class="st">&#39;.&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;None&#39;</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">9</span>), subplots<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">&#39;Ozone (ppb)&#39;</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">&#39;Temperature (F)&#39;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>axes[<span class="dv">2</span>].set_ylabel(<span class="st">&#39;Wind Speed (m/s)&#39;</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </div>
 
 

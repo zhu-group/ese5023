@@ -481,9 +481,8 @@ simple, efficient, and fun!” - <code>Xarray</code> document.</p>
 <hr />
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
-<p>In <code>Anaconda Powershell</code>, install <code>netCDF4</code>,
-<code>xarray</code>, and <code>nc-time-axis</code>, <strong>one after
-another</strong>:</p>
+<p>In <code>Anaconda Powershell</code>, install <code>netCDF4</code> and
+<code>nc-time-axis</code>, <strong>one after another</strong>:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>pip install netCDF4</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>pip install nc<span class="op">-</span>time<span class="op">-</span>axis</span></code></pre></div>
@@ -505,12 +504,12 @@ for all kinds of data wrangling and analysis, have made
 <code>pandas</code> one of the most popular python packages in the
 world.</p>
 <p>However, not all Earth science datasets easily fit into the “tabular”
-model (i.e. rows and columns) imposed by <code>pandas</code>. In
-particular, we often deal with <em>multidimensional</em> data. By
-multidimensional data (also often called N-dimensional), it means data
-with many independent dimensions or axes. For example, we might
-represent Earth’s surface temperature <em>T</em> as a three dimensional
-variable:</p>
+model (<em>i.e.</em>, rows and columns) imposed by <code>pandas</code>.
+In particular, we often deal with <em>multidimensional</em> data. By
+multidimensional data (also often called <em>N-dimensional</em>), it
+means data with many independent dimensions or axes. For example, we
+might represent Earth’s surface temperature <em>T</em> as a three
+dimensional variable:</p>
 <p><span class="math display">\[T(Lon, Lat, Time)  \]</span></p>
 <p>The point of <code>xarray</code> is to provide <strong>pandas-level
 convenience</strong> for working with this type of data. Specifically,
@@ -556,11 +555,11 @@ Structures</a> for more.</p>
 <ul>
 <li><p><code>values</code>: a <code>numpy.ndarray</code> holding the
 array’s values</p></li>
-<li><p><code>dims</code>: dimension names for each axis (e.g., (‘x’,
-‘y’, ‘z’), (‘lon’, ‘lat’, ‘time’))</p></li>
+<li><p><code>dims</code>: dimension names for each axis (<em>e.g.</em>,
+(‘x’, ‘y’, ‘z’), (‘lon’, ‘lat’, ‘time’))</p></li>
 <li><p><code>coords</code>: a dict-like container of arrays
-(coordinates) that label each point (e.g., 1-dimensional arrays of
-numbers, datetime objects or strings)</p></li>
+(coordinates) that label each point (<em>e.g.</em>, 1-dimensional arrays
+of numbers, datetime objects or strings)</p></li>
 <li><p><code>attrs</code>: an <code>OrderedDict</code> to hold arbitrary
 metadata (attributes)</p></li>
 </ul>
@@ -569,8 +568,9 @@ metadata (attributes)</p></li>
 class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div>
 <p>A simple <code>DataArray</code> without dimensions or coordinates
 isn’t much use:</p>
 <div class="sourceCode" id="cb4"><pre
@@ -642,7 +642,7 @@ netCDF dataset.</p>
 class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Open a netCDF4 file</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">&quot;CESM2_200001-201412.nc&quot;</span>, engine<span class="op">=</span><span class="st">&quot;netcdf4&quot;</span>)</span></code></pre></div>
 <p>By default, <code>xarray.open_dataset()</code> function uses lazy
-loading, i.e. it just loads in the <em>coordinate</em> and
+loading, <em>i.e.</em>, it just loads in the <em>coordinate</em> and
 <em>attribute</em> metadata and not the data that correspond to data
 variables themselves. The data variables are loaded only on actual
 values access (e.g. when performing some calculation, slicing, …) or
@@ -669,9 +669,9 @@ properties:</p>
 <li><p><code>data_vars</code>: an dictionary of <code>DataArrays</code>
 corresponding to data variables</p></li>
 <li><p><code>dims</code>: a dictionary mapping from dimension names to
-the fixed length of each dimension (e.g. {‘time’: <code>180</code>,
-‘lat’: <code>192</code>, ‘lon’: <code>288</code>, ‘nbnd’:
-<code>2</code>} )</p></li>
+the fixed length of each dimension (<em>e.g.</em>, {‘time’:
+<code>180</code>, ‘lat’: <code>192</code>, ‘lon’: <code>288</code>,
+‘nbnd’: <code>2</code>} )</p></li>
 <li><p><code>coords</code>: a dictionary-like container of arrays
 (coordinates) that label each point (tick label) along our
 dimensions</p></li>
@@ -750,11 +750,11 @@ and selecting data</a> for more.</p>
 <strong>purely integer based indexing</strong>. The following are valid
 inputs:</p>
 <ul>
-<li><p>An integer, e.g. <code>lat=10</code></p></li>
-<li><p>A list or array of integers, e.g,
+<li><p>An integer, <em>e.g.</em>, <code>lat=10</code></p></li>
+<li><p>A list or array of integers, <em>e.g.</em>,
 <code>lon=[10, 20, 39]</code></p></li>
-<li><p>A slice object (range) with integers,
-e.g. <code>time=slice(2, 20)</code></p></li>
+<li><p>A slice object (range) with integers, <em>e.g.</em>,
+<code>time=slice(2, 20)</code></p></li>
 </ul>
 <div class="sourceCode" id="cb14"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># The original object, i.e. no selection</span></span>
@@ -775,12 +775,12 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a h
 <strong>purely coordinate label based indexing</strong>. The following
 are valid inputs:</p>
 <ul>
-<li><p>A single coordinate label, e.g. <code>time='2013-01-15'</code> or
-<code>time='2013'</code></p></li>
-<li><p>A list or array of coordinate labels,
-e.g. <code>lon=['100','356.25']</code></p></li>
-<li><p>A slice object with coordinate labels,
-e.g. <code>time=slice("2021-01-01", "2021-03-01")</code></p></li>
+<li><p>A single coordinate label, <em>e.g.</em>,
+<code>time='2013-01-15'</code> or <code>time='2013'</code></p></li>
+<li><p>A list or array of coordinate labels, <em>e.g.</em>,
+<code>lon=['100','356.25']</code></p></li>
+<li><p>A slice object with coordinate labels, <em>e.g.</em>,
+<code>time=slice("2021-01-01", "2021-03-01")</code></p></li>
 </ul>
 <div class="sourceCode" id="cb15"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Select data in 2013</span></span>
@@ -809,12 +809,12 @@ coordinate labels, things get a little tricky. As shown above, when our
 coordinate labels are not integers or strings or datetime-like but
 floating point numbers, <code>.sel()</code> may throw a KeyError:
 <code>ds.tas.sel(lat=39.5, lon=105.7)</code> fails because we are trying
-to use a conditional for an <strong>approximate</strong> value, i.e
-floating numbers are represented approximately inside the computer, and
-<code>xarray</code> is unable to locate this exact value. To address
-this issue, <code>xarray</code> supports method and tolerance keyword
-argument. The method parameter allows for enabling nearest neighbor
-(inexact) lookups by use of the methods <code>pad</code>,
+to use a conditional for an <strong>approximate</strong> value,
+<em>i.e</em>, floating numbers are represented approximately inside the
+computer, and <code>xarray</code> is unable to locate this exact value.
+To address this issue, <code>xarray</code> supports method and tolerance
+keyword argument. The method parameter allows for enabling nearest
+neighbor (inexact) lookups by use of the methods <code>pad</code>,
 <code>backfill</code>, or <code>nearest</code>:</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Using the nearest method to find a nearby value</span></span>
@@ -871,8 +871,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a h
 surface temperature:</p>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Time series of the near surface temperature at Shenzhen</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co"># Here Lon is in a range of [0, 360] to prevent negative values,</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># where 0 is 180W and 360 is 180E</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>ds.tas.sel(lon<span class="op">=</span><span class="fl">294.1</span>, lat<span class="op">=</span><span class="fl">22.5</span>, method<span class="op">=</span><span class="st">&#39;nearest&#39;</span>).plot(marker<span class="op">=</span><span class="st">&quot;o&quot;</span>, size<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>Lets say we want to compare plots of temperature at three different
 latitudes. We can use the <code>hue</code> keyword argument to do
 this.</p>
@@ -1161,9 +1163,8 @@ panels.</p>
 <li><a
 href="https://xarray.pydata.org/en/stable/index.html"><code>xarray</code>
 offical guide</a></li>
-<li><a
-href="https://www.unidata.ucar.edu/software/netcdf/docs/index.html">NetCDF
-offical guide</a></li>
+<li><a href="https://docs.unidata.ucar.edu/nug/current">NetCDF User’s
+guide</a></li>
 <li><a
 href="https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f"><code>xarray</code>
 Example Cheatsheet</a></li>

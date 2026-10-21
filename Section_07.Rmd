@@ -14,7 +14,7 @@ output:
 
 # Prerequisites
 
-In `Anaconda Powershell`, install `netCDF4`, `xarray`, and `nc-time-axis`, **one after another**:
+In `Anaconda Powershell`, install `netCDF4` and `nc-time-axis`, **one after another**:
 
 ```{python, eval=F}
 pip install netCDF4
@@ -34,7 +34,7 @@ import xarray as xr
 
 In [Section 06](https://zhu-group.github.io/ese5023/Section_06.html), we saw how `pandas` handled *tabular* datasets, by using "indexes" for each row and labels for each column. These features, together with `pandas`' many useful routines for all kinds of data wrangling and analysis, have made `pandas` one of the most popular python packages in the world.
 
-However, not all Earth science datasets easily fit into the "tabular" model (i.e. rows and columns) imposed by `pandas`. In particular, we often deal with *multidimensional* data. By multidimensional data (also often called N-dimensional), it means data with many independent dimensions or axes. For example, we might represent Earth's surface temperature *T* as a three dimensional variable:
+However, not all Earth science datasets easily fit into the "tabular" model (*i.e.*, rows and columns) imposed by `pandas`. In particular, we often deal with *multidimensional* data. By multidimensional data (also often called *N-dimensional*), it means data with many independent dimensions or axes. For example, we might represent Earth's surface temperature *T* as a three dimensional variable:
 
 $$T(Lon, Lat, Time)  $$
 
@@ -72,9 +72,9 @@ A *DataArray* has four essential attributes:
 
 + `values`: a `numpy.ndarray` holding the array’s values
 
-+ `dims`: dimension names for each axis (e.g., ('x', 'y', 'z'), ('lon', 'lat', 'time'))
++ `dims`: dimension names for each axis (*e.g.*, ('x', 'y', 'z'), ('lon', 'lat', 'time'))
 
-+ `coords`: a dict-like container of arrays (coordinates) that label each point (e.g., 1-dimensional arrays of numbers, datetime objects or strings)
++ `coords`: a dict-like container of arrays (coordinates) that label each point (*e.g.*, 1-dimensional arrays of numbers, datetime objects or strings)
 
 + `attrs`: an `OrderedDict` to hold arbitrary metadata (attributes)
 
@@ -84,6 +84,7 @@ Let's start by constructing some DataArrays manually:
 import numpy as np
 import pandas as pd
 import xarray as xr
+import netCDF4
 from matplotlib import pyplot as plt
 %matplotlib inline
 ```
@@ -157,7 +158,7 @@ First, let's open the CESM netCDF file (`CESM2_200001-201412.nc`) using the `xar
 ds = xr.open_dataset("CESM2_200001-201412.nc", engine="netcdf4")
 ```
 
-By default, `xarray.open_dataset()` function uses lazy loading, i.e. it just loads in the *coordinate* and *attribute* metadata and not the data that correspond to data variables themselves. The data variables are loaded only on actual values access (e.g. when performing some calculation, slicing, ...) or with `.load()` method. The `xarray.open_dataset()` is also able to load files in other formats (e.g., `grib `, `tiff`, or `zarr`), check [Reading and writing files](https://xarray.pydata.org/en/stable/user-guide/io.html) for more.
+By default, `xarray.open_dataset()` function uses lazy loading, *i.e.*, it just loads in the *coordinate* and *attribute* metadata and not the data that correspond to data variables themselves. The data variables are loaded only on actual values access (e.g. when performing some calculation, slicing, ...) or with `.load()` method. The `xarray.open_dataset()` is also able to load files in other formats (e.g., `grib `, `tiff`, or `zarr`), check [Reading and writing files](https://xarray.pydata.org/en/stable/user-guide/io.html) for more.
 
 Now take a look at the loaded dataset:
 
@@ -179,7 +180,7 @@ The `Datasets` (`ds`) have the following key properties:
 
 + `data_vars`: an dictionary of `DataArrays` corresponding to data variables
 
-+ `dims`: a dictionary mapping from dimension names to the fixed length of each dimension (e.g. {'time': `180`, 'lat': `192`, 'lon': `288`, 'nbnd': `2`} )
++ `dims`: a dictionary mapping from dimension names to the fixed length of each dimension (*e.g.*, {'time': `180`, 'lat': `192`, 'lon': `288`, 'nbnd': `2`} )
 
 + `coords`: a dictionary-like container of arrays (coordinates) that label each point (tick label) along our dimensions
 
@@ -246,11 +247,11 @@ Check [Indexing and selecting data](https://xarray.pydata.org/en/stable/user-gui
 
 The `.isel()` method is the primary access method for **purely integer based indexing**. The following are valid inputs:
 
-+ An integer, e.g. `lat=10`
++ An integer, *e.g.*, `lat=10`
 
-+ A list or array of integers, e.g, `lon=[10, 20, 39]`
++ A list or array of integers, *e.g.*, `lon=[10, 20, 39]`
 
-+ A slice object (range) with integers, e.g. `time=slice(2, 20)`
++ A slice object (range) with integers, *e.g.*, `time=slice(2, 20)`
 
 ```{python, eval=F}
 # The original object, i.e. no selection
@@ -270,11 +271,11 @@ ds.tas.isel(lon=100, time=slice(10, 20))
 
 The `.sel()` method is the primary access method for **purely coordinate label based indexing**. The following are valid inputs:
 
-+ A single coordinate label, e.g. `time='2013-01-15'` or `time='2013'`
++ A single coordinate label, *e.g.*, `time='2013-01-15'` or `time='2013'`
 
-+ A list or array of coordinate labels, e.g. `lon=['100','356.25']`
++ A list or array of coordinate labels, *e.g.*, `lon=['100','356.25']`
 
-+ A slice object with coordinate labels, e.g. `time=slice("2021-01-01", "2021-03-01")`
++ A slice object with coordinate labels, *e.g.*, `time=slice("2021-01-01", "2021-03-01")`
 
 ```{python, eval=F}
 # Select data in 2013
@@ -301,7 +302,7 @@ ds.tas.sel(lat=39.5, lon=105.7)
 
 Can you figure out why this did not work? 
 
-Be careful when working with floating coordinate labels. When we have integer, string, datetime-like values for coordinate labels, `sel()` works flawlessly. When we try to work with floating coordinate labels, things get a little tricky. As shown above, when our coordinate labels are not integers or strings or datetime-like but floating point numbers, `.sel()` may throw a KeyError: `ds.tas.sel(lat=39.5, lon=105.7)` fails because we are trying to use a conditional for an **approximate** value, i.e floating numbers are represented approximately inside the computer, and `xarray` is unable to locate this exact value. To address this issue, `xarray` supports method and tolerance keyword argument. The method parameter allows for enabling nearest neighbor (inexact) lookups by use of the methods `pad`, `backfill`, or `nearest`:
+Be careful when working with floating coordinate labels. When we have integer, string, datetime-like values for coordinate labels, `sel()` works flawlessly. When we try to work with floating coordinate labels, things get a little tricky. As shown above, when our coordinate labels are not integers or strings or datetime-like but floating point numbers, `.sel()` may throw a KeyError: `ds.tas.sel(lat=39.5, lon=105.7)` fails because we are trying to use a conditional for an **approximate** value, *i.e*, floating numbers are represented approximately inside the computer, and `xarray` is unable to locate this exact value. To address this issue, `xarray` supports method and tolerance keyword argument. The method parameter allows for enabling nearest neighbor (inexact) lookups by use of the methods `pad`, `backfill`, or `nearest`:
 
 ```{python, eval=F}
 # Using the nearest method to find a nearby value
@@ -354,6 +355,8 @@ Let's select one spatial location and plot a time series of the near surface tem
 
 ```{python, eval=F}
 # Time series of the near surface temperature at Shenzhen
+# Here Lon is in a range of [0, 360] to prevent negative values,
+# where 0 is 180W and 360 is 180E
 ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
 plt.show()
 ```
@@ -618,7 +621,7 @@ Plot monthly climatology in temperature in `12` panels.
 # Further reading
 
 + [`xarray` offical guide](https://xarray.pydata.org/en/stable/index.html)
-+ [NetCDF offical guide](https://www.unidata.ucar.edu/software/netcdf/docs/index.html)
++ [NetCDF User's guide](https://docs.unidata.ucar.edu/nug/current)
 + [`xarray` Example Cheatsheet](https://gist.github.com/pletchm/f1302a61d81285838d6e4255d460b16f)
 + [`Python`: a tutorial introduction to `xarray`](http://pure.iiasa.ac.at/id/eprint/14952/1/xarray-tutorial-egu2017-answers.pdf)
 + [Pythia Cookbooks Gallery](https://cookbooks.projectpythia.org/) (very comprehensive, contains many courses and tutorials)

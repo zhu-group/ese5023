@@ -26,7 +26,7 @@ Wednesday 19:00-21:50
 |13  |12/02|W.  | AI for coding (I)                                                                         | AI for coding (I)                                                                    |                                                                        |                 |
 |14  |12/09|W.  | AI for coding (II)                                                                        | AI for coding (II)                                                                   |                                                                        | Assignment 5    |
 |15  |12/16|W.  | AI for coding (III)                                                                       | AI for coding (III); Course wrap-up                                                  |                                                                        |                 |
-|16  |12/23|W.  | Final project presentation                                                                |                                                                                      |                                                                        |                 |
+|16  |12/23|W.  | Final project presentation                                                                |[Final project](https://zhu-group.github.io/ese5023/download/Final_project_2026.pdf)  |                                                                        |                 |
 
 **Supplements:**  
 [Supplement 01: Scientific computing with `SciPy`](https://zhu-group.github.io/ese5023/Sup_01.html)  

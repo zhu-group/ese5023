@@ -12,12 +12,6 @@ output:
 
 # 1. Basics of time series
 
-In `Anaconda Powershell`, install `seaborn`:
-
-```{python, eval=F}
-pip install seaborn
-```
-
 **1.** Read the [daily ozone data file](https://zhu-group.github.io/ese5023/download/ozone_data.csv) we used in [Section 06](https://zhu-group.github.io/ese5023/Section_06.html#Exercise_4). Read the data as `ozone_data` dataframe.
 
 **2.** Create a new column `cDate` that contains string values in a format like `2020-05-01`. Here we use `2020` as the year of all observations.
