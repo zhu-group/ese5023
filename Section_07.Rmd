@@ -356,8 +356,9 @@ Let's select one spatial location and plot a time series of the near surface tem
 ```{python, eval=F}
 # Time series of the near surface temperature at Shenzhen
 # Here Lon is in a range of [0, 360] to prevent negative values,
-# where 0 is 180W and 360 is 180E
-ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
+# If the longitude is between 0° and 180°: Keep it exactly the same,
+# If the longitude is greater than 180°: Subtract 360 from the number
+ds.tas.sel(lon=114.1, lat=22.5, method='nearest').plot(marker="o", size=6)
 plt.show()
 ```
 
@@ -394,7 +395,7 @@ colorbar_kwargs = {
 }
 
 # Plot
-ds.tas.sel(lon=294.1, method='nearest').plot(
+ds.tas.sel(lon=114.1, method='nearest').plot(
     # coordinate to plot on the x-axis of the plot
     x="time", 
     # set colorbar limits to 2nd and 98th percentile of data
@@ -461,7 +462,7 @@ ds.tas.min(dim=['time'])
 # Compute spatial sum
 ds.tas.sum(dim=['lat', 'lon'])
 # compute temporal median
-ds.tas.median(dim='time').plot(size=7, robust=True)
+ds.tas.median(dim=['time']).plot(size=7, robust=True)
 plt.show()
 ```
 
@@ -487,7 +488,7 @@ We are going to use `groupby` to remove the seasonal cycle ("climatology") from 
 
 ```{python, eval=F}
 # Near surface temperature at Shenzhen
-ds.tas.sel(lon=294.1, lat=22.5, method='nearest').plot(marker="o", size=6)
+ds.tas.sel(lon=114.1, lat=22.5, method='nearest').plot(marker="o", size=6)
 plt.show()
 ```
 
@@ -523,7 +524,7 @@ tas_clim = ds.tas.groupby('time.month').mean()
 tas_clim
 
 # Plot climatology at a specific point (Shenzhen)
-tas_clim.sel(lon=294.1, lat=22.5, method='nearest').plot()
+tas_clim.sel(lon=114.1, lat=22.5, method='nearest').plot()
 plt.show()
 
 # Plot zonal mean climatology
@@ -542,7 +543,7 @@ tas_anom = group_data - group_data.mean(dim='time')
 tas_anom
 
 # Plot anomalies at a specific point (Shenzhen)
-tas_anom.sel(lon=294.1, lat=22.5, method='nearest').plot()
+tas_anom.sel(lon=114.1, lat=22.5, method='nearest').plot()
 plt.show()
 
 # Plot global mean anomalies
