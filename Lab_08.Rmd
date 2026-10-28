@@ -49,7 +49,7 @@ sst_anom = group_data - group_data.mean(dim='time')
 sst_anom
 
 # Use resample() function at a frequency of 3 years
-resample_obj = sst_anom.resample(time="3Y")
+resample_obj = sst_anom.resample(time="3YE")
 
 # Show the resample object
 resample_obj

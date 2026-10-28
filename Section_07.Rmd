@@ -458,11 +458,11 @@ Now try:
 
 ```{python, eval=F}
 # Compute temporal min
-ds.tas.min(dim=['time'])
+ds.tas.min(dim='time')
 # Compute spatial sum
 ds.tas.sum(dim=['lat', 'lon'])
 # compute temporal median
-ds.tas.median(dim=['time']).plot(size=7, robust=True)
+ds.tas.median(dim='time').plot(size=7, robust=True)
 plt.show()
 ```
 
