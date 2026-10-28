@@ -55,7 +55,7 @@ The following piece of code is found in pretty much any python code that has `ma
 Suppose you want to draw a specific type of plot, say a scatterplot, the first thing you want to check out are the methods under `plt` (type `dir(plt)`). Let’s begin by making a simple but full-featured scatterplot and take it from there. Let’s see what `plt.plot()` creates if you an arbitrary sequence of numbers.
 
 ```{python, eval=F}
-# This will return the plot object itself (0x22172dfec10) 
+# This will return the plot object itself (e.g., 0x22172dfec10) 
 # besides drawing the plot.
 plt.plot(ozone_data['Ozone'])
 ```
