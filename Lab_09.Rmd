@@ -59,7 +59,7 @@ ds.sst.sel(lon=114.55, lat=22.5, method='nearest').hvplot()
 **3.** So far we have had to subset our data in order to produce plots. `Hvplot` provides convenient functionality for producing plots on-demand via interactive widgets. Let's create a series of 2D for each time slice, We will use the groupby parameter to let `hvplot` know that we want to create a widget (a slider) for the time dimension:
 
 ```{python, eval=F}
-ds.sst.hvplot(groupby="time", clim=(ds.sst.min(), ds.sst.max()), cmap='turbo')
+ds.sst.hvplot(groupby="time", clim=(-2, 45), cmap='turbo')
 ```
 
 **4.** Feel free to use `hvplot` to create a few interactive plots.

@@ -18,6 +18,7 @@ In `Anaconda Powershell Prompt`, install `cartopy`:
 
 ```{python, eval=F}
 # Install cartopy
+# This may take a while depending on your system
 conda install -c conda-forge cartopy 
 ```
 
@@ -57,7 +58,7 @@ Making maps is a **fundamental part of geoscience and environmental research**. 
 
 + Maps often include extra decorations besides the data (e.g. continents, country borders, etc.)
 
-Making mapping is a hard and complicated problem, mostly due to the complexities of projection. In this lecture, we will learn about [`cartopy`](https://scitools.org.uk/cartopy/docs/latest/), one of the most common packages for making maps within `python`. Another popular and powerful library is [`basemap`](https://matplotlib.org/basemap/). However, `basemap` is retiring and being replaced by `cartopy`. 
+Making mapping is a hard and complicated problem, mostly due to the complexities of projection. In this lecture, we will learn about [`cartopy`](https://cartopy.readthedocs.io/stable/), one of the most common packages for making maps within `python`. Another popular and powerful library is [`basemap`](https://matplotlib.org/basemap/). However, `basemap` is retiring and being replaced by `cartopy`. 
 
 
 ## Projections
@@ -91,7 +92,7 @@ print(ccrs.PlateCarree())
 ccrs.PlateCarree?
 ```
 
-For other available `cartopy` projections, check `cartopy` [coordinate reference systems](https://scitools.org.uk/cartopy/docs/latest/reference/projections.html).
+For other available `cartopy` projections, check `cartopy` [coordinate reference systems](https://cartopy.readthedocs.io/stable/getting_started/crs.html).
 
 ## Drawing a simple map
 
@@ -193,7 +194,7 @@ ax.add_feature(cfeature.NaturalEarthFeature(category='cultural',
 plt.show()
 ```
 
-For more about `NaturalEarthFeature()`, use `help(cfeature.NaturalEarthFeature)` or check the [`cartopy` feature interface](https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature). For a list of available features in `NaturalEarthFeature()` visit [Natural Earth Features](https://www.naturalearthdata.com/features).
+For more about `NaturalEarthFeature()`, use `help(cfeature.NaturalEarthFeature)` or check the [`cartopy` feature interface](https://cartopy.readthedocs.io/stable/matplotlib/feature_interface.html). For a list of available features in `NaturalEarthFeature()` visit [Natural Earth Features](https://www.naturalearthdata.com/features).
 
 Now let's put all features together:
 
@@ -534,7 +535,7 @@ Applying the [`LambertConformal` projection](https://scitools.org.uk/cartopy/doc
 
 # Further reading
 
-+ [`Cartopy` official guide](https://scitools.org.uk/cartopy/docs/latest/index.html)
++ [`Cartopy` official guide](https://cartopy.readthedocs.io/stable/)
 + [`Cartopy` gallery](https://cartopy.readthedocs.io/stable/gallery/index.html)
 + [`GeoCAT` gallery](https://geocat-examples.readthedocs.io/en/latest/gallery/index.html)
 + [Geospatial Data Visualization](https://geohackweek.github.io/visualization)

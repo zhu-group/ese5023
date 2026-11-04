@@ -453,6 +453,9 @@ div.tocify {
     <li>
       <a href="Assignment_02.html">Assignment 02</a>
     </li>
+    <li>
+      <a href="Assignment_03.html">Assignment 03</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -485,7 +488,8 @@ agreement about how to help the land.” - Sonoma Ecology Center</p>
 <code>cartopy</code>:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install cartopy</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>conda install <span class="op">-</span>c conda<span class="op">-</span>forge cartopy </span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># This may take a while depending on your system</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>conda install <span class="op">-</span>c conda<span class="op">-</span>forge cartopy </span></code></pre></div>
 <p>Once <code>cartopy</code> is installed, load the following
 modules:</p>
 <div class="sourceCode" id="cb2"><pre
@@ -525,7 +529,7 @@ the 3D Earth to the 2D space of your figure.</p></li>
 </ul>
 <p>Making mapping is a hard and complicated problem, mostly due to the
 complexities of projection. In this lecture, we will learn about <a
-href="https://scitools.org.uk/cartopy/docs/latest/"><code>cartopy</code></a>,
+href="https://cartopy.readthedocs.io/stable/"><code>cartopy</code></a>,
 one of the most common packages for making maps within
 <code>python</code>. Another popular and powerful library is <a
 href="https://matplotlib.org/basemap/"><code>basemap</code></a>.
@@ -581,7 +585,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a hr
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>ccrs.PlateCarree?</span></code></pre></div>
 <p>For other available <code>cartopy</code> projections, check
 <code>cartopy</code> <a
-href="https://scitools.org.uk/cartopy/docs/latest/reference/projections.html">coordinate
+href="https://cartopy.readthedocs.io/stable/getting_started/crs.html">coordinate
 reference systems</a>.</p>
 </div>
 <div id="drawing-a-simple-map" class="section level2">
@@ -681,7 +685,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a hr
 <span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p>For more about <code>NaturalEarthFeature()</code>, use
 <code>help(cfeature.NaturalEarthFeature)</code> or check the <a
-href="https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature"><code>cartopy</code>
+href="https://cartopy.readthedocs.io/stable/matplotlib/feature_interface.html"><code>cartopy</code>
 feature interface</a>. For a list of available features in
 <code>NaturalEarthFeature()</code> visit <a
 href="https://www.naturalearthdata.com/features">Natural Earth
@@ -1048,7 +1052,7 @@ domain.</p>
 <h1>Further reading</h1>
 <ul>
 <li><a
-href="https://scitools.org.uk/cartopy/docs/latest/index.html"><code>Cartopy</code>
+href="https://cartopy.readthedocs.io/stable/"><code>Cartopy</code>
 official guide</a></li>
 <li><a
 href="https://cartopy.readthedocs.io/stable/gallery/index.html"><code>Cartopy</code>

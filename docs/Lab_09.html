@@ -453,6 +453,9 @@ div.tocify {
     <li>
       <a href="Assignment_02.html">Assignment 02</a>
     </li>
+    <li>
+      <a href="Assignment_03.html">Assignment 03</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -521,7 +524,7 @@ of 2D for each time slice, We will use the groupby parameter to let
 <code>hvplot</code> know that we want to create a widget (a slider) for
 the time dimension:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(ds.sst.<span class="bu">min</span>(), ds.sst.<span class="bu">max</span>()), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>ds.sst.hvplot(groupby<span class="op">=</span><span class="st">&quot;time&quot;</span>, clim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">45</span>), cmap<span class="op">=</span><span class="st">&#39;turbo&#39;</span>)</span></code></pre></div>
 <p><strong>4.</strong> Feel free to use <code>hvplot</code> to create a
 few interactive plots.</p>
 <p>For more about <code>hvplot</code>, check its <a
