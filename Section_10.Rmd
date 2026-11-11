@@ -86,7 +86,7 @@ conda list
 To stop using the `cper` environment, type in:
 
 ```{bash, eval=F}
-conda deactivate cper
+conda deactivate
 ```
 
 ## Installing modules under a `Python` environment
@@ -167,10 +167,16 @@ conda env create --name cper_new --file ZZZZ.yml
 
 If you want to copy the environment, you may want to use `conda-pack` that allows you to package your entire environment as a compressed file (a `tar.gz`) you can just copy and paste somewhere, and it just works. 
 
+Install `conda-pack` your environment: 
+
+```{bash, eval=F}
+conda install -c conda-forge conda-pack
+```
+
 Pack your environment: 
 
 ```{bash, eval=F}
-conda pack
+conda-pack --name cper
 ```
 
 It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, uncompress folder. Then use the standard Command Prompt (cmd.exe) on Windows, not Anaconda Prompt or PowerShell, go to the folder:
@@ -185,9 +191,10 @@ to re-create symlinks and set everything up. Check [Moving Conda Environments](h
 
 ## Removing a conda environment 
 
-If you would like to get rid of the entire `cper` environment, deactivate it then type in:
+If you would like to get rid of the entire `cper` environment, deactivate it, then type in:
 
 ```{bash, eval=F}
+conda deactivate
 conda remove --name cper --all
 ```
 
@@ -197,7 +204,7 @@ For extensive documentation on using environments, please see the [conda documen
 
 ***
 
-*The notes are modified from the excellent [Python Environments](https://rabernat.github.io/research_computing_2018/python-environments.html), and [Getting started with Python environments (using Conda)](https://towardsdatascience.com/getting-started-with-python-environments-using-conda-32e9f2779307), all available freely online.*
+*The notes are modified from the excellent [Python Environments](https://rabernat.github.io/research_computing_2018/python-environments.html), available freely online.*
 
 ***
 
@@ -211,6 +218,6 @@ Go through the notes, make sure you understand the scripts.
 
 # Further reading
 
-+ [Conda Cheat sheet](https://conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
++ [Conda Cheat sheet](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html)
 + [Sharing Environments](https://carpentries-incubator.github.io/introduction-to-conda-for-data-scientists/04-sharing-environments/index.html)
-+ [Getting started with conda](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html)
++ [Getting started with conda](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
