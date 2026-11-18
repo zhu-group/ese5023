@@ -175,7 +175,7 @@ Let’s type in a few lines of text. Once we’re happy with our text, we can pr
 
 Once our file is saved, we can use `Ctrl`+`X` to quit the editor and return to the shell.
 
-On Linux, many programmers use [Emacs](http://www.gnu.org/software/emacs/) or [Vim](https://www.vim.org/) (both of which require more time to learn), or a graphical editor such as [Gedit](https://wiki.gnome.org/Apps/Gedit). On Windows, you may wish to use [Notepad++](https://notepad-plus-plus.org/). Windows also has a built-in editor called `notepad` that can be run from the command line in the same way as `nano` for the purposes of this section.
+On Linux, many programmers use [Emacs](http://www.gnu.org/software/emacs/) or [Vim](https://www.vim.org/) (both of which require more time to learn), or a graphical editor such as [Gedit](https://gedit-text-editor.org/). On Windows, you may wish to use [Notepad++](https://sourceforge.net/projects/notepadplusplus.mirror/). Windows also has a built-in editor called `notepad` that can be run from the command line in the same way as `nano` for the purposes of this section.
 
 ## Moving files and directories
 
