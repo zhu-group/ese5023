@@ -66,11 +66,11 @@ To understand what a "home directory" is, let’s have a look at how the file sy
 
 <img src="figs/Taiyi_folder.png" alt="drawing" width="800"/>  
 
-At the top is the *root directory* that holds everything else. We refer to it using a slash character, `/`, on its own; this is the leading slash in `/work/ese-ouycc`.
+At the top is the *root directory* that holds everything else. We refer to it using a slash character, `/`, on its own; this is the leading slash in `/work/ese-zhangj`.
 
 Inside the `root` directory are several other directories: `bin` (which is where some built-in programs are stored), `data` (for miscellaneous data files), `work` (where users’ personal directories are located), `tmp` (for temporary files that don’t need to be stored long-term), and so on.
 
-We know that our current working directory `/work/ese-ouycc` is stored inside `/work` because `/work` is the first part of its name. Similarly, we know that `/work` is stored inside the `root` directory `/` because its name begins with `/`.
+We know that our current working directory `/work/ese-zhangj` is stored inside `/work` because `/work` is the first part of its name. Similarly, we know that `/work` is stored inside the `root` directory `/` because its name begins with `/`.
 
 ## Navigating with `ls` and `cd`
 
@@ -109,7 +109,7 @@ cd data_demo
 cd data
 ```
 
-These commands will move us from our home directory into the `data_demo` directory, then into the `data` directory. `cd` doesn't print anything, but if we run `pwd` after it, we can see that we are now in `/work/ese-ouycc/data_demo/data`. If we run `ls` without arguments now, it lists the contents of `/work/ese-ouycc/data_demo/data`.
+These commands will move us from our home directory into the `data_demo` directory, then into the `data` directory. `cd` doesn't print anything, but if we run `pwd` after it, we can see that we are now in `/work/ese-zhangj/data_demo/data`. If we run `ls` without arguments now, it lists the contents of `/work/ese-zhangj/data_demo/data`.
 
 ## Shortcuts
 
