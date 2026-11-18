@@ -634,6 +634,11 @@ channel:</p>
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">pip</span> install nc-time-axis</span></code></pre></div>
 <p>Now use <code>conda list</code> to verify that we have successfully
 installed the above modules.</p>
+<p>When install packages, you can move where future environments and
+packages are saved by configuring <code>envs_dirs</code> and
+<code>pkgs_dirs</code> in your <code>.condarc</code> file. Follow the <a
+href="https://docs.conda.io/projects/conda/en/stable/user-guide/configuration/custom-env-and-pkg-locations.html">Conda
+Custom Locations Guide</a> to set this up.</p>
 </div>
 <div id="using-the-environment-file" class="section level2">
 <h2>Using the environment file</h2>
@@ -679,9 +684,9 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href=
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">conda-pack</span> <span class="at">--name</span> cper</span></code></pre></div>
 <p>It can take some minutes depending on the size of the environment and
 the number of libraries installed. Move the compressed file to the
-destination, uncompress folder. Then use the standard Command Prompt
-(cmd.exe) on Windows, not Anaconda Prompt or PowerShell, go to the
-folder:</p>
+destination, uncompress folder. Then use the <strong>standard Command
+Prompt</strong> (cmd.exe) on Windows, <strong>not Anaconda Prompt or
+PowerShell</strong>, go to the folder:</p>
 <div class="sourceCode" id="cb20"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="bu">.</span><span class="dt">\S</span>cripts<span class="dt">\a</span>ctivate.bat</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="bu">.</span><span class="dt">\S</span>cripts<span class="dt">\c</span>onda-unpack.exe</span></code></pre></div>

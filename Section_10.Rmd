@@ -141,7 +141,9 @@ Later, we use `pip` to install a module via a different channel:
 pip install nc-time-axis
 ```
 
-Now use `conda list` to verify that we have successfully installed the above modules.
+Now use `conda list` to verify that we have successfully installed the above modules.  
+
+When install packages, you can move where future environments and packages are saved by configuring `envs_dirs` and `pkgs_dirs` in your `.condarc` file. Follow the [Conda Custom Locations Guide](https://docs.conda.io/projects/conda/en/stable/user-guide/configuration/custom-env-and-pkg-locations.html) to set this up.
 
 ## Using the environment file
 
@@ -179,7 +181,7 @@ Pack your environment:
 conda-pack --name cper
 ```
 
-It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, uncompress folder. Then use the standard Command Prompt (cmd.exe) on Windows, not Anaconda Prompt or PowerShell, go to the folder:
+It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, uncompress folder. Then use the **standard Command Prompt** (cmd.exe) on Windows, **not Anaconda Prompt or PowerShell**, go to the folder:
 
 
 ```{bash, eval=F}
