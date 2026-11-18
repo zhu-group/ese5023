@@ -684,9 +684,10 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href=
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">conda-pack</span> <span class="at">--name</span> cper</span></code></pre></div>
 <p>It can take some minutes depending on the size of the environment and
 the number of libraries installed. Move the compressed file to the
-destination, uncompress folder. Then use the <strong>standard Command
-Prompt</strong> (cmd.exe) on Windows, <strong>not Anaconda Prompt or
-PowerShell</strong>, go to the folder:</p>
+destination, uncompress folder (<code>tar -xvzf</code>). Then use the
+<strong>standard Command Prompt</strong> (<code>cmd.exe</code>) on
+Windows, <strong>not Anaconda Prompt or PowerShell</strong>, go to the
+folder:</p>
 <div class="sourceCode" id="cb20"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="bu">.</span><span class="dt">\S</span>cripts<span class="dt">\a</span>ctivate.bat</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="bu">.</span><span class="dt">\S</span>cripts<span class="dt">\c</span>onda-unpack.exe</span></code></pre></div>

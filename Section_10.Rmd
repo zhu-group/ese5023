@@ -181,7 +181,7 @@ Pack your environment:
 conda-pack --name cper
 ```
 
-It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, uncompress folder. Then use the **standard Command Prompt** (cmd.exe) on Windows, **not Anaconda Prompt or PowerShell**, go to the folder:
+It can take some minutes depending on the size of the environment and the number of libraries installed. Move the compressed file to the destination, uncompress folder (`tar -xvzf`). Then use the **standard Command Prompt** (`cmd.exe`) on Windows, **not Anaconda Prompt or PowerShell**, go to the folder:
 
 
 ```{bash, eval=F}
