@@ -10,7 +10,7 @@ output:
 
 ***
 
-# 1. Environment Variables
+# 1. Environment variables
 
 An *environment variable* is a dynamic-named value containing information about your login session, set configuration options, and customize the shell environment in Linux-based operating systems. In simple terms, an environment variable is used to define a location for storing a value, you can also refer to its symbolic name. These values are stored within the system and are used by command-line applications. The stored value can be deleted, displayed, edited, and re-saved.
 
