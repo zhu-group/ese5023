@@ -70,12 +70,12 @@ Now you should be able to use the `conda` command. We then create a new environm
 conda create --name my_mpi python=3.10 mpi4py numpy scipy
 ```
 
-Please refer to [`Python` environments](https://zhu-group.github.io/ese5023/Section_11.html#Python_environments) for questions about the `conda` environment and how to create one.
+Please refer to [`Python` environments](https://zhu-group.github.io/ese5023/Section_10.html#Python_environments) for questions about the `conda` environment and how to create one.
 
 On Taiyi, the above command will take a few minutes to complete. Once finished, you will see (using `ll -a`) a hidden folder `.conda` where modules got installed. To activate the environment:
 
 ```{bash, eval=F}
-source activate my_mpi
+conda activate my_mpi
 ```
 
 Check `mpi4py` is properly installed by running:

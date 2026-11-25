@@ -545,7 +545,7 @@ create a new environment (e.g., <code>my_mpi</code>) and install
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> my_mpi python=3.10 mpi4py numpy scipy</span></code></pre></div>
 <p>Please refer to <a
-href="https://zhu-group.github.io/ese5023/Section_11.html#Python_environments"><code>Python</code>
+href="https://zhu-group.github.io/ese5023/Section_10.html#Python_environments"><code>Python</code>
 environments</a> for questions about the <code>conda</code> environment
 and how to create one.</p>
 <p>On Taiyi, the above command will take a few minutes to complete. Once
@@ -553,7 +553,7 @@ finished, you will see (using <code>ll -a</code>) a hidden folder
 <code>.conda</code> where modules got installed. To activate the
 environment:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="bu">source</span> activate my_mpi</span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">conda</span> activate my_mpi</span></code></pre></div>
 <p>Check <code>mpi4py</code> is properly installed by running:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">&quot;import mpi4py&quot;</span></span></code></pre></div>
